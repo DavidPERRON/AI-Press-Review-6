@@ -123,8 +123,14 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         },
         "instructions": (
             "Return JSON only. Do not include markdown fences or any text outside the JSON. "
-            "Write dense factual paragraphs only. No bullet points. No headings inside paragraphs. "
-            "Keep the tone factual, clear, and business-oriented. "
+            "Write as a confident radio host — natural, engaging, conversational but professional. "
+            "No bullet points. No headings inside paragraphs. "
+            "NUMBERS: Round aggressively (say 'about 1.2 billion' not '1,247,000,000'). "
+            "Skip model version numbers (say 'the latest GPT' not 'GPT-4o-2024-05-13'). "
+            "FLOW: Connect stories naturally. Never say 'Moving on' or 'In our next section'. "
+            "Use callbacks to earlier stories when relevant. Bridge between topics seamlessly. "
+            "RHYTHM: Vary sentence length. Short after complex. Use dashes and commas for pauses. "
+            "Use contractions (it's, they've, that's). Write for the ear, not the eye. "
             "Prioritize sources with the highest relevance_score. "
             "Cross-reference multiple sources on the same topic to build richer paragraphs. "
             + length_instructions

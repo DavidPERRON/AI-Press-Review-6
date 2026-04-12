@@ -37,9 +37,9 @@ llm:
 # ── TTS (Cartesia) ───────────────────────────────────────────
 tts:
   chunk_max_chars: 1800
-  speed: 0.9
+  speed: 0.82
   volume: 1.0
-  emotion: "neutral"
+  emotion: "curiosity:high,confidence:high"
 
 # ── PUBLICATION ───────────────────────────────────────────────
 retention_days: 10

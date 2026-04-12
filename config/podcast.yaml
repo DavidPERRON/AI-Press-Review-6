@@ -91,7 +91,7 @@ scoring:
   min_relevance: 3.0
   min_text_length: 180
   similarity_threshold: 0.88
-  max_per_domain: 25
+  max_per_domain: 5
 
   # Mots-cles interdits — les articles contenant ces termes sont exclus
   banned_terms:

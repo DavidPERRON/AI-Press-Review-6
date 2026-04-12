@@ -225,10 +225,16 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     candidates: list[SourceItem] = []
     seen_urls: set[str] = set()
 
+    google_news_skipped = 0
     for item in rss_items + newsapi_items:
         if item.url in seen_urls:
             continue
         seen_urls.add(item.url)
+
+        # Drop unresolved Google News URLs — content is inaccessible
+        if "news.google.com" in (item.url or ""):
+            google_news_skipped += 1
+            continue
 
         if settings.exclude_previous_episode and _is_duplicate_of_previous(
             item, previous_fingerprints, previous_titles, recent_titles, settings.scoring.similarity_threshold
@@ -239,6 +245,9 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
             continue
 
         candidates.append(item)
+
+    if google_news_skipped:
+        logger.info("Dropped %d unresolved Google News URLs", google_news_skipped)
 
     logger.info("Phase 2: %d candidates after pre-filtering", len(candidates))
 

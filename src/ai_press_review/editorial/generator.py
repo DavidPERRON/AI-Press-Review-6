@@ -230,34 +230,60 @@ def _extract_json(content: str) -> dict[str, Any]:
 
 
 def _generate_with_model(model: str, manifest: dict, settings, force_length: bool) -> dict[str, Any]:
+    from ..observability import record_llm_call
+
     messages = [
         {"role": "system", "content": settings.prompt_path.read_text(encoding="utf-8")},
         {"role": "user", "content": _build_user_prompt(manifest, settings, force_length=force_length)},
     ]
 
     start = time.monotonic()
-    data = _create_completion_data(
-        settings=settings,
-        model=model,
-        messages=messages,
-        temperature=settings.llm_temperature,
-        max_tokens=settings.llm_max_tokens,
-    )
-    elapsed = time.monotonic() - start
+    success = False
+    usage: dict[str, Any] = {}
+    try:
+        data = _create_completion_data(
+            settings=settings,
+            model=model,
+            messages=messages,
+            temperature=settings.llm_temperature,
+            max_tokens=settings.llm_max_tokens,
+        )
+        elapsed = time.monotonic() - start
 
-    content = _extract_message_content(data)
-    if not content.strip():
-        raise ValueError("Model returned empty content")
+        content = _extract_message_content(data)
+        if not content.strip():
+            raise ValueError("Model returned empty content")
 
-    usage = data.get("usage", {})
-    logger.info(
-        "LLM call completed: model=%s elapsed=%.1fs prompt_tokens=%s completion_tokens=%s",
-        model, elapsed,
-        usage.get("prompt_tokens", "?"),
-        usage.get("completion_tokens", "?"),
-    )
-
-    return _extract_json(content)
+        usage = data.get("usage", {}) or {}
+        logger.info(
+            "LLM call completed: model=%s elapsed=%.1fs prompt_tokens=%s completion_tokens=%s",
+            model, elapsed,
+            usage.get("prompt_tokens", "?"),
+            usage.get("completion_tokens", "?"),
+        )
+        payload = _extract_json(content)
+        success = True
+        return payload
+    finally:
+        elapsed = time.monotonic() - start
+        # Anthropic returns cache_read_input_tokens in usage; OpenAI returns
+        # cached_tokens nested under prompt_tokens_details.
+        cached = (
+            usage.get("cache_read_input_tokens")
+            or usage.get("prompt_tokens_details", {}).get("cached_tokens")
+            or 0
+        )
+        record_llm_call(
+            run_date=manifest.get("run_date", "unknown"),
+            model=model,
+            prompt_tokens=int(usage.get("prompt_tokens") or 0),
+            completion_tokens=int(usage.get("completion_tokens") or 0),
+            cached_tokens=int(cached or 0),
+            duration_s=elapsed,
+            phase="editorial",
+            success=success,
+            force_length=force_length,
+        )
 
 
 @retry(wait=wait_fixed(3), stop=stop_after_attempt(2))

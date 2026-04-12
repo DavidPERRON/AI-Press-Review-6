@@ -99,10 +99,33 @@ def test_pipeline_publishes_episode_end_to_end(isolated_dirs):
     assert 'OpenAI ships o4' in feed_xml
     assert 'rel="self"' in feed_xml  # atom:self from SEO patch
     assert '<itunes:type>episodic</itunes:type>' in feed_xml
+    # Podcasting 2.0 tags
+    assert 'xmlns:podcast="https://podcastindex.org/namespace/1.0"' in feed_xml
+    assert '<podcast:guid>' in feed_xml
+    assert '<podcast:medium>podcast</podcast:medium>' in feed_xml
+    assert '<podcast:person role="host"' in feed_xml
+    assert '<podcast:transcript' in feed_xml
+    assert 'type="text/vtt"' in feed_xml
 
     index_html = (isolated_dirs['docs'] / 'index.html').read_text(encoding='utf-8')
     assert 'OpenAI ships o4' in index_html
     assert 'application/ld+json' in index_html
+
+    # Per-episode transcript artifacts generated.
+    episode_dirs = list((isolated_dirs['docs'] / 'episodes').iterdir())
+    assert len(episode_dirs) == 1
+    episode_dir = episode_dirs[0]
+    vtt = (episode_dir / 'transcript.vtt').read_text(encoding='utf-8')
+    assert vtt.startswith('WEBVTT')
+    assert '-->' in vtt
+    episode_html = (episode_dir / 'index.html').read_text(encoding='utf-8')
+    assert '<h1>' in episode_html
+    assert 'OpenAI ships o4' in episode_html
+    assert 'Transcript' in episode_html
+    assert 'PodcastEpisode' in episode_html  # JSON-LD type
+    # Sitemap references the episode page.
+    sitemap = (isolated_dirs['docs'] / 'sitemap.xml').read_text(encoding='utf-8')
+    assert f'/episodes/{episode_dir.name}/' in sitemap
 
     # Episode history and sitemap persisted.
     history = json.loads((isolated_dirs['data'] / 'state' / 'episode_history.json').read_text())

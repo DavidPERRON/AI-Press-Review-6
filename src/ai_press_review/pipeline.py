@@ -119,7 +119,12 @@ def run_pipeline(
         t0 = time.monotonic()
         fingerprints = [fingerprint(s['title'], s['url']) for s in manifest['sources']]
         source_titles = [s['title'] for s in manifest['sources']]
-        publish_episode(episode, fingerprints, source_titles)
+        publish_episode(
+            episode, fingerprints, source_titles,
+            script=draft.script,
+            key_claims=draft.key_claims,
+            grounding_report=draft.grounding_report,
+        )
         elapsed = time.monotonic() - t0
         record_phase(run_date, 'publish', elapsed, title=draft.episode_title)
         result['published'] = True
@@ -230,6 +235,7 @@ def generate_draft(
         'source_fingerprints': fps,
         'source_titles': titles,
         'source_count': manifest['source_count'],
+        'script': draft.script,
         'script_words': len(draft.script.split()),
         'key_claims': draft.key_claims,
         'grounding_report': draft.grounding_report,
@@ -294,6 +300,9 @@ def release_pending_draft() -> dict:
         episode,
         draft_data.get('source_fingerprints', []),
         draft_data.get('source_titles', []),
+        script=draft_data.get('script'),
+        key_claims=draft_data.get('key_claims') or [],
+        grounding_report=draft_data.get('grounding_report') or {},
     )
 
     draft_data['status'] = 'released'

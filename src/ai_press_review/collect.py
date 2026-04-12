@@ -273,6 +273,22 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     if settings.prefer_unused and weekly_used_fps:
         sources = _apply_weekly_bonus(sources, weekly_used_fps, weekly_used_titles, settings)
 
+    # Phase 4c: Cap per domain to ensure source diversity
+    max_per_domain = settings.scoring.max_per_domain
+    if max_per_domain > 0:
+        domain_counts: dict[str, int] = {}
+        capped: list[SourceItem] = []
+        for item in sources:
+            d = (item.domain or "").lower()
+            count = domain_counts.get(d, 0)
+            if count >= max_per_domain:
+                continue
+            domain_counts[d] = count + 1
+            capped.append(item)
+        if len(capped) < len(sources):
+            logger.info("Domain cap applied: %d → %d sources (max %d per domain)", len(sources), len(capped), max_per_domain)
+        sources = capped
+
     logger.info(
         "Phase 4: %d sources selected (min required: %d)",
         len(sources), settings.min_source_count,

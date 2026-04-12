@@ -1,3 +1,9 @@
+# ──────────────────────────────────────────────────────────────
+#  SOURCES RSS — Modifie directement sur GitHub
+#  Les Google News RSS sont des recherches par mots-cles.
+#  Les curated RSS sont des flux directs de sites specifiques.
+# ──────────────────────────────────────────────────────────────
+
 google_news_rss:
   - "https://news.google.com/rss/search?q=artificial+intelligence+when:2d&hl=en-US&gl=US&ceid=US:en"
   - "https://news.google.com/rss/search?q=generative+AI+when:2d&hl=en-US&gl=US&ceid=US:en"
@@ -5,13 +11,52 @@ google_news_rss:
   - "https://news.google.com/rss/search?q=AI+chips+OR+GPU+OR+datacenter+when:2d&hl=en-US&gl=US&ceid=US:en"
   - "https://news.google.com/rss/search?q=AI+deployment+OR+copilot+OR+agent+when:2d&hl=en-US&gl=US&ceid=US:en"
 
+# ── AI LABS & BIG TECH ────────────────────────────────────────
 curated_rss:
+  # Labs
   - "https://openai.com/news/rss.xml"
   - "https://www.anthropic.com/news/rss.xml"
   - "https://blog.google/technology/ai/rss/"
-  - "https://www.microsoft.com/en-us/microsoft-cloud/blog/feed/"
-  - "https://aws.amazon.com/blogs/machine-learning/feed/"
+  - "https://ai.meta.com/blog/rss/"
   - "https://blogs.nvidia.com/feed/"
   - "https://huggingface.co/blog/feed.xml"
-  - "https://venturebeat.com/category/ai/feed/"
+  - "https://www.deepmind.com/blog/rss.xml"
+  - "https://blog.x.ai/rss.xml"
+
+  # Cloud & Enterprise
+  - "https://www.microsoft.com/en-us/microsoft-cloud/blog/feed/"
+  - "https://aws.amazon.com/blogs/machine-learning/feed/"
+  - "https://cloud.google.com/blog/products/ai-machine-learning/rss"
+
+  # ── PRESSE SPECIALISEE IA ─────────────────────────────────
   - "https://techcrunch.com/category/artificial-intelligence/feed/"
+  - "https://venturebeat.com/category/ai/feed/"
+  - "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
+  - "https://www.wired.com/feed/tag/ai/latest/rss"
+  - "https://arstechnica.com/tag/artificial-intelligence/feed/"
+  - "https://www.technologyreview.com/feed/"
+  - "https://www.zdnet.com/topic/artificial-intelligence/rss.xml"
+  - "https://siliconangle.com/category/ai/feed/"
+  - "https://9to5mac.com/guides/artificial-intelligence/feed/"
+  - "https://the-decoder.com/feed/"
+  - "https://www.marktechpost.com/feed/"
+
+  # ── BUSINESS & FINANCE ────────────────────────────────────
+  - "https://www.reuters.com/technology/rss"
+  - "https://www.bloomberg.com/feed/podcast/decrypted"
+  - "https://feeds.content.dowjones.io/public/rss/RSSWSJD"
+  - "https://www.cnbc.com/id/19854910/device/rss/rss.html"
+  - "https://fortune.com/feed/fortune-feeds/latest/"
+
+  # ── JOURNAUX GENERALISTES ─────────────────────────────────
+  - "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
+  - "https://www.theguardian.com/technology/artificialintelligenceai/rss"
+  - "https://feeds.bbci.co.uk/news/technology/rss.xml"
+  - "https://www.washingtonpost.com/arcio/rss/category/technology/"
+
+  # ── RECHERCHE & ACADEMIQUE ────────────────────────────────
+  - "https://export.arxiv.org/rss/cs.AI"
+  - "https://export.arxiv.org/rss/cs.CL"
+  - "https://export.arxiv.org/rss/cs.LG"
+  - "https://bair.berkeley.edu/blog/feed.xml"
+  - "https://ai.stanford.edu/blog/feed.xml"

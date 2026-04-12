@@ -21,6 +21,7 @@ class ScoringConfig:
     min_relevance: float = 3.0
     min_text_length: int = 180
     similarity_threshold: float = 0.88
+    max_per_domain: int = 25
     banned_terms: list[str] = field(default_factory=list)
     ai_terms_high: list[str] = field(default_factory=list)
     ai_terms_mid: list[str] = field(default_factory=list)
@@ -129,6 +130,7 @@ def _load_scoring(config: dict[str, Any]) -> ScoringConfig:
         min_relevance=float(s.get('min_relevance', 3.0)),
         min_text_length=int(s.get('min_text_length', 180)),
         similarity_threshold=float(s.get('similarity_threshold', 0.88)),
+        max_per_domain=int(s.get('max_per_domain', 25)),
         banned_terms=list(s.get('banned_terms', [])),
         ai_terms_high=list(s.get('ai_terms_high', [])),
         ai_terms_mid=list(s.get('ai_terms_mid', [])),

@@ -269,36 +269,57 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
     if settings.llm_fallback_model:
         models.append(settings.llm_fallback_model)
 
+    max_length_retries = 4  # nombre de tentatives par modele si trop court
+
     for model in models:
         try:
             logger.info("Generating script with model: %s (profile=%s)", model, settings.profile_name)
 
-            payload = _generate_with_model(model, manifest, settings, force_length=False)
-            script = assemble_script(manifest["run_date"], payload, intro_format=settings.intro_format)
-            wc = _word_count(script)
+            best_payload = None
+            best_script = None
+            best_wc = 0
 
-            if wc < settings.min_script_words:
+            for attempt in range(max_length_retries):
+                force = attempt > 0
+                logger.info("Attempt %d/%d (force_length=%s)", attempt + 1, max_length_retries, force)
+
+                try:
+                    payload = _generate_with_model(model, manifest, settings, force_length=force)
+                    script = assemble_script(manifest["run_date"], payload, intro_format=settings.intro_format)
+                    wc = _word_count(script)
+                except Exception as inner_exc:
+                    logger.warning("Attempt %d failed: %s", attempt + 1, inner_exc)
+                    continue
+
+                logger.info("Attempt %d produced %d words", attempt + 1, wc)
+
+                if wc > best_wc:
+                    best_payload = payload
+                    best_script = script
+                    best_wc = wc
+
+                if wc >= settings.min_script_words:
+                    break
+
                 logger.warning(
-                    "Script too short: %d words < %d minimum, retrying with force_length=True",
+                    "Script too short: %d words < %d minimum, retrying...",
                     wc, settings.min_script_words,
                 )
-                payload = _generate_with_model(model, manifest, settings, force_length=True)
-                script = assemble_script(manifest["run_date"], payload, intro_format=settings.intro_format)
-                wc = _word_count(script)
 
-            if wc < settings.min_script_words:
+            if best_wc < settings.min_script_words:
                 raise ValueError(
-                    f"Script too short after retry: {wc} words < {settings.min_script_words} minimum"
+                    f"Script too short after {max_length_retries} attempts: "
+                    f"{best_wc} words < {settings.min_script_words} minimum"
                 )
 
-            logger.info("Script generated successfully: %d words, model=%s", wc, model)
+            logger.info("Script generated successfully: %d words, model=%s", best_wc, model)
             return EpisodeDraft(
-                episode_title=payload.get("episode_title", settings.podcast_title),
-                episode_summary=payload.get("episode_summary", settings.podcast_description_short),
-                opening_news_title=payload.get("opening_news_title", ""),
-                script=script,
-                tomorrow_concept=payload.get("tomorrow_pedagogical_concept", ""),
-                highlights_label=payload.get("highlights_label", "Highlights"),
+                episode_title=best_payload.get("episode_title", settings.podcast_title),
+                episode_summary=best_payload.get("episode_summary", settings.podcast_description_short),
+                opening_news_title=best_payload.get("opening_news_title", ""),
+                script=best_script,
+                tomorrow_concept=best_payload.get("tomorrow_pedagogical_concept", ""),
+                highlights_label=best_payload.get("highlights_label", "Highlights"),
             )
         except Exception as exc:
             logger.error("Model %s failed: %s", model, exc)

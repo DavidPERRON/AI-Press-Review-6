@@ -12,3 +12,4 @@ docs/sources/
 .DS_Store
 *.mp3
 tts_chunks/
+*.egg-info/

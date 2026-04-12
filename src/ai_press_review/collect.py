@@ -10,82 +10,11 @@ from .collectors.newsapi import fetch_newsapi_articles
 from .collectors.rss import fetch_rss_entries
 from .extractors.web_content import batch_extract
 from .models import SourceItem
-from .settings import DATA_DIR, DOCS_DIR, load_settings, load_sources_config
+from .settings import DATA_DIR, DOCS_DIR, ScoringConfig, load_settings, load_sources_config
 from .state import load_episode_history, load_used_sources, save_used_sources
 from .utils import fingerprint, iso_now, title_similarity, within_hours, write_json
 
 logger = logging.getLogger(__name__)
-
-BANNED_TERMS = {
-    "policy",
-    "regulation",
-    "regulatory",
-    "lawmakers",
-    "legislation",
-    "compliance rule",
-    "executive order",
-    "government policy",
-    "antitrust settlement",
-    "rumor",
-    "rumour",
-}
-
-AI_TERMS_HIGH = {
-    "artificial intelligence",
-    "generative ai",
-    "large language model",
-    "foundation model",
-    "text to speech",
-    "voice model",
-}
-
-AI_TERMS_MID = {
-    "ai",
-    "llm",
-    "agent",
-    "inference",
-    "copilot",
-    "benchmark",
-    "gpu",
-    "datacenter",
-    "data center",
-}
-
-AI_TERMS_LOW = {
-    "model",
-    "chip",
-    "research",
-    "deployment",
-    "automation",
-}
-
-SIGNAL_WORDS_STRONG = {
-    "benchmark", "launch", "funding", "deploy", "revenue",
-    "inference", "training", "open source", "api", "fine-tune",
-    "architecture", "parameter", "token", "multimodal",
-}
-
-SIGNAL_WORDS_MEDIUM = {
-    "latency", "chip", "model", "agent", "research",
-    "paper", "deployment", "startup", "enterprise", "scale",
-}
-
-DOMAIN_AUTHORITY = {
-    "openai.com": 2.0,
-    "anthropic.com": 2.0,
-    "blog.google": 2.0,
-    "deepmind.google": 2.0,
-    "ai.meta.com": 2.0,
-    "nvidia.com": 1.5,
-    "blogs.nvidia.com": 1.5,
-    "huggingface.co": 1.5,
-    "arxiv.org": 1.5,
-    "techcrunch.com": 1.0,
-    "venturebeat.com": 1.0,
-    "theverge.com": 0.8,
-    "reuters.com": 1.0,
-    "bloomberg.com": 1.0,
-}
 
 
 def _previous_episode_memory() -> tuple[set[str], list[str]]:
@@ -102,27 +31,27 @@ def _recent_used_titles() -> list[str]:
     return [item.get("title", "") for item in payload.get("items", [])]
 
 
-def _contains_banned_topic(text: str) -> bool:
+def _contains_banned_topic(text: str, scoring: ScoringConfig) -> bool:
     value = (text or "").lower()
-    return any(term in value for term in BANNED_TERMS)
+    return any(term in value for term in scoring.banned_terms)
 
 
-def _ai_relevance_score(texts: Iterable[str]) -> float:
+def _ai_relevance_score(texts: Iterable[str], scoring: ScoringConfig) -> float:
     joined = " ".join(text or "" for text in texts).lower()
     score = 0.0
-    for term in AI_TERMS_HIGH:
+    for term in scoring.ai_terms_high:
         if term in joined:
             score += 3.0
-    for term in AI_TERMS_MID:
+    for term in scoring.ai_terms_mid:
         if term in joined:
             score += 1.5
-    for term in AI_TERMS_LOW:
+    for term in scoring.ai_terms_low:
         if term in joined:
             score += 0.5
     return score
 
 
-def _score_source(item: SourceItem) -> float:
+def _score_source(item: SourceItem, scoring: ScoringConfig) -> float:
     score = 0.0
     combined = " ".join(filter(None, [item.title, item.summary, item.content_text])).lower()
 
@@ -145,28 +74,30 @@ def _score_source(item: SourceItem) -> float:
         score += 1.0
 
     # Strong signal words
-    strong_matches = sum(1 for w in SIGNAL_WORDS_STRONG if w in combined)
+    strong_matches = sum(1 for w in scoring.signal_words_strong if w in combined)
     score += min(strong_matches * 1.0, 4.0)
 
     # Medium signal words
-    medium_matches = sum(1 for w in SIGNAL_WORDS_MEDIUM if w in combined)
+    medium_matches = sum(1 for w in scoring.signal_words_medium if w in combined)
     score += min(medium_matches * 0.5, 2.0)
 
     # Domain authority
     domain = (item.domain or "").lower()
-    for auth_domain, bonus in DOMAIN_AUTHORITY.items():
+    for auth_domain, bonus in scoring.domain_authority.items():
         if domain.endswith(auth_domain):
             score += bonus
             break
 
     # AI relevance
-    ai_score = _ai_relevance_score([item.title, item.summary, item.content_text or ""])
+    ai_score = _ai_relevance_score([item.title, item.summary, item.content_text or ""], scoring)
     score += min(ai_score, 5.0)
 
     return round(score, 2)
 
 
 def _is_editorially_valid(item: SourceItem, settings) -> bool:
+    scoring = settings.scoring
+
     if not item.url or not item.title or not item.domain:
         return False
 
@@ -174,19 +105,19 @@ def _is_editorially_valid(item: SourceItem, settings) -> bool:
         return False
 
     combined = " ".join(filter(None, [item.title, item.summary, item.content_text]))
-    if _contains_banned_topic(combined):
+    if _contains_banned_topic(combined, scoring):
         return False
 
-    ai_score = _ai_relevance_score([item.title, item.summary, item.content_text or ""])
+    ai_score = _ai_relevance_score([item.title, item.summary, item.content_text or ""], scoring)
     if ai_score < 1.0:
         return False
 
     effective_text = (item.content_text or item.summary or "").strip()
-    if len(effective_text) < 180:
+    if len(effective_text) < scoring.min_text_length:
         return False
 
-    item.relevance_score = _score_source(item)
-    return item.relevance_score >= 3.0
+    item.relevance_score = _score_source(item, scoring)
+    return item.relevance_score >= scoring.min_relevance
 
 
 def _is_duplicate_of_previous(
@@ -194,13 +125,14 @@ def _is_duplicate_of_previous(
     previous_fingerprints: set[str],
     previous_titles: list[str],
     recent_titles: list[str],
+    threshold: float,
 ) -> bool:
     fp = fingerprint(item.title, item.url)
     if fp in previous_fingerprints:
         return True
 
     for prior_title in previous_titles + recent_titles:
-        if title_similarity(item.title, prior_title) >= 0.88:
+        if title_similarity(item.title, prior_title) >= threshold:
             return True
 
     return False
@@ -254,10 +186,10 @@ def collect_sources(run_date: str, local_preview: bool = False) -> dict:
             continue
         seen_urls.add(item.url)
 
-        if _is_duplicate_of_previous(item, previous_fingerprints, previous_titles, recent_titles):
+        if _is_duplicate_of_previous(item, previous_fingerprints, previous_titles, recent_titles, settings.scoring.similarity_threshold):
             continue
 
-        if _contains_banned_topic(" ".join(filter(None, [item.title, item.summary]))):
+        if _contains_banned_topic(" ".join(filter(None, [item.title, item.summary])), settings.scoring):
             continue
 
         candidates.append(item)

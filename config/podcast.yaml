@@ -1,3 +1,10 @@
+# ──────────────────────────────────────────────────────────────
+#  AI PRESS REVIEW — CONFIGURATION CENTRALE
+#  Modifie ce fichier directement sur GitHub pour ajuster les parametres.
+#  Les changements prennent effet au prochain run du workflow.
+# ──────────────────────────────────────────────────────────────
+
+# ── PODCAST METADATA ──────────────────────────────────────────
 title: "AI Press Review"
 subtitle: "Factual, Clear, Built for Busy Professionals"
 author: "David Perron"
@@ -12,17 +19,128 @@ site_url: "https://davidperron.github.io/AI-Press-Review"
 public_audio_base_url: "https://www.ashcroftedition.org"
 cover_image: "assets/podcast-cover.png"
 
+# ── EDITORIAL ─────────────────────────────────────────────────
 editorial:
-  target_duration_min: 14
-  target_duration_max: 18
-  min_script_words: 2500
-  min_source_count: 45
-  freshness_hours: 48
-  exclude_previous_episode: true
+  target_duration_min: 14          # duree cible minimum (minutes)
+  target_duration_max: 18          # duree cible maximum (minutes)
+  min_script_words: 2500           # nombre minimum de mots dans le script
+  min_source_count: 45             # nombre minimum de sources requises
+  freshness_hours: 48              # anciennete max des articles (heures)
+  exclude_previous_episode: true   # exclure les sources deja utilisees
 
-retention_days: 10
+# ── LLM ───────────────────────────────────────────────────────
+llm:
+  max_tokens: 12000                # tokens max pour la generation
+  temperature: 0.2                 # creativite (0.0 = factuel, 1.0 = creatif)
+  timeout_seconds: 180             # timeout par appel LLM
+
+# ── TTS (Cartesia) ───────────────────────────────────────────
+tts:
+  chunk_max_chars: 1800            # taille max par chunk TTS (caracteres)
+
+# ── PUBLICATION ───────────────────────────────────────────────
+retention_days: 10                 # jours de retention des anciens episodes
 publish_timezone: "Europe/Paris"
 
 schedule:
-  publish_hour_local: 7
-  weekdays_only: true
+  publish_hour_local: 7            # heure de publication (heure locale)
+  weekdays_only: true              # publier uniquement en semaine
+
+# ── SCORING DES SOURCES ──────────────────────────────────────
+# Le score determine quelles sources sont selectionnees.
+# Plus le score est eleve, plus la source est prioritaire.
+
+scoring:
+  min_relevance: 3.0               # score minimum pour qu'une source soit gardee
+  min_text_length: 180             # longueur minimum du texte (caracteres)
+  similarity_threshold: 0.88       # seuil de similarite pour la deduplication
+
+  # Mots-cles interdits — les articles contenant ces termes sont exclus
+  banned_terms:
+    - "policy"
+    - "regulation"
+    - "regulatory"
+    - "lawmakers"
+    - "legislation"
+    - "compliance rule"
+    - "executive order"
+    - "government policy"
+    - "antitrust settlement"
+    - "rumor"
+    - "rumour"
+
+  # Termes AI — poids fort (score +3.0 par match)
+  ai_terms_high:
+    - "artificial intelligence"
+    - "generative ai"
+    - "large language model"
+    - "foundation model"
+    - "text to speech"
+    - "voice model"
+
+  # Termes AI — poids moyen (score +1.5 par match)
+  ai_terms_mid:
+    - "ai"
+    - "llm"
+    - "agent"
+    - "inference"
+    - "copilot"
+    - "benchmark"
+    - "gpu"
+    - "datacenter"
+    - "data center"
+
+  # Termes AI — poids faible (score +0.5 par match)
+  ai_terms_low:
+    - "model"
+    - "chip"
+    - "research"
+    - "deployment"
+    - "automation"
+
+  # Mots-signaux forts (score +1.0 par match, max 4.0)
+  signal_words_strong:
+    - "benchmark"
+    - "launch"
+    - "funding"
+    - "deploy"
+    - "revenue"
+    - "inference"
+    - "training"
+    - "open source"
+    - "api"
+    - "fine-tune"
+    - "architecture"
+    - "parameter"
+    - "token"
+    - "multimodal"
+
+  # Mots-signaux moyens (score +0.5 par match, max 2.0)
+  signal_words_medium:
+    - "latency"
+    - "chip"
+    - "model"
+    - "agent"
+    - "research"
+    - "paper"
+    - "deployment"
+    - "startup"
+    - "enterprise"
+    - "scale"
+
+  # Autorite des domaines — bonus automatique par source
+  domain_authority:
+    "openai.com": 2.0
+    "anthropic.com": 2.0
+    "blog.google": 2.0
+    "deepmind.google": 2.0
+    "ai.meta.com": 2.0
+    "nvidia.com": 1.5
+    "blogs.nvidia.com": 1.5
+    "huggingface.co": 1.5
+    "arxiv.org": 1.5
+    "techcrunch.com": 1.0
+    "venturebeat.com": 1.0
+    "theverge.com": 0.8
+    "reuters.com": 1.0
+    "bloomberg.com": 1.0

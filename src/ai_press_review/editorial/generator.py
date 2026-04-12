@@ -223,8 +223,8 @@ def _generate_with_model(model: str, manifest: dict, settings, force_length: boo
         settings=settings,
         model=model,
         messages=messages,
-        temperature=0.2,
-        max_tokens=12000,
+        temperature=settings.llm_temperature,
+        max_tokens=settings.llm_max_tokens,
     )
     elapsed = time.monotonic() - start
 

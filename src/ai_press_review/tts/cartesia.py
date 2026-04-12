@@ -36,7 +36,7 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     if not settings.cartesia_voice_id:
         raise ValueError('CARTESIA_VOICE_ID is required for TTS')
 
-    chunks = split_script(script)
+    chunks = split_script(script, max_chars=settings.tts_chunk_max_chars)
     if not chunks:
         raise ValueError('Script is empty — cannot synthesize audio')
 

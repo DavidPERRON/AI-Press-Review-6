@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -14,6 +14,20 @@ DATA_DIR = ROOT / 'data'
 DOCS_DIR = ROOT / 'docs'
 
 load_dotenv(ROOT / '.env', override=False)
+
+
+@dataclass
+class ScoringConfig:
+    min_relevance: float = 3.0
+    min_text_length: int = 180
+    similarity_threshold: float = 0.88
+    banned_terms: list[str] = field(default_factory=list)
+    ai_terms_high: list[str] = field(default_factory=list)
+    ai_terms_mid: list[str] = field(default_factory=list)
+    ai_terms_low: list[str] = field(default_factory=list)
+    signal_words_strong: list[str] = field(default_factory=list)
+    signal_words_medium: list[str] = field(default_factory=list)
+    domain_authority: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass
@@ -47,6 +61,9 @@ class Settings:
     llm_editor_model: str
     llm_fallback_model: str
     llm_timeout_seconds: int
+    llm_max_tokens: int
+    llm_temperature: float
+    tts_chunk_max_chars: int
     cartesia_api_key: str
     cartesia_voice_id: str
     cartesia_model_id: str
@@ -64,6 +81,7 @@ class Settings:
     newsapi_api_key: str
     newsapi_query: str
     newsapi_page_size: int
+    scoring: ScoringConfig = field(default_factory=ScoringConfig)
 
     @property
     def prompt_path(self) -> Path:
@@ -96,6 +114,22 @@ def _env_bool(name: str, default: bool) -> bool:
     if value is None:
         return bool(default)
     return value.strip().lower() in {'1', 'true', 'yes', 'on'}
+
+
+def _load_scoring(config: dict[str, Any]) -> ScoringConfig:
+    s = config.get('scoring', {}) or {}
+    return ScoringConfig(
+        min_relevance=float(s.get('min_relevance', 3.0)),
+        min_text_length=int(s.get('min_text_length', 180)),
+        similarity_threshold=float(s.get('similarity_threshold', 0.88)),
+        banned_terms=list(s.get('banned_terms', [])),
+        ai_terms_high=list(s.get('ai_terms_high', [])),
+        ai_terms_mid=list(s.get('ai_terms_mid', [])),
+        ai_terms_low=list(s.get('ai_terms_low', [])),
+        signal_words_strong=list(s.get('signal_words_strong', [])),
+        signal_words_medium=list(s.get('signal_words_medium', [])),
+        domain_authority=dict(s.get('domain_authority', {})),
+    )
 
 
 def load_settings(local_preview: bool = False) -> Settings:
@@ -136,7 +170,10 @@ def load_settings(local_preview: bool = False) -> Settings:
         llm_api_key=_env('LLM_API_KEY', 'unused' if local_preview else ''),
         llm_editor_model=llm_model_default,
         llm_fallback_model=_env('LLM_FALLBACK_MODEL'),
-        llm_timeout_seconds=int(_env('LLM_TIMEOUT_SECONDS', '180')),
+        llm_timeout_seconds=int(_env('LLM_TIMEOUT_SECONDS', str(_yaml_get(config, 'llm.timeout_seconds', 180)))),
+        llm_max_tokens=int(_yaml_get(config, 'llm.max_tokens', 12000)),
+        llm_temperature=float(_yaml_get(config, 'llm.temperature', 0.2)),
+        tts_chunk_max_chars=int(_yaml_get(config, 'tts.chunk_max_chars', 1800)),
         cartesia_api_key=_env('CARTESIA_API_KEY'),
         cartesia_voice_id=_env('CARTESIA_VOICE_ID'),
         cartesia_model_id=_env('CARTESIA_MODEL_ID', 'sonic-3'),
@@ -154,6 +191,7 @@ def load_settings(local_preview: bool = False) -> Settings:
         newsapi_api_key=_env('NEWSAPI_API_KEY'),
         newsapi_query=_env('NEWSAPI_QUERY', 'artificial intelligence OR generative AI OR large language model OR AI banking OR AI finance'),
         newsapi_page_size=int(_env('NEWSAPI_PAGE_SIZE', '50')),
+        scoring=_load_scoring(config),
     )
 
 

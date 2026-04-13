@@ -10,32 +10,21 @@ google_news_rss: []
 
 # ── AI LABS & BIG TECH ────────────────────────────────────────
 curated_rss:
-  # Labs — primary sources (×3 weight)
+  # Labs — primary sources
   - "https://openai.com/news/rss.xml"
-  - "https://www.anthropic.com/news/rss.xml"
   - "https://blog.google/technology/ai/rss/"
-  - "https://ai.meta.com/blog/rss/"
   - "https://blogs.nvidia.com/feed/"
   - "https://huggingface.co/blog/feed.xml"
   - "https://www.deepmind.com/blog/rss.xml"
-  - "https://blog.x.ai/rss.xml"
-  - "https://stability.ai/news/feed"
   - "https://cohere.com/blog/rss.xml"
-  - "https://mistral.ai/feed/rss2.xml"
-  - "https://www.adept.ai/blog/rss.xml"
 
   # Cloud & Enterprise
-  - "https://www.microsoft.com/en-us/microsoft-cloud/blog/feed/"
   - "https://aws.amazon.com/blogs/machine-learning/feed/"
   - "https://cloud.google.com/blog/products/ai-machine-learning/rss"
-  - "https://www.ibm.com/blog/category/artificial-intelligence/feed/"
-  - "https://blogs.oracle.com/ai-and-datascience/rss"
   - "https://engineering.salesforce.com/feed/"
 
   # Semiconductors & Hardware
   - "https://www.intel.com/content/www/us/en/newsroom/rss-feed.html"
-  - "https://www.amd.com/en/corporate/newsroom.xml"
-  - "https://www.qualcomm.com/news/releases/feed"
 
   # ── PRESSE SPECIALISEE IA ─────────────────────────────────
   - "https://techcrunch.com/category/artificial-intelligence/feed/"
@@ -44,35 +33,25 @@ curated_rss:
   - "https://www.wired.com/feed/tag/ai/latest/rss"
   - "https://arstechnica.com/tag/artificial-intelligence/feed/"
   - "https://www.technologyreview.com/feed/"
-  - "https://www.zdnet.com/topic/artificial-intelligence/rss.xml"
   - "https://siliconangle.com/category/ai/feed/"
   - "https://9to5mac.com/guides/artificial-intelligence/feed/"
   - "https://the-decoder.com/feed/"
   - "https://www.marktechpost.com/feed/"
-  - "https://www.infoworld.com/category/ai-ml/index.rss"
   - "https://www.computerworld.com/category/artificial-intelligence/index.rss"
   - "https://www.cio.com/category/artificial-intelligence/index.rss"
-  - "https://www.theregister.com/offbeat/ai+ml/headlines.atom"
   - "https://www.unite.ai/feed/"
   - "https://analyticsindiamag.com/feed/"
 
   # ── BUSINESS & FINANCE ────────────────────────────────────
-  - "https://www.reuters.com/technology/rss"
-  - "https://www.bloomberg.com/feed/podcast/decrypted"
   - "https://feeds.content.dowjones.io/public/rss/RSSWSJD"
-  - "https://www.cnbc.com/id/19854910/device/rss/rss.html"
-  - "https://fortune.com/feed/fortune-feeds/latest/"
   - "https://www.ft.com/technology?format=rss"
-  - "https://hbr.org/topic/technology.rss"
   - "https://www.economist.com/science-and-technology/rss.xml"
 
   # ── JOURNAUX GENERALISTES ─────────────────────────────────
   - "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
   - "https://www.theguardian.com/technology/artificialintelligenceai/rss"
   - "https://feeds.bbci.co.uk/news/technology/rss.xml"
-  - "https://www.washingtonpost.com/arcio/rss/category/technology/"
   - "https://www.lemonde.fr/intelligence-artificielle/rss_full.xml"
-  - "https://www.japantimes.co.jp/tag/artificial-intelligence/feed/"
   - "https://www.scmp.com/rss/36/feed"
 
   # ── AI-FOCUSED MEDIA & NEWSLETTERS ───────────────────────
@@ -81,9 +60,6 @@ curated_rss:
   - "https://syncedreview.com/feed/"
   - "https://jack-clark.net/feed/"
   - "https://lastweekin.ai/feed"
-  - "https://bensbites.beehiiv.com/feed"
-  - "https://www.theainavigator.com/feed"
-  - "https://www.superhuman.ai/feed"
   - "https://www.oneusefulthing.org/feed"
   - "https://simonwillison.net/atom/everything/"
   - "https://lilianweng.github.io/index.xml"
@@ -97,10 +73,8 @@ curated_rss:
   - "https://bair.berkeley.edu/blog/feed.xml"
   - "https://ai.stanford.edu/blog/feed.xml"
   - "https://machinelearning.apple.com/rss.xml"
-  - "https://www.microsoft.com/en-us/research/feed/"
   - "https://research.google/blog/rss/"
   - "https://engineering.fb.com/category/ml-applications/feed/"
-  - "https://www.nature.com/subjects/artificial-intelligence.rss"
   - "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science"
 
   # ── AI IN FINANCE & BANKING ──────────────────────────────

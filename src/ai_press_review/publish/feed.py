@@ -9,6 +9,7 @@ from ..settings import DOCS_DIR, load_settings
 from ..state import load_episode_history, save_episode_history
 from ..storage.r2 import delete_key
 from ..utils import utcnow
+from .episode_brief import generate_episode_brief
 
 
 def publish_episode(episode: PublishedEpisode, source_fingerprints: list[str], source_titles: list[str]) -> None:
@@ -63,11 +64,13 @@ def _write_feed(episodes: list[dict]) -> None:
             f"<link>{escape(ep['source_manifest_url'])}</link></item>"
         )
     xml = (
-        '<?xml version="1.0" encoding="UTF-8"?>'
-        '<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/">'
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>\n'
+        '<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">'
         '<channel>'
         f"<title>{escape(settings.podcast_title)}</title>"
         f"<link>{escape(settings.site_base_url)}</link>"
+        f'<atom:link href="{escape(settings.rss_feed_url)}" rel="self" type="application/rss+xml" />'
         f"<language>{escape(settings.podcast_language)}</language>"
         f"<itunes:author>{escape(settings.podcast_author)}</itunes:author>"
         f"<itunes:subtitle>{escape(settings.podcast_subtitle)}</itunes:subtitle>"
@@ -110,7 +113,7 @@ def _write_index(episodes: list[dict]) -> None:
         f"<img src='{escape(settings.cover_image_path)}' alt='cover'>"
         f"<h1>{escape(settings.podcast_title)}</h1>"
         f"<p>{escape(settings.podcast_subtitle)}</p>"
-        "<p><a href='podcast-feed.xml'>Podcast RSS feed</a></p>"
+        "<p><a href='podcast-feed.xml'>Podcast RSS feed</a> · <a href='/about.html'>Methodology</a></p>"
         f"{''.join(cards) if cards else empty}"
         "</body></html>"
     )

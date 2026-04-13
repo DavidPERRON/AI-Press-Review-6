@@ -6,6 +6,7 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Iterable
 from xml.sax.saxutils import escape
 
+from .collectors.gnews import fetch_gnews_articles
 from .collectors.newsapi import fetch_newsapi_articles
 from .collectors.rss import fetch_rss_entries
 from .extractors.web_content import batch_extract
@@ -189,9 +190,9 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     settings = load_settings(local_preview=local_preview, profile=profile)
     cfg = load_sources_config()
 
-    # Phase 1: Collect metadata in parallel (RSS feeds + NewsAPI)
-    logger.info("Phase 1: Collecting metadata from RSS and NewsAPI...")
-    with ThreadPoolExecutor(max_workers=2) as executor:
+    # Phase 1: Collect metadata in parallel (RSS feeds + NewsAPI + GNews)
+    logger.info("Phase 1: Collecting metadata from RSS, NewsAPI, and GNews...")
+    with ThreadPoolExecutor(max_workers=3) as executor:
         rss_future = executor.submit(
             fetch_rss_entries,
             list(cfg.get("google_news_rss", [])) + list(cfg.get("curated_rss", [])),
@@ -204,10 +205,18 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
             settings.newsapi_page_size,
             settings.freshness_hours,
         )
+        gnews_future = executor.submit(
+            fetch_gnews_articles,
+            settings.gnews_api_key,
+            settings.gnews_query,
+            settings.gnews_max_results,
+            settings.freshness_hours,
+        )
         rss_items = rss_future.result()
         newsapi_items = newsapi_future.result()
+        gnews_items = gnews_future.result()
 
-    logger.info("Collected %d RSS + %d NewsAPI items", len(rss_items), len(newsapi_items))
+    logger.info("Collected %d RSS + %d NewsAPI + %d GNews items", len(rss_items), len(newsapi_items), len(gnews_items))
 
     # Phase 2: Pre-filter and deduplicate before expensive extraction
     if settings.exclude_previous_episode:
@@ -226,7 +235,7 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     seen_urls: set[str] = set()
 
     google_news_skipped = 0
-    for item in rss_items + newsapi_items:
+    for item in rss_items + newsapi_items + gnews_items:
         if item.url in seen_urls:
             continue
         seen_urls.add(item.url)

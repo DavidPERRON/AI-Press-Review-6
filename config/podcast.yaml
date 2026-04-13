@@ -9,11 +9,18 @@ title: "AI Press Review"
 subtitle: "Factual, Clear, Built for Busy Professionals"
 author: "David Perron"
 email: "david.perron@aequitus.net"
+author_email: "david.perron@aequitus.net"
 language: "en"
 category_primary: "Business"
 category_secondary: "Artificial Intelligence"
-short_description: "Six pillars: AI News - Research & Breakthroughs - Use Cases - Tools & Practice - Weak Signals - Education."
-long_description: ""
+tagline: "40 sources. 15 minutes. What matters in AI today."
+short_description: "40 sources. 15 minutes. What matters in AI today."
+long_description: >
+  Every weekday morning at 7AM CET, AI Press Review distills 40+ global sources
+  into a focused 15-minute briefing — filtered, weighted, and structured around
+  six pillars: AI News, Research & Breakthroughs, Use Cases, Tools & Practice,
+  Weak Signals, and Education. Built for professionals who need signal, not noise.
+  Every Saturday: a weekly recap of the five trends that defined the week.
 feed_url: "https://podcast.aequitus.net/podcast-feed.xml"
 site_url: "https://podcast.aequitus.net"
 public_audio_base_url: "https://www.ashcroftedition.org"
@@ -24,7 +31,7 @@ editorial:
   target_duration_min: 14
   target_duration_max: 18
   min_script_words: 2200
-  min_source_count: 45
+  min_source_count: 20
   freshness_hours: 48
   exclude_previous_episode: true
 
@@ -62,7 +69,7 @@ profiles:
     freshness_hours: 48
     exclude_previous_episode: true
     prefer_unused: false
-    min_source_count: 45
+    min_source_count: 20
     min_script_words: 2200
     target_duration_min: 14
     target_duration_max: 18
@@ -168,17 +175,40 @@ scoring:
 
   # Autorite des domaines — bonus automatique par source
   domain_authority:
+    # Primary sources (×3 tier)
     "openai.com": 2.0
     "anthropic.com": 2.0
     "blog.google": 2.0
     "deepmind.google": 2.0
+    "research.google": 2.0
     "ai.meta.com": 2.0
+    "stability.ai": 1.5
+    "cohere.com": 1.5
+    "mistral.ai": 1.5
+    "blog.x.ai": 1.5
+    # Hardware & Cloud
     "nvidia.com": 1.5
     "blogs.nvidia.com": 1.5
+    "intel.com": 1.0
+    "amd.com": 1.0
+    "qualcomm.com": 1.0
+    # Research (×3 tier)
     "huggingface.co": 1.5
     "arxiv.org": 1.5
+    "nature.com": 1.5
+    "science.org": 1.5
+    "machinelearning.apple.com": 1.5
+    # Press (×2 tier)
     "techcrunch.com": 1.0
     "venturebeat.com": 1.0
+    "technologyreview.com": 1.0
     "theverge.com": 0.8
     "reuters.com": 1.0
     "bloomberg.com": 1.0
+    "ft.com": 1.0
+    "economist.com": 1.0
+    "hbr.org": 1.0
+    # Finance-specific
+    "finextra.com": 0.8
+    "pymnts.com": 0.5
+    "americanbanker.com": 0.8

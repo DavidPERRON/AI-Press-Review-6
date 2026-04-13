@@ -82,6 +82,9 @@ class Settings:
     newsapi_api_key: str
     newsapi_query: str
     newsapi_page_size: int
+    gnews_api_key: str
+    gnews_query: str
+    gnews_max_results: int
     scoring: ScoringConfig = field(default_factory=ScoringConfig)
     # Profile fields
     profile_name: str = 'daily'
@@ -230,6 +233,9 @@ def load_settings(local_preview: bool = False, profile: str | None = None) -> Se
         newsapi_api_key=_env('NEWSAPI_API_KEY'),
         newsapi_query=_env('NEWSAPI_QUERY', 'artificial intelligence OR generative AI OR large language model OR AI banking OR AI finance'),
         newsapi_page_size=int(_env('NEWSAPI_PAGE_SIZE', '50')),
+        gnews_api_key=_env('GNEWS_API_KEY'),
+        gnews_query=_env('GNEWS_QUERY', 'artificial intelligence OR generative AI OR LLM'),
+        gnews_max_results=int(_env('GNEWS_MAX_RESULTS', '50')),
         scoring=_load_scoring(config),
     )
 

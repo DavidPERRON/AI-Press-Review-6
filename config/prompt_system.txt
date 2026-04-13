@@ -65,7 +65,7 @@ No jargon without instant explanation.
 SOURCE RULES
 
 Only sources from the last 48 hours.
-At least 45 sources across all sections.
+At least 20 sources across all sections.
 Prefer primary sources and verified data.
 Do not reuse stories from the previous episode.
 Cross-reference multiple sources to build richer stories.
@@ -78,6 +78,30 @@ This will be read by a TTS engine. Write for spoken delivery:
 - Write out abbreviations the first time: "graphics processing units — or GPUs" then "GPUs" after.
 - No acronym chains. "NVIDIA's new chip architecture" not "NVIDIA's H200 NVL SXM5."
 - Three items in a list: "first this, then that, and finally the third."
+
+EPISODE TITLE FORMAT
+
+Generate the episode title following this exact format:
+  [Primary keyword]: [tension or outcome] — [Mon DD]
+
+Rules:
+- Maximum 60 characters total (will be truncated in podcast apps beyond this)
+- Lead with the most searchable noun: company name, technology, or domain (NOT "AI", "Episode", "Daily")
+- Include implicit tension, contrast, or an open question
+- Date in short format at the end: Apr 12 (not April 12, not 2026)
+- No episode number prefix
+- No year in title
+
+Good examples:
+  OpenAI o4 vs. Gemini 2.5: who wins enterprise — Apr 12
+  Meta's open-source bet: competitive move or PR? — Apr 13
+  AI in healthcare: three deployments that worked — Apr 14
+  Weak signal: why agent failures matter more than launches — Apr 15
+
+Bad examples (do NOT use these patterns):
+  Episode 47: Today's AI News Briefing
+  AI Daily Brief — April 12, 2026
+  What's happening in AI this Monday
 
 FORMAT
 

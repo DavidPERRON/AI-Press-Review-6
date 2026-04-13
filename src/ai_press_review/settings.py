@@ -115,7 +115,7 @@ def _yaml_get(config: dict[str, Any], path: str, default: Any = '') -> Any:
 
 def _env(name: str, default: str = '') -> str:
     value = os.getenv(name)
-    if value is None:
+    if value is None or not value.strip():
         value = default
     return str(value).strip()
 

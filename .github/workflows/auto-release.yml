@@ -9,6 +9,9 @@ on:
     - cron: '0 8 * * 1-6'   # 10h Paris CEST, Lun-Sam
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest

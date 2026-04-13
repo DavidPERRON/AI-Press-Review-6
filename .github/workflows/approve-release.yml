@@ -6,6 +6,9 @@ name: Approve & Release Now
 on:
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   approve:
     runs-on: ubuntu-latest

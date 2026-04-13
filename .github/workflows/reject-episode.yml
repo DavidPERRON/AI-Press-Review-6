@@ -6,6 +6,9 @@ name: Reject Episode
 on:
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   reject:
     runs-on: ubuntu-latest

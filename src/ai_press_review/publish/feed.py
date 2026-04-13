@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
+from pathlib import Path
 from xml.sax.saxutils import escape
 
 from ..models import PublishedEpisode
@@ -90,31 +91,28 @@ def _write_feed(episodes: list[dict]) -> None:
     (DOCS_DIR / 'podcast-feed.xml').write_text(xml, encoding='utf-8')
 
 
+_INDEX_TEMPLATE_PATH = Path(__file__).parent / 'templates' / 'index-template.html'
+
+
 def _write_index(episodes: list[dict]) -> None:
-    settings = load_settings()
+    template = _INDEX_TEMPLATE_PATH.read_text(encoding='utf-8')
     cards = []
     for ep in episodes:
+        pub_dt = datetime.fromisoformat(ep['published_at'])
+        date_str = pub_dt.strftime('%b %d, %Y')
+        dur = ep.get('duration_seconds') or 0
+        dur_str = f'{dur // 60} min' if dur else ''
         cards.append(
-            f"<article class='card'>"
-            f"<h3>{escape(ep['title'])}</h3>"
-            f"<p>{escape(ep['summary'])}</p>"
-            f"<p><a href='{escape(ep['audio_url'])}'>Listen</a> · "
-            f"<a href='{escape(ep['source_manifest_url'])}'>Sources</a></p>"
-            f"</article>"
+            f'<div class="episode-item">'
+            f'<div>'
+            f'<a href="{escape(ep["audio_url"])}" class="episode-title">{escape(ep["title"])}</a>'
+            f'<div class="episode-meta">{date_str}</div>'
+            f'<p class="episode-summary">{escape(ep["summary"])}</p>'
+            f'<a href="{escape(ep["audio_url"])}" class="episode-listen">Listen &rarr;</a>'
+            f'</div>'
+            f'<span class="episode-duration">{dur_str}</span>'
+            f'</div>'
         )
-    empty = "<div class='card'><strong>No episodes published yet.</strong></div>"
-    html = (
-        "<!doctype html><html lang='en'><head><meta charset='utf-8'>"
-        "<meta name='viewport' content='width=device-width, initial-scale=1'>"
-        f"<title>{escape(settings.podcast_title)}</title>"
-        "<style>body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:760px;margin:2rem auto;line-height:1.55;color:#111}"
-        "img{max-width:240px;border-radius:20px}.card{border:1px solid #ddd;border-radius:16px;padding:1rem 1.25rem;margin:1rem 0}</style>"
-        "</head><body>"
-        f"<img src='{escape(settings.cover_image_path)}' alt='cover'>"
-        f"<h1>{escape(settings.podcast_title)}</h1>"
-        f"<p>{escape(settings.podcast_subtitle)}</p>"
-        "<p><a href='podcast-feed.xml'>Podcast RSS feed</a> · <a href='/about.html'>Methodology</a></p>"
-        f"{''.join(cards) if cards else empty}"
-        "</body></html>"
-    )
+    episodes_html = '\n'.join(cards) if cards else '<div class="empty-state">First episode coming soon.</div>'
+    html = template.replace('{{EPISODES}}', episodes_html)
     (DOCS_DIR / 'index.html').write_text(html, encoding='utf-8')

@@ -261,7 +261,13 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     logger.info("Phase 2: %d candidates after pre-filtering", len(candidates))
 
     # Phase 3: Batch extract content in parallel for items missing content
-    urls_to_extract = [item.url for item in candidates if not (item.content_text or "").strip()]
+    # Skip extraction for arxiv.org — RSS abstract is sufficient for scoring
+    SKIP_EXTRACT_DOMAINS = {"arxiv.org"}
+    urls_to_extract = [
+        item.url for item in candidates
+        if not (item.content_text or "").strip()
+        and not any(d in (item.domain or "") for d in SKIP_EXTRACT_DOMAINS)
+    ]
     if urls_to_extract:
         logger.info("Phase 3: Extracting content for %d articles...", len(urls_to_extract))
         extracted_map = batch_extract(urls_to_extract)

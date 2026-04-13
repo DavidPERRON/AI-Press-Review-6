@@ -63,13 +63,6 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     }
 
 
-def _parse_emotion(raw: str) -> list[str]:
-    """Parse 'curiosity:high,confidence:high' into Cartesia emotion list format."""
-    if not raw or raw == 'neutral':
-        return []
-    return [e.strip() for e in raw.split(',') if e.strip()]
-
-
 @retry(wait=wait_exponential(multiplier=2, min=2, max=30), stop=stop_after_attempt(3))
 def _render_chunk(chunk: str, settings) -> bytes:
     headers = {
@@ -86,7 +79,7 @@ def _render_chunk(chunk: str, settings) -> bytes:
         'generation_config': {
             'volume': settings.cartesia_volume,
             'speed': settings.cartesia_speed,
-            'emotion': _parse_emotion(settings.cartesia_emotion),
+            'emotion': settings.cartesia_emotion,
         },
         'save': False,
     }

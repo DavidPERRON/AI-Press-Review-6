@@ -15,6 +15,7 @@ on:
 jobs:
   cloud_dry_run:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
@@ -29,6 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          set -e
           pip install -r requirements.txt
           pip install -e .
 
@@ -50,6 +52,7 @@ jobs:
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
         run: |
+          set -e
           RUN_DATE=${{ github.event.inputs.run_date }}
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
           python scripts/cloud_dry_run.py --date "$RUN_DATE" --profile "${{ github.event.inputs.profile }}"

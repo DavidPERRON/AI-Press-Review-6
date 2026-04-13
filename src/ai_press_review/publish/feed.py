@@ -10,7 +10,6 @@ from ..settings import DOCS_DIR, load_settings
 from ..state import load_episode_history, save_episode_history
 from ..storage.r2 import delete_key
 from ..utils import utcnow
-from .episode_brief import generate_episode_brief
 
 
 def publish_episode(episode: PublishedEpisode, source_fingerprints: list[str], source_titles: list[str]) -> None:
@@ -27,6 +26,8 @@ def publish_episode(episode: PublishedEpisode, source_fingerprints: list[str], s
     kept = []
     for item in episodes:
         published_at = datetime.fromisoformat(item['published_at'])
+        if published_at.tzinfo is None:
+            published_at = published_at.replace(tzinfo=timezone.utc)
         if published_at >= cutoff:
             kept.append(item)
         else:
@@ -55,13 +56,16 @@ def _write_feed(episodes: list[dict]) -> None:
     items = []
     for ep in episodes:
         pub_date = format_datetime(datetime.fromisoformat(ep['published_at']))
+        duration_secs = ep.get('duration_seconds', 0)
+        duration_str = f"{duration_secs // 3600}:{(duration_secs % 3600) // 60:02d}:{duration_secs % 60:02d}"
         items.append(
             f"<item><title>{escape(ep['title'])}</title>"
             f"<description>{escape(ep['summary'])}</description>"
-            f"<guid>{escape(ep['audio_url'])}</guid>"
+            f"<guid isPermaLink=\"false\">{escape(ep.get('date', '') + '-' + ep.get('slug', ''))}</guid>"
             f"<pubDate>{pub_date}</pubDate>"
             f'<enclosure url="{escape(ep["audio_url"])}" length="{ep["audio_bytes"]}" type="audio/mpeg" />'
             f"<itunes:summary>{escape(ep['summary'])}</itunes:summary>"
+            f"<itunes:duration>{escape(duration_str)}</itunes:duration>"
             f"<link>{escape(ep['source_manifest_url'])}</link></item>"
         )
     xml = (

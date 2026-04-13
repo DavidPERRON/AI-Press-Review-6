@@ -24,6 +24,8 @@ def upload_file(
     content_type: str = 'audio/mpeg',
     local_preview: bool = False,
 ) -> str:
+    if not local_path.exists():
+        raise FileNotFoundError(f"Audio file not found: {local_path}")
     settings = load_settings(local_preview=local_preview)
     client = r2_client(local_preview=local_preview)
     client.upload_file(

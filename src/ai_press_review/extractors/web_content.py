@@ -24,7 +24,7 @@ USER_AGENT = (
 
 MAX_CONTENT_LENGTH = 6000
 MIN_CONTENT_LENGTH = 400
-MAX_EXTRACTION_WORKERS = 8
+MAX_EXTRACTION_WORKERS = 3
 
 
 @dataclass
@@ -75,6 +75,11 @@ def _extract_with_beautifulsoup(html: str) -> Optional[str]:
 def _fetch_html(url: str, timeout: int = 25) -> Optional[str]:
     response = requests.get(url, timeout=timeout, headers={"User-Agent": USER_AGENT})
     response.raise_for_status()
+    # Reject excessively large pages (> 10 MB)
+    content_length = response.headers.get('Content-Length')
+    if content_length and int(content_length) > 10_000_000:
+        logger.warning("Skipping oversized page (%s bytes): %s", content_length, url[:80])
+        return None
     return response.text
 
 

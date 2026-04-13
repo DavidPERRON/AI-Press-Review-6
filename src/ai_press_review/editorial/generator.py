@@ -168,6 +168,11 @@ def _post_chat_completion(settings, payload: dict[str, Any]) -> dict[str, Any]:
     base_url = (settings.llm_base_url or "").strip().rstrip("/")
     if not base_url.startswith("http"):
         raise ValueError(f"Invalid LLM_BASE_URL: {base_url!r}")
+    from urllib.parse import urlparse
+    parsed = urlparse(base_url)
+    hostname = parsed.hostname or ""
+    if hostname in ("localhost", "127.0.0.1", "0.0.0.0") or hostname.startswith("169.254.") or hostname.startswith("10.") or hostname.startswith("192.168."):
+        raise ValueError(f"LLM_BASE_URL points to a private/internal address: {base_url!r}")
 
     url = f"{base_url}/chat/completions"
     headers = {"Content-Type": "application/json"}
@@ -182,10 +187,10 @@ def _post_chat_completion(settings, payload: dict[str, Any]) -> dict[str, Any]:
             timeout=max(settings.llm_timeout_seconds, 180),
         )
     except requests.RequestException as exc:
-        raise ValueError(f"Connection error: {exc}") from exc
+        raise ValueError(f"LLM connection error to {parsed.hostname}") from exc
 
     if response.status_code >= 400:
-        raise ValueError(f"HTTP {response.status_code}: {_response_error_text(response)}")
+        raise ValueError(f"LLM HTTP {response.status_code}: {_response_error_text(response)}")
 
     try:
         return response.json()
@@ -220,13 +225,29 @@ def _create_completion_data(
 
 
 def _extract_json(content: str) -> dict[str, Any]:
+    cleaned = content.strip()
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
+        cleaned = re.sub(r"\s*```$", "", cleaned)
     try:
-        return json.loads(content)
+        return json.loads(cleaned)
     except json.JSONDecodeError:
-        match = re.search(r"\{.*\}", content, re.DOTALL)
-        if not match:
+        # Find the outermost JSON object by matching braces
+        start = cleaned.find("{")
+        if start == -1:
             raise ValueError(f"Model did not return valid JSON. First 500 chars: {content[:500]}")
-        return json.loads(match.group(0))
+        depth = 0
+        for i, ch in enumerate(cleaned[start:], start):
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    try:
+                        return json.loads(cleaned[start:i + 1])
+                    except json.JSONDecodeError:
+                        break
+        raise ValueError(f"Model did not return valid JSON. First 500 chars: {content[:500]}")
 
 
 def _generate_with_model(model: str, manifest: dict, settings, force_length: bool) -> dict[str, Any]:

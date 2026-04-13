@@ -15,6 +15,7 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
@@ -28,6 +29,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          set -e
           pip install -r requirements.txt
           pip install -e .
 
@@ -42,6 +44,7 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
         run: |
+          set -e
           python -c "
           import json, sys
           from pathlib import Path
@@ -60,6 +63,7 @@ jobs:
 
       - name: Commit published state
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/state/ docs/

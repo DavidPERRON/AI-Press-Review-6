@@ -83,7 +83,7 @@ profiles:
     prefer_unused: true
     unused_score_bonus: 2.0
     reuse_min_score: 8.0
-    min_source_count: 60
+    min_source_count: 45
     min_script_words: 3000
     target_duration_min: 18
     target_duration_max: 24

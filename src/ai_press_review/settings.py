@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -7,6 +8,8 @@ from typing import Any
 
 import yaml
 from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG_DIR = ROOT / 'config'
@@ -97,7 +100,10 @@ class Settings:
 
 
 def _yaml_config() -> dict[str, Any]:
-    with (CONFIG_DIR / 'podcast.yaml').open('r', encoding='utf-8') as handle:
+    path = CONFIG_DIR / 'podcast.yaml'
+    if not path.exists():
+        raise FileNotFoundError(f"Config file not found: {path}")
+    with path.open('r', encoding='utf-8') as handle:
         return yaml.safe_load(handle) or {}
 
 
@@ -122,6 +128,24 @@ def _env_bool(name: str, default: bool) -> bool:
     if value is None:
         return bool(default)
     return value.strip().lower() in {'1', 'true', 'yes', 'on'}
+
+
+def _safe_int(value: str, default: int, field: str = '') -> int:
+    try:
+        return int(value)
+    except (ValueError, TypeError):
+        if field:
+            logger.warning("Invalid int for %s: %r, using default %d", field, value, default)
+        return default
+
+
+def _safe_float(value: str, default: float, field: str = '') -> float:
+    try:
+        return float(value)
+    except (ValueError, TypeError):
+        if field:
+            logger.warning("Invalid float for %s: %r, using default %s", field, value, default)
+        return default
 
 
 def _load_scoring(config: dict[str, Any]) -> ScoringConfig:
@@ -211,15 +235,15 @@ def load_settings(local_preview: bool = False, profile: str | None = None) -> Se
         llm_fallback_model=_env('LLM_FALLBACK_MODEL'),
         llm_timeout_seconds=int(_env('LLM_TIMEOUT_SECONDS', str(_yaml_get(config, 'llm.timeout_seconds', 180)))),
         llm_max_tokens=int(_yaml_get(config, 'llm.max_tokens', 12000)),
-        llm_temperature=float(_yaml_get(config, 'llm.temperature', 0.2)),
+        llm_temperature=_safe_float(str(_yaml_get(config, 'llm.temperature', 0.2)), 0.2, 'llm.temperature'),
         tts_chunk_max_chars=int(_yaml_get(config, 'tts.chunk_max_chars', 1800)),
         cartesia_api_key=_env('CARTESIA_API_KEY'),
         cartesia_voice_id=_env('CARTESIA_VOICE_ID'),
         cartesia_model_id=_env('CARTESIA_MODEL_ID', 'sonic-3'),
         cartesia_version=_env('CARTESIA_VERSION', '2025-04-16'),
         cartesia_language=_env('CARTESIA_LANGUAGE', 'en'),
-        cartesia_speed=float(_env('CARTESIA_SPEED', str(_yaml_get(config, 'tts.speed', 1.0)))),
-        cartesia_volume=float(_env('CARTESIA_VOLUME', str(_yaml_get(config, 'tts.volume', 1.0)))),
+        cartesia_speed=_safe_float(_env('CARTESIA_SPEED', str(_yaml_get(config, 'tts.speed', 1.0))), 1.0, 'CARTESIA_SPEED'),
+        cartesia_volume=_safe_float(_env('CARTESIA_VOLUME', str(_yaml_get(config, 'tts.volume', 1.0))), 1.0, 'CARTESIA_VOLUME'),
         cartesia_emotion=_env('CARTESIA_EMOTION', str(_yaml_get(config, 'tts.emotion', 'neutral'))),
         r2_bucket_name=_env('R2_BUCKET_NAME', 'pressreview'),
         r2_endpoint=_env('R2_ENDPOINT'),
@@ -236,9 +260,19 @@ def load_settings(local_preview: bool = False, profile: str | None = None) -> Se
     if profile:
         _apply_profile(settings, config, profile)
 
+    if not settings.llm_api_key and not local_preview:
+        logger.warning("LLM_API_KEY is not set — editorial generation will fail")
+    if not settings.cartesia_api_key:
+        logger.warning("CARTESIA_API_KEY is not set — TTS will fail")
+    if not settings.r2_endpoint:
+        logger.warning("R2_ENDPOINT is not set — audio upload will fail")
+
     return settings
 
 
 def load_sources_config() -> dict:
-    with (CONFIG_DIR / 'sources.yaml').open('r', encoding='utf-8') as handle:
+    path = CONFIG_DIR / 'sources.yaml'
+    if not path.exists():
+        raise FileNotFoundError(f"Config file not found: {path}")
+    with path.open('r', encoding='utf-8') as handle:
         return yaml.safe_load(handle) or {}

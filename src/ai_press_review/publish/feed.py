@@ -103,8 +103,14 @@ def _secondary_category_xml(settings) -> str:
 def _write_feed(episodes: list[dict]) -> None:
     settings = load_settings()
     items = []
+    latest_pub_dt: datetime | None = None
     for ep in episodes:
-        pub_date = format_datetime(datetime.fromisoformat(ep['published_at']))
+        ep_dt = datetime.fromisoformat(ep['published_at'])
+        if ep_dt.tzinfo is None:
+            ep_dt = ep_dt.replace(tzinfo=timezone.utc)
+        if latest_pub_dt is None or ep_dt > latest_pub_dt:
+            latest_pub_dt = ep_dt
+        pub_date = format_datetime(ep_dt)
         duration_secs = ep.get('duration_seconds', 0)
         duration_str = f"{duration_secs // 3600}:{(duration_secs % 3600) // 60:02d}:{duration_secs % 60:02d}"
         brief_url = ep.get('brief_url', '')
@@ -120,6 +126,19 @@ def _write_feed(episodes: list[dict]) -> None:
             f"<itunes:duration>{escape(duration_str)}</itunes:duration>"
             f"<link>{escape(brief_url)}</link></item>"
         )
+
+    # Freshness signals required by Apple Podcasts / YouTube Music to detect NEW episodes
+    # after initial feed import. Without these tags, aggregators fall back on HTTP cache
+    # headers and the default refresh interval (often 24h), so newly published items
+    # may not appear for hours or days.
+    # - lastBuildDate: when the FEED was last rebuilt (now)
+    # - channel pubDate: publication time of the MOST RECENT item
+    # - ttl: client-side refresh hint in minutes (60 = 1h)
+    # - itunes:type: episodic (standard for serial podcasts — dated releases)
+    now_dt = utcnow()
+    last_build_date = format_datetime(now_dt)
+    channel_pub_date = format_datetime(latest_pub_dt) if latest_pub_dt else last_build_date
+
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<?xml-stylesheet type="text/xsl" href="/feed.xsl"?>\n'
@@ -129,6 +148,10 @@ def _write_feed(episodes: list[dict]) -> None:
         f"<link>{escape(settings.site_base_url)}</link>"
         f'<atom:link href="{escape(settings.rss_feed_url)}" rel="self" type="application/rss+xml" />'
         f"<language>{escape(settings.podcast_language)}</language>"
+        f"<lastBuildDate>{last_build_date}</lastBuildDate>"
+        f"<pubDate>{channel_pub_date}</pubDate>"
+        "<ttl>60</ttl>"
+        "<itunes:type>episodic</itunes:type>"
         f"<itunes:author>{escape(settings.podcast_author)}</itunes:author>"
         f"<itunes:subtitle>{escape(settings.podcast_subtitle)}</itunes:subtitle>"
         f"<itunes:summary>{escape(settings.podcast_description_short)}</itunes:summary>"

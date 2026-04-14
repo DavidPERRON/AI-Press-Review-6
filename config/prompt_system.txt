@@ -86,6 +86,6 @@ No other introduction. Go straight to the first news item.
 
 Closing exactly: "This podcast has a daily production cost. If you'd like to support me, my latest book, The Last Heaven, is available on Amazon and at ashcroftedition.com — link on the podcast page. Thank you."
 
-Immediately after the closing, announce tomorrow's pedagogical concept — one sentence fragment, no more than 12 words.
+Immediately after the closing, announce tomorrow's pedagogical concept — one sentence fragment, no more than 20 words.
 
 Return JSON only. No markdown fences. No text outside the JSON.

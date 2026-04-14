@@ -60,20 +60,26 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 56px;
+      height: 72px;
     }
     .logo-link {
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
+    }
+    .logo-mark {
+      width: 38px; height: 38px; border-radius: 9px; object-fit: cover;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 0 0 3px rgba(200,169,110,0.08);
     }
     .logo-dot {
-      width: 8px; height: 8px;
+      width: 10px; height: 10px;
       border-radius: 50%;
       background: var(--accent);
       flex-shrink: 0;
       animation: pulse 3s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(200,169,110,0.6);
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; }
@@ -81,10 +87,11 @@
     }
     .logo-text {
       font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 1.25rem;
       color: var(--text);
       letter-spacing: 0.01em;
     }
+    .logo-text em { font-style: italic; color: var(--accent); }
     nav a {
       font-size: 0.8rem;
       font-weight: 500;
@@ -439,8 +446,8 @@
   <header>
     <div class="header-inner">
       <a href="/" class="logo-link">
-        <span class="logo-dot" aria-hidden="true"></span>
-        <span class="logo-text">AI Press Review</span>
+        <img src="assets/podcast-cover.png" alt="" class="logo-mark" />
+        <span class="logo-text">AI <em>Press Review</em></span>
       </a>
       <nav>
         <a href="/">Home</a>
@@ -485,7 +492,7 @@
         <div class="audience-grid">
           <div class="audience-item">
             <div class="audience-item-title">Format</div>
-            <div class="audience-item-val">Daily + weekly recap</div>
+            <div class="audience-item-val">Mon–Fri daily + Saturday recap</div>
           </div>
           <div class="audience-item">
             <div class="audience-item-title">Duration</div>
@@ -503,97 +510,10 @@
       </div>
     </section>
 
-    <!-- 2. SOURCE SELECTION -->
-    <section class="section" id="sources">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <h2 class="section-title">How sources are selected and weighted</h2>
-      </div>
-      <div class="section-body">
-        <p>
-          Every episode draws from <strong>40+ global sources</strong> gathered in the
-          12 hours preceding publication. Sources are not treated equally.
-          Each carries a weight score based on editorial standards, domain authority,
-          and primary-source proximity. The higher the weight, the more a source's
-          content influences the episode structure and emphasis.
-        </p>
-        <table class="weight-table" aria-label="Source weight tiers">
-          <thead>
-            <tr>
-              <th>Tier</th>
-              <th>Weight</th>
-              <th>Examples</th>
-              <th>Rationale</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Primary</td>
-              <td><span class="weight-badge w-high">×3</span></td>
-              <td>Lab blogs, official company pages, preprint repositories</td>
-              <td>Official announcements, peer-reviewed research — highest source authority</td>
-            </tr>
-            <tr>
-              <td>Press</td>
-              <td><span class="weight-badge w-med">×2</span></td>
-              <td>Major wire services, financial press, academic journals</td>
-              <td>Editorial standards, original reporting, verified by news desk</td>
-            </tr>
-            <tr>
-              <td>Specialist Press &amp; Tech</td>
-              <td><span class="weight-badge w-base">×1</span></td>
-              <td>Tech news outlets, industry publications</td>
-              <td>Industry coverage — used for context and signal, not primary sourcing</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style="margin-top:1.25rem; font-size: 0.8rem; color: var(--text-muted);">
-          Source tiers are applied automatically during episode production.
-        </p>
-      </div>
-    </section>
-
-    <!-- 3. EDITORIAL EXCLUSIONS -->
-    <section class="section" id="exclusions">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <h2 class="section-title">What we exclude, and why</h2>
-      </div>
-      <div class="section-body">
-        <p>
-          Editorial discipline is as much about what you leave out as what you include.
-          The following categories are systematically excluded from every episode,
-          regardless of how widely they circulate on a given day.
-        </p>
-        <div class="exclusion-grid">
-          <div class="exclusion-item">
-            <div class="exclusion-item-title">Regulatory speculation</div>
-            <div class="exclusion-item-desc">Unverified regulatory moves produce noise that is almost always revised. We wait for official filings.</div>
-          </div>
-          <div class="exclusion-item">
-            <div class="exclusion-item-title">Uncorroborated claims</div>
-            <div class="exclusion-item-desc">If only one source carries a claim with no independent corroboration, it doesn't air.</div>
-          </div>
-          <div class="exclusion-item">
-            <div class="exclusion-item-title">Opinion &amp; commentary</div>
-            <div class="exclusion-item-desc">We report what happened, not what commentators think about it. Interpretation is yours.</div>
-          </div>
-          <div class="exclusion-item">
-            <div class="exclusion-item-title">Small funding rounds</div>
-            <div class="exclusion-item-desc">Rounds below $50M and pre-seed announcements crowd out operational signal.</div>
-          </div>
-          <div class="exclusion-item">
-            <div class="exclusion-item-title">Engagement-driven content</div>
-            <div class="exclusion-item-desc">Social media posts, thought leadership, and content farms are excluded regardless of virality.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. EPISODE STRUCTURE -->
+    <!-- 2. EPISODE STRUCTURE -->
     <section class="section" id="structure">
       <div class="section-header">
-        <span class="section-num">04</span>
+        <span class="section-num">02</span>
         <h2 class="section-title">How episodes are structured</h2>
       </div>
       <div class="section-body">
@@ -655,8 +575,95 @@
           </div>
           <div class="schedule-row">
             <span class="schedule-day">Sunday</span>
-            <span class="schedule-desc">Daily briefing continues</span>
-            <span class="schedule-time">07:00 CET</span>
+            <span class="schedule-desc">No episode — rest day</span>
+            <span class="schedule-time">—</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SOURCE SELECTION -->
+    <section class="section" id="sources">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">How sources are selected and weighted</h2>
+      </div>
+      <div class="section-body">
+        <p>
+          Every episode draws from <strong>40+ global sources</strong> gathered in the
+          12 hours preceding publication. Sources are not treated equally.
+          Each carries a weight score based on editorial standards, domain authority,
+          and primary-source proximity. The higher the weight, the more a source's
+          content influences the episode structure and emphasis.
+        </p>
+        <table class="weight-table" aria-label="Source weight tiers">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Weight</th>
+              <th>Examples</th>
+              <th>Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primary</td>
+              <td><span class="weight-badge w-high">×3</span></td>
+              <td>Lab blogs, official company pages, preprint repositories</td>
+              <td>Official announcements, peer-reviewed research — highest source authority</td>
+            </tr>
+            <tr>
+              <td>Press</td>
+              <td><span class="weight-badge w-med">×2</span></td>
+              <td>Major wire services, financial press, academic journals</td>
+              <td>Editorial standards, original reporting, verified by news desk</td>
+            </tr>
+            <tr>
+              <td>Specialist Press &amp; Tech</td>
+              <td><span class="weight-badge w-base">×1</span></td>
+              <td>Tech news outlets, industry publications</td>
+              <td>Industry coverage — used for context and signal, not primary sourcing</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:1.25rem; font-size: 0.8rem; color: var(--text-muted);">
+          Source tiers are applied automatically during episode production.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. EDITORIAL EXCLUSIONS -->
+    <section class="section" id="exclusions">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">What we exclude, and why</h2>
+      </div>
+      <div class="section-body">
+        <p>
+          Editorial discipline is as much about what you leave out as what you include.
+          The following categories are systematically excluded from every episode,
+          regardless of how widely they circulate on a given day.
+        </p>
+        <div class="exclusion-grid">
+          <div class="exclusion-item">
+            <div class="exclusion-item-title">Regulatory speculation</div>
+            <div class="exclusion-item-desc">Unverified regulatory moves produce noise that is almost always revised. We wait for official filings.</div>
+          </div>
+          <div class="exclusion-item">
+            <div class="exclusion-item-title">Uncorroborated claims</div>
+            <div class="exclusion-item-desc">If only one source carries a claim with no independent corroboration, it doesn't air.</div>
+          </div>
+          <div class="exclusion-item">
+            <div class="exclusion-item-title">Opinion &amp; commentary</div>
+            <div class="exclusion-item-desc">We report what happened, not what commentators think about it. Interpretation is yours.</div>
+          </div>
+          <div class="exclusion-item">
+            <div class="exclusion-item-title">Small funding rounds</div>
+            <div class="exclusion-item-desc">Rounds below $50M and pre-seed announcements crowd out operational signal.</div>
+          </div>
+          <div class="exclusion-item">
+            <div class="exclusion-item-title">Engagement-driven content</div>
+            <div class="exclusion-item-desc">Social media posts, thought leadership, and content farms are excluded regardless of virality.</div>
           </div>
         </div>
       </div>
@@ -670,7 +677,7 @@
       </div>
       <div class="section-body">
         <div class="author-card">
-          <img src="/assets/david-perron.jpg" alt="David Perron" style="width:100px; height:100px; border-radius:50%; object-fit:cover; border:1px solid var(--border-light); margin-bottom:1.25rem;" />
+          <img src="assets/david-perron.jpg" alt="David Perron" style="width:120px; height:120px; border-radius:50%; object-fit:cover; border:1px solid var(--border-light); box-shadow: 0 0 0 4px rgba(200,169,110,0.08); margin-bottom:1.25rem; display:block;" />
           <div class="author-name">David Perron</div>
           <div class="author-title">Senior Global Trade Solutions professional · AI practitioner · Paris</div>
           <p class="author-bio">
@@ -682,7 +689,10 @@
           </p>
           <div class="author-links">
             <a href="https://www.linkedin.com/in/davidperron" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="https://podcast.aequitus.net/podcast-feed.xml">RSS Feed</a>
+            <a href="https://podcast.aequitus.net/podcast-feed.xml">RSS</a>
+            <a href="https://podcasts.apple.com/" target="_blank" rel="noopener">Apple Podcasts</a>
+            <a href="https://open.spotify.com/" target="_blank" rel="noopener">Spotify</a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
             <a href="mailto:david.perron@aequitus.net">Contact</a>
           </div>
         </div>

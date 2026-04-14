@@ -47,6 +47,9 @@ class Settings:
     site_base_url: str
     rss_feed_url: str
     public_audio_base_url: str
+    apple_podcasts_url: str
+    spotify_url: str
+    youtube_url: str
     target_duration_min: int
     target_duration_max: int
     min_script_words: int
@@ -200,6 +203,9 @@ def load_settings(local_preview: bool = False, profile: str | None = None) -> Se
         site_base_url=_env('SITE_BASE_URL', _yaml_get(config, 'site_url', '')),
         rss_feed_url=_env('RSS_FEED_URL', _yaml_get(config, 'feed_url', '')),
         public_audio_base_url=_env('PUBLIC_AUDIO_BASE_URL', _yaml_get(config, 'public_audio_base_url', '')),
+        apple_podcasts_url=_env('APPLE_PODCASTS_URL', _yaml_get(config, 'distribution.apple_podcasts_url', '')),
+        spotify_url=_env('SPOTIFY_URL', _yaml_get(config, 'distribution.spotify_url', '')),
+        youtube_url=_env('YOUTUBE_URL', _yaml_get(config, 'distribution.youtube_url', '')),
         target_duration_min=int(_env('TARGET_DURATION_MIN', str(_yaml_get(config, 'editorial.target_duration_min', 14)))),
         target_duration_max=int(_env('TARGET_DURATION_MAX', str(_yaml_get(config, 'editorial.target_duration_max', 18)))),
         min_script_words=int(_env('MIN_SCRIPT_WORDS', str(_yaml_get(config, 'editorial.min_script_words', 2500)))),

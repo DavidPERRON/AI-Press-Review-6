@@ -26,6 +26,14 @@ site_url: "https://podcast.aequitus.net"
 public_audio_base_url: "https://www.ashcroftedition.org"
 cover_image: "assets/podcast-cover.png"
 
+# ── DISTRIBUTION ──────────────────────────────────────────────
+# URLs publiques d'ecoute. Laisse vide tant que la soumission n'a pas
+# ete acceptee — le bouton correspondant est masque automatiquement.
+distribution:
+  apple_podcasts_url: ""
+  spotify_url: ""
+  youtube_url: ""
+
 # ── EDITORIAL (defaults — les profils peuvent surcharger) ────
 editorial:
   target_duration_min: 14

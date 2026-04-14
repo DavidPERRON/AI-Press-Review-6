@@ -284,6 +284,69 @@ def _json_ld(settings, episodes: list[dict]) -> str:
     return json.dumps(data, ensure_ascii=False)
 
 
+def _subscribe_buttons_html(settings, feed_url: str) -> str:
+    """Render Subscribe row. Each platform button is hidden if URL is
+    empty in config — RSS is always shown as the always-on fallback."""
+    buttons: list[str] = []
+
+    if settings.apple_podcasts_url:
+        buttons.append(
+            f"<a class='sub apple' href='{escape(settings.apple_podcasts_url)}' "
+            "rel='noopener' target='_blank' aria-label='Listen on Apple Podcasts'>"
+            "<svg viewBox='0 0 24 24' aria-hidden='true' width='18' height='18'>"
+            "<path fill='currentColor' d='M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm-3 9c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v3a3 3 0 0 1-6 0v-3z'/>"
+            "</svg>Apple Podcasts</a>"
+        )
+    if settings.spotify_url:
+        buttons.append(
+            f"<a class='sub spotify' href='{escape(settings.spotify_url)}' "
+            "rel='noopener' target='_blank' aria-label='Listen on Spotify'>"
+            "<svg viewBox='0 0 24 24' aria-hidden='true' width='18' height='18'>"
+            "<circle cx='12' cy='12' r='10' fill='currentColor'/>"
+            "<path fill='#fff' d='M7.3 9.5c3.3-.9 7.6-.7 11 1 .5.3.7 1 .4 1.5-.3.5-1 .7-1.5.4-2.9-1.5-6.7-1.7-9.5-.9-.6.2-1.1-.2-1.3-.7-.1-.6.3-1.2.9-1.3zm-.2 3.4c2.7-.7 6.6-.4 9.3 1.2.4.2.6.8.3 1.2-.2.4-.8.6-1.2.3-2.3-1.4-5.7-1.6-7.9-1-.5.1-.9-.2-1-.6-.1-.5.2-1 .5-1.1zm.4 3.2c2.2-.5 5.1-.3 7.2.9.3.2.4.6.2.9-.2.3-.6.4-.9.2-1.7-1-4.3-1.2-6.2-.7-.4.1-.7-.1-.8-.5-.1-.3.1-.7.5-.8z'/>"
+            "</svg>Spotify</a>"
+        )
+    if settings.youtube_url:
+        buttons.append(
+            f"<a class='sub youtube' href='{escape(settings.youtube_url)}' "
+            "rel='noopener' target='_blank' aria-label='Watch on YouTube'>"
+            "<svg viewBox='0 0 24 24' aria-hidden='true' width='18' height='18'>"
+            "<path fill='currentColor' d='M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2C.5 9.1.5 12 .5 12s0 2.9.5 4.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-4.8.5-4.8s0-2.9-.5-4.8z'/>"
+            "<path fill='#fff' d='M9.6 15.6V8.4l6.2 3.6z'/>"
+            "</svg>YouTube</a>"
+        )
+    # RSS — always available
+    buttons.append(
+        f"<a class='sub rss' href='{escape(feed_url)}' "
+        "aria-label='Subscribe via RSS'>"
+        "<svg viewBox='0 0 24 24' aria-hidden='true' width='16' height='16'>"
+        "<path fill='currentColor' d='M4 4a16 16 0 0 1 16 16h-3A13 13 0 0 0 4 7V4zm0 6a10 10 0 0 1 10 10h-3a7 7 0 0 0-7-7v-3zm2 7a2 2 0 1 1 0 4 2 2 0 0 1 0-4z'/>"
+        "</svg>RSS</a>"
+    )
+    return f"<div class='subscribe'>{''.join(buttons)}</div>"
+
+
+def _episode_card(ep: dict, base: str, *, featured: bool = False) -> str:
+    episode_link = ep.get('episode_page_url') or f"{base}/episodes/{ep.get('slug', '')}/"
+    duration_min = ''
+    if ep.get('duration_seconds'):
+        duration_min = f" &middot; {int(ep['duration_seconds']) // 60} min"
+    pub_label = (ep.get('published_at') or '')[:10]
+    cls = 'card featured' if featured else 'card'
+    return (
+        f"<article class='{cls}'>"
+        f"<p class='ep-meta'>{escape(pub_label)}{duration_min}</p>"
+        f"<h3><a href='{escape(episode_link)}'>{escape(ep['title'])}</a></h3>"
+        f"<p>{escape(ep['summary'])}</p>"
+        f"<p class='ep-links'>"
+        f"<a href='{escape(episode_link)}'>Transcript &amp; episode page</a> &middot; "
+        f"<a href='{escape(ep['audio_url'])}'>Listen</a> &middot; "
+        f"<a href='{escape(ep['source_manifest_url'])}'>Sources</a>"
+        f"</p>"
+        f"</article>"
+    )
+
+
 def _write_index(episodes: list[dict]) -> None:
     settings = load_settings()
     base = _base_url(settings)
@@ -298,20 +361,14 @@ def _write_index(episodes: list[dict]) -> None:
         'AI for business, daily AI briefing'
     )
 
-    cards = []
-    for ep in episodes:
-        episode_link = ep.get('episode_page_url') or f"{base}/episodes/{ep.get('slug', '')}/"
-        cards.append(
-            f"<article class='card'>"
-            f"<h3><a href='{escape(episode_link)}'>{escape(ep['title'])}</a></h3>"
-            f"<p>{escape(ep['summary'])}</p>"
-            f"<p><a href='{escape(episode_link)}'>Transcript &amp; episode page</a> &middot; "
-            f"<a href='{escape(ep['audio_url'])}'>Listen</a> &middot; "
-            f"<a href='{escape(ep['source_manifest_url'])}'>Sources</a></p>"
-            f"</article>"
-        )
-    empty = "<div class='card'><strong>No episodes published yet.</strong></div>"
+    if episodes:
+        first = _episode_card(episodes[0], base, featured=True)
+        rest = ''.join(_episode_card(ep, base) for ep in episodes[1:])
+        episodes_html = first + rest
+    else:
+        episodes_html = "<div class='card empty'><strong>First episode publishing soon.</strong> Subscribe via the buttons above to be notified.</div>"
 
+    subscribe_html = _subscribe_buttons_html(settings, feed_url)
     json_ld = _json_ld(settings, episodes)
 
     html = (
@@ -347,23 +404,123 @@ def _write_index(episodes: list[dict]) -> None:
         # JSON-LD
         f"<script type='application/ld+json'>{json_ld}</script>"
         "<style>"
-        "body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:760px;"
-        "margin:2rem auto;padding:0 1rem;line-height:1.55;color:#111}"
-        "img.cover{max-width:240px;border-radius:20px}"
-        ".card{border:1px solid #ddd;border-radius:16px;padding:1rem 1.25rem;margin:1rem 0}"
-        "h1{margin-bottom:.25rem}.subtitle{color:#555;margin-top:0}"
+        # Reset & base
+        "*{box-sizing:border-box}"
+        "body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;"
+        "margin:0;padding:0;line-height:1.55;color:#111;background:#fff}"
+        ".wrap{max-width:880px;margin:0 auto;padding:1.5rem 1.25rem 3rem}"
+        # Hero — horizontal layout, compact so first episode is above the fold
+        ".hero{display:flex;align-items:center;gap:1.4rem;padding:1rem 0 1.4rem;"
+        "border-bottom:1px solid #eee;margin-bottom:1.5rem}"
+        ".hero img.logo{width:140px;height:140px;border-radius:22px;flex-shrink:0;"
+        "box-shadow:0 4px 18px rgba(0,0,0,.10)}"
+        ".hero-content{min-width:0;flex:1}"
+        ".hero h1{margin:0;font-size:1.7rem;letter-spacing:-.01em}"
+        ".hero .tagline{margin:.25rem 0 .65rem;color:#444;font-size:1rem}"
+        # Subscribe row
+        ".subscribe{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}"
+        ".sub{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .8rem;"
+        "border-radius:999px;border:1px solid #ddd;font-size:.85rem;font-weight:500;"
+        "text-decoration:none;transition:all .15s}"
+        ".sub svg{flex-shrink:0}"
+        ".sub.apple{color:#a437dc;border-color:#e4c8f5}"
+        ".sub.apple:hover{background:#f7eefc}"
+        ".sub.spotify{color:#1db954;border-color:#bfeac9}"
+        ".sub.spotify:hover{background:#e8f8ed}"
+        ".sub.youtube{color:#ff0033;border-color:#ffc8d1}"
+        ".sub.youtube:hover{background:#fff0f3}"
+        ".sub.rss{color:#e69200;border-color:#ffe1b3}"
+        ".sub.rss:hover{background:#fff5e3}"
+        # How-it-works prominent CTA in hero
+        ".hiw-cta{display:inline-flex;align-items:center;gap:.35rem;margin-left:.5rem;"
+        "padding:.45rem .85rem;border-radius:999px;background:#111;color:#fff;"
+        "font-size:.85rem;font-weight:500;text-decoration:none;transition:opacity .15s}"
+        ".hiw-cta:hover{opacity:.85}"
+        # Episodes section
+        ".section-head{display:flex;align-items:baseline;justify-content:space-between;"
+        "margin:0 0 .8rem;gap:1rem}"
+        ".section-head h2{margin:0;font-size:1.15rem;letter-spacing:.02em;"
+        "text-transform:uppercase;color:#555}"
+        ".section-head .small-link{font-size:.85rem;color:#0b5fff;text-decoration:none}"
+        ".card{border:1px solid #e5e5e5;border-radius:16px;padding:1rem 1.25rem;"
+        "margin:.85rem 0;background:#fff;transition:border-color .15s}"
+        ".card:hover{border-color:#bbb}"
+        ".card.featured{border:2px solid #111;padding:1.25rem 1.4rem}"
+        ".card.empty{text-align:center;color:#555;padding:2rem;border-style:dashed}"
+        ".card h3{margin:.15rem 0 .4rem;font-size:1.15rem;line-height:1.3}"
+        ".card h3 a{color:#111;text-decoration:none}"
+        ".card h3 a:hover{color:#0b5fff}"
+        ".card p{margin:.35rem 0}"
+        ".ep-meta{font-size:.8rem;color:#888;text-transform:uppercase;"
+        "letter-spacing:.05em;margin:0 0 .3rem}"
+        ".ep-links{font-size:.85rem;color:#666}"
+        ".ep-links a{color:#0b5fff;text-decoration:none}"
+        ".ep-links a:hover{text-decoration:underline}"
+        # How-it-works inline section
+        "#how-it-works{margin-top:3rem;padding-top:1.5rem;border-top:1px solid #eee}"
+        "#how-it-works h2{font-size:1.3rem;margin:0 0 .25rem}"
+        "#how-it-works .lead{color:#555;margin:.25rem 0 1.25rem;font-size:.95rem}"
+        ".hiw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));"
+        "gap:1rem;margin-bottom:1rem}"
+        ".hiw-grid .step{padding:1rem;background:#f7f7f8;border-radius:12px}"
+        ".hiw-grid .step strong{display:block;font-size:.95rem;margin-bottom:.3rem}"
+        ".hiw-grid .step span{color:#555;font-size:.88rem}"
+        # Footer
+        "footer{margin-top:3rem;padding-top:1rem;border-top:1px solid #eee;"
+        "color:#888;font-size:.85rem;text-align:center}"
+        "footer a{color:#888}"
         "a{color:#0b5fff}"
+        # Mobile
+        "@media (max-width:560px){"
+        ".hero{flex-direction:column;align-items:flex-start;gap:1rem;text-align:left}"
+        ".hero img.logo{width:96px;height:96px;border-radius:18px}"
+        ".hero h1{font-size:1.4rem}"
+        ".hiw-cta{margin-left:0}"
+        "}"
         "</style>"
         "</head>"
         "<body>"
-        f"<img class='cover' src='{escape(cover_rel)}' alt='{escape(settings.podcast_title)} cover'>"
+        "<div class='wrap'>"
+        # ── HERO ──
+        "<header class='hero'>"
+        f"<img class='logo' src='{escape(cover_rel)}' alt='{escape(settings.podcast_title)} cover'>"
+        "<div class='hero-content'>"
         f"<h1>{escape(settings.podcast_title)}</h1>"
-        f"<p class='subtitle'>{escape(settings.podcast_subtitle)}</p>"
-        f"<p>{escape(description)}</p>"
-        f"<p><a href='{escape(feed_url)}'>Podcast RSS feed</a></p>"
+        f"<p class='tagline'>{escape(settings.podcast_subtitle)}</p>"
+        f"{subscribe_html}"
+        " <a class='hiw-cta' href='#how-it-works'>How it works &rarr;</a>"
+        "</div>"
+        "</header>"
+        # ── EPISODES (above the fold) ──
         "<main>"
-        f"{''.join(cards) if cards else empty}"
+        "<section aria-label='Latest episodes'>"
+        "<div class='section-head'>"
+        "<h2>Latest episodes</h2>"
+        f"<a class='small-link' href='{escape(feed_url)}'>RSS &rarr;</a>"
+        "</div>"
+        f"{episodes_html}"
+        "</section>"
+        # ── HOW IT WORKS (inline anchor) ──
+        "<section id='how-it-works'>"
+        "<h2>How it works</h2>"
+        f"<p class='lead'>{escape(description)}</p>"
+        "<div class='hiw-grid'>"
+        "<div class='step'><strong>40+ sources, weighted</strong>"
+        "<span>Primary labs (OpenAI, DeepMind, Anthropic, arXiv) carry more weight than aggregators. Regulatory speculation and unverified rumors are excluded.</span></div>"
+        "<div class='step'><strong>Semantic clustering</strong>"
+        "<span>Sources reporting the same story are grouped before the editorial pass. Single-source claims are flagged as weak signals.</span></div>"
+        "<div class='step'><strong>Claim &rarr; source grounding</strong>"
+        "<span>Every factual claim in the script is verified against the cited source. Per-episode coverage is published on the transcript page.</span></div>"
+        "<div class='step'><strong>14&ndash;18 minute briefing</strong>"
+        "<span>Six pillars: AI News, Use Cases, Tools &amp; Practice, Weak Signals, Research, Education. Every Saturday: a weekly recap.</span></div>"
+        "</div>"
+        "</section>"
         "</main>"
+        "<footer>"
+        f"Hosted by {escape(settings.podcast_author)} &middot; "
+        f"<a href='{escape(feed_url)}'>RSS feed</a>"
+        "</footer>"
+        "</div>"
         "</body></html>"
     )
     (DOCS_DIR / 'index.html').write_text(html, encoding='utf-8')

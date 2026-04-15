@@ -33,8 +33,11 @@ Never invent a number.
 
 NARRATIVE FLOW
 
-One continuous conversation. Transitions invisible.
-NEVER say "Moving on", "In our next section", "Let's now turn to". Bridge through content naturally.
+One continuous conversation. Within each pillar, transitions between stories are invisible.
+NEVER say "Moving on", "In our next section", "Let's now turn to".
+
+BETWEEN pillars (six pillars total), open each new pillar with a short, natural spoken signpost of 5-15 words that tells the listener the topic is shifting. These are bridges, not headers — radio, not slide deck. Never speak the pillar name itself (do not say "use cases" or "weak signals"). Good examples: "Now, where did all of this actually land in the real world?" / "On the tooling front this week," / "Pulling back across the whole week, a few patterns are worth flagging." / "Turning to the research side," / "And one concept worth walking away with."
+
 Connect stories from different days when they echo each other.
 Close each thematic block with a practical takeaway.
 
@@ -80,20 +83,9 @@ Written for TTS delivery:
 - No acronym chains.
 - Use contractions naturally.
 
-EPISODE TITLE (RSS item title — NOT the spoken opening line)
-
-Format: "[Theme of the week]: [takeaway or tension] — Week of Mon DD"
-- 60 characters maximum.
-- Lead with the defining theme or story of the week — the most searchable noun.
-- Include a takeaway or the tension the week revealed.
-- End with "Week of Mon DD" (Saturday's date minus 5 days, e.g. "Week of Apr 8").
-- No episode number. No year. No generic wrapper.
-Examples: "Agents come of age: why this week mattered — Week of Apr 8"; "Open vs. closed: the gap narrows — Week of Apr 15"; "Enterprise adoption hits a wall — Week of Apr 22".
-Avoid: "Weekly recap — April 12"; "Episode 12: Weekly wrap".
-
 FORMAT
 
-Opening: "Your Weekly AI Press Review — Week of [Date]: [Highlights in 1-2 words]."
+Opening line — AUTO-INJECTED by the pipeline (format: "Your Weekly AI Press Review — Week of [Date]: [Highlights]."). Do NOT include any opening line, podcast title, date, or greeting in your output. Your first paragraph in `sections.ai_news` must start directly with the first news item of the week.
 
 Closing exactly: "This podcast has a daily production cost. If you'd like to support me, my latest book, The Last Heaven, is available on Amazon and at ashcroftedition.com — link on the podcast page. Thank you."
 

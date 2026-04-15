@@ -6,74 +6,52 @@
 
 # ── PODCAST METADATA ──────────────────────────────────────────
 title: "AI Press Review"
-subtitle: "40 sources. 15 minutes. What matters in AI today."
+subtitle: "Factual, Clear, Built for Busy Professionals"
 author: "David Perron"
 email: "david.perron@aequitus.net"
+author_email: "david.perron@aequitus.net"
 language: "en"
 category_primary: "Business"
 category_secondary: "Artificial Intelligence"
+tagline: "40 sources. 15 minutes. What matters in AI today."
 short_description: "40 sources. 15 minutes. What matters in AI today."
-long_description: |
-  AI Press Review is a daily AI news briefing — published every morning at 7AM CET, Monday through Sunday. Each episode draws from 40+ weighted global sources, structured across six editorial pillars: AI News, Research & Breakthroughs, Use Cases, Tools & Practice, Weak Signals, and Education.
-
-  Sources are selected by domain authority and editorial standards. Regulatory speculation, unverified rumors, and opinion pieces are excluded.
-
+long_description: >
+  Every weekday morning at 7AM CET, AI Press Review distills 40+ global sources
+  into a focused 15-minute briefing — filtered, weighted, and structured around
+  six pillars: AI News, Research & Breakthroughs, Use Cases, Tools & Practice,
+  Weak Signals, and Education. Built for professionals who need signal, not noise.
   Every Saturday: a weekly recap of the five trends that defined the week.
-
-  Hosted by David Perron.
+  Also available in French at podcast.aequitus.net/fr.
 feed_url: "https://podcast.aequitus.net/podcast-feed.xml"
 site_url: "https://podcast.aequitus.net"
-public_audio_base_url: "https://www.ashcroftedition.org"
+public_audio_base_url: "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview"
 cover_image: "assets/podcast-cover.png"
-
-# ── DISTRIBUTION ──────────────────────────────────────────────
-# URLs publiques d'ecoute. Laisse vide tant que la soumission n'a pas
-# ete acceptee — le bouton correspondant est masque automatiquement.
-distribution:
-  apple_podcasts_url: ""
-  spotify_url: ""
-  youtube_url: ""
 
 # ── EDITORIAL (defaults — les profils peuvent surcharger) ────
 editorial:
   target_duration_min: 14
   target_duration_max: 18
-  min_script_words: 2200
-  min_source_count: 45
+  min_script_words: 2100
+  min_source_count: 15
   freshness_hours: 48
   exclude_previous_episode: true
-  # single_pass: un seul appel LLM (comportement historique).
-  # multi_pass: pass "ledger" (extraction structuree des stories) suivi
-  # d'un pass "writer" qui recoit la ledger + texte complet des sources
-  # citees uniquement. Meilleur structure, meilleur hit caching, mais
-  # +1 appel LLM par run (typiquement ~1.3x cost avec caching, ~2.5x sans).
-  mode: single_pass
-  # Grounding: seuils pour la verification claim -> source.
-  grounding_min_overlap: 0.55
-  grounding_min_coverage: 0.70
 
 # ── LLM ───────────────────────────────────────────────────────
 llm:
   max_tokens: 12000
   temperature: 0.2
   timeout_seconds: 180
-  # Si ton LLM_BASE_URL pointe vers un backend Anthropic-compatible
-  # (Anthropic direct, OpenRouter, LiteLLM), active le cache pour
-  # reduire de ~90% le cout des tokens stables (system prompt + manifest).
-  # Sur les backends qui ne connaissent pas cache_control, l'option est
-  # silencieusement ignoree.
-  enable_prompt_cache: true
-  # Laisser vide pour utiliser llm_editor_model comme ledger. Specifier
-  # un modele moins cher (ex. Haiku/GPT-4o-mini) pour reduire le cout
-  # du multi-pass.
-  ledger_model: ""
 
 # ── TTS (Cartesia) ───────────────────────────────────────────
+# Voice: Benoit (5def377d-908b-4540-8bd7-3c968fcae351) — set via
+# CARTESIA_VOICE_ID GitHub secret, not here.
+# Speed 0.90 + emotion "serious" = ~176 WPM, timbre validated by user
+# on 471-word ear-test (PHASE8-T5-voice-benoit-090.mp3).
 tts:
-  chunk_max_chars: 1800
-  speed: 0.97
+  chunk_max_chars: 1500
+  speed: 0.9
   volume: 1.0
-  emotion: "curiosity:high,confidence:high"
+  emotion: "serious"
 
 # ── PUBLICATION ───────────────────────────────────────────────
 retention_days: 10
@@ -82,6 +60,77 @@ publish_timezone: "Europe/Paris"
 schedule:
   publish_hour_local: 7
   weekdays_only: false
+
+# ──────────────────────────────────────────────────────────────
+#  LOCALES — PODCASTS MULTILINGUES
+#  Chaque locale genere son propre feed RSS, ses propres pages
+#  et son propre prefixe audio R2. Les champs top-level ci-dessus
+#  restent les defauts EN pour compatibilite descendante.
+#  Le workflow matrix daily-generate.yml itere sur les locales
+#  dont enabled=true.
+# ──────────────────────────────────────────────────────────────
+locales:
+  en:
+    enabled: true
+    title: "AI Press Review"
+    subtitle: "Factual, Clear, Built for Busy Professionals"
+    language: "en"
+    tagline: "40 sources. 15 minutes. What matters in AI today."
+    short_description: "40 sources. 15 minutes. What matters in AI today."
+    long_description: >
+      Every weekday morning at 7AM CET, AI Press Review distills 40+ global sources
+      into a focused 15-minute briefing — filtered, weighted, and structured around
+      six pillars: AI News, Research & Breakthroughs, Use Cases, Tools & Practice,
+      Weak Signals, and Education. Built for professionals who need signal, not noise.
+      Every Saturday: a weekly recap of the five trends that defined the week.
+      Also available in French at podcast.aequitus.net/fr.
+    feed_url: "https://podcast.aequitus.net/podcast-feed.xml"
+    site_url: "https://podcast.aequitus.net"
+    public_audio_base_url: "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview"
+    cover_image: "assets/podcast-cover.png"
+    docs_subdir: ""                        # racine de docs/
+    prompt_daily: "prompt_system.txt"
+    prompt_weekly: "prompt_weekly.txt"
+    category_primary: "Business"
+    category_secondary: "Artificial Intelligence"
+    opening_line_daily: "Your Daily AI Press Review"
+    opening_line_weekly: "Your Weekly AI Press Review"
+    # TTS locale-specific overrides (voice, speed, emotion, language)
+    voice_id_env: "CARTESIA_VOICE_ID"      # secret GitHub existant
+    cartesia_language: "en"
+    tts_speed: 0.9
+    tts_emotion: "serious"
+
+  fr:
+    enabled: true
+    title: "Revue de Presse IA"
+    subtitle: "Factuel, clair, pense pour les professionnels presses"
+    language: "fr"
+    tagline: "40 sources. 15 minutes. Ce qui compte aujourd'hui en IA."
+    short_description: "40 sources. 15 minutes. Ce qui compte aujourd'hui en IA."
+    long_description: >
+      Chaque matin a 7h, la Revue de Presse IA distille plus de 40 sources
+      internationales en un brief de 15 minutes — filtre, pondere, et structure
+      autour de six piliers : Actualite IA, Recherche et Percees, Cas d'usage,
+      Outils et Pratique, Signaux faibles, et Pedagogie. Pense pour les
+      professionnels qui ont besoin de signal, pas de bruit.
+      Chaque samedi : le recap des cinq tendances qui ont defini la semaine.
+    feed_url: "https://podcast.aequitus.net/fr/podcast-feed.xml"
+    site_url: "https://podcast.aequitus.net/fr"
+    public_audio_base_url: "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview-fr"
+    cover_image: "assets/podcast-cover.png"   # reutilise cover EN pour demarrer
+    docs_subdir: "fr"                         # docs/fr/
+    prompt_daily: "prompt_system_fr.txt"
+    prompt_weekly: "prompt_weekly_fr.txt"
+    category_primary: "Business"
+    category_secondary: "Artificial Intelligence"
+    opening_line_daily: "Votre Revue de Presse IA du jour"
+    opening_line_weekly: "Votre Revue de Presse IA hebdo"
+    # TTS locale-specific overrides
+    voice_id_env: "CARTESIA_VOICE_ID_FR"   # nouveau secret GitHub
+    cartesia_language: "fr"                # CRITIQUE pour prosodie francaise
+    tts_speed: 0.92                        # valide ear-test 2026-04-15 (serious + 0.92)
+    tts_emotion: "serious"
 
 # ──────────────────────────────────────────────────────────────
 #  PROFILS EDITORIAUX
@@ -96,8 +145,8 @@ profiles:
     freshness_hours: 48
     exclude_previous_episode: true
     prefer_unused: false
-    min_source_count: 45
-    min_script_words: 2200
+    min_source_count: 15
+    min_script_words: 2100
     target_duration_min: 14
     target_duration_max: 18
     prompt_file: "prompt_system.txt"
@@ -110,8 +159,8 @@ profiles:
     prefer_unused: true
     unused_score_bonus: 2.0
     reuse_min_score: 8.0
-    min_source_count: 60
-    min_script_words: 3000
+    min_source_count: 45
+    min_script_words: 2200
     target_duration_min: 18
     target_duration_max: 24
     prompt_file: "prompt_weekly.txt"
@@ -125,7 +174,7 @@ scoring:
   min_relevance: 3.0
   min_text_length: 180
   similarity_threshold: 0.88
-  max_per_domain: 5
+  max_per_domain: 7
 
   # Mots-cles interdits — les articles contenant ces termes sont exclus
   banned_terms:
@@ -201,18 +250,32 @@ scoring:
     - "scale"
 
   # Autorite des domaines — bonus automatique par source
+  # Only active/verified feeds are listed here
   domain_authority:
+    # Primary sources — Labs
     "openai.com": 2.0
-    "anthropic.com": 2.0
     "blog.google": 2.0
     "deepmind.google": 2.0
-    "ai.meta.com": 2.0
+    "research.google": 2.0
+    "cohere.com": 1.5
+    # Hardware & Cloud
     "nvidia.com": 1.5
     "blogs.nvidia.com": 1.5
+    "intel.com": 1.0
+    # Research
     "huggingface.co": 1.5
     "arxiv.org": 1.5
+    "science.org": 1.5
+    "machinelearning.apple.com": 1.5
+    "engineering.fb.com": 1.0
+    # Press
     "techcrunch.com": 1.0
     "venturebeat.com": 1.0
+    "technologyreview.com": 1.0
     "theverge.com": 0.8
-    "reuters.com": 1.0
-    "bloomberg.com": 1.0
+    "ft.com": 1.0
+    "economist.com": 1.0
+    # Finance-specific
+    "finextra.com": 0.8
+    "pymnts.com": 0.5
+    "americanbanker.com": 0.8

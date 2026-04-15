@@ -8,15 +8,9 @@ from xml.sax.saxutils import escape
 
 from .collectors.newsapi import fetch_newsapi_articles
 from .collectors.rss import fetch_rss_entries
-from .editorial.clustering import (
-    cluster_manifest_summary,
-    cluster_sources,
-    rank_clusters,
-    reduce_to_sources,
-)
 from .extractors.web_content import batch_extract
 from .models import SourceItem
-from .settings import DATA_DIR, DOCS_DIR, ScoringConfig, load_settings, load_sources_config
+from .settings import DATA_DIR, ScoringConfig, load_settings, load_sources_config
 from .state import load_episode_history, load_used_sources, save_used_sources
 from .utils import fingerprint, iso_now, title_similarity, within_hours, write_json
 
@@ -231,16 +225,11 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     candidates: list[SourceItem] = []
     seen_urls: set[str] = set()
 
-    google_news_skipped = 0
+    google_news_kept = 0
     for item in rss_items + newsapi_items:
         if item.url in seen_urls:
             continue
         seen_urls.add(item.url)
-
-        # Drop unresolved Google News URLs — content is inaccessible
-        if "news.google.com" in (item.url or ""):
-            google_news_skipped += 1
-            continue
 
         if settings.exclude_previous_episode and _is_duplicate_of_previous(
             item, previous_fingerprints, previous_titles, recent_titles, settings.scoring.similarity_threshold
@@ -250,15 +239,24 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
         if _contains_banned_topic(" ".join(filter(None, [item.title, item.summary])), settings.scoring):
             continue
 
+        if "news.google.com" in (item.url or ""):
+            google_news_kept += 1
+
         candidates.append(item)
 
-    if google_news_skipped:
-        logger.info("Dropped %d unresolved Google News URLs", google_news_skipped)
+    if google_news_kept:
+        logger.info("Kept %d Google News items (unresolved URLs use RSS summary)", google_news_kept)
 
     logger.info("Phase 2: %d candidates after pre-filtering", len(candidates))
 
     # Phase 3: Batch extract content in parallel for items missing content
-    urls_to_extract = [item.url for item in candidates if not (item.content_text or "").strip()]
+    # Skip extraction for arxiv.org — RSS abstract is sufficient for scoring
+    SKIP_EXTRACT_DOMAINS = {"arxiv.org", "news.google.com"}
+    urls_to_extract = [
+        item.url for item in candidates
+        if not (item.content_text or "").strip()
+        and not any(d in (item.domain or "") for d in SKIP_EXTRACT_DOMAINS)
+    ]
     if urls_to_extract:
         logger.info("Phase 3: Extracting content for %d articles...", len(urls_to_extract))
         extracted_map = batch_extract(urls_to_extract)
@@ -288,21 +286,7 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     if settings.prefer_unused and weekly_used_fps:
         sources = _apply_weekly_bonus(sources, weekly_used_fps, weekly_used_titles, settings)
 
-    # Phase 4c: Semantic clustering — group sources that report the same
-    # story so the LLM receives deduplicated stories, not raw articles.
-    # Gracefully degrades to singleton clusters if the embedding endpoint
-    # is unavailable.
-    clusters = cluster_sources(sources)
-    clusters_ranked = rank_clusters(clusters)
-    reps_per_cluster = int(getattr(settings.scoring, 'cluster_representatives', 0) or 3)
-    sources = reduce_to_sources(clusters_ranked, k_per_cluster=reps_per_cluster)
-    cluster_summary = cluster_manifest_summary(clusters_ranked)
-    logger.info(
-        "Clustering: %d sources grouped into %d stories; keeping top %d per story",
-        sum(c.size for c in clusters_ranked), len(clusters_ranked), reps_per_cluster,
-    )
-
-    # Phase 4d: Cap per domain to ensure source diversity across stories
+    # Phase 4c: Cap per domain to ensure source diversity
     max_per_domain = settings.scoring.max_per_domain
     if max_per_domain > 0:
         domain_counts: dict[str, int] = {}
@@ -331,12 +315,17 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
         "source_count": len(sources),
         "profile": settings.profile_name,
         "sources": [s.to_dict() for s in sources],
-        "clusters": cluster_summary,
-        "cluster_count": len(cluster_summary),
     }
 
-    data_sources_dir = DATA_DIR / "sources"
-    docs_sources_dir = DOCS_DIR / "sources"
+    # Per-locale manifest storage prevents EN and FR matrix jobs from
+    # clobbering each other's data/sources/latest.json on the same run date.
+    # Legacy single-locale mode (no APR_LOCALE) keeps writing to data/sources/.
+    if settings.locale:
+        data_sources_dir = DATA_DIR / "sources" / settings.locale
+    else:
+        data_sources_dir = DATA_DIR / "sources"
+    # docs/sources/ for EN, docs/fr/sources/ for FR — driven by APR_LOCALE.
+    docs_sources_dir = settings.docs_output_dir / "sources"
     data_sources_dir.mkdir(parents=True, exist_ok=True)
     docs_sources_dir.mkdir(parents=True, exist_ok=True)
 

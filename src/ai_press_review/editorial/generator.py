@@ -38,14 +38,11 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
     target_words = max(settings.min_script_words + 800, 3000)
 
     schema = {
-        "episode_title": "string — max 60 chars. Format: '[Primary keyword]: [tension or outcome] — [Mon DD]'. Lead with the most searchable noun (company, technology, domain). Include implicit tension. No episode number. No year. No 'Episode', no 'Daily', no 'AI Briefing' prefix. Examples: 'OpenAI o4 vs. Gemini 2.5: who wins enterprise — Apr 12', 'Meta's open-source bet: competitive move or PR? — Apr 13'.",
+        "episode_title": "string — short, factual, no clickbait",
         "episode_summary": "string — 2-3 sentence summary of the episode",
         "opening_news_title": "string — the most impactful headline of the day",
         "highlights_label": "1-2 words summarizing the day's theme",
         "tomorrow_pedagogical_concept": "one short sentence fragment, no more than 12 words, announcing a concept to explain tomorrow",
-        "key_claims": [
-            "array of 8-15 objects, one per factual claim made in the script that cites a specific number, company, product, or verifiable event. Each object MUST have exactly two keys: 'claim' (short factual statement, 12-25 words, as stated in the script) and 'source_url' (one of the manifest's source URLs that supports this claim — copy verbatim from the manifest). Example: {'claim': 'OpenAI released a new model that outperforms prior systems on reasoning benchmarks', 'source_url': 'https://openai.com/blog/...'}. Only include claims that are directly supported by at least one cited source.",
-        ],
         "sections": {
             "ai_news": [
                 "paragraph 1 (110-150 words): lead story — set the scene, why it matters now",
@@ -123,8 +120,15 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "No bullet points. No headings inside paragraphs. "
             "NUMBERS: Round aggressively (say 'about 1.2 billion' not '1,247,000,000'). "
             "Skip model version numbers (say 'the latest GPT' not 'GPT-4o-2024-05-13'). "
-            "FLOW: Connect stories naturally. Never say 'Moving on' or 'In our next section'. "
-            "Use callbacks to earlier stories when relevant. Bridge between topics seamlessly. "
+            "FLOW: Within a pillar, connect stories seamlessly — never use 'Moving on' or 'In our next section'. "
+            "PILLAR TRANSITIONS: The first paragraph of every pillar after AI News (so: use cases, "
+            "tools, weak signals, research, education) MUST open with a short, natural spoken signpost "
+            "of 5-15 words that tells the listener the topic is shifting. These are bridges, not headers — "
+            "they feel like radio, not a slide deck. Never speak the pillar name itself (don't say 'use cases' "
+            "or 'weak signals'). Good examples: 'Now, where is all of this actually landing in the real world?' / "
+            "'On the tooling side,' / 'Pulling back from the day's news, a few patterns are worth flagging.' / "
+            "'Turning to the research front,' / 'And one concept worth understanding today.' "
+            "Use callbacks to earlier stories when relevant. "
             "RHYTHM: Vary sentence length. Short after complex. Use dashes and commas for pauses. "
             "Use contractions (it's, they've, that's). Write for the ear, not the eye. "
             "Prioritize sources with the highest relevance_score. "
@@ -133,16 +137,6 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         ).strip(),
         "source_manifest": compact_sources,
     }
-    # In multi-pass mode, the pre-computed story ledger is prepended so
-    # the writer works from a curated running order rather than raw sources.
-    if manifest.get("story_ledger"):
-        payload["story_ledger"] = manifest["story_ledger"]
-        payload["instructions"] += (
-            " A structured STORY_LEDGER has been produced by a research pass and is "
-            "provided below. Use it as the running order — each story in the ledger "
-            "should become a paragraph (or part of one) in the appropriate pillar. "
-            "Do NOT introduce topics absent from the ledger."
-        )
     return json.dumps(payload, ensure_ascii=False)
 
 
@@ -181,6 +175,11 @@ def _post_chat_completion(settings, payload: dict[str, Any]) -> dict[str, Any]:
     base_url = (settings.llm_base_url or "").strip().rstrip("/")
     if not base_url.startswith("http"):
         raise ValueError(f"Invalid LLM_BASE_URL: {base_url!r}")
+    from urllib.parse import urlparse
+    parsed = urlparse(base_url)
+    hostname = parsed.hostname or ""
+    if hostname in ("localhost", "127.0.0.1", "0.0.0.0") or hostname.startswith("169.254.") or hostname.startswith("10.") or hostname.startswith("192.168."):
+        raise ValueError(f"LLM_BASE_URL points to a private/internal address: {base_url!r}")
 
     url = f"{base_url}/chat/completions"
     headers = {"Content-Type": "application/json"}
@@ -195,10 +194,10 @@ def _post_chat_completion(settings, payload: dict[str, Any]) -> dict[str, Any]:
             timeout=max(settings.llm_timeout_seconds, 180),
         )
     except requests.RequestException as exc:
-        raise ValueError(f"Connection error: {exc}") from exc
+        raise ValueError(f"LLM connection error to {parsed.hostname}") from exc
 
     if response.status_code >= 400:
-        raise ValueError(f"HTTP {response.status_code}: {_response_error_text(response)}")
+        raise ValueError(f"LLM HTTP {response.status_code}: {_response_error_text(response)}")
 
     try:
         return response.json()
@@ -233,117 +232,60 @@ def _create_completion_data(
 
 
 def _extract_json(content: str) -> dict[str, Any]:
+    cleaned = content.strip()
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
+        cleaned = re.sub(r"\s*```$", "", cleaned)
     try:
-        return json.loads(content)
+        return json.loads(cleaned)
     except json.JSONDecodeError:
-        match = re.search(r"\{.*\}", content, re.DOTALL)
-        if not match:
+        # Find the outermost JSON object by matching braces
+        start = cleaned.find("{")
+        if start == -1:
             raise ValueError(f"Model did not return valid JSON. First 500 chars: {content[:500]}")
-        return json.loads(match.group(0))
-
-
-def _cacheable_text(content: str) -> list[dict[str, Any]]:
-    """Mark a message content block as cache-eligible. OpenAI-compatible
-    gateways with Anthropic underneath (OpenRouter, LiteLLM, Anthropic
-    direct) honor `cache_control: {type: "ephemeral"}`. Gateways that
-    don't understand it simply treat it as plain text."""
-    return [{"type": "text", "text": content, "cache_control": {"type": "ephemeral"}}]
+        depth = 0
+        for i, ch in enumerate(cleaned[start:], start):
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    try:
+                        return json.loads(cleaned[start:i + 1])
+                    except json.JSONDecodeError:
+                        break
+        raise ValueError(f"Model did not return valid JSON. First 500 chars: {content[:500]}")
 
 
 def _generate_with_model(model: str, manifest: dict, settings, force_length: bool) -> dict[str, Any]:
-    from ..observability import record_llm_call
-
-    system_text = settings.prompt_path.read_text(encoding="utf-8")
-    user_text = _build_user_prompt(manifest, settings, force_length=force_length)
-
-    if getattr(settings, 'llm_enable_prompt_cache', False):
-        # Cache system prompt (stable across all runs) and the manifest
-        # block (stable across retries on the same run). The only part
-        # that changes between retries is the "too short" addendum —
-        # which is NOT marked cacheable.
-        messages = [
-            {"role": "system", "content": _cacheable_text(system_text)},
-            {"role": "user", "content": _cacheable_text(user_text)},
-        ]
-    else:
-        messages = [
-            {"role": "system", "content": system_text},
-            {"role": "user", "content": user_text},
-        ]
+    messages = [
+        {"role": "system", "content": settings.prompt_path.read_text(encoding="utf-8")},
+        {"role": "user", "content": _build_user_prompt(manifest, settings, force_length=force_length)},
+    ]
 
     start = time.monotonic()
-    success = False
-    usage: dict[str, Any] = {}
-    try:
-        data = _create_completion_data(
-            settings=settings,
-            model=model,
-            messages=messages,
-            temperature=settings.llm_temperature,
-            max_tokens=settings.llm_max_tokens,
-        )
-        elapsed = time.monotonic() - start
+    data = _create_completion_data(
+        settings=settings,
+        model=model,
+        messages=messages,
+        temperature=settings.llm_temperature,
+        max_tokens=settings.llm_max_tokens,
+    )
+    elapsed = time.monotonic() - start
 
-        content = _extract_message_content(data)
-        if not content.strip():
-            raise ValueError("Model returned empty content")
+    content = _extract_message_content(data)
+    if not content.strip():
+        raise ValueError("Model returned empty content")
 
-        usage = data.get("usage", {}) or {}
-        logger.info(
-            "LLM call completed: model=%s elapsed=%.1fs prompt_tokens=%s completion_tokens=%s",
-            model, elapsed,
-            usage.get("prompt_tokens", "?"),
-            usage.get("completion_tokens", "?"),
-        )
-        payload = _extract_json(content)
-        success = True
-        return payload
-    finally:
-        elapsed = time.monotonic() - start
-        # Anthropic returns cache_read_input_tokens in usage; OpenAI returns
-        # cached_tokens nested under prompt_tokens_details.
-        cached = (
-            usage.get("cache_read_input_tokens")
-            or usage.get("prompt_tokens_details", {}).get("cached_tokens")
-            or 0
-        )
-        record_llm_call(
-            run_date=manifest.get("run_date", "unknown"),
-            model=model,
-            prompt_tokens=int(usage.get("prompt_tokens") or 0),
-            completion_tokens=int(usage.get("completion_tokens") or 0),
-            cached_tokens=int(cached or 0),
-            duration_s=elapsed,
-            phase="editorial",
-            success=success,
-            force_length=force_length,
-        )
+    usage = data.get("usage", {})
+    logger.info(
+        "LLM call completed: model=%s elapsed=%.1fs prompt_tokens=%s completion_tokens=%s",
+        model, elapsed,
+        usage.get("prompt_tokens", "?"),
+        usage.get("completion_tokens", "?"),
+    )
 
-
-def _maybe_run_ledger_pass(manifest: dict, settings) -> dict:
-    """If editorial_mode='multi_pass', run the ledger pass and attach its
-    output to the manifest so the writer receives it. Returns the manifest
-    (possibly enriched) — always safe to call.
-    """
-    if getattr(settings, 'editorial_mode', 'single_pass') != 'multi_pass':
-        return manifest
-    try:
-        from .passes import run_ledger_pass
-        ledger = run_ledger_pass(
-            manifest, settings,
-            post_chat_completion=_post_chat_completion,
-            extract_message_content=_extract_message_content,
-            extract_json=_extract_json,
-            enable_cache=getattr(settings, 'llm_enable_prompt_cache', True),
-        )
-        # Enrich the manifest: the user prompt builder appends story_ledger
-        # if present.
-        enriched = dict(manifest)
-        enriched['story_ledger'] = ledger
-        return enriched
-    except Exception as exc:
-        logger.warning("Ledger pass failed, falling back to single-pass: %s", exc)
-        return manifest
+    return _extract_json(content)
 
 
 @retry(wait=wait_fixed(3), stop=stop_after_attempt(2))
@@ -355,9 +297,6 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
         raise ValueError(
             f"Not enough relevant sources: {source_count} < {settings.min_source_count}"
         )
-
-    # Optional ledger pass enriches the manifest before the writer runs.
-    manifest = _maybe_run_ledger_pass(manifest, settings)
 
     errors: list[str] = []
 
@@ -409,19 +348,6 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
                 )
 
             logger.info("Script generated successfully: %d words, model=%s", best_wc, model)
-
-            # Claim grounding: verify that each claim the LLM cited is
-            # actually supported by its declared source.
-            from .grounding import verify_claims
-
-            raw_claims = best_payload.get("key_claims") or []
-            report = verify_claims(
-                raw_claims,
-                manifest.get("sources", []),
-                min_overlap_ratio=float(getattr(settings, 'grounding_min_overlap', 0.55)),
-                min_coverage_ratio=float(getattr(settings, 'grounding_min_coverage', 0.7)),
-            )
-
             return EpisodeDraft(
                 episode_title=best_payload.get("episode_title", settings.podcast_title),
                 episode_summary=best_payload.get("episode_summary", settings.podcast_description_short),
@@ -429,8 +355,6 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
                 script=best_script,
                 tomorrow_concept=best_payload.get("tomorrow_pedagogical_concept", ""),
                 highlights_label=best_payload.get("highlights_label", "Highlights"),
-                key_claims=raw_claims if isinstance(raw_claims, list) else [],
-                grounding_report=report.to_dict(),
             )
         except Exception as exc:
             logger.error("Model %s failed: %s", model, exc)

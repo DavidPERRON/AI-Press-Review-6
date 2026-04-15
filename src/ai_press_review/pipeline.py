@@ -7,7 +7,6 @@ from pathlib import Path
 from .collect import collect_sources
 from .editorial.generator import generate_episode_script
 from .models import PublishedEpisode
-from .observability import record_phase, record_run
 from .publish.feed import publish_episode
 from .settings import load_settings
 from .state import delete_pending_draft, load_pending_draft, save_pending_draft
@@ -33,17 +32,12 @@ def run_pipeline(
     # Phase 1: Collect
     t0 = time.monotonic()
     manifest = collect_sources(run_date=run_date, local_preview=local_preview, profile=profile)
-    elapsed = time.monotonic() - t0
-    logger.info("Collection completed: %d sources in %.1fs", manifest['source_count'], elapsed)
-    record_phase(run_date, 'collect', elapsed, source_count=manifest['source_count'], profile=settings.profile_name)
+    logger.info("Collection completed: %d sources in %.1fs", manifest['source_count'], time.monotonic() - t0)
 
     # Phase 2: Generate editorial script
     t0 = time.monotonic()
     draft = generate_episode_script(manifest, local_preview=local_preview, profile=profile)
-    elapsed = time.monotonic() - t0
-    word_count = len(draft.script.split())
-    logger.info("Editorial completed: %d words in %.1fs", word_count, elapsed)
-    record_phase(run_date, 'editorial', elapsed, word_count=word_count, profile=settings.profile_name)
+    logger.info("Editorial completed: %d words in %.1fs", len(draft.script.split()), time.monotonic() - t0)
 
     outputs_dir = Path('output') / run_date
     outputs_dir.mkdir(parents=True, exist_ok=True)
@@ -55,11 +49,10 @@ def run_pipeline(
         'profile': settings.profile_name,
         'source_count': manifest['source_count'],
         'script_title': draft.episode_title,
-        'script_words': word_count,
+        'script_words': len(draft.script.split()),
         'rendered_audio': False,
         'uploaded_audio': False,
         'published': False,
-        'grounding_report': draft.grounding_report,
     }
 
     audio_name = f"{run_date}-{safe_slug(draft.episode_title)}.mp3"
@@ -70,19 +63,12 @@ def run_pipeline(
     if render_audio:
         t0 = time.monotonic()
         audio_meta = synthesize_script(draft.script, audio_path, local_preview=local_preview)
-        elapsed = time.monotonic() - t0
         logger.info(
             "TTS completed: %d chunks, %ds duration, %.1f MB in %.1fs",
             audio_meta['chunk_count'],
             audio_meta['duration_seconds'],
             audio_meta['bytes'] / 1_048_576,
-            elapsed,
-        )
-        record_phase(
-            run_date, 'tts', elapsed,
-            chunks=audio_meta['chunk_count'],
-            audio_duration_s=audio_meta['duration_seconds'],
-            audio_bytes=audio_meta['bytes'],
+            time.monotonic() - t0,
         )
         result['rendered_audio'] = True
         result['audio_path'] = str(audio_path)
@@ -94,9 +80,7 @@ def run_pipeline(
         t0 = time.monotonic()
         remote_key = f"{settings.r2_audio_prefix.rstrip('/')}/{audio_name}"
         audio_url = upload_file(audio_path, remote_key, local_preview=local_preview)
-        elapsed = time.monotonic() - t0
-        logger.info("Upload completed: %s in %.1fs", remote_key, elapsed)
-        record_phase(run_date, 'upload', elapsed, remote_key=remote_key)
+        logger.info("Upload completed: %s in %.1fs", remote_key, time.monotonic() - t0)
         result['uploaded_audio'] = True
     else:
         audio_url = ''
@@ -113,20 +97,11 @@ def run_pipeline(
             audio_url=audio_url,
             audio_bytes=audio_meta['bytes'],
             duration_seconds=audio_meta['duration_seconds'],
-            source_manifest_url=f"{settings.site_base_url}/sources/{run_date}.html",
             published_at=iso_now(),
         )
-        t0 = time.monotonic()
         fingerprints = [fingerprint(s['title'], s['url']) for s in manifest['sources']]
         source_titles = [s['title'] for s in manifest['sources']]
-        publish_episode(
-            episode, fingerprints, source_titles,
-            script=draft.script,
-            key_claims=draft.key_claims,
-            grounding_report=draft.grounding_report,
-        )
-        elapsed = time.monotonic() - t0
-        record_phase(run_date, 'publish', elapsed, title=draft.episode_title)
+        publish_episode(episode, fingerprints, source_titles)
         result['published'] = True
         result['audio_url'] = audio_url
         logger.info("Feed published: %s", draft.episode_title)
@@ -134,22 +109,6 @@ def run_pipeline(
     total_elapsed = time.monotonic() - pipeline_start
     result['pipeline_seconds'] = round(total_elapsed, 1)
     logger.info("Pipeline completed in %.1fs", total_elapsed)
-
-    record_run(
-        run_date,
-        profile=settings.profile_name,
-        source_count=manifest['source_count'],
-        script_title=draft.episode_title,
-        script_words=word_count,
-        audio_duration_s=(audio_meta or {}).get('duration_seconds'),
-        rendered=result['rendered_audio'],
-        uploaded=result['uploaded_audio'],
-        published=result['published'],
-        grounding_coverage=draft.grounding_report.get('coverage_ratio'),
-        grounding_acceptable=draft.grounding_report.get('acceptable'),
-        claim_count=draft.grounding_report.get('claim_count'),
-        pipeline_seconds=round(total_elapsed, 1),
-    )
 
     write_json(outputs_dir / 'run_summary.json', result)
     return result
@@ -172,17 +131,12 @@ def generate_draft(
     # Phase 1: Collect
     t0 = time.monotonic()
     manifest = collect_sources(run_date=run_date, local_preview=local_preview, profile=profile)
-    elapsed = time.monotonic() - t0
-    logger.info("Collection completed: %d sources in %.1fs", manifest['source_count'], elapsed)
-    record_phase(run_date, 'collect', elapsed, source_count=manifest['source_count'], profile=profile)
+    logger.info("Collection completed: %d sources in %.1fs", manifest['source_count'], time.monotonic() - t0)
 
     # Phase 2: Generate
     t0 = time.monotonic()
     draft = generate_episode_script(manifest, local_preview=local_preview, profile=profile)
-    elapsed = time.monotonic() - t0
-    word_count = len(draft.script.split())
-    logger.info("Editorial completed: %d words in %.1fs", word_count, elapsed)
-    record_phase(run_date, 'editorial', elapsed, word_count=word_count, profile=profile)
+    logger.info("Editorial completed: %d words in %.1fs", len(draft.script.split()), time.monotonic() - t0)
 
     outputs_dir = Path('output') / run_date
     outputs_dir.mkdir(parents=True, exist_ok=True)
@@ -194,28 +148,19 @@ def generate_draft(
     audio_path = outputs_dir / audio_name
     t0 = time.monotonic()
     audio_meta = synthesize_script(draft.script, audio_path, local_preview=local_preview)
-    elapsed = time.monotonic() - t0
     logger.info(
         "TTS completed: %d chunks, %ds duration, %.1f MB in %.1fs",
         audio_meta['chunk_count'],
         audio_meta['duration_seconds'],
         audio_meta['bytes'] / 1_048_576,
-        elapsed,
-    )
-    record_phase(
-        run_date, 'tts', elapsed,
-        chunks=audio_meta['chunk_count'],
-        audio_duration_s=audio_meta['duration_seconds'],
-        audio_bytes=audio_meta['bytes'],
+        time.monotonic() - t0,
     )
 
     # Phase 4: Upload audio (so user can preview)
     t0 = time.monotonic()
     remote_key = f"{settings.r2_audio_prefix.rstrip('/')}/{audio_name}"
     audio_url = upload_file(audio_path, remote_key, local_preview=local_preview)
-    elapsed = time.monotonic() - t0
-    logger.info("Upload completed: %s in %.1fs", remote_key, elapsed)
-    record_phase(run_date, 'upload', elapsed, remote_key=remote_key)
+    logger.info("Upload completed: %s in %.1fs", remote_key, time.monotonic() - t0)
 
     # Save draft state
     fps = [fingerprint(s['title'], s['url']) for s in manifest['sources']]
@@ -231,48 +176,20 @@ def generate_draft(
         'audio_name': audio_name,
         'audio_bytes': audio_meta['bytes'],
         'duration_seconds': audio_meta['duration_seconds'],
-        'source_manifest_url': f"{settings.site_base_url}/sources/{run_date}.html",
         'source_fingerprints': fps,
         'source_titles': titles,
         'source_count': manifest['source_count'],
-        'script': draft.script,
         'script_words': len(draft.script.split()),
-        'key_claims': draft.key_claims,
-        'grounding_report': draft.grounding_report,
         'generated_at': iso_now(),
         'status': 'pending',
     }
     save_pending_draft(draft_data)
-
-    # Surface the grounding report as an observability signal.
-    if draft.grounding_report:
-        record_phase(
-            run_date, 'grounding', 0,
-            claim_count=draft.grounding_report.get('claim_count', 0),
-            supported_count=draft.grounding_report.get('supported_count', 0),
-            coverage_ratio=draft.grounding_report.get('coverage_ratio', 0.0),
-            acceptable=draft.grounding_report.get('acceptable', True),
-        )
 
     total_elapsed = time.monotonic() - pipeline_start
     draft_data['pipeline_seconds'] = round(total_elapsed, 1)
     logger.info("Draft saved: %s (%d words, %ds audio) in %.1fs",
                 draft.episode_title, draft_data['script_words'],
                 audio_meta['duration_seconds'], total_elapsed)
-
-    record_run(
-        run_date,
-        profile=profile,
-        source_count=manifest['source_count'],
-        script_title=draft.episode_title,
-        script_words=draft_data['script_words'],
-        audio_duration_s=audio_meta['duration_seconds'],
-        rendered=True,
-        uploaded=True,
-        published=False,
-        status='pending',
-        pipeline_seconds=round(total_elapsed, 1),
-    )
 
     write_json(outputs_dir / 'run_summary.json', draft_data)
     return draft_data
@@ -292,7 +209,6 @@ def release_pending_draft() -> dict:
         audio_url=draft_data['audio_url'],
         audio_bytes=draft_data['audio_bytes'],
         duration_seconds=draft_data['duration_seconds'],
-        source_manifest_url=draft_data['source_manifest_url'],
         published_at=iso_now(),
     )
 
@@ -300,9 +216,6 @@ def release_pending_draft() -> dict:
         episode,
         draft_data.get('source_fingerprints', []),
         draft_data.get('source_titles', []),
-        script=draft_data.get('script'),
-        key_claims=draft_data.get('key_claims') or [],
-        grounding_report=draft_data.get('grounding_report') or {},
     )
 
     draft_data['status'] = 'released'

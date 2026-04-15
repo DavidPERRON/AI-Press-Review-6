@@ -78,7 +78,8 @@ def fingerprint(title: str, url: str) -> str:
 
 
 def safe_slug(text: str) -> str:
-    return slugify(text, max_length=80)
+    result = slugify(text, max_length=80)
+    return result if result else "untitled"
 
 
 def read_json(path: Path, default):

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Press Review — Daily AI Briefing</title>
+  <meta name="description" content="40 sources. 15 minutes. What matters in AI today. A daily AI briefing for busy professionals, published every morning at 7AM CET." />
+  <link rel="canonical" href="https://podcast.aequitus.net/" />
+  <link rel="alternate" type="application/rss+xml" title="AI Press Review" href="https://podcast.aequitus.net/podcast-feed.xml" />
+  <meta property="og:title" content="AI Press Review — Daily AI Briefing" />
+  <meta property="og:description" content="40 sources. 15 minutes. What matters in AI today." />
+  <meta property="og:url" content="https://podcast.aequitus.net/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://podcast.aequitus.net/assets/podcast-cover.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #09090b; --surface: #111113; --border: #1f1f23;
+      --border-light: #2a2a30; --text: #e8e8ed; --text-secondary: #8a8a9a;
+      --text-muted: #55555f; --accent: #c8a96e; --accent-dim: #8a6f3f;
+      --accent-glow: rgba(200,169,110,0.08);
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--font-body); font-size: 15px; line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header { border-bottom: 1px solid var(--border); padding: 0 2rem; }
+    .header-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between; height: 56px;
+    }
+    .logo-link { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .logo-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .logo-text { font-family: var(--font-display); font-size: 1rem; color: var(--text); }
+    nav { display: flex; gap: 1.5rem; }
+    nav a {
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-secondary); text-decoration: none; transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+
+    .hero {
+      padding: 5rem 2rem 4rem; border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 800px; margin: 0 auto; }
+    .hero-cover {
+      width: 140px; height: 140px; border-radius: 14px; margin-bottom: 2rem;
+      border: 1px solid var(--border-light); object-fit: cover;
+    }
+    .hero h1 {
+      font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem);
+      line-height: 1.15; color: var(--text); margin-bottom: 0.75rem;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .tagline {
+      font-size: 1.1rem; color: var(--accent); font-weight: 500;
+      letter-spacing: 0.02em; margin-bottom: 1.25rem;
+    }
+    .hero-desc {
+      font-size: 0.95rem; color: var(--text-secondary); max-width: 560px;
+      line-height: 1.65; margin-bottom: 2rem;
+    }
+
+    .cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: var(--accent); color: #09090b;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      text-decoration: none; padding: 0.65em 1.3em; border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      border: 1px solid var(--border-light); color: var(--text-secondary);
+      font-size: 0.78rem; font-weight: 500; text-decoration: none;
+      padding: 0.6em 1.1em; border-radius: 4px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-secondary:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+    .pillars {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
+      border-radius: 6px; overflow: hidden; margin-top: 3rem;
+    }
+    .pillar { background: var(--surface); padding: 1.25rem 1.5rem; transition: background 0.2s; }
+    .pillar:hover { background: var(--accent-glow); }
+    .pillar-name { font-size: 0.85rem; font-weight: 500; color: var(--text); margin-bottom: 0.2rem; }
+    .pillar-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; }
+
+    .stats-row {
+      display: flex; gap: 2.5rem; margin-top: 2.5rem; flex-wrap: wrap;
+      padding-top: 2.5rem; border-top: 1px solid var(--border);
+    }
+    .stat { font-size: 0.78rem; color: var(--text-muted); }
+    .stat strong { color: var(--text-secondary); display: block; font-size: 1.1rem; font-weight: 500; }
+
+    main { max-width: 800px; margin: 0 auto; padding: 0 2rem 5rem; }
+    .episodes-header {
+      padding: 2.5rem 0 1.25rem;
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); border-bottom: 1px solid var(--border);
+    }
+    .episode-item {
+      padding: 1.5rem 0; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr auto; gap: 0.5rem 1.5rem; align-items: start;
+    }
+    .episode-title {
+      font-family: var(--font-display); font-size: 1.05rem; color: var(--text);
+      line-height: 1.3; text-decoration: none; transition: color 0.2s;
+    }
+    .episode-title:hover { color: var(--accent); }
+    .episode-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
+    .episode-summary {
+      font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.6rem;
+      line-height: 1.6; max-width: 560px; grid-column: 1;
+    }
+    .episode-listen {
+      display: inline-block; font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--accent); text-decoration: none; margin-top: 0.75rem;
+      border-bottom: 1px solid var(--accent-dim); transition: border-color 0.2s;
+    }
+    .episode-listen:hover { border-color: var(--accent); }
+    .episode-duration {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-muted); text-align: right; white-space: nowrap; padding-top: 0.2rem;
+    }
+    .empty-state {
+      padding: 3rem 0; text-align: center;
+      font-size: 0.9rem; color: var(--text-muted);
+    }
+
+    footer { border-top: 1px solid var(--border); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.75rem; color: var(--text-muted); }
+    footer a { color: var(--text-muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .hero, main, header { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .episode-item { grid-template-columns: 1fr; }
+      .episode-duration { text-align: left; }
+      footer { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <a href="/" class="logo-link">
+        <span class="logo-dot"></span>
+        <span class="logo-text">AI Press Review</span>
+      </a>
+      <nav>
+        <a href="/about.html">About</a>
+        <a href="/podcast-feed.xml">RSS</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <img src="assets/podcast-cover.png" alt="AI Press Review cover" class="hero-cover" />
+      <h1>AI <em>Press Review</em></h1>
+      <p class="tagline">40 sources. 15 minutes. What matters in AI today.</p>
+      <p class="hero-desc">
+        Every morning at 7AM CET, AI Press Review distills 40+ global sources
+        into a focused 15-minute briefing — filtered, weighted, and structured
+        for professionals who need signal, not noise.
+      </p>
+      <div class="cta-row">
+        <a href="/podcast-feed.xml" class="btn-primary">Subscribe via RSS</a>
+        <a href="/about.html" class="btn-secondary">How it works</a>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-name">AI News</div>
+          <div class="pillar-desc">Launches, partnerships, major moves</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-name">Research</div>
+          <div class="pillar-desc">Papers and lab breakthroughs</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-name">Use Cases</div>
+          <div class="pillar-desc">Real deployments, measurable gains</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-name">Tools</div>
+          <div class="pillar-desc">APIs, frameworks, practitioner updates</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-name">Weak Signals</div>
+          <div class="pillar-desc">Patterns not yet mainstream</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-name">Education</div>
+          <div class="pillar-desc">One concept per episode</div>
+        </div>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat"><strong>Daily + Saturday</strong>Schedule</div>
+        <div class="stat"><strong>7:00 AM CET</strong>Published</div>
+        <div class="stat"><strong>14–18 min</strong>Duration</div>
+        <div class="stat"><strong>40+ sources</strong>Per episode</div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <p class="episodes-header">Latest episodes</p>
+    {{EPISODES}}
+  </main>
+
+  <footer>
+    <p>
+      AI Press Review &middot;
+      <a href="/about.html">Methodology</a> &middot;
+      <a href="/podcast-feed.xml">RSS</a> &middot;
+      <a href="mailto:david.perron@aequitus.net">Contact</a>
+    </p>
+  </footer>
+
+</body>
+</html>

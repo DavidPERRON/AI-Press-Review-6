@@ -4,6 +4,7 @@ import logging
 from datetime import timedelta
 
 import requests
+from tenacity import retry, stop_after_attempt, wait_fixed
 
 from ..models import SourceItem
 from ..utils import clean_text, domain_from_url, normalize_url, utcnow, within_hours
@@ -13,6 +14,7 @@ logger = logging.getLogger(__name__)
 NEWSAPI_URL = 'https://newsapi.org/v2/everything'
 
 
+@retry(wait=wait_fixed(3), stop=stop_after_attempt(3))
 def fetch_newsapi_articles(api_key: str, query: str, page_size: int = 50, freshness_hours: int = 48) -> list[SourceItem]:
     if not api_key:
         logger.info("NewsAPI key not set, skipping")

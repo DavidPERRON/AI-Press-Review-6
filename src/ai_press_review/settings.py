@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -7,6 +8,8 @@ from typing import Any
 
 import yaml
 from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIG_DIR = ROOT / 'config'
@@ -47,9 +50,6 @@ class Settings:
     site_base_url: str
     rss_feed_url: str
     public_audio_base_url: str
-    apple_podcasts_url: str
-    spotify_url: str
-    youtube_url: str
     target_duration_min: int
     target_duration_max: int
     min_script_words: int
@@ -64,15 +64,11 @@ class Settings:
     llm_api_key: str
     llm_editor_model: str
     llm_fallback_model: str
-    llm_ledger_model: str
     llm_timeout_seconds: int
     llm_max_tokens: int
     llm_temperature: float
-    llm_enable_prompt_cache: bool
-    editorial_mode: str  # 'single_pass' | 'multi_pass'
-    grounding_min_overlap: float
-    grounding_min_coverage: float
     tts_chunk_max_chars: int
+    tts_bitrate: str
     cartesia_api_key: str
     cartesia_voice_id: str
     cartesia_model_id: str
@@ -98,14 +94,29 @@ class Settings:
     reuse_min_score: float = 0.0
     intro_format: str = 'daily'
     prompt_file: str = 'prompt_system.txt'
+    # Locale fields (empty string = legacy single-locale mode)
+    locale: str = ''
+    docs_subdir: str = ''
+    opening_line_daily: str = 'Your Daily AI Press Review'
+    opening_line_weekly: str = 'Your Weekly AI Press Review'
 
     @property
     def prompt_path(self) -> Path:
         return CONFIG_DIR / self.prompt_file
 
+    @property
+    def docs_output_dir(self) -> Path:
+        """Root directory for this locale's generated site output (docs/ or docs/fr/)."""
+        if self.docs_subdir:
+            return DOCS_DIR / self.docs_subdir
+        return DOCS_DIR
+
 
 def _yaml_config() -> dict[str, Any]:
-    with (CONFIG_DIR / 'podcast.yaml').open('r', encoding='utf-8') as handle:
+    path = CONFIG_DIR / 'podcast.yaml'
+    if not path.exists():
+        raise FileNotFoundError(f"Config file not found: {path}")
+    with path.open('r', encoding='utf-8') as handle:
         return yaml.safe_load(handle) or {}
 
 
@@ -120,7 +131,7 @@ def _yaml_get(config: dict[str, Any], path: str, default: Any = '') -> Any:
 
 def _env(name: str, default: str = '') -> str:
     value = os.getenv(name)
-    if value is None:
+    if value is None or not value.strip():
         value = default
     return str(value).strip()
 
@@ -130,6 +141,24 @@ def _env_bool(name: str, default: bool) -> bool:
     if value is None:
         return bool(default)
     return value.strip().lower() in {'1', 'true', 'yes', 'on'}
+
+
+def _safe_int(value: str, default: int, field: str = '') -> int:
+    try:
+        return int(value)
+    except (ValueError, TypeError):
+        if field:
+            logger.warning("Invalid int for %s: %r, using default %d", field, value, default)
+        return default
+
+
+def _safe_float(value: str, default: float, field: str = '') -> float:
+    try:
+        return float(value)
+    except (ValueError, TypeError):
+        if field:
+            logger.warning("Invalid float for %s: %r, using default %s", field, value, default)
+        return default
 
 
 def _load_scoring(config: dict[str, Any]) -> ScoringConfig:
@@ -147,6 +176,90 @@ def _load_scoring(config: dict[str, Any]) -> ScoringConfig:
         signal_words_medium=list(s.get('signal_words_medium', [])),
         domain_authority=dict(s.get('domain_authority', {})),
     )
+
+
+def _apply_locale(settings: Settings, config: dict[str, Any], locale: str) -> None:
+    """Override locale-dependent Settings fields from config['locales'][locale].
+
+    This is what makes EN and FR (and future ZH) runs differ: title, prompts,
+    TTS voice+speed+emotion+language, public URLs, docs subdir, R2 audio URL.
+
+    The voice_id is resolved by reading the env var named in `voice_id_env`
+    (default 'CARTESIA_VOICE_ID'). This lets each locale point at its own
+    GitHub secret (CARTESIA_VOICE_ID, CARTESIA_VOICE_ID_FR, ...) without
+    hardcoding UUIDs in the repo.
+    """
+    locales = config.get('locales', {}) or {}
+    loc = locales.get(locale)
+    if not loc:
+        return
+    if not loc.get('enabled', True):
+        logger.warning("Locale %s is disabled in config — settings unchanged", locale)
+        return
+
+    settings.locale = locale
+
+    # Podcast metadata
+    if 'title' in loc:
+        settings.podcast_title = str(loc['title'])
+    if 'subtitle' in loc:
+        settings.podcast_subtitle = str(loc['subtitle'])
+    if 'language' in loc:
+        settings.podcast_language = str(loc['language'])
+    if 'short_description' in loc:
+        settings.podcast_description_short = str(loc['short_description'])
+    if 'long_description' in loc:
+        settings.podcast_description_long = str(loc['long_description']).strip()
+    if 'category_primary' in loc:
+        settings.category_primary = str(loc['category_primary'])
+    if 'category_secondary' in loc:
+        settings.category_secondary = str(loc['category_secondary'])
+    if 'cover_image' in loc:
+        settings.cover_image_path = str(loc['cover_image'])
+
+    # URLs (per-locale RSS feed, site, R2 audio base)
+    if 'site_url' in loc:
+        settings.site_base_url = str(loc['site_url'])
+    if 'feed_url' in loc:
+        settings.rss_feed_url = str(loc['feed_url'])
+    if 'public_audio_base_url' in loc:
+        settings.public_audio_base_url = str(loc['public_audio_base_url'])
+
+    # Site output subdir (docs/ or docs/fr/)
+    if 'docs_subdir' in loc:
+        settings.docs_subdir = str(loc['docs_subdir'])
+
+    # Opening lines (localized intros)
+    if 'opening_line_daily' in loc:
+        settings.opening_line_daily = str(loc['opening_line_daily'])
+    if 'opening_line_weekly' in loc:
+        settings.opening_line_weekly = str(loc['opening_line_weekly'])
+
+    # TTS locale-specific overrides
+    if 'cartesia_language' in loc:
+        settings.cartesia_language = str(loc['cartesia_language'])
+    if 'tts_speed' in loc:
+        settings.cartesia_speed = float(loc['tts_speed'])
+    if 'tts_emotion' in loc:
+        settings.cartesia_emotion = str(loc['tts_emotion'])
+
+    # Voice ID: read from the env var named in voice_id_env
+    voice_env = str(loc.get('voice_id_env', 'CARTESIA_VOICE_ID'))
+    voice_id = _env(voice_env)
+    if voice_id:
+        settings.cartesia_voice_id = voice_id
+    else:
+        logger.warning(
+            "Locale %s voice_id_env=%s is empty — falling back to CARTESIA_VOICE_ID=%s",
+            locale, voice_env, settings.cartesia_voice_id or '(unset)',
+        )
+
+    # Prompt file resolution: profile decides daily vs weekly, locale provides filename
+    profile_name = settings.profile_name
+    if profile_name in ('daily',) and 'prompt_daily' in loc:
+        settings.prompt_file = str(loc['prompt_daily'])
+    elif profile_name in ('weekly_recap', 'weekly') and 'prompt_weekly' in loc:
+        settings.prompt_file = str(loc['prompt_weekly'])
 
 
 def _apply_profile(settings: Settings, config: dict[str, Any], profile: str) -> None:
@@ -179,7 +292,30 @@ def _apply_profile(settings: Settings, config: dict[str, Any], profile: str) -> 
         settings.reuse_min_score = float(prof['reuse_min_score'])
 
 
-def load_settings(local_preview: bool = False, profile: str | None = None) -> Settings:
+def load_settings(
+    local_preview: bool = False,
+    profile: str | None = None,
+    locale: str | None = None,
+) -> Settings:
+    """Load runtime settings from env + podcast.yaml.
+
+    When `locale` is provided (e.g., 'en' or 'fr'), locale-specific overrides
+    from config['locales'][locale] are applied AFTER the profile overrides —
+    so title, prompt file, voice_id, TTS params, public URLs, and docs_subdir
+    all switch to the locale's values.
+
+    When `locale` is None, the env var APR_LOCALE is checked — this lets
+    the matrix workflow set `APR_LOCALE=fr` once per job and have every
+    downstream load_settings() call pick up the right locale without needing
+    to thread the param through every function signature.
+
+    When neither is set, settings use the top-level yaml defaults (backward
+    compatible with the single-locale EN pipeline).
+    """
+    if locale is None:
+        env_locale = _env('APR_LOCALE')
+        locale = env_locale if env_locale else None
+
     config = _yaml_config()
 
     local_base = _env('LOCAL_LLM_BASE_URL') if local_preview else ''
@@ -203,9 +339,6 @@ def load_settings(local_preview: bool = False, profile: str | None = None) -> Se
         site_base_url=_env('SITE_BASE_URL', _yaml_get(config, 'site_url', '')),
         rss_feed_url=_env('RSS_FEED_URL', _yaml_get(config, 'feed_url', '')),
         public_audio_base_url=_env('PUBLIC_AUDIO_BASE_URL', _yaml_get(config, 'public_audio_base_url', '')),
-        apple_podcasts_url=_env('APPLE_PODCASTS_URL', _yaml_get(config, 'distribution.apple_podcasts_url', '')),
-        spotify_url=_env('SPOTIFY_URL', _yaml_get(config, 'distribution.spotify_url', '')),
-        youtube_url=_env('YOUTUBE_URL', _yaml_get(config, 'distribution.youtube_url', '')),
         target_duration_min=int(_env('TARGET_DURATION_MIN', str(_yaml_get(config, 'editorial.target_duration_min', 14)))),
         target_duration_max=int(_env('TARGET_DURATION_MAX', str(_yaml_get(config, 'editorial.target_duration_max', 18)))),
         min_script_words=int(_env('MIN_SCRIPT_WORDS', str(_yaml_get(config, 'editorial.min_script_words', 2500)))),
@@ -220,22 +353,18 @@ def load_settings(local_preview: bool = False, profile: str | None = None) -> Se
         llm_api_key=_env('LLM_API_KEY', 'unused' if local_preview else ''),
         llm_editor_model=llm_model_default,
         llm_fallback_model=_env('LLM_FALLBACK_MODEL'),
-        llm_ledger_model=_env('LLM_LEDGER_MODEL', _yaml_get(config, 'llm.ledger_model', '')),
         llm_timeout_seconds=int(_env('LLM_TIMEOUT_SECONDS', str(_yaml_get(config, 'llm.timeout_seconds', 180)))),
         llm_max_tokens=int(_yaml_get(config, 'llm.max_tokens', 12000)),
-        llm_temperature=float(_yaml_get(config, 'llm.temperature', 0.2)),
-        llm_enable_prompt_cache=_env_bool('LLM_ENABLE_PROMPT_CACHE', bool(_yaml_get(config, 'llm.enable_prompt_cache', True))),
-        editorial_mode=_env('EDITORIAL_MODE', _yaml_get(config, 'editorial.mode', 'single_pass')),
-        grounding_min_overlap=float(_env('GROUNDING_MIN_OVERLAP', str(_yaml_get(config, 'editorial.grounding_min_overlap', 0.55)))),
-        grounding_min_coverage=float(_env('GROUNDING_MIN_COVERAGE', str(_yaml_get(config, 'editorial.grounding_min_coverage', 0.7)))),
+        llm_temperature=_safe_float(str(_yaml_get(config, 'llm.temperature', 0.2)), 0.2, 'llm.temperature'),
         tts_chunk_max_chars=int(_yaml_get(config, 'tts.chunk_max_chars', 1800)),
+        tts_bitrate=str(_yaml_get(config, 'tts.bitrate', '96k')),
         cartesia_api_key=_env('CARTESIA_API_KEY'),
         cartesia_voice_id=_env('CARTESIA_VOICE_ID'),
         cartesia_model_id=_env('CARTESIA_MODEL_ID', 'sonic-3'),
         cartesia_version=_env('CARTESIA_VERSION', '2025-04-16'),
         cartesia_language=_env('CARTESIA_LANGUAGE', 'en'),
-        cartesia_speed=float(_env('CARTESIA_SPEED', str(_yaml_get(config, 'tts.speed', 1.0)))),
-        cartesia_volume=float(_env('CARTESIA_VOLUME', str(_yaml_get(config, 'tts.volume', 1.0)))),
+        cartesia_speed=_safe_float(_env('CARTESIA_SPEED', str(_yaml_get(config, 'tts.speed', 1.0))), 1.0, 'CARTESIA_SPEED'),
+        cartesia_volume=_safe_float(_env('CARTESIA_VOLUME', str(_yaml_get(config, 'tts.volume', 1.0))), 1.0, 'CARTESIA_VOLUME'),
         cartesia_emotion=_env('CARTESIA_EMOTION', str(_yaml_get(config, 'tts.emotion', 'neutral'))),
         r2_bucket_name=_env('R2_BUCKET_NAME', 'pressreview'),
         r2_endpoint=_env('R2_ENDPOINT'),
@@ -252,9 +381,24 @@ def load_settings(local_preview: bool = False, profile: str | None = None) -> Se
     if profile:
         _apply_profile(settings, config, profile)
 
+    # Locale overrides AFTER profile so per-locale prompt files win over
+    # profile-wide prompt_file.
+    if locale:
+        _apply_locale(settings, config, locale)
+
+    if not settings.llm_api_key and not local_preview:
+        logger.warning("LLM_API_KEY is not set — editorial generation will fail")
+    if not settings.cartesia_api_key:
+        logger.warning("CARTESIA_API_KEY is not set — TTS will fail")
+    if not settings.r2_endpoint:
+        logger.warning("R2_ENDPOINT is not set — audio upload will fail")
+
     return settings
 
 
 def load_sources_config() -> dict:
-    with (CONFIG_DIR / 'sources.yaml').open('r', encoding='utf-8') as handle:
+    path = CONFIG_DIR / 'sources.yaml'
+    if not path.exists():
+        raise FileNotFoundError(f"Config file not found: {path}")
+    with path.open('r', encoding='utf-8') as handle:
         return yaml.safe_load(handle) or {}

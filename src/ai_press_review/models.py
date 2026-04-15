@@ -28,8 +28,6 @@ class EpisodeDraft:
     script: str
     tomorrow_concept: str
     highlights_label: str
-    key_claims: list[dict[str, Any]] = field(default_factory=list)
-    grounding_report: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -41,7 +39,6 @@ class PublishedEpisode:
     audio_url: str
     audio_bytes: int
     duration_seconds: int | None
-    source_manifest_url: str
     published_at: str
 
     def to_dict(self) -> dict[str, Any]:

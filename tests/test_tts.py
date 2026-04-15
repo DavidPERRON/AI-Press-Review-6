@@ -1,6 +1,6 @@
 import pytest
 
-from ai_press_review.tts.cartesia import split_script
+from ai_press_review.tts.cartesia import normalize_pronunciations, split_script
 
 
 def test_split_script_single_short():
@@ -36,3 +36,43 @@ def test_split_script_single_long_paragraph():
     chunks = split_script(long_para.strip(), max_chars=1800)
     assert len(chunks) == 1
     assert chunks[0] == long_para.strip()
+
+
+def test_normalize_pronunciations_en_rewrites_known_acronyms():
+    text = "Transformers like BERT beat LaTeX on arXiv benchmarks."
+    out = normalize_pronunciations(text, 'en')
+    assert 'BERT' not in out
+    assert 'LaTeX' not in out
+    assert 'arXiv' not in out
+    assert 'Burt' in out
+    assert 'Lay-Tech' in out
+    assert 'ar-kive' in out
+
+
+def test_normalize_pronunciations_preserves_unrelated_text():
+    text = "OpenAI released GPT-5.4 alongside SOLARIS and GPU upgrades."
+    out = normalize_pronunciations(text, 'en')
+    # SOLARIS/GPU are not in the dictionary → stay untouched
+    assert out == text
+
+
+def test_normalize_pronunciations_word_boundary():
+    # A token that merely *contains* BERT must stay untouched (no false hit).
+    text = "ROBERTA and ALBERT are related models."
+    out = normalize_pronunciations(text, 'en')
+    assert out == text
+
+
+def test_normalize_pronunciations_fr_uses_french_table():
+    text = "Les transformeurs comme BERT utilisent LaTeX."
+    out = normalize_pronunciations(text, 'fr')
+    assert 'BERT' not in out
+    assert 'LaTeX' not in out
+    assert 'Beurt' in out
+    assert 'La-Tek' in out
+
+
+def test_normalize_pronunciations_default_locale_is_english():
+    text = "BERT model."
+    assert normalize_pronunciations(text, '') == "Burt model."
+    assert normalize_pronunciations(text, 'en') == normalize_pronunciations(text, '')

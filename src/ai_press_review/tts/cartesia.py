@@ -5,6 +5,7 @@ import base64
 import json
 import logging
 import math
+import re
 import time
 import uuid
 import wave
@@ -22,6 +23,40 @@ CARTESIA_WEBSOCKET_URL = 'wss://api.cartesia.ai/tts/websocket'
 # the previous /tts/bytes WAV output (pcm_f32le @ 44100) at half the bandwidth
 # (16-bit vs 32-bit) with no audible loss for speech.
 WEBSOCKET_SAMPLE_RATE = 44100
+
+
+# Phonetic respelling applied ONLY to the text sent to the TTS engine. The
+# stored script.txt stays readable ("BERT", "LaTeX") while the audio says
+# the expected pronunciation. Order matters: longer keys first would collide
+# with shorter ones otherwise — the regex \b word-boundaries handle that.
+#
+# Add entries as TTS mispronunciations surface. Keep the list tight: each
+# entry is a liability if the underlying voice model's pronunciation of the
+# raw form changes over time.
+_PRONUNCIATIONS_EN: dict[str, str] = {
+    r'\bLaTeX\b': 'Lay-Tech',
+    r'\barXiv\b': 'ar-kive',
+    r'\bBERT\b': 'Burt',
+}
+
+_PRONUNCIATIONS_FR: dict[str, str] = {
+    r'\bLaTeX\b': 'La-Tek',
+    r'\barXiv\b': 'ar-kive',
+    r'\bBERT\b': 'Beurt',
+}
+
+
+def normalize_pronunciations(text: str, locale: str) -> str:
+    """Rewrite known-mispronounced acronyms to their spoken-language form.
+
+    Applied right before chunking so Cartesia hears the phonetic version
+    while `script.txt` (read by humans, used for transcripts) keeps the
+    canonical uppercase/camelcase spelling.
+    """
+    table = _PRONUNCIATIONS_FR if (locale or '').lower().startswith('fr') else _PRONUNCIATIONS_EN
+    for pattern, phon in table.items():
+        text = re.sub(pattern, phon, text)
+    return text
 
 
 def split_script(text: str, max_chars: int = 1800) -> list[str]:
@@ -64,7 +99,11 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     if not settings.cartesia_voice_id:
         raise ValueError('CARTESIA_VOICE_ID is required for TTS')
 
-    chunks = split_script(script, max_chars=settings.tts_chunk_max_chars)
+    # Phonetic respelling for acronyms Cartesia otherwise spells letter by
+    # letter (LaTeX → "L-A-T-E-X" instead of "Lay-Tech", etc.). Only affects
+    # what the TTS hears; script.txt stays canonical.
+    spoken_script = normalize_pronunciations(script, settings.locale or 'en')
+    chunks = split_script(spoken_script, max_chars=settings.tts_chunk_max_chars)
     if not chunks:
         raise ValueError('Script is empty — cannot synthesize audio')
 

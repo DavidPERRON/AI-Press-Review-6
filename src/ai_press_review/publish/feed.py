@@ -328,9 +328,12 @@ def _shared_css() -> str:
     so they look like one site."""
     return (
         ":root{"
-        "--bg:#050E2B;"
-        "--bg-soft:#08143A;"
-        "--bg-card:#0B1A47;"
+        # Unified midnight navy — same hex for body, sections, and cards.
+        # Differentiation comes from borders (gold) only, not from
+        # background variations.
+        "--bg:#01040F;"
+        "--bg-soft:#01040F;"
+        "--bg-card:#01040F;"
         "--ink:#F4ECDC;"
         "--ink-soft:#C5BAA0;"
         "--ink-muted:#8E8470;"
@@ -352,7 +355,7 @@ def _shared_css() -> str:
         ".banner{background:var(--bg);padding:3.6rem 1.25rem 2.6rem;text-align:center;"
         "position:relative;overflow:hidden}"
         ".banner::before{content:'';position:absolute;inset:0;pointer-events:none;"
-        "background:radial-gradient(circle at 50% 60%,rgba(217,162,74,.10) 0%,rgba(5,14,43,0) 60%)}"
+        "background:radial-gradient(circle at 50% 60%,rgba(217,162,74,.10) 0%,rgba(1,4,15,0) 60%)}"
         ".banner::after{content:'';position:absolute;inset:0;pointer-events:none;"
         "background:repeating-radial-gradient(circle at 50% 110%,transparent 0,transparent 80px,"
         "rgba(217,162,74,.04) 81px,rgba(217,162,74,.04) 82px)}"
@@ -367,7 +370,7 @@ def _shared_css() -> str:
         "letter-spacing:.32em;color:var(--gold);font-size:.95rem;margin:0;padding-left:.32em;opacity:.85}"
         ".banner-title a{color:var(--gold);border-bottom:none}"
         ".banner-title a:hover{color:#EBC172;border-bottom:none}"
-        # Page nav (small links under banner across pages)
+        # Page nav
         ".pagenav{position:relative;z-index:1;text-align:center;padding:1rem 1rem 0;"
         "background:var(--bg);border-bottom:1px solid var(--rule)}"
         ".pagenav a{display:inline-block;margin:0 1rem;padding-bottom:1rem;"
@@ -488,10 +491,9 @@ def _episode_card(ep: dict, base: str) -> str:
 
 
 _HOME_EXTRA_CSS = (
-    # Intro block (zone visible sous le banner)
+    # Intro block (zone visible sous le banner) — flat unified bg
     ".intro{padding:2.8rem 1.25rem 2.4rem;text-align:center;"
-    "border-bottom:1px solid var(--rule);"
-    "background:linear-gradient(180deg,rgba(217,162,74,.025) 0%,transparent 100%)}"
+    "border-bottom:1px solid var(--rule)}"
     ".intro-inner{max-width:720px;margin:0 auto}"
     ".intro .tagline{font-family:'EB Garamond',serif;font-style:italic;"
     "font-size:clamp(1.6rem,3.5vw,2.1rem);color:var(--ink);"
@@ -515,9 +517,8 @@ _HOME_EXTRA_CSS = (
     "font-variant:small-caps;letter-spacing:.22em;color:var(--ink-soft);"
     "padding:.5rem 1rem;border-bottom:1px solid var(--rule)}"
     ".intro .hiw-link:hover{color:var(--gold);border-bottom-color:var(--gold)}"
-    # Six pillars block on home — visible and distinct
-    ".pillars-home{padding:2.6rem 1.25rem 2.4rem;border-bottom:1px solid var(--rule);"
-    "background:rgba(217,162,74,.02)}"
+    # Six pillars block on home — flat unified bg, distinguished by border
+    ".pillars-home{padding:2.6rem 1.25rem 2.4rem;border-bottom:1px solid var(--rule)}"
     ".pillars-home-inner{max-width:880px;margin:0 auto}"
     ".pillars-home h2{font-family:'EB Garamond',serif;font-weight:700;"
     "font-variant:small-caps;letter-spacing:.24em;color:var(--gold);"
@@ -637,7 +638,7 @@ def _write_index(episodes: list[dict]) -> None:
     # are then shown in their own visually distinct block.
     intro_paragraph = (
         "AI Press Review is a daily AI news briefing, "
-        "published every morning at 7&thinsp;AM CET, Monday through Sunday. "
+        "published every morning at 7&thinsp;AM CET, Monday to Saturday. "
         "Each episode draws from 40+ weighted global sources."
     )
 
@@ -654,7 +655,7 @@ def _write_index(episodes: list[dict]) -> None:
         + "<div class='intro-inner'>"
         + f"<p class='tagline'>{escape(settings.podcast_subtitle)}</p>"
         + f"<p class='description'>{intro_paragraph}</p>"
-        + "<p class='tagline-note'>An editorial podcast &middot; Daily, 7&thinsp;AM CET</p>"
+        + "<p class='tagline-note'>An editorial podcast &middot; Mon&ndash;Sat, 7&thinsp;AM CET</p>"
         + f"<div class='subscribe'>{subscribe_html}</div>"
         + "<a class='hiw-link' href='/how-it-works.html'>How it works &rarr;</a>"
         + "</div>"
@@ -768,39 +769,22 @@ def _write_how_it_works() -> None:
         + "<div class='wrap'>"
         + "<p class='page-lead'>40+ sources. 15 minutes. What matters in AI today. "
           "Here is exactly how each episode is built.</p>"
-        # 01 — SIX PILLARS FIRST
+        # 01 — Structure (no redundant pillar grid; pillars already shown on home)
         + "<section class='section'>"
         + "<hr class='section-rule' />"
         + "<span class='num'>01 &middot; How episodes are structured</span>"
         + "<h2>Six pillars, one continuous narrative</h2>"
-        + "<div class='pillars'>"
-        + "<div class='pillar'><strong>AI News</strong>Verified announcements from labs, companies, institutions.</div>"
-        + "<div class='pillar'><strong>Research &amp; Breakthroughs</strong>Peer-reviewed publications and lab releases.</div>"
-        + "<div class='pillar'><strong>Use Cases</strong>Documented enterprise and sector deployments.</div>"
-        + "<div class='pillar'><strong>Tools &amp; Practice</strong>Practitioner releases, APIs, frameworks.</div>"
-        + "<div class='pillar'><strong>Weak Signals</strong>Early patterns not yet in mainstream coverage.</div>"
-        + "<div class='pillar'><strong>Education</strong>Concepts and context for non-technical audiences.</div>"
-        + "</div>"
-        + "<p><strong>Weekly recap (Saturdays).</strong> Every Saturday episode steps back from "
-          "the daily news to identify the five trends that defined the week. It connects the "
-          "dots across daily episodes and flags what will likely matter next week.</p>"
+        + "<p>Each daily episode runs 14 to 18 minutes as a single continuous narrative "
+          "across the six editorial pillars. No segments, no jingles between sections, "
+          "no filler. The pillars themselves are listed on the home page.</p>"
+        + "<p><strong>Saturday weekly recap.</strong> The Saturday episode steps back from "
+          "the daily news to identify the five trends that defined the week and flag what "
+          "is likely to matter next week.</p>"
         + "</section>"
-        # 02 — Who this is for
+        # 02 — How sources are selected and weighted (was 03)
         + "<section class='section'>"
         + "<hr class='section-rule' />"
-        + "<span class='num'>02 &middot; Who this is for</span>"
-        + "<h2>Built for professionals whose work is affected by AI</h2>"
-        + "<p>AI Press Review is built for finance, banking, legal, healthcare, consulting "
-          "and enterprise technology professionals. Smart, time-poor, and exposed to AI shifts "
-          "without the bandwidth to monitor 40 sources daily.</p>"
-        + "<p>Each episode is designed for a morning commute or a focused 15-minute break. "
-          "You don't need a technical background. You need to know what changed, what it "
-          "means for your sector, and what signal is worth tracking next week.</p>"
-        + "</section>"
-        # 03 — How sources are selected and weighted
-        + "<section class='section'>"
-        + "<hr class='section-rule' />"
-        + "<span class='num'>03 &middot; How sources are selected and weighted</span>"
+        + "<span class='num'>02 &middot; How sources are selected and weighted</span>"
         + "<h2>40+ sources, weighted by editorial standards</h2>"
         + "<p><strong>40+ is a minimum threshold, not a target.</strong> Each episode draws "
           "from at least forty global sources gathered in the 12 hours preceding publication. "
@@ -825,7 +809,30 @@ def _write_how_it_works() -> None:
         + "<p>Each episode's source manifest, with the actual domains and articles used, "
           "is published alongside the episode page.</p>"
         + "</section>"
-        # 04 — What we exclude (no editorial-discipline H2)
+        # 03 — What each episode covers (rewritten — topics, not audience)
+        + "<section class='section'>"
+        + "<hr class='section-rule' />"
+        + "<span class='num'>03 &middot; What each episode covers</span>"
+        + "<h2>The substance of each briefing</h2>"
+        + "<p>Daily episodes draw from concrete activity in artificial intelligence:</p>"
+        + "<ul class='exclusions'>"
+        + "<li><strong>Model releases and benchmarks.</strong> New models from frontier "
+          "labs, capability shifts, comparative results that change the practitioner picture.</li>"
+        + "<li><strong>Enterprise deployments.</strong> Real implementations with measurable "
+          "outcomes: cost, time, accuracy, scale. What worked, what didn't.</li>"
+        + "<li><strong>Infrastructure shifts.</strong> Chips, datacenters, cloud capacity, "
+          "energy footprint. The plumbing that decides who can build what.</li>"
+        + "<li><strong>Open-source and tooling.</strong> APIs, frameworks, agents, and "
+          "tools that change what a practitioner can do this week versus last week.</li>"
+        + "<li><strong>Research and breakthroughs.</strong> Peer-reviewed and lab-published "
+          "work, translated for non-experts in 30 seconds.</li>"
+        + "<li><strong>Vertical applications.</strong> Finance, banking, healthcare, legal, "
+          "consulting, public sector. AI where decisions actually get made.</li>"
+        + "<li><strong>Weak signals.</strong> Early patterns surfacing across multiple "
+          "stories before they reach mainstream coverage.</li>"
+        + "</ul>"
+        + "</section>"
+        # 04 — What we exclude
         + "<section class='section'>"
         + "<hr class='section-rule' />"
         + "<span class='num'>04 &middot; What we exclude, and why</span>"

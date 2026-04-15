@@ -117,7 +117,13 @@ locales:
       Chaque samedi : le recap des cinq tendances qui ont defini la semaine.
     feed_url: "https://podcast.aequitus.net/fr/podcast-feed.xml"
     site_url: "https://podcast.aequitus.net/fr"
-    public_audio_base_url: "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview-fr"
+    # R2 bucket is shared with EN (pressreview). This used to override the base
+    # to ".../pressreview-fr" but that bucket/prefix was never actually created
+    # on R2 — uploads went to `pressreview` while URLs pointed at
+    # `pressreview-fr`, yielding 404 on every FR audio (observed 2026-04-15).
+    # Slugs are locale-distinct (French titles → French slugs) so collisions
+    # in the shared bucket are a non-issue in practice.
+    public_audio_base_url: "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview"
     cover_image: "assets/podcast-cover.png"   # reutilise cover EN pour demarrer
     docs_subdir: "fr"                         # docs/fr/
     prompt_daily: "prompt_system_fr.txt"

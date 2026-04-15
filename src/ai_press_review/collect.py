@@ -176,11 +176,46 @@ def _apply_weekly_bonus(
     return kept
 
 
+USED_SOURCES_RETENTION_DAYS = 10
+USED_SOURCES_HARD_CAP = 400
+
+
 def _update_used_sources(sources: list[SourceItem]) -> None:
+    """Record the sources cited in today's episode and trim old entries.
+
+    Retention policy:
+    - Time-based: drop entries older than USED_SOURCES_RETENTION_DAYS (default 10).
+      This is the primary dedup window — an article that aired 11 days ago is
+      fair game again and shouldn't permanently block its own domain.
+    - Size-based: hard-cap at USED_SOURCES_HARD_CAP as a safety net against
+      runaway growth (e.g. weekly recaps that mark 200+ sources in one run).
+
+    Entries without a parseable `used_at` timestamp are conservatively kept
+    under the hard cap so a legacy file with bare {title, url} items won't
+    be silently wiped on first write.
+    """
+    from datetime import datetime, timedelta, timezone
+
     payload = load_used_sources()
     items = payload.get("items", [])
     fresh = [{"title": src.title, "url": src.url, "used_at": iso_now()} for src in sources[:80]]
-    merged = (fresh + items)[:400]
+
+    cutoff = datetime.now(timezone.utc) - timedelta(days=USED_SOURCES_RETENTION_DAYS)
+    kept: list[dict] = []
+    for it in items:
+        ts = it.get("used_at")
+        if not ts:
+            kept.append(it)  # legacy entry, hard-cap will catch it
+            continue
+        try:
+            used_at = datetime.fromisoformat(ts)
+        except ValueError:
+            kept.append(it)
+            continue
+        if used_at >= cutoff:
+            kept.append(it)
+
+    merged = (fresh + kept)[:USED_SOURCES_HARD_CAP]
     payload["items"] = merged
     save_used_sources(payload)
 

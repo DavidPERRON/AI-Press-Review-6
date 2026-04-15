@@ -219,6 +219,9 @@ def _write_index(episodes: list[dict]) -> None:
     locale = os.getenv('APR_LOCALE', '').strip().lower()
     listen_label = 'Écouter' if locale == 'fr' else 'Listen'
     brief_label = 'Lire le brief' if locale == 'fr' else 'Read brief'
+    sources_label = 'Sources' if locale == 'fr' else 'Sources'
+    # Locale-aware sources directory: /sources/ for EN, /fr/sources/ for FR.
+    sources_base = '/fr/sources/' if locale == 'fr' else '/sources/'
 
     cards = []
     for ep in episodes:
@@ -235,12 +238,20 @@ def _write_index(episodes: list[dict]) -> None:
         audio_url = escape(ep.get('audio_url') or '')
         brief_url_raw = ep.get('brief_url') or ''
         brief_url = escape(brief_url_raw)
+        # Per-episode sources manifest page. Opens in new tab so the listener
+        # doesn't lose their place on the home index.
+        sources_url = escape(f"{sources_base}{pub_dt.strftime('%Y-%m-%d')}.html")
 
-        # Links row: always show Listen. Append "Read brief" when a brief page exists.
+        # Links row: always show Listen. Append "Read brief" when a brief page
+        # exists, then "Sources" pointing to the per-episode manifest.
         links_parts = [f'<a href="{audio_url}">{listen_label}</a>']
         if brief_url_raw:
             links_parts.append('<span class="dot">·</span>')
             links_parts.append(f'<a href="{brief_url}">{brief_label}</a>')
+        links_parts.append('<span class="dot">·</span>')
+        links_parts.append(
+            f'<a href="{sources_url}" target="_blank" rel="noopener">{sources_label}</a>'
+        )
         links_html = ''.join(links_parts)
 
         cards.append(
@@ -253,7 +264,9 @@ def _write_index(episodes: list[dict]) -> None:
         )
 
     if cards:
-        episodes_html = '\n'.join(cards)
+        # Wrap cards in a CSS grid so the layout auto-fits up to ~4 columns
+        # on wide screens and collapses to 1 column on mobile.
+        episodes_html = '<div class="cards-grid">' + '\n'.join(cards) + '</div>'
     elif locale == 'fr':
         episodes_html = (
             "<div class='card empty'>"

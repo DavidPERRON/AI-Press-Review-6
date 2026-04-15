@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 from pathlib import Path
@@ -15,6 +16,14 @@ from ..utils import utcnow
 from .episode_brief import generate_episode_brief
 
 logger = logging.getLogger(__name__)
+
+# Month names for French date formatting ("15 avril 2026" style).
+# strftime('%B') would honor LC_TIME but the runner locale isn't guaranteed,
+# so we inline the table rather than depend on system locale data.
+_MONTHS_FR = [
+    'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+    'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',
+]
 
 
 def _build_brief_data(episode: PublishedEpisode, source_titles: list[str], episode_number: int) -> dict:
@@ -176,34 +185,92 @@ def _write_feed(episodes: list[dict]) -> None:
     (out_dir / 'podcast-feed.xml').write_text(xml, encoding='utf-8')
 
 
-_INDEX_TEMPLATE_PATH = Path(__file__).parent / 'templates' / 'index-template.html'
+_TEMPLATES_DIR = Path(__file__).parent / 'templates'
+# Legacy constant kept so callers/tests that imported it still resolve (it points
+# at the EN template, which is the default when APR_LOCALE is unset).
+_INDEX_TEMPLATE_PATH = _TEMPLATES_DIR / 'index-template.html'
+
+
+def _index_template_path() -> Path:
+    """Pick index template per locale: EN default, `index-template-<loc>.html` else."""
+    locale = os.getenv('APR_LOCALE', '').strip().lower()
+    if locale:
+        return _TEMPLATES_DIR / f'index-template-{locale}.html'
+    return _INDEX_TEMPLATE_PATH
+
+
+def _format_card_date(pub_dt: datetime, locale: str) -> str:
+    """Human-readable date for an episode card. FR uses French months; EN uses %B %d, %Y."""
+    if locale == 'fr':
+        return f"{pub_dt.day} {_MONTHS_FR[pub_dt.month - 1]} {pub_dt.year}"
+    return pub_dt.strftime('%B %d, %Y')
 
 
 def _write_index(episodes: list[dict]) -> None:
-    template = _INDEX_TEMPLATE_PATH.read_text(encoding='utf-8')
-    cards = []
     settings = load_settings()
+    template_path = _index_template_path()
+    # Fall back to EN template if the locale-specific one is missing — protects
+    # against partial deploys where only one template was shipped.
+    if not template_path.exists():
+        logger.warning("Index template %s missing — falling back to EN", template_path.name)
+        template_path = _INDEX_TEMPLATE_PATH
+    template = template_path.read_text(encoding='utf-8')
+
+    locale = os.getenv('APR_LOCALE', '').strip().lower()
+    listen_label = 'Écouter' if locale == 'fr' else 'Listen'
+    brief_label = 'Lire le brief' if locale == 'fr' else 'Read brief'
+
+    cards = []
     for ep in episodes:
         pub_dt = datetime.fromisoformat(ep['published_at'])
-        date_str = pub_dt.strftime('%b %d, %Y')
+        date_str = _format_card_date(pub_dt, locale)
         dur = ep.get('duration_seconds') or 0
         dur_str = f'{dur // 60} min' if dur else ''
+        meta = f"{date_str} · {dur_str}" if dur_str else date_str
+
         # Fallback chain for title link: brief page -> site homepage.
         # Never link the title to the .mp3 directly (that triggers a download
         # and looks like a blank page in the browser).
         title_link = escape(ep.get('brief_url') or settings.site_base_url or '/')
+        audio_url = escape(ep.get('audio_url') or '')
+        brief_url_raw = ep.get('brief_url') or ''
+        brief_url = escape(brief_url_raw)
+
+        # Links row: always show Listen. Append "Read brief" when a brief page exists.
+        links_parts = [f'<a href="{audio_url}">{listen_label}</a>']
+        if brief_url_raw:
+            links_parts.append('<span class="dot">·</span>')
+            links_parts.append(f'<a href="{brief_url}">{brief_label}</a>')
+        links_html = ''.join(links_parts)
+
         cards.append(
-            f'<div class="episode-item">'
-            f'<div>'
-            f'<a href="{title_link}" class="episode-title">{escape(ep["title"])}</a>'
-            f'<div class="episode-meta">{date_str}</div>'
-            f'<p class="episode-summary">{escape(ep["summary"])}</p>'
-            f'<a href="{escape(ep["audio_url"])}" class="episode-listen">Listen &rarr;</a>'
-            f'</div>'
-            f'<span class="episode-duration">{dur_str}</span>'
+            f'<div class="card">'
+            f'<p class="card-meta">{escape(meta)}</p>'
+            f'<h3><a href="{title_link}">{escape(ep["title"])}</a></h3>'
+            f'<p class="card-summary">{escape(ep["summary"])}</p>'
+            f'<p class="card-links">{links_html}</p>'
             f'</div>'
         )
-    episodes_html = '\n'.join(cards) if cards else '<div class="empty-state">First episode coming soon.</div>'
+
+    if cards:
+        episodes_html = '\n'.join(cards)
+    elif locale == 'fr':
+        episodes_html = (
+            "<div class='card empty'>"
+            "<p class='card-meta'>Bientôt</p>"
+            "<h3>Premier épisode publié dans les jours qui viennent.</h3>"
+            "<p class='card-summary'>Abonnez-vous via Apple, Spotify, YouTube ou RSS pour être notifié.</p>"
+            "</div>"
+        )
+    else:
+        episodes_html = (
+            "<div class='card empty'>"
+            "<p class='card-meta'>Coming soon</p>"
+            "<h3>First episode publishing within days.</h3>"
+            "<p class='card-summary'>Subscribe via Apple, Spotify, YouTube, or RSS to be notified.</p>"
+            "</div>"
+        )
+
     html = template.replace('{{EPISODES}}', episodes_html)
     out_dir = settings.docs_output_dir
     out_dir.mkdir(parents=True, exist_ok=True)

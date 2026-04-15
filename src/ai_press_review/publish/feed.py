@@ -10,6 +10,7 @@ from ..settings import DOCS_DIR, load_settings
 from ..state import load_episode_history, save_episode_history
 from ..storage.r2 import delete_key
 from ..utils import utcnow
+from .locales import ALL_LOCALES, DEFAULT_LOCALE, LOCALES, get_locale
 
 
 def publish_episode(
@@ -56,9 +57,14 @@ def publish_episode(
     history['episodes'] = kept
     save_episode_history(history)
     _write_transcripts(kept)
-    _write_feed(kept)
-    _write_index(kept)
-    _write_how_it_works()
+    # Generate site for every locale (EN, FR, ...). Episodes themselves
+    # are EN-only for now; the FR site renders the same shell with French
+    # UI strings and an empty episode list until a FR pipeline is wired.
+    for locale in ALL_LOCALES:
+        episodes_for_locale = kept if locale == DEFAULT_LOCALE else []
+        _write_feed(episodes_for_locale, locale=locale)
+        _write_index(episodes_for_locale, locale=locale)
+        _write_how_it_works(locale=locale)
     _write_sitemap(kept)
     _write_robots()
 
@@ -137,8 +143,35 @@ def _absolute(settings, path: str) -> str:
     return f"{_base_url(settings)}/{path.lstrip('/')}"
 
 
-def _feed_url(settings) -> str:
-    return settings.rss_feed_url or f"{_base_url(settings)}/podcast-feed.xml"
+def _locale_path(loc: dict) -> str:
+    """Return the URL prefix for a locale: '' for default, '/fr' otherwise."""
+    site_path = loc.get('site_path', '').strip('/')
+    return f"/{site_path}" if site_path else ''
+
+
+def _locale_dir(loc: dict):
+    """Return the docs sub-directory where this locale's files live."""
+    site_path = loc.get('site_path', '').strip('/')
+    out = DOCS_DIR / site_path if site_path else DOCS_DIR
+    out.mkdir(parents=True, exist_ok=True)
+    return out
+
+
+def _feed_url(settings, loc: dict | None = None) -> str:
+    if loc is None:
+        return settings.rss_feed_url or f"{_base_url(settings)}/podcast-feed.xml"
+    prefix = _locale_path(loc)
+    return f"{_base_url(settings)}{prefix}/{loc.get('feed_filename', 'podcast-feed.xml')}"
+
+
+def _home_url(settings, loc: dict) -> str:
+    prefix = _locale_path(loc)
+    return f"{_base_url(settings)}{prefix}/"
+
+
+def _how_url(settings, loc: dict) -> str:
+    prefix = _locale_path(loc)
+    return f"{_base_url(settings)}{prefix}/how-it-works.html"
 
 
 def _secondary_category_xml(settings) -> str:
@@ -154,12 +187,12 @@ def _secondary_category_xml(settings) -> str:
 _PODCAST_NS = 'https://podcastindex.org/namespace/1.0'
 
 
-def _channel_guid(settings) -> str:
+def _channel_guid(settings, loc: dict | None = None) -> str:
     """Stable channel GUID per Podcasting 2.0 spec. Deterministic UUIDv5
-    derived from the podcast feed URL so it stays identical across
-    regenerations but changes if the operator forks/moves the feed."""
+    derived from the locale-specific feed URL so each locale has its
+    own stable identifier (Apple/Spotify treat them as distinct shows)."""
     import uuid
-    return str(uuid.uuid5(uuid.NAMESPACE_URL, _feed_url(settings)))
+    return str(uuid.uuid5(uuid.NAMESPACE_URL, _feed_url(settings, loc)))
 
 
 def _podcast_person_xml(settings) -> str:
@@ -170,11 +203,12 @@ def _podcast_person_xml(settings) -> str:
     )
 
 
-def _write_feed(episodes: list[dict]) -> None:
+def _write_feed(episodes: list[dict], locale: str = DEFAULT_LOCALE) -> None:
     settings = load_settings()
-    feed_url = _feed_url(settings)
+    loc = get_locale(locale)
+    feed_url = _feed_url(settings, loc)
     cover_url = _absolute(settings, settings.cover_image_path)
-    description = settings.podcast_description_long or settings.podcast_description_short
+    description = loc['intro_paragraph']
     last_build = format_datetime(utcnow())
 
     items = []
@@ -213,20 +247,19 @@ def _write_feed(episodes: list[dict]) -> None:
         'xmlns:atom="http://www.w3.org/2005/Atom" '
         f'xmlns:podcast="{_PODCAST_NS}">'
         '<channel>'
-        f"<title>{escape(settings.podcast_title)}</title>"
-        f"<link>{escape(_base_url(settings))}</link>"
+        f"<title>{escape(loc['title'])}</title>"
+        f"<link>{escape(_home_url(settings, loc))}</link>"
         f'<atom:link href="{escape(feed_url)}" rel="self" type="application/rss+xml" />'
-        f"<language>{escape(settings.podcast_language)}</language>"
+        f"<language>{escape(loc['lang'])}</language>"
         f"<lastBuildDate>{last_build}</lastBuildDate>"
         '<generator>ai-press-review</generator>'
-        # Podcasting 2.0 channel-level
-        f'<podcast:guid>{_channel_guid(settings)}</podcast:guid>'
+        f'<podcast:guid>{_channel_guid(settings, loc)}</podcast:guid>'
         '<podcast:medium>podcast</podcast:medium>'
         '<podcast:locked>no</podcast:locked>'
         f'{_podcast_person_xml(settings)}'
         f"<itunes:author>{escape(settings.podcast_author)}</itunes:author>"
-        f"<itunes:subtitle>{escape(settings.podcast_subtitle)}</itunes:subtitle>"
-        f"<itunes:summary>{escape(settings.podcast_description_short)}</itunes:summary>"
+        f"<itunes:subtitle>{escape(loc['subtitle'])}</itunes:subtitle>"
+        f"<itunes:summary>{escape(loc['description_short'])}</itunes:summary>"
         f"<description>{escape(description)}</description>"
         '<itunes:type>episodic</itunes:type>'
         f"<itunes:explicit>{'true' if settings.explicit else 'false'}</itunes:explicit>"
@@ -236,22 +269,22 @@ def _write_feed(episodes: list[dict]) -> None:
         '</itunes:owner>'
         f'<itunes:image href="{escape(cover_url)}" />'
         f'<image><url>{escape(cover_url)}</url>'
-        f"<title>{escape(settings.podcast_title)}</title>"
-        f"<link>{escape(_base_url(settings))}</link></image>"
+        f"<title>{escape(loc['title'])}</title>"
+        f"<link>{escape(_home_url(settings, loc))}</link></image>"
         f'<itunes:category text="{escape(settings.category_primary)}" />'
         f'{_secondary_category_xml(settings)}'
         f"{''.join(items)}"
         '</channel></rss>'
     )
-    (DOCS_DIR / 'podcast-feed.xml').write_text(xml, encoding='utf-8')
+    (_locale_dir(loc) / loc.get('feed_filename', 'podcast-feed.xml')).write_text(xml, encoding='utf-8')
 
 
 # ── HTML landing page ────────────────────────────────────────────────────────
 
-def _json_ld(settings, episodes: list[dict]) -> str:
-    base = _base_url(settings)
+def _json_ld(settings, episodes: list[dict], loc: dict | None = None) -> str:
+    if loc is None:
+        loc = get_locale(DEFAULT_LOCALE)
     cover_url = _absolute(settings, settings.cover_image_path)
-    description = settings.podcast_description_long or settings.podcast_description_short
 
     episode_nodes = []
     for ep in episodes[:10]:
@@ -271,13 +304,13 @@ def _json_ld(settings, episodes: list[dict]) -> str:
     data = {
         '@context': 'https://schema.org',
         '@type': 'PodcastSeries',
-        'name': settings.podcast_title,
-        'url': base,
-        'description': description,
+        'name': loc['title'],
+        'url': _home_url(settings, loc),
+        'description': loc['description_short'],
         'image': cover_url,
-        'inLanguage': settings.podcast_language,
+        'inLanguage': loc['lang'],
         'author': {'@type': 'Person', 'name': settings.podcast_author},
-        'webFeed': _feed_url(settings),
+        'webFeed': _feed_url(settings, loc),
     }
     if episode_nodes:
         data['episode'] = episode_nodes
@@ -385,13 +418,14 @@ def _shared_css() -> str:
     )
 
 
-def _render_banner_html(settings) -> str:
-    """Banner header reused on every page."""
+def _render_banner_html(settings, loc: dict) -> str:
+    """Banner header reused on every page (locale-aware title + home link)."""
+    home_href = _locale_path(loc) + '/' if _locale_path(loc) else '/'
     return (
         "<header class='banner'>"
         "<div class='banner-inner'>"
         f"{_arch_bars_svg()}"
-        f"<h1 class='banner-title'><a href='/'>{escape(settings.podcast_title)}</a></h1>"
+        f"<h1 class='banner-title'><a href='{escape(home_href)}'>{escape(loc['title'])}</a></h1>"
         "<hr class='banner-rule' />"
         f"<p class='banner-author'>{escape(settings.podcast_author)}</p>"
         "</div>"
@@ -399,41 +433,71 @@ def _render_banner_html(settings) -> str:
     )
 
 
-def _render_pagenav(active: str, feed_url: str) -> str:
-    """Small navigation bar shown under the banner on every page."""
+def _render_pagenav(active: str, loc: dict, feed_url: str) -> str:
+    """Small navigation bar with locale-aware labels and cross-locale link."""
     def cls(name: str) -> str:
         return " class='active'" if name == active else ""
+    home_href = _locale_path(loc) + '/' if _locale_path(loc) else '/'
+    how_href = _locale_path(loc) + '/how-it-works.html' if _locale_path(loc) else '/how-it-works.html'
     return (
         "<nav class='pagenav'>"
-        f"<a href='/'{cls('home')}>Home</a>"
-        f"<a href='/how-it-works.html'{cls('how')}>How it works</a>"
-        f"<a href='{escape(feed_url)}'>RSS</a>"
+        f"<a href='{escape(home_href)}'{cls('home')}>{escape(loc['nav_home'])}</a>"
+        f"<a href='{escape(how_href)}'{cls('how')}>{escape(loc['nav_how'])}</a>"
+        f"<a href='{escape(loc['nav_other_path'])}' class='other-locale'>{escape(loc['nav_other_label'])}</a>"
+        f"<a href='{escape(feed_url)}'>{escape(loc['nav_rss'])}</a>"
         "</nav>"
     )
 
 
-def _render_footer(settings, feed_url: str) -> str:
+def _render_footer(settings, loc: dict, feed_url: str) -> str:
+    how_href = _locale_path(loc) + '/how-it-works.html' if _locale_path(loc) else '/how-it-works.html'
     return (
         "<footer>"
-        f"Hosted by {escape(settings.podcast_author)}"
-        f"<span class='sep'>&middot;</span><a href='{escape(feed_url)}'>RSS feed</a>"
-        f"<span class='sep'>&middot;</span><a href='/how-it-works.html'>How it works</a>"
+        f"{escape(loc['footer_hosted_by'])} {escape(settings.podcast_author)}"
+        f"<span class='sep'>&middot;</span><a href='{escape(feed_url)}'>{escape(loc['footer_rss'])}</a>"
+        f"<span class='sep'>&middot;</span><a href='{escape(how_href)}'>{escape(loc['nav_how'])}</a>"
         "</footer>"
     )
 
 
-def _render_head(settings, *, page_title: str, page_description: str,
-                 canonical_path: str, extra_css: str = '') -> str:
+def _render_head(settings, loc: dict, *, page_title: str, page_description: str,
+                 canonical_subpath: str, extra_css: str = '') -> str:
+    """Render the <head> for a localized page.
+
+    canonical_subpath: path WITHIN the locale (e.g. '/' for the locale
+    home, '/how-it-works.html' for the methodology page). The locale
+    site_path is prepended automatically.
+    """
     base = _base_url(settings)
     cover_url = _absolute(settings, settings.cover_image_path)
     cover_rel = settings.cover_image_path
-    feed_url = _feed_url(settings)
+    feed_url = _feed_url(settings, loc)
     keywords = (
         'AI podcast, artificial intelligence, generative AI, LLM, '
         'AI news, AI research, AI use cases, AI tools, weak signals, '
         'AI for business, daily AI briefing'
     )
-    canonical = f"{base}{canonical_path}"
+    canonical = f"{base}{_locale_path(loc)}{canonical_subpath}"
+
+    # hreflang alternates: emit one <link> per locale + x-default = English.
+    alts: list[str] = []
+    for code, other in LOCALES.items():
+        other_path = f"/{other.get('site_path','').strip('/')}/" if other.get('site_path') else '/'
+        # For the methodology page, suffix stays the same across locales.
+        if canonical_subpath != '/' and not canonical_subpath.startswith('/episodes/'):
+            other_path = other_path.rstrip('/') + canonical_subpath
+        alts.append(
+            f"<link rel='alternate' hreflang='{escape(code)}' href='{escape(base)}{escape(other_path)}'>"
+        )
+    # x-default points to English root version.
+    default_loc = LOCALES[DEFAULT_LOCALE]
+    default_path = f"/{default_loc.get('site_path','').strip('/')}/" if default_loc.get('site_path') else '/'
+    if canonical_subpath != '/' and not canonical_subpath.startswith('/episodes/'):
+        default_path = default_path.rstrip('/') + canonical_subpath
+    alts.append(
+        f"<link rel='alternate' hreflang='x-default' href='{escape(base)}{escape(default_path)}'>"
+    )
+
     return (
         "<head>"
         "<meta charset='utf-8'>"
@@ -445,17 +509,18 @@ def _render_head(settings, *, page_title: str, page_description: str,
         "<meta name='robots' content='index,follow,max-image-preview:large'>"
         "<meta name='theme-color' content='#071028'>"
         f"<link rel='canonical' href='{escape(canonical)}'>"
-        f"<link rel='alternate' type='application/rss+xml' title='{escape(settings.podcast_title)} RSS' href='{escape(feed_url)}'>"
-        f"<link rel='icon' type='image/png' href='{escape(cover_rel)}'>"
-        f"<link rel='apple-touch-icon' href='{escape(cover_rel)}'>"
+        f"{''.join(alts)}"
+        f"<link rel='alternate' type='application/rss+xml' title='{escape(loc['title'])} RSS' href='{escape(feed_url)}'>"
+        f"<link rel='icon' type='image/png' href='{escape(_absolute(settings, cover_rel))}'>"
+        f"<link rel='apple-touch-icon' href='{escape(_absolute(settings, cover_rel))}'>"
         "<meta property='og:type' content='website'>"
-        f"<meta property='og:site_name' content='{escape(settings.podcast_title)}'>"
+        f"<meta property='og:site_name' content='{escape(loc['title'])}'>"
         f"<meta property='og:title' content='{escape(page_title)}'>"
         f"<meta property='og:description' content='{escape(page_description)}'>"
         f"<meta property='og:url' content='{escape(canonical)}'>"
         f"<meta property='og:image' content='{escape(cover_url)}'>"
-        "<meta property='og:image:alt' content='AI Press Review cover'>"
-        f"<meta property='og:locale' content='{escape(settings.podcast_language)}'>"
+        f"<meta property='og:image:alt' content='{escape(loc['title'])} cover'>"
+        f"<meta property='og:locale' content='{escape(loc['lang'])}'>"
         "<meta name='twitter:card' content='summary_large_image'>"
         f"<meta name='twitter:title' content='{escape(page_title)}'>"
         f"<meta name='twitter:description' content='{escape(page_description)}'>"
@@ -468,23 +533,23 @@ def _render_head(settings, *, page_title: str, page_description: str,
     )
 
 
-def _episode_card(ep: dict, base: str) -> str:
+def _episode_card(ep: dict, base: str, loc: dict) -> str:
     episode_link = ep.get('episode_page_url') or f"{base}/episodes/{ep.get('slug', '')}/"
     pub_label = (ep.get('published_at') or '')[:10]
     duration = ''
     if ep.get('duration_seconds'):
-        duration = f" &nbsp;&middot;&nbsp; {int(ep['duration_seconds']) // 60} min"
+        duration = f" &nbsp;&middot;&nbsp; {int(ep['duration_seconds']) // 60} {escape(loc['min_label'])}"
     return (
         f"<article class='card'>"
         f"<p class='card-meta'>{escape(pub_label)}{duration}</p>"
         f"<h3><a href='{escape(episode_link)}'>{escape(ep['title'])}</a></h3>"
         f"<p class='card-summary'>{escape(ep['summary'])}</p>"
         f"<p class='card-links'>"
-        f"<a href='{escape(episode_link)}'>Transcript &amp; episode page</a> "
+        f"<a href='{escape(episode_link)}'>{escape(loc['transcript_link_label'])}</a> "
         f"<span class='dot'>&middot;</span> "
-        f"<a href='{escape(ep['audio_url'])}'>Listen</a> "
+        f"<a href='{escape(ep['audio_url'])}'>{escape(loc['listen_label'])}</a> "
         f"<span class='dot'>&middot;</span> "
-        f"<a href='{escape(ep['source_manifest_url'])}'>Sources</a>"
+        f"<a href='{escape(ep['source_manifest_url'])}'>{escape(loc['sources_label'])}</a>"
         f"</p>"
         f"</article>"
     )
@@ -578,28 +643,12 @@ _HOME_EXTRA_CSS = (
 )
 
 
-SIX_PILLARS = [
-    ("01", "AI News",
-     "Verified announcements from labs, companies, institutions."),
-    ("02", "Research & Breakthroughs",
-     "Peer-reviewed publications and lab releases."),
-    ("03", "Use Cases",
-     "Documented enterprise and sector deployments."),
-    ("04", "Tools & Practice",
-     "Practitioner releases, APIs, frameworks."),
-    ("05", "Weak Signals",
-     "Early patterns not yet in mainstream coverage."),
-    ("06", "Education",
-     "Concepts and context for non-technical audiences."),
-]
-
-
-def _pillars_grid_html() -> str:
+def _pillars_grid_html(loc: dict) -> str:
     tiles = []
-    for num, name, desc in SIX_PILLARS:
+    for num, name, desc in loc['pillars']:
         tiles.append(
             "<div class='pillar-tile'>"
-            f"<span class='pillar-num'>{num}</span>"
+            f"<span class='pillar-num'>{escape(num)}</span>"
             f"<span class='pillar-name'>{escape(name)}</span>"
             f"<span class='pillar-desc'>{escape(desc)}</span>"
             "</div>"
@@ -607,78 +656,67 @@ def _pillars_grid_html() -> str:
     return f"<div class='pillars-grid'>{''.join(tiles)}</div>"
 
 
-def _write_index(episodes: list[dict]) -> None:
+def _write_index(episodes: list[dict], locale: str = DEFAULT_LOCALE) -> None:
     settings = load_settings()
+    loc = get_locale(locale)
     base = _base_url(settings)
-    description = settings.podcast_description_short or settings.podcast_description_long
-    feed_url = _feed_url(settings)
+    feed_url = _feed_url(settings, loc)
+    how_href = _locale_path(loc) + '/how-it-works.html' if _locale_path(loc) else '/how-it-works.html'
 
-    cards = [_episode_card(ep, base) for ep in episodes]
+    cards = [_episode_card(ep, base, loc) for ep in episodes]
     empty = (
         "<div class='card empty'>"
-        "<p class='card-meta'>Coming soon</p>"
-        "<h3>First episode publishing within days.</h3>"
-        "<p class='card-summary'>Subscribe via Apple, Spotify, YouTube, or RSS to be notified.</p>"
+        f"<p class='card-meta'>{escape(loc['first_episode_meta'])}</p>"
+        f"<h3>{escape(loc['first_episode_h'])}</h3>"
+        f"<p class='card-summary'>{escape(loc['subscribe_invite'])}</p>"
         "</div>"
     )
     subscribe_html = _subscribe_buttons_html(settings, feed_url)
-
-    json_ld = _json_ld(settings, episodes)
-    page_title = f"{settings.podcast_title} — {settings.podcast_subtitle}"
+    json_ld = _json_ld(settings, episodes, loc)
+    page_title = f"{loc['title']} — {loc['subtitle']}"
 
     head = _render_head(
-        settings,
+        settings, loc,
         page_title=page_title,
-        page_description=description,
-        canonical_path='/',
+        page_description=loc['description_short'],
+        canonical_subpath='/',
         extra_css=_HOME_EXTRA_CSS,
-    )
-
-    # Narrative description stops at "global sources". The six pillars
-    # are then shown in their own visually distinct block.
-    intro_paragraph = (
-        "AI Press Review is a daily AI news briefing, "
-        "published every morning at 7&thinsp;AM CET, Monday to Saturday. "
-        "Each episode draws from 40+ weighted global sources."
     )
 
     html = (
         "<!doctype html>"
-        f"<html lang='{escape(settings.podcast_language)}'>"
+        f"<html lang='{escape(loc['lang'])}'>"
         + head
         + f"<script type='application/ld+json'>{json_ld}</script>"
         + "<body>"
-        + _render_banner_html(settings)
-        + _render_pagenav('home', feed_url)
-        # Intro: tagline, short narrative, subscribe, hiw link
+        + _render_banner_html(settings, loc)
+        + _render_pagenav('home', loc, feed_url)
         + "<section class='intro'>"
         + "<div class='intro-inner'>"
-        + f"<p class='tagline'>{escape(settings.podcast_subtitle)}</p>"
-        + f"<p class='description'>{intro_paragraph}</p>"
-        + "<p class='tagline-note'>An editorial podcast &middot; Mon&ndash;Sat, 7&thinsp;AM CET</p>"
+        + f"<p class='tagline'>{escape(loc['subtitle'])}</p>"
+        + f"<p class='description'>{loc['intro_paragraph']}</p>"
+        + f"<p class='tagline-note'>{loc['tagline_note']}</p>"
         + f"<div class='subscribe'>{subscribe_html}</div>"
-        + "<a class='hiw-link' href='/how-it-works.html'>How it works &rarr;</a>"
+        + f"<a class='hiw-link' href='{escape(how_href)}'>{escape(loc['how_link_label'])}</a>"
         + "</div>"
         + "</section>"
-        # Six pillars block — visible and distinct
         + "<section class='pillars-home'>"
         + "<div class='pillars-home-inner'>"
-        + "<h2>Six editorial pillars</h2>"
-        + "<p class='subhead'>One continuous 14&ndash;18 minute briefing across all six.</p>"
-        + _pillars_grid_html()
+        + f"<h2>{escape(loc['pillars_heading'])}</h2>"
+        + f"<p class='subhead'>{escape(loc['pillars_subhead'])}</p>"
+        + _pillars_grid_html(loc)
         + "</div>"
         + "</section>"
-        # Latest episodes
         + "<div class='wrap'>"
-        + "<h2 class='sect-head'>Latest episodes</h2>"
+        + f"<h2 class='sect-head'>{escape(loc['latest_episodes'])}</h2>"
         + "<main>"
         + (''.join(cards) if cards else empty)
         + "</main>"
         + "</div>"
-        + _render_footer(settings, feed_url)
+        + _render_footer(settings, loc, feed_url)
         + "</body></html>"
     )
-    (DOCS_DIR / 'index.html').write_text(html, encoding='utf-8')
+    (_locale_dir(loc) / 'index.html').write_text(html, encoding='utf-8')
 
 
 _HOW_EXTRA_CSS = (
@@ -746,128 +784,89 @@ _HOW_EXTRA_CSS = (
 )
 
 
-def _write_how_it_works() -> None:
+def _write_how_it_works(locale: str = DEFAULT_LOCALE) -> None:
     settings = load_settings()
-    feed_url = _feed_url(settings)
-    page_title = f"How it works — {settings.podcast_title}"
-    page_desc = (
-        "How AI Press Review selects, weights, and verifies sources. "
-        "Editorial method behind the daily AI briefing."
-    )
+    loc = get_locale(locale)
+    feed_url = _feed_url(settings, loc)
 
     head = _render_head(
-        settings,
-        page_title=page_title,
-        page_description=page_desc,
-        canonical_path='/how-it-works.html',
+        settings, loc,
+        page_title=loc['how_page_title'],
+        page_description=loc['how_page_desc'],
+        canonical_subpath='/how-it-works.html',
         extra_css=_HOW_EXTRA_CSS,
     )
 
+    th = loc['how_s02_th']
+    rows = ''.join(
+        f"<tr><td>{escape(t)}</td>"
+        f"<td class='weight'>{escape(w)}</td>"
+        f"<td class='examples'>{escape(ex)}</td>"
+        f"<td>{escape(rat)}</td></tr>"
+        for t, w, ex, rat in loc['how_s02_rows']
+    )
+    s03_items = ''.join(
+        f"<li><strong>{escape(s)}</strong>{escape(rest)}</li>"
+        for s, rest in loc['how_s03_items']
+    )
+    s04_items = ''.join(
+        f"<li><strong>{escape(s)}</strong>{escape(rest)}</li>"
+        for s, rest in loc['how_s04_items']
+    )
+
     body = (
-        _render_banner_html(settings)
-        + _render_pagenav('how', feed_url)
+        _render_banner_html(settings, loc)
+        + _render_pagenav('how', loc, feed_url)
         + "<div class='wrap'>"
-        + "<p class='page-lead'>40+ sources. 15 minutes. What matters in AI today. "
-          "Here is exactly how each episode is built.</p>"
-        # 01 — Structure (no redundant pillar grid; pillars already shown on home)
+        + f"<p class='page-lead'>{escape(loc['how_lead'])}</p>"
+        # 01 — Structure
         + "<section class='section'>"
         + "<hr class='section-rule' />"
-        + "<span class='num'>01 &middot; How episodes are structured</span>"
-        + "<h2>Six pillars, one continuous narrative</h2>"
-        + "<p>Each daily episode runs 14 to 18 minutes as a single continuous narrative "
-          "across the six editorial pillars. No segments, no jingles between sections, "
-          "no filler. The pillars themselves are listed on the home page.</p>"
-        + "<p><strong>Saturday weekly recap.</strong> The Saturday episode steps back from "
-          "the daily news to identify the five trends that defined the week and flag what "
-          "is likely to matter next week.</p>"
+        + f"<span class='num'>{loc['how_s01_num']}</span>"
+        + f"<h2>{escape(loc['how_s01_h'])}</h2>"
+        + f"<p>{escape(loc['how_s01_p1'])}</p>"
+        + f"<p><strong>{escape(loc['how_s01_p2_strong'])}</strong>{escape(loc['how_s01_p2'])}</p>"
         + "</section>"
-        # 02 — How sources are selected and weighted (was 03)
+        # 02 — Sources & weighting
         + "<section class='section'>"
         + "<hr class='section-rule' />"
-        + "<span class='num'>02 &middot; How sources are selected and weighted</span>"
-        + "<h2>40+ sources, weighted by editorial standards</h2>"
-        + "<p><strong>40+ is a minimum threshold, not a target.</strong> Each episode draws "
-          "from at least forty global sources gathered in the 12 hours preceding publication. "
-          "Sources are not treated equally. Each carries a weight score based on editorial "
-          "standards, domain authority, and primary-source proximity.</p>"
+        + f"<span class='num'>{loc['how_s02_num']}</span>"
+        + f"<h2>{escape(loc['how_s02_h'])}</h2>"
+        + f"<p><strong>{escape(loc['how_s02_p1_strong'])}</strong>{escape(loc['how_s02_p1'])}</p>"
         + "<table class='tiers'>"
-        + "<thead><tr><th>Tier</th><th>Weight</th><th>Examples</th><th>Rationale</th></tr></thead>"
-        + "<tbody>"
-        + "<tr><td>Primary / Official</td>"
-          "<td class='weight'>2.0&times;</td>"
-          "<td class='examples'>openai.com, deepmind.com, anthropic.com, arxiv.org</td>"
-          "<td>Official announcements, peer-reviewed research</td></tr>"
-        + "<tr><td>Tier-1 Press</td>"
-          "<td class='weight'>1.5&times;</td>"
-          "<td class='examples'>reuters.com, ft.com, mit.edu, nature.com</td>"
-          "<td>Editorial standards, original reporting</td></tr>"
-        + "<tr><td>Specialist Tech Press</td>"
-          "<td class='weight'>1.0&times;</td>"
-          "<td class='examples'>techcrunch.com, wired.com, venturebeat.com</td>"
-          "<td>Industry coverage, verified editorially</td></tr>"
-        + "</tbody></table>"
-        + "<p>Each episode's source manifest, with the actual domains and articles used, "
-          "is published alongside the episode page.</p>"
+        + f"<thead><tr><th>{escape(th[0])}</th><th>{escape(th[1])}</th><th>{escape(th[2])}</th><th>{escape(th[3])}</th></tr></thead>"
+        + f"<tbody>{rows}</tbody>"
+        + "</table>"
+        + f"<p>{escape(loc['how_s02_p2'])}</p>"
         + "</section>"
-        # 03 — What each episode covers (rewritten — topics, not audience)
+        # 03 — Topics covered
         + "<section class='section'>"
         + "<hr class='section-rule' />"
-        + "<span class='num'>03 &middot; What each episode covers</span>"
-        + "<h2>The substance of each briefing</h2>"
-        + "<p>Daily episodes draw from concrete activity in artificial intelligence:</p>"
-        + "<ul class='exclusions'>"
-        + "<li><strong>Model releases and benchmarks.</strong> New models from frontier "
-          "labs, capability shifts, comparative results that change the practitioner picture.</li>"
-        + "<li><strong>Enterprise deployments.</strong> Real implementations with measurable "
-          "outcomes: cost, time, accuracy, scale. What worked, what didn't.</li>"
-        + "<li><strong>Infrastructure shifts.</strong> Chips, datacenters, cloud capacity, "
-          "energy footprint. The plumbing that decides who can build what.</li>"
-        + "<li><strong>Open-source and tooling.</strong> APIs, frameworks, agents, and "
-          "tools that change what a practitioner can do this week versus last week.</li>"
-        + "<li><strong>Research and breakthroughs.</strong> Peer-reviewed and lab-published "
-          "work, translated for non-experts in 30 seconds.</li>"
-        + "<li><strong>Vertical applications.</strong> Finance, banking, healthcare, legal, "
-          "consulting, public sector. AI where decisions actually get made.</li>"
-        + "<li><strong>Weak signals.</strong> Early patterns surfacing across multiple "
-          "stories before they reach mainstream coverage.</li>"
-        + "</ul>"
+        + f"<span class='num'>{loc['how_s03_num']}</span>"
+        + f"<h2>{escape(loc['how_s03_h'])}</h2>"
+        + f"<p>{escape(loc['how_s03_lead'])}</p>"
+        + f"<ul class='exclusions'>{s03_items}</ul>"
         + "</section>"
-        # 04 — What we exclude
+        # 04 — Exclusions
         + "<section class='section'>"
         + "<hr class='section-rule' />"
-        + "<span class='num'>04 &middot; What we exclude, and why</span>"
-        + "<ul class='exclusions'>"
-        + "<li><strong>Regulatory speculation and policy rumors.</strong> Unverified "
-          "regulatory moves produce noise that is almost always revised. We wait for official filings.</li>"
-        + "<li><strong>Unverified announcements without independent corroboration.</strong> "
-          "If only one source carries a claim, it doesn't air.</li>"
-        + "<li><strong>Opinion and editorial commentary.</strong> AI Press Review reports "
-          "what happened, not what commentators think about it. Interpretation is yours.</li>"
-        + "<li><strong>Funding rounds below $50M and pre-seed announcements.</strong> "
-          "Capital events dominate AI coverage and crowd out operational signal.</li>"
-        + "<li><strong>Engagement-optimized content.</strong> Social media posts, "
-          "thought-leadership, and content farms are excluded regardless of virality.</li>"
-        + "</ul>"
+        + f"<span class='num'>{loc['how_s04_num']}</span>"
+        + f"<ul class='exclusions'>{s04_items}</ul>"
         + "</section>"
-        # 05 — About the host (was 06)
+        # 05 — About the host
         + "<section class='section'>"
         + "<hr class='section-rule' />"
-        + "<span class='num'>05 &middot; About the host</span>"
+        + f"<span class='num'>{loc['how_s05_num']}</span>"
         + "<div class='author-card'>"
         + "<div class='avatar'>"
-        + "<img src='assets/david-perron.jpg' alt='David Perron' "
+        + f"<img src='{escape(_absolute(settings, 'assets/david-perron.jpg'))}' alt='{escape(settings.podcast_author)}' "
           "onerror=\"this.style.display='none'\">"
         + "<span class='avatar-fallback'>DP</span>"
         + "</div>"
         + "<div class='author-text'>"
         + f"<p class='name'>{escape(settings.podcast_author)}</p>"
-        + "<p class='tag'>Senior global trade solutions professional &middot; AI practitioner &middot; Paris</p>"
-        + "<p>Twenty years in front-office banking and trade finance at JPMorgan, Barclays "
-          "and HSBC. Executive Master in Artificial Intelligence, Institut Mines-T&eacute;l&eacute;com "
-          "(2025). AI Press Review extends my daily professional practice of monitoring AI "
-          "developments across finance, enterprise and research. The result is a format I would "
-          "actually want to listen to. I am responsible for the editorial decisions, source "
-          "weighting, and quality of every episode.</p>"
+        + f"<p class='tag'>{loc['how_s05_tag']}</p>"
+        + f"<p>{escape(loc['how_s05_bio'])}</p>"
         + "<p class='author-links'>"
           "<a href='https://www.linkedin.com/in/davidperron/' "
           "rel='noopener' target='_blank'>LinkedIn</a>"
@@ -876,35 +875,32 @@ def _write_how_it_works() -> None:
         + "</div>"
         + "</div>"
         + "</section>"
-        # 06 — Feedback (was 07)
+        # 06 — Feedback
         + "<section class='section'>"
         + "<hr class='section-rule' />"
-        + "<span class='num'>06 &middot; Feedback</span>"
-        + "<h2>Feedback is welcome</h2>"
-        + f"<p>If you spot a factual error, a source that should be excluded, or a domain "
-          f"underrepresented in coverage, write to "
-          f"<a href='mailto:{escape(settings.podcast_email)}'>{escape(settings.podcast_email)}</a>.</p>"
+        + f"<span class='num'>{loc['how_s06_num']}</span>"
+        + f"<h2>{escape(loc['how_s06_h'])}</h2>"
+        + f"<p>{loc['how_s06_p_template'].format(email=escape(settings.podcast_email))}</p>"
         + "</section>"
         + "</div>"
-        + _render_footer(settings, feed_url)
+        + _render_footer(settings, loc, feed_url)
     )
 
     html = (
         "<!doctype html>"
-        f"<html lang='{escape(settings.podcast_language)}'>"
+        f"<html lang='{escape(loc['lang'])}'>"
         + head
         + "<body>"
         + body
         + "</body></html>"
     )
-    (DOCS_DIR / 'how-it-works.html').write_text(html, encoding='utf-8')
+    (_locale_dir(loc) / 'how-it-works.html').write_text(html, encoding='utf-8')
 
 # ── sitemap.xml & robots.txt ─────────────────────────────────────────────────
 
 def _write_sitemap(episodes: list[dict]) -> None:
     settings = load_settings()
     base = _base_url(settings)
-    feed_url = _feed_url(settings)
 
     if episodes:
         last_pub = max(ep['published_at'] for ep in episodes)
@@ -912,12 +908,15 @@ def _write_sitemap(episodes: list[dict]) -> None:
     else:
         lastmod = utcnow().date().isoformat()
 
-    urls = [
-        ('', 'daily', '1.0', lastmod),
-        ('how-it-works.html', 'monthly', '0.7', lastmod),
-        ('podcast-feed.xml', 'daily', '0.9', lastmod),
-    ]
-    # Per-episode transcript pages — indexable content is the real SEO lever.
+    urls: list[tuple[str, str, str, str]] = []
+    # One entry per locale: home, how-it-works, RSS feed
+    for code in ALL_LOCALES:
+        loc = get_locale(code)
+        prefix = (loc.get('site_path', '').strip('/') + '/') if loc.get('site_path') else ''
+        urls.append((prefix, 'daily', '1.0', lastmod))
+        urls.append((prefix + 'how-it-works.html', 'monthly', '0.7', lastmod))
+        urls.append((prefix + 'podcast-feed.xml', 'daily', '0.9', lastmod))
+    # Per-episode transcript pages (EN only for now — FR pipeline will add later)
     for ep in episodes:
         slug = ep.get('slug')
         if not slug:

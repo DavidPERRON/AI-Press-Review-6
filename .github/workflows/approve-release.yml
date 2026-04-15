@@ -4,7 +4,16 @@ name: Approve & Release Now
 # (sans attendre l'auto-release de 10h)
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      locale:
+        description: 'Locale to release (en or fr)'
+        required: true
+        default: 'en'
+        type: choice
+        options:
+          - en
+          - fr
 
 permissions:
   contents: write
@@ -35,6 +44,7 @@ jobs:
 
       - name: Release pending draft
         env:
+          APR_LOCALE: ${{ inputs.locale }}
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
           R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}

@@ -48,7 +48,13 @@ llm:
 # Speed 0.90 + emotion "serious" = ~176 WPM, timbre validated by user
 # on 471-word ear-test (PHASE8-T5-voice-benoit-090.mp3).
 tts:
-  chunk_max_chars: 1500
+  # 2026-04-15: reduced 1500 → 900 to mitigate Cartesia websocket quality
+  # degradation on long scripts (FR dropped at ~minute 3, EN at ~minute 7).
+  # Smaller chunks within a single context_id session give the model more
+  # frequent paragraph boundaries to re-anchor prosody. Transitions remain
+  # seamless because context_id + continue=true preserve voice state across
+  # chunks in the same websocket session (validated Phase 8/T5 ear-test).
+  chunk_max_chars: 900
   speed: 0.9
   volume: 1.0
   emotion: "serious"

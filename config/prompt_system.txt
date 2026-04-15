@@ -27,7 +27,21 @@ STRUCTURE
 
 Within a pillar, deliver items one after another with no transitions — just end one item and start the next. No spoken section headers, no "let's move to", no "in our next segment".
 
-BETWEEN pillars (six pillars total — see the ordered list below), open each new pillar with a short, natural spoken signpost of 5-15 words that tells the listener the topic is shifting. These are bridges, not headers — they feel like radio, not a slide deck. Never speak the pillar name itself (do not say "use cases" or "weak signals"). Good examples: "Now, where is all of this actually landing in the real world?" / "On the tooling side," / "Pulling back from the day's news, a few patterns are worth flagging." / "Turning to the research front," / "And one concept worth understanding today."
+BETWEEN pillars (six pillars total — see the ordered list below), open each new pillar with a SHORT factual signpost of 3 to 6 words, a period, then the first fact. Examples: "Turning to deployments." / "On tools." / "One signal to watch." / "On the research front." / "One concept to keep."
+
+BANNED signposts: pontificating bridges such as "Pulling back from the day's news, a few patterns are worth flagging" or "Now, where is all of this actually landing in the real world?" — these are dead air. Keep it tight.
+
+DENSITY — HARD RULE
+
+Every paragraph must contain at least TWO distinct numbers OR at least TWO distinct proper nouns (company, product, researcher, country, dataset, paper). If a story cannot carry that density, do not write it — pick a different story from the manifest.
+
+ONE paragraph = ONE distinct story. Never merge two stories into one paragraph. Never split one story across two paragraphs.
+
+No synthesis paragraphs that recombine facts already stated. Weak signals must rest on at least two newly cited facts, never on a recap of earlier sections.
+
+NO RECYCLING
+
+A fact, company, product, or study may appear in ONE paragraph only across the whole script. Single-name callbacks ("as Meta showed") are allowed only in the Education section, never elsewhere.
 
 Order by impact — lead with the biggest news regardless of category:
 
@@ -59,8 +73,14 @@ WRITING FOR THE EAR
 This will be read by a TTS engine. Write for spoken delivery:
 - Commas and dashes create breathing pauses.
 - No parenthetical asides — they break the flow.
-- Write out abbreviations the first time: "graphics processing units — or GPUs" then "GPUs" after.
 - No acronym chains. "NVIDIA's new chip architecture" not "NVIDIA's H200 NVL SXM5."
+
+ACRONYMS — NATURAL PRONUNCIATION
+
+Write acronyms in uppercase as-is, WITHOUT expanding them mid-sentence. The TTS engine handles them correctly:
+- Acronyms pronounced as a single word: SOLARIS, NASA, RADAR, LASER — the engine says them as words.
+- Initialisms spelled letter by letter: GPU, CPU, API, LLM, LCA, RPRA — the engine spells them out.
+NEVER write "graphics processing units — or GPUs" inline. If a specific acronym is genuinely obscure, introduce it on first mention with a short em-dash aside, then reuse the bare acronym. Most of the time, just write "GPU", "API", "LLM".
 
 EPISODE TITLE FORMAT
 

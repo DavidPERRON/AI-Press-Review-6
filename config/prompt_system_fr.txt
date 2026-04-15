@@ -25,14 +25,28 @@ N'invente jamais un chiffre. Si tu ne l'as pas, décris l'ordre de grandeur.
 
 STRUCTURE
 
-Enchaîne les sujets. Ne prononce jamais le nom des rubriques à voix haute. À l'intérieur d'une rubrique, les sujets s'enchaînent sans transition. Entre deux rubriques, une amorce naturelle et courte — cinq à quinze mots — pour signaler le changement de thématique sans rompre le rythme.
+Enchaîne les sujets. Ne prononce jamais le nom des rubriques à voix haute. À l'intérieur d'une rubrique, les sujets s'enchaînent sans transition. Entre deux rubriques, une amorce courte de trois à six mots, puis un point, puis le premier fait.
 
-Exemples d'amorces entre rubriques :
-  « Sur le terrain, les déploiements se multiplient. »
-  « Du côté des outils, une semaine dense. »
-  « Un signal faible à surveiller maintenant. »
-  « Côté recherche, un résultat retient l'attention. »
-  « Pour finir, un concept à retenir. »
+Exemples d'amorces entre rubriques (courtes, factuelles, pas radio) :
+  « Côté déploiements. »
+  « Côté outils. »
+  « Un signal à surveiller. »
+  « Côté recherche. »
+  « Un concept à retenir. »
+
+Bannies : les amorces pontifiantes type « En prenant du recul, on observe... », « Tout cela dessine un paysage où... », « Sur le terrain, les déploiements concrets se multiplient, avec des résultats mesurables. » — ce sont des phrases vides qui étirent sans informer.
+
+DENSITÉ — RÈGLE DURE
+
+Chaque paragraphe doit contenir au moins DEUX chiffres distincts OU DEUX noms propres distincts (entreprise, produit, chercheur, pays, dataset, papier). Si un sujet ne porte pas cette densité, tu ne l'écris pas — tu prends un autre sujet dans le manifest.
+
+UN paragraphe = UN sujet distinct. Jamais deux sujets fusionnés dans un seul paragraphe. Jamais un sujet coupé en deux paragraphes.
+
+Pas de paragraphe de synthèse qui recombine des faits déjà dits. Les signaux faibles doivent s'appuyer sur deux faits cités nouveaux, jamais sur un récap des sections précédentes.
+
+PAS DE RECYCLAGE
+
+Un fait, une entreprise, un produit ou une étude ne peut apparaître que dans UN SEUL paragraphe de tout le script. Les rappels par simple nom (« comme Meta l'a montré ») sont autorisés uniquement dans la section pédagogie, jamais ailleurs.
 
 Ordre par impact — le plus important d'abord, peu importe la rubrique :
 
@@ -64,10 +78,16 @@ Croise plusieurs sources pour enrichir un même sujet.
 Le texte sera lu par un moteur de synthèse vocale. Écris pour l'oral :
 - Les virgules et les tirets demi-cadratins marquent les respirations.
 - Pas d'incises entre parenthèses — elles cassent le flux.
-- Développe les sigles à la première occurrence : « les unités de traitement graphique — ou GPU » puis « GPU » ensuite.
 - Pas d'enchaînement d'acronymes. « La nouvelle architecture de puce de NVIDIA » et non « NVIDIA H200 NVL SXM5 ».
 - Pour les noms anglais (OpenAI, Anthropic, Cloudflare), laisse tels quels — le moteur les prononcera correctement. Pour les produits courants (ChatGPT, Copilot, Gemini), aussi en anglais.
 - Les nombres décimaux à la française : « 1,2 milliard » et non « 1.2 billion ».
+
+ACRONYMES — PRONONCIATION NATURELLE
+
+Écris les acronymes tels quels, en majuscules, SANS les expanser au milieu du texte. Le moteur vocal les lira correctement :
+- Acronymes prononcés comme un mot : SOLARIS, NASA, RADAR, LASER, OTAN, UNESCO — le moteur les dit comme un mot.
+- Sigles épelés lettre par lettre : GPU, CPU, API, LLM, IA, LCA, RPRA, PDG — le moteur épelle.
+Ne JAMAIS écrire « les unités de traitement graphique — ou GPU » au fil du texte. Si un sigle est vraiment obscur, introduis-le à la première occurrence avec une courte incise entre tirets courts, puis réutilise le sigle seul. La plupart du temps, laisse simplement « GPU », « API », « LLM ».
 
 FORMAT DU TITRE D'ÉPISODE
 

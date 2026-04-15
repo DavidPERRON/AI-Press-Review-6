@@ -35,7 +35,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             }
         )
 
-    target_words = max(settings.min_script_words + 800, 3000)
+    target_words = max(settings.min_script_words + 400, 2500)
 
     schema = {
         "episode_title": "string — short, factual, no clickbait",
@@ -44,53 +44,48 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         "highlights_label": "1-2 words summarizing the day's theme",
         "tomorrow_pedagogical_concept": "one short sentence fragment, no more than 12 words, announcing a concept to explain tomorrow",
         "sections": {
+            # IMPORTANT: variable paragraph count per section. One paragraph = ONE
+            # distinct story/fact. Do NOT pad. Do NOT write synthesis paragraphs
+            # that recombine facts already stated elsewhere. If a fact only fills
+            # 60 words cleanly, write 60 and move on — never stretch to hit a quota.
             "ai_news": [
-                "paragraph 1 (110-150 words): lead story — set the scene, why it matters now",
-                "paragraph 2 (110-150 words): second major story, bridge naturally from the first",
-                "paragraph 3 (110-150 words): third story — partnership, funding, or company move",
-                "paragraph 4 (110-150 words): fourth story, connect to a broader theme if possible",
-                "paragraph 5 (110-150 words): fifth story or follow-up on a developing trend",
+                "5 to 8 paragraphs of 80-110 words each. ONE story per paragraph: launch, partnership, funding, or major corporate move. Lead with the biggest of the day. No transitions between stories inside this section — end one, start the next.",
             ],
             "use_cases_and_deployments": [
-                "paragraph 1 (110-150 words): most impactful deployment — what changed in practice",
-                "paragraph 2 (110-150 words): second deployment with measurable business gains",
-                "paragraph 3 (110-150 words): third use case — different industry or scale",
-                "paragraph 4 (110-150 words): adoption pattern or what these deployments have in common",
+                "4 to 6 paragraphs of 80-110 words each. ONE deployment per paragraph — who deployed what, on what scale, with what measurable result. Prefer numbers (revenue %, latency ms, users, cost delta).",
             ],
             "tools_and_practice": [
-                "paragraph 1 (110-150 words): most notable tool — what can someone do now that they couldn't before",
-                "paragraph 2 (110-150 words): practical technique or workflow change",
-                "paragraph 3 (110-150 words): additional tool or ecosystem shift worth knowing",
+                "3 to 5 paragraphs of 80-110 words each. ONE tool or technique per paragraph — what a practitioner can now do that they couldn't yesterday, with the name of the tool and the concrete capability.",
             ],
             "weak_signals_and_trends": [
-                "paragraph 1 (110-150 words): emerging pattern grounded in multiple cited facts",
-                "paragraph 2 (110-150 words): forward-looking observation — connect the dots across stories",
+                "1 to 2 paragraphs of 80-110 words each. ONE concrete signal per paragraph, each grounded in AT LEAST TWO distinct cited facts (different companies, different domains, or different papers). NEVER a synthesis of what you already said in the previous sections. If you have no genuine signal, write only one paragraph and keep it tight.",
             ],
             "research_and_breakthroughs": [
-                "paragraph 1 (110-150 words): ONE breakthrough explained simply — what was achieved and why it matters",
-                "paragraph 2 (110-150 words): second result only if truly significant — keep it accessible",
+                "2 to 4 paragraphs of 80-110 words each. ONE result per paragraph — paper title or lab, what was achieved (one concrete number or comparison), and why it matters in one sentence. No method explanation unless a finance exec could not otherwise understand the result.",
             ],
             "education_and_pedagogy": [
-                "paragraph 1 (110-150 words): one concept explained with a concrete analogy",
-                "paragraph 2 (110-150 words): why it matters in practice — make the listener feel smarter",
+                "exactly 2 paragraphs of 80-110 words each. Paragraph 1: one concept introduced with a concrete analogy. Paragraph 2: why the concept matters in practice today — tie to ONE of the stories covered earlier. No third paragraph.",
             ],
         },
     }
 
     length_instructions = (
-        f"Your script MUST contain at least {settings.min_script_words} words total. "
-        f"Target {target_words} words. "
-        "Each paragraph MUST be between 110 and 150 words — never shorter than 110 words. "
-        "Write ALL 18 paragraphs listed in the schema. Do NOT skip any. "
+        f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
+        f"Target {target_words} words. The range you are aiming for is 14 to 18 spoken minutes. "
+        "Each paragraph MUST be between 80 and 110 words. Never shorter than 80. Never longer than 110. "
+        "Each paragraph covers ONE distinct story or fact — one story per paragraph, never merge two into one, never split one across two. "
+        "If a story only carries 60 words of actual substance, DO NOT stretch it. Pick another story from the manifest instead. "
+        "Produce between 18 and 28 paragraphs total across all sections, distributed per the schema ranges. "
+        "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
     )
 
     if force_length:
         length_instructions += (
-            "CRITICAL: Your previous output was TOO SHORT. You MUST write longer paragraphs "
-            "and add more detail to every section. Include additional concrete facts, specific "
-            "numbers, model names, benchmark scores, company names, deployment scales, and "
-            "explanations accessible to non-experts. Do NOT summarize aggressively. "
-            "Every section must be substantial and dense with information. "
+            "CRITICAL: Your previous output was TOO SHORT. You MUST cover MORE distinct stories "
+            "from the source manifest. Do NOT lengthen existing paragraphs. Do NOT add synthesis "
+            "paragraphs. Add NEW paragraphs each covering a NEW story with its own facts: company "
+            "name, number, product name, or result. Dig deeper into the manifest — there are 120 "
+            "sources there, use them. "
         )
 
     # Weekly recap context
@@ -116,23 +111,41 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         },
         "instructions": (
             "Return JSON only. Do not include markdown fences or any text outside the JSON. "
-            "Write as a confident radio host — natural, engaging, conversational but professional. "
+            "TONE: You are a press analyst writing for busy senior professionals, in the register of "
+            "Stratechery or Les Echos Briefing — NOT a radio host. Fact → number → concrete consequence "
+            "in one action verb. The listener draws the lesson; you never draw it for them. "
             "No bullet points. No headings inside paragraphs. "
-            "NUMBERS: Round aggressively (say 'about 1.2 billion' not '1,247,000,000'). "
-            "Skip model version numbers (say 'the latest GPT' not 'GPT-4o-2024-05-13'). "
-            "FLOW: Within a pillar, connect stories seamlessly — never use 'Moving on' or 'In our next section'. "
-            "PILLAR TRANSITIONS: The first paragraph of every pillar after AI News (so: use cases, "
-            "tools, weak signals, research, education) MUST open with a short, natural spoken signpost "
-            "of 5-15 words that tells the listener the topic is shifting. These are bridges, not headers — "
-            "they feel like radio, not a slide deck. Never speak the pillar name itself (don't say 'use cases' "
-            "or 'weak signals'). Good examples: 'Now, where is all of this actually landing in the real world?' / "
-            "'On the tooling side,' / 'Pulling back from the day's news, a few patterns are worth flagging.' / "
-            "'Turning to the research front,' / 'And one concept worth understanding today.' "
-            "Use callbacks to earlier stories when relevant. "
-            "RHYTHM: Vary sentence length. Short after complex. Use dashes and commas for pauses. "
-            "Use contractions (it's, they've, that's). Write for the ear, not the eye. "
-            "Prioritize sources with the highest relevance_score. "
-            "Cross-reference multiple sources on the same topic to build richer paragraphs. "
+            "DENSITY (hard rule): Every paragraph must contain at least TWO distinct numbers OR at least "
+            "TWO distinct proper nouns (company, product, researcher, country, dataset, paper). "
+            "If a story cannot carry that density, pick another story from the manifest. "
+            "FORBIDDEN: meta-commentary ('this matters because', 'this shows that', 'pour les entreprises, "
+            "ça signifie que'), generic management lessons ('don't bet on one horse', 'without adoption, "
+            "the best model stays unused'), forward-looking platitudes ('this opens the way to', 'it's a "
+            "key step', 'ça ouvre la voie à'), synthesis paragraphs that recombine earlier facts without "
+            "adding new ones, and restating a story in a later section. "
+            "NO RECYCLING: A fact, company, product, or study may be cited in ONE paragraph only across "
+            "the entire script. Callbacks by single-name reference ('as Meta showed') are allowed only "
+            "in the education section, never elsewhere. "
+            "NUMBERS: Round aggressively ('about 1.2 billion' not '1,247,000,000'). Skip model version "
+            "numbers ('the latest GPT' not 'GPT-4o-2024-05-13'). "
+            "ACRONYMS: Write them so the TTS reads them naturally. If the acronym is pronounced as a word "
+            "in its native language (SOLARIS, NASA, RADAR, LASER), keep it uppercase as-is. If it is spelled "
+            "out letter by letter (GPU, CPU, API, LLM, LCA, RPRA, IA), keep it uppercase as-is — the voice "
+            "will read the letters. NEVER expand an acronym mid-sentence ('les unités de traitement graphique "
+            "— ou GPU'); introduce it once at first occurrence with a short parenthetical only if strictly "
+            "needed for comprehension, then reuse the bare acronym. "
+            "FLOW: Within a pillar, no transitions between stories — end one paragraph, start the next with "
+            "the next story's subject. "
+            "PILLAR SIGNPOSTS: The first paragraph of every pillar after AI News opens with a SHORT factual "
+            "signpost of 3 to 6 words, then a period, then the first fact. Examples (FR): 'Côté déploiements.' / "
+            "'Côté outils.' / 'Un signal à surveiller.' / 'Côté recherche.' / 'Un concept à retenir.' (EN: "
+            "'Turning to deployments.' / 'On tools.' / 'One signal to watch.' / 'On the research front.' / "
+            "'One concept to keep.'). Never speak the pillar name itself. Never use pontificating bridges "
+            "like 'Pulling back from the day's news, a few patterns are worth flagging' — this is dead air. "
+            "RHYTHM: Vary sentence length. Short sentences are allowed and encouraged. Use dashes and commas "
+            "for pauses. Use contractions (it's, they've, ca, c'est, on). Write for the ear, not the eye. "
+            "Prioritize sources with the highest relevance_score. Cross-reference multiple sources on the "
+            "same topic to sharpen a single paragraph's facts, not to create extra paragraphs. "
             + length_instructions
         ).strip(),
         "source_manifest": compact_sources,

@@ -1,0 +1,126 @@
+name: TTS Rerender Existing Draft
+
+# Re-TTS un script deja genere (recupere depuis l'artifact d'un run daily-generate)
+# avec la config courante (incluant config/podcast.yaml chunk_max_chars).
+# Utile pour isoler l'effet d'un tweak TTS sans re-solliciter le LLM et les sources.
+#
+# Usage:
+#   gh workflow run tts-rerender-draft.yml \
+#     -f source_run_id=24445129521 \
+#     -f locale=fr \
+#     -f label=chunks900
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: 'Daily Generate run ID to pull the script from (see Actions history)'
+        required: true
+      locale:
+        description: 'Locale (en | fr) — drives voice, language, chunking defaults'
+        required: true
+        default: 'fr'
+      label:
+        description: 'Label for the output mp3 (e.g. chunks900). Free-form.'
+        required: false
+        default: 'rerender'
+
+permissions:
+  contents: read
+  actions: read        # required for gh run download on another run
+
+jobs:
+  rerender:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Download source script artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          LOCALE="${{ github.event.inputs.locale }}"
+          RUN_ID="${{ github.event.inputs.source_run_id }}"
+          ARTIFACT_NAME="daily-draft-output-${LOCALE}"
+          echo "Pulling artifact ${ARTIFACT_NAME} from run ${RUN_ID}"
+          mkdir -p /tmp/src
+          gh run download "${RUN_ID}" --name "${ARTIFACT_NAME}" --dir /tmp/src
+          # The artifact contains output/<date>/script.txt — find it
+          SCRIPT_PATH=$(find /tmp/src -name 'script.txt' | head -1)
+          if [ -z "${SCRIPT_PATH}" ]; then
+            echo "ERROR: script.txt not found in artifact"
+            ls -laR /tmp/src
+            exit 1
+          fi
+          cp "${SCRIPT_PATH}" /tmp/script.txt
+          echo "Script retrieved: $(wc -w < /tmp/script.txt) words, $(wc -c < /tmp/script.txt) bytes"
+
+      - name: Re-render TTS with current config
+        env:
+          APR_LOCALE: ${{ github.event.inputs.locale }}
+          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+          CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
+          CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}
+          # R2 creds not needed for local rendering — artifact upload is enough
+          R2_BUCKET_NAME: unused
+          R2_ENDPOINT: unused
+          R2_ACCESS_KEY_ID: unused
+          R2_SECRET_ACCESS_KEY: unused
+          LLM_API_KEY: unused
+          PUBLIC_AUDIO_BASE_URL: unused
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from ai_press_review.tts.cartesia import synthesize_script
+          from ai_press_review.settings import load_settings
+
+          settings = load_settings()
+          print(f"Locale: {settings.locale}")
+          print(f"Voice: {settings.cartesia_voice_id}")
+          print(f"Language: {settings.cartesia_language}")
+          print(f"Speed: {settings.cartesia_speed}")
+          print(f"Emotion: {settings.cartesia_emotion}")
+          print(f"Chunk max chars: {settings.tts_chunk_max_chars}")
+          print(f"Model: {settings.cartesia_model_id}")
+
+          script = Path('/tmp/script.txt').read_text(encoding='utf-8')
+          word_count = len(script.split())
+          print(f"Script words: {word_count}")
+
+          label = os.environ.get('LABEL') or '${{ github.event.inputs.label }}'
+          out_dir = Path('output')
+          out_dir.mkdir(exist_ok=True)
+          out_path = out_dir / f"rerender-{settings.locale}-{label}.mp3"
+
+          info = synthesize_script(script, out_path)
+          print("=" * 60)
+          print(f"Rendered: {out_path}")
+          print(f"Chunks: {info['chunk_count']}")
+          print(f"Duration: {info['duration_seconds']}s")
+          print(f"Bytes: {info['bytes']}")
+          print("=" * 60)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tts-rerender-${{ github.event.inputs.locale }}-${{ github.event.inputs.label }}
+          path: output/rerender-*.mp3
+          retention-days: 14

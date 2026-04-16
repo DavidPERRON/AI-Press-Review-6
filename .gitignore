@@ -13,3 +13,11 @@ docs/sources/
 *.mp3
 tts_chunks/
 *.egg-info/
+
+# LWS newsletter backend — local-only config (DB creds, admin token, IP-hash salt).
+# Never commit. An example file (config.example.php) is committed as a template.
+lws/newsletter/public/config.php
+
+# Claude Code scratch + Windows thumb cache that sometimes lands in assets/.
+.claude/
+Thumbs.db

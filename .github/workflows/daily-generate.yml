@@ -107,9 +107,26 @@ jobs:
           # --autostash because the pipeline may have modified tracked files
           # (e.g. data/state/episode_history_{locale}.json) before this step.
           git pull --rebase --autostash origin main
+          # Fail-safe: on 2026-04-16 an autostash pop silently left conflict
+          # markers (<<<<<<< / ======= / >>>>>>>) in data/state/*.json, they
+          # got committed as-is, and the next day's pipeline crashed with
+          # JSONDecodeError. Refuse to commit any file that still contains
+          # markers so we surface the merge instead of shipping broken state.
+          if git grep -l -E '^(<<<<<<< |=======$|>>>>>>> )' -- data/state/ data/sources/ docs/ 2>/dev/null; then
+            echo "::error::Unresolved conflict markers in staged paths — refusing to commit"
+            git status
+            exit 1
+          fi
           git add -f data/state/ data/sources/ docs/
           git diff --cached --quiet || git commit -m "draft: daily episode ${{ matrix.locale }} ${{ github.event.inputs.run_date || 'auto' }} [skip ci]"
-          git push
+          # Retry on push race (another matrix job / approve-release may have pushed).
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected — rebasing (attempt $attempt)"
+            git pull --rebase origin main
+          done
+          echo "::error::push failed after 3 rebase attempts"
+          exit 1
 
       - uses: actions/upload-artifact@v4
         if: always()

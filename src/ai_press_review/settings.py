@@ -262,6 +262,26 @@ def _apply_locale(settings: Settings, config: dict[str, Any], locale: str) -> No
     elif profile_name in ('weekly_recap', 'weekly') and 'prompt_weekly' in loc:
         settings.prompt_file = str(loc['prompt_weekly'])
 
+    # ── Per-locale LLM model resolution ───────────────────────────────────
+    # LLM_EDITOR_MODEL_EN (resp. _FR) wins over the generic LLM_EDITOR_MODEL.
+    # This lets us run sophisticated French via Mistral Large 2411 in the FR
+    # job and journalism-tone English via Claude Sonnet 4.5 in the EN job —
+    # same OpenRouter API key, same base URL, two different downstream models.
+    #
+    # Empty per-locale value → fall through to the generic model already loaded
+    # from LLM_EDITOR_MODEL. Backward compatible: pipelines that only set the
+    # generic vars keep working unchanged.
+    suffix = locale.upper()
+    per_locale_editor = _env(f'LLM_EDITOR_MODEL_{suffix}')
+    if per_locale_editor:
+        settings.llm_editor_model = per_locale_editor
+    per_locale_fallback = _env(f'LLM_FALLBACK_MODEL_{suffix}')
+    if per_locale_fallback:
+        settings.llm_fallback_model = per_locale_fallback
+    per_locale_emergency = _env(f'LLM_EMERGENCY_MODEL_{suffix}')
+    if per_locale_emergency:
+        settings.llm_emergency_model = per_locale_emergency
+
 
 def _apply_profile(settings: Settings, config: dict[str, Any], profile: str) -> None:
     profiles = config.get('profiles', {}) or {}

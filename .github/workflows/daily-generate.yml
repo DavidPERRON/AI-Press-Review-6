@@ -77,6 +77,9 @@ jobs:
           PODCAST_DESCRIPTION_LONG: ${{ vars.PODCAST_DESCRIPTION_LONG }}
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          # Generic model vars — used as fallback when no per-locale override is set.
+          # Backward-compatible: a repo that only sets these continues to work
+          # with both EN and FR jobs sharing the same model.
           LLM_EDITOR_MODEL: ${{ vars.LLM_EDITOR_MODEL }}
           LLM_FALLBACK_MODEL: ${{ vars.LLM_FALLBACK_MODEL }}
           # Optional 3rd cascade tier — leave the repo var unset to disable.
@@ -85,6 +88,18 @@ jobs:
           # whole daily run down. See generator.py: cascade kicks in after
           # MAX_QUOTA_HITS (2) on the editor model, then again on fallback.
           LLM_EMERGENCY_MODEL: ${{ vars.LLM_EMERGENCY_MODEL }}
+          # Per-locale model overrides — settings._apply_locale() picks the
+          # right one based on APR_LOCALE. Lets us run Mistral Large 2411 for
+          # FR (sophisticated French register) and Claude Sonnet 4.5 for EN
+          # (journalism tone), all via OpenRouter with one API key. Set them
+          # in repo Variables to enable; leave any unset to fall back to the
+          # generic LLM_EDITOR_MODEL / LLM_FALLBACK_MODEL above.
+          LLM_EDITOR_MODEL_EN: ${{ vars.LLM_EDITOR_MODEL_EN }}
+          LLM_FALLBACK_MODEL_EN: ${{ vars.LLM_FALLBACK_MODEL_EN }}
+          LLM_EMERGENCY_MODEL_EN: ${{ vars.LLM_EMERGENCY_MODEL_EN }}
+          LLM_EDITOR_MODEL_FR: ${{ vars.LLM_EDITOR_MODEL_FR }}
+          LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
+          LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
           # Both voice IDs are passed — settings._apply_locale picks the right

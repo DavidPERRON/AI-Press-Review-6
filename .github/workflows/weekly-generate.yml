@@ -68,10 +68,21 @@ jobs:
           PODCAST_DESCRIPTION_LONG: ${{ vars.PODCAST_DESCRIPTION_LONG }}
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
+          # Generic model vars — used when no per-locale override is set.
           LLM_EDITOR_MODEL: ${{ vars.LLM_EDITOR_MODEL }}
           LLM_FALLBACK_MODEL: ${{ vars.LLM_FALLBACK_MODEL }}
           # Optional 3rd cascade tier — see daily-generate.yml for rationale.
           LLM_EMERGENCY_MODEL: ${{ vars.LLM_EMERGENCY_MODEL }}
+          # Per-locale model overrides — see daily-generate.yml. Same vars,
+          # same logic: settings._apply_locale() switches the editor/fallback
+          # based on APR_LOCALE so EN and FR can run on different downstream
+          # models from one OpenRouter API key.
+          LLM_EDITOR_MODEL_EN: ${{ vars.LLM_EDITOR_MODEL_EN }}
+          LLM_FALLBACK_MODEL_EN: ${{ vars.LLM_FALLBACK_MODEL_EN }}
+          LLM_EMERGENCY_MODEL_EN: ${{ vars.LLM_EMERGENCY_MODEL_EN }}
+          LLM_EDITOR_MODEL_FR: ${{ vars.LLM_EDITOR_MODEL_FR }}
+          LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
+          LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}

@@ -217,5 +217,6 @@
   "source_count": 101,
   "script_words": 2232,
   "generated_at": "2026-04-16T06:21:19.569165+00:00",
-  "status": "pending"
+  "status": "released",
+  "released_at": "2026-04-16T07:27:28.272178+00:00"
 }

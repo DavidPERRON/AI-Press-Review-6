@@ -1,0 +1,131 @@
+# Nightly encrypted backup of the LWS-hosted subscriber list.
+#
+# Why this exists: LWS Perso comes with daily server snapshots, but those
+# live on LWS infrastructure. If LWS has a bad week, the subscriber list
+# goes with them. This workflow downloads the CSV every night, GPG-encrypts
+# it with a passphrase only the operator knows, and commits the encrypted
+# blob to a SEPARATE private repo. Two independent failure domains.
+#
+# Setup (do once — see lws/newsletter/README.md §"Off-site backup"):
+#
+#   1. Create a private repo, e.g. `<you>/aequitus-newsletter-backup`.
+#   2. Generate a passphrase ≥ 40 random chars and store in 1Password /
+#      Bitwarden. This is the ONLY way to decrypt backups — lose it and
+#      the backups are useless forever.
+#   3. Mint a fine-grained PAT with `Contents: write` scoped to ONLY the
+#      backup repo. Do NOT give it access to AI-Press-Review-5 or your
+#      other repos.
+#   4. In AI-Press-Review-5 → Settings → Secrets and variables → Actions,
+#      add these three Repository secrets:
+#        LWS_EXPORT_TOKEN        ← your config.php admin_token
+#        BACKUP_GPG_PASSPHRASE   ← the 40-char passphrase from step 2
+#        BACKUP_REPO_TOKEN       ← the PAT from step 3
+#   5. Edit BACKUP_REPO below to point at your new backup repo.
+#   6. Run once manually from the Actions tab to confirm it works.
+#
+# Decrypting later (from any machine with gpg installed):
+#
+#   gpg --decrypt --batch --passphrase "$BACKUP_GPG_PASSPHRASE" \
+#       subscribers-2026-04-16.csv.gpg > subscribers-2026-04-16.csv
+#
+# Retention: by default every snapshot is kept forever. For a RTBF-heavy
+# list, set KEEP_LAST to a small N (e.g. 30) to auto-prune older files.
+
+name: backup-subscribers
+
+on:
+  schedule:
+    # 05:00 UTC = 07:00 Paris (summer) / 06:00 (winter). Runs after the
+    # nightly newsletter send window so the backup is up-to-date.
+    - cron: '0 5 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read  # this workflow does not push to THIS repo
+
+env:
+  # Edit this to match the private backup repo you created.
+  BACKUP_REPO: your-github-handle/aequitus-newsletter-backup
+  # 0 = keep all. Set to 30/90/etc. to auto-prune older backups.
+  KEEP_LAST: 0
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Liveness probe
+        run: |
+          set -euo pipefail
+          http=$(curl -sS -o /tmp/health.json -w '%{http_code}' \
+                  https://aequitus.net/api/health.php)
+          echo "health.php → HTTP $http"
+          cat /tmp/health.json
+          echo
+          test "$http" = "200"
+          jq -e '.ok == true and .db == true' /tmp/health.json
+
+      - name: Download CSV from LWS
+        env:
+          LWS_EXPORT_TOKEN: ${{ secrets.LWS_EXPORT_TOKEN }}
+        run: |
+          set -euo pipefail
+          : "${LWS_EXPORT_TOKEN:?LWS_EXPORT_TOKEN secret is not set}"
+          date=$(date -u +%F)
+          curl -sS --fail-with-body \
+               -H "Authorization: Bearer ${LWS_EXPORT_TOKEN}" \
+               -o "subscribers-${date}.csv" \
+               https://aequitus.net/api/export.php
+          # Sanity: must have at least the header row.
+          wc -l "subscribers-${date}.csv"
+          head -1 "subscribers-${date}.csv" | grep -q '^.\{0,3\}id,email,locale'
+          echo "csv_file=subscribers-${date}.csv" >> "$GITHUB_ENV"
+
+      - name: Encrypt with GPG (symmetric, AES256)
+        env:
+          BACKUP_GPG_PASSPHRASE: ${{ secrets.BACKUP_GPG_PASSPHRASE }}
+        run: |
+          set -euo pipefail
+          : "${BACKUP_GPG_PASSPHRASE:?BACKUP_GPG_PASSPHRASE secret is not set}"
+          gpg --batch --yes --symmetric \
+              --cipher-algo AES256 \
+              --passphrase "${BACKUP_GPG_PASSPHRASE}" \
+              --output "${csv_file}.gpg" \
+              "${csv_file}"
+          ls -lh "${csv_file}.gpg"
+          # Scrub the cleartext CSV from the runner before anything else
+          # has a chance to see it (the runner is ephemeral anyway, but
+          # belt-and-braces).
+          rm -f "${csv_file}"
+
+      - name: Push encrypted blob to backup repo
+        env:
+          BACKUP_REPO_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+        run: |
+          set -euo pipefail
+          : "${BACKUP_REPO_TOKEN:?BACKUP_REPO_TOKEN secret is not set}"
+          date=$(date -u +%F)
+          git config --global user.email 'actions@github.com'
+          git config --global user.name  'subscriber-backup-bot'
+          git clone --depth=1 \
+            "https://x-access-token:${BACKUP_REPO_TOKEN}@github.com/${BACKUP_REPO}.git" \
+            backup-repo
+          mkdir -p backup-repo/snapshots
+          mv "subscribers-${date}.csv.gpg" "backup-repo/snapshots/"
+          cd backup-repo
+
+          # Optional retention: drop older-than-KEEP_LAST snapshots.
+          if [ "${KEEP_LAST:-0}" -gt 0 ]; then
+            ls -1 snapshots/subscribers-*.csv.gpg 2>/dev/null \
+              | sort -r \
+              | tail -n +$((KEEP_LAST + 1)) \
+              | xargs -r git rm -f
+          fi
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit (backup identical to yesterday)."
+            exit 0
+          fi
+          git commit -m "backup ${date} (encrypted)"
+          git push origin HEAD:main

@@ -34,20 +34,21 @@ jobs:
       fail-fast: false       # FR doit tourner meme si EN casse
       max-parallel: 1        # serialise les git push pour eviter les races
       matrix:
-        locale: [en, fr]
+        # Filter the matrix itself so non-selected locales never spawn a job.
+        # Earlier attempt used an `exit 0` step body, which only exits that
+        # one step — the rest of the job (ffmpeg, pytest, Chromium, LLM, TTS)
+        # still ran and committed unwanted drafts on manual single-locale
+        # dispatches. Narrowing the expansion here is the correct fix:
+        # dispatch with locale=fr → ["fr"]; schedule / empty → ["en","fr"].
+        # `matrix.locale` is not available in `jobs.<id>.if`, but
+        # `github.event.inputs` IS available in `jobs.<id>.strategy`.
+        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en","fr"]') }}
 
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main           # toujours partir de main pour cumuler EN puis FR
-
-      # Skip non-selected locales when a manual run narrows the scope
-      - name: Skip if locale filter excludes this job
-        if: ${{ github.event.inputs.locale != '' && github.event.inputs.locale != matrix.locale }}
-        run: |
-          echo "Locale filter '${{ github.event.inputs.locale }}' excludes '${{ matrix.locale }}' — skipping."
-          exit 0
 
       - uses: actions/setup-python@v5
         with:

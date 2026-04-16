@@ -32,19 +32,15 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        locale: [en, fr]
+        # Filter the matrix itself so non-selected locales never spawn a job.
+        # See daily-generate.yml for the long explanation; same bug, same fix.
+        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en","fr"]') }}
 
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
-
-      - name: Skip if locale filter excludes this job
-        if: ${{ github.event.inputs.locale != '' && github.event.inputs.locale != matrix.locale }}
-        run: |
-          echo "Locale filter '${{ github.event.inputs.locale }}' excludes '${{ matrix.locale }}' — skipping."
-          exit 0
 
       - uses: actions/setup-python@v5
         with:

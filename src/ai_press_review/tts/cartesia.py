@@ -232,12 +232,14 @@ def _strip_trailing_pause_tokens(text: str) -> str:
     return _TRAILING_PAUSE_TOKENS.sub('.', text.rstrip())
 
 
-# Matches remaining ALL-CAPS tokens (2-5 letters) that are still in the script
-# after the known-table normalization pass. Capped at 5 letters to avoid touching
-# proper names written in all-caps (SOLARIS, AURORA, DARWIN, etc.) which are
-# not acronyms and should be left for the TTS engine to pronounce naturally.
-# Standard acronyms (API, GPU, LLM, AGI, PEFT, …) are all ≤ 5 letters.
-_UNKNOWN_ACRONYM = re.compile(r'\b[A-Z]{2,5}\b')
+# Matches remaining ALL-CAPS tokens (3-5 letters) that are still in the script
+# after the known-table normalization pass.
+# Minimum 3: 2-letter tokens (IA, AI, EU, UK, ML, RL …) are either already
+#   handled by the static table OR, like FR "IA", must be left bare so the
+#   native TTS engine (cartesia_language=fr) can pronounce them naturally.
+#   Auto-spelling "I. A." is exactly the mechanical two-beat we removed.
+# Maximum 5: avoids touching proper names written all-caps (SOLARIS, AURORA …).
+_UNKNOWN_ACRONYM = re.compile(r'\b[A-Z]{3,5}\b')
 
 # Words that look like acronyms but should never be auto-spelled — either
 # because they're already in the pronunciation table or because they sound

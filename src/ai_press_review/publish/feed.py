@@ -341,7 +341,7 @@ def _write_index(episodes: list[dict]) -> None:
 # layer only, not runtime behavior.
 _SOCIAL_LOCALES: dict[str, dict[str, str]] = {
     'en': {
-        'state_file': 'episode_history.json',          # legacy un-suffixed path
+        'state_file': 'episode_history_en.json',       # locale-suffixed (migrated from legacy)
         'site_base_url': 'https://podcast.aequitus.net',
         'hashtags': '#AI #Podcast #TechBriefing',
         'listen_label': 'Listen',

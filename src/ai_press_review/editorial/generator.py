@@ -103,19 +103,19 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             # that recombine facts already stated elsewhere. If a fact only fills
             # 60 words cleanly, write 60 and move on — never stretch to hit a quota.
             "ai_news": [
-                "5 to 8 paragraphs of 80-110 words each. ONE story per paragraph: launch, partnership, funding, or major corporate move. Lead with the biggest of the day. No transitions between stories inside this section — end one, start the next.",
+                "6 to 10 paragraphs of 80-110 words each. ONE story per paragraph: launch, partnership, funding, or major corporate move. Lead with the biggest of the day. No transitions between stories inside this section — end one, start the next.",
             ],
             "use_cases_and_deployments": [
-                "4 to 6 paragraphs of 80-110 words each. ONE deployment per paragraph — who deployed what, on what scale, with what measurable result. Prefer numbers (revenue %, latency ms, users, cost delta).",
+                "5 to 8 paragraphs of 80-110 words each. ONE deployment per paragraph — who deployed what, on what scale, with what measurable result. Prefer numbers (revenue %, latency ms, users, cost delta).",
             ],
             "tools_and_practice": [
-                "3 to 5 paragraphs of 80-110 words each. ONE tool or technique per paragraph — what a practitioner can now do that they couldn't yesterday, with the name of the tool and the concrete capability.",
+                "4 to 6 paragraphs of 80-110 words each. ONE tool or technique per paragraph — what a practitioner can now do that they couldn't yesterday, with the name of the tool and the concrete capability.",
             ],
             "weak_signals_and_trends": [
-                "1 to 2 paragraphs of 80-110 words each. ONE concrete signal per paragraph, each grounded in AT LEAST TWO distinct cited facts (different companies, different domains, or different papers). NEVER a synthesis of what you already said in the previous sections. If you have no genuine signal, write only one paragraph and keep it tight.",
+                "2 to 3 paragraphs of 80-110 words each. ONE concrete signal per paragraph, each grounded in AT LEAST TWO distinct cited facts (different companies, different domains, or different papers). NEVER a synthesis of what you already said in the previous sections. If you have no genuine signal, write only two paragraphs and keep them tight.",
             ],
             "research_and_breakthroughs": [
-                "2 to 4 paragraphs of 80-110 words each. ONE result per paragraph — paper title or lab, what was achieved (one concrete number or comparison), and why it matters in one sentence. No method explanation unless a finance exec could not otherwise understand the result.",
+                "3 to 5 paragraphs of 80-110 words each. ONE result per paragraph — paper title or lab, what was achieved (one concrete number or comparison), and why it matters in one sentence. No method explanation unless a finance exec could not otherwise understand the result.",
             ],
             "education_and_pedagogy": [
                 "exactly 2 paragraphs of 80-110 words each. Paragraph 1: one concept introduced with a concrete analogy. Paragraph 2: why the concept matters in practice today — tie to ONE of the stories covered earlier. No third paragraph.",
@@ -125,11 +125,11 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
 
     length_instructions = (
         f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
-        f"Target {target_words} words. The range you are aiming for is 14 to 18 spoken minutes. "
+        f"Target {target_words} words. The range you are aiming for is 16 to 22 spoken minutes. "
         "Each paragraph MUST be between 80 and 110 words. Never shorter than 80. Never longer than 110. "
         "Each paragraph covers ONE distinct story or fact — one story per paragraph, never merge two into one, never split one across two. "
         "If a story only carries 60 words of actual substance, DO NOT stretch it. Pick another story from the manifest instead. "
-        "Produce between 18 and 28 paragraphs total across all sections, distributed per the schema ranges. "
+        "Produce between 22 and 35 paragraphs total across all sections, distributed per the schema ranges. "
         "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
     )
 

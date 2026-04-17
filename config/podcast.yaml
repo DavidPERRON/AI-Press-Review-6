@@ -173,9 +173,9 @@ profiles:
     exclude_previous_episode: true
     prefer_unused: false
     min_source_count: 15
-    min_script_words: 2100
-    target_duration_min: 14
-    target_duration_max: 18
+    min_script_words: 2500
+    target_duration_min: 16
+    target_duration_max: 22
     prompt_file: "prompt_system.txt"
     intro_format: "daily"
 

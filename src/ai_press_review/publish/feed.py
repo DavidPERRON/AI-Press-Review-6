@@ -259,9 +259,9 @@ def _write_index(episodes: list[dict]) -> None:
     template = template_path.read_text(encoding='utf-8')
 
     locale = os.getenv('APR_LOCALE', '').strip().lower()
-    listen_label = 'Écouter' if locale == 'fr' else 'Listen'
-    brief_label = 'Lire le brief' if locale == 'fr' else 'Read brief'
-    sources_label = 'Sources' if locale == 'fr' else 'Sources'
+    read_label = 'Lire le brief' if locale == 'fr' else 'Read brief'
+    audio_label = 'Audio'   # same in both locales — intent is clear without translation
+    sources_label = 'Sources'
     # Locale-aware sources directory: /sources/ for EN, /fr/sources/ for FR.
     sources_base = '/fr/sources/' if locale == 'fr' else '/sources/'
 
@@ -284,12 +284,13 @@ def _write_index(episodes: list[dict]) -> None:
         # doesn't lose their place on the home index.
         sources_url = escape(f"{sources_base}{pub_dt.strftime('%Y-%m-%d')}.html")
 
-        # Links row: always show Listen. Append "Read brief" when a brief page
-        # exists, then "Sources" pointing to the per-episode manifest.
-        links_parts = [f'<a href="{audio_url}" target="_blank" rel="noopener">{listen_label}</a>']
+        # Links row: "Read brief" first (no new tab — this IS the episode page),
+        # then "Audio" (mp3, new tab), then "Sources" (new tab).
+        links_parts = []
         if brief_url_raw:
+            links_parts.append(f'<a href="{brief_url}">{read_label}</a>')
             links_parts.append('<span class="dot">·</span>')
-            links_parts.append(f'<a href="{brief_url}">{brief_label}</a>')
+        links_parts.append(f'<a href="{audio_url}" target="_blank" rel="noopener">{audio_label}</a>')
         links_parts.append('<span class="dot">·</span>')
         links_parts.append(
             f'<a href="{sources_url}" target="_blank" rel="noopener">{sources_label}</a>'

@@ -98,6 +98,7 @@ def run_pipeline(
             audio_bytes=audio_meta['bytes'],
             duration_seconds=audio_meta['duration_seconds'],
             published_at=iso_now(),
+            script=draft.script,
         )
         fingerprints = [fingerprint(s['title'], s['url']) for s in manifest['sources']]
         source_titles = [s['title'] for s in manifest['sources']]

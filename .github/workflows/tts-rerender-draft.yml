@@ -91,9 +91,12 @@ jobs:
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          # LLM key not needed for TTS-only — set to unused to satisfy validation
-          LLM_API_KEY: unused
-          LLM_BASE_URL: unused
+          # LLM key not needed for TTS-only — empty string satisfies settings
+          # validation ("LLM_API_KEY not set" is only a warning, not an error).
+          # LLM_BASE_URL must NOT be set (or must be empty) — the hostname
+          # whitelist validator raises ValueError on non-empty unknown values.
+          LLM_API_KEY: ''
+          LLM_BASE_URL: ''
         run: python scripts/rerender_draft_tts.py --script /tmp/script.txt
 
       - name: Commit updated pending draft state

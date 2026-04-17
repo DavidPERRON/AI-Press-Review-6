@@ -232,16 +232,18 @@ def _strip_trailing_pause_tokens(text: str) -> str:
     return _TRAILING_PAUSE_TOKENS.sub('.', text.rstrip())
 
 
-# Matches remaining ALL-CAPS tokens (3-7 letters) that are still in the script
-# after the known-table normalization pass. These are auto-spelled letter-by-letter
-# as a safe default so no acronym reaches the TTS engine un-normalized.
-_UNKNOWN_ACRONYM = re.compile(r'\b[A-Z]{3,7}\b')
+# Matches remaining ALL-CAPS tokens (2-5 letters) that are still in the script
+# after the known-table normalization pass. Capped at 5 letters to avoid touching
+# proper names written in all-caps (SOLARIS, AURORA, DARWIN, etc.) which are
+# not acronyms and should be left for the TTS engine to pronounce naturally.
+# Standard acronyms (API, GPU, LLM, AGI, PEFT, …) are all ≤ 5 letters.
+_UNKNOWN_ACRONYM = re.compile(r'\b[A-Z]{2,5}\b')
 
-# Words that look like acronyms but should never be auto-spelled:
-# NATO/NASA are already in the table; this set catches any extras added directly
-# as proper nouns in scripts (e.g., "SWIFT", "OPEC") that sound fine as words.
+# Words that look like acronyms but should never be auto-spelled — either
+# because they're already in the pronunciation table or because they sound
+# fine when read as words by the TTS engine.
 _AUTO_SPELL_SKIP: frozenset[str] = frozenset({
-    'NATO', 'NASA', 'SWIFT', 'OPEC', 'FAISS',  # already in table or pronounced as word
+    'NATO', 'NASA', 'FAISS', 'SWIFT', 'OPEC', 'OTAN',
 })
 
 

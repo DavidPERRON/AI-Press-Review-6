@@ -24,6 +24,12 @@ on:
 permissions:
   contents: write
 
+# Serialize two runs of weekly-generate on the same ref (scheduled Saturday
+# run vs. manual re-run). Queue, don't cancel — see daily-generate.yml.
+concurrency:
+  group: weekly-generate-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest

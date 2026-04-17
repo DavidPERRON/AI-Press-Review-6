@@ -20,6 +20,13 @@ on:
 permissions:
   contents: write
 
+# Reject runs must not race with approve-release — both touch
+# data/state/pending_draft_{locale}.json. Cheaper to queue rejects globally
+# (rare event) than to try coordinating with approve.
+concurrency:
+  group: release-workflow
+  cancel-in-progress: false
+
 jobs:
   reject:
     runs-on: ubuntu-latest
@@ -62,6 +69,17 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Rebase-pull in case approve-release or a daily draft committed
+          # to main between checkout and now. Same retry loop as the other
+          # write-to-main workflows; reject used to `git push` straight and
+          # fail on any race.
+          git pull --rebase --autostash origin main
           git add data/state/
           git diff --cached --quiet || git commit -m "reject: episode rejected [skip ci]"
-          git push
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected — rebasing (attempt $attempt)"
+            git pull --rebase origin main
+          done
+          echo "::error::push failed after 3 rebase attempts"
+          exit 1

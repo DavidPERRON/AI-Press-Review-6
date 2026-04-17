@@ -67,9 +67,23 @@ jobs:
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           YOUTUBE_PLAYLIST_ID_EN: ${{ vars.YOUTUBE_PLAYLIST_ID_EN }}
           YOUTUBE_PLAYLIST_ID_FR: ${{ vars.YOUTUBE_PLAYLIST_ID_FR }}
+          # Shell-injection hardening — inputs reach the script via env + argv.
+          DATE_INPUT: ${{ inputs.date }}
+          LOCALE_INPUT: ${{ inputs.locale }}
         run: |
+          set -e
+          # Locale: `choice` type constraint in workflow_dispatch already
+          # restricts to en|fr, but workflow_call is unchecked — enforce here.
+          case "$LOCALE_INPUT" in
+            en|fr) LOCALE="$LOCALE_INPUT" ;;
+            *) echo "::error::Invalid locale: $LOCALE_INPUT"; exit 1 ;;
+          esac
           DATE_ARG=""
-          if [ -n "${{ inputs.date }}" ]; then
-            DATE_ARG="--date ${{ inputs.date }}"
+          if [ -n "$DATE_INPUT" ]; then
+            if ! [[ "$DATE_INPUT" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+              echo "::error::Invalid date format: $DATE_INPUT (expected YYYY-MM-DD)"
+              exit 1
+            fi
+            DATE_ARG="--date $DATE_INPUT"
           fi
-          python scripts/youtube_upload.py --locale ${{ inputs.locale }} $DATE_ARG
+          python scripts/youtube_upload.py --locale "$LOCALE" $DATE_ARG

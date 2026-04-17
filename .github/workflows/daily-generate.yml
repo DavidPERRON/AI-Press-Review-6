@@ -26,6 +26,14 @@ on:
 permissions:
   contents: write
 
+# Prevent two runs of daily-generate from racing on git push — e.g. a
+# manual dispatch triggered while the scheduled run is still in flight.
+# Queue rather than cancel: a half-finished pipeline may have already
+# uploaded audio to R2, and we want its state commit to land cleanly.
+concurrency:
+  group: daily-generate-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest

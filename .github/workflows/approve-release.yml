@@ -24,6 +24,16 @@ on:
 permissions:
   contents: write
 
+# Globally queue all release runs regardless of locale. Two simultaneous
+# approve-release runs (EN + FR, or a re-run while the first is in flight)
+# both mutate data/state/ and docs/social-feed.xml — without this group
+# they race on `git push` and hit the retry-loop (observed 2026-04-16).
+# One queue across locales is simpler than per-locale since the social-feed
+# job reads both histories anyway.
+concurrency:
+  group: release-workflow
+  cancel-in-progress: false
+
 jobs:
   approve:
     runs-on: ubuntu-latest

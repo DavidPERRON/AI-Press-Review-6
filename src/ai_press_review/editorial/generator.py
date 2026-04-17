@@ -65,7 +65,17 @@ _TRANSIENT_HTTP_CODES = (500, 502, 503, 504)
 
 
 def _word_count(text: str) -> int:
-    return len(re.findall(r"\b\w+\b", text or ""))
+    """Honest spoken-word count: whitespace-separated tokens.
+
+    Earlier used re.findall(r"\b\w+\b", ...) which inflated French counts
+    by ~10-15% because apostrophes split "c'est"/"l'IA"/"d'Anthropic" into
+    two matches each. That made the min_script_words gate pass on scripts
+    that spoke for far less than target_duration_min — observed 2026-04-17
+    FR weekly: 2174 split-words (~11m54s audio) sailed past a 2200 regex-
+    gate while the audio was 6 minutes short of the 18-min minimum.
+    Using split() aligns the count with what the TTS will actually speak.
+    """
+    return len((text or "").split())
 
 
 def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> str:
@@ -83,7 +93,11 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             }
         )
 
-    target_words = max(settings.min_script_words + 400, 2500)
+    # Target well above the minimum so the LLM aims for the middle of the
+    # target duration band. At ~180 WPM, 18 min = 3240 words, 20 min = 3600.
+    # Overshoot the minimum by 500 words to leave room for TTS variance and
+    # avoid dancing on the gate.
+    target_words = max(settings.min_script_words + 500, 3000)
 
     if settings.profile_name == 'weekly_recap':
         schema = {
@@ -194,13 +208,13 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
     if settings.profile_name == 'weekly_recap':
         length_instructions = (
             f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
-            f"Target {target_words} words (~20 spoken minutes total: ~15 min for Friday news + deployments, ~5 min for next week). "
+            f"Target {target_words} words (~21 spoken minutes total: ~16 min for Friday news + deployments, ~5 min for next week). "
             "weekly_intro paragraphs: 60-90 words each. All other paragraphs: 80-110 words each. Never shorter, never longer. "
             "One paragraph = one distinct story or fact. Never merge two stories. Never split one story across two paragraphs. "
             "weekly_news and weekly_use_cases MUST use ONLY sources from Friday — ignore earlier days. "
             "weekly_next_week may reference any recent signals to ground its forward-looking items. "
             "Sources with higher relevance_score should be prioritized. "
-            f"Produce between 18 and 30 paragraphs total across all sections. "
+            f"Produce between 28 and 42 paragraphs total across all sections. "
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:
@@ -212,11 +226,11 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
     else:
         length_instructions = (
             f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
-            f"Target {target_words} words. The range you are aiming for is 16 to 22 spoken minutes. "
+            f"Target {target_words} words. The range you are aiming for is 14 to 18 spoken minutes. "
             "Each paragraph MUST be between 80 and 110 words. Never shorter than 80. Never longer than 110. "
             "Each paragraph covers ONE distinct story or fact — one story per paragraph, never merge two into one, never split one across two. "
             "If a story only carries 60 words of actual substance, DO NOT stretch it. Pick another story from the manifest instead. "
-            "Produce between 22 and 35 paragraphs total across all sections, distributed per the schema ranges. "
+            "Produce between 24 and 34 paragraphs total across all sections, distributed per the schema ranges. "
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:

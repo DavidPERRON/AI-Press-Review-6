@@ -28,10 +28,13 @@ public_audio_base_url: "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pres
 cover_image: "assets/podcast-cover.png"
 
 # ── EDITORIAL (defaults — les profils peuvent surcharger) ────
+# Mots-par-minute observés : Cartesia FR à speed 0.88 + emotion serious = ~182 WPM
+# (2174 mots / 714s validé sur le weekly 2026-04-17). Cartesia EN à speed 0.90 = ~176 WPM.
+# Moyenne retenue pour les gates : 180 WPM. Pour tenir 14 min min → 2520 mots min.
 editorial:
   target_duration_min: 14
   target_duration_max: 18
-  min_script_words: 2100
+  min_script_words: 2600
   min_source_count: 15
   freshness_hours: 48
   exclude_previous_episode: true
@@ -173,9 +176,11 @@ profiles:
     exclude_previous_episode: true
     prefer_unused: false
     min_source_count: 40        # hard minimum — pipeline warns if below
-    min_script_words: 2500
-    target_duration_min: 16
-    target_duration_max: 22
+    # 14-18 min @ ~180 WPM → 2520-3240 mots. Gate à 2700 pour viser 15 min
+    # minimum garanti avec marge TTS. Target LLM calculé = 3200 (cf. generator.py).
+    min_script_words: 2700
+    target_duration_min: 14
+    target_duration_max: 18
     prompt_file: "prompt_system.txt"
     intro_format: "daily"
 
@@ -187,7 +192,9 @@ profiles:
     unused_score_bonus: 2.0
     reuse_min_score: 8.0
     min_source_count: 45
-    min_script_words: 2200
+    # 18-24 min @ ~180 WPM → 3240-4320 mots. Gate à 3300 pour tenir 18 min min.
+    # Target LLM calculé = 3800 (min + 500 bump défini dans generator.py).
+    min_script_words: 3300
     target_duration_min: 18
     target_duration_max: 24
     prompt_file: "prompt_weekly.txt"

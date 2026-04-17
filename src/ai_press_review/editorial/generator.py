@@ -101,6 +101,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 # PART 2 (~5 min): what to watch next week (news only)
                 # One paragraph = ONE distinct story/fact. No padding.
                 "weekly_intro": [
+                    "KEY NAME IS 'weekly_intro' — do not rename. "
                     "1 to 2 paragraphs of 60-90 words each. "
                     "In natural spoken language, introduce this episode's 2-part structure: "
                     "first, you will cover the AI news and deployments from this Friday (~15 minutes); "
@@ -110,6 +111,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                     "No filler. End on a hook that makes the listener lean in.",
                 ],
                 "weekly_news": [
+                    "KEY NAME IS 'weekly_news' — do not rename. "
                     "8 to 14 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY sources published on the most recent Friday in the manifest — "
                     "do NOT include news from earlier in the week. "
@@ -125,6 +127,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                     "No signpost needed: the intro already set the context.",
                 ],
                 "weekly_use_cases": [
+                    "KEY NAME IS 'weekly_use_cases' — do not rename. "
                     "5 to 8 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY deployment news published on the most recent Friday in the manifest. "
                     "Friday's most concrete AI deployments. ONE deployment per paragraph. "
@@ -134,6 +137,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                     "— then a period, then the first fact.",
                 ],
                 "weekly_next_week": [
+                    "KEY NAME IS 'weekly_next_week' — do not rename. "
                     "3 to 5 paragraphs of 80-110 words each. "
                     "What to watch in the coming week: announced product launches, earnings calls, regulatory "
                     "decisions, policy hearings, IPOs, investor days, or research papers about to drop. "
@@ -225,6 +229,21 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             )
 
     if settings.profile_name == 'weekly_recap':
+        key_names_instruction = (
+            "CRITICAL — WEEKLY SECTION KEYS (read this first): "
+            "Your JSON response MUST contain a \"sections\" object with EXACTLY these four keys "
+            "in EXACTLY this order: "
+            "\"weekly_intro\", \"weekly_news\", \"weekly_use_cases\", \"weekly_next_week\". "
+            "Any other key name — including ai_news, use_cases_and_deployments, tools_and_practice, "
+            "weak_signals_and_trends, research_and_breakthroughs, education_and_pedagogy, "
+            "news, deployments, next_week, intro, or ANY variation — will cause an immediate "
+            "validation failure and your output will be discarded. "
+            "There are exactly FOUR sections. No more, no less. "
+        )
+    else:
+        key_names_instruction = ""
+
+    if settings.profile_name == 'weekly_recap':
         signpost_instructions = (
             "SECTION SIGNPOSTS (weekly only): "
             "weekly_news has NO signpost — the intro sets the context. "
@@ -263,6 +282,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "required_output": schema,
         },
         "instructions": (
+            key_names_instruction +
             "Return JSON only. Do not include markdown fences or any text outside the JSON. "
             "TONE: You are a press analyst writing for busy senior professionals, in the register of "
             "Stratechery or Les Echos Briefing — NOT a radio host. Fact → number → concrete consequence "

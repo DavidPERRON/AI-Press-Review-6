@@ -48,9 +48,17 @@ def generate_episode_brief(episode_data: dict) -> str:
     if raw_script:
         paras = [p.strip() for p in raw_script.split('\n\n') if p.strip()]
         script_html = '\n'.join(f'<p class="script-para">{escape(p)}</p>' for p in paras)
+        empty_notice = ''
     else:
         script_html = ''
+        empty_notice = (
+            '<p class="script-empty">'
+            'The full transcript for this episode is not yet available. '
+            'Use the audio player below to listen.'
+            '</p>'
+        )
     html = html.replace('{{EPISODE_SCRIPT_HTML}}', script_html)
+    html = html.replace('<!-- EMPTY_NOTICE_PLACEHOLDER -->', empty_notice)
 
     # ── Conditional removal of optional platform links in compact listen bar ──
     # Each link has a preceding separator <span class="listen-sep">·</span>.

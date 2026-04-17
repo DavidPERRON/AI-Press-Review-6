@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+import re
 import time
 from pathlib import Path
 
@@ -16,6 +17,24 @@ from .utils import fingerprint, iso_now, safe_slug, write_json
 
 logger = logging.getLogger(__name__)
 
+_DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+
+
+def _sanitize_run_date(run_date: str) -> str:
+    """Normalize run_date to YYYY-MM-DD, tolerating accidental slash separators.
+
+    GitHub Actions workflow_dispatch inputs sometimes arrive as 'YYYY/MM/DD'
+    when users type slashes instead of dashes.  Passing that raw value to
+    pathlib creates nested subdirectories (docs/sources/2026/04/17.html) that
+    don't exist, causing FileNotFoundError at write time.
+    """
+    d = run_date.strip().replace('/', '-').replace('\\', '-')
+    if not _DATE_RE.match(d):
+        raise ValueError(
+            f"Invalid run_date {run_date!r}: expected YYYY-MM-DD (got {d!r} after normalisation)"
+        )
+    return d
+
 
 def run_pipeline(
     run_date: str,
@@ -25,6 +44,7 @@ def run_pipeline(
     publish_feed: bool = False,
     profile: str | None = None,
 ) -> dict:
+    run_date = _sanitize_run_date(run_date)
     pipeline_start = time.monotonic()
     settings = load_settings(local_preview=local_preview, profile=profile)
     logger.info("Pipeline started: date=%s preview=%s profile=%s", run_date, local_preview, settings.profile_name)
@@ -125,6 +145,7 @@ def generate_draft(
 ) -> dict:
     """Collect, generate, render audio, upload — but do NOT publish to RSS.
     Saves draft metadata for later release or rejection."""
+    run_date = _sanitize_run_date(run_date)
     pipeline_start = time.monotonic()
     settings = load_settings(local_preview=local_preview, profile=profile)
     logger.info("Draft generation started: date=%s profile=%s", run_date, profile)

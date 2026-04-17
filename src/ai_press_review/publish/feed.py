@@ -284,13 +284,21 @@ def _write_index(episodes: list[dict]) -> None:
         # doesn't lose their place on the home index.
         sources_url = escape(f"{sources_base}{pub_dt.strftime('%Y-%m-%d')}.html")
 
-        # Links row: "Read brief" first (no new tab — this IS the episode page),
-        # then "Audio" (mp3, new tab), then "Sources" (new tab).
+        # Links row:
+        # "Read brief" — opens episode page (narrative + embedded player) in same tab.
+        # "Audio"      — opens the SAME episode page in a new tab so the user can
+        #                listen without losing their place on the index.  Previously
+        #                this pointed to the raw mp3, which just downloaded/streamed
+        #                the file in the browser with no context.
+        # "Sources"    — opens the source manifest page in a new tab.
         links_parts = []
         if brief_url_raw:
             links_parts.append(f'<a href="{brief_url}">{read_label}</a>')
             links_parts.append('<span class="dot">·</span>')
-        links_parts.append(f'<a href="{audio_url}" target="_blank" rel="noopener">{audio_label}</a>')
+            links_parts.append(f'<a href="{brief_url}" target="_blank" rel="noopener">{audio_label}</a>')
+        else:
+            # Fallback: no brief page yet — link Audio directly to mp3
+            links_parts.append(f'<a href="{audio_url}" target="_blank" rel="noopener">{audio_label}</a>')
         links_parts.append('<span class="dot">·</span>')
         links_parts.append(
             f'<a href="{sources_url}" target="_blank" rel="noopener">{sources_label}</a>'

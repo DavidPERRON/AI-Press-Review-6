@@ -1,23 +1,4 @@
 <!DOCTYPE html>
-<!--
-  TEMPLATE: Episode Brief Page — reading-first layout
-  Variables:
-  {{EPISODE_TITLE}}       — e.g. "OpenAI o4 vs. Gemini 2.5: who wins enterprise — Apr 12"
-  {{EPISODE_DATE_ISO}}    — e.g. "2026-04-12"
-  {{EPISODE_DATE_HUMAN}}  — e.g. "April 12, 2026"
-  {{EPISODE_NUMBER}}      — e.g. "12"
-  {{EPISODE_DURATION}}    — e.g. "16 min"
-  {{EPISODE_AUDIO_URL}}   — full URL to mp3
-  {{EPISODE_SPOTIFY_URL}} — Spotify episode deep link (optional, leave "" to hide)
-  {{EPISODE_APPLE_URL}}   — Apple Podcasts episode deep link (optional, leave "" to hide)
-  {{EPISODE_SUMMARY}}     — 2-3 sentence plain-text summary
-  {{EPISODE_SCRIPT_HTML}} — rendered transcript paragraphs
-  {{EPISODE_DURATION_ISO}}— ISO 8601 duration for schema.org
-  {{PREV_EPISODE_URL}}    — relative URL of previous episode (or "" to hide)
-  {{PREV_EPISODE_TITLE}}  — short title of previous episode
-  {{NEXT_EPISODE_URL}}    — relative URL of next episode (or "" to hide)
-  {{NEXT_EPISODE_TITLE}}  — short title of next episode
--->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -184,12 +165,22 @@
       font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--accent-dim); margin-bottom: 1.75rem;
     }
+    /* Reading-optimised body: comfortable measure (~68 chars), generous leading */
     .script-body { max-width: 660px; }
     .script-para {
-      font-size: 1.05rem; line-height: 1.9; color: var(--text);
-      margin-bottom: 1.6rem;
+      font-size: 1.05rem; line-height: 1.95; color: var(--text);
+      margin-bottom: 1.75rem;
+      font-weight: 300;
+      letter-spacing: 0.01em;
     }
+    /* First paragraph: slightly larger drop-in */
+    .script-para:first-child { font-size: 1.1rem; color: #d8d8e0; }
     .script-para:last-child { margin-bottom: 0; }
+    /* Empty transcript notice */
+    .script-empty {
+      font-size: 0.9rem; color: var(--text-muted); font-style: italic;
+      padding: 2rem 0;
+    }
 
     /* ── AUDIO PLAYER — at the bottom, after the read ── */
     .audio-section {
@@ -288,6 +279,7 @@
       <p class="section-label">Episode brief</p>
       <div class="script-body">
         {{EPISODE_SCRIPT_HTML}}
+        <!-- EMPTY_NOTICE_PLACEHOLDER -->
       </div>
     </section>
 

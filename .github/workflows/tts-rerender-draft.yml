@@ -78,7 +78,7 @@ jobs:
           echo "Script: $(wc -w < /tmp/script.txt) words"
 
       - name: Pull latest state before re-render
-        run: git pull --rebase origin main
+        run: git pull --rebase --autostash origin main
 
       - name: Re-render TTS, upload to R2, update pending draft
         env:
@@ -104,13 +104,13 @@ jobs:
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
           git add data/state/pending_draft*.json
           git diff --cached --quiet || git commit -m "tts-rerender: refresh ${{ github.event.inputs.locale }} audio [skip ci]"
           for attempt in 1 2 3; do
             if git push; then exit 0; fi
             echo "push rejected — rebasing (attempt $attempt)"
-            git pull --rebase origin main
+            git pull --rebase --autostash origin main
           done
           echo "::error::push failed after 3 attempts"
           exit 1

@@ -113,9 +113,14 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                     "8 to 14 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY sources published on the most recent Friday in the manifest — "
                     "do NOT include news from earlier in the week. "
+                    "Also include any post-NYSE-close developments or overnight signals (Asian markets, "
+                    "after-hours moves, late-breaking announcements) if present in the manifest. "
                     "Friday's biggest AI news stories in order of impact. ONE story per paragraph — launch, funding, "
-                    "partnership, or major corporate move. Lead with the most impactful Friday story. "
-                    "You may use 'yesterday' or 'this Friday' as time references. "
+                    "partnership, major corporate move, or market reaction. "
+                    "FINANCIAL ANGLE: when a story moved a stock or triggered a market reaction, include "
+                    "the % move and ticker. Funding rounds must state valuation and lead investor. "
+                    "Lead with the most impactful Friday story. "
+                    "You may use 'yesterday', 'this Friday', or 'after the close' as time references. "
                     "No transitions between stories — end one paragraph, start the next with the next story's subject. "
                     "No signpost needed: the intro already set the context.",
                 ],
@@ -130,8 +135,11 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 ],
                 "weekly_next_week": [
                     "3 to 5 paragraphs of 80-110 words each. "
-                    "What to watch in the coming week: announced product launches, expected regulatory decisions, "
-                    "earnings calls, policy hearings, or research papers about to drop. "
+                    "What to watch in the coming week: announced product launches, earnings calls, regulatory "
+                    "decisions, policy hearings, IPOs, investor days, or research papers about to drop. "
+                    "FINANCIAL ANGLE: prioritize events with market implications — earnings calls (name the company "
+                    "and consensus estimate if known), IPOs, central bank decisions affecting tech spending. "
+                    "Also flag any overnight or Asian market signal from Friday that could set the tone for Monday. "
                     "ONE item per paragraph. News and announced facts only — no tools, no research, no pedagogy. "
                     "First paragraph opens with a short signpost — "
                     "FR: 'Ce qu'il faut surveiller la semaine prochaine.' | EN: 'Looking ahead to next week.' "

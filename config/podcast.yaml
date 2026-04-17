@@ -172,7 +172,7 @@ profiles:
     freshness_hours: 48
     exclude_previous_episode: true
     prefer_unused: false
-    min_source_count: 15
+    min_source_count: 40        # hard minimum — pipeline warns if below
     min_script_words: 2500
     target_duration_min: 16
     target_duration_max: 22
@@ -198,24 +198,27 @@ profiles:
 # Plus le score est eleve, plus la source est prioritaire.
 
 scoring:
-  min_relevance: 3.0
-  min_text_length: 180
+  # Lower thresholds so 40+ sources pass through each day.
+  # Rationale: RSS summary-only articles have no content_text, so the
+  # content-depth component scores 0.  A relevance score of 2.0 can be
+  # reached with just 1 high-weight AI term (3.0 pts, capped at 5.0) plus
+  # minimal signal words — i.e. any clearly AI-focused article passes.
+  min_relevance: 2.0        # was 3.0
+  min_text_length: 100      # was 180 — shorter summaries are still citable
   similarity_threshold: 0.88
   max_per_domain: 7
 
-  # Mots-cles interdits — les articles contenant ces termes sont exclus
+  # Mots-cles interdits — articles hors-sujet uniquement.
+  # NOTE: "policy" / "regulation" alone are too broad — AI policy IS relevant.
+  # Only exclude articles that are PURELY political/social noise with no AI angle.
   banned_terms:
-    - "policy"
-    - "regulation"
-    - "regulatory"
-    - "lawmakers"
-    - "legislation"
-    - "compliance rule"
-    - "executive order"
-    - "government policy"
     - "antitrust settlement"
     - "rumor"
     - "rumour"
+    - "celebrity"
+    - "sports"
+    - "recipe"
+    - "horoscope"
 
   # Termes AI — poids fort (score +3.0 par match)
   ai_terms_high:
@@ -277,32 +280,55 @@ scoring:
     - "scale"
 
   # Autorite des domaines — bonus automatique par source
-  # Only active/verified feeds are listed here
+  # Only free/open sources — paywalled domains are hard-blocked in collect.py
   domain_authority:
     # Primary sources — Labs
     "openai.com": 2.0
     "blog.google": 2.0
     "deepmind.google": 2.0
+    "deepmind.com": 2.0
     "research.google": 2.0
     "cohere.com": 1.5
+    "anthropic.com": 2.0
+    "mistral.ai": 1.5
+    "meta.ai": 1.5
+    "ai.meta.com": 1.5
     # Hardware & Cloud
     "nvidia.com": 1.5
     "blogs.nvidia.com": 1.5
     "intel.com": 1.0
+    "amd.com": 1.0
+    "aws.amazon.com": 1.0
+    "azure.microsoft.com": 1.0
+    "cloud.google.com": 1.0
     # Research
     "huggingface.co": 1.5
-    "arxiv.org": 1.5
+    "arxiv.org": 1.0           # capped lower — too many papers on low-signal topics
     "science.org": 1.5
+    "nature.com": 1.5
+    "ieee.org": 1.5
+    "spectrum.ieee.org": 1.5
     "machinelearning.apple.com": 1.5
     "engineering.fb.com": 1.0
-    # Press
+    "research.microsoft.com": 1.5
+    "news.mit.edu": 1.5
+    "hai.stanford.edu": 1.5
+    # Press — free, professional
     "techcrunch.com": 1.0
     "venturebeat.com": 1.0
-    "technologyreview.com": 1.0
     "theverge.com": 0.8
-    "ft.com": 1.0
-    "economist.com": 1.0
-    # Finance-specific
+    "arstechnica.com": 0.8
+    "wired.com": 0.8
+    "siliconangle.com": 0.8
+    "the-decoder.com": 0.8
+    "zdnet.com": 0.7
+    "computerworld.com": 0.7
+    "infoworld.com": 0.7
+    "theregister.com": 0.7
+    "artificialintelligence-news.com": 0.7
+    "aitrends.com": 0.7
+    "simonwillison.net": 1.0    # highly curated, expert analysis
+    # Finance-specific (free)
     "finextra.com": 0.8
     "pymnts.com": 0.5
     "americanbanker.com": 0.8

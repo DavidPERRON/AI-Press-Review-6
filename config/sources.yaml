@@ -2,17 +2,25 @@
 #  SOURCES RSS — Modifie directement sur GitHub
 #  Les Google News RSS sont des recherches par mots-cles.
 #  Les curated RSS sont des flux directs de sites specifiques.
+#  Règle absolue : aucune source derrière un paywall.
 # ──────────────────────────────────────────────────────────────
 
-# Google News RSS — recherches par mots-cles
+# Google News RSS — recherches par mots-cles (ciblés IA & tech)
 google_news_rss:
   - "https://news.google.com/rss/search?q=artificial+intelligence&hl=en&gl=US&ceid=US:en"
   - "https://news.google.com/rss/search?q=generative+AI+LLM&hl=en&gl=US&ceid=US:en"
-  - "https://news.google.com/rss/search?q=AI+startup+funding&hl=en&gl=US&ceid=US:en"
-  - "https://news.google.com/rss/search?q=machine+learning+research&hl=en&gl=US&ceid=US:en"
-  - "https://news.google.com/rss/search?q=AI+enterprise+deployment&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=AI+startup+funding+venture&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=machine+learning+research+paper&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=AI+enterprise+deployment+automation&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=AI+chips+semiconductor+NVIDIA+AMD&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=large+language+model+OpenAI+Anthropic+Google&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=AI+healthcare+medicine+drug+discovery&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=AI+robotics+autonomous+deployment&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=AI+finance+banking+fintech&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=AI+model+release+benchmark+2026&hl=en&gl=US&ceid=US:en"
+  - "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
 
-# ── AI LABS & BIG TECH ────────────────────────────────────────
+# ── AI LABS & BIG TECH ─────────────────────────────────────────
 curated_rss:
   # Labs — primary sources
   - "https://openai.com/news/rss.xml"
@@ -21,54 +29,57 @@ curated_rss:
   - "https://huggingface.co/blog/feed.xml"
   - "https://www.deepmind.com/blog/rss.xml"
   - "https://cohere.com/blog/rss.xml"
+  - "https://www.anthropic.com/rss.xml"
+  - "https://mistral.ai/news/rss"
 
   # Cloud & Enterprise
   - "https://aws.amazon.com/blogs/machine-learning/feed/"
+  - "https://aws.amazon.com/blogs/aws/feed/"
   - "https://cloud.google.com/blog/products/ai-machine-learning/rss"
+  - "https://devblogs.microsoft.com/feed/"
+  - "https://azure.microsoft.com/en-us/blog/feed/"
   - "https://engineering.salesforce.com/feed/"
+  - "https://engineering.atspotify.com/feed/"
 
   # Semiconductors & Hardware
   - "https://www.intel.com/content/www/us/en/newsroom/rss-feed.html"
+  - "https://community.amd.com/community/amd-blog/rss"
 
-  # ── PRESSE SPECIALISEE IA ─────────────────────────────────
+  # ── PRESSE SPECIALISEE IA ──────────────────────────────────
   - "https://techcrunch.com/category/artificial-intelligence/feed/"
   - "https://venturebeat.com/category/ai/feed/"
   - "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
   - "https://www.wired.com/feed/tag/ai/latest/rss"
   - "https://arstechnica.com/tag/artificial-intelligence/feed/"
-  - "https://www.technologyreview.com/feed/"
   - "https://siliconangle.com/category/ai/feed/"
-  - "https://9to5mac.com/guides/artificial-intelligence/feed/"
   - "https://the-decoder.com/feed/"
   - "https://www.marktechpost.com/feed/"
   - "https://www.computerworld.com/category/artificial-intelligence/index.rss"
   - "https://www.cio.com/category/artificial-intelligence/index.rss"
   - "https://www.unite.ai/feed/"
   - "https://analyticsindiamag.com/feed/"
-
-  # ── BUSINESS & FINANCE ────────────────────────────────────
-  - "https://feeds.content.dowjones.io/public/rss/RSSWSJD"
-  - "https://www.ft.com/technology?format=rss"
-  - "https://www.economist.com/science-and-technology/rss.xml"
-
-  # ── JOURNAUX GENERALISTES ─────────────────────────────────
-  - "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
-  - "https://www.theguardian.com/technology/artificialintelligenceai/rss"
-  - "https://feeds.bbci.co.uk/news/technology/rss.xml"
-  - "https://www.lemonde.fr/intelligence-artificielle/rss_full.xml"
-  - "https://www.scmp.com/rss/36/feed"
-
-  # ── AI-FOCUSED MEDIA & NEWSLETTERS ───────────────────────
+  - "https://www.zdnet.com/topic/artificial-intelligence/rss.xml"
+  - "https://www.infoworld.com/category/machine-learning/index.rss"
   - "https://www.artificialintelligence-news.com/feed/"
   - "https://www.aitrends.com/feed/"
-  - "https://syncedreview.com/feed/"
-  - "https://jack-clark.net/feed/"
-  - "https://lastweekin.ai/feed"
-  - "https://www.oneusefulthing.org/feed"
+  - "https://theregister.com/software/ai_and_ml/headlines.atom"
+  - "https://www.analyticsvidhya.com/feed/"
+  - "https://www.datanami.com/feed/"
+  - "https://www.kdnuggets.com/feed"
+
+  # ── AI-FOCUSED MEDIA & EXPERT BLOGS ───────────────────────
   - "https://simonwillison.net/atom/everything/"
   - "https://lilianweng.github.io/index.xml"
+  - "https://syncedreview.com/feed/"
+  - "https://www.oneusefulthing.org/feed"
+  - "https://lastweekin.ai/feed"
+  - "https://jack-clark.net/feed/"
+  - "https://interconnects.ai/feed"
+  - "https://www.semianalysis.com/feed"
+  - "https://newsletter.pragmaticengineer.com/feed"
+  - "https://9to5mac.com/guides/artificial-intelligence/feed/"
 
-  # ── RECHERCHE & ACADEMIQUE ────────────────────────────────
+  # ── RECHERCHE & ACADEMIQUE ─────────────────────────────────
   - "https://export.arxiv.org/rss/cs.AI"
   - "https://export.arxiv.org/rss/cs.CL"
   - "https://export.arxiv.org/rss/cs.LG"
@@ -78,9 +89,28 @@ curated_rss:
   - "https://research.google/blog/rss/"
   - "https://engineering.fb.com/category/ml-applications/feed/"
   - "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science"
+  - "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss"
+  - "https://news.mit.edu/topic/artificial-intelligence2/rss.xml"
+  - "https://hai.stanford.edu/news/feed"
+  - "https://research.ibm.com/blog/feed/"
+  - "https://pytorch.org/blog/feed.xml"
+  - "https://research.microsoft.com/en-us/news/rss/home.aspx"
+  - "https://www.nature.com/subjects/machine-learning.rss"
 
-  # ── AI IN FINANCE & BANKING ──────────────────────────────
+  # ── JOURNAUX GENERALISTES (libre accès) ───────────────────
+  - "https://www.theguardian.com/technology/artificialintelligenceai/rss"
+  - "https://feeds.bbci.co.uk/news/technology/rss.xml"
+  - "https://www.scmp.com/rss/36/feed"
+  - "https://www.axios.com/feeds/feed.rss"
+
+  # ── BUSINESS & FINANCE (libre accès) ──────────────────────
   - "https://www.finextra.com/rss/headlines.aspx"
   - "https://www.pymnts.com/artificial-intelligence-2/feed/"
   - "https://www.americanbanker.com/feed"
   - "https://www.bankingdive.com/feeds/news/"
+
+  # ── PRESSE FRANÇAISE (libre accès) ────────────────────────
+  - "https://www.journaldunet.com/intelligence-artificielle/rss.xml"
+  - "https://www.usine-digitale.fr/rss.xml"
+  - "https://siecledigital.fr/feed/"
+  - "https://www.maddyness.com/feed/"

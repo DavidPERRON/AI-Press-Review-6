@@ -4,7 +4,8 @@ import logging
 from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
 from typing import Iterable
-from xml.sax.saxutils import escape
+from urllib.parse import urlparse
+from xml.sax.saxutils import escape, quoteattr
 
 from .collectors.newsapi import fetch_newsapi_articles
 from .collectors.rss import fetch_rss_entries
@@ -43,10 +44,22 @@ _PAYWALL_DOMAINS: frozenset[str] = frozenset({
 
 def _is_paywalled(domain: str) -> bool:
     """Return True if *domain* (or any parent domain) is on the paywall list."""
-    d = (domain or '').lower()
-    if d.startswith('www.'):
-        d = d[4:]
+    d = (domain or '').lower().removeprefix('www.')
     return any(d == pw or d.endswith('.' + pw) for pw in _PAYWALL_DOMAINS)
+
+
+def _is_safe_http_url(url: str) -> bool:
+    """Whitelist http(s) schemes for rendered links.
+
+    Prevents `javascript:`, `data:`, `vbscript:` URIs from slipping into public
+    HTML via a poisoned feed. Any malformed URL (parse error, wrong type) is
+    treated as unsafe. Relative URLs with no scheme are rejected too — all
+    source URLs in the manifest are absolute by construction.
+    """
+    try:
+        return urlparse(url).scheme in ('http', 'https')
+    except (ValueError, TypeError):
+        return False
 
 
 def _previous_episode_memory() -> tuple[set[str], list[str]]:
@@ -457,12 +470,22 @@ def _manifest_to_html(manifest: dict) -> str:
     for src in manifest["sources"]:
         if _is_paywalled(src.get("domain", "")):
             continue
+
+        # Refuse to render non-http(s) URLs. `javascript:` in a feed would
+        # otherwise be emitted verbatim into the public sources page — small
+        # attack surface, trivial fix. `lstrip` was also replaced by
+        # `removeprefix` below because lstrip takes a *character set*, so
+        # "wow.example.com".lstrip("www.") drops the w+o, not the "www.".
+        url = src.get("url", "")
+        if not _is_safe_http_url(url):
+            continue
+
         pub = src.get("published_at", "")[:10] if src.get("published_at") else ""
         author = (src.get("author") or "").strip()
 
-        # Publication name: clean domain, strip www.
-        domain_raw = src.get("domain", "")
-        publication = domain_raw.lstrip("www.") if domain_raw else ""
+        # Publication name: clean domain, strip literal "www." prefix only.
+        domain_raw = src.get("domain", "") or ""
+        publication = domain_raw.removeprefix("www.")
 
         # Build the by-line: "by Author · Publication · Date" (omit missing parts)
         byline_parts: list[str] = []
@@ -474,9 +497,10 @@ def _manifest_to_html(manifest: dict) -> str:
             byline_parts.append(escape(pub))
         byline = " · ".join(byline_parts)
 
+        # quoteattr emits the surrounding quotes and escapes both " and '.
         cards.append(
             "<article class='source-card'>"
-            f"<h3><a href='{escape(src['url'])}' target='_blank' rel='noopener'>{escape(src['title'])} ↗</a></h3>"
+            f"<h3><a href={quoteattr(url)} target='_blank' rel='noopener'>{escape(src['title'])} ↗</a></h3>"
             + (f"<p class='source-byline'>{byline}</p>" if byline else "")
             + "</article>"
         )

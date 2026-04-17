@@ -88,10 +88,23 @@ jobs:
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}
           NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
+          # Shell-injection hardening — untrusted inputs come via env only.
+          RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
+          PROFILE_INPUT: ${{ github.event.inputs.profile }}
         run: |
           set -e
-          RUN_DATE=${{ github.event.inputs.run_date }}
+          RUN_DATE="${RUN_DATE_INPUT}"
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
+          if ! [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "::error::Invalid run_date format: $RUN_DATE (expected YYYY-MM-DD)"
+            exit 1
+          fi
+          # Profile whitelist — reject anything that isn't one of the two
+          # expected profile names, keeps crafted inputs from reaching argv.
+          case "$PROFILE_INPUT" in
+            daily|weekly_recap) PROFILE="$PROFILE_INPUT" ;;
+            *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
+          esac
           echo "Locale: $APR_LOCALE"
           # Fail fast if LLM_API_KEY is empty — avoids 8-minute crawl then 401
           python3 - <<'KEYCHECK'
@@ -121,7 +134,7 @@ jobs:
               )
           print(f'Editor model resolved for {loc}: ' + next(c for c in candidates if c.strip()))
           "
-          python scripts/cloud_dry_run.py --date "$RUN_DATE" --profile "${{ github.event.inputs.profile }}"
+          python scripts/cloud_dry_run.py --date "$RUN_DATE" --profile "$PROFILE"
 
       - uses: actions/upload-artifact@v4
         if: always()

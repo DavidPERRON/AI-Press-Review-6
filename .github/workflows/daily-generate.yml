@@ -112,6 +112,11 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
+          # Untrusted workflow input — MUST be read via env to avoid shell
+          # injection. Pasting `${{ github.event.inputs.run_date }}` directly
+          # into a `run:` script lets a triggering actor execute arbitrary
+          # shell via a crafted input. See GitHub Actions Security Hardening.
+          RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
         run: |
           set -e
           # ── Pre-flight: validate LLM_API_KEY before burning 8 minutes crawling ──
@@ -137,12 +142,22 @@ jobs:
           hint = key[:6] + "..." if len(key) > 6 else key[:3] + "..."
           print(f"LLM_API_KEY OK — {len(key)} chars, starts with {hint}")
           PREFLIGHT
-          RUN_DATE=${{ github.event.inputs.run_date }}
+          RUN_DATE="${RUN_DATE_INPUT}"
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
+          # Validate shape — must be YYYY-MM-DD. Anything else is either a
+          # typo or a hostile payload; we refuse rather than paste it onwards.
+          if ! [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "::error::Invalid run_date format: $RUN_DATE (expected YYYY-MM-DD)"
+            exit 1
+          fi
           echo "Generating daily draft for locale=$APR_LOCALE date=$RUN_DATE"
           python scripts/generate_draft.py --date "$RUN_DATE" --profile daily
 
       - name: Commit draft state
+        env:
+          # Untrusted inputs reach the commit message via env, not interpolation.
+          LOCALE: ${{ matrix.locale }}
+          RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
         run: |
           set -e
           git config user.name "github-actions[bot]"
@@ -162,7 +177,8 @@ jobs:
             exit 1
           fi
           git add -f data/state/ data/sources/ docs/
-          git diff --cached --quiet || git commit -m "draft: daily episode ${{ matrix.locale }} ${{ github.event.inputs.run_date || 'auto' }} [skip ci]"
+          MSG_DATE="${RUN_DATE_INPUT:-auto}"
+          git diff --cached --quiet || git commit -m "draft: daily episode ${LOCALE} ${MSG_DATE} [skip ci]"
           # Retry on push race (another matrix job / approve-release may have pushed).
           for attempt in 1 2 3; do
             if git push; then exit 0; fi

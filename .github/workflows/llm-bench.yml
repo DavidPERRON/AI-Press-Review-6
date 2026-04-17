@@ -60,18 +60,38 @@ jobs:
           NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
           # Intentionally do NOT pass LLM_EDITOR_MODEL / FALLBACK — the script
           # overrides per-model and neutralises the fallback during the run.
+          # Untrusted workflow inputs — consumed via env, never interpolated
+          # straight into the shell script body.
+          RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
+          PROFILE_INPUT: ${{ github.event.inputs.profile }}
+          MODELS_INPUT: ${{ github.event.inputs.models }}
+          REUSE_INPUT: ${{ github.event.inputs.reuse_manifest }}
         run: |
           set -e
-          RUN_DATE=${{ github.event.inputs.run_date }}
+          RUN_DATE="${RUN_DATE_INPUT}"
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
+          if ! [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "::error::Invalid run_date format: $RUN_DATE (expected YYYY-MM-DD)"
+            exit 1
+          fi
+          case "$PROFILE_INPUT" in
+            daily|weekly_recap) PROFILE="$PROFILE_INPUT" ;;
+            *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
+          esac
+          # Models list: must match OpenRouter slug shape (provider/name with
+          # dots, dashes, digits, colons) separated by commas.
+          if ! [[ "$MODELS_INPUT" =~ ^[A-Za-z0-9._/:,-]+$ ]]; then
+            echo "::error::Invalid models list: $MODELS_INPUT"
+            exit 1
+          fi
           REUSE_FLAG=""
-          if [ "${{ github.event.inputs.reuse_manifest }}" != "true" ]; then
+          if [ "$REUSE_INPUT" != "true" ]; then
             REUSE_FLAG="--fresh-manifest"
           fi
           python scripts/bench_llm.py \
             --date "$RUN_DATE" \
-            --profile "${{ github.event.inputs.profile }}" \
-            --models "${{ github.event.inputs.models }}" \
+            --profile "$PROFILE" \
+            --models "$MODELS_INPUT" \
             $REUSE_FLAG
 
       - uses: actions/upload-artifact@v4

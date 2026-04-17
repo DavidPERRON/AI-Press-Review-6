@@ -92,14 +92,23 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
+          # Shell-injection hardening — see daily-generate.yml for the pattern.
+          RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
         run: |
           set -e
-          RUN_DATE=${{ github.event.inputs.run_date }}
+          RUN_DATE="${RUN_DATE_INPUT}"
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
+          if ! [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+            echo "::error::Invalid run_date format: $RUN_DATE (expected YYYY-MM-DD)"
+            exit 1
+          fi
           echo "Generating weekly recap for locale=$APR_LOCALE date=$RUN_DATE"
           python scripts/generate_draft.py --date "$RUN_DATE" --profile weekly_recap
 
       - name: Commit draft state
+        env:
+          LOCALE: ${{ matrix.locale }}
+          RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
         run: |
           set -e
           git config user.name "github-actions[bot]"
@@ -115,7 +124,8 @@ jobs:
             exit 1
           fi
           git add -f data/state/ data/sources/ docs/
-          git diff --cached --quiet || git commit -m "draft: weekly recap ${{ matrix.locale }} ${{ github.event.inputs.run_date || 'auto' }} [skip ci]"
+          MSG_DATE="${RUN_DATE_INPUT:-auto}"
+          git diff --cached --quiet || git commit -m "draft: weekly recap ${LOCALE} ${MSG_DATE} [skip ci]"
           for attempt in 1 2 3; do
             if git push; then exit 0; fi
             echo "push rejected — rebasing (attempt $attempt)"

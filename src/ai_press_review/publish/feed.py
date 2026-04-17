@@ -4,7 +4,7 @@ import os
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 from pathlib import Path
-from xml.sax.saxutils import escape
+from xml.sax.saxutils import escape, quoteattr
 
 import logging
 
@@ -17,6 +17,19 @@ from .episode_brief import generate_episode_brief
 from .sitemap import write_sitemap
 
 logger = logging.getLogger(__name__)
+
+
+def _escape_cdata(text: str) -> str:
+    """Escape the CDATA terminator sequence so user content can't close the block.
+
+    Any occurrence of `]]>` is split into `]]` + `]]><![CDATA[` + `>`, which
+    preserves the visible text while stopping the CDATA section from
+    terminating early. This is the canonical XML-safe trick (see XML 1.0
+    rec §2.7). Without it, a summary containing `]]>` would break every
+    downstream parser.
+    """
+    return (text or "").replace(']]>', ']]]]><![CDATA[>')
+
 
 # Month names for French date formatting ("15 avril 2026" style).
 # strftime('%B') would honor LC_TIME but the runner locale isn't guaranteed,
@@ -121,7 +134,7 @@ def _secondary_category_xml(settings) -> str:
         return ''
     if settings.category_secondary.strip().lower() == 'artificial intelligence':
         return '<itunes:category text="Technology"><itunes:category text="Artificial Intelligence" /></itunes:category>'
-    return f'<itunes:category text="{escape(settings.category_secondary)}" />'
+    return f'<itunes:category text={quoteattr(settings.category_secondary)} />'
 
 
 def _cover_image_url(settings) -> str:
@@ -166,14 +179,17 @@ def _write_feed(episodes: list[dict]) -> None:
         # empty <link></link> — some podcast aggregators (Apple, Spotify)
         # silently drop items with a missing canonical URL.
         item_link = ep.get('brief_url') or settings.site_base_url
+        # CDATA content must be _escape_cdata'd (escape `]]>`), not escape()'d
+        # — escape would emit literal `&lt;` inside what readers expect as raw
+        # HTML, which breaks rendering in podcast players.
         content_encoded = f"<p>{escape(ep['summary'])}</p>"
         items.append(
             f"<item><title>{escape(ep['title'])}</title>"
             f"<description>{escape(ep['summary'])}</description>"
-            f"<content:encoded><![CDATA[{content_encoded}]]></content:encoded>"
+            f"<content:encoded><![CDATA[{_escape_cdata(content_encoded)}]]></content:encoded>"
             f"<guid isPermaLink=\"false\">{escape(ep.get('date', '') + '-' + ep.get('slug', ''))}</guid>"
             f"<pubDate>{pub_date}</pubDate>"
-            f'<enclosure url="{escape(ep["audio_url"])}" length="{ep["audio_bytes"]}" type="audio/mpeg" />'
+            f'<enclosure url={quoteattr(ep["audio_url"])} length="{ep["audio_bytes"]}" type="audio/mpeg" />'
             f"<itunes:summary>{escape(ep['summary'])}</itunes:summary>"
             f"<itunes:duration>{escape(duration_str)}</itunes:duration>"
             f"<link>{escape(item_link)}</link></item>"
@@ -200,7 +216,7 @@ def _write_feed(episodes: list[dict]) -> None:
         '<channel>'
         f"<title>{escape(settings.podcast_title)}</title>"
         f"<link>{escape(settings.site_base_url)}</link>"
-        f'<atom:link href="{escape(settings.rss_feed_url)}" rel="self" type="application/rss+xml" />'
+        f'<atom:link href={quoteattr(settings.rss_feed_url)} rel="self" type="application/rss+xml" />'
         f"<language>{escape(settings.podcast_language)}</language>"
         f"<lastBuildDate>{last_build_date}</lastBuildDate>"
         f"<pubDate>{channel_pub_date}</pubDate>"
@@ -215,8 +231,8 @@ def _write_feed(episodes: list[dict]) -> None:
         f"<itunes:name>{escape(settings.podcast_author)}</itunes:name>"
         f"<itunes:email>{escape(settings.podcast_email)}</itunes:email>"
         '</itunes:owner>'
-        f'<itunes:image href="{escape(_cover_image_url(settings))}" />'
-        f'<itunes:category text="{escape(settings.category_primary)}" />'
+        f'<itunes:image href={quoteattr(_cover_image_url(settings))} />'
+        f'<itunes:category text={quoteattr(settings.category_primary)} />'
         f'{_secondary_category_xml(settings)}'
         f"{''.join(items)}"
         '</channel></rss>'
@@ -276,13 +292,18 @@ def _write_index(episodes: list[dict]) -> None:
         # Fallback chain for title link: brief page -> site homepage.
         # Never link the title to the .mp3 directly (that triggers a download
         # and looks like a blank page in the browser).
-        title_link = escape(ep.get('brief_url') or settings.site_base_url or '/')
-        audio_url = escape(ep.get('audio_url') or '')
+        #
+        # quoteattr emits its own surrounding quotes and escapes &, <, >, ", '
+        # — critical because xml.sax.saxutils.escape alone does NOT escape
+        # quote characters, so href="{escape(url)}" was vulnerable to an
+        # attribute-break if the URL ever contained a quote.
+        title_link = quoteattr(ep.get('brief_url') or settings.site_base_url or '/')
+        audio_url = quoteattr(ep.get('audio_url') or '')
         brief_url_raw = ep.get('brief_url') or ''
-        brief_url = escape(brief_url_raw)
+        brief_url = quoteattr(brief_url_raw)
         # Per-episode sources manifest page. Opens in new tab so the listener
         # doesn't lose their place on the home index.
-        sources_url = escape(f"{sources_base}{pub_dt.strftime('%Y-%m-%d')}.html")
+        sources_url = quoteattr(f"{sources_base}{pub_dt.strftime('%Y-%m-%d')}.html")
 
         # Links row:
         # "Read brief" — opens episode page (narrative + embedded player) in same tab.
@@ -291,24 +312,26 @@ def _write_index(episodes: list[dict]) -> None:
         #                this pointed to the raw mp3, which just downloaded/streamed
         #                the file in the browser with no context.
         # "Sources"    — opens the source manifest page in a new tab.
+        # title_link / audio_url / brief_url / sources_url are already wrapped
+        # in quotes by quoteattr, so `href={value}` (no surrounding quotes).
         links_parts = []
         if brief_url_raw:
-            links_parts.append(f'<a href="{brief_url}">{read_label}</a>')
+            links_parts.append(f'<a href={brief_url}>{read_label}</a>')
             links_parts.append('<span class="dot">·</span>')
-            links_parts.append(f'<a href="{brief_url}" target="_blank" rel="noopener">{audio_label}</a>')
+            links_parts.append(f'<a href={brief_url} target="_blank" rel="noopener">{audio_label}</a>')
         else:
             # Fallback: no brief page yet — link Audio directly to mp3
-            links_parts.append(f'<a href="{audio_url}" target="_blank" rel="noopener">{audio_label}</a>')
+            links_parts.append(f'<a href={audio_url} target="_blank" rel="noopener">{audio_label}</a>')
         links_parts.append('<span class="dot">·</span>')
         links_parts.append(
-            f'<a href="{sources_url}" target="_blank" rel="noopener">{sources_label}</a>'
+            f'<a href={sources_url} target="_blank" rel="noopener">{sources_label}</a>'
         )
         links_html = ''.join(links_parts)
 
         cards.append(
             f'<div class="card">'
             f'<p class="card-meta">{escape(meta)}</p>'
-            f'<h3><a href="{title_link}">{escape(ep["title"])}</a></h3>'
+            f'<h3><a href={title_link}>{escape(ep["title"])}</a></h3>'
             f'<p class="card-summary">{escape(ep["summary"])}</p>'
             f'<p class="card-links">{links_html}</p>'
             f'</div>'
@@ -487,7 +510,7 @@ def build_social_feed(output_path: Path | None = None) -> Path:
             f"<item>"
             f"<title>{escape(ep.get('title', ''))}</title>"
             f"<link>{escape(link)}</link>"
-            f"<description><![CDATA[{post_body}]]></description>"
+            f"<description><![CDATA[{_escape_cdata(post_body)}]]></description>"
             f"<guid isPermaLink=\"false\">{escape(guid)}</guid>"
             f"<pubDate>{pub_date}</pubDate>"
             f"</item>"
@@ -504,7 +527,7 @@ def build_social_feed(output_path: Path | None = None) -> Path:
         '<channel>'
         f"<title>{escape(_SOCIAL_CHANNEL_TITLE)}</title>"
         f"<link>{escape('https://podcast.aequitus.net')}</link>"
-        f'<atom:link href="{escape(self_href)}" rel="self" type="application/rss+xml" />'
+        f'<atom:link href={quoteattr(self_href)} rel="self" type="application/rss+xml" />'
         '<language>mul</language>'
         f"<description>{escape(_SOCIAL_CHANNEL_DESC)}</description>"
         f"<lastBuildDate>{last_build_date}</lastBuildDate>"

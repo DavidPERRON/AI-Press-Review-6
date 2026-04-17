@@ -114,6 +114,29 @@ jobs:
           NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
         run: |
           set -e
+          # ── Pre-flight: validate LLM_API_KEY before burning 8 minutes crawling ──
+          # The key is passed via secret; if it is empty/whitespace the Authorization
+          # header is never sent and every LLM call fails with HTTP 401.
+          python3 - <<'PREFLIGHT'
+          import os, sys
+          key = os.environ.get("LLM_API_KEY", "").strip()
+          placeholders = {"none", "null", "placeholder", "changeme",
+                          "your-api-key", "your_api_key", "xxx", "todo"}
+          if not key:
+              sys.exit(
+                  "ERROR: LLM_API_KEY is empty or whitespace.\n"
+                  "  → Go to repo Settings → Secrets and variables → Actions\n"
+                  "  → Create / update secret LLM_API_KEY with your OpenRouter key"
+              )
+          if key.lower() in placeholders:
+              sys.exit(
+                  f"ERROR: LLM_API_KEY looks like a placeholder ({key!r}).\n"
+                  "  → Replace it with your real OpenRouter key at https://openrouter.ai/keys"
+              )
+          # Print a safe debug hint: first 6 chars + length
+          hint = key[:6] + "..." if len(key) > 6 else key[:3] + "..."
+          print(f"LLM_API_KEY OK — {len(key)} chars, starts with {hint}")
+          PREFLIGHT
           RUN_DATE=${{ github.event.inputs.run_date }}
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
           echo "Generating daily draft for locale=$APR_LOCALE date=$RUN_DATE"

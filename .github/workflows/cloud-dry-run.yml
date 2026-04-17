@@ -84,6 +84,18 @@ jobs:
           RUN_DATE=${{ github.event.inputs.run_date }}
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
           echo "Locale: $APR_LOCALE"
+          # Fail fast if LLM_API_KEY is empty — avoids 8-minute crawl then 401
+          python3 - <<'KEYCHECK'
+          import os, sys
+          key = os.environ.get("LLM_API_KEY", "").strip()
+          if not key or key.lower() in {"none","null","placeholder","changeme","xxx","todo"}:
+              hint = repr(key) if key else "(empty)"
+              sys.exit(
+                  f"ERROR: LLM_API_KEY is {hint} — update secret in repo Settings → "
+                  "Secrets and variables → Actions → LLM_API_KEY"
+              )
+          print(f"LLM_API_KEY OK — {len(key)} chars, starts with {key[:6]}...")
+          KEYCHECK
           # Fail fast with a clear message if no model is resolvable for this
           # locale — avoids the 9-minute-crawl-then-empty-error surprise.
           python -c "

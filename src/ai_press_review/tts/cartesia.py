@@ -60,13 +60,20 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'AWS': 'A. W. S.',
     'GCP': 'G. C. P.',
     'HPE': 'H. P. E.',
+    'SAP': 'S. A. P.',
     # Models / families
     'GPT': 'G. P. T.',
-    'BERT': 'Burt',  # pronounced as a word in EN
+    'BERT': 'Burt',   # pronounced as a word in EN
     'LLM': 'L. L. M.',
     'LLMs': 'L. L. M. s',
+    'SLM': 'S. L. M.',
+    'SLMs': 'S. L. M. s',
     'LLaMA': 'lama',
     'LoRA': 'lora',
+    'MoE': 'M. O. E.',
+    'RAG': 'rag',     # retrieval-augmented generation — pronounced as a word
+    'RLHF': 'R. L. H. F.',
+    'PEFT': 'P. E. F. T.',
     # Compute / infra
     'GPU': 'G. P. U.',
     'GPUs': 'G. P. U. s',
@@ -75,13 +82,20 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'TPU': 'T. P. U.',
     'TPUs': 'T. P. U. s',
     'NPU': 'N. P. U.',
+    'HPC': 'H. P. C.',
     'API': 'A. P. I.',
     'APIs': 'A. P. I. s',
+    'MCP': 'M. C. P.',  # Model Context Protocol
     'SDK': 'S. D. K.',
     'SDKs': 'S. D. K. s',
+    'CLI': 'C. L. I.',
+    'IDE': 'I. D. E.',
+    'CI': 'C. I.',
+    'CD': 'C. D.',
     'SaaS': 'sass',
     'PaaS': 'pass',
     'IaaS': 'eye-ass',
+    'VPN': 'V. P. N.',
     # Org titles / business
     'CEO': 'C. E. O.',
     'CTO': 'C. T. O.',
@@ -91,6 +105,22 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'CISO': 'C. I. S. O.',
     'IPO': 'I. P. O.',
     'M&A': 'M. and A.',
+    'VC': 'V. C.',
+    'PE': 'P. E.',
+    'ROI': 'R. O. I.',
+    'KPI': 'K. P. I.',
+    'KPIs': 'K. P. I. s',
+    # AI-specific acronyms
+    'AI': 'A. I.',       # English: ay-eye
+    'AGI': 'A. G. I.',
+    'ASI': 'A. S. I.',
+    'NLP': 'N. L. P.',
+    'ML': 'M. L.',
+    'TTS': 'T. T. S.',
+    'ASR': 'A. S. R.',
+    'OCR': 'O. C. R.',
+    'CV': 'C. V.',       # computer vision in context
+    'RL': 'R. L.',
     # Geographies / institutions
     'USA': 'U. S. A.',
     'EU': 'E. U.',
@@ -112,7 +142,7 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'URLs': 'U. R. L. s',
     'HTTP': 'H. T. T. P.',
     'HTTPS': 'H. T. T. P. S.',
-    'AI': 'A. I.',  # English: ay-eye
+    'ONNX': 'O. N. N. X.',
     # Brands / camelCase
     'OpenAI': 'Open A. I.',
     'NVIDIA': 'en-vidia',
@@ -123,12 +153,18 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'NeurIPS': 'noor-ips',
     'ICML': 'I. C. M. L.',
     'ACL': 'A. C. L.',
+    'ICLR': 'I. C. L. R.',
+    'FAISS': 'fais',   # Facebook AI Similarity Search — pronounced as a word
 }
 
 _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     # FR-specific letter pronunciations and very common French acronyms.
     'AI': 'A. I.',          # FR keeps the English form when it appears in source quotes
-    'IA': 'I. A.',          # FR for "intelligence artificielle"
+    # IA: deliberately NOT dot-spelled — 'I. A.' caused a stiff, mechanical
+    # two-beat pause ("I [stop] A [stop]") that sounded unnatural in French.
+    # Cartesia's native FR prosody (cartesia_language='fr') pronounces the bare
+    # letters "IA" fluidly as "ee-ah" without any override needed.
+    # 'IA': removed — handled by native French TTS
     'PDG': 'P. D. G.',      # Président-directeur général (= CEO)
     'DG': 'D. G.',          # Directeur général
     'DSI': 'D. S. I.',      # Directeur des systèmes d'information (= CIO)
@@ -194,6 +230,45 @@ def _strip_trailing_pause_tokens(text: str) -> str:
     no whitespace after.
     """
     return _TRAILING_PAUSE_TOKENS.sub('.', text.rstrip())
+
+
+# Matches remaining ALL-CAPS tokens (3-7 letters) that are still in the script
+# after the known-table normalization pass. These are auto-spelled letter-by-letter
+# as a safe default so no acronym reaches the TTS engine un-normalized.
+_UNKNOWN_ACRONYM = re.compile(r'\b[A-Z]{3,7}\b')
+
+# Words that look like acronyms but should never be auto-spelled:
+# NATO/NASA are already in the table; this set catches any extras added directly
+# as proper nouns in scripts (e.g., "SWIFT", "OPEC") that sound fine as words.
+_AUTO_SPELL_SKIP: frozenset[str] = frozenset({
+    'NATO', 'NASA', 'SWIFT', 'OPEC', 'FAISS',  # already in table or pronounced as word
+})
+
+
+def _auto_spell_unknown_acronyms(text: str, locale: str) -> tuple[str, list[str]]:
+    """Dot-spell any ALL-CAPS token (3-7 letters) not yet normalized.
+
+    Run AFTER normalize_pronunciations() so already-handled entries are gone.
+    Returns (rewritten_text, sorted list of tokens that were auto-spelled).
+
+    This "run-time accumulation" approach means a newly coined acronym (e.g. a
+    paper codename, a product launch abbreviation) is automatically spelled out
+    letter-by-letter rather than mispronounced, without requiring a table update.
+    The returned list is logged by synthesize_script() so you can review and
+    optionally promote frequently seen entries to the static table.
+    """
+    found: list[str] = []
+
+    def replace(m: re.Match) -> str:
+        word = m.group(0)
+        if word in _AUTO_SPELL_SKIP:
+            return word
+        spelled = '. '.join(list(word)) + '.'
+        found.append(word)
+        return spelled
+
+    result = _UNKNOWN_ACRONYM.sub(replace, text)
+    return result, sorted(set(found))
 
 
 def _cap_sentence_length(text: str, max_chars: int = 240) -> str:
@@ -292,6 +367,14 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     # letter (LaTeX → "L-A-T-E-X" instead of "Lay-Tech", etc.). Only affects
     # what the TTS hears; script.txt stays canonical.
     spoken_script = normalize_pronunciations(script, settings.locale or 'en')
+    # Auto-spell any ALL-CAPS tokens not covered by the static table.
+    spoken_script, auto_spelled = _auto_spell_unknown_acronyms(spoken_script, settings.locale or 'en')
+    if auto_spelled:
+        logger.info(
+            'TTS auto-spelled %d unknown acronym(s): %s — '
+            'add to _SPELL_OUT_COMMON if pronunciation is wrong',
+            len(auto_spelled), ', '.join(auto_spelled),
+        )
     spoken_script = _normalize_tts_whitespace(spoken_script)
     spoken_script = _strip_trailing_pause_tokens(spoken_script)
     # Cap long sentences so Cartesia never tapers volume on a single utterance.
@@ -343,6 +426,7 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
         'chunk_count': len(chunks),
         'duration_seconds': duration_seconds,
         'bytes': output_path.stat().st_size,
+        'auto_spelled_acronyms': auto_spelled,
     }
 
 

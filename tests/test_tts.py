@@ -146,7 +146,9 @@ def test_normalize_pronunciations_fr_handles_french_acronyms():
     out = normalize_pronunciations(text, 'fr')
     assert 'P. D. G.' in out
     assert 'P. M. E.' in out
-    assert 'I. A.' in out
+    # IA is intentionally NOT dot-spelled in FR — Cartesia's native French TTS
+    # pronounces bare "IA" more fluently than the mechanical "I. A." two-beat form.
+    assert 'IA' in out  # kept as-is for natural French letter pronunciation
     assert 'U. E.' in out
 
 

@@ -87,7 +87,13 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
 
     schema = {
         "episode_title": "string — short, factual, no clickbait",
-        "episode_summary": "string — 2-3 sentence summary of the episode",
+        "episode_summary": (
+            "string — exactly 3 sentences: "
+            "(1) the top news finding of the day with the key actor and outcome; "
+            "(2) one concrete use-case or deployment highlighted in this episode; "
+            "(3) what practitioners or professionals can act on or watch. "
+            "No filler. No 'this episode covers'. Pure facts."
+        ),
         "opening_news_title": "string — the most impactful headline of the day",
         "highlights_label": "1-2 words summarizing the day's theme",
         "tomorrow_pedagogical_concept": "one short sentence fragment, no more than 12 words, announcing a concept to explain tomorrow",

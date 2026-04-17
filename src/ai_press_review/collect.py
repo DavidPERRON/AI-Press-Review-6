@@ -16,6 +16,38 @@ from .utils import fingerprint, iso_now, title_similarity, within_hours, write_j
 
 logger = logging.getLogger(__name__)
 
+# ── Paywall domain filter ────────────────────────────────────────────────────
+# Hard exclusion list: articles from these domains sit behind a paywall.
+# Listeners cannot verify them, and reproducing their content raises
+# copyright / plagiarism risk.  This list is intentionally conservative;
+# add new domains as they are confirmed paywalled.
+_PAYWALL_DOMAINS: frozenset[str] = frozenset({
+    'wsj.com',
+    'ft.com',
+    'economist.com',
+    'nytimes.com',
+    'technologyreview.com',
+    'bloomberg.com',
+    'theinformation.com',
+    'hbr.org',
+    'barrons.com',
+    'marketwatch.com',
+    'seekingalpha.com',
+    'lemonde.fr',
+    'lefigaro.fr',
+    'lesechos.fr',
+    'thetimes.co.uk',
+    'telegraph.co.uk',
+})
+
+
+def _is_paywalled(domain: str) -> bool:
+    """Return True if *domain* (or any parent domain) is on the paywall list."""
+    d = (domain or '').lower()
+    if d.startswith('www.'):
+        d = d[4:]
+    return any(d == pw or d.endswith('.' + pw) for pw in _PAYWALL_DOMAINS)
+
 
 def _previous_episode_memory() -> tuple[set[str], list[str]]:
     history = load_episode_history()
@@ -112,6 +144,10 @@ def _is_editorially_valid(item: SourceItem, settings) -> bool:
     scoring = settings.scoring
 
     if not item.url or not item.title or not item.domain:
+        return False
+
+    # Hard exclusion: never cite sources that are behind a paywall.
+    if _is_paywalled(item.domain):
         return False
 
     if not within_hours(item.published_at, settings.freshness_hours):
@@ -411,41 +447,68 @@ def _manifest_to_markdown(manifest: dict) -> str:
 
 
 def _manifest_to_html(manifest: dict) -> str:
+    # Article excerpts are intentionally omitted from the public source page
+    # to avoid reproducing copyrighted content without explicit permission.
+    # Only title, author (if available), publication, date, and link are shown.
+    # Paywalled sources are silently excluded even from older manifests that
+    # were collected before the domain filter was added to the pipeline.
     cards = []
 
     for src in manifest["sources"]:
-        # Article excerpts are intentionally omitted from the public source page
-        # to avoid reproducing copyrighted content without explicit permission.
-        # Title + domain + date + score + link are sufficient to credit each source.
+        if _is_paywalled(src.get("domain", "")):
+            continue
         pub = src.get("published_at", "")[:10] if src.get("published_at") else ""
-        score = src.get("relevance_score", 0.0)
-        meta_parts = [escape(src['domain'])]
+        author = (src.get("author") or "").strip()
+
+        # Publication name: clean domain, strip www.
+        domain_raw = src.get("domain", "")
+        publication = domain_raw.lstrip("www.") if domain_raw else ""
+
+        # Build the by-line: "by Author · Publication · Date" (omit missing parts)
+        byline_parts: list[str] = []
+        if author:
+            byline_parts.append(f"by {escape(author)}")
+        if publication:
+            byline_parts.append(escape(publication))
         if pub:
-            meta_parts.append(escape(pub))
-        meta_parts.append(f"score {score:.1f}")
-        meta = " · ".join(meta_parts)
+            byline_parts.append(escape(pub))
+        byline = " · ".join(byline_parts)
+
         cards.append(
-            "<article class='card'>"
-            f"<h3>{escape(src['title'])}</h3>"
-            f"<p class='card-meta'>{meta}</p>"
-            f"<p><a href='{escape(src['url'])}' target='_blank' rel='noopener'>Open source ↗</a></p>"
-            "</article>"
+            "<article class='source-card'>"
+            f"<h3><a href='{escape(src['url'])}' target='_blank' rel='noopener'>{escape(src['title'])} ↗</a></h3>"
+            + (f"<p class='source-byline'>{byline}</p>" if byline else "")
+            + "</article>"
         )
+
+    run_date = escape(manifest['run_date'])
 
     return (
         "<!doctype html>"
         "<html lang='en'>"
         "<head>"
         "<meta charset='utf-8'>"
-        f"<title>Sources {escape(manifest['run_date'])}</title>"
+        "<meta name='viewport' content='width=device-width,initial-scale=1'>"
+        f"<title>Sources — {run_date} · AI Press Review</title>"
         "<style>"
-        "body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:900px;margin:2rem auto;line-height:1.5}"
-        ".card{border:1px solid #ddd;border-radius:14px;padding:1rem;margin:1rem 0}"
+        ":root{--bg:#09090b;--surface:#111113;--border:#1f1f23;--text:#e8e8ed;"
+        "--text-secondary:#8a8a9a;--accent:#c8a96e;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}"
+        "body{background:var(--bg);color:var(--text);font-family:var(--font);"
+        "max-width:760px;margin:0 auto;padding:2rem 1.5rem;line-height:1.6}"
+        "h1{font-size:1.4rem;font-weight:600;margin-bottom:.25rem;color:var(--text)}"
+        ".page-meta{font-size:.8rem;color:var(--text-secondary);margin-bottom:2rem}"
+        ".page-meta a{color:var(--accent);text-decoration:none}"
+        ".source-card{border-bottom:1px solid var(--border);padding:1rem 0}"
+        ".source-card:last-child{border-bottom:none}"
+        ".source-card h3{margin:0 0 .3rem;font-size:.95rem;font-weight:500;line-height:1.4}"
+        ".source-card h3 a{color:var(--text);text-decoration:none}"
+        ".source-card h3 a:hover{color:var(--accent)}"
+        ".source-byline{margin:0;font-size:.78rem;color:var(--text-secondary)}"
         "</style>"
         "</head>"
         "<body>"
-        f"<h1>Sources — {escape(manifest['run_date'])} ({escape(manifest.get('profile', 'daily'))})</h1>"
-        f"<p>Generated at {escape(manifest['generated_at'])}</p>"
+        f"<h1>Sources — {run_date}</h1>"
+        f"<p class='page-meta'><a href='/'>← AI Press Review</a> &nbsp;·&nbsp; {len(manifest['sources'])} sources</p>"
         f"{''.join(cards)}"
         "</body>"
         "</html>"

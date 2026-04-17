@@ -45,6 +45,13 @@ def _parse_single_feed(feed_url: str, freshness_hours: int) -> list[SourceItem]:
 
         domain = domain_from_url(source_url) if source_url else domain_from_url(link)
         summary = clean_text(entry.get('summary', ''))[:1200]
+        # Author: prefer entry.author_detail.name, fall back to entry.author
+        author_raw = ''
+        if hasattr(entry, 'author_detail') and entry.author_detail:
+            author_raw = entry.author_detail.get('name', '') or ''
+        if not author_raw:
+            author_raw = entry.get('author', '') or ''
+        author = clean_text(author_raw)[:120] if author_raw else None
 
         items.append(
             SourceItem(
@@ -52,6 +59,7 @@ def _parse_single_feed(feed_url: str, freshness_hours: int) -> list[SourceItem]:
                 title=clean_text(entry.get('title', 'Untitled')),
                 domain=domain,
                 published_at=published,
+                author=author,
                 summary=summary,
                 queries=[feed_url],
                 sections=[],

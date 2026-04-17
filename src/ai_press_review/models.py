@@ -10,6 +10,7 @@ class SourceItem:
     title: str
     domain: str
     published_at: str | None = None
+    author: str | None = None
     summary: str | None = None
     content_text: str | None = None
     relevance_score: float = 0.0

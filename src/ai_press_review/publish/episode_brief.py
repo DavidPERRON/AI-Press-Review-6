@@ -52,10 +52,12 @@ def generate_episode_brief(episode_data: dict) -> str:
         script_html = ''
     html = html.replace('{{EPISODE_SCRIPT_HTML}}', script_html)
 
-    # ── Conditional removal of optional buttons ──
+    # ── Conditional removal of optional platform links in compact listen bar ──
+    # Each link has a preceding separator <span class="listen-sep">·</span>.
+    # Remove both the separator and the link when the URL is empty.
     if not episode_data.get('spotify_url'):
         html = re.sub(
-            r'<!-- SPOTIFY button:.*?-->\s*<a[^>]*>.*?Listen on Spotify.*?</a>',
+            r'<!-- SPOTIFY button:.*?-->\s*<span class="listen-sep">[^<]*</span>\s*<a[^>]*>.*?</a>',
             '',
             html,
             flags=re.DOTALL,
@@ -63,7 +65,7 @@ def generate_episode_brief(episode_data: dict) -> str:
 
     if not episode_data.get('apple_url'):
         html = re.sub(
-            r'<!-- APPLE button:.*?-->\s*<a[^>]*>.*?Apple Podcasts.*?</a>',
+            r'<!-- APPLE button:.*?-->\s*<span class="listen-sep">[^<]*</span>\s*<a[^>]*>.*?</a>',
             '',
             html,
             flags=re.DOTALL,

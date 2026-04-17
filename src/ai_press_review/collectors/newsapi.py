@@ -51,12 +51,15 @@ def fetch_newsapi_articles(api_key: str, query: str, page_size: int = 50, freshn
             continue
         title = clean_text(article.get('title', 'Untitled'))
         summary = clean_text(article.get('description', '') or article.get('content', ''))[:1200]
+        author_raw = clean_text(article.get('author', '') or '')
+        author = author_raw[:120] if author_raw else None
         items.append(
             SourceItem(
                 url=url,
                 title=title,
                 domain=domain_from_url(url),
                 published_at=published,
+                author=author,
                 summary=summary,
                 queries=[query],
                 sections=[],

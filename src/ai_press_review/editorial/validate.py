@@ -10,6 +10,16 @@ REQUIRED_SECTION_KEYS = [
     "education_and_pedagogy",
 ]
 
+# Weekly recap uses a 2-part structure: intro + news/use-cases (Part 1) +
+# what-to-watch (Part 2). Separate key list so validate_section_payload can
+# enforce the right order for each format.
+REQUIRED_SECTION_KEYS_WEEKLY = [
+    "weekly_intro",       # 1-2 §: introduces the 2-part format naturally
+    "weekly_news",        # Part 1: the week's biggest news stories
+    "weekly_use_cases",   # Part 1: concrete deployments this week
+    "weekly_next_week",   # Part 2: what to watch next week (news only)
+]
+
 # Closing sentence appended to every script. Each locale has its own — both EN
 # and FR prompts tell the LLM NOT to include the closing, so the pipeline
 # appends the locale-appropriate text here. Passing an English closing into a
@@ -101,23 +111,28 @@ def build_intro_line(
     return f"{prefix} — {formatted}: {label}."
 
 
-def validate_section_payload(payload: dict) -> None:
+def validate_section_payload(payload: dict, intro_format: str = 'daily') -> None:
+    required_keys = (
+        REQUIRED_SECTION_KEYS_WEEKLY if intro_format == 'weekly' else REQUIRED_SECTION_KEYS
+    )
     sections = payload.get("sections") or {}
-    if list(sections.keys()) != REQUIRED_SECTION_KEYS:
+    if list(sections.keys()) != required_keys:
         raise ValueError("Section order does not match the editorial line")
 
-    for key in REQUIRED_SECTION_KEYS:
+    for key in required_keys:
         paragraphs = sections.get(key)
         if not isinstance(paragraphs, list) or not paragraphs:
             raise ValueError(f"Missing section content for {key}")
         for paragraph in paragraphs:
             _validate_paragraph(paragraph)
 
-    tomorrow_concept = (payload.get("tomorrow_pedagogical_concept") or "").strip()
-    if not tomorrow_concept:
-        raise ValueError("Tomorrow pedagogical concept is missing")
-    if len(tomorrow_concept.split()) > 12:
-        raise ValueError("Tomorrow pedagogical concept is too long")
+    # tomorrow_pedagogical_concept is a daily concept — not applicable to weekly.
+    if intro_format != 'weekly':
+        tomorrow_concept = (payload.get("tomorrow_pedagogical_concept") or "").strip()
+        if not tomorrow_concept:
+            raise ValueError("Tomorrow pedagogical concept is missing")
+        if len(tomorrow_concept.split()) > 12:
+            raise ValueError("Tomorrow pedagogical concept is too long")
 
 
 def assemble_script(
@@ -127,7 +142,7 @@ def assemble_script(
     locale: str | None = None,
 ) -> str:
     """Assemble the final TTS-ready script with locale-aware intro & closing."""
-    validate_section_payload(payload)
+    validate_section_payload(payload, intro_format=intro_format)
     loc = _normalize_locale(locale)
 
     intro = build_intro_line(
@@ -135,8 +150,11 @@ def assemble_script(
     )
     sections = payload["sections"]
 
+    section_keys = (
+        REQUIRED_SECTION_KEYS_WEEKLY if intro_format == 'weekly' else REQUIRED_SECTION_KEYS
+    )
     ordered_paragraphs = [intro]
-    for key in REQUIRED_SECTION_KEYS:
+    for key in section_keys:
         ordered_paragraphs.extend([p.strip() for p in sections[key] if p.strip()])
 
     ordered_paragraphs.append(CLOSING_SENTENCES_BY_LOCALE[loc])

@@ -85,71 +85,162 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
 
     target_words = max(settings.min_script_words + 400, 2500)
 
-    schema = {
-        "episode_title": "string — short, factual, no clickbait",
-        "episode_summary": (
-            "string — exactly 3 sentences: "
-            "(1) the top news finding of the day with the key actor and outcome; "
-            "(2) one concrete use-case or deployment highlighted in this episode; "
-            "(3) what practitioners or professionals can act on or watch. "
-            "No filler. No 'this episode covers'. Pure facts."
-        ),
-        "opening_news_title": "string — the most impactful headline of the day",
-        "highlights_label": "1-2 words summarizing the day's theme",
-        "tomorrow_pedagogical_concept": "one short sentence fragment, no more than 12 words, announcing a concept to explain tomorrow",
-        "sections": {
-            # IMPORTANT: variable paragraph count per section. One paragraph = ONE
-            # distinct story/fact. Do NOT pad. Do NOT write synthesis paragraphs
-            # that recombine facts already stated elsewhere. If a fact only fills
-            # 60 words cleanly, write 60 and move on — never stretch to hit a quota.
-            "ai_news": [
-                "6 to 10 paragraphs of 80-110 words each. ONE story per paragraph: launch, partnership, funding, or major corporate move. Lead with the biggest of the day. No transitions between stories inside this section — end one, start the next.",
-            ],
-            "use_cases_and_deployments": [
-                "5 to 8 paragraphs of 80-110 words each. ONE deployment per paragraph — who deployed what, on what scale, with what measurable result. Prefer numbers (revenue %, latency ms, users, cost delta).",
-            ],
-            "tools_and_practice": [
-                "4 to 6 paragraphs of 80-110 words each. ONE tool or technique per paragraph — what a practitioner can now do that they couldn't yesterday, with the name of the tool and the concrete capability.",
-            ],
-            "weak_signals_and_trends": [
-                "2 to 3 paragraphs of 80-110 words each. ONE concrete signal per paragraph, each grounded in AT LEAST TWO distinct cited facts (different companies, different domains, or different papers). NEVER a synthesis of what you already said in the previous sections. If you have no genuine signal, write only two paragraphs and keep them tight.",
-            ],
-            "research_and_breakthroughs": [
-                "3 to 5 paragraphs of 80-110 words each. ONE result per paragraph — paper title or lab, what was achieved (one concrete number or comparison), and why it matters in one sentence. No method explanation unless a finance exec could not otherwise understand the result.",
-            ],
-            "education_and_pedagogy": [
-                "exactly 2 paragraphs of 80-110 words each. Paragraph 1: one concept introduced with a concrete analogy. Paragraph 2: why the concept matters in practice today — tie to ONE of the stories covered earlier. No third paragraph.",
-            ],
-        },
-    }
-
-    length_instructions = (
-        f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
-        f"Target {target_words} words. The range you are aiming for is 16 to 22 spoken minutes. "
-        "Each paragraph MUST be between 80 and 110 words. Never shorter than 80. Never longer than 110. "
-        "Each paragraph covers ONE distinct story or fact — one story per paragraph, never merge two into one, never split one across two. "
-        "If a story only carries 60 words of actual substance, DO NOT stretch it. Pick another story from the manifest instead. "
-        "Produce between 22 and 35 paragraphs total across all sections, distributed per the schema ranges. "
-        "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
-    )
-
-    if force_length:
-        length_instructions += (
-            "CRITICAL: Your previous output was TOO SHORT. You MUST cover MORE distinct stories "
-            "from the source manifest. Do NOT lengthen existing paragraphs. Do NOT add synthesis "
-            "paragraphs. Add NEW paragraphs each covering a NEW story with its own facts: company "
-            "name, number, product name, or result. Dig deeper into the manifest — there are 120 "
-            "sources there, use them. "
-        )
-
-    # Weekly recap context
     if settings.profile_name == 'weekly_recap':
-        length_instructions += (
-            "This is a WEEKLY RECAP covering the entire past week. "
-            "Prioritize the biggest stories that generated buzz. "
-            "Also highlight important news that may have been missed in daily episodes. "
-            "Sources with higher relevance_score are more likely to be unused — prioritize them. "
-            "Use natural time references when covering stories from different days. "
+        schema = {
+            "episode_title": "string — short weekly recap title, factual, no clickbait",
+            "episode_summary": (
+                "string — exactly 3 sentences: "
+                "(1) the biggest story of the week with key actor and outcome; "
+                "(2) the most concrete deployment or use case of the week; "
+                "(3) one concrete item to watch in the coming week. "
+                "No filler. Pure facts."
+            ),
+            "highlights_label": "1-2 words summarizing the week's dominant theme",
+            "sections": {
+                # PART 1 (~15 min): intro + this week's news + this week's use cases
+                # PART 2 (~5 min): what to watch next week (news only)
+                # One paragraph = ONE distinct story/fact. No padding.
+                "weekly_intro": [
+                    "1 to 2 paragraphs of 60-90 words each. "
+                    "In natural spoken language, introduce this episode's 2-part structure: "
+                    "first, you will cover the AI news and deployments from this Friday (~15 minutes); "
+                    "then, a focused look at what to watch in the coming week (~5 minutes). "
+                    "Do NOT say 'Part 1' or 'Part 2'. Use natural language: 'We start with...', 'We close with...'. "
+                    "Reference Friday explicitly ('this Friday', 'hier' in FR). "
+                    "No filler. End on a hook that makes the listener lean in.",
+                ],
+                "weekly_news": [
+                    "8 to 14 paragraphs of 80-110 words each. "
+                    "IMPORTANT: use ONLY sources published on the most recent Friday in the manifest — "
+                    "do NOT include news from earlier in the week. "
+                    "Friday's biggest AI news stories in order of impact. ONE story per paragraph — launch, funding, "
+                    "partnership, or major corporate move. Lead with the most impactful Friday story. "
+                    "You may use 'yesterday' or 'this Friday' as time references. "
+                    "No transitions between stories — end one paragraph, start the next with the next story's subject. "
+                    "No signpost needed: the intro already set the context.",
+                ],
+                "weekly_use_cases": [
+                    "5 to 8 paragraphs of 80-110 words each. "
+                    "IMPORTANT: use ONLY deployment news published on the most recent Friday in the manifest. "
+                    "Friday's most concrete AI deployments. ONE deployment per paragraph. "
+                    "Prefer numbers: revenue %, latency ms, users, cost delta, headcount. "
+                    "First paragraph opens with a short signpost — "
+                    "FR: 'Côté déploiements.' | EN: 'On deployments.' "
+                    "— then a period, then the first fact.",
+                ],
+                "weekly_next_week": [
+                    "3 to 5 paragraphs of 80-110 words each. "
+                    "What to watch in the coming week: announced product launches, expected regulatory decisions, "
+                    "earnings calls, policy hearings, or research papers about to drop. "
+                    "ONE item per paragraph. News and announced facts only — no tools, no research, no pedagogy. "
+                    "First paragraph opens with a short signpost — "
+                    "FR: 'Ce qu'il faut surveiller la semaine prochaine.' | EN: 'Looking ahead to next week.' "
+                    "— then a period, then the first item. "
+                    "Ground each item in a concrete signal from this week's news.",
+                ],
+            },
+        }
+    else:
+        schema = {
+            "episode_title": "string — short, factual, no clickbait",
+            "episode_summary": (
+                "string — exactly 3 sentences: "
+                "(1) the top news finding of the day with the key actor and outcome; "
+                "(2) one concrete use-case or deployment highlighted in this episode; "
+                "(3) what practitioners or professionals can act on or watch. "
+                "No filler. No 'this episode covers'. Pure facts."
+            ),
+            "opening_news_title": "string — the most impactful headline of the day",
+            "highlights_label": "1-2 words summarizing the day's theme",
+            "tomorrow_pedagogical_concept": "one short sentence fragment, no more than 12 words, announcing a concept to explain tomorrow",
+            "sections": {
+                # IMPORTANT: variable paragraph count per section. One paragraph = ONE
+                # distinct story/fact. Do NOT pad. Do NOT write synthesis paragraphs
+                # that recombine facts already stated elsewhere. If a fact only fills
+                # 60 words cleanly, write 60 and move on — never stretch to hit a quota.
+                "ai_news": [
+                    "6 to 10 paragraphs of 80-110 words each. ONE story per paragraph: launch, partnership, funding, or major corporate move. Lead with the biggest of the day. No transitions between stories inside this section — end one, start the next.",
+                ],
+                "use_cases_and_deployments": [
+                    "5 to 8 paragraphs of 80-110 words each. ONE deployment per paragraph — who deployed what, on what scale, with what measurable result. Prefer numbers (revenue %, latency ms, users, cost delta).",
+                ],
+                "tools_and_practice": [
+                    "4 to 6 paragraphs of 80-110 words each. ONE tool or technique per paragraph — what a practitioner can now do that they couldn't yesterday, with the name of the tool and the concrete capability.",
+                ],
+                "weak_signals_and_trends": [
+                    "2 to 3 paragraphs of 80-110 words each. ONE concrete signal per paragraph, each grounded in AT LEAST TWO distinct cited facts (different companies, different domains, or different papers). NEVER a synthesis of what you already said in the previous sections. If you have no genuine signal, write only two paragraphs and keep them tight.",
+                ],
+                "research_and_breakthroughs": [
+                    "3 to 5 paragraphs of 80-110 words each. ONE result per paragraph — paper title or lab, what was achieved (one concrete number or comparison), and why it matters in one sentence. No method explanation unless a finance exec could not otherwise understand the result.",
+                ],
+                "education_and_pedagogy": [
+                    "exactly 2 paragraphs of 80-110 words each. Paragraph 1: one concept introduced with a concrete analogy. Paragraph 2: why the concept matters in practice today — tie to ONE of the stories covered earlier. No third paragraph.",
+                ],
+            },
+        }
+
+    if settings.profile_name == 'weekly_recap':
+        length_instructions = (
+            f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
+            f"Target {target_words} words (~20 spoken minutes total: ~15 min for Friday news + deployments, ~5 min for next week). "
+            "weekly_intro paragraphs: 60-90 words each. All other paragraphs: 80-110 words each. Never shorter, never longer. "
+            "One paragraph = one distinct story or fact. Never merge two stories. Never split one story across two paragraphs. "
+            "weekly_news and weekly_use_cases MUST use ONLY sources from Friday — ignore earlier days. "
+            "weekly_next_week may reference any recent signals to ground its forward-looking items. "
+            "Sources with higher relevance_score should be prioritized. "
+            f"Produce between 18 and 30 paragraphs total across all sections. "
+            "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
+        )
+        if force_length:
+            length_instructions += (
+                "CRITICAL: Your previous output was TOO SHORT. Cover MORE distinct stories from the manifest. "
+                "Do NOT lengthen existing paragraphs. Add NEW paragraphs each covering a NEW story with its own "
+                "facts: company name, number, product name, or result. Dig deeper into the manifest. "
+            )
+    else:
+        length_instructions = (
+            f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
+            f"Target {target_words} words. The range you are aiming for is 16 to 22 spoken minutes. "
+            "Each paragraph MUST be between 80 and 110 words. Never shorter than 80. Never longer than 110. "
+            "Each paragraph covers ONE distinct story or fact — one story per paragraph, never merge two into one, never split one across two. "
+            "If a story only carries 60 words of actual substance, DO NOT stretch it. Pick another story from the manifest instead. "
+            "Produce between 22 and 35 paragraphs total across all sections, distributed per the schema ranges. "
+            "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
+        )
+        if force_length:
+            length_instructions += (
+                "CRITICAL: Your previous output was TOO SHORT. You MUST cover MORE distinct stories "
+                "from the source manifest. Do NOT lengthen existing paragraphs. Do NOT add synthesis "
+                "paragraphs. Add NEW paragraphs each covering a NEW story with its own facts: company "
+                "name, number, product name, or result. Dig deeper into the manifest — there are 120 "
+                "sources there, use them. "
+            )
+
+    if settings.profile_name == 'weekly_recap':
+        signpost_instructions = (
+            "SECTION SIGNPOSTS (weekly only): "
+            "weekly_news has NO signpost — the intro sets the context. "
+            "weekly_use_cases first paragraph opens with: FR 'Côté déploiements cette semaine.' | EN 'This week's deployments.' "
+            "weekly_next_week first paragraph opens with: FR 'Ce qu'il faut surveiller la semaine prochaine.' | EN 'Looking ahead to next week.' "
+            "Never use pontificating bridges — no 'Pulling back from the week's news...' or equivalent. "
+        )
+        recycling_rule = (
+            "NO RECYCLING: A fact, company, product, or study may be cited in ONE paragraph only across "
+            "the entire script. No education section in weekly — callbacks are never allowed. "
+        )
+    else:
+        signpost_instructions = (
+            "PILLAR SIGNPOSTS: The first paragraph of every pillar after AI News opens with a SHORT factual "
+            "signpost of 3 to 6 words, then a period, then the first fact. Examples (FR): 'Côté déploiements.' / "
+            "'Côté outils.' / 'Un signal à surveiller.' / 'Côté recherche.' / 'Un concept à retenir.' (EN: "
+            "'Turning to deployments.' / 'On tools.' / 'One signal to watch.' / 'On the research front.' / "
+            "'One concept to keep.'). Never speak the pillar name itself. Never use pontificating bridges "
+            "like 'Pulling back from the day's news, a few patterns are worth flagging' — this is dead air. "
+        )
+        recycling_rule = (
+            "NO RECYCLING: A fact, company, product, or study may be cited in ONE paragraph only across "
+            "the entire script. Callbacks by single-name reference ('as Meta showed') are allowed only "
+            "in the education section, never elsewhere. "
         )
 
     payload = {
@@ -177,23 +268,16 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "the best model stays unused'), forward-looking platitudes ('this opens the way to', 'it's a "
             "key step', 'ça ouvre la voie à'), synthesis paragraphs that recombine earlier facts without "
             "adding new ones, and restating a story in a later section. "
-            "NO RECYCLING: A fact, company, product, or study may be cited in ONE paragraph only across "
-            "the entire script. Callbacks by single-name reference ('as Meta showed') are allowed only "
-            "in the education section, never elsewhere. "
+            + recycling_rule +
             "NUMBERS: Round aggressively ('about 1.2 billion' not '1,247,000,000'). Skip model version "
             "numbers ('the latest GPT' not 'GPT-4o-2024-05-13'). "
             "ACRONYMS: Write them in their canonical uppercase form (TSMC, GPT, API, LLM, IA, PDG, IPO, USA). "
             "The TTS layer normalizes them to the correct spoken form, so DO NOT pre-spell them out, DO NOT "
             "expand them mid-sentence ('graphics processing units — or GPUs'), and DO NOT add letter-by-letter "
             "hints. Just write the acronym once in its canonical form and reuse it. "
-            "FLOW: Within a pillar, no transitions between stories — end one paragraph, start the next with "
+            "FLOW: Within a section, no transitions between stories — end one paragraph, start the next with "
             "the next story's subject. "
-            "PILLAR SIGNPOSTS: The first paragraph of every pillar after AI News opens with a SHORT factual "
-            "signpost of 3 to 6 words, then a period, then the first fact. Examples (FR): 'Côté déploiements.' / "
-            "'Côté outils.' / 'Un signal à surveiller.' / 'Côté recherche.' / 'Un concept à retenir.' (EN: "
-            "'Turning to deployments.' / 'On tools.' / 'One signal to watch.' / 'On the research front.' / "
-            "'One concept to keep.'). Never speak the pillar name itself. Never use pontificating bridges "
-            "like 'Pulling back from the day's news, a few patterns are worth flagging' — this is dead air. "
+            + signpost_instructions +
             "RHYTHM: Vary sentence length. Short sentences are allowed and encouraged. Use dashes and commas "
             "for pauses. Use contractions (it's, they've, ca, c'est, on). Write for the ear, not the eye. "
             "Prioritize sources with the highest relevance_score. Cross-reference multiple sources on the "

@@ -58,6 +58,11 @@ tts:
   speed: 0.9
   volume: 1.0
   emotion: "serious"
+  # Render mode — overridable per locale:
+  #   'websocket': one continue=true session for the full script (EN default)
+  #   'chunks':    independent session per chunk + crossfade (FR default)
+  mode: "websocket"
+  chunk_crossfade_ms: 80
 
 # ── PUBLICATION ───────────────────────────────────────────────
 retention_days: 10
@@ -106,6 +111,7 @@ locales:
     cartesia_language: "en"
     tts_speed: 0.9
     tts_emotion: "serious"
+    tts_mode: "websocket"    # one continue=true session: seamless prosody, validated up to ~15 min
 
   fr:
     enabled: true
@@ -141,13 +147,17 @@ locales:
     # TTS locale-specific overrides
     voice_id_env: "CARTESIA_VOICE_ID_FR"   # nouveau secret GitHub
     cartesia_language: "fr"                # CRITIQUE pour prosodie francaise
-    # Speed 0.82 (2026-04-15): 0.92 etait trop rapide sur un episode complet
-    # — pauses entre phrases comprimees, sensation de lecture precipitee.
-    # FR etant intrinsequement plus rapide que EN en WPM, on compense avec
-    # une vitesse plus basse que EN (0.9). Normalisation pause_hints_fr
-    # ajoute des virgules de respiration apres les points (voir tts/cartesia.py).
-    tts_speed: 0.82
+    # Speed 0.88: raised from 0.82 to match the EN feel more closely —
+    # same "serious" journalistic tone, pauses driven by sentence-length capping
+    # (_cap_sentence_length in tts/cartesia.py) rather than manual speed reduction.
+    tts_speed: 0.88
     tts_emotion: "serious"
+    # chunks mode: each paragraph block is synthesized as a self-contained
+    # WebSocket session, then segments are crossfaded together. Eliminates the
+    # noise + volume degradation observed in FR after ~2 min of a single long
+    # continue=true session. 80 ms crossfade is inaudible at normal volume.
+    tts_mode: "chunks"
+    tts_chunk_crossfade_ms: 80
 
 # ──────────────────────────────────────────────────────────────
 #  PROFILS EDITORIAUX

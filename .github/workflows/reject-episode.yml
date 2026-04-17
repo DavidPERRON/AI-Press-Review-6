@@ -1,10 +1,21 @@
 name: Reject Episode
 
-# Declenchement manuel pour rejeter le draft en attente
-# Supprime l'audio de R2 et marque le draft comme rejete
+# Declenchement manuel pour rejeter le draft en attente pour une locale donnee.
+# Supprime l'audio de R2 et marque le draft comme rejete dans
+# data/state/pending_draft_{locale}.json (ou pending_draft.json pour l'ancienne
+# locale unique EN sans suffixe).
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      locale:
+        description: Locale whose pending draft to reject (en or fr)
+        required: true
+        default: 'en'
+        type: choice
+        options:
+          - en
+          - fr
 
 permissions:
   contents: write
@@ -35,6 +46,10 @@ jobs:
 
       - name: Reject pending draft
         env:
+          # APR_LOCALE drives _locale_suffix() in state.py so the script
+          # reads/writes pending_draft_en.json or pending_draft_fr.json
+          # (not the legacy suffix-less file).
+          APR_LOCALE: ${{ inputs.locale }}
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
           R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}

@@ -22,7 +22,12 @@ jobs:
     timeout-minutes: 45
 
     steps:
+      # Always pin to main so the dry run exercises the exact same code that
+      # daily-generate.yml will run — not a feature branch or stale fork.
+      # This also ensures no WIP code accidentally reaches TTS or the LLM.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -44,6 +49,10 @@ jobs:
       - name: Install Chromium for crawler
         run: python -m playwright install chromium
 
+      # cloud_dry_run.py calls run_pipeline(upload_audio=False, publish_feed=False).
+      # It writes only to output/ (artifact below). It does NOT write to
+      # data/state/ and does NOT create a pending_draft — so nothing can be
+      # accidentally released after a dry run.
       - name: Run cloud dry run
         env:
           # Locale selector — drives settings._apply_locale() so the per-locale

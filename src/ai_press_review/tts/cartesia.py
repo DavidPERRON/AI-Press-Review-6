@@ -129,14 +129,19 @@ _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     # FR-specific letter pronunciations and very common French acronyms.
     'AI': 'A. I.',          # FR keeps the English form when it appears in source quotes
     'IA': 'I. A.',          # FR for "intelligence artificielle"
-    'PDG': 'P. D. G.',
-    'DG': 'D. G.',
+    'PDG': 'P. D. G.',      # Président-directeur général (= CEO)
+    'DG': 'D. G.',          # Directeur général
+    'DSI': 'D. S. I.',      # Directeur des systèmes d'information (= CIO)
     'PME': 'P. M. E.',
     'PMI': 'P. M. I.',
     'TPE': 'T. P. E.',
     'UE': 'U. E.',
-    'OTAN': 'OTAN',
+    'OTAN': 'OTAN',         # Already pronounced as a word
     'ONU': 'O. N. U.',
+    'RGPD': 'R. G. P. D.', # Règlement général sur la protection des données (= GDPR)
+    'PIB': 'P. I. B.',      # Produit intérieur brut (= GDP)
+    'GAFAM': 'GAFAM',       # Pronounced as a word in French
+    'R&D': 'R. et D.',      # Recherche et développement
     # FR letter names differ from EN — explicit dotted spacing keeps both safe
     # because Cartesia respects the locale flag for individual letter prosody.
     'BERT': 'Beurt',
@@ -169,6 +174,7 @@ _MULTISPACE = re.compile(r'[ \t]{2,}')
 _SPACE_BEFORE_NEWLINE = re.compile(r'[ \t]+\n')
 _TRIPLE_NEWLINE = re.compile(r'\n{3,}')
 _TRAILING_PAUSE_TOKENS = re.compile(r'(?:\.{2,}|\s+\.\s*)+$')
+_LONG_SENT_BREAK = re.compile(r'[,;]\s')
 
 
 def _normalize_tts_whitespace(text: str) -> str:
@@ -188,6 +194,38 @@ def _strip_trailing_pause_tokens(text: str) -> str:
     no whitespace after.
     """
     return _TRAILING_PAUSE_TOKENS.sub('.', text.rstrip())
+
+
+def _cap_sentence_length(text: str, max_chars: int = 240) -> str:
+    """Break lines longer than max_chars at a natural comma/semicolon pause point.
+
+    Cartesia's prosody model tapers off on very long unbroken utterances — the
+    engine predicts a breath point that never arrives and compensates by winding
+    down the voice volume ('running out of air' effect). Breaking any sentence
+    longer than ~240 chars at its first suitable comma (≥ 80 chars in) gives the
+    engine a clear sentence boundary with full volume on the second half too.
+
+    Each split inserts a '\\n' so split_script() sees two separate paragraphs and
+    can place them in independent chunks when they overflow. Applied to TTS input
+    only; script.txt stays canonical.
+    """
+    return '\n'.join(_shorten_line(line, max_chars) for line in text.split('\n'))
+
+
+def _shorten_line(line: str, max_chars: int) -> str:
+    """Recursively shorten one line until every segment is ≤ max_chars."""
+    if len(line) <= max_chars:
+        return line
+    # Find the first comma/semicolon between positions [80, max_chars]
+    for m in _LONG_SENT_BREAK.finditer(line):
+        pos = m.start()
+        if 80 <= pos <= max_chars:
+            first = line[:pos].rstrip() + '.'
+            rest = line[pos + 1:].lstrip()
+            if rest:
+                rest = rest[0].upper() + rest[1:]
+            return first + '\n' + _shorten_line(rest, max_chars)
+    return line  # no suitable split point — leave as is
 
 
 def normalize_pronunciations(text: str, locale: str) -> str:
@@ -256,6 +294,9 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     spoken_script = normalize_pronunciations(script, settings.locale or 'en')
     spoken_script = _normalize_tts_whitespace(spoken_script)
     spoken_script = _strip_trailing_pause_tokens(spoken_script)
+    # Cap long sentences so Cartesia never tapers volume on a single utterance.
+    # Splits any line > 240 chars at its first usable comma/semicolon ≥ 80 chars in.
+    spoken_script = _cap_sentence_length(spoken_script)
     chunks = split_script(spoken_script, max_chars=settings.tts_chunk_max_chars)
     if not chunks:
         raise ValueError('Script is empty — cannot synthesize audio')
@@ -266,7 +307,18 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     start = time.monotonic()
-    raw_pcm = asyncio.run(_render_script_websocket(chunks, settings))
+    tts_mode = getattr(settings, 'tts_mode', 'websocket')
+    if tts_mode == 'chunks':
+        # FR mode: each chunk is a fully independent WebSocket session whose
+        # audio is then crossfaded with its neighbours. Avoids the quality
+        # degradation (noise, volume drop) that accumulates in a single long
+        # WebSocket continue=true session beyond ~2 minutes.
+        crossfade_ms = getattr(settings, 'tts_chunk_crossfade_ms', 80)
+        raw_pcm = asyncio.run(_render_chunks_crossfade(chunks, settings, crossfade_ms))
+    else:
+        # EN mode: one WebSocket session with continue=true — seamless prosody
+        # across the full script, validated on sessions up to ~15 min.
+        raw_pcm = asyncio.run(_render_script_websocket(chunks, settings))
     elapsed = time.monotonic() - start
 
     # Wrap raw PCM (int16 little-endian mono) into a WAV, then transcode to MP3.
@@ -311,6 +363,108 @@ async def _render_script_websocket(chunks: list[str], settings, max_retries: int
             if attempt < max_retries:
                 await asyncio.sleep(min(2 ** attempt, 15))
     raise ValueError(f'Cartesia websocket failed after {max_retries} attempts: {last_exc}')
+
+
+async def _render_single_chunk_ws(chunk: str, settings, context_id: str | None = None) -> bytes:
+    """Render one text chunk as a complete, self-contained WebSocket session.
+
+    Unlike _render_session (which sends all chunks under one context_id with
+    continue=True), each call here opens a fresh connection for a single chunk
+    and closes it after the 'done' frame. This prevents the audio-quality
+    degradation that accumulates over long WebSocket sessions (noise, volume
+    creep) at the cost of a per-chunk connection overhead (~0.2 s each).
+    """
+    ctx = context_id or f'aipr-{uuid.uuid4()}'
+    url = (
+        f'{CARTESIA_WEBSOCKET_URL}'
+        f'?cartesia_version={settings.cartesia_version}'
+        f'&api_key={settings.cartesia_api_key}'
+    )
+    async with websockets.connect(url, max_size=None) as ws:
+        request = {
+            'model_id': settings.cartesia_model_id,
+            'transcript': chunk,
+            'voice': {'mode': 'id', 'id': settings.cartesia_voice_id},
+            'language': settings.cartesia_language,
+            'context_id': ctx,
+            'continue': False,   # standalone — no continuation expected
+            'output_format': {
+                'container': 'raw',
+                'encoding': 'pcm_s16le',
+                'sample_rate': WEBSOCKET_SAMPLE_RATE,
+            },
+            'generation_config': {
+                'volume': settings.cartesia_volume,
+                'speed': settings.cartesia_speed,
+                'emotion': settings.cartesia_emotion,
+            },
+        }
+        await ws.send(json.dumps(request))
+
+        audio = bytearray()
+        while True:
+            msg = json.loads(await ws.recv())
+            if msg.get('context_id') != ctx:
+                continue
+            mtype = msg.get('type')
+            if mtype == 'chunk':
+                audio.extend(base64.b64decode(msg['data']))
+            elif mtype == 'done':
+                break
+            elif mtype == 'error':
+                raise RuntimeError(f'Cartesia error: {msg}')
+    return bytes(audio)
+
+
+async def _render_chunks_crossfade(
+    chunks: list[str], settings, crossfade_ms: int = 80, max_retries: int = 3,
+) -> bytes:
+    """Render each chunk independently, then crossfade all segments together.
+
+    Used for FR (tts_mode='chunks') where a single long WebSocket session
+    accumulates noise and volume instability after ~2 minutes. Independent
+    connections keep each segment at full quality; the crossfade_ms overlap
+    smooths the boundary so the join is inaudible at normal listening volume.
+
+    Retry logic: each chunk backs off exponentially and retries up to
+    max_retries times before raising, so a transient WebSocket hiccup on
+    chunk 8/20 doesn't abort the whole episode.
+    """
+    from pydub import AudioSegment
+
+    segments: list[AudioSegment] = []
+    for i, chunk in enumerate(chunks, 1):
+        last_exc: Exception | None = None
+        for attempt in range(1, max_retries + 1):
+            try:
+                pcm = await _render_single_chunk_ws(chunk, settings)
+                break
+            except Exception as exc:
+                last_exc = exc
+                logger.warning(
+                    'Chunk %d/%d attempt %d/%d failed: %s',
+                    i, len(chunks), attempt, max_retries, exc,
+                )
+                if attempt < max_retries:
+                    await asyncio.sleep(min(2 ** attempt, 10))
+        else:
+            raise ValueError(
+                f'Cartesia chunk {i}/{len(chunks)} failed after {max_retries} attempts: {last_exc}'
+            )
+        seg = AudioSegment(
+            data=pcm,
+            sample_width=2,                # pcm_s16le = 2 bytes per sample
+            frame_rate=WEBSOCKET_SAMPLE_RATE,
+            channels=1,
+        )
+        segments.append(seg)
+        logger.debug('Chunk %d/%d: %.1fs audio', i, len(chunks), len(seg) / 1000)
+
+    # Merge with a short crossfade to hide any micro-silence at boundaries.
+    combined = segments[0]
+    for seg in segments[1:]:
+        combined = combined.append(seg, crossfade=crossfade_ms)
+    return combined.raw_data
 
 
 async def _render_session(chunks: list[str], settings) -> bytes:

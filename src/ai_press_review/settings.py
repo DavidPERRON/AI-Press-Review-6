@@ -72,6 +72,11 @@ class Settings:
     llm_temperature: float
     tts_chunk_max_chars: int
     tts_bitrate: str
+    # Render mode: 'websocket' = one continue=true session (EN default);
+    # 'chunks' = independent session per chunk + crossfade (FR default, avoids
+    # WebSocket quality degradation on long FR episodes).
+    tts_mode: str
+    tts_chunk_crossfade_ms: int
     cartesia_api_key: str
     cartesia_voice_id: str
     cartesia_model_id: str
@@ -245,6 +250,10 @@ def _apply_locale(settings: Settings, config: dict[str, Any], locale: str) -> No
         settings.cartesia_speed = float(loc['tts_speed'])
     if 'tts_emotion' in loc:
         settings.cartesia_emotion = str(loc['tts_emotion'])
+    if 'tts_mode' in loc:
+        settings.tts_mode = str(loc['tts_mode'])
+    if 'tts_chunk_crossfade_ms' in loc:
+        settings.tts_chunk_crossfade_ms = int(loc['tts_chunk_crossfade_ms'])
 
     # Voice ID: read from the env var named in voice_id_env
     voice_env = str(loc.get('voice_id_env', 'CARTESIA_VOICE_ID'))
@@ -386,6 +395,8 @@ def load_settings(
         llm_temperature=_safe_float(str(_yaml_get(config, 'llm.temperature', 0.2)), 0.2, 'llm.temperature'),
         tts_chunk_max_chars=int(_yaml_get(config, 'tts.chunk_max_chars', 1800)),
         tts_bitrate=str(_yaml_get(config, 'tts.bitrate', '96k')),
+        tts_mode=str(_yaml_get(config, 'tts.mode', 'websocket')),
+        tts_chunk_crossfade_ms=int(_yaml_get(config, 'tts.chunk_crossfade_ms', 80)),
         cartesia_api_key=_env('CARTESIA_API_KEY'),
         cartesia_voice_id=_env('CARTESIA_VOICE_ID'),
         cartesia_model_id=_env('CARTESIA_MODEL_ID', 'sonic-3'),

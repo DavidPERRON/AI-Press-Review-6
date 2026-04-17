@@ -43,23 +43,14 @@ def generate_episode_brief(episode_data: dict) -> str:
     for placeholder, value in replacements.items():
         html = html.replace(placeholder, value)
 
-    # ── Key claims ──
-    claims_html = []
-    for claim in episode_data.get('key_claims', []):
-        claims_html.append(
-            f'<div class="claim-item">'
-            f'<p class="claim-text">{escape(claim["claim"])}</p>'
-            f'</div>'
-        )
-    html = html.replace(
-        '<!-- Rendered by pipeline from KEY_CLAIMS JSON array -->\n'
-        '        <!-- Example item structure (repeat for each claim):\n'
-        '        <div class="claim-item">\n'
-        '          <p class="claim-text">OpenAI released o4 with a reported 40% improvement on math benchmarks.</p>\n'
-        '        </div>\n'
-        '        -->',
-        '\n'.join(claims_html),
-    )
+    # ── Episode script (full transcript) ──
+    raw_script = episode_data.get('script', '').strip()
+    if raw_script:
+        paras = [p.strip() for p in raw_script.split('\n\n') if p.strip()]
+        script_html = '\n'.join(f'<p class="script-para">{escape(p)}</p>' for p in paras)
+    else:
+        script_html = ''
+    html = html.replace('{{EPISODE_SCRIPT_HTML}}', script_html)
 
     # ── Conditional removal of optional buttons ──
     if not episode_data.get('spotify_url'):

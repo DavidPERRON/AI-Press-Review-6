@@ -142,7 +142,9 @@ def assemble_script(
         ordered_paragraphs.extend([p.strip() for p in sections[key] if p.strip()])
 
     ordered_paragraphs.append(CLOSING_SENTENCES_BY_LOCALE[loc])
-    ordered_paragraphs.append(payload["tomorrow_pedagogical_concept"].strip().rstrip(".") + ".")
+    # tomorrow_pedagogical_concept is kept in the JSON payload (for the episode
+    # brief page) but is NOT appended to the TTS script — the teaser was removed
+    # from the audio by user request.
 
     script = "\n\n".join(ordered_paragraphs)
     validate_final_script(script, intro_format, locale=loc)
@@ -167,14 +169,8 @@ def validate_final_script(
         raise ValueError("Script has too few paragraphs")
 
     expected_closing = CLOSING_SENTENCES_BY_LOCALE[loc]
-    if lines[-2] != expected_closing:
+    if lines[-1] != expected_closing:
         raise ValueError(f"Closing sentence does not exactly match the required line for locale={loc!r}")
-
-    tomorrow_line = lines[-1].lower()
-    # Guard against the LLM leaking the closing prefix into the tomorrow line.
-    forbidden_prefixes = ("this podcast has", "ce podcast a un coût")
-    if any(tomorrow_line.startswith(p) for p in forbidden_prefixes):
-        raise ValueError("Tomorrow pedagogical concept appears to be a duplicate of the closing sentence")
 
     for line in lines:
         _validate_paragraph(line)

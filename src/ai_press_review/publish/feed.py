@@ -55,6 +55,7 @@ def _build_brief_data(episode: PublishedEpisode, source_titles: list[str], episo
         'spotify_url': '',
         'apple_url': '',
         'summary': episode.summary,
+        'script': episode.script,
         'prev_url': '',
         'prev_title': '',
         'next_url': '',
@@ -285,7 +286,7 @@ def _write_index(episodes: list[dict]) -> None:
 
         # Links row: always show Listen. Append "Read brief" when a brief page
         # exists, then "Sources" pointing to the per-episode manifest.
-        links_parts = [f'<a href="{audio_url}">{listen_label}</a>']
+        links_parts = [f'<a href="{audio_url}" target="_blank" rel="noopener">{listen_label}</a>']
         if brief_url_raw:
             links_parts.append('<span class="dot">·</span>')
             links_parts.append(f'<a href="{brief_url}">{brief_label}</a>')

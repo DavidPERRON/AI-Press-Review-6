@@ -40,6 +40,7 @@ class PublishedEpisode:
     audio_bytes: int
     duration_seconds: int | None
     published_at: str
+    script: str = ''   # Full TTS script — empty for episodes pre-dating this field
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

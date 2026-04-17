@@ -5,17 +5,17 @@
   Filename convention: episodes/YYYY-MM-DD.html  (e.g. episodes/2026-04-12.html)
 
   Variables to replace (double-brace = pipeline substitution):
-  OpenAI&#x27;s Math AI: Solves Erdős problem in hours — Apr 15       — e.g. "OpenAI o4 vs. Gemini 2.5: who wins enterprise — Apr 12"
+  Cybersecurity AI: OpenAI vs. Anthropic&#x27;s new arms race — Apr 15       — e.g. "OpenAI o4 vs. Gemini 2.5: who wins enterprise — Apr 12"
   2026-04-15    — e.g. "2026-04-12"
   April 15, 2026  — e.g. "April 12, 2026"
-  2      — e.g. "12"
-  17:45    — e.g. "16 min"
-  https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-04-15-openai-s-math-ai-solves-erdos-problem-in-hours-apr-15.mp3   — full URL to mp3
+  4      — e.g. "12"
+  13:51    — e.g. "16 min"
+  https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-04-15-cybersecurity-ai-openai-vs-anthropic-s-new-arms-race-apr-15.mp3   — full URL to mp3
    — Spotify episode deep link (optional, leave "" to hide)
      — Apple Podcasts episode deep link (optional, leave "" to hide)
   {{KEY_CLAIMS}}          — JSON array, see structure below
   {{SOURCE_MANIFEST}}     — JSON array, see structure below
-  OpenAI&#x27;s latest model reportedly solves a longstanding mathematics problem, signaling a new era for AI in science. Meanwhile, Meta deploys a new inference scaling system called SOLARIS, boosting ad revenue by nearly 0.7%. In hardware, China&#x27;s Dishan Technology reports a 2nm AI chip design breakthrough.     — 2-3 sentence plain-text summary (200 words max)
+  OpenAI and Anthropic are escalating competition with new AI models specialized for cybersecurity, drawing reactions from top banks. This comes as the 2026 Stanford AI Index confirms rapid model improvement and rising costs, and new agentic tools from Google and Anthropic signal a shift toward automated, domain-specific AI.     — 2-3 sentence plain-text summary (200 words max)
       — relative URL of previous episode (or "" to hide nav)
     — short title of previous episode
       — relative URL of next episode (or "" to hide nav)
@@ -31,77 +31,65 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>OpenAI&#x27;s Math AI: Solves Erdős problem in hours — Apr 15 — AI Press Review</title>
-  <meta name="description" content="OpenAI&#x27;s latest model reportedly solves a longstanding mathematics problem, signaling a new era for AI in science. Meanwhile, Meta deploys a new inference scaling system called SOLARIS, boosting ad revenue by nearly 0.7%. In hardware, China&#x27;s Dishan Technology reports a 2nm AI chip design breakthrough." />
+  <title>Cybersecurity AI: OpenAI vs. Anthropic&#x27;s new arms race — Apr 15 — AI Press Review</title>
+  <meta name="description" content="OpenAI and Anthropic are escalating competition with new AI models specialized for cybersecurity, drawing reactions from top banks. This comes as the 2026 Stanford AI Index confirms rapid model improvement and rising costs, and new agentic tools from Google and Anthropic signal a shift toward automated, domain-specific AI." />
   <link rel="canonical" href="https://podcast.aequitus.net/episodes/2026-04-15.html" />
   <link rel="alternate" type="application/rss+xml" title="AI Press Review" href="https://podcast.aequitus.net/podcast-feed.xml" />
 
-  <meta property="og:title" content="OpenAI&#x27;s Math AI: Solves Erdős problem in hours — Apr 15" />
-  <meta property="og:description" content="OpenAI&#x27;s latest model reportedly solves a longstanding mathematics problem, signaling a new era for AI in science. Meanwhile, Meta deploys a new inference scaling system called SOLARIS, boosting ad revenue by nearly 0.7%. In hardware, China&#x27;s Dishan Technology reports a 2nm AI chip design breakthrough." />
+  <meta property="og:title" content="Cybersecurity AI: OpenAI vs. Anthropic&#x27;s new arms race — Apr 15" />
+  <meta property="og:description" content="OpenAI and Anthropic are escalating competition with new AI models specialized for cybersecurity, drawing reactions from top banks. This comes as the 2026 Stanford AI Index confirms rapid model improvement and rising costs, and new agentic tools from Google and Anthropic signal a shift toward automated, domain-specific AI." />
   <meta property="og:url" content="https://podcast.aequitus.net/episodes/2026-04-15.html" />
   <meta property="og:type" content="article" />
   <meta property="og:image" content="https://podcast.aequitus.net/assets/og-banner.png" /><meta property='og:image:width' content='1200'><meta property='og:image:height' content='627'>
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="OpenAI&#x27;s Math AI: Solves Erdős problem in hours — Apr 15" />
-  <meta name="twitter:description" content="OpenAI&#x27;s latest model reportedly solves a longstanding mathematics problem, signaling a new era for AI in science. Meanwhile, Meta deploys a new inference scaling system called SOLARIS, boosting ad revenue by nearly 0.7%. In hardware, China&#x27;s Dishan Technology reports a 2nm AI chip design breakthrough." />
+  <meta name="twitter:title" content="Cybersecurity AI: OpenAI vs. Anthropic&#x27;s new arms race — Apr 15" />
+  <meta name="twitter:description" content="OpenAI and Anthropic are escalating competition with new AI models specialized for cybersecurity, drawing reactions from top banks. This comes as the 2026 Stanford AI Index confirms rapid model improvement and rising costs, and new agentic tools from Google and Anthropic signal a shift toward automated, domain-specific AI." />
 
-  <!-- JSON-LD: PodcastEpisode (enriched — url, episodeNumber, image, inLanguage, valid ISO 8601 duration). -->
+  <!-- JSON-LD: PodcastEpisode (enriched — url, episodeNumber, image,
+       inLanguage, and valid ISO 8601 duration, so Google's Rich Results
+       validator accepts it). -->
   <script type="application/ld+json">
   {
-  "@context": "https://schema.org",
-  "@type": "PodcastEpisode",
-  "url": "https://podcast.aequitus.net/episodes/2026-04-15.html",
-  "name": "OpenAI&#x27;s Math AI: Solves Erdős problem in hours — Apr 15",
-  "episodeNumber": "3",
-  "datePublished": "2026-04-15",
-  "description": "OpenAI&#x27;s latest model reportedly solves a longstanding mathematics problem, signaling a new era for AI in science. Meanwhile, Meta deploys a new inference scaling system called SOLARIS, boosting ad revenue by nearly 0.7%. In hardware, China&#x27;s Dishan Technology reports a 2nm AI chip design breakthrough.",
-  "duration": "PT17M45S",
-  "inLanguage": "en",
-  "image": "https://podcast.aequitus.net/assets/podcast-cover.png",
-  "associatedMedia": {
-    "@type": "MediaObject",
-    "contentUrl": "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-04-15-openai-s-math-ai-solves-erdos-problem-in-hours-apr-15.mp3",
-    "encodingFormat": "audio/mpeg"
-  },
-  "partOfSeries": {
-    "@type": "PodcastSeries",
-    "name": "AI Press Review",
-    "url": "https://podcast.aequitus.net",
-    "webFeed": "https://podcast.aequitus.net/podcast-feed.xml"
-  },
-  "author": {
-    "@type": "Person",
-    "name": "David Perron"
+    "@context": "https://schema.org",
+    "@type": "PodcastEpisode",
+    "url": "https://podcast.aequitus.net/episodes/2026-04-15.html",
+    "name": "Cybersecurity AI: OpenAI vs. Anthropic&#x27;s new arms race — Apr 15",
+    "episodeNumber": "4",
+    "datePublished": "2026-04-15",
+    "description": "OpenAI and Anthropic are escalating competition with new AI models specialized for cybersecurity, drawing reactions from top banks. This comes as the 2026 Stanford AI Index confirms rapid model improvement and rising costs, and new agentic tools from Google and Anthropic signal a shift toward automated, domain-specific AI.",
+    "duration": "PT13M51S",
+    "inLanguage": "en",
+    "image": "https://podcast.aequitus.net/assets/podcast-cover.png",
+    "associatedMedia": {
+      "@type": "MediaObject",
+      "contentUrl": "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-04-15-cybersecurity-ai-openai-vs-anthropic-s-new-arms-race-apr-15.mp3",
+      "encodingFormat": "audio/mpeg"
+    },
+    "partOfSeries": {
+      "@type": "PodcastSeries",
+      "name": "AI Press Review",
+      "url": "https://podcast.aequitus.net",
+      "webFeed": "https://podcast.aequitus.net/podcast-feed.xml"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "David Perron"
+    }
   }
-}
   </script>
 
-  <!-- JSON-LD: BreadcrumbList — renders "Home > Episodes > …" in SERPs. -->
+  <!-- JSON-LD: BreadcrumbList — lets Google render a "Home > Episodes > …"
+       trail in SERPs and signals site hierarchy for crawl prioritization. -->
   <script type="application/ld+json">
   {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://podcast.aequitus.net/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Episodes",
-      "item": "https://podcast.aequitus.net/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "OpenAI&#x27;s Math AI: Solves Erdős problem in hours — Apr 15",
-      "item": "https://podcast.aequitus.net/episodes/2026-04-15.html"
-    }
-  ]
-}
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://podcast.aequitus.net/"},
+      {"@type": "ListItem", "position": 2, "name": "Episodes", "item": "https://podcast.aequitus.net/"},
+      {"@type": "ListItem", "position": 3, "name": "Cybersecurity AI: OpenAI vs. Anthropic&#x27;s new arms race — Apr 15", "item": "https://podcast.aequitus.net/episodes/2026-04-15.html"}
+    ]
+  }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -208,16 +196,19 @@
     /* MAIN CONTENT */
     main { max-width: 760px; margin: 0 auto; padding: 0 2rem 5rem; }
 
-    /* KEY CLAIMS */
+    /* TRANSCRIPT */
     .section { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
     .section:last-child { border-bottom: none; }
     .section-label {
       font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--accent-dim); margin-bottom: 1.25rem;
+      color: var(--accent-dim); margin-bottom: 1.75rem;
     }
-    .claims-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-    .claim-item { background: var(--surface); padding: 1.1rem 1.5rem; }
-    .claim-text { font-size: 0.9rem; color: var(--text); margin-bottom: 0.4rem; line-height: 1.5; }
+    .script-body { max-width: 680px; }
+    .script-para {
+      font-size: 1.05rem; line-height: 1.85; color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .script-para:last-child { margin-bottom: 0; }
 
     /* EPISODE NAV */
     .episode-nav {
@@ -254,7 +245,7 @@
       </a>
       <nav>
         <a href="/">Home</a>
-        <a href="/podcast-feed.xml">RSS</a>
+        <a href="/subscribe.html">Subscribe</a>
       </nav>
     </div>
   </header>
@@ -264,22 +255,22 @@
       <div class="episode-meta">
         <span>April 15, 2026</span>
         <span class="episode-meta-sep">·</span>
-        <span>Episode 2</span>
+        <span>Episode 4</span>
         <span class="episode-meta-sep">·</span>
-        <span>17:45</span>
+        <span>13:51</span>
       </div>
-      <h1 class="episode-title">OpenAI&#x27;s Math AI: Solves Erdős problem in hours — Apr 15</h1>
-      <p class="episode-summary">OpenAI&#x27;s latest model reportedly solves a longstanding mathematics problem, signaling a new era for AI in science. Meanwhile, Meta deploys a new inference scaling system called SOLARIS, boosting ad revenue by nearly 0.7%. In hardware, China&#x27;s Dishan Technology reports a 2nm AI chip design breakthrough.</p>
+      <h1 class="episode-title">Cybersecurity AI: OpenAI vs. Anthropic&#x27;s new arms race — Apr 15</h1>
+      <p class="episode-summary">OpenAI and Anthropic are escalating competition with new AI models specialized for cybersecurity, drawing reactions from top banks. This comes as the 2026 Stanford AI Index confirms rapid model improvement and rising costs, and new agentic tools from Google and Anthropic signal a shift toward automated, domain-specific AI.</p>
       <div class="listen-row">
         
         
-        <a href="https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-04-15-openai-s-math-ai-solves-erdos-problem-in-hours-apr-15.mp3" class="btn-secondary" download>
+        <a href="https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-04-15-cybersecurity-ai-openai-vs-anthropic-s-new-arms-race-apr-15.mp3" class="btn-secondary" download>
           Download MP3
         </a>
       </div>
       <!-- Native player as fallback -->
       <audio controls preload="none">
-        <source src="https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-04-15-openai-s-math-ai-solves-erdos-problem-in-hours-apr-15.mp3" type="audio/mpeg" />
+        <source src="https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-04-15-cybersecurity-ai-openai-vs-anthropic-s-new-arms-race-apr-15.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
     </div>
@@ -287,10 +278,10 @@
 
   <main>
 
-    <!-- KEY CLAIMS -->
+    <!-- EPISODE TRANSCRIPT -->
     <section class="section">
-      <p class="section-label">Key claims</p>
-      <div class="claims-list" id="key-claims">
+      <p class="section-label">Episode transcript</p>
+      <div class="script-body">
         
       </div>
     </section>
@@ -307,7 +298,7 @@
   <footer>
     <p>
       AI Press Review · <a href="/">Home</a> ·
-      <a href="/podcast-feed.xml">RSS</a> ·
+      <a href="/subscribe.html">Subscribe</a> ·
       <a href="mailto:david.perron@aequitus.net">Contact</a>
     </p>
   </footer>

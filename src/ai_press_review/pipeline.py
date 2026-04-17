@@ -180,6 +180,7 @@ def generate_draft(
         'source_titles': titles,
         'source_count': manifest['source_count'],
         'script_words': len(draft.script.split()),
+        'script': draft.script,
         'generated_at': iso_now(),
         'status': 'pending',
     }
@@ -210,6 +211,7 @@ def release_pending_draft() -> dict:
         audio_bytes=draft_data['audio_bytes'],
         duration_seconds=draft_data['duration_seconds'],
         published_at=iso_now(),
+        script=draft_data.get('script', ''),
     )
 
     publish_episode(

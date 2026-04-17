@@ -73,7 +73,9 @@ def test_assemble_script_produces_valid_output():
     script = assemble_script("2026-04-12", _make_payload())
     assert script.startswith("Your Daily AI Press Review")
     assert CLOSING_SENTENCE in script
-    assert script.endswith(".")
+    # Script ends with the closing sentence — tomorrow_concept is kept in JSON
+    # payload but is no longer appended to the TTS script.
+    assert script.endswith(CLOSING_SENTENCE)
 
 
 def test_validate_final_script_rejects_empty():
@@ -85,7 +87,7 @@ def test_validate_final_script_rejects_bullets():
     intro = "Your Daily AI Press Review — April 12, 2026: Test."
     body = "Some paragraph content here for the body."
     bullet = "- This is a bullet point"
-    script = f"{intro}\n\n{body}\n\n{bullet}\n\n{CLOSING_SENTENCE}\n\nWhat is inference."
+    script = f"{intro}\n\n{body}\n\n{bullet}\n\n{CLOSING_SENTENCE}"
     with pytest.raises(ValueError, match="Bullet points"):
         validate_final_script(script)
 
@@ -94,7 +96,7 @@ def test_validate_final_script_rejects_headings():
     intro = "Your Daily AI Press Review — April 12, 2026: Test."
     body = "Some paragraph content here for the body."
     heading = "This ends with a colon:"
-    script = f"{intro}\n\n{body}\n\n{heading}\n\n{CLOSING_SENTENCE}\n\nWhat is inference."
+    script = f"{intro}\n\n{body}\n\n{heading}\n\n{CLOSING_SENTENCE}"
     with pytest.raises(ValueError, match="Heading-style"):
         validate_final_script(script)
 
@@ -135,7 +137,7 @@ def test_validate_final_script_rejects_en_closing_in_fr_script():
     body = "Un paragraphe de contenu narratif en français."
     script = (
         f"{intro}\n\n{body}\n\n{body}\n\n"
-        f"{CLOSING_SENTENCES_BY_LOCALE['en']}\n\nQu'est-ce que l'inférence."
+        f"{CLOSING_SENTENCES_BY_LOCALE['en']}"
     )
     with pytest.raises(ValueError, match="Closing sentence"):
         validate_final_script(script, locale='fr')

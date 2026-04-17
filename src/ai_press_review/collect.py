@@ -414,13 +414,21 @@ def _manifest_to_html(manifest: dict) -> str:
     cards = []
 
     for src in manifest["sources"]:
-        summary = (src.get("summary") or src.get("content_text") or "")[:900]
+        # Article excerpts are intentionally omitted from the public source page
+        # to avoid reproducing copyrighted content without explicit permission.
+        # Title + domain + date + score + link are sufficient to credit each source.
+        pub = src.get("published_at", "")[:10] if src.get("published_at") else ""
+        score = src.get("relevance_score", 0.0)
+        meta_parts = [escape(src['domain'])]
+        if pub:
+            meta_parts.append(escape(pub))
+        meta_parts.append(f"score {score:.1f}")
+        meta = " · ".join(meta_parts)
         cards.append(
             "<article class='card'>"
             f"<h3>{escape(src['title'])}</h3>"
-            f"<p><strong>{escape(src['domain'])}</strong></p>"
-            f"<p>{escape(summary)}</p>"
-            f"<p><a href='{escape(src['url'])}'>Open source</a></p>"
+            f"<p class='card-meta'>{meta}</p>"
+            f"<p><a href='{escape(src['url'])}' target='_blank' rel='noopener'>Open source ↗</a></p>"
             "</article>"
         )
 

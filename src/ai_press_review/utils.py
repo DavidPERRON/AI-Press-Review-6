@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import tempfile
 from datetime import datetime, timedelta, timezone
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -108,6 +110,46 @@ def read_json(path: Path, default):
         return default
 
 
-def write_json(path: Path, data) -> None:
+def atomic_write_text(path: Path, content: str, encoding: str = 'utf-8') -> None:
+    """Write *content* to *path* atomically (tmp + rename).
+
+    Why this exists: `path.write_text(...)` truncates the file and then
+    streams the bytes — so if the process is killed, the runner hits a
+    disk-full condition, or the FS journal flushes at a bad moment, the
+    file ends up truncated or half-written. The 2026-04-16 release blocker
+    was a related class of bug: committed conflict markers inside the JSON
+    state files (`data/state/used_sources_{en,fr}.json`) crashed the next
+    day's pipeline on JSONDecodeError. Atomic writes, combined with the
+    quarantine-on-decode-error in `read_json`, shrink the blast radius of
+    any future partial-write or corrupt-state incident.
+
+    Mechanics:
+    - tempfile.mkstemp in the SAME directory as *path* so the eventual
+      os.replace is guaranteed to be on the same filesystem (cross-FS
+      rename is not atomic on POSIX).
+    - fsync() the temp file before rename so the new bytes are durable
+      before the directory entry flips.
+    - On any exception, best-effort cleanup of the temp file so we don't
+      leak half-written `.tmp` sidecars.
+    """
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding='utf-8')
+    fd, tmp_path_str = tempfile.mkstemp(
+        prefix=path.name + '.', suffix='.tmp', dir=str(path.parent),
+    )
+    try:
+        with os.fdopen(fd, 'w', encoding=encoding, newline='') as fh:
+            fh.write(content)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp_path_str, path)
+    except BaseException:
+        # Best-effort cleanup; never mask the original exception.
+        try:
+            os.unlink(tmp_path_str)
+        except OSError:
+            pass
+        raise
+
+
+def write_json(path: Path, data) -> None:
+    atomic_write_text(path, json.dumps(data, indent=2, ensure_ascii=False))

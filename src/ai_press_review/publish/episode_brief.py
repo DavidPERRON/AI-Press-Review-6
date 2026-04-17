@@ -5,6 +5,7 @@ from html import escape
 from pathlib import Path
 
 from ..settings import load_settings
+from ..utils import atomic_write_text
 
 TEMPLATE_PATH = Path(__file__).parent / 'templates' / 'episode-brief-template.html'
 
@@ -102,6 +103,6 @@ def generate_episode_brief(episode_data: dict) -> str:
     episodes_dir = settings.docs_output_dir / 'episodes'
     episodes_dir.mkdir(parents=True, exist_ok=True)
     out_path = episodes_dir / f'{date_iso}.html'
-    out_path.write_text(html, encoding='utf-8')
+    atomic_write_text(out_path, html)
 
     return f'episodes/{date_iso}.html'

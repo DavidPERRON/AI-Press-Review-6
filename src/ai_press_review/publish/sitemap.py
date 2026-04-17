@@ -21,6 +21,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ..settings import DOCS_DIR, load_settings
+from ..utils import atomic_write_text
 
 logger = logging.getLogger(__name__)
 
@@ -148,6 +149,6 @@ def write_sitemap(docs_root: Path | None = None) -> Path:
         '</urlset>'
     )
     out_path = docs_root / 'sitemap.xml'
-    out_path.write_text(body, encoding='utf-8')
+    atomic_write_text(out_path, body)
     logger.info("Sitemap written: %s (%d URLs)", out_path, len(urls))
     return out_path

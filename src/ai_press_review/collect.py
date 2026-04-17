@@ -13,7 +13,14 @@ from .extractors.web_content import batch_extract
 from .models import SourceItem
 from .settings import DATA_DIR, ScoringConfig, load_settings, load_sources_config
 from .state import load_episode_history, load_used_sources, save_used_sources
-from .utils import fingerprint, iso_now, title_similarity, within_hours, write_json
+from .utils import (
+    atomic_write_text,
+    fingerprint,
+    iso_now,
+    title_similarity,
+    within_hours,
+    write_json,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -419,10 +426,13 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     md = _manifest_to_markdown(manifest)
     html = _manifest_to_html(manifest)
 
-    (data_sources_dir / f"{run_date}.md").write_text(md, encoding="utf-8")
-    (data_sources_dir / "latest.md").write_text(md, encoding="utf-8")
-    (docs_sources_dir / f"{run_date}.html").write_text(html, encoding="utf-8")
-    (docs_sources_dir / "latest.html").write_text(html, encoding="utf-8")
+    # atomic_write_text to guard against partial writes — the manifest
+    # pages are served from GitHub Pages, so half-written HTML would be
+    # visible to visitors and crawlers between the truncate and the flush.
+    atomic_write_text(data_sources_dir / f"{run_date}.md", md)
+    atomic_write_text(data_sources_dir / "latest.md", md)
+    atomic_write_text(docs_sources_dir / f"{run_date}.html", html)
+    atomic_write_text(docs_sources_dir / "latest.html", html)
 
     return manifest
 

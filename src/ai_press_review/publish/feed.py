@@ -12,7 +12,7 @@ from ..models import PublishedEpisode
 from ..settings import DATA_DIR, DOCS_DIR, load_settings
 from ..state import load_episode_history, save_episode_history
 from ..storage.r2 import delete_key
-from ..utils import read_json, utcnow
+from ..utils import atomic_write_text, read_json, utcnow
 from .episode_brief import generate_episode_brief
 from .sitemap import write_sitemap
 
@@ -238,9 +238,13 @@ def _write_feed(episodes: list[dict]) -> None:
         '</channel></rss>'
     )
     # Write to locale-specific docs dir (docs/ for EN, docs/fr/ for FR).
+    # atomic_write_text because podcast-feed.xml is read by Apple, Spotify
+    # and Google crawlers — a truncated feed from a killed run would drop
+    # episodes from directories and could re-queue the WHOLE back-catalog
+    # for re-ingestion once the next run repairs it.
     out_dir = settings.docs_output_dir
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / 'podcast-feed.xml').write_text(xml, encoding='utf-8')
+    atomic_write_text(out_dir / 'podcast-feed.xml', xml)
 
 
 _TEMPLATES_DIR = Path(__file__).parent / 'templates'
@@ -361,7 +365,7 @@ def _write_index(episodes: list[dict]) -> None:
     html = template.replace('{{EPISODES}}', episodes_html)
     out_dir = settings.docs_output_dir
     out_dir.mkdir(parents=True, exist_ok=True)
-    (out_dir / 'index.html').write_text(html, encoding='utf-8')
+    atomic_write_text(out_dir / 'index.html', html)
 
 
 # ── SOCIAL FEED (LinkedIn) ───────────────────────────────────────────────
@@ -536,7 +540,6 @@ def build_social_feed(output_path: Path | None = None) -> Path:
         f"{''.join(items)}"
         '</channel></rss>'
     )
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(xml, encoding='utf-8')
+    atomic_write_text(output_path, xml)
     logger.info('Social feed written: %s (%d items)', output_path, len(items))
     return output_path

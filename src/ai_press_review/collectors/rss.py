@@ -92,16 +92,59 @@ def _resolve_redirect(url: str) -> str:
 
 
 def _resolve_google_news_urls(items: list[SourceItem]) -> list[SourceItem]:
-    """Resolve Google News redirect URLs to actual article URLs in parallel."""
+    """Resolve Google News redirect URLs to actual article URLs in parallel.
+
+    Google News changed its RSS link handling — the simple HEAD -> 3xx
+    redirect flow this function was written against no longer works:
+    requests come back as 200 with a JS-rendered page and `resp.url` stays
+    at news.google.com. On the 2026-04-18 weekly run this function
+    "resolved" 0 of 272 items — ~9 seconds of pure waste per run.
+
+    Mitigation: probe the first few items synchronously. If none resolve,
+    assume the redirect flow is currently broken and skip the remainder.
+    If at least one probe works (Google changed their mind, or a new item
+    type uses the old flow), fall through to the full parallel resolve for
+    the rest. Worst case today: 3 fast HEAD requests (~0.1s). Best case
+    when Google behaves: same total cost as before, the probes just cost
+    sequential instead of parallel wallclock time.
+    """
     google_items = [i for i in items if 'news.google.com' in i.url]
     if not google_items:
         return items
 
-    logger.info("Resolving %d Google News redirect URLs...", len(google_items))
-    resolved = 0
+    PROBE_COUNT = 3
+    probes = google_items[:PROBE_COUNT]
+    probe_resolved = 0
+    for item in probes:
+        real_url = _resolve_redirect(item.url)
+        if real_url != item.url and 'news.google.com' not in real_url:
+            item.url = normalize_url(real_url)
+            item.domain = domain_from_url(real_url)
+            probe_resolved += 1
+
+    if probe_resolved == 0:
+        # Probe says Google News redirect resolution is currently broken.
+        # Log once (INFO level, not WARNING — this is expected, not novel)
+        # and keep the items with their news.google.com URL + real-domain
+        # attribution from the RSS <source> tag. Downstream Phase 3 skips
+        # content extraction for these (see collect.py:_should_extract) so
+        # they survive the pipeline on RSS summary alone.
+        logger.info(
+            "Google News redirect resolution disabled for this run "
+            "(%d/%d probe(s) resolved). Items retained with RSS summary.",
+            probe_resolved, len(probes),
+        )
+        return items
+
+    rest = google_items[PROBE_COUNT:]
+    logger.info(
+        "Resolving %d more Google News redirect URLs (probe: %d/%d resolved)...",
+        len(rest), probe_resolved, len(probes),
+    )
+    resolved = probe_resolved
 
     with ThreadPoolExecutor(max_workers=MAX_RESOLVE_WORKERS) as executor:
-        futures = {executor.submit(_resolve_redirect, item.url): item for item in google_items}
+        futures = {executor.submit(_resolve_redirect, item.url): item for item in rest}
         for future in as_completed(futures):
             item = futures[future]
             try:

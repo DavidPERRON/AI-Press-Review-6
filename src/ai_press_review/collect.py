@@ -354,13 +354,39 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     logger.info("Phase 2: %d candidates after pre-filtering", len(candidates))
 
     # Phase 3: Batch extract content in parallel for items missing content
-    # Skip extraction for arxiv.org — RSS abstract is sufficient for scoring
-    SKIP_EXTRACT_DOMAINS = {"arxiv.org", "news.google.com"}
-    urls_to_extract = [
-        item.url for item in candidates
-        if not (item.content_text or "").strip()
-        and not any(d in (item.domain or "") for d in SKIP_EXTRACT_DOMAINS)
-    ]
+    # Skip extraction for:
+    #   - arxiv.org        — RSS abstract is sufficient for scoring
+    #   - news.google.com  — the URL is a Google News redirect wrapper that
+    #                        either 404s our crawler or serves a JS-only page;
+    #                        trafilatura discards it and we're just wasting a
+    #                        Chromium tab. The 2026-04-18 weekly run spent
+    #                        several minutes pointlessly crawling 272 of these.
+    # Two lists, two reasons:
+    #   SKIP_EXTRACT_DOMAINS: matched against item.domain (the real publisher,
+    #       captured from the RSS <source> tag for Google News items).
+    #   SKIP_EXTRACT_URL_HOSTS: matched against the URL's own hostname. This
+    #       is the one that catches news.google.com — the Google News item's
+    #       domain field has already been rewritten to the real publisher
+    #       (e.g. "techcrunch.com"), so a domain-only check misses it. The
+    #       earlier version used domain only, and "news.google.com" never
+    #       matched a Google News item's rewritten domain — silent waste.
+    SKIP_EXTRACT_DOMAINS = {"arxiv.org"}
+    SKIP_EXTRACT_URL_HOSTS = {"news.google.com"}
+
+    def _should_extract(item: SourceItem) -> bool:
+        if (item.content_text or "").strip():
+            return False
+        if any(d in (item.domain or "") for d in SKIP_EXTRACT_DOMAINS):
+            return False
+        try:
+            host = urlparse(item.url or "").hostname or ""
+        except ValueError:
+            return False
+        if host in SKIP_EXTRACT_URL_HOSTS:
+            return False
+        return True
+
+    urls_to_extract = [item.url for item in candidates if _should_extract(item)]
     if urls_to_extract:
         logger.info("Phase 3: Extracting content for %d articles...", len(urls_to_extract))
         extracted_map = batch_extract(urls_to_extract)

@@ -5,12 +5,14 @@ import logging
 import random
 import re
 import time
+from pathlib import Path
 from typing import Any
 
 import requests
 
 from ..models import EpisodeDraft
 from ..settings import load_settings
+from ..utils import atomic_write_text, write_json
 from .validate import assemble_script
 
 logger = logging.getLogger(__name__)
@@ -780,4 +782,54 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
             best_overall_wc, best_overall_model, settings.min_script_words,
             " | ".join(errors),
         )
+        # Preserve the best-effort draft on disk so an operator can inspect
+        # it, or — at their discretion — re-run the pipeline from the saved
+        # artifact. Before this change, the draft was simply discarded when
+        # the raise fired, which meant an operator had to pay the full LLM
+        # cost again just to see what came out of the last attempt.
+        _persist_short_draft(
+            run_date=manifest.get('run_date', 'unknown'),
+            payload=best_overall_payload,
+            script=best_overall_script,
+            word_count=best_overall_wc,
+            model=best_overall_model,
+            min_words=settings.min_script_words,
+            errors=errors,
+        )
     raise ValueError("All editorial generation attempts failed: " + " | ".join(errors))
+
+
+def _persist_short_draft(
+    run_date: str,
+    payload: dict[str, Any],
+    script: str,
+    word_count: int,
+    model: str | None,
+    min_words: int,
+    errors: list[str],
+) -> None:
+    """Write the best-effort draft + metadata to output/<run_date>/short_draft.*.
+
+    Best-effort: never masks the original cascade failure. If the write itself
+    raises (disk full, permission denied, weird CI path), we log and move on
+    so the ValueError in the caller is what surfaces to the pipeline.
+    """
+    try:
+        out_dir = Path('output') / run_date
+        out_dir.mkdir(parents=True, exist_ok=True)
+        atomic_write_text(out_dir / 'short_draft.txt', script)
+        write_json(out_dir / 'short_draft.json', {
+            'run_date': run_date,
+            'model': model,
+            'word_count': word_count,
+            'min_words': min_words,
+            'deficit': max(0, min_words - word_count),
+            'errors': errors,
+            'payload': payload,
+        })
+        logger.info(
+            "Short draft preserved at %s (%d words; min was %d)",
+            out_dir, word_count, min_words,
+        )
+    except Exception as exc:
+        logger.warning("Could not persist short draft: %s", exc)

@@ -24,6 +24,22 @@ CARTESIA_WEBSOCKET_URL = 'wss://api.cartesia.ai/tts/websocket'
 # (16-bit vs 32-bit) with no audible loss for speech.
 WEBSOCKET_SAMPLE_RATE = 44100
 
+# Hard upper bounds on any single send/recv await. Without these, a stuck
+# Cartesia session blocks the whole workflow until GitHub's 6-hour job
+# timeout fires — we've seen it happen when the server accepts the
+# connection but never emits the first audio frame (model cold-start gone
+# wrong). The websockets library's default ping_interval (20s) detects a
+# dead TCP socket but NOT a server that just stops streaming audio while
+# still answering pings. These timeouts make the retry loops in
+# `_render_script_websocket` / `_render_chunks_crossfade` actually engage.
+#
+# RECV is generous: first frame after `send` can take ~15s for model spin-up
+# on a cold region; between-frame gaps during active synthesis are milliseconds.
+# 60s is ~4x the worst observed first-frame latency and ~60000x a steady-state
+# gap, so anything beyond that really is stuck.
+WS_SEND_TIMEOUT_S = 30.0
+WS_RECV_TIMEOUT_S = 60.0
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Pronunciation normalization
@@ -487,11 +503,15 @@ async def _render_single_chunk_ws(chunk: str, settings, context_id: str | None =
                 'emotion': settings.cartesia_emotion,
             },
         }
-        await ws.send(json.dumps(request))
+        await asyncio.wait_for(ws.send(json.dumps(request)), timeout=WS_SEND_TIMEOUT_S)
 
         audio = bytearray()
         while True:
-            msg = json.loads(await ws.recv())
+            # Bound each frame wait so a server that accepts the connection
+            # but never emits audio (observed during model cold-start
+            # failures) surfaces as a TimeoutError caught by the retry loop,
+            # not a workflow that silently runs until the 6-hour CI cap.
+            msg = json.loads(await asyncio.wait_for(ws.recv(), timeout=WS_RECV_TIMEOUT_S))
             if msg.get('context_id') != ctx:
                 continue
             mtype = msg.get('type')
@@ -587,11 +607,14 @@ async def _render_session(chunks: list[str], settings) -> bytes:
                     'emotion': settings.cartesia_emotion,
                 },
             }
-            await ws.send(json.dumps(request))
+            await asyncio.wait_for(ws.send(json.dumps(request)), timeout=WS_SEND_TIMEOUT_S)
 
         audio = bytearray()
         while True:
-            msg = json.loads(await ws.recv())
+            # See WS_RECV_TIMEOUT_S rationale above — bounded per-frame wait
+            # turns a silent hang into a normal exception the outer retry
+            # loop in `_render_script_websocket` will pick up.
+            msg = json.loads(await asyncio.wait_for(ws.recv(), timeout=WS_RECV_TIMEOUT_S))
             if msg.get('context_id') != context_id:
                 continue  # ignore any stale frames from a prior session
             mtype = msg.get('type')

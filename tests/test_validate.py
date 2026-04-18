@@ -46,7 +46,22 @@ def test_validate_section_payload_valid():
 def test_validate_section_payload_missing_section():
     payload = _make_payload()
     del payload["sections"]["ai_news"]
-    with pytest.raises(ValueError, match="Section order"):
+    # The error now names the missing key directly so a prompt-drift case
+    # (LLM drops or renames a section) is immediately diagnosable from the
+    # traceback. The old "Section order does not match" message only fires
+    # when every required key is present but the ordering differs — a much
+    # rarer case, covered by test_validate_section_payload_wrong_order.
+    with pytest.raises(ValueError, match=r"Section keys mismatch.*missing=\['ai_news'\]"):
+        validate_section_payload(payload)
+
+
+def test_validate_section_payload_wrong_order():
+    """All keys present, but in the wrong order — hits the second error path."""
+    payload = _make_payload()
+    # Rebuild the sections dict in reverse to force a pure ordering mismatch
+    # without adding or removing keys.
+    payload["sections"] = {k: payload["sections"][k] for k in reversed(list(payload["sections"]))}
+    with pytest.raises(ValueError, match="Section order does not match"):
         validate_section_payload(payload)
 
 

@@ -67,7 +67,7 @@ _TRANSIENT_HTTP_CODES = (500, 502, 503, 504)
 
 
 def _word_count(text: str) -> int:
-    """Honest spoken-word count: whitespace-separated tokens.
+    r"""Honest spoken-word count: whitespace-separated tokens.
 
     Earlier used re.findall(r"\b\w+\b", ...) which inflated French counts
     by ~10-15% because apostrophes split "c'est"/"l'IA"/"d'Anthropic" into

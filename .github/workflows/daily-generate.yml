@@ -59,7 +59,12 @@ jobs:
         # dispatch with locale=fr → ["fr"]; schedule / empty → ["en","fr"].
         # `matrix.locale` is not available in `jobs.<id>.if`, but
         # `github.event.inputs` IS available in `jobs.<id>.strategy`.
-        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en","fr"]') }}
+        # FR was paused on 2026-04-18 pending voice cloning of the host
+        # (user instruction 1.98 — "stop toutes les workflow fr"). The matrix
+        # defaults to EN only. Operators can still force a FR run via
+        # workflow_dispatch with locale=fr, but the scheduled daily run is
+        # EN-only until the FR locale is re-enabled in podcast.yaml.
+        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en"]') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -115,6 +120,13 @@ jobs:
           LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
           LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          # Free Layer-2 crawler fallback. Jina Reader works anonymously at
+          # ~20 req/min which is typically enough for the post-Layer-1 residue;
+          # setting JINA_API_KEY (free tier) bumps it to ~200 req/min. Leave
+          # the secret unset to stay anonymous, or set JINA_READER_ENABLED=false
+          # to disable the fallback entirely.
+          JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
+          JINA_READER_ENABLED: ${{ vars.JINA_READER_ENABLED }}
           CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
           # Both voice IDs are passed — settings._apply_locale picks the right
           # one via voice_id_env in podcast.yaml (CARTESIA_VOICE_ID for EN,

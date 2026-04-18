@@ -37,14 +37,22 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # 30 min hard cap (user decision 2026-04-18). The weekly pipeline must
+    # complete within this budget: collection + LLM + TTS + R2 upload. Before
+    # this cap the weekly ran unchecked for 88+ min because of Chromium hangs
+    # (Crawl4AI abandoned the same day). 30 min gives ~5 min headroom over
+    # the typical 20-25 min run with httpx async + Cartesia streaming.
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       max-parallel: 1
       matrix:
-        # Filter the matrix itself so non-selected locales never spawn a job.
-        # See daily-generate.yml for the long explanation; same bug, same fix.
-        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en","fr"]') }}
+        # FR was paused on 2026-04-18 pending voice cloning of the host
+        # (user instruction 1.98 — "stop toutes les workflow fr"). The matrix
+        # defaults to EN only. Operators can still force a FR run via
+        # workflow_dispatch with locale=fr, but the scheduled Saturday run
+        # is EN-only until the FR locale is re-enabled in podcast.yaml.
+        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en"]') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -91,6 +99,9 @@ jobs:
           LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
           LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          # Free Layer-2 crawler fallback (Jina Reader). Anonymous if unset.
+          JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
+          JINA_READER_ENABLED: ${{ vars.JINA_READER_ENABLED }}
           CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}

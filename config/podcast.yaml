@@ -117,7 +117,10 @@ locales:
     tts_mode: "websocket"    # one continue=true session: seamless prosody, validated up to ~15 min
 
   fr:
-    enabled: true
+    # Paused 2026-04-18: voice quality unacceptable (saccadée, acronymes
+    # coupés UE/ASML). FR is on hold until the host's voice is cloned and
+    # integrated. Set back to true to re-enable the FR pipeline.
+    enabled: false
     title: "Revue de Presse IA"
     subtitle: "Factuel, clair, pense pour les professionnels presses"
     language: "fr"
@@ -239,6 +242,8 @@ scoring:
     - "voice model"
 
   # Termes AI — poids moyen (score +1.5 par match)
+  # Enriched 2026-04-18: adds transformer, diffusion, reasoning, rag, and
+  # other technical terms that are strong AI-relevance signals on their own.
   ai_terms_mid:
     - "ai"
     - "llm"
@@ -249,6 +254,18 @@ scoring:
     - "gpu"
     - "datacenter"
     - "data center"
+    - "transformer"
+    - "diffusion"
+    - "reasoning"
+    - "rag"
+    - "retrieval augmented"
+    - "finetune"
+    - "fine-tuning"
+    - "pretrain"
+    - "embedding"
+    - "mixture of experts"
+    - "reinforcement learning"
+    - "rlhf"
 
   # Termes AI — poids faible (score +0.5 par match)
   ai_terms_low:
@@ -257,6 +274,15 @@ scoring:
     - "research"
     - "deployment"
     - "automation"
+    - "prompt"
+    - "context window"
+    - "tokenizer"
+    - "quantization"
+    - "distillation"
+    - "alignment"
+    - "hallucination"
+    - "autonomous"
+    - "synthetic data"
 
   # Mots-signaux forts (score +1.0 par match, max 4.0)
   signal_words_strong:
@@ -274,8 +300,15 @@ scoring:
     - "parameter"
     - "token"
     - "multimodal"
+    - "acquisition"
+    - "valuation"
+    - "ipo"
+    - "earnings"
+    - "partnership"
 
-  # Mots-signaux moyens (score +0.5 par match, max 2.0)
+  # Mots-signaux moyens (score +0.5 par match, max 3.0)
+  # Cap raised 2.0 → 3.0 so an item with 6+ medium matches gets proper credit.
+  # Enriched 2026-04-18 to capture broader business/tech signals.
   signal_words_medium:
     - "latency"
     - "chip"
@@ -287,9 +320,26 @@ scoring:
     - "startup"
     - "enterprise"
     - "scale"
+    - "roadmap"
+    - "adoption"
+    - "pilot"
+    - "integration"
+    - "throughput"
+    - "cost per token"
+    - "cluster"
+    - "fleet"
+    - "fabrication"
+    - "wafer"
+    - "hiring"
+    - "layoff"
+    - "regulation"
+    - "export control"
 
   # Autorite des domaines — bonus automatique par source
   # Only free/open sources — paywalled domains are hard-blocked in collect.py
+  # Expanded drastically on 2026-04-18 (user instruction 1.96) with
+  # Asian / non-anglophone / tier-2 expert outlets to widen editorial
+  # coverage and avoid Anglo-centric blind spots.
   domain_authority:
     # Primary sources — Labs
     "openai.com": 2.0
@@ -302,6 +352,22 @@ scoring:
     "mistral.ai": 1.5
     "meta.ai": 1.5
     "ai.meta.com": 1.5
+    "x.ai": 1.5
+    "stability.ai": 1.2
+    "aleph-alpha.com": 1.5         # EU lab
+    "inceptionlabs.ai": 1.2
+    "runwayml.com": 1.2
+    "together.ai": 1.2
+    "databricks.com": 1.5
+    "snowflake.com": 1.2
+    # Asian labs & providers
+    "deepseek.com": 1.8            # rising Chinese lab — high signal
+    "moonshot.cn": 1.5
+    "zhipu.ai": 1.5
+    "qwen.alibaba.com": 1.5
+    "01.ai": 1.2
+    "stepfun.com": 1.0
+    "minimaxi.com": 1.0
     # Hardware & Cloud
     "nvidia.com": 1.5
     "blogs.nvidia.com": 1.5
@@ -310,9 +376,14 @@ scoring:
     "aws.amazon.com": 1.0
     "azure.microsoft.com": 1.0
     "cloud.google.com": 1.0
+    "tsmc.com": 1.5                # fab leader
+    "samsung.com": 0.8
+    "groq.com": 1.2
+    "cerebras.net": 1.2
+    "sambanova.ai": 1.0
     # Research
     "huggingface.co": 1.5
-    "arxiv.org": 1.0           # capped lower — too many papers on low-signal topics
+    "arxiv.org": 1.0               # capped lower — too many papers on low-signal topics
     "science.org": 1.5
     "nature.com": 1.5
     "ieee.org": 1.5
@@ -322,7 +393,38 @@ scoring:
     "research.microsoft.com": 1.5
     "news.mit.edu": 1.5
     "hai.stanford.edu": 1.5
-    # Press — free, professional
+    "bair.berkeley.edu": 1.5
+    "ai.stanford.edu": 1.5
+    "crfm.stanford.edu": 1.5
+    "csail.mit.edu": 1.5
+    "allenai.org": 1.5
+    "paperswithcode.com": 1.0
+    "thegradient.pub": 1.2         # long-form ML analysis
+    "distill.pub": 1.2
+    "transformer-circuits.pub": 1.5
+    # Expert newsletters / analysts (free tier)
+    "simonwillison.net": 1.2       # highly curated, expert analysis
+    "import.ai": 1.5               # Jack Clark — weekly signal
+    "latent.space": 1.2            # deep podcast transcripts
+    "aisnakeoil.substack.com": 1.0
+    "garymarcus.substack.com": 0.8
+    "oneusefulthing.org": 1.0      # Ethan Mollick
+    "chinatalk.media": 1.5         # non-western AI intelligence
+    "aisupremacy.substack.com": 0.8
+    "interconnected.org": 1.0
+    "bensbites.com": 0.8
+    "nonzero.newsletter": 0.8
+    # Non-western press (free)
+    "restofworld.org": 1.5         # global-south tech coverage, unmatched lens
+    "36kr.com": 1.2                # Chinese tech biz
+    "english.caixin.com": 1.2      # China news
+    "asia.nikkei.com": 1.2         # Japan & Asia biz
+    "scmp.com": 0.8                # mix — weighted lower
+    "technode.com": 1.0            # China tech
+    "pingwest.com": 0.8
+    "yicaiglobal.com": 0.8
+    "kr-asia.com": 0.8
+    # Press — free, professional (Anglo)
     "techcrunch.com": 1.0
     "venturebeat.com": 1.0
     "theverge.com": 0.8
@@ -336,7 +438,9 @@ scoring:
     "theregister.com": 0.7
     "artificialintelligence-news.com": 0.7
     "aitrends.com": 0.7
-    "simonwillison.net": 1.0    # highly curated, expert analysis
+    "semianalysis.com": 1.0        # free posts only — paywall posts blocked
+    "thestack.technology": 0.8
+    "crunchbase.com": 0.7
     # Finance-specific (free)
     "finextra.com": 0.8
     "pymnts.com": 0.5

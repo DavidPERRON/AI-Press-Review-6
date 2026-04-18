@@ -13,9 +13,35 @@ from pathlib import Path
 
 import websockets
 
-from ..settings import load_settings
+from ..settings import DATA_DIR, load_settings
 
 logger = logging.getLogger(__name__)
+
+
+def _persist_acronyms_seen(acronyms: list[str], locale: str) -> None:
+    """Append auto-spelled acronyms to a per-locale registry on disk.
+
+    Builds a cumulative operator-facing inventory at
+    ``data/state/acronyms_seen_{locale}.json`` mapping each acronym to
+    ``{first_seen, last_seen, count}``. Used exclusively for review — the
+    pipeline itself does not read this file back.
+    """
+    if not acronyms:
+        return
+    state_dir = DATA_DIR / 'state'
+    state_dir.mkdir(parents=True, exist_ok=True)
+    path = state_dir / f'acronyms_seen_{locale}.json'
+    try:
+        current = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+    except (OSError, json.JSONDecodeError):
+        current = {}
+    now = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())
+    for token in acronyms:
+        entry = current.get(token) or {'first_seen': now, 'last_seen': now, 'count': 0}
+        entry['last_seen'] = now
+        entry['count'] = int(entry.get('count', 0)) + 1
+        current[token] = entry
+    path.write_text(json.dumps(current, indent=2, sort_keys=True), encoding='utf-8')
 
 CARTESIA_WEBSOCKET_URL = 'wss://api.cartesia.ai/tts/websocket'
 
@@ -395,6 +421,15 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
             'add to _SPELL_OUT_COMMON if pronunciation is wrong',
             len(auto_spelled), ', '.join(auto_spelled),
         )
+        # Persist the acronyms encountered so the operator has a cumulative
+        # list to review (user instruction 2026-04-17: "conserve une liste").
+        # Stored per-locale at data/state/acronyms_seen_{locale}.json with
+        # {acronym: {count, first_seen, last_seen}}.  Failures are silent —
+        # persistence is a convenience, not a pipeline requirement.
+        try:
+            _persist_acronyms_seen(auto_spelled, settings.locale or 'en')
+        except Exception as exc:  # noqa: BLE001
+            logger.warning('Acronym persistence skipped: %s', exc)
     spoken_script = _normalize_tts_whitespace(spoken_script)
     spoken_script = _strip_trailing_pause_tokens(spoken_script)
     # Cap long sentences so Cartesia never tapers volume on a single utterance.

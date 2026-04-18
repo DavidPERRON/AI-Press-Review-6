@@ -55,6 +55,92 @@ def _is_paywalled(domain: str) -> bool:
     return any(d == pw or d.endswith('.' + pw) for pw in _PAYWALL_DOMAINS)
 
 
+# ── Cross-check entity extraction ────────────────────────────────────────────
+# Tokens that capitalize in English/French titles but carry no identifying
+# signal. Kept lowercase — comparison is case-insensitive.
+_ENTITY_STOPWORDS: frozenset[str] = frozenset({
+    'the', 'and', 'for', 'with', 'from', 'into', 'that', 'this', 'what',
+    'why', 'how', 'when', 'where', 'who', 'will', 'after', 'before', 'over',
+    'under', 'new', 'news', 'says', 'said', 'says', 'can', 'could', 'should',
+    'would', 'may', 'might', 'just', 'also', 'about', 'amid', 'against',
+    'le', 'la', 'les', 'des', 'une', 'sur', 'sous', 'dans', 'pour', 'avec',
+    'sans', 'plus', 'moins', 'avant', 'apres', 'apr\u00e8s', 'entre', 'chez',
+    'ai', 'ia', 'it',
+})
+
+
+def _title_entities(title: str) -> set[str]:
+    """Extract a coarse set of 'named entities' from a title.
+
+    We don't need a real NER model — we just need a cheap signal of whether
+    two headlines are talking about the same story.  A 3+ char token that
+    starts with an uppercase letter (or is ALL CAPS, catching tickers like
+    TSMC, ASML, GPU) and isn't a stopword is treated as an entity.
+    """
+    if not title:
+        return set()
+    out: set[str] = set()
+    for raw in title.split():
+        token = ''.join(c for c in raw if c.isalnum())
+        if len(token) < 3:
+            continue
+        lower = token.lower()
+        if lower in _ENTITY_STOPWORDS:
+            continue
+        # Uppercase-initial (Apple, OpenAI) OR all-caps (TSMC, NYSE, GPU, LLM)
+        if token[0].isupper() or token.isupper():
+            out.add(lower)
+    return out
+
+
+def _cross_check_dedupe(
+    sources: list[SourceItem],
+    min_shared_entities: int = 2,
+) -> list[SourceItem]:
+    """Drop near-duplicate stories that share >=N named entities with a
+    higher-scoring item already kept.
+
+    User instruction 2026-04-18 (1.96): "analyse croisee" before selection —
+    avoid featuring the same story under different angles when two outlets
+    cover the same acquisition / launch / earnings release.
+
+    Inputs MUST be sorted by relevance_score descending so the best-scoring
+    variant is kept and its near-duplicates dropped.  Two items collide when
+    their title-entity sets share at least *min_shared_entities* tokens.
+
+    Complexity is O(n*k) where k is the size of the running 'kept' set.
+    For n=300 candidates this stays well under 50 ms.
+    """
+    kept: list[SourceItem] = []
+    kept_entities: list[set[str]] = []
+    dropped = 0
+    for item in sources:
+        ents = _title_entities(item.title)
+        # Items without at least 2 entities can't collide under this rule;
+        # keep them unconditionally (they'll be judged by other filters).
+        if len(ents) < min_shared_entities:
+            kept.append(item)
+            kept_entities.append(ents)
+            continue
+        collision = False
+        for prior in kept_entities:
+            if len(ents & prior) >= min_shared_entities:
+                collision = True
+                break
+        if collision:
+            dropped += 1
+            continue
+        kept.append(item)
+        kept_entities.append(ents)
+    if dropped:
+        logger.info(
+            "Cross-check dedupe: dropped %d near-duplicate stories "
+            "(shared >=%d named entities with a higher-scored item)",
+            dropped, min_shared_entities,
+        )
+    return kept
+
+
 def _is_safe_http_url(url: str) -> bool:
     """Whitelist http(s) schemes for rendered links.
 
@@ -120,16 +206,24 @@ def _score_source(item: SourceItem, scoring: ScoringConfig) -> float:
     score = 0.0
     combined = " ".join(filter(None, [item.title, item.summary, item.content_text])).lower()
 
-    # Content depth
+    # Content depth — reweighted 2026-04-18 (user instruction 1.96: "pondertion
+    # du contenu profond pour evaluer ce qui ressort"). The top bucket is
+    # raised so a 3 000-char deep-dive dominates a 1 500-char press note,
+    # and a new 300-char floor rewards summaries-only items with at least
+    # some substance over one-line wire items.
     content_len = len(item.content_text or "")
-    if content_len >= 2000:
-        score += 4.0
+    if content_len >= 3000:
+        score += 6.0
+    elif content_len >= 2000:
+        score += 5.0
     elif content_len >= 1200:
-        score += 3.0
+        score += 3.5
     elif content_len >= 700:
         score += 2.0
-    elif item.summary and len(item.summary) >= 180:
+    elif content_len >= 300:
         score += 1.0
+    elif item.summary and len(item.summary) >= 180:
+        score += 0.5
 
     # Numerical data density
     digit_count = sum(1 for char in combined if char.isdigit())
@@ -142,9 +236,11 @@ def _score_source(item: SourceItem, scoring: ScoringConfig) -> float:
     strong_matches = sum(1 for w in scoring.signal_words_strong if w in combined)
     score += min(strong_matches * 1.0, 4.0)
 
-    # Medium signal words
+    # Medium signal words — cap raised to 3.0 on 2026-04-18 so the expanded
+    # medium list (24 terms vs. 10 before) can actually influence ranking
+    # rather than saturating at 2.0 after 4 matches.
     medium_matches = sum(1 for w in scoring.signal_words_medium if w in combined)
-    score += min(medium_matches * 0.5, 2.0)
+    score += min(medium_matches * 0.5, 3.0)
 
     # Domain authority
     domain = (item.domain or "").lower()
@@ -365,10 +461,13 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     #   3. Keep the rest in a separate pool — they enter Phase 4 on summary only
     #      and can still pass the relevance gate if their summary is strong enough.
     #
-    # Effect: crawl drops from ~700 to ~100 items → ~1-2 min with httpx async.
+    # Effect: crawl drops from ~700 to ~200 items → ~2-4 min with httpx async.
     # Trade-off: a few articles with weak summaries but rich content may be missed.
     # Mitigation: domain-authority items are pre-scored high and always crawled.
-    PRE_CRAWL_KEEP = 100
+    # 2026-04-18: user re-validated 200 (not 100) to keep a wider extraction pool
+    # feeding Phase 4 with full-content data. 200 stays within the 25-30 min
+    # pipeline budget at concurrency-20 + 8s timeout.
+    PRE_CRAWL_KEEP = 200
     if len(candidates) > PRE_CRAWL_KEEP:
         for item in candidates:
             item.relevance_score = _score_source(item, settings.scoring)
@@ -447,6 +546,11 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     # Phase 4b: Weekly bonus/penalty for unused vs reused sources
     if settings.prefer_unused and weekly_used_fps:
         sources = _apply_weekly_bonus(sources, weekly_used_fps, weekly_used_titles, settings)
+
+    # Phase 4b.5: Cross-check dedupe — drop same-story variants. This runs
+    # AFTER scoring and weekly bonuses so the kept variant is the highest-
+    # scoring one. See _cross_check_dedupe() for the rationale.
+    sources = _cross_check_dedupe(sources)
 
     # Phase 4c: Cap per domain to ensure source diversity
     max_per_domain = settings.scoring.max_per_domain

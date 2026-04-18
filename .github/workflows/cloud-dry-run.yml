@@ -46,9 +46,8 @@ jobs:
       - name: Run tests
         run: pytest tests/ -v --tb=short
 
-      - name: Install Chromium for crawler
-        run: python -m playwright install chromium
-
+      # Crawl4AI/Playwright abandoned 2026-04-18 — see extractors/web_content.py.
+      # The crawler is now httpx async; no browser install step required.
       # cloud_dry_run.py calls run_pipeline(upload_audio=False, publish_feed=False).
       # It writes only to output/ (artifact below). It does NOT write to
       # data/state/ and does NOT create a pending_draft — so nothing can be
@@ -82,6 +81,9 @@ jobs:
           LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
           LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          # Free Layer-2 crawler fallback (Jina Reader). Anonymous if unset.
+          JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
+          JINA_READER_ENABLED: ${{ vars.JINA_READER_ENABLED }}
           CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
           # Both voice IDs — settings._apply_locale picks the right one via
           # voice_id_env in podcast.yaml.

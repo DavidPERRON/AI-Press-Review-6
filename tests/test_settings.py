@@ -25,7 +25,31 @@ from __future__ import annotations
 
 import pytest
 
+from ai_press_review import settings as settings_module
 from ai_press_review.settings import _validate_llm_base_url, load_settings
+
+
+@pytest.fixture(autouse=True)
+def _enable_all_locales_for_tests(monkeypatch):
+    """Ensure every locale is treated as enabled for settings-resolution tests.
+
+    FR was paused on 2026-04-18 (podcast.yaml: locales.fr.enabled=false) so
+    scheduled matrix jobs default to EN only. The per-locale env-var
+    resolution logic, however, must still work when a caller explicitly
+    passes locale='fr' (manual dispatch, re-render TTS, CLI tooling). These
+    unit tests exercise that resolution path and therefore need every
+    locale enabled regardless of the config on disk.
+    """
+    original = settings_module._yaml_config
+
+    def patched(*args, **kwargs):
+        cfg = original(*args, **kwargs)
+        for loc in (cfg.get('locales') or {}).values():
+            if isinstance(loc, dict):
+                loc['enabled'] = True
+        return cfg
+
+    monkeypatch.setattr(settings_module, '_yaml_config', patched)
 
 
 # ─── Per-locale override beats the generic var ────────────────────────────────

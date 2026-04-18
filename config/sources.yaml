@@ -103,6 +103,26 @@ curated_rss:
   - "https://www.scmp.com/rss/36/feed"
   - "https://www.axios.com/feeds/feed.rss"
 
+  # ── NON-WESTERN / ASIA (libre accès) ──────────────────────
+  # Added 2026-04-18: user 1.90 + 1.96 — broaden sources with Asian coverage
+  # and non-Anglo expert newsletters, explicitly including Mandarin-origin
+  # outlets with English editions. Paywalled outlets (FT, WSJ, Nikkei
+  # Asia Pro, Caixin Global Pro) are hard-blocked by _PAYWALL_DOMAINS.
+  - "https://www.restofworld.org/feed/latest/"
+  - "https://technode.com/feed/"
+  - "https://asia.nikkei.com/rss/feed/nikkei-asia-top-stories"
+  - "https://36kr.com/feed"
+  - "https://en.pingwest.com/feed"
+  - "https://kr-asia.com/feed"
+  - "https://chinatalk.media/feed"
+  - "https://www.yicaiglobal.com/feed"
+
+  # ── EXPERT NEWSLETTERS COMPLEMENTARY (libre accès) ────────
+  - "https://thegradient.pub/rss/"
+  - "https://www.latent.space/feed"
+  - "https://www.aisnakeoil.com/feed"
+  - "https://garymarcus.substack.com/feed"
+
   # ── BUSINESS & FINANCE (libre accès) ──────────────────────
   - "https://www.finextra.com/rss/headlines.aspx"
   - "https://www.pymnts.com/artificial-intelligence-2/feed/"

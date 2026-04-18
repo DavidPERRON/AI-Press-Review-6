@@ -2,10 +2,11 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import os
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import Optional
+from urllib.parse import quote
 
 import httpx
 import trafilatura
@@ -24,7 +25,7 @@ USER_AGENT = (
 MAX_CONTENT_LENGTH = 6000
 MIN_CONTENT_LENGTH = 400
 
-# Number of concurrent HTTP requests in batch_extract.
+# Number of concurrent HTTP requests in batch_extract (Layer 1).
 # httpx async client opens connections in parallel — no browser, no JS engine.
 # 20 concurrent requests on a 2-vCPU GitHub-hosted runner is comfortably safe
 # and keeps Phase 3 under 3 minutes even on 100-URL batches.
@@ -33,6 +34,36 @@ BATCH_CONCURRENCY = 20
 # Hard per-URL timeout (seconds). News articles load in <2s on good days;
 # 8s gives a generous buffer while bounding the worst-case tail.
 HTTP_TIMEOUT = 8.0
+
+# ─── Layer 2: Jina Reader fallback ──────────────────────────────────────────
+# Free JS-rendering reader at https://r.jina.ai/<url>. Used for URLs that
+# Layer 1 couldn't extract — typically SPAs, JS-paywalled articles, and
+# Asian/Chinese sites that geo-throttle direct datacenter traffic but serve
+# Jina's residential/egress fleet cleanly.
+#
+# - No API key required (anonymous ~20 req/min, typically enough for the
+#   fallback subset after Layer 1). Setting JINA_API_KEY bumps the rate to
+#   ~200 req/min (free tier of reader.jina.ai).
+# - Returns plain markdown/text; no HTML parsing needed.
+# - Timeout is 2.5x Layer 1 because Jina runs a headless browser server-side.
+JINA_READER_BASE = "https://r.jina.ai/"
+JINA_CONCURRENCY = 6          # conservative: anonymous free tier is ~20 RPM
+JINA_TIMEOUT = 20.0           # Jina renders JS; give it room
+JINA_MIN_CHARS = MIN_CONTENT_LENGTH
+
+# Feature flags — can be turned off via env without code change.
+#   JINA_READER_ENABLED=false  → skip Layer 2 entirely
+#   JINA_API_KEY=<key>         → optional, raises rate limit
+def _jina_enabled() -> bool:
+    v = os.getenv("JINA_READER_ENABLED")
+    if v is None:
+        return True
+    return v.strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _jina_api_key() -> Optional[str]:
+    v = os.getenv("JINA_API_KEY")
+    return v.strip() if v and v.strip() else None
 
 
 @dataclass
@@ -87,7 +118,7 @@ def _parse_html(url: str, html: str) -> Optional[ExtractedContent]:
     return None
 
 
-# ── Async batch path ─────────────────────────────────────────────────────────
+# ── Async batch path — Layer 1 (direct httpx) ────────────────────────────────
 
 async def _fetch_one_async(
     client: httpx.AsyncClient,
@@ -108,31 +139,80 @@ async def _fetch_one_async(
         return _parse_html(url, html)
 
 
-async def _batch_extract_async(urls: list[str]) -> dict[str, Optional[ExtractedContent]]:
-    """Fetch all URLs concurrently under a single httpx async client.
+# ── Layer 2: Jina Reader fallback ────────────────────────────────────────────
 
-    Uses a semaphore to cap in-flight requests at BATCH_CONCURRENCY so the
-    GitHub-hosted runner isn't overwhelmed.  Each request has a hard timeout
-    of HTTP_TIMEOUT seconds — no retry, no Chromium, no JavaScript rendering.
-    For a news aggregation pipeline, ~85 % of articles are plain HTML and
-    extract cleanly; the remaining 15 % are JS-gated or paywalled and would
-    have been filtered in Phase 4 anyway.
+async def _jina_fetch_one(
+    client: httpx.AsyncClient,
+    url: str,
+    sem: asyncio.Semaphore,
+    api_key: Optional[str],
+) -> Optional[ExtractedContent]:
+    """Fetch article text via Jina Reader (https://r.jina.ai/<url>).
+
+    Jina returns pre-extracted, markdown-ish plain text — no HTML parsing.
+    Response structure is typically a short title/URL header followed by the
+    article body, so we keep the full payload and let the caller's length
+    cap + downstream scoring filter noise.
+    """
+    reader_url = JINA_READER_BASE + url  # Jina accepts raw or percent-encoded
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/plain",
+        # Ask Jina for markdown-plain content (less boilerplate than html).
+        "X-Return-Format": "markdown",
+    }
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+
+    async with sem:
+        try:
+            resp = await client.get(reader_url, headers=headers, follow_redirects=True)
+            resp.raise_for_status()
+            body = clean_text(resp.text or "")
+            if len(body) >= JINA_MIN_CHARS:
+                return ExtractedContent(
+                    url=url,
+                    text=body[:MAX_CONTENT_LENGTH],
+                    method="jina-reader",
+                )
+        except Exception as exc:
+            logger.debug("jina-reader failed for %s: %s", url, exc)
+    return None
+
+
+async def _batch_extract_async(urls: list[str]) -> dict[str, Optional[ExtractedContent]]:
+    """Fetch all URLs via a two-layer free pipeline.
+
+    Layer 1 — httpx + trafilatura/BS4 (fast, free, ~85 % hit rate):
+        Single httpx AsyncClient, semaphore-capped concurrency, hard timeout.
+        No browser, no JS engine. This is the ONLY path that runs for most
+        articles.
+
+    Layer 2 — Jina Reader (https://r.jina.ai/<url>):
+        Only invoked for URLs that Layer 1 couldn't extract. Jina runs a
+        headless browser server-side for us — free, no API key required,
+        globally distributed (meaningfully better than our runner for
+        Chinese/Japanese/Korean outlets and geo-fenced SPAs). Concurrency
+        is deliberately lower (6 vs 20) to respect the anonymous rate limit.
+        Can be disabled with JINA_READER_ENABLED=false; rate-lifted with
+        JINA_API_KEY=<free-tier-key>.
 
     Previous approach used Crawl4AI (Playwright/Chromium) which added 2+ min
-    of browser startup overhead and occasionally hung indefinitely on tabs that
-    never resolved — causing the weekly job to time out at 88+ minutes.
+    of browser startup overhead and occasionally hung indefinitely on tabs
+    that never resolved — causing the weekly job to time out at 88+ minutes.
+    Jina replaces that capability without the infra cost.
     """
     results: dict[str, Optional[ExtractedContent]] = {u: None for u in urls}
     if not urls:
         return results
 
-    sem = asyncio.Semaphore(BATCH_CONCURRENCY)
-    timeout = httpx.Timeout(connect=5.0, read=HTTP_TIMEOUT, write=5.0, pool=5.0)
-    headers = {"User-Agent": USER_AGENT}
+    # ── Layer 1 ──────────────────────────────────────────────────────────
+    sem_l1 = asyncio.Semaphore(BATCH_CONCURRENCY)
+    timeout_l1 = httpx.Timeout(connect=5.0, read=HTTP_TIMEOUT, write=5.0, pool=5.0)
+    headers_l1 = {"User-Agent": USER_AGENT}
 
-    async with httpx.AsyncClient(timeout=timeout, headers=headers) as client:
-        # gather runs all coroutines truly concurrently; semaphore caps in-flight.
-        coroutines = [_fetch_one_async(client, url, sem) for url in urls]
+    async with httpx.AsyncClient(timeout=timeout_l1, headers=headers_l1) as client:
+        coroutines = [_fetch_one_async(client, url, sem_l1) for url in urls]
         raw = await asyncio.gather(*coroutines, return_exceptions=True)
 
     for url, result in zip(urls, raw):
@@ -141,6 +221,49 @@ async def _batch_extract_async(urls: list[str]) -> dict[str, Optional[ExtractedC
         else:
             results[url] = result
 
+    layer1_hits = sum(1 for v in results.values() if v is not None)
+
+    # ── Layer 2: Jina Reader fallback ───────────────────────────────────
+    if not _jina_enabled():
+        logger.info("batch_extract: Layer 1 %d/%d; Jina fallback disabled",
+                    layer1_hits, len(urls))
+        return results
+
+    failed_urls = [u for u, v in results.items() if v is None]
+    if not failed_urls:
+        logger.info("batch_extract: Layer 1 %d/%d (no fallback needed)",
+                    layer1_hits, len(urls))
+        return results
+
+    api_key = _jina_api_key()
+    logger.info(
+        "batch_extract: Layer 1 %d/%d; invoking Jina fallback on %d URLs "
+        "(concurrency=%d, timeout=%.0fs, api_key=%s)",
+        layer1_hits, len(urls), len(failed_urls),
+        JINA_CONCURRENCY, JINA_TIMEOUT, "yes" if api_key else "anonymous",
+    )
+
+    sem_l2 = asyncio.Semaphore(JINA_CONCURRENCY)
+    timeout_l2 = httpx.Timeout(connect=10.0, read=JINA_TIMEOUT, write=10.0, pool=10.0)
+
+    async with httpx.AsyncClient(timeout=timeout_l2) as client:
+        coroutines = [
+            _jina_fetch_one(client, url, sem_l2, api_key) for url in failed_urls
+        ]
+        raw = await asyncio.gather(*coroutines, return_exceptions=True)
+
+    l2_hits = 0
+    for url, result in zip(failed_urls, raw):
+        if isinstance(result, BaseException):
+            continue
+        if result is not None:
+            results[url] = result
+            l2_hits += 1
+
+    logger.info(
+        "batch_extract: Layer 2 recovered %d/%d URLs (%d total hits of %d)",
+        l2_hits, len(failed_urls), layer1_hits + l2_hits, len(urls),
+    )
     return results
 
 
@@ -156,19 +279,24 @@ def _run_async(coro):
 
 
 def batch_extract(urls: list[str]) -> dict[str, Optional[ExtractedContent]]:
-    """Extract content for many URLs using async httpx (no browser required).
+    """Extract content for many URLs using the two-layer free pipeline.
 
-    All requests share a single httpx AsyncClient and run concurrently up to
-    BATCH_CONCURRENCY.  Returns a dict keyed by input URL; failed/timeout
-    entries map to None.  Duplicates in the input are collapsed before work.
+    Layer 1 (httpx + trafilatura/BS4) runs first; Jina Reader picks up the
+    URLs that Layer 1 couldn't crack. Returns a dict keyed by input URL;
+    entries that neither layer could recover map to None. Duplicates in the
+    input are collapsed before work.
 
-    Timing: 100 URLs at concurrency-20 with 8s timeout ≈ 40–90 seconds on
-    a GitHub-hosted runner — well within the weekly job's 90-minute budget
-    even when combined with LLM generation and TTS encoding.
+    Typical timing on 100 URLs:
+      - Layer 1: 40–90 s (80–85 % hit)
+      - Layer 2: 30–80 s on the ~15–20 remaining URLs
+      - Total: well under 3 min, fits comfortably in the daily 25-min budget.
     """
     unique_urls = list(dict.fromkeys(urls))
-    logger.info("batch_extract: fetching %d unique URLs (concurrency=%d, timeout=%.0fs)",
-                len(unique_urls), BATCH_CONCURRENCY, HTTP_TIMEOUT)
+    logger.info(
+        "batch_extract: fetching %d unique URLs (L1 concurrency=%d, timeout=%.0fs; "
+        "L2 jina enabled=%s)",
+        len(unique_urls), BATCH_CONCURRENCY, HTTP_TIMEOUT, _jina_enabled(),
+    )
     try:
         results = _run_async(_batch_extract_async(unique_urls))
     except Exception as exc:
@@ -182,7 +310,12 @@ def batch_extract(urls: list[str]) -> dict[str, Optional[ExtractedContent]]:
 
 @lru_cache(maxsize=512)
 def extract_article_content(url: str) -> Optional[ExtractedContent]:
-    """Single-URL extraction (cached).  Used by ad-hoc callers outside the batch path."""
+    """Single-URL extraction (cached). Tries Layer 1 then Jina Reader fallback.
+
+    Used by ad-hoc callers outside the batch path. Respects the same
+    JINA_READER_ENABLED / JINA_API_KEY toggles as batch_extract.
+    """
+    # Layer 1
     try:
         timeout = httpx.Timeout(connect=5.0, read=HTTP_TIMEOUT, write=5.0, pool=5.0)
         with httpx.Client(timeout=timeout, headers={"User-Agent": USER_AGENT},
@@ -191,9 +324,36 @@ def extract_article_content(url: str) -> Optional[ExtractedContent]:
             resp.raise_for_status()
             if len(resp.content) > 5_000_000:
                 return None
-            return _parse_html(url, resp.text)
+            parsed = _parse_html(url, resp.text)
+            if parsed is not None:
+                return parsed
+    except Exception:
+        pass
+
+    # Layer 2 — Jina Reader
+    if not _jina_enabled():
+        return None
+    api_key = _jina_api_key()
+    try:
+        timeout = httpx.Timeout(connect=10.0, read=JINA_TIMEOUT, write=10.0, pool=10.0)
+        headers = {
+            "User-Agent": USER_AGENT,
+            "Accept": "text/plain",
+            "X-Return-Format": "markdown",
+        }
+        if api_key:
+            headers["Authorization"] = f"Bearer {api_key}"
+        with httpx.Client(timeout=timeout, follow_redirects=True) as client:
+            resp = client.get(JINA_READER_BASE + url, headers=headers)
+            resp.raise_for_status()
+            body = clean_text(resp.text or "")
+            if len(body) >= JINA_MIN_CHARS:
+                return ExtractedContent(
+                    url=url, text=body[:MAX_CONTENT_LENGTH], method="jina-reader",
+                )
     except Exception:
         return None
+    return None
 
 
 def fetch_article_text(url: str) -> str:

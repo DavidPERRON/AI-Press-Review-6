@@ -136,28 +136,47 @@ jobs:
           RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
         run: |
           set -e
-          # ── Pre-flight: validate LLM_API_KEY before burning 8 minutes crawling ──
-          # The key is passed via secret; if it is empty/whitespace the Authorization
-          # header is never sent and every LLM call fails with HTTP 401.
+          # ── Pre-flight: fail fast on missing secrets/variables ──────────────
+          # Before this block an empty secret meant every LLM/TTS/R2 call
+          # failed late with a 401 or missing-credential error, after the
+          # pipeline had already burned 8+ minutes crawling. The original
+          # LLM_API_KEY-only check caught the most common case, but a missing
+          # CARTESIA_* or R2_* still only surfaced at the end of a full run.
+          # Now we validate every required input in one pass and emit a
+          # consolidated error listing exactly what to set. Same block is
+          # copied into weekly-generate.yml — keep them in sync.
           python3 - <<'PREFLIGHT'
           import os, sys
-          key = os.environ.get("LLM_API_KEY", "").strip()
+          locale = os.environ.get("APR_LOCALE", "en").strip().lower() or "en"
+          voice_var = "CARTESIA_VOICE_ID_FR" if locale == "fr" else "CARTESIA_VOICE_ID"
+          required = [
+              ("LLM_API_KEY",         "secret",   "OpenRouter API key (editorial)"),
+              ("CARTESIA_API_KEY",    "secret",   "Cartesia API key (TTS)"),
+              ("R2_ACCESS_KEY_ID",    "secret",   "Cloudflare R2 access key ID (audio upload)"),
+              ("R2_SECRET_ACCESS_KEY","secret",   "Cloudflare R2 secret access key (audio upload)"),
+              ("R2_BUCKET_NAME",      "variable", "Cloudflare R2 bucket name"),
+              ("R2_ENDPOINT",         "variable", "Cloudflare R2 endpoint URL"),
+              (voice_var,             "variable", f"Cartesia voice ID for locale={locale}"),
+          ]
           placeholders = {"none", "null", "placeholder", "changeme",
                           "your-api-key", "your_api_key", "xxx", "todo"}
-          if not key:
+          missing = []
+          for name, kind, desc in required:
+              val = os.environ.get(name, "").strip()
+              if not val:
+                  missing.append(f"  - {name} ({kind}) -- {desc}")
+              elif val.lower() in placeholders:
+                  missing.append(f"  - {name} ({kind}) -- placeholder value {val!r}, {desc}")
+          if missing:
               sys.exit(
-                  "ERROR: LLM_API_KEY is empty or whitespace.\n"
-                  "  → Go to repo Settings → Secrets and variables → Actions\n"
-                  "  → Create / update secret LLM_API_KEY with your OpenRouter key"
+                  "ERROR: required secrets/variables are missing or empty:\n"
+                  + "\n".join(missing)
+                  + "\n\nGo to repo Settings -> Secrets and variables -> Actions.\n"
+                  "  Secrets in the 'Secrets' tab. Variables in the 'Variables' tab."
               )
-          if key.lower() in placeholders:
-              sys.exit(
-                  f"ERROR: LLM_API_KEY looks like a placeholder ({key!r}).\n"
-                  "  → Replace it with your real OpenRouter key at https://openrouter.ai/keys"
-              )
-          # Print a safe debug hint: first 6 chars + length
-          hint = key[:6] + "..." if len(key) > 6 else key[:3] + "..."
-          print(f"LLM_API_KEY OK — {len(key)} chars, starts with {hint}")
+          llm_key = os.environ["LLM_API_KEY"].strip()
+          hint = llm_key[:6] + "..." if len(llm_key) > 6 else llm_key[:3] + "..."
+          print(f"Pre-flight OK - LLM_API_KEY: {len(llm_key)} chars, starts with {hint}")
           PREFLIGHT
           RUN_DATE="${RUN_DATE_INPUT}"
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi

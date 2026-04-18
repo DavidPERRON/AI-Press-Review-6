@@ -99,8 +99,8 @@ jobs:
           CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}
           R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
-          R2_ACCESS_KEY_ID: ${{ secrets.CLOUD_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUD_SECRET_KEY }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
           # Shell-injection hardening — see daily-generate.yml for the pattern.
           RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
@@ -124,8 +124,8 @@ jobs:
           required = [
               ("LLM_API_KEY",         "secret",   "OpenRouter API key (editorial)"),
               ("CARTESIA_API_KEY",    "secret",   "Cartesia API key (TTS)"),
-              ("CLOUD_ACCESS_KEY_ID",    "secret",   "Cloudflare R2 access key ID (audio upload)"),
-              ("CLOUD_SECRET_KEY","secret",   "Cloudflare R2 secret access key (audio upload)"),
+              ("R2_ACCESS_KEY_ID",    "secret",   "Cloudflare R2 access key ID (audio upload)"),
+              ("R2_SECRET_ACCESS_KEY","secret",   "Cloudflare R2 secret access key (audio upload)"),
               ("R2_BUCKET_NAME",      "variable", "Cloudflare R2 bucket name"),
               ("R2_ENDPOINT",         "variable", "Cloudflare R2 endpoint URL"),
               (voice_var,             "variable", f"Cartesia voice ID for locale={locale}"),

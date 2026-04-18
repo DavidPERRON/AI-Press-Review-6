@@ -128,7 +128,7 @@ jobs:
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
+          NEWSAPI_API_KEY: ${{ secrets.NEWS_API_KEY }}
           # Untrusted workflow input — MUST be read via env to avoid shell
           # injection. Pasting `${{ github.event.inputs.run_date }}` directly
           # into a `run:` script lets a triggering actor execute arbitrary

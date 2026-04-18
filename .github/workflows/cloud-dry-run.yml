@@ -87,7 +87,7 @@ jobs:
           # voice_id_env in podcast.yaml.
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}
-          NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
+          NEWSAPI_API_KEY: ${{ secrets.NEWS_API_KEY }}
           # Shell-injection hardening — untrusted inputs come via env only.
           RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
           PROFILE_INPUT: ${{ github.event.inputs.profile }}

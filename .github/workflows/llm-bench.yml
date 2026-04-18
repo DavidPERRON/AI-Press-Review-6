@@ -57,7 +57,7 @@ jobs:
         env:
           LLM_BASE_URL: ${{ vars.LLM_BASE_URL }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-          NEWSAPI_API_KEY: ${{ secrets.NEWSAPI_API_KEY }}
+          NEWSAPI_API_KEY: ${{ secrets.NEWS_API_KEY }}
           # Intentionally do NOT pass LLM_EDITOR_MODEL / FALLBACK — the script
           # overrides per-model and neutralises the fallback during the run.
           # Untrusted workflow inputs — consumed via env, never interpolated

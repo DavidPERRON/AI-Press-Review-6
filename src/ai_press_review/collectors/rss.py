@@ -15,6 +15,17 @@ logger = logging.getLogger(__name__)
 MAX_FEED_WORKERS = 6
 MAX_RESOLVE_WORKERS = 12
 
+# Per-feed HTTP timeout (seconds). feedparser.parse(url) uses urllib with NO
+# timeout by default — a single slow/blocked feed can hang the whole
+# ThreadPoolExecutor forever because as_completed waits on every future.
+# Real incident 2026-04-18: Google News RSS started silently rate-limiting the
+# GitHub-hosted runner's IP range; 11 google_news feeds never returned and the
+# job sat idle for 40 min before being cancelled. Fetching via requests with
+# an explicit timeout and feeding raw bytes to feedparser bounds each feed to
+# a hard wall.
+FEED_HTTP_CONNECT_TIMEOUT = 5.0
+FEED_HTTP_READ_TIMEOUT = 15.0
+
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -25,9 +36,23 @@ USER_AGENT = (
 def _parse_single_feed(feed_url: str, freshness_hours: int) -> list[SourceItem]:
     items: list[SourceItem] = []
     try:
-        parsed = feedparser.parse(feed_url)
-    except Exception:
-        logger.warning("Failed to parse RSS feed: %s", feed_url)
+        # Fetch bytes ourselves so we control the timeout. feedparser.parse(url)
+        # silently calls urllib.request.urlopen with no timeout — that's what
+        # hung the pipeline on 2026-04-18 when Google News started throttling.
+        resp = requests.get(
+            feed_url,
+            timeout=(FEED_HTTP_CONNECT_TIMEOUT, FEED_HTTP_READ_TIMEOUT),
+            headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml, application/atom+xml, application/xml;q=0.9, */*;q=0.8"},
+            allow_redirects=True,
+        )
+        resp.raise_for_status()
+        # feedparser accepts bytes directly — no network call on this path.
+        parsed = feedparser.parse(resp.content)
+    except requests.exceptions.Timeout:
+        logger.warning("RSS feed timed out (>%.0fs): %s", FEED_HTTP_READ_TIMEOUT, feed_url[:80])
+        return items
+    except Exception as exc:
+        logger.warning("Failed to parse RSS feed %s: %s", feed_url[:80], exc)
         return items
 
     for entry in parsed.entries:
@@ -164,19 +189,38 @@ def fetch_rss_entries(feed_urls: Iterable[str], freshness_hours: int) -> list[So
     feed_list = list(feed_urls)
     all_items: list[SourceItem] = []
 
+    # Global safety wall: even if every single feed exhausts its internal
+    # timeout serially (worst case), the whole gather should finish within
+    # ceil(N / MAX_FEED_WORKERS) * FEED_HTTP_READ_TIMEOUT seconds plus slack.
+    # Using a generous multiplier here so slow-but-eventually-healthy feeds
+    # aren't punished; the per-feed timeout already bounds the real tail.
+    gather_deadline = max(60.0, (len(feed_list) / MAX_FEED_WORKERS + 1) * (
+        FEED_HTTP_CONNECT_TIMEOUT + FEED_HTTP_READ_TIMEOUT + 5.0
+    ))
+
     with ThreadPoolExecutor(max_workers=MAX_FEED_WORKERS) as executor:
         futures = {
             executor.submit(_parse_single_feed, url, freshness_hours): url
             for url in feed_list
         }
-        for future in as_completed(futures):
-            feed_url = futures[future]
-            try:
-                items = future.result()
-                all_items.extend(items)
-                logger.info("RSS feed %s: %d entries", feed_url[:80], len(items))
-            except Exception:
-                logger.warning("RSS feed failed: %s", feed_url)
+        try:
+            for future in as_completed(futures, timeout=gather_deadline):
+                feed_url = futures[future]
+                try:
+                    items = future.result(timeout=FEED_HTTP_CONNECT_TIMEOUT + FEED_HTTP_READ_TIMEOUT + 5.0)
+                    all_items.extend(items)
+                    logger.info("RSS feed %s: %d entries", feed_url[:80], len(items))
+                except Exception as exc:
+                    logger.warning("RSS feed failed %s: %s", feed_url[:80], exc)
+        except TimeoutError:
+            # Kill-switch: don't let the whole pipeline wait on stragglers.
+            still_pending = [futures[f] for f in futures if not f.done()]
+            logger.warning(
+                "RSS gather deadline (%.0fs) exceeded — %d feed(s) still pending, "
+                "moving on without them: %s",
+                gather_deadline, len(still_pending),
+                ", ".join(u[:60] for u in still_pending[:5]),
+            )
 
     # Resolve Google News redirects to actual article URLs
     all_items = _resolve_google_news_urls(all_items)

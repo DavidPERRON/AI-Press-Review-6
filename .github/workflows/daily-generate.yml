@@ -1,4 +1,4 @@
-name: Daily Generate
+name: Générer — épisode du jour
 
 # Genere l'episode quotidien Lun-Ven a 5h45 Paris (3h45 UTC ete / 4h45 UTC hiver)
 # Le podcast publie a 7h Paris — le run demarre a 5h45 pour laisser ~1h15

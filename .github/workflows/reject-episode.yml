@@ -1,4 +1,4 @@
-name: Reject Episode
+name: Rejeter le brouillon
 
 # Declenchement manuel pour rejeter le draft en attente pour une locale donnee.
 # Supprime l'audio de R2 et marque le draft comme rejete dans

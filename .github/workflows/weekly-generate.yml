@@ -1,4 +1,4 @@
-name: Weekly Generate
+name: Générer — récap hebdo
 
 # Genere le recap hebdomadaire le Samedi a 6h Paris
 # Matrix: genere EN puis FR en serie (max-parallel: 1) pour eviter les races

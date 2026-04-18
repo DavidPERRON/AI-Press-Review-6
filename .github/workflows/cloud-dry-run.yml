@@ -1,4 +1,4 @@
-name: Cloud Dry Run
+name: Simuler le pipeline (sans publication)
 
 on:
   workflow_dispatch:

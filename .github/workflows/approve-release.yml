@@ -1,4 +1,4 @@
-name: Approve & Release Now
+name: Approuver et publier
 
 # Declenchement manuel pour publier le draft immediatement
 # (sans attendre l'auto-release de 10h).

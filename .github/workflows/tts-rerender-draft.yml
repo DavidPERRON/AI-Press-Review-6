@@ -1,4 +1,4 @@
-name: TTS Rerender Draft
+name: Resynthétiser l'audio
 
 # Re-synthesise the audio for an existing pending draft without re-crawling
 # or re-running the LLM.  Pulls script.txt from a prior daily-generate artifact,

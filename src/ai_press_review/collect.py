@@ -365,10 +365,10 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     #   3. Keep the rest in a separate pool — they enter Phase 4 on summary only
     #      and can still pass the relevance gate if their summary is strong enough.
     #
-    # Effect: crawl drops from ~700 to ~200 items → ~5-7 min instead of 22-25 min.
+    # Effect: crawl drops from ~700 to ~100 items → ~1-2 min with httpx async.
     # Trade-off: a few articles with weak summaries but rich content may be missed.
     # Mitigation: domain-authority items are pre-scored high and always crawled.
-    PRE_CRAWL_KEEP = 200
+    PRE_CRAWL_KEEP = 100
     if len(candidates) > PRE_CRAWL_KEEP:
         for item in candidates:
             item.relevance_score = _score_source(item, settings.scoring)

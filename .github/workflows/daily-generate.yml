@@ -84,9 +84,6 @@ jobs:
       - name: Run tests
         run: pytest tests/ -v --tb=short
 
-      - name: Install Chromium for crawler
-        run: python -m playwright install chromium
-
       - name: Generate daily draft
         env:
           # Locale selector — drives load_settings() + state file suffix

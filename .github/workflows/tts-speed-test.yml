@@ -33,7 +33,7 @@ jobs:
 
       - name: Render TTS and report WPM
         env:
-          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           SPEED: ${{ github.event.inputs.speed }}
         run: |

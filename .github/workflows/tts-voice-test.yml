@@ -40,7 +40,7 @@ jobs:
 
       - name: Render TTS for candidate voice
         env:
-          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
           VOICE_ID: ${{ github.event.inputs.voice_id }}
           VOICE_NAME: ${{ github.event.inputs.voice_name }}
           SPEED: ${{ github.event.inputs.speed }}

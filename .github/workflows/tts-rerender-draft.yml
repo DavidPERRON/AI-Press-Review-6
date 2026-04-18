@@ -83,7 +83,7 @@ jobs:
       - name: Re-render TTS, upload to R2, update pending draft
         env:
           APR_LOCALE: ${{ github.event.inputs.locale }}
-          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}

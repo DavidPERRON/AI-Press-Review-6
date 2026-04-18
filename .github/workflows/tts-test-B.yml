@@ -41,7 +41,7 @@ jobs:
 
       - name: Render TTS with fade + normalize
         env:
-          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           SPEED: ${{ github.event.inputs.speed }}
           FADE_MS: ${{ github.event.inputs.fade_ms }}

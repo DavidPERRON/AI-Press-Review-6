@@ -118,7 +118,7 @@ jobs:
           LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
           LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
           # Both voice IDs are passed — settings._apply_locale picks the right
           # one via voice_id_env in podcast.yaml (CARTESIA_VOICE_ID for EN,
           # CARTESIA_VOICE_ID_FR for FR).

@@ -11,7 +11,16 @@ name: Daily Generate
 
 on:
   schedule:
-    - cron: '45 3 * * 1-5'   # 5h45 Paris CEST (ajuster a '45 4' en hiver si besoin)
+    # Two crons stabilize the Paris 5h45 local time year-round. GitHub cron
+    # runs on UTC, so a single '45 3' entry that's correct in summer (CEST =
+    # UTC+2) publishes an hour early in winter (CET = UTC+1). Before this
+    # split, the workflow comment said 'ajuster en hiver si besoin' — which
+    # no one ever did, so Nov–Mar runs fired at 4h45 Paris for the listener.
+    # The month lists are disjoint, so only one fires on any given day. The
+    # two DST-switch Sundays each year produce at most a 1-hour skew on
+    # Monday's run; that's acceptable versus the everyday 1-hour drift.
+    - cron: '45 3 * 4-10 1-5'       # 5h45 Paris CEST (Apr-Oct, UTC+2)
+    - cron: '45 4 * 1-3,11,12 1-5'  # 5h45 Paris CET  (Nov-Mar, UTC+1)
   workflow_dispatch:
     inputs:
       run_date:

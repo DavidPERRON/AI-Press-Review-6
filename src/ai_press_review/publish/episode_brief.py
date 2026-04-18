@@ -24,6 +24,18 @@ def generate_episode_brief(episode_data: dict) -> str:
     template = TEMPLATE_PATH.read_text(encoding='utf-8')
     html = template
 
+    # Locale-derived fields. Before the 2026-04-18 fix, FR episode briefs
+    # rendered with <html lang="en">, canonical URLs pointing to /episodes/
+    # (not /fr/episodes/), inLanguage=en in JSON-LD, and the EN series name
+    # in <title>. Google treated FR pages as duplicates of EN and skipped
+    # them from the FR index. We now pull the locale-specific site base,
+    # HTML lang attribute, and series title from Settings so a FR render
+    # produces correct hreflang-consistent metadata.
+    settings = load_settings()
+    site_base = (settings.site_base_url or '').rstrip('/')
+    html_lang = (settings.locale or 'en').strip().lower() or 'en'
+    series_title = settings.podcast_title or 'AI Press Review'
+
     # ── Simple placeholders ──
     replacements = {
         '{{EPISODE_TITLE}}': escape(episode_data.get('title', '')),
@@ -40,6 +52,9 @@ def generate_episode_brief(episode_data: dict) -> str:
         '{{PREV_EPISODE_TITLE}}': escape(episode_data.get('prev_title', '')),
         '{{NEXT_EPISODE_URL}}': escape(episode_data.get('next_url', '')),
         '{{NEXT_EPISODE_TITLE}}': escape(episode_data.get('next_title', '')),
+        '{{HTML_LANG}}': escape(html_lang),
+        '{{SITE_BASE_URL}}': escape(site_base),
+        '{{SERIES_TITLE}}': escape(series_title),
     }
     for placeholder, value in replacements.items():
         html = html.replace(placeholder, value)
@@ -99,7 +114,9 @@ def generate_episode_brief(episode_data: dict) -> str:
 
     # ── Write output ──
     date_iso = episode_data.get('date_iso', 'unknown')
-    settings = load_settings()
+    # `settings` was loaded at the top of the function for locale-aware
+    # placeholder resolution — reuse it here rather than paying for a
+    # second YAML/env parse.
     episodes_dir = settings.docs_output_dir / 'episodes'
     episodes_dir.mkdir(parents=True, exist_ok=True)
     out_path = episodes_dir / f'{date_iso}.html'

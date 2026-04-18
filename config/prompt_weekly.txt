@@ -8,8 +8,8 @@ CRITICAL — JSON SECTION KEYS (read this first)
 
 Your JSON response MUST contain a "sections" object with EXACTLY these four keys in EXACTLY this order:
   "weekly_intro"     — 1 to 2 paragraphs introducing the 2-part structure in natural spoken language
-  "weekly_news"      — 8 to 14 paragraphs: Friday's AI news ONLY (post-NYSE close signals included)
-  "weekly_use_cases" — 5 to 8 paragraphs: Friday's concrete AI deployments ONLY
+  "weekly_news"      — 8 to 18 paragraphs: Friday's AI news ONLY (post-NYSE close signals included)
+  "weekly_use_cases" — 5 to 10 paragraphs: Friday's concrete AI deployments ONLY
   "weekly_next_week" — 3 to 5 paragraphs: what to watch next week
 
 DO NOT use any other key name. The following key names are FORBIDDEN and will cause immediate pipeline failure:

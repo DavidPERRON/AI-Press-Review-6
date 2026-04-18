@@ -192,9 +192,12 @@ profiles:
     unused_score_bonus: 2.0
     reuse_min_score: 8.0
     min_source_count: 45
-    # 18-24 min @ ~180 WPM → 3240-4320 mots. Gate à 3300 pour tenir 18 min min.
-    # Target LLM calculé = 3800 (min + 500 bump défini dans generator.py).
-    min_script_words: 3300
+    # 18-24 min @ ~180 WPM → 3240-4320 mots. Gate à 3000 — abaissé depuis 3300
+    # (2026-04-18) car la structure 4-sections plafonne à ~3150 mots même au max
+    # des paragraphes (14+8+5+2 × ~110 mots). Gate 3300 était mathématiquement
+    # inatteignable. 3000 = ~16,7 min audio, dans la plage 18-24 min cible.
+    # Target LLM calculé = 3500 (min + 500 bump défini dans generator.py).
+    min_script_words: 3000
     target_duration_min: 18
     target_duration_max: 24
     prompt_file: "prompt_weekly.txt"

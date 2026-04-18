@@ -129,7 +129,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 ],
                 "weekly_news": [
                     "KEY NAME IS 'weekly_news' — do not rename. "
-                    "8 to 14 paragraphs of 80-110 words each. "
+                    "8 to 18 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY sources published on the most recent Friday in the manifest — "
                     "do NOT include news from earlier in the week. "
                     "Also include any post-NYSE-close developments or overnight signals (Asian markets, "
@@ -145,7 +145,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 ],
                 "weekly_use_cases": [
                     "KEY NAME IS 'weekly_use_cases' — do not rename. "
-                    "5 to 8 paragraphs of 80-110 words each. "
+                    "5 to 10 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY deployment news published on the most recent Friday in the manifest. "
                     "Friday's most concrete AI deployments. ONE deployment per paragraph. "
                     "Prefer numbers: revenue %, latency ms, users, cost delta, headcount. "

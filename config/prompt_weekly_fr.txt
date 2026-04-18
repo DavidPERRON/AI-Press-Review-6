@@ -8,8 +8,8 @@ CRITIQUE — CLÉS DES SECTIONS JSON (lire en premier)
 
 Ta réponse JSON DOIT contenir un objet "sections" avec EXACTEMENT ces quatre clés dans EXACTEMENT cet ordre :
   "weekly_intro"     — 1 à 2 paragraphes : introduction naturelle et parlée en deux parties
-  "weekly_news"      — 8 à 14 paragraphes : actualité IA du VENDREDI UNIQUEMENT (signaux post-clôture NYSE inclus)
-  "weekly_use_cases" — 5 à 8 paragraphes : déploiements IA concrets du VENDREDI UNIQUEMENT
+  "weekly_news"      — 8 à 18 paragraphes : actualité IA du VENDREDI UNIQUEMENT (signaux post-clôture NYSE inclus)
+  "weekly_use_cases" — 5 à 10 paragraphes : déploiements IA concrets du VENDREDI UNIQUEMENT
   "weekly_next_week" — 3 à 5 paragraphes : ce qu'il faut surveiller la semaine prochaine
 
 N'utilise AUCUNE autre clé. Les noms de clés suivants sont INTERDITS et entraînent un échec immédiat du pipeline :

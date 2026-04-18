@@ -14,14 +14,14 @@ from ai_press_review.editorial.validate import (
 def _make_payload(overrides=None):
     base = {
         "highlights_label": "Highlights",
-        "tomorrow_pedagogical_concept": "What is inference",
         "sections": {
+            "daily_intro": ["OpenAI launched a new model today. Off the radar, a quiet Asian market signal." * 1] * 1,
             "ai_news": ["OpenAI launched a new model today with significant performance gains." * 2] * 4,
             "use_cases_and_deployments": ["Banks are deploying AI agents for customer service automation." * 2] * 3,
             "tools_and_practice": ["New developer tools simplify fine-tuning of large language models." * 2] * 3,
             "weak_signals_and_trends": ["Experts observe a shift toward smaller more efficient models." * 2] * 2,
+            "daily_offradar": ["Off the radar. A quiet signal from an Asian lab not yet covered." * 2] * 2,
             "research_and_breakthroughs": ["A new paper demonstrates improved reasoning in language models." * 2] * 3,
-            "education_and_pedagogy": ["Retrieval augmented generation combines search with text generation." * 2] * 2,
         },
     }
     if overrides:
@@ -45,13 +45,8 @@ def test_validate_section_payload_valid():
 
 def test_validate_section_payload_missing_section():
     payload = _make_payload()
-    del payload["sections"]["ai_news"]
-    # The error now names the missing key directly so a prompt-drift case
-    # (LLM drops or renames a section) is immediately diagnosable from the
-    # traceback. The old "Section order does not match" message only fires
-    # when every required key is present but the ordering differs — a much
-    # rarer case, covered by test_validate_section_payload_wrong_order.
-    with pytest.raises(ValueError, match=r"Section keys mismatch.*missing=\['ai_news'\]"):
+    del payload["sections"]["daily_offradar"]
+    with pytest.raises(ValueError, match=r"Section keys mismatch.*missing=\['daily_offradar'\]"):
         validate_section_payload(payload)
 
 
@@ -71,17 +66,6 @@ def test_validate_section_payload_empty_paragraphs():
     with pytest.raises(ValueError, match="Missing section content"):
         validate_section_payload(payload)
 
-
-def test_validate_section_payload_missing_tomorrow():
-    payload = _make_payload({"tomorrow_pedagogical_concept": ""})
-    with pytest.raises(ValueError, match="Tomorrow pedagogical concept is missing"):
-        validate_section_payload(payload)
-
-
-def test_validate_section_payload_tomorrow_too_long():
-    payload = _make_payload({"tomorrow_pedagogical_concept": " ".join(["word"] * 15)})
-    with pytest.raises(ValueError, match="too long"):
-        validate_section_payload(payload)
 
 
 def test_assemble_script_produces_valid_output():

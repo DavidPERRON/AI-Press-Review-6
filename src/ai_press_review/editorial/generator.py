@@ -120,12 +120,15 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 "weekly_intro": [
                     "KEY NAME IS 'weekly_intro' — do not rename. "
                     "1 to 2 paragraphs of 60-90 words each. "
-                    "In natural spoken language, introduce this episode's 2-part structure: "
-                    "first, you will cover the AI news and deployments from this Friday (~15 minutes); "
-                    "then, a focused look at what to watch in the coming week (~5 minutes). "
-                    "Do NOT say 'Part 1' or 'Part 2'. Use natural language: 'We start with...', 'We close with...'. "
+                    "In natural spoken language, introduce this episode's 3-part structure: "
+                    "first, you will cover the AI news and deployments from this Friday (~13 minutes); "
+                    "then, a brief segment of signals absent from mainstream tech media — the kind of intelligence "
+                    "Bloomberg hasn't surfaced yet (~4 minutes); "
+                    "finally, a focused look at what to watch in the coming week (~5 minutes). "
+                    "Do NOT say 'Part 1', 'Part 2', or 'Part 3'. Use natural language. "
                     "Reference Friday explicitly ('this Friday', 'hier' in FR). "
-                    "No filler. End on a hook that makes the listener lean in.",
+                    "TEASE the off-radar segment: 1 sentence that makes the listener curious about what mainstream media missed. "
+                    "No filler. Keep it tight.",
                 ],
                 "weekly_news": [
                     "KEY NAME IS 'weekly_news' — do not rename. "
@@ -195,12 +198,20 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             ),
             "opening_news_title": "string — the most impactful headline of the day",
             "highlights_label": "1-2 words summarizing the day's theme",
-            "tomorrow_pedagogical_concept": "one short sentence fragment, no more than 12 words, announcing a concept to explain tomorrow",
             "sections": {
                 # IMPORTANT: variable paragraph count per section. One paragraph = ONE
                 # distinct story/fact. Do NOT pad. Do NOT write synthesis paragraphs
                 # that recombine facts already stated elsewhere. If a fact only fills
                 # 60 words cleanly, write 60 and move on — never stretch to hit a quota.
+                "daily_intro": [
+                    "KEY NAME IS 'daily_intro' — do not rename. "
+                    "EXACTLY 1 paragraph of 50-70 words. "
+                    "Very brief spoken opening: name the 2-3 biggest stories in one tight sentence each, "
+                    "then close with ONE sentence teasing the off-radar segment — "
+                    "FR: something like 'Et sous le radar, [1 fact/signal that Bloomberg hasn't covered].' "
+                    "EN: 'Off the radar, [1 fact/signal the mainstream missed].' "
+                    "No greeting. No 'welcome'. No 'today we cover'. Start directly with the first story.",
+                ],
                 "ai_news": [
                     "6 to 10 paragraphs of 80-110 words each. ONE story per paragraph: launch, partnership, funding, or major corporate move. Lead with the biggest of the day. No transitions between stories inside this section — end one, start the next.",
                 ],
@@ -213,11 +224,21 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 "weak_signals_and_trends": [
                     "2 to 3 paragraphs of 80-110 words each. ONE concrete signal per paragraph, each grounded in AT LEAST TWO distinct cited facts (different companies, different domains, or different papers). NEVER a synthesis of what you already said in the previous sections. If you have no genuine signal, write only two paragraphs and keep them tight.",
                 ],
+                "daily_offradar": [
+                    "KEY NAME IS 'daily_offradar' — do not rename. "
+                    "2 to 4 paragraphs of 80-110 words each. "
+                    "Signals absent from mainstream tech media but material for AI business strategy. "
+                    "Draw from: specialized AI research blogs, non-anglophone sources (Asian markets, "
+                    "European labs, government filings), academic preprints not yet covered, "
+                    "niche industry verticals, open-source releases from non-famous actors, "
+                    "hiring patterns, quiet acquisitions, regulatory moves outside the US. "
+                    "ONE signal per paragraph — novelty and forward-looking relevance over volume. "
+                    "Never repeat a story already covered earlier in this script. "
+                    "First paragraph opens with: FR 'Sous le radar.' | EN 'Off the radar.' "
+                    "— then a period, then the first signal.",
+                ],
                 "research_and_breakthroughs": [
                     "3 to 5 paragraphs of 80-110 words each. ONE result per paragraph — paper title or lab, what was achieved (one concrete number or comparison), and why it matters in one sentence. No method explanation unless a finance exec could not otherwise understand the result.",
-                ],
-                "education_and_pedagogy": [
-                    "exactly 2 paragraphs of 80-110 words each. Paragraph 1: one concept introduced with a concrete analogy. Paragraph 2: why the concept matters in practice today — tie to ONE of the stories covered earlier. No third paragraph.",
                 ],
             },
         }
@@ -253,7 +274,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "Each paragraph MUST be between 80 and 110 words. Never shorter than 80. Never longer than 110. "
             "Each paragraph covers ONE distinct story or fact — one story per paragraph, never merge two into one, never split one across two. "
             "If a story only carries 60 words of actual substance, DO NOT stretch it. Pick another story from the manifest instead. "
-            "Produce between 24 and 34 paragraphs total across all sections, distributed per the schema ranges. "
+            "Produce between 24 and 36 paragraphs total across all sections, distributed per the schema ranges. "
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:
@@ -270,14 +291,14 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
     if settings.profile_name == 'weekly_recap':
         key_names_instruction = (
             "CRITICAL — WEEKLY SECTION KEYS (read this first): "
-            "Your JSON response MUST contain a \"sections\" object with EXACTLY these four keys "
+            "Your JSON response MUST contain a \"sections\" object with EXACTLY these five keys "
             "in EXACTLY this order: "
-            "\"weekly_intro\", \"weekly_news\", \"weekly_use_cases\", \"weekly_next_week\". "
+            "\"weekly_intro\", \"weekly_news\", \"weekly_use_cases\", \"weekly_offradar\", \"weekly_next_week\". "
             "Any other key name — including ai_news, use_cases_and_deployments, tools_and_practice, "
             "weak_signals_and_trends, research_and_breakthroughs, education_and_pedagogy, "
-            "news, deployments, next_week, intro, or ANY variation — will cause an immediate "
+            "news, deployments, next_week, intro, off_radar, offradar, or ANY variation — will cause an immediate "
             "validation failure and your output will be discarded. "
-            "There are exactly FOUR sections. No more, no less. "
+            "There are exactly FIVE sections. No more, no less. "
         )
     else:
         key_names_instruction = ""
@@ -286,27 +307,28 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         signpost_instructions = (
             "SECTION SIGNPOSTS (weekly only): "
             "weekly_news has NO signpost — the intro sets the context. "
-            "weekly_use_cases first paragraph opens with: FR 'Côté déploiements cette semaine.' | EN 'This week's deployments.' "
+            "weekly_use_cases first paragraph opens with: FR 'Côté déploiements.' | EN 'On deployments.' "
+            "weekly_offradar first paragraph opens with: FR 'Sous le radar.' | EN 'Off the radar.' "
             "weekly_next_week first paragraph opens with: FR 'Ce qu'il faut surveiller la semaine prochaine.' | EN 'Looking ahead to next week.' "
             "Never use pontificating bridges — no 'Pulling back from the week's news...' or equivalent. "
         )
         recycling_rule = (
             "NO RECYCLING: A fact, company, product, or study may be cited in ONE paragraph only across "
-            "the entire script. No education section in weekly — callbacks are never allowed. "
+            "the entire script. Callbacks are never allowed in any section. "
         )
     else:
         signpost_instructions = (
-            "PILLAR SIGNPOSTS: The first paragraph of every pillar after AI News opens with a SHORT factual "
-            "signpost of 3 to 6 words, then a period, then the first fact. Examples (FR): 'Côté déploiements.' / "
-            "'Côté outils.' / 'Un signal à surveiller.' / 'Côté recherche.' / 'Un concept à retenir.' (EN: "
-            "'Turning to deployments.' / 'On tools.' / 'One signal to watch.' / 'On the research front.' / "
-            "'One concept to keep.'). Never speak the pillar name itself. Never use pontificating bridges "
-            "like 'Pulling back from the day's news, a few patterns are worth flagging' — this is dead air. "
+            "SECTION SIGNPOSTS (daily): "
+            "daily_intro has NO signpost — it IS the teaser. "
+            "ai_news has NO signpost — it follows directly after the intro. "
+            "Every section after ai_news opens with a SHORT factual signpost of 3 to 6 words, a period, then the first fact. "
+            "Examples (FR): 'Côté déploiements.' / 'Côté outils.' / 'Un signal à surveiller.' / 'Sous le radar.' / 'Côté recherche.' "
+            "(EN: 'On deployments.' / 'On tools.' / 'One signal to watch.' / 'Off the radar.' / 'On the research front.'). "
+            "Never speak the section name itself. Never use pontificating bridges — dead air. "
         )
         recycling_rule = (
             "NO RECYCLING: A fact, company, product, or study may be cited in ONE paragraph only across "
-            "the entire script. Callbacks by single-name reference ('as Meta showed') are allowed only "
-            "in the education section, never elsewhere. "
+            "the entire script. No callbacks of any kind in any section. "
         )
 
     payload = {

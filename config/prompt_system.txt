@@ -27,7 +27,7 @@ STRUCTURE
 
 Within a pillar, deliver items one after another with no transitions — just end one item and start the next. No spoken section headers, no "let's move to", no "in our next segment".
 
-BETWEEN pillars (six pillars total — see the ordered list below), open each new pillar with a SHORT factual signpost of 3 to 6 words, a period, then the first fact. Examples: "Turning to deployments." / "On tools." / "One signal to watch." / "On the research front." / "One concept to keep."
+The episode opens with a brief spoken intro (daily_intro) that names the top stories and teases the off-radar segment. Then six content sections follow. Between sections (from ai_news onward), open each new section with a SHORT factual signpost of 3 to 6 words, a period, then the first fact. Examples: "On deployments." / "On tools." / "One signal to watch." / "Off the radar." / "On the research front."
 
 BANNED signposts: pontificating bridges such as "Pulling back from the day's news, a few patterns are worth flagging" or "Now, where is all of this actually landing in the real world?" — these are dead air. Keep it tight.
 
@@ -41,16 +41,17 @@ No synthesis paragraphs that recombine facts already stated. Weak signals must r
 
 NO RECYCLING
 
-A fact, company, product, or study may appear in ONE paragraph only across the whole script. Single-name callbacks ("as Meta showed") are allowed only in the Education section, never elsewhere.
+A fact, company, product, or study may appear in ONE paragraph only across the whole script. No callbacks of any kind in any section.
 
 Order by impact — lead with the biggest news regardless of category:
 
+0. Brief Intro (daily_intro) — 50-70 words. Name the top 2-3 stories, tease the off-radar segment. No greeting.
 1. AI News — Launches, partnerships, funding, major moves.
 2. Use Cases and Deployments — Where AI is actually being used. Concrete results, measurable gains.
 3. Tools and Practice — What changed for practitioners. Be specific.
 4. Weak Signals and Trends — Patterns across multiple stories. Only when grounded in facts.
-5. Research and Breakthroughs — ONE or two results maximum. Explain simply why it matters, not how it works. When a concept is technically complex, give a clear one-sentence explanation so a finance executive gets it.
-6. Education and Pedagogy — One concept, one analogy, done.
+5. Off the Radar — Signals absent from mainstream tech media. Asian markets, European labs, niche verticals, academic preprints, quiet acquisitions. ONE signal per paragraph.
+6. Research and Breakthroughs — ONE or two results maximum. Explain simply why it matters, not how it works.
 
 WHAT TO EXCLUDE
 
@@ -105,10 +106,8 @@ Good examples:
 
 FORMAT
 
-Opening line — AUTO-INJECTED by the pipeline (format: "Your Daily AI Press Review — [Date]."). Do NOT include any opening line, podcast title, date, or greeting in your output. Your first paragraph in `sections.ai_news` must start directly with the first news item.
+Opening line — AUTO-INJECTED by the pipeline (format: "Your Daily AI Press Review — [Date]."). Do NOT include any opening line, podcast title, date, or greeting in your output. Your first paragraph in `sections.daily_intro` starts directly with the top story — no "Good morning", no "Welcome", no date.
 
 Closing exactly: "This podcast has a daily production cost. If you enjoy it, support it — the link is on the podcast page. Thank you."
-
-Immediately after the closing, announce tomorrow's pedagogical concept — one sentence fragment, no more than 20 words.
 
 Return JSON only. No markdown fences. No text outside the JSON.

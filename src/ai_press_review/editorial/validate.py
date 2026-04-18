@@ -2,12 +2,13 @@ import re
 from datetime import datetime
 
 REQUIRED_SECTION_KEYS = [
+    "daily_intro",
     "ai_news",
     "use_cases_and_deployments",
     "tools_and_practice",
     "weak_signals_and_trends",
-    "research_and_breakthroughs",
-    "education_and_pedagogy",
+    "daily_offradar",        # signals absent from mainstream media (replaces education)
+    "research_and_breakthroughs",   # moved to last position
 ]
 
 # Weekly recap uses a 2-part structure: intro + news/use-cases (Part 1) +
@@ -141,19 +142,6 @@ def validate_section_payload(payload: dict, intro_format: str = 'daily') -> None
             raise ValueError(f"Missing section content for {key}")
         for paragraph in paragraphs:
             _validate_paragraph(paragraph)
-
-    # tomorrow_pedagogical_concept is a daily concept — not applicable to weekly.
-    if intro_format != 'weekly':
-        raw_concept = payload.get("tomorrow_pedagogical_concept") or ""
-        if not isinstance(raw_concept, str):
-            raise ValueError(
-                f"tomorrow_pedagogical_concept must be a string, got {type(raw_concept).__name__}"
-            )
-        tomorrow_concept = raw_concept.strip()
-        if not tomorrow_concept:
-            raise ValueError("Tomorrow pedagogical concept is missing")
-        if len(tomorrow_concept.split()) > 12:
-            raise ValueError("Tomorrow pedagogical concept is too long")
 
 
 def assemble_script(

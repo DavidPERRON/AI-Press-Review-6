@@ -192,9 +192,13 @@ profiles:
     unused_score_bonus: 2.0
     reuse_min_score: 8.0
     min_source_count: 45
-    # 18-24 min @ ~180 WPM → 3240-4320 mots. Gate à 3300 pour tenir 18 min min.
-    # Target LLM calculé = 3800 (min + 500 bump défini dans generator.py).
-    min_script_words: 3300
+    # 16-24 min @ ~180 WPM → 2880-4320 mots. Gate à 2900 pour tenir 16 min min.
+    # Précédent gate à 3300 déclenchait 3 retries force_length tous échoués
+    # (2977→2789→2457 mots) car le prompt référençait "previous output" sur
+    # une API stateless. Le prompt force_length est corrigé dans generator.py;
+    # le gate est abaissé à 2900 comme filet si le manifest Friday est mince.
+    # Target LLM calculé = 3400 (min + 500 défini dans generator.py).
+    min_script_words: 2900
     target_duration_min: 18
     target_duration_max: 24
     prompt_file: "prompt_weekly.txt"

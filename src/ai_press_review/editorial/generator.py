@@ -4,6 +4,7 @@ import json
 import logging
 import random
 import re
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -220,10 +221,19 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:
+            # Do NOT reference "previous output" — each LLM call is stateless.
+            # The model has no memory of prior attempts; telling it "your last
+            # output was too short" confuses it and consistently produces
+            # shorter scripts on each retry (observed: 2977→2789→2457 words).
+            # Instead: raise concrete paragraph-count minimums and restate the
+            # word target so the model has a fresh, unambiguous target.
             length_instructions += (
-                "CRITICAL: Your previous output was TOO SHORT. Cover MORE distinct stories from the manifest. "
-                "Do NOT lengthen existing paragraphs. Add NEW paragraphs each covering a NEW story with its own "
-                "facts: company name, number, product name, or result. Dig deeper into the manifest. "
+                f"MANDATORY: This script MUST contain at least {settings.min_script_words} words. "
+                f"Aim for {target_words} words. "
+                "Produce at least 35 paragraphs total: weekly_news must have 12+ paragraphs, "
+                "weekly_use_cases must have 7+ paragraphs, weekly_next_week must have 4+ paragraphs. "
+                "Each paragraph: exactly 80-110 words, ONE distinct story, concrete named facts. "
+                "Cover every significant Friday story in the manifest — do not skip any. "
             )
     else:
         length_instructions = (
@@ -236,12 +246,14 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:
+            # Same rationale as weekly: stateless API, no "previous output".
             length_instructions += (
-                "CRITICAL: Your previous output was TOO SHORT. You MUST cover MORE distinct stories "
-                "from the source manifest. Do NOT lengthen existing paragraphs. Do NOT add synthesis "
-                "paragraphs. Add NEW paragraphs each covering a NEW story with its own facts: company "
-                "name, number, product name, or result. Dig deeper into the manifest — there are 120 "
-                "sources there, use them. "
+                f"MANDATORY: This script MUST contain at least {settings.min_script_words} words. "
+                f"Aim for {target_words} words. "
+                "Produce at least 30 paragraphs total: ai_news must have 9+ paragraphs, "
+                "use_cases_and_deployments must have 7+, tools_and_practice must have 5+. "
+                "Each paragraph: exactly 80-110 words, ONE distinct story, concrete named facts. "
+                "Cover every significant story from the manifest — do not skip any. "
             )
 
     if settings.profile_name == 'weekly_recap':
@@ -466,9 +478,25 @@ def _extract_json(content: str) -> dict[str, Any]:
     if cleaned.startswith("```"):
         cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
         cleaned = re.sub(r"\s*```$", "", cleaned)
+
+    # Python's pure-Python JSON decoder is recursive. Very long arrays (e.g.
+    # 40+ paragraphs × long strings) can overflow the default limit of 1000
+    # frames. We temporarily raise the limit for the parse call only; the
+    # previous value is restored in the finally block so we don't change the
+    # process-wide default permanently.
+    prev_limit = sys.getrecursionlimit()
     try:
-        return json.loads(cleaned)
-    except json.JSONDecodeError:
+        sys.setrecursionlimit(max(prev_limit, 5000))
+        try:
+            return json.loads(cleaned)
+        except json.JSONDecodeError:
+            pass
+        except RecursionError:
+            raise LLMInvalidResponseError(
+                "Model returned JSON too deeply nested to parse (RecursionError). "
+                f"Response length: {len(content)} chars."
+            )
+
         # Find the outermost JSON object by matching braces
         start = cleaned.find("{")
         if start == -1:
@@ -484,11 +512,13 @@ def _extract_json(content: str) -> dict[str, Any]:
                 if depth == 0:
                     try:
                         return json.loads(cleaned[start:i + 1])
-                    except json.JSONDecodeError:
+                    except (json.JSONDecodeError, RecursionError):
                         break
         raise LLMInvalidResponseError(
             f"Model did not return valid JSON. First 500 chars: {content[:500]}"
         )
+    finally:
+        sys.setrecursionlimit(prev_limit)
 
 
 def _generate_with_model(model: str, manifest: dict, settings, force_length: bool) -> dict[str, Any]:

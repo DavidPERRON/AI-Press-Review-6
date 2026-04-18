@@ -99,8 +99,8 @@ jobs:
           CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}
           R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           NEWSAPI_API_KEY: ${{ secrets.NEWS_API_KEY }}
           # Shell-injection hardening — see daily-generate.yml for the pattern.
           RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
@@ -139,16 +139,32 @@ jobs:
                   missing.append(f"  - {name} ({kind}) -- {desc}")
               elif val.lower() in placeholders:
                   missing.append(f"  - {name} ({kind}) -- placeholder value {val!r}, {desc}")
+          # R2 credential length check — same as daily-generate.yml (keep in sync).
+          r2_ak = os.environ.get("R2_ACCESS_KEY_ID", "").strip()
+          r2_sk = os.environ.get("R2_SECRET_ACCESS_KEY", "").strip()
+          if r2_ak and len(r2_ak) != 32:
+              missing.append(
+                  f"  - R2_ACCESS_KEY_ID has {len(r2_ak)} chars (expected 32) -- "
+                  "go to Cloudflare R2 → Manage API Tokens → create an R2-specific token"
+              )
+          if r2_sk and len(r2_sk) != 64:
+              missing.append(
+                  f"  - R2_SECRET_ACCESS_KEY has {len(r2_sk)} chars (expected 64) -- "
+                  "go to Cloudflare R2 → Manage API Tokens → create an R2-specific token"
+              )
           if missing:
               sys.exit(
                   "ERROR: required secrets/variables are missing or empty:\n"
                   + "\n".join(missing)
                   + "\n\nGo to repo Settings -> Secrets and variables -> Actions.\n"
-                  "  Secrets in the 'Secrets' tab. Variables in the 'Variables' tab."
+                  "  Secrets in the 'Secrets' tab. Variables in the 'Variables' tab.\n"
+                  "  R2 keys: Cloudflare Dashboard → R2 → Manage API Tokens."
               )
           llm_key = os.environ["LLM_API_KEY"].strip()
           hint = llm_key[:6] + "..." if len(llm_key) > 6 else llm_key[:3] + "..."
           print(f"Pre-flight OK - LLM_API_KEY: {len(llm_key)} chars, starts with {hint}")
+          print(f"Pre-flight OK - R2_ACCESS_KEY_ID: {len(r2_ak)} chars (expected 32)")
+          print(f"Pre-flight OK - R2_SECRET_ACCESS_KEY: {len(r2_sk)} chars (expected 64)")
           PREFLIGHT
           RUN_DATE="${RUN_DATE_INPUT}"
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi

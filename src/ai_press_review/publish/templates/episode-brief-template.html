@@ -158,35 +158,9 @@
     /* ── MAIN CONTENT ── */
     main { max-width: 760px; margin: 0 auto; padding: 0 2rem 5rem; }
 
-    /* ── TRANSCRIPT ── */
-    .section { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
-    .section:last-child { border-bottom: none; }
-    .section-label {
-      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--accent-dim); margin-bottom: 1.75rem;
-    }
-    /* Reading-optimised body: comfortable measure (~68 chars), generous leading */
-    .script-body { max-width: 660px; }
-    .script-para {
-      font-size: 1.05rem; line-height: 1.95; color: var(--text);
-      margin-bottom: 1.75rem;
-      font-weight: 300;
-      letter-spacing: 0.01em;
-    }
-    /* First paragraph: slightly larger drop-in */
-    .script-para:first-child { font-size: 1.1rem; color: #d8d8e0; }
-    .script-para:last-child { margin-bottom: 0; }
-    /* Empty transcript notice */
-    .script-empty {
-      font-size: 0.9rem; color: var(--text-muted); font-style: italic;
-      padding: 2rem 0;
-    }
-
-    /* ── AUDIO PLAYER — at the bottom, after the read ── */
+    /* ── AUDIO PLAYER — first item in main, right under the hero ── */
     .audio-section {
-      padding: 2rem 0;
-      border-top: 1px solid var(--border);
-      margin-top: 0;
+      padding: 2.5rem 0 2rem;
     }
     .audio-section-label {
       font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
@@ -205,6 +179,69 @@
       transition: color 0.2s, border-color 0.2s;
     }
     .audio-links a:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+    /* ── FULL BRIEF — collapsible panel at bottom ── */
+    .brief-section {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .brief-details { }
+    /* Remove native marker */
+    .brief-toggle { list-style: none; }
+    .brief-toggle::-webkit-details-marker { display: none; }
+    .brief-toggle {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      cursor: pointer;
+      padding: 0.7rem 1.15rem;
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.07em; text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .brief-toggle:hover {
+      border-color: var(--accent-dim);
+      background: #14141a;
+    }
+    .brief-details[open] .brief-toggle {
+      border-color: var(--accent-dim);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .brief-chevron {
+      font-size: 1rem; line-height: 1;
+      color: var(--accent-dim);
+      transition: transform 0.22s ease;
+      display: inline-block;
+    }
+    .brief-details[open] .brief-chevron { transform: rotate(180deg); }
+
+    /* Script reading surface — appears inside the open details */
+    .brief-script-surface {
+      border: 1px solid var(--accent-dim);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 2.25rem 2rem 2rem;
+      background: #0d0d10;
+    }
+    .script-body { max-width: 660px; }
+    .script-para {
+      font-size: 1.05rem; line-height: 1.95; color: var(--text);
+      margin-bottom: 1.75rem;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+    }
+    /* First paragraph: slightly larger drop-in */
+    .script-para:first-child { font-size: 1.1rem; color: #d8d8e0; }
+    .script-para:last-child { margin-bottom: 0; }
+    /* Empty transcript notice */
+    .script-empty {
+      font-size: 0.9rem; color: var(--text-muted); font-style: italic;
+      padding: 1rem 0;
+    }
 
     /* ── EPISODE NAV ── */
     .episode-nav {
@@ -228,6 +265,7 @@
       .listen-row { max-width: 100%; }
       .episode-nav { flex-direction: column; }
       .nav-block.right { text-align: left; }
+      .brief-script-surface { padding: 1.5rem 1.25rem 1.25rem; }
     }
   </style>
 </head>
@@ -274,16 +312,7 @@
 
   <main>
 
-    <!-- EPISODE TRANSCRIPT — the read brief -->
-    <section class="section">
-      <p class="section-label">Episode brief</p>
-      <div class="script-body">
-        {{EPISODE_SCRIPT_HTML}}
-        <!-- EMPTY_NOTICE_PLACEHOLDER -->
-      </div>
-    </section>
-
-    <!-- AUDIO PLAYER — at the bottom, after reading -->
+    <!-- AUDIO PLAYER — first item after the hero summary -->
     <div class="audio-section">
       <p class="audio-section-label">Audio</p>
       <audio controls preload="none">
@@ -294,6 +323,21 @@
         <a href="{{EPISODE_AUDIO_URL}}" download>Download MP3</a>
         <a href="{{SITE_BASE_URL}}/podcast-feed.xml">RSS Feed</a>
       </div>
+    </div>
+
+    <!-- FULL BRIEF — collapsible, revealed on demand -->
+    <div class="brief-section">
+      <details class="brief-details">
+        <summary class="brief-toggle">
+          {{BRIEF_BUTTON_LABEL}}&nbsp;<span class="brief-chevron" aria-hidden="true">&#8964;</span>
+        </summary>
+        <div class="brief-script-surface">
+          <div class="script-body">
+            {{EPISODE_SCRIPT_HTML}}
+            <!-- EMPTY_NOTICE_PLACEHOLDER -->
+          </div>
+        </div>
+      </details>
     </div>
 
     <!-- EPISODE NAV -->

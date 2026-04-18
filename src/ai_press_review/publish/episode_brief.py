@@ -36,6 +36,10 @@ def generate_episode_brief(episode_data: dict) -> str:
     html_lang = (settings.locale or 'en').strip().lower() or 'en'
     series_title = settings.podcast_title or 'AI Press Review'
 
+    # ── Locale-aware labels ──
+    is_fr = html_lang == 'fr'
+    brief_button_label = 'Lire le brief complet' if is_fr else 'Read full brief'
+
     # ── Simple placeholders ──
     replacements = {
         '{{EPISODE_TITLE}}': escape(episode_data.get('title', '')),
@@ -55,6 +59,7 @@ def generate_episode_brief(episode_data: dict) -> str:
         '{{HTML_LANG}}': escape(html_lang),
         '{{SITE_BASE_URL}}': escape(site_base),
         '{{SERIES_TITLE}}': escape(series_title),
+        '{{BRIEF_BUTTON_LABEL}}': escape(brief_button_label),
     }
     for placeholder, value in replacements.items():
         html = html.replace(placeholder, value)
@@ -69,9 +74,14 @@ def generate_episode_brief(episode_data: dict) -> str:
         script_html = ''
         empty_notice = (
             '<p class="script-empty">'
-            'The full transcript for this episode is not yet available. '
-            'Use the audio player below to listen.'
-            '</p>'
+            + (
+                'Le texte intégral de cet épisode n\'est pas encore disponible. '
+                'Utilisez le lecteur audio ci-dessus pour écouter.'
+                if is_fr else
+                'The full transcript for this episode is not yet available. '
+                'Use the audio player above to listen.'
+            )
+            + '</p>'
         )
     html = html.replace('{{EPISODE_SCRIPT_HTML}}', script_html)
     html = html.replace('<!-- EMPTY_NOTICE_PLACEHOLDER -->', empty_notice)

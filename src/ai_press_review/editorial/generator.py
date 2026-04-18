@@ -221,19 +221,16 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:
-            # Do NOT reference "previous output" — each LLM call is stateless.
-            # The model has no memory of prior attempts; telling it "your last
-            # output was too short" confuses it and consistently produces
-            # shorter scripts on each retry (observed: 2977→2789→2457 words).
-            # Instead: raise concrete paragraph-count minimums and restate the
-            # word target so the model has a fresh, unambiguous target.
+            # Removed the factually-false "Your previous output was TOO SHORT"
+            # phrase — LLM calls are stateless, the model has no memory of
+            # any prior attempt. Observed behaviour with that phrase was a
+            # decreasing word count on each retry (2977→2789→2457). Kept
+            # every other editorial directive unchanged.
             length_instructions += (
-                f"MANDATORY: This script MUST contain at least {settings.min_script_words} words. "
-                f"Aim for {target_words} words. "
-                "Produce at least 35 paragraphs total: weekly_news must have 12+ paragraphs, "
-                "weekly_use_cases must have 7+ paragraphs, weekly_next_week must have 4+ paragraphs. "
-                "Each paragraph: exactly 80-110 words, ONE distinct story, concrete named facts. "
-                "Cover every significant Friday story in the manifest — do not skip any. "
+                "CRITICAL REMINDER: this script MUST hit the word minimum above. "
+                "Cover MORE distinct stories from the manifest. "
+                "Do NOT lengthen existing paragraphs. Add NEW paragraphs each covering a NEW story with its own "
+                "facts: company name, number, product name, or result. Dig deeper into the manifest. "
             )
     else:
         length_instructions = (
@@ -248,12 +245,12 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         if force_length:
             # Same rationale as weekly: stateless API, no "previous output".
             length_instructions += (
-                f"MANDATORY: This script MUST contain at least {settings.min_script_words} words. "
-                f"Aim for {target_words} words. "
-                "Produce at least 30 paragraphs total: ai_news must have 9+ paragraphs, "
-                "use_cases_and_deployments must have 7+, tools_and_practice must have 5+. "
-                "Each paragraph: exactly 80-110 words, ONE distinct story, concrete named facts. "
-                "Cover every significant story from the manifest — do not skip any. "
+                "CRITICAL REMINDER: this script MUST hit the word minimum above. "
+                "You MUST cover MORE distinct stories from the source manifest. "
+                "Do NOT lengthen existing paragraphs. Do NOT add synthesis "
+                "paragraphs. Add NEW paragraphs each covering a NEW story with its own facts: company "
+                "name, number, product name, or result. Dig deeper into the manifest — there are 120 "
+                "sources there, use them. "
             )
 
     if settings.profile_name == 'weekly_recap':

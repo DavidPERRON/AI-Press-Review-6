@@ -116,8 +116,23 @@ def validate_section_payload(payload: dict, intro_format: str = 'daily') -> None
         REQUIRED_SECTION_KEYS_WEEKLY if intro_format == 'weekly' else REQUIRED_SECTION_KEYS
     )
     sections = payload.get("sections") or {}
-    if list(sections.keys()) != required_keys:
-        raise ValueError("Section order does not match the editorial line")
+    actual_keys = list(sections.keys())
+
+    # Better error surfacing: first call out missing / extra keys by name so a
+    # prompt-drift (e.g. the LLM returning `ai_news` instead of `weekly_news`)
+    # yields an actionable message, not a generic "order does not match".
+    missing = [k for k in required_keys if k not in sections]
+    extra = [k for k in actual_keys if k not in required_keys]
+    if missing or extra:
+        raise ValueError(
+            f"Section keys mismatch — missing={missing!r}, unexpected={extra!r}, "
+            f"expected={required_keys!r}"
+        )
+    if actual_keys != required_keys:
+        raise ValueError(
+            f"Section order does not match the editorial line: got {actual_keys!r}, "
+            f"expected {required_keys!r}"
+        )
 
     for key in required_keys:
         paragraphs = sections.get(key)
@@ -128,7 +143,12 @@ def validate_section_payload(payload: dict, intro_format: str = 'daily') -> None
 
     # tomorrow_pedagogical_concept is a daily concept — not applicable to weekly.
     if intro_format != 'weekly':
-        tomorrow_concept = (payload.get("tomorrow_pedagogical_concept") or "").strip()
+        raw_concept = payload.get("tomorrow_pedagogical_concept") or ""
+        if not isinstance(raw_concept, str):
+            raise ValueError(
+                f"tomorrow_pedagogical_concept must be a string, got {type(raw_concept).__name__}"
+            )
+        tomorrow_concept = raw_concept.strip()
         if not tomorrow_concept:
             raise ValueError("Tomorrow pedagogical concept is missing")
         if len(tomorrow_concept.split()) > 12:
@@ -192,7 +212,14 @@ def validate_final_script(
         _validate_paragraph(line)
 
 
-def _validate_paragraph(text: str) -> None:
+def _validate_paragraph(text) -> None:
+    # Explicit type check so a malformed JSON payload (e.g. the LLM returning
+    # `sections.ai_news = [{"text": "…"}, "…"]`) surfaces a readable error
+    # instead of a raw AttributeError deep inside `text.strip()`.
+    if not isinstance(text, str):
+        raise ValueError(
+            f"Paragraph must be a string, got {type(text).__name__}: {text!r}"
+        )
     stripped = text.strip()
     if not stripped:
         raise ValueError("Empty paragraph found")

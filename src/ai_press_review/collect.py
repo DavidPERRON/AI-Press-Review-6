@@ -236,25 +236,38 @@ USED_SOURCES_RETENTION_DAYS = 10
 USED_SOURCES_HARD_CAP = 400
 
 
-def _update_used_sources(sources: list[SourceItem]) -> None:
-    """Record the sources cited in today's episode and trim old entries.
+def record_used_sources(entries: list[tuple[str, str]]) -> None:
+    """Record sources cited in a PUBLISHED episode and trim old entries.
 
-    Retention policy:
-    - Time-based: drop entries older than USED_SOURCES_RETENTION_DAYS (default 10).
-      This is the primary dedup window — an article that aired 11 days ago is
-      fair game again and shouldn't permanently block its own domain.
-    - Size-based: hard-cap at USED_SOURCES_HARD_CAP as a safety net against
-      runaway growth (e.g. weekly recaps that mark 200+ sources in one run).
+    Only called from `release_pending_draft` — **not** from `collect_sources`.
+    Before this refactor, collect_sources wrote used_sources on every draft,
+    so a rejected or re-generated draft still "consumed" its sources in the
+    dedup pool for 10 days. That quietly blocked those stories from any
+    future run, even though they never actually aired. Moving the write to
+    release means:
 
-    Entries without a parseable `used_at` timestamp are conservatively kept
-    under the hard cap so a legacy file with bare {title, url} items won't
-    be silently wiped on first write.
+      - Drafts that get rejected leave zero footprint.
+      - Re-generating a draft on the same day is idempotent.
+      - `used_sources.json` now truly means "published in the last N days".
+
+    *entries* is a list of (title, url) tuples — the function is deliberately
+    ignorant of the wider SourceItem shape so it can be called from the
+    release pipeline where only the pending-draft dict is available.
+
+    Retention policy (unchanged from the old implementation):
+      - Time-based: drop entries older than USED_SOURCES_RETENTION_DAYS (10).
+      - Size-based: hard-cap at USED_SOURCES_HARD_CAP as a safety net.
+      - Legacy entries without `used_at` are kept under the hard cap so a
+        pre-refactor state file isn't silently wiped on first write.
     """
     from datetime import datetime, timedelta, timezone
 
     payload = load_used_sources()
     items = payload.get("items", [])
-    fresh = [{"title": src.title, "url": src.url, "used_at": iso_now()} for src in sources[:80]]
+    fresh = [
+        {"title": title, "url": url, "used_at": iso_now()}
+        for title, url in entries[:80]
+    ]
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=USED_SOURCES_RETENTION_DAYS)
     kept: list[dict] = []
@@ -398,7 +411,10 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
         len(sources), settings.min_source_count,
     )
 
-    _update_used_sources(sources)
+    # NOTE: used_sources.json is NO LONGER updated here. Only a successfully
+    # RELEASED episode should consume its sources for dedup. See
+    # `pipeline.release_pending_draft` which calls record_used_sources at
+    # that point.
 
     manifest = {
         "run_date": run_date,

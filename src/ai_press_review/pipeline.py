@@ -5,7 +5,7 @@ import re
 import time
 from pathlib import Path
 
-from .collect import collect_sources
+from .collect import collect_sources, record_used_sources
 from .editorial.generator import generate_episode_script
 from .models import PublishedEpisode
 from .publish.feed import publish_episode
@@ -184,9 +184,12 @@ def generate_draft(
     audio_url = upload_file(audio_path, remote_key, local_preview=local_preview)
     logger.info("Upload completed: %s in %.1fs", remote_key, time.monotonic() - t0)
 
-    # Save draft state
+    # Save draft state. Also persist `source_urls` so release_pending_draft
+    # can feed record_used_sources with (title, url) pairs — collect.py no
+    # longer writes used_sources.json at collect time (see dedup refactor).
     fps = [fingerprint(s['title'], s['url']) for s in manifest['sources']]
     titles = [s['title'] for s in manifest['sources']]
+    urls = [s['url'] for s in manifest['sources']]
 
     draft_data = {
         'date': run_date,
@@ -200,6 +203,7 @@ def generate_draft(
         'duration_seconds': audio_meta['duration_seconds'],
         'source_fingerprints': fps,
         'source_titles': titles,
+        'source_urls': urls,
         'source_count': manifest['source_count'],
         'script_words': len(draft.script.split()),
         'script': draft.script,
@@ -241,6 +245,17 @@ def release_pending_draft() -> dict:
         draft_data.get('source_fingerprints', []),
         draft_data.get('source_titles', []),
     )
+
+    # Only mark the sources as "used" now that the episode is actually live.
+    # Rejected drafts never reach this point, so their sources remain in the
+    # eligible pool. Backward-compat: older drafts saved before the refactor
+    # may not carry source_urls — in that case we pair titles with empty
+    # URL strings, which still works (the dedup lookup uses both).
+    titles = draft_data.get('source_titles', []) or []
+    urls = draft_data.get('source_urls', []) or []
+    if len(urls) < len(titles):
+        urls = urls + [''] * (len(titles) - len(urls))
+    record_used_sources(list(zip(titles, urls)))
 
     draft_data['status'] = 'released'
     draft_data['released_at'] = iso_now()

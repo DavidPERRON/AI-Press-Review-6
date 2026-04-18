@@ -192,13 +192,13 @@ profiles:
     unused_score_bonus: 2.0
     reuse_min_score: 8.0
     min_source_count: 45
-    # 18-24 min @ ~180 WPM → 3240-4320 mots. Gate à 3300 pour tenir 18 min min.
-    # Target LLM calculé = 3800 (min + 500 bump défini dans generator.py).
-    # Note (2026-04-18): paragraphes max élargis (weekly_news 14→18,
-    # weekly_use_cases 8→10) — plafond structurel = 3810 mots, gate atteignable.
-    min_script_words: 3300
-    target_duration_min: 18
-    target_duration_max: 24
+    # 22-25 min @ ~180 WPM → 3960-4500 mots. Gate à 3700 pour tenir 22 min min.
+    # Target LLM calculé = 4200 (min + 500 bump défini dans generator.py).
+    # Structure: 5 sections (weekly_offradar ajouté 2026-04-18).
+    # Plafond structurel = 4360 mots (2×90 + 18×110 + 10×110 + 5×110 + 5×110).
+    min_script_words: 3700
+    target_duration_min: 22
+    target_duration_max: 25
     prompt_file: "prompt_weekly.txt"
     intro_format: "weekly"
 

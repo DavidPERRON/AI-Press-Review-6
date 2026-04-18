@@ -14,9 +14,10 @@ REQUIRED_SECTION_KEYS = [
 # what-to-watch (Part 2). Separate key list so validate_section_payload can
 # enforce the right order for each format.
 REQUIRED_SECTION_KEYS_WEEKLY = [
-    "weekly_intro",       # 1-2 §: introduces the 2-part format naturally
+    "weekly_intro",       # 1-2 §: introduces the 3-part format naturally
     "weekly_news",        # Part 1: the week's biggest news stories
     "weekly_use_cases",   # Part 1: concrete deployments this week
+    "weekly_offradar",    # Part 1b: signals absent from mainstream media
     "weekly_next_week",   # Part 2: what to watch next week (news only)
 ]
 

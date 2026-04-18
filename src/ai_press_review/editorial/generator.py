@@ -97,10 +97,10 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         )
 
     # Target well above the minimum so the LLM aims for the middle of the
-    # target duration band. At ~180 WPM, 18 min = 3240 words, 20 min = 3600.
+    # target duration band. At ~180 WPM, 22 min = 3960 words, 25 min = 4500.
     # Overshoot the minimum by 500 words to leave room for TTS variance and
     # avoid dancing on the gate.
-    target_words = max(settings.min_script_words + 500, 3000)
+    target_words = max(settings.min_script_words + 500, 3500)
 
     if settings.profile_name == 'weekly_recap':
         schema = {
@@ -152,6 +152,20 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                     "First paragraph opens with a short signpost — "
                     "FR: 'Côté déploiements.' | EN: 'On deployments.' "
                     "— then a period, then the first fact.",
+                ],
+                "weekly_offradar": [
+                    "KEY NAME IS 'weekly_offradar' — do not rename. "
+                    "3 to 5 paragraphs of 80-110 words each. "
+                    "Signals absent from mainstream tech media but material for AI business strategy. "
+                    "Draw from: specialized AI research blogs, non-anglophone sources (Asian markets, "
+                    "European labs, government filings), academic preprints not yet covered, "
+                    "niche industry verticals, open-source releases from non-famous actors, "
+                    "hiring patterns, quiet acquisitions, regulatory moves outside the US. "
+                    "ONE signal per paragraph — novelty and forward-looking relevance over volume. "
+                    "Never repeat a story already covered in weekly_news or weekly_use_cases. "
+                    "First paragraph opens with a short signpost — "
+                    "FR: 'Sous le radar.' | EN: 'Off the radar.' "
+                    "— then a period, then the first signal.",
                 ],
                 "weekly_next_week": [
                     "KEY NAME IS 'weekly_next_week' — do not rename. "

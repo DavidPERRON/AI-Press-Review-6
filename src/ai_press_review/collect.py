@@ -353,6 +353,37 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
 
     logger.info("Phase 2: %d candidates after pre-filtering", len(candidates))
 
+    # Phase 2b: Pre-score on RSS metadata to cap the crawl budget.
+    #
+    # The content-extraction crawl (Phase 3) is the pipeline's biggest time sink:
+    # ~22-25 min for 700 URLs on a weekly run. But scoring in Phase 4 only needs
+    # a content_text boost for items that would otherwise be borderline — items
+    # with strong domain authority + high AI-term density in their title/summary
+    # will rank high regardless. So we:
+    #   1. Score every candidate on title + summary + domain alone (no content).
+    #   2. Sort by pre-score, take the top PRE_CRAWL_KEEP for full extraction.
+    #   3. Keep the rest in a separate pool — they enter Phase 4 on summary only
+    #      and can still pass the relevance gate if their summary is strong enough.
+    #
+    # Effect: crawl drops from ~700 to ~200 items → ~5-7 min instead of 22-25 min.
+    # Trade-off: a few articles with weak summaries but rich content may be missed.
+    # Mitigation: domain-authority items are pre-scored high and always crawled.
+    PRE_CRAWL_KEEP = 200
+    if len(candidates) > PRE_CRAWL_KEEP:
+        for item in candidates:
+            item.relevance_score = _score_source(item, settings.scoring)
+        candidates.sort(key=lambda i: (i.relevance_score, i.published_at or ""), reverse=True)
+        crawl_pool = candidates[:PRE_CRAWL_KEEP]
+        rss_only_pool = candidates[PRE_CRAWL_KEEP:]
+        logger.info(
+            "Phase 2b: pre-scored %d candidates — crawling top %d, "
+            "%d enter Phase 4 on RSS summary only",
+            len(candidates), len(crawl_pool), len(rss_only_pool),
+        )
+    else:
+        crawl_pool = candidates
+        rss_only_pool = []
+
     # Phase 3: Batch extract content in parallel for items missing content
     # Skip extraction for:
     #   - arxiv.org        — RSS abstract is sufficient for scoring
@@ -386,11 +417,11 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
             return False
         return True
 
-    urls_to_extract = [item.url for item in candidates if _should_extract(item)]
+    urls_to_extract = [item.url for item in crawl_pool if _should_extract(item)]
     if urls_to_extract:
         logger.info("Phase 3: Extracting content for %d articles...", len(urls_to_extract))
         extracted_map = batch_extract(urls_to_extract)
-        for item in candidates:
+        for item in crawl_pool:
             if not (item.content_text or "").strip() and item.url in extracted_map:
                 result = extracted_map[item.url]
                 if result:
@@ -398,9 +429,10 @@ def collect_sources(run_date: str, local_preview: bool = False, profile: str | N
     else:
         logger.info("Phase 3: All candidates already have content")
 
-    # Phase 4: Score and filter
+    # Phase 4: Score and filter — crawled pool (full content) + RSS-only pool
+    all_candidates = crawl_pool + rss_only_pool
     deduped: OrderedDict[str, SourceItem] = OrderedDict()
-    for item in candidates:
+    for item in all_candidates:
         if not _is_editorially_valid(item, settings):
             continue
 

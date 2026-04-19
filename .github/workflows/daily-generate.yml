@@ -24,9 +24,17 @@ on:
   workflow_dispatch:
     inputs:
       run_date:
-        description: Run date (YYYY-MM-DD)
+        description: Run date (JJ/MM/AA, e.g. 18/04/26)
         required: false
         default: ''
+      profile:
+        description: Editorial profile
+        required: false
+        default: 'daily'
+        type: choice
+        options:
+          - daily
+          - weekly
       locale:
         description: Locale to run (leave empty for all enabled, or 'en'/'fr')
         required: false
@@ -151,6 +159,7 @@ jobs:
           # into a `run:` script lets a triggering actor execute arbitrary
           # shell via a crafted input. See GitHub Actions Security Hardening.
           RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
+          PROFILE_INPUT: ${{ github.event.inputs.profile || 'daily' }}
         run: |
           set -e
           # ── Pre-flight: fail fast on missing secrets/variables ──────────────
@@ -218,14 +227,25 @@ jobs:
           PREFLIGHT
           RUN_DATE="${RUN_DATE_INPUT}"
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
-          # Validate shape — must be YYYY-MM-DD. Anything else is either a
-          # typo or a hostile payload; we refuse rather than paste it onwards.
+          # Convert European JJ/MM/AA or JJ/MM/AAAA → YYYY-MM-DD for internal use
+          if [[ "$RUN_DATE" =~ ^([0-9]{2})/([0-9]{2})/([0-9]{2})$ ]]; then
+            RUN_DATE="20${BASH_REMATCH[3]}-${BASH_REMATCH[2]}-${BASH_REMATCH[1]}"
+          elif [[ "$RUN_DATE" =~ ^([0-9]{2})/([0-9]{2})/([0-9]{4})$ ]]; then
+            RUN_DATE="${BASH_REMATCH[3]}-${BASH_REMATCH[2]}-${BASH_REMATCH[1]}"
+          fi
+          # Validate shape — must be YYYY-MM-DD after conversion.
           if ! [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-            echo "::error::Invalid run_date format: $RUN_DATE (expected YYYY-MM-DD)"
+            echo "::error::Invalid run_date format: $RUN_DATE (expected JJ/MM/AA, e.g. 18/04/26)"
             exit 1
           fi
-          echo "Generating daily draft for locale=$APR_LOCALE date=$RUN_DATE"
-          python scripts/generate_draft.py --date "$RUN_DATE" --profile daily
+          PROFILE_INPUT=$(echo "$PROFILE_INPUT" | tr '[:upper:]' '[:lower:]' | tr '-' '_')
+          case "$PROFILE_INPUT" in
+            daily) PROFILE="daily" ;;
+            weekly|weekly_recap) PROFILE="weekly_recap" ;;
+            *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
+          esac
+          echo "Generating ${PROFILE} draft for locale=$APR_LOCALE date=$RUN_DATE"
+          python scripts/generate_draft.py --date "$RUN_DATE" --profile "$PROFILE"
 
       - name: Commit draft state
         env:

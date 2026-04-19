@@ -91,29 +91,29 @@ jobs:
             cp "${SCRIPT_PATH}" /tmp/script.txt
           else
             echo "No source_run_id — extracting script from pending draft state"
-            python3 - <<'PYEOF'
-          import json, pathlib, sys
-          locale = "$LOCALE"
-          suffix = f"_{locale}" if locale != "en" else "_en"
-          candidates = [
-              pathlib.Path(f"data/state/pending_draft{suffix}.json"),
-              pathlib.Path("data/state/pending_draft.json"),
-          ]
-          data = None
-          for p in candidates:
-              if p.exists():
-                  data = json.loads(p.read_text())
-                  break
-          if not data:
-              print("ERROR: no pending draft found", file=sys.stderr)
-              sys.exit(1)
-          script = data.get("script", "").strip()
-          if not script:
-              print("ERROR: pending draft has no script field", file=sys.stderr)
-              sys.exit(1)
-          pathlib.Path("/tmp/script.txt").write_text(script, encoding="utf-8")
-          print(f"Extracted {len(script.split())} words from {p}")
-          PYEOF
+            cat > /tmp/extract_script.py << 'PYEOF'
+import json, pathlib, sys, os
+locale = os.environ.get('LOCALE', 'en')
+candidates = [
+    pathlib.Path(f'data/state/pending_draft_{locale}.json'),
+    pathlib.Path('data/state/pending_draft.json'),
+]
+data = None
+for p in candidates:
+    if p.exists():
+        data = json.loads(p.read_text())
+        break
+if not data:
+    print('ERROR: no pending draft found', file=sys.stderr)
+    sys.exit(1)
+script = data.get('script', '').strip()
+if not script:
+    print('ERROR: pending draft has no script field', file=sys.stderr)
+    sys.exit(1)
+pathlib.Path('/tmp/script.txt').write_text(script, encoding='utf-8')
+print(f'Extracted {len(script.split())} words from {p}')
+PYEOF
+            LOCALE="${LOCALE}" python3 /tmp/extract_script.py
           fi
           echo "Script: $(wc -w < /tmp/script.txt) words"
 

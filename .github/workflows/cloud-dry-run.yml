@@ -108,9 +108,14 @@ jobs:
           fi
           # Profile whitelist — reject anything that isn't one of the two
           # expected profile names, keeps crafted inputs from reaching argv.
-          case "$PROFILE_INPUT" in
-            daily|weekly_recap) PROFILE="$PROFILE_INPUT" ;;
-            *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
+          # Normalize first: lowercase + hyphens-to-underscores, so common typos
+          # like 'Weekly-recap' or 'WEEKLY_RECAP' resolve cleanly. The whitelist
+          # itself stays exact-match — only obvious typographic variants are
+          # rewritten, so e.g. "weeklyrecap" or "wkly" still fail loudly.
+          PROFILE_NORM=$(printf '%s' "$PROFILE_INPUT" | tr '[:upper:]' '[:lower:]' | tr '-' '_')
+          case "$PROFILE_NORM" in
+            daily|weekly_recap) PROFILE="$PROFILE_NORM" ;;
+            *) echo "::error::Invalid profile: $PROFILE_INPUT (accepted: daily, weekly_recap)"; exit 1 ;;
           esac
           echo "Locale: $APR_LOCALE  Profile: $PROFILE  Date: $RUN_DATE"
           # ── Pre-flight: validate every required secret/variable in one pass ──

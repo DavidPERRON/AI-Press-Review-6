@@ -430,6 +430,10 @@ def _extract_message_content(data: dict[str, Any]) -> str:
 def _normalize_model(model: str, base_url: str) -> str:
     """Resolve model shorthands and validate model ID format.
 
+    Fails fast if the model value is an endpoint URL
+    (e.g. the user set LLM_FALLBACK_MODEL_EN="https://api.anthropic.com/v1"
+    — that value belongs in LLM_FALLBACK_BASE_URL_EN, not the model var).
+
     Fails fast if the model value looks like an env-var assignment
     (e.g. the user set LLM_EDITOR_MODEL_EN="ANTHROPIC_MODEL=sonnet"
     instead of just "sonnet" or "claude-sonnet-4-6").
@@ -439,6 +443,13 @@ def _normalize_model(model: str, base_url: str) -> str:
     valid on OpenRouter, which requires the "anthropic/claude-sonnet-4.5"
     dot-notation format.
     """
+    if (model or '').lower().startswith(('http://', 'https://')):
+        raise ValueError(
+            f"Invalid model ID: got URL {model!r}. "
+            f"Set LLM_*_MODEL to a model ID (e.g. claude-sonnet-4-6 for Anthropic, "
+            f"anthropic/claude-sonnet-4.5 for OpenRouter) and "
+            f"LLM_*_BASE_URL to the endpoint URL (e.g. https://api.anthropic.com/v1)."
+        )
     if '=' in (model or ''):
         raise ValueError(
             f"Model ID {model!r} contains '=' — it looks like you set the variable "
@@ -572,6 +583,12 @@ def _post_chat_completion(
         ) from exc
 
 
+def _is_response_format_error(exc: ValueError) -> bool:
+    """True if a 400 error is about an unsupported response_format type."""
+    msg = str(exc).lower()
+    return any(k in msg for k in ("json_schema", "json_object", "response_format", "response format", "405"))
+
+
 def _create_completion_data(
     settings,
     model: str,
@@ -582,32 +599,42 @@ def _create_completion_data(
     # Resolve endpoint first so _normalize_model knows the target provider.
     base_url, api_key = _resolve_endpoint(model, settings)
     model = _normalize_model(model, base_url)
-    payload = {
+    base_payload = {
         "model": model,
         "temperature": temperature,
         "messages": messages,
         "max_tokens": max_tokens,
-        "response_format": {"type": "json_object"},
     }
 
-    try:
+    def _post(extra: dict) -> dict[str, Any]:
         return _post_chat_completion(
-            settings, payload,
+            settings, {**base_payload, **extra},
             base_url_override=base_url, api_key_override=api_key,
         )
+
+    # Try 1: json_schema — required by newer Anthropic-compatible endpoints.
+    # Fixes the weekly crash: "response_format.type should be 'json_schema'"
+    # was raised when we sent json_object to an endpoint that mandates json_schema.
+    try:
+        return _post({"response_format": {
+            "type": "json_schema",
+            "json_schema": {"name": "episode", "schema": {"type": "object"}, "strict": False},
+        }})
     except ValueError as exc:
-        # Permanent client errors only — re-attempt without response_format
-        # if the model rejects that field (common with older OpenAI-compatible
-        # endpoints). LLMQuota / Transient / Invalid errors fall through.
-        message = str(exc).lower()
-        if "json_object" in message or "response format" in message or "405" in message:
-            logger.info("Model does not support response_format, retrying without it")
-            payload.pop("response_format", None)
-            return _post_chat_completion(
-                settings, payload,
-                base_url_override=base_url, api_key_override=api_key,
-            )
-        raise
+        if not _is_response_format_error(exc):
+            raise
+        logger.info("json_schema response_format rejected (%s), retrying with json_object", exc)
+
+    # Try 2: json_object — accepted by most OpenAI-compatible endpoints.
+    try:
+        return _post({"response_format": {"type": "json_object"}})
+    except ValueError as exc:
+        if not _is_response_format_error(exc):
+            raise
+        logger.info("json_object response_format rejected (%s), retrying without response_format", exc)
+
+    # Try 3: no response_format — some older or custom endpoints reject the field.
+    return _post({})
 
 
 def _extract_json(content: str) -> dict[str, Any]:

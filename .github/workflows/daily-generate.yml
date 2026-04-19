@@ -240,6 +240,22 @@ jobs:
                   f"  - R2_SECRET_ACCESS_KEY has {len(r2_sk)} chars (expected 64) -- "
                   "go to Cloudflare R2 → Manage API Tokens → create an R2-specific token"
               )
+          # Validate model variables — none should be set to an endpoint URL.
+          # Caused a weekly crash: LLM_FALLBACK_MODEL_EN="https://api.anthropic.com/v1"
+          # was used as a model ID, producing HTTP 401 Missing Authentication header.
+          model_vars = [
+              "LLM_EDITOR_MODEL", f"LLM_EDITOR_MODEL_{locale_upper}",
+              "LLM_FALLBACK_MODEL", f"LLM_FALLBACK_MODEL_{locale_upper}",
+              "LLM_EMERGENCY_MODEL", f"LLM_EMERGENCY_MODEL_{locale_upper}",
+          ]
+          for var in model_vars:
+              val = os.environ.get(var, "").strip()
+              if val.lower().startswith(("http://", "https://")):
+                  missing.append(
+                      f"  - {var} is set to a URL ({val!r}) — must be a model ID, not an endpoint URL.\n"
+                      f"    Correct model IDs: claude-sonnet-4-6 (Anthropic direct) or anthropic/claude-sonnet-4.5 (OpenRouter)\n"
+                      f"    Endpoint URLs go in: LLM_EDITOR_BASE_URL(_EN/_FR), LLM_FALLBACK_BASE_URL(_EN/_FR), LLM_EMERGENCY_BASE_URL(_EN/_FR)"
+                  )
           if missing:
               sys.exit(
                   "ERROR: required secrets/variables are missing or empty:\n"

@@ -55,6 +55,8 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     strategy:
       fail-fast: false       # FR doit tourner meme si EN casse
       max-parallel: 1        # serialise les git push pour eviter les races

@@ -922,6 +922,29 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
             )
 
     if best_overall_payload is not None and best_overall_script is not None:
+        # Soft-accept for weekly_recap: if the best draft is within 90% of the
+        # minimum, accept it with a degraded_mode warning rather than hard-failing
+        # the entire pipeline. Rationale: a 2900-word weekly is still a usable
+        # episode; a hard fail at this point discards work already paid for and
+        # leaves listeners with nothing. The operator sees the warning in logs.
+        soft_floor = int(settings.min_script_words * 0.90)
+        if settings.profile_name == 'weekly_recap' and best_overall_wc >= soft_floor:
+            logger.warning(
+                "degraded_mode=true — soft-accept: best draft %d words is >= 90%% "
+                "of min %d (floor %d); accepting from model=%s. "
+                "Errors: %s",
+                best_overall_wc, settings.min_script_words, soft_floor,
+                best_overall_model, " | ".join(errors),
+            )
+            return EpisodeDraft(
+                episode_title=best_overall_payload.get("episode_title", settings.podcast_title),
+                episode_summary=best_overall_payload.get("episode_summary", settings.podcast_description_short),
+                opening_news_title=best_overall_payload.get("opening_news_title", ""),
+                script=best_overall_script,
+                tomorrow_concept=best_overall_payload.get("tomorrow_pedagogical_concept", ""),
+                highlights_label=best_overall_payload.get("highlights_label", "Highlights"),
+            )
+
         logger.error(
             "All models exhausted — best draft was %d words from %s "
             "(min %d). Errors: %s",

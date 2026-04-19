@@ -51,6 +51,8 @@ jobs:
     # (Crawl4AI abandoned the same day). 30 min gives ~5 min headroom over
     # the typical 20-25 min run with httpx async + Cartesia streaming.
     timeout-minutes: 30
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     strategy:
       fail-fast: false
       max-parallel: 1

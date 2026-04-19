@@ -24,6 +24,8 @@ jobs:
   cloud_dry_run:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       # Always pin to main so the dry run exercises the exact same code that

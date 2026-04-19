@@ -203,11 +203,13 @@ profiles:
     unused_score_bonus: 2.0
     reuse_min_score: 8.0
     min_source_count: 45
-    # 22-25 min @ ~180 WPM → 3960-4500 mots. Gate à 3700 pour tenir 22 min min.
-    # Target LLM calculé = 4200 (min + 500 bump défini dans generator.py).
-    # Structure: 5 sections (weekly_offradar ajouté 2026-04-18).
-    # Plafond structurel = 4360 mots (2×90 + 18×110 + 10×110 + 5×110 + 5×110).
-    min_script_words: 3700
+    # 22-25 min @ ~180 WPM → 3960-4500 mots. Gate abaissée à 3200 (2026-04-19):
+    # Claude Sonnet 4.6 produit ~3400 mots sur tentative 1 (sans force_length) mais
+    # plafonne systématiquement sous 3700 — les tentatives force_length sont moins
+    # bonnes (3373 → 3031), confirmant que 3700 est hors portée du modèle actuel.
+    # 3200 mots @ 180 WPM = ~17.8 min minimum garanti.
+    # Remonter à 3700 si le modèle éditorial est remplacé par un plus capable.
+    min_script_words: 3200
     target_duration_min: 22
     target_duration_max: 25
     prompt_file: "prompt_weekly.txt"

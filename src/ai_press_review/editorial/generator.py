@@ -137,7 +137,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 ],
                 "weekly_news": [
                     "KEY NAME IS 'weekly_news' — do not rename. "
-                    "8 to 22 paragraphs of 80-110 words each. "
+                    "12 to 22 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY sources published on the most recent Friday in the manifest — "
                     "do NOT include news from earlier in the week. "
                     "Also include any post-NYSE-close developments or overnight signals (Asian markets, "
@@ -153,7 +153,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 ],
                 "weekly_use_cases": [
                     "KEY NAME IS 'weekly_use_cases' — do not rename. "
-                    "5 to 10 paragraphs of 80-110 words each. "
+                    "7 to 10 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY deployment news published on the most recent Friday in the manifest. "
                     "Friday's most concrete AI deployments. ONE deployment per paragraph. "
                     "Prefer numbers: revenue %, latency ms, users, cost delta, headcount. "
@@ -257,15 +257,15 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "weekly_news and weekly_use_cases MUST use ONLY sources from Friday — ignore earlier days. "
             "weekly_next_week may reference any recent signals to ground its forward-looking items. "
             "Sources with higher relevance_score should be prioritized. "
-            f"Produce between 34 and 46 paragraphs total across all sections. "
+            f"Produce between 38 and 46 paragraphs total across all sections. "
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:
             length_instructions += (
-                f"STRICT FLOOR: you MUST produce AT LEAST {settings.min_script_words} words and "
-                "AT LEAST 40 paragraphs total. "
-                "Expand weekly_news to at least 16 paragraphs and weekly_use_cases to at least 8. "
-                "Each added paragraph must cover a NEW story with a company name, number, or concrete fact."
+                f"FLOOR REMINDER: aim for at least 42 paragraphs total — "
+                "push weekly_news toward 18 paragraphs and weekly_use_cases toward 9. "
+                "Write each paragraph toward the 100-110 word end of the 80-110 range. "
+                "More paragraphs from more stories — not longer sentences."
             )
     else:
         length_instructions = (
@@ -280,12 +280,10 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         if force_length:
             # Same rationale as weekly: stateless API, no "previous output".
             length_instructions += (
-                "CRITICAL REMINDER: this script MUST hit the word minimum above. "
-                "You MUST cover MORE distinct stories from the source manifest. "
-                "Do NOT lengthen existing paragraphs. Do NOT add synthesis "
-                "paragraphs. Add NEW paragraphs each covering a NEW story with its own facts: company "
-                "name, number, product name, or result. Dig deeper into the manifest — there are 120 "
-                "sources there, use them. "
+                "FLOOR REMINDER: aim for 30+ paragraphs total — push ai_news toward 9 and "
+                "use_cases_and_deployments toward 7. "
+                "Write each paragraph toward the 100-110 word end of the 80-110 range. "
+                "More paragraphs from more stories — not longer sentences."
             )
 
     if settings.profile_name == 'weekly_recap':
@@ -703,6 +701,18 @@ def _generate_with_model(model: str, manifest: dict, settings, force_length: boo
     )
     elapsed = time.monotonic() - start
 
+    # OpenRouter (and some other gateways) return HTTP 200 with an error
+    # payload instead of a proper 4xx/5xx when the upstream rejects the
+    # request (e.g. context overflow). Detect this before calling
+    # _extract_message_content so we can raise the right exception class.
+    if isinstance(data, dict) and "error" in data and "choices" not in data:
+        err = data["error"]
+        msg = str(err.get("message", err) if isinstance(err, dict) else err)
+        # Context overflow is permanent — the same prompt will never fit.
+        if any(kw in msg for kw in ("max_num_tokens", "prompt length", "context_length", "maximum context", "context window")):
+            raise ValueError(f"LLM context overflow (permanent — prompt too large for this model): {msg[:300]}")
+        raise LLMTransientError(f"LLM gateway error (upstream rejection): {msg[:300]}")
+
     content = _extract_message_content(data)
     if not content.strip():
         raise LLMInvalidResponseError("Model returned empty content")
@@ -978,6 +988,29 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
             )
 
     if best_overall_payload is not None and best_overall_script is not None:
+        # Soft-accept for weekly_recap: if the best draft is within 90% of the
+        # minimum, accept it with a degraded_mode warning rather than hard-failing
+        # the entire pipeline. Rationale: a 2900-word weekly is still a usable
+        # episode; a hard fail at this point discards work already paid for and
+        # leaves listeners with nothing. The operator sees the warning in logs.
+        soft_floor = int(settings.min_script_words * 0.90)
+        if settings.profile_name == 'weekly_recap' and best_overall_wc >= soft_floor:
+            logger.warning(
+                "degraded_mode=true — soft-accept: best draft %d words is >= 90%% "
+                "of min %d (floor %d); accepting from model=%s. "
+                "Errors: %s",
+                best_overall_wc, settings.min_script_words, soft_floor,
+                best_overall_model, " | ".join(errors),
+            )
+            return EpisodeDraft(
+                episode_title=best_overall_payload.get("episode_title", settings.podcast_title),
+                episode_summary=best_overall_payload.get("episode_summary", settings.podcast_description_short),
+                opening_news_title=best_overall_payload.get("opening_news_title", ""),
+                script=best_overall_script,
+                tomorrow_concept=best_overall_payload.get("tomorrow_pedagogical_concept", ""),
+                highlights_label=best_overall_payload.get("highlights_label", "Highlights"),
+            )
+
         logger.error(
             "All models exhausted — best draft was %d words from %s "
             "(min %d). Errors: %s",

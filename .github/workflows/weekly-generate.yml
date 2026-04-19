@@ -140,11 +140,9 @@ jobs:
           python3 - <<'PREFLIGHT'
           import os, sys
           locale = os.environ.get("APR_LOCALE", "en").strip().lower() or "en"
+          locale_upper = locale.upper()
           voice_var = "CARTESIA_VOICE_ID_FR" if locale == "fr" else "CARTESIA_VOICE_ID"
-          # (name, kind, what-it-does) — kind is shown so the operator knows
-          # which of the two Actions tabs (Secrets vs Variables) to open.
           required = [
-              ("LLM_API_KEY",         "secret",   "OpenRouter API key (editorial)"),
               ("CARTESIA_API_KEY",    "secret",   "Cartesia API key (TTS)"),
               ("R2_ACCESS_KEY_ID",    "secret",   "Cloudflare R2 access key ID (audio upload)"),
               ("R2_SECRET_ACCESS_KEY","secret",   "Cloudflare R2 secret access key (audio upload)"),
@@ -161,6 +159,19 @@ jobs:
                   missing.append(f"  - {name} ({kind}) -- {desc}")
               elif val.lower() in placeholders:
                   missing.append(f"  - {name} ({kind}) -- placeholder value {val!r}, {desc}")
+          # LLM key: generic LLM_API_KEY (OpenRouter) OR a per-locale editor key
+          # when routing the editor tier directly (e.g. to api.anthropic.com).
+          llm_key = (
+              os.environ.get(f"LLM_EDITOR_API_KEY_{locale_upper}", "").strip() or
+              os.environ.get("LLM_API_KEY", "").strip()
+          )
+          if not llm_key:
+              missing.append(
+                  f"  - LLM_API_KEY (secret) -- OpenRouter key (editorial)\n"
+                  f"    OR set LLM_EDITOR_API_KEY_{locale_upper} when routing editor tier directly"
+              )
+          elif llm_key.lower() in placeholders:
+              missing.append(f"  - LLM_API_KEY (secret) -- placeholder value, set a real API key")
           # R2 credential length check — same as daily-generate.yml (keep in sync).
           r2_ak = os.environ.get("R2_ACCESS_KEY_ID", "").strip()
           r2_sk = os.environ.get("R2_SECRET_ACCESS_KEY", "").strip()
@@ -182,9 +193,8 @@ jobs:
                   "  Secrets in the 'Secrets' tab. Variables in the 'Variables' tab.\n"
                   "  R2 keys: Cloudflare Dashboard → R2 → Manage API Tokens."
               )
-          llm_key = os.environ["LLM_API_KEY"].strip()
           hint = llm_key[:6] + "..." if len(llm_key) > 6 else llm_key[:3] + "..."
-          print(f"Pre-flight OK - LLM_API_KEY: {len(llm_key)} chars, starts with {hint}")
+          print(f"Pre-flight OK - LLM key: {len(llm_key)} chars, starts with {hint}")
           print(f"Pre-flight OK - R2_ACCESS_KEY_ID: {len(r2_ak)} chars (expected 32)")
           print(f"Pre-flight OK - R2_SECRET_ACCESS_KEY: {len(r2_sk)} chars (expected 64)")
           PREFLIGHT

@@ -127,7 +127,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 ],
                 "weekly_news": [
                     "KEY NAME IS 'weekly_news' — do not rename. "
-                    "8 to 22 paragraphs of 80-110 words each. "
+                    "12 to 22 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY sources published on the most recent Friday in the manifest — "
                     "do NOT include news from earlier in the week. "
                     "Also include any post-NYSE-close developments or overnight signals (Asian markets, "
@@ -143,7 +143,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 ],
                 "weekly_use_cases": [
                     "KEY NAME IS 'weekly_use_cases' — do not rename. "
-                    "5 to 10 paragraphs of 80-110 words each. "
+                    "7 to 10 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY deployment news published on the most recent Friday in the manifest. "
                     "Friday's most concrete AI deployments. ONE deployment per paragraph. "
                     "Prefer numbers: revenue %, latency ms, users, cost delta, headcount. "
@@ -247,7 +247,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
             "weekly_news and weekly_use_cases MUST use ONLY sources from Friday — ignore earlier days. "
             "weekly_next_week may reference any recent signals to ground its forward-looking items. "
             "Sources with higher relevance_score should be prioritized. "
-            f"Produce between 34 and 46 paragraphs total across all sections. "
+            f"Produce between 38 and 46 paragraphs total across all sections. "
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:
@@ -636,6 +636,18 @@ def _generate_with_model(model: str, manifest: dict, settings, force_length: boo
         max_tokens=settings.llm_max_tokens,
     )
     elapsed = time.monotonic() - start
+
+    # OpenRouter (and some other gateways) return HTTP 200 with an error
+    # payload instead of a proper 4xx/5xx when the upstream rejects the
+    # request (e.g. context overflow). Detect this before calling
+    # _extract_message_content so we can raise the right exception class.
+    if isinstance(data, dict) and "error" in data and "choices" not in data:
+        err = data["error"]
+        msg = str(err.get("message", err) if isinstance(err, dict) else err)
+        # Context overflow is permanent — the same prompt will never fit.
+        if any(kw in msg for kw in ("max_num_tokens", "prompt length", "context_length", "maximum context", "context window")):
+            raise ValueError(f"LLM context overflow (permanent — prompt too large for this model): {msg[:300]}")
+        raise LLMTransientError(f"LLM gateway error (upstream rejection): {msg[:300]}")
 
     content = _extract_message_content(data)
     if not content.strip():

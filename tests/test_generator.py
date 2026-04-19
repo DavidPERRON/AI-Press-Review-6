@@ -34,6 +34,8 @@ from ai_press_review.editorial.generator import (
     MAX_LENGTH_RETRIES,
     MAX_QUOTA_HITS,
     MAX_TRANSIENT_RETRIES,
+    _create_completion_data,
+    _normalize_model,
     _parse_retry_after,
     _post_chat_completion,
     _try_generate_one,
@@ -401,6 +403,112 @@ def test_cascade_aborts_early_on_insufficient_sources():
     assert "Not enough relevant sources" in str(exc_info.value)
     # Generator was never invoked — we bailed at the precondition check.
     assert mocked.call_count == 0
+
+
+# ─── _normalize_model: URL-as-model guard ────────────────────────────────────
+
+def test_normalize_model_raises_on_https_url():
+    with pytest.raises(ValueError, match="Invalid model ID: got URL"):
+        _normalize_model("https://api.anthropic.com/v1", "https://api.anthropic.com/v1")
+
+
+def test_normalize_model_raises_on_http_url():
+    with pytest.raises(ValueError, match="Invalid model ID: got URL"):
+        _normalize_model("http://localhost:11434", "")
+
+
+def test_normalize_model_accepts_valid_anthropic_id():
+    assert _normalize_model("claude-sonnet-4-6", "https://api.anthropic.com/v1") == "claude-sonnet-4-6"
+
+
+def test_normalize_model_accepts_openrouter_dot_notation():
+    assert _normalize_model("anthropic/claude-sonnet-4.5", "https://openrouter.ai/api/v1") == "anthropic/claude-sonnet-4.5"
+
+
+# ─── _create_completion_data: progressive response_format fallback ────────────
+
+def _minimal_settings():
+    return SimpleNamespace(
+        llm_base_url="https://example.test/v1",
+        llm_api_key="key",
+    )
+
+
+def _good_response():
+    return {"choices": [{"message": {"content": '{"ok": true}'}}]}
+
+
+def test_create_completion_data_uses_json_schema_first():
+    """Try #1 sends json_schema; success on first attempt means no further tries."""
+    calls = []
+
+    def fake_post(s, payload, base_url_override=None, api_key_override=None):
+        calls.append(payload.get("response_format", {}).get("type"))
+        return _good_response()
+
+    with patch("ai_press_review.editorial.generator._post_chat_completion", fake_post):
+        result = _create_completion_data(_minimal_settings(), "some-model", [], 0.5, 1000)
+
+    assert result == _good_response()
+    assert calls == ["json_schema"]
+
+
+def test_create_completion_data_falls_back_to_json_object_when_json_schema_rejected():
+    """If json_schema is rejected with a format error, Try #2 uses json_object."""
+    calls = []
+
+    def fake_post(s, payload, base_url_override=None, api_key_override=None):
+        fmt = payload.get("response_format", {}).get("type")
+        calls.append(fmt)
+        if fmt == "json_schema":
+            raise ValueError("LLM HTTP 400: json_schema type is not supported by this endpoint")
+        return _good_response()
+
+    with patch("ai_press_review.editorial.generator._post_chat_completion", fake_post):
+        result = _create_completion_data(_minimal_settings(), "some-model", [], 0.5, 1000)
+
+    assert result == _good_response()
+    assert calls == ["json_schema", "json_object"]
+
+
+def test_create_completion_data_falls_back_to_no_format_when_both_rejected():
+    """If json_schema and json_object both rejected, Try #3 omits response_format entirely."""
+    calls = []
+
+    def fake_post(s, payload, base_url_override=None, api_key_override=None):
+        fmt = payload.get("response_format", {}).get("type")
+        calls.append(fmt)
+        if fmt == "json_schema":
+            raise ValueError("LLM HTTP 400: json_schema not supported")
+        if fmt == "json_object":
+            raise ValueError("LLM HTTP 400: response format json_object not supported")
+        return _good_response()
+
+    with patch("ai_press_review.editorial.generator._post_chat_completion", fake_post):
+        result = _create_completion_data(_minimal_settings(), "some-model", [], 0.5, 1000)
+
+    assert result == _good_response()
+    assert calls == ["json_schema", "json_object", None]  # None = no response_format key
+
+
+def test_create_completion_data_raises_on_non_format_400():
+    """A 400 unrelated to response_format (e.g. auth) must propagate immediately."""
+    with patch(
+        "ai_press_review.editorial.generator._post_chat_completion",
+        side_effect=ValueError("LLM HTTP 401: Missing Authentication header"),
+    ):
+        with pytest.raises(ValueError, match="401"):
+            _create_completion_data(_minimal_settings(), "some-model", [], 0.5, 1000)
+
+
+def test_create_completion_data_raises_on_url_as_model():
+    """Passing an endpoint URL as model ID must raise before any HTTP call."""
+    with patch("ai_press_review.editorial.generator._post_chat_completion") as mock_post:
+        with pytest.raises(ValueError, match="Invalid model ID: got URL"):
+            _create_completion_data(
+                _minimal_settings(), "https://api.anthropic.com/v1", [], 0.5, 1000
+            )
+    mock_post.assert_not_called()
 
 
 # ─── Sanity check on the budget constants (regression guard) ─────────────────

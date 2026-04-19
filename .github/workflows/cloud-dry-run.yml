@@ -85,6 +85,15 @@ jobs:
           LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
           LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
           # Per-tier endpoint overrides — see daily-generate.yml for rationale.
+          # Shorthands (sonnet/haiku/opus) auto-resolve for api.anthropic.com.
+          LLM_EDITOR_BASE_URL_EN: ${{ vars.LLM_EDITOR_BASE_URL_EN }}
+          LLM_EDITOR_API_KEY_EN: ${{ secrets.LLM_EDITOR_API_KEY_EN }}
+          LLM_EDITOR_BASE_URL_FR: ${{ vars.LLM_EDITOR_BASE_URL_FR }}
+          LLM_EDITOR_API_KEY_FR: ${{ secrets.LLM_EDITOR_API_KEY_FR }}
+          LLM_FALLBACK_BASE_URL_EN: ${{ vars.LLM_FALLBACK_BASE_URL_EN }}
+          LLM_FALLBACK_API_KEY_EN: ${{ secrets.LLM_FALLBACK_API_KEY_EN }}
+          LLM_FALLBACK_BASE_URL_FR: ${{ vars.LLM_FALLBACK_BASE_URL_FR }}
+          LLM_FALLBACK_API_KEY_FR: ${{ secrets.LLM_FALLBACK_API_KEY_FR }}
           LLM_EMERGENCY_BASE_URL_EN: ${{ vars.LLM_EMERGENCY_BASE_URL_EN }}
           LLM_EMERGENCY_API_KEY_EN: ${{ secrets.LLM_EMERGENCY_API_KEY_EN || secrets.DEEPINFRA_API_KEY }}
           LLM_EMERGENCY_BASE_URL_FR: ${{ vars.LLM_EMERGENCY_BASE_URL_FR }}
@@ -127,17 +136,25 @@ jobs:
             *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
           esac
           echo "Locale: $APR_LOCALE"
-          # Fail fast if LLM_API_KEY is empty — avoids 8-minute crawl then 401
+          # Fail fast if no LLM key is available — avoids 8-minute crawl then 401.
+          # Accepts LLM_API_KEY (OpenRouter) OR LLM_EDITOR_API_KEY_<LOCALE>
+          # when routing the editor tier directly (e.g. to api.anthropic.com).
           python3 - <<'KEYCHECK'
           import os, sys
-          key = os.environ.get("LLM_API_KEY", "").strip()
-          if not key or key.lower() in {"none","null","placeholder","changeme","xxx","todo"}:
+          locale_upper = os.environ.get("APR_LOCALE", "en").strip().upper() or "EN"
+          placeholders = {"none", "null", "placeholder", "changeme", "xxx", "todo"}
+          key = (
+              os.environ.get(f"LLM_EDITOR_API_KEY_{locale_upper}", "").strip() or
+              os.environ.get("LLM_API_KEY", "").strip()
+          )
+          if not key or key.lower() in placeholders:
               hint = repr(key) if key else "(empty)"
               sys.exit(
                   f"ERROR: LLM_API_KEY is {hint} — update secret in repo Settings → "
-                  "Secrets and variables → Actions → LLM_API_KEY"
+                  f"Secrets and variables → Actions → LLM_API_KEY\n"
+                  f"  OR set LLM_EDITOR_API_KEY_{locale_upper} when routing editor tier directly"
               )
-          print(f"LLM_API_KEY OK — {len(key)} chars, starts with {key[:6]}...")
+          print(f"LLM key OK — {len(key)} chars, starts with {key[:6]}...")
           KEYCHECK
           # Fail fast with a clear message if no model is resolvable for this
           # locale — avoids the 9-minute-crawl-then-empty-error surprise.

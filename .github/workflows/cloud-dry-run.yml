@@ -8,9 +8,13 @@ on:
         required: false
         default: ''
       profile:
-        description: Editorial profile (daily, weekly_recap)
+        description: Editorial profile
         required: false
         default: 'daily'
+        type: choice
+        options:
+          - daily
+          - weekly_recap
       locale:
         description: Locale (en or fr) — picks the per-locale LLM model + voice
         required: false
@@ -106,6 +110,9 @@ jobs:
             echo "::error::Invalid run_date format: $RUN_DATE (expected YYYY-MM-DD)"
             exit 1
           fi
+          # Normalize input before whitelist check — tolerates Weekly-recap,
+          # weekly-recap, Weekly_Recap etc. from API/programmatic callers.
+          PROFILE_INPUT=$(echo "$PROFILE_INPUT" | tr '[:upper:]' '[:lower:]' | tr '-' '_')
           # Profile whitelist — reject anything that isn't one of the two
           # expected profile names, keeps crafted inputs from reaching argv.
           case "$PROFILE_INPUT" in

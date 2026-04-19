@@ -119,20 +119,15 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 # One paragraph = ONE distinct story/fact. No padding.
                 "weekly_intro": [
                     "KEY NAME IS 'weekly_intro' — do not rename. "
-                    "1 to 2 paragraphs of 60-90 words each. "
-                    "In natural spoken language, introduce this episode's 3-part structure: "
-                    "first, you will cover the AI news and deployments from this Friday (~13 minutes); "
-                    "then, a brief segment of signals absent from mainstream tech media — the kind of intelligence "
-                    "Bloomberg hasn't surfaced yet (~4 minutes); "
-                    "finally, a focused look at what to watch in the coming week (~5 minutes). "
-                    "Do NOT say 'Part 1', 'Part 2', or 'Part 3'. Use natural language. "
-                    "Reference Friday explicitly ('this Friday', 'hier' in FR). "
-                    "TEASE the off-radar segment: 1 sentence that makes the listener curious about what mainstream media missed. "
-                    "No filler. Keep it tight.",
+                    "EXACTLY 1 paragraph of 60-70 words. No more. "
+                    "Straight to the point: name the top story of the week, state what's in this episode "
+                    "(Friday news + off-radar signals + week ahead), tease the off-radar segment in one punchy sentence. "
+                    "No filler, no 'Welcome back', no paragraph numbering. "
+                    "Reference Friday explicitly ('this Friday' / 'hier vendredi' in FR).",
                 ],
                 "weekly_news": [
                     "KEY NAME IS 'weekly_news' — do not rename. "
-                    "8 to 18 paragraphs of 80-110 words each. "
+                    "8 to 22 paragraphs of 80-110 words each. "
                     "IMPORTANT: use ONLY sources published on the most recent Friday in the manifest — "
                     "do NOT include news from earlier in the week. "
                     "Also include any post-NYSE-close developments or overnight signals (Asian markets, "
@@ -247,25 +242,20 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         length_instructions = (
             f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
             f"Target {target_words} words (~21 spoken minutes total: ~16 min for Friday news + deployments, ~5 min for next week). "
-            "weekly_intro paragraphs: 60-90 words each. All other paragraphs: 80-110 words each. Never shorter, never longer. "
+            "weekly_intro: exactly 1 paragraph of 60-70 words. All other paragraphs: 80-110 words each. Never shorter, never longer. "
             "One paragraph = one distinct story or fact. Never merge two stories. Never split one story across two paragraphs. "
             "weekly_news and weekly_use_cases MUST use ONLY sources from Friday — ignore earlier days. "
             "weekly_next_week may reference any recent signals to ground its forward-looking items. "
             "Sources with higher relevance_score should be prioritized. "
-            f"Produce between 28 and 42 paragraphs total across all sections. "
+            f"Produce between 34 and 46 paragraphs total across all sections. "
             "Hitting the word target comes from COVERING MORE STORIES, not from inflating paragraphs. "
         )
         if force_length:
-            # Removed the factually-false "Your previous output was TOO SHORT"
-            # phrase — LLM calls are stateless, the model has no memory of
-            # any prior attempt. Observed behaviour with that phrase was a
-            # decreasing word count on each retry (2977→2789→2457). Kept
-            # every other editorial directive unchanged.
             length_instructions += (
-                "CRITICAL REMINDER: this script MUST hit the word minimum above. "
-                "Cover MORE distinct stories from the manifest. "
-                "Do NOT lengthen existing paragraphs. Add NEW paragraphs each covering a NEW story with its own "
-                "facts: company name, number, product name, or result. Dig deeper into the manifest. "
+                f"STRICT FLOOR: you MUST produce AT LEAST {settings.min_script_words} words and "
+                "AT LEAST 40 paragraphs total. "
+                "Expand weekly_news to at least 16 paragraphs and weekly_use_cases to at least 8. "
+                "Each added paragraph must cover a NEW story with a company name, number, or concrete fact."
             )
     else:
         length_instructions = (
@@ -456,10 +446,32 @@ def _resolve_endpoint(model: str, settings) -> tuple[str, str]:
     if tier_prefix:
         per_base = getattr(settings, f'{tier_prefix}_base_url', '') or ''
         per_key = getattr(settings, f'{tier_prefix}_api_key', '') or ''
+        env_prefix = tier_prefix.upper().replace('LLM_', '')
         if per_base:
             base = per_base
-        if per_key:
-            key = per_key
+            if per_key:
+                key = per_key
+            else:
+                # Per-tier base URL set but no matching key — fall through to the
+                # generic LLM_API_KEY with a warning.
+                logger.warning(
+                    "LLM_%s_BASE_URL is set (%s) but LLM_%s_API_KEY[_<LOCALE>] is empty "
+                    "— falling back to generic LLM_API_KEY. "
+                    "If the target provider needs its own key, set LLM_%s_API_KEY.",
+                    env_prefix, per_base, env_prefix, env_prefix,
+                )
+        elif per_key:
+            # Per-tier key set WITHOUT a per-tier base URL: applying a provider-specific
+            # key (e.g. DEEPINFRA_API_KEY) to the generic endpoint (e.g. OpenRouter)
+            # sends the wrong credentials and causes HTTP 401. Ignore the stray key and
+            # keep using the generic LLM_API_KEY for the generic endpoint.
+            # Fix: set LLM_{TIER}_BASE_URL[_<LOCALE>] to point at the correct provider.
+            logger.warning(
+                "LLM_%s_API_KEY[_<LOCALE>] is set but LLM_%s_BASE_URL is empty "
+                "— ignoring per-tier key to avoid sending wrong credentials to %r. "
+                "Set LLM_%s_BASE_URL[_<LOCALE>] to route this tier to its own endpoint.",
+                env_prefix, env_prefix, base, env_prefix,
+            )
     return base, key
 
 
@@ -482,9 +494,14 @@ def _post_chat_completion(
         raise ValueError(f"LLM base URL points to a private/internal address: {base_url!r}")
 
     url = f"{base_url}/chat/completions"
-    headers = {"Content-Type": "application/json"}
-    if api_key:
-        headers["Authorization"] = f"Bearer {api_key}"
+    if not api_key:
+        raise ValueError(
+            f"No API key configured for LLM endpoint {parsed.hostname!r}. "
+            "Set LLM_API_KEY, or for a per-tier provider endpoint also set "
+            "LLM_<TIER>_BASE_URL[_<LOCALE>] and LLM_<TIER>_API_KEY[_<LOCALE>] "
+            "(e.g. LLM_EMERGENCY_BASE_URL_EN + LLM_EMERGENCY_API_KEY_EN)."
+        )
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
 
     try:
         response = requests.post(

@@ -16,11 +16,11 @@ category_secondary: "Artificial Intelligence"
 tagline: "40 sources. 15 minutes. What matters in AI today."
 short_description: "40 sources. 15 minutes. What matters in AI today."
 long_description: >
-  Every weekday morning at 7AM CET, AI Press Review distills 40+ global sources
+  Tuesday through Friday at 7AM CET, AI Press Review distills 40+ global sources
   into a focused 15-minute briefing — filtered, weighted, and structured around
-  six pillars: AI News, Research & Breakthroughs, Use Cases, Tools & Practice,
-  Weak Signals, and Education. Built for professionals who need signal, not noise.
-  Every Saturday: a weekly recap of the five trends that defined the week.
+  six sections: AI News, Use Cases & Deployments, Tools & Practice,
+  Weak Signals, Off the Radar, and Research. Built for professionals who need signal, not noise.
+  Every Saturday: a weekly recap of the trends that defined the week.
   Also available in French at podcast.aequitus.net/fr.
 feed_url: "https://podcast.aequitus.net/podcast-feed.xml"
 site_url: "https://podcast.aequitus.net"
@@ -92,11 +92,11 @@ locales:
     tagline: "40 sources. 15 minutes. What matters in AI today."
     short_description: "40 sources. 15 minutes. What matters in AI today."
     long_description: >
-      Every weekday morning at 7AM CET, AI Press Review distills 40+ global sources
+      Tuesday through Friday at 7AM CET, AI Press Review distills 40+ global sources
       into a focused 15-minute briefing — filtered, weighted, and structured around
-      six pillars: AI News, Research & Breakthroughs, Use Cases, Tools & Practice,
-      Weak Signals, and Education. Built for professionals who need signal, not noise.
-      Every Saturday: a weekly recap of the five trends that defined the week.
+      six sections: AI News, Use Cases & Deployments, Tools & Practice,
+      Weak Signals, Off the Radar, and Research. Built for professionals who need signal, not noise.
+      Every Saturday: a weekly recap of the trends that defined the week.
       Also available in French at podcast.aequitus.net/fr.
     feed_url: "https://podcast.aequitus.net/podcast-feed.xml"
     site_url: "https://podcast.aequitus.net"
@@ -182,7 +182,7 @@ locales:
 # ──────────────────────────────────────────────────────────────
 profiles:
   daily:
-    description: "Episode quotidien Lun-Ven"
+    description: "Episode quotidien Mar-Ven"
     freshness_hours: 48
     exclude_previous_episode: true
     prefer_unused: false

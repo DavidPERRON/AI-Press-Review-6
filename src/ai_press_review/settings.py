@@ -497,6 +497,7 @@ _ALLOWED_LLM_HOSTS: frozenset[str] = frozenset({
     'api.mistral.ai',
     'api.together.xyz',
     'api.deepinfra.com',
+    'api.deepseek.com',
     'api.groq.com',
     'generativelanguage.googleapis.com',
     # Local / dev — Ollama and friends listen on loopback.

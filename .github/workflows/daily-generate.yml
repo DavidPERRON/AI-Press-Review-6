@@ -1,6 +1,6 @@
 name: Générer — épisode du jour
 
-# Genere l'episode quotidien Lun-Ven a 5h45 Paris (3h45 UTC ete / 4h45 UTC hiver)
+# Genere l'episode quotidien Mar-Ven a 5h45 Paris (3h45 UTC ete / 4h45 UTC hiver)
 # Le podcast publie a 7h Paris — le run demarre a 5h45 pour laisser ~1h15
 # de marge avant le drop (debugging, re-run TTS, approbation manuelle si besoin).
 # Matrix: genere EN puis FR en serie (max-parallel: 1) pour eviter les races
@@ -18,9 +18,9 @@ on:
     # no one ever did, so Nov–Mar runs fired at 4h45 Paris for the listener.
     # The month lists are disjoint, so only one fires on any given day. The
     # two DST-switch Sundays each year produce at most a 1-hour skew on
-    # Monday's run; that's acceptable versus the everyday 1-hour drift.
-    - cron: '45 3 * 4-10 1-5'       # 5h45 Paris CEST (Apr-Oct, UTC+2)
-    - cron: '45 4 * 1-3,11,12 1-5'  # 5h45 Paris CET  (Nov-Mar, UTC+1)
+    # Tuesday's run; that's acceptable versus the everyday 1-hour drift.
+    - cron: '45 3 * 4-10 2-5'       # 5h45 Paris CEST (Apr-Oct, UTC+2)
+    - cron: '45 4 * 1-3,11,12 2-5'  # 5h45 Paris CET  (Nov-Mar, UTC+1)
   workflow_dispatch:
     inputs:
       run_date:

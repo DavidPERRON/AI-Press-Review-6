@@ -279,7 +279,7 @@ def _write_index(episodes: list[dict]) -> None:
     template = template_path.read_text(encoding='utf-8')
 
     locale = os.getenv('APR_LOCALE', '').strip().lower()
-    read_label = 'Lire le brief' if locale == 'fr' else 'Read brief'
+    read_label = 'Lire le brief' if locale == 'fr' else 'Transcript'
     audio_label = 'Audio'   # same in both locales — intent is clear without translation
     sources_label = 'Sources'
     # Locale-aware sources directory: /sources/ for EN, /fr/sources/ for FR.
@@ -310,7 +310,7 @@ def _write_index(episodes: list[dict]) -> None:
         sources_url = quoteattr(f"{sources_base}{pub_dt.strftime('%Y-%m-%d')}.html")
 
         # Links row:
-        # "Read brief" — opens episode page (narrative + embedded player) in same tab.
+        # "Transcript"  — opens episode page (narrative + embedded player) in same tab.
         # "Audio"      — opens the SAME episode page in a new tab so the user can
         #                listen without losing their place on the index.  Previously
         #                this pointed to the raw mp3, which just downloaded/streamed

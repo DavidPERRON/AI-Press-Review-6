@@ -319,6 +319,355 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'EMNLP': 'E. M. N. L. P.',
     'AAAI': 'triple-A. I.',
     'FAISS': 'fais',   # Facebook AI Similarity Search — pronounced as a word
+
+    # ─────────────────────────────────────────────────────────────────────
+    # MASS-EXPANSION 2026-04-19 — recurring acronyms across the AI/finance
+    # beat. Rule of thumb when adding: if the token shows up on TechCrunch,
+    # Bloomberg, FT, or any AI lab blog at least monthly, it belongs here.
+    # ─────────────────────────────────────────────────────────────────────
+
+    # ── Finance / corporate metrics ──────────────────────────────────────
+    'ROE': 'R. O. E.',
+    'ROA': 'R. O. A.',
+    'ROIC': 'R. O. I. C.',
+    'ROCE': 'R. O. C. E.',
+    'NPV': 'N. P. V.',
+    'IRR': 'I. R. R.',
+    'FCF': 'F. C. F.',
+    'FCFF': 'F. C. F. F.',
+    'OPEX': 'op-ex',
+    'CAPEX': 'cap-ex',
+    'COGS': 'cogs',
+    'SG&A': 'S. G. and A.',
+    'EBIT': 'ee-bit',
+    'NIM': 'N. I. M.',         # Net Interest Margin
+    'NPL': 'N. P. L.',         # Non-Performing Loan
+    'NPLs': 'N. P. L. s',
+    'CET1': 'C. E. T. 1.',     # Common Equity Tier 1
+    'RWA': 'R. W. A.',         # Risk-Weighted Assets
+    'LCR': 'L. C. R.',
+    'NSFR': 'N. S. F. R.',
+    'CECL': 'see-sel',
+    'IRRBB': 'I. R. R. B. B.',
+    'GAAP': 'gap',
+    'IFRS': 'I. F. R. S.',
+    'CAGR': 'cay-ger',
+    'ARR': 'A. R. R.',
+    'MRR': 'M. R. R.',
+    'ARPU': 'ar-poo',
+    'CAC': 'C. A. C.',
+    'LTV': 'L. T. V.',
+    'NRR': 'N. R. R.',
+    'GMV': 'G. M. V.',
+    'TAM': 'tam',
+    'SAM': 'sam',
+    'SOM': 'som',
+    # ── Indices & market plumbing ────────────────────────────────────────
+    'S&P': 'S. and P.',
+    'FTSE': 'foot-see',
+    'DAX': 'dax',
+    'CAC40': 'C. A. C. forty',
+    'HSI': 'H. S. I.',
+    'KOSPI': 'koss-pee',
+    'ETF': 'E. T. F.',
+    'ETFs': 'E. T. F. s',
+    'ETN': 'E. T. N.',
+    'REIT': 'reet',
+    'REITs': 'reets',
+    'SPV': 'S. P. V.',
+    'SPAC': 'spack',
+    'SPACs': 'spacks',
+    'MBS': 'M. B. S.',
+    'ABS': 'A. B. S.',
+    'CDS': 'C. D. S.',
+    'CLO': 'C. L. O.',
+    'CDO': 'C. D. O.',
+    'OTC': 'O. T. C.',
+    'HFT': 'H. F. T.',
+    'AUM': 'A. U. M.',
+    'NAV': 'N. A. V.',
+    'IPO': 'I. P. O.',
+    'M&A': 'M. and A.',
+    # ── Rates / benchmarks ───────────────────────────────────────────────
+    'LIBOR': 'lie-bore',
+    'SOFR': 'so-fer',
+    'ESTR': 'ester',
+    'SONIA': 'so-nya',
+    'TONA': 'toh-na',
+    'TONAR': 'toh-nar',
+    # ── Banking rails / payments ─────────────────────────────────────────
+    'ACH': 'A. C. H.',
+    'RTP': 'R. T. P.',
+    'SEPA': 'see-pa',
+    'BIC': 'B. I. C.',
+    'IBAN': 'I. ban',
+    'POS': 'P. O. S.',
+    'ATM': 'A. T. M.',
+    'ATMs': 'A. T. M. s',
+    'SWIFT': 'SWIFT',
+    'FedNow': 'Fed-Now',
+    'PSP': 'P. S. P.',
+    'PSPs': 'P. S. P. s',
+    'BNPL': 'B. N. P. L.',
+    'PCI': 'P. C. I.',
+    # ── Regulators / regimes (non-US) ────────────────────────────────────
+    'EBA': 'E. B. A.',
+    'OCC': 'O. C. C.',
+    'FDIC': 'F. D. I. C.',
+    'CFPB': 'C. F. P. B.',
+    'OFAC': 'O. FAC.',
+    'FinCEN': 'fin-sen',
+    'SAMA': 'sah-mah',
+    'MAS': 'M. A. S.',
+    'HKMA': 'H. K. M. A.',
+    'FSA': 'F. S. A.',
+    'JFSA': 'J. F. S. A.',
+    'PRA': 'P. R. A.',
+    'FCA': 'F. C. A.',
+    'AMF': 'A. M. F.',
+    'BaFin': 'bah-fin',
+    'CFT': 'C. F. T.',
+    'FATCA': 'fat-ka',
+    'CRS': 'C. R. S.',
+    'MiFID': 'mee-fid',
+    'EMIR': 'eh-mere',
+    'DORA': 'door-ah',
+    'FRTB': 'F. R. T. B.',
+    'BCBS': 'B. C. B. S.',
+    'IOSCO': 'eye-os-co',
+    'CCPA': 'C. C. P. A.',
+    # ── Crypto / web3 (recurring on tech press) ──────────────────────────
+    'BTC': 'B. T. C.',
+    'ETH': 'eath',
+    'NFT': 'N. F. T.',
+    'NFTs': 'N. F. T. s',
+    'DeFi': 'dee-fy',
+    'CeFi': 'see-fy',
+    'DAO': 'D. A. O.',
+    'DAOs': 'D. A. O. s',
+    'DEX': 'dex',
+    'CEX': 'sex',     # the exchange type, said as a word
+    'AMM': 'A. M. M.',
+    'TVL': 'T. V. L.',
+    'USDC': 'U. S. D. C.',
+    'USDT': 'U. S. D. T.',
+    'L1': 'layer-one',
+    'L2': 'layer-two',
+    # ── Cybersecurity (banking-relevant) ─────────────────────────────────
+    'SSO': 'S. S. O.',
+    'MFA': 'M. F. A.',
+    '2FA': 'two-F. A.',
+    'OAuth': 'O. auth',
+    'OIDC': 'O. I. D. C.',
+    'SAML': 'sam-el',
+    'JWT': 'J. W. T.',
+    'TLS': 'T. L. S.',
+    'SSL': 'S. S. L.',
+    'CVE': 'C. V. E.',
+    'CVEs': 'C. V. E. s',
+    'CWE': 'C. W. E.',
+    'OWASP': 'oh-wasp',
+    'EDR': 'E. D. R.',
+    'XDR': 'X. D. R.',
+    'SIEM': 'seem',
+    'SOAR': 'soar',
+    'IAM': 'I. A. M.',
+    'PAM': 'P. A. M.',
+    'DLP': 'D. L. P.',
+    'IDS': 'I. D. S.',
+    'IPS': 'I. P. S.',
+    'WAF': 'waff',
+    'DDoS': 'D. dos',
+    'SOC': 'sock',
+    'SOC2': 'sock-two',
+    'GRC': 'G. R. C.',
+    'FedRAMP': 'Fed-Ramp',
+    'FIPS': 'fips',
+    'PII': 'P. I. I.',
+    'PHI': 'P. H. I.',
+    # ── Cloud / networking ───────────────────────────────────────────────
+    'VPC': 'V. P. C.',
+    'S3': 'S. three',
+    'EC2': 'E. C. two',
+    'EKS': 'E. K. S.',
+    'GKE': 'G. K. E.',
+    'AKS': 'A. K. S.',
+    'ECS': 'E. C. S.',
+    'ECR': 'E. C. R.',
+    'RDS': 'R. D. S.',
+    'KMS': 'K. M. S.',
+    'SNS': 'S. N. S.',
+    'SQS': 'S. Q. S.',
+    'CDN': 'C. D. N.',
+    'DNS': 'D. N. S.',
+    'BGP': 'B. G. P.',
+    'IPv4': 'I. P. version four',
+    'IPv6': 'I. P. version six',
+    'NAT': 'nat',
+    'VLAN': 'V. lan',
+    'DHCP': 'D. H. C. P.',
+    # ── AI/ML extended (architectures, training, eval) ──────────────────
+    'VAE': 'V. A. E.',
+    'GAN': 'gan',
+    'GANs': 'gans',
+    'CNN': 'C. N. N.',
+    'CNNs': 'C. N. N. s',
+    'RNN': 'R. N. N.',
+    'LSTM': 'L. S. T. M.',
+    'GRU': 'G. R. U.',
+    'MLP': 'M. L. P.',
+    'ViT': 'V. I. T.',
+    'CLIP': 'clip',
+    'NeRF': 'nerf',
+    'PPO': 'P. P. O.',
+    'GRPO': 'G. R. P. O.',
+    'ORPO': 'or-po',
+    'KTO': 'K. T. O.',
+    'ICL': 'I. C. L.',
+    'MoE': 'M. O. E.',
+    'MQA': 'M. Q. A.',
+    'GQA': 'G. Q. A.',
+    'KV': 'K. V.',     # KV cache
+    # Quantization / numeric formats
+    'INT8': 'int-eight',
+    'INT4': 'int-four',
+    'FP4': 'F. P. four',
+    'FP8': 'F. P. eight',
+    'FP16': 'F. P. sixteen',
+    'BF16': 'B. F. sixteen',
+    'FP32': 'F. P. thirty-two',
+    'FP64': 'F. P. sixty-four',
+    'TFLOP': 'tee-flop',
+    'TFLOPs': 'tee-flops',
+    'PFLOP': 'pee-flop',
+    'EFLOP': 'ee-flop',
+    'MFU': 'M. F. U.',
+    # Extra benchmarks
+    'AIME': 'aim',
+    'MMLU-Pro': 'M. M. L. U. Pro',
+    'MATH-500': 'MATH five-hundred',
+    'HumanEval+': 'Human-Eval Plus',
+    'MBPP': 'M. B. P. P.',
+    'BIG-bench': 'big-bench',
+    'AGIEval': 'A. G. I. Eval',
+    'IFEval': 'I. F. Eval',
+    'BFCL': 'B. F. C. L.',
+    'MGSM': 'M. G. S. M.',
+    # AI orgs
+    'BAAI': 'B. A. A. I.',
+    'EleutherAI': 'E-loo-ther A. I.',
+    'LMSYS': 'L. M. sis',
+    # ── General business / comms ─────────────────────────────────────────
+    'FAQ': 'F. A. Q.',
+    'TBD': 'T. B. D.',
+    'TBA': 'T. B. A.',
+    'ASAP': 'A. sap',
+    'EOD': 'E. O. D.',
+    'EOW': 'E. O. W.',
+    'EOM': 'E. O. M.',
+    'EOY': 'E. O. Y.',
+    'ETA': 'E. T. A.',
+    'ETD': 'E. T. D.',
+    'NDA': 'N. D. A.',
+    'NDAs': 'N. D. A. s',
+    'MoU': 'M. o. U.',
+    'MOU': 'M. O. U.',
+    'RFP': 'R. F. P.',
+    'RFQ': 'R. F. Q.',
+    'RFI': 'R. F. I.',
+    'EULA': 'you-lah',
+    'SLA': 'S. L. A.',
+    'SLAs': 'S. L. A. s',
+    'SLO': 'S. L. O.',
+    'SLOs': 'S. L. O. s',
+    'PoV': 'P. O. V.',
+    'POV': 'P. O. V.',
+    'TL;DR': 'T. L. D. R.',
+    # ── Time zones / calendar ────────────────────────────────────────────
+    'EST': 'E. S. T.',
+    'PST': 'P. S. T.',
+    'GMT': 'G. M. T.',
+    'UTC': 'U. T. C.',
+    'CET': 'C. E. T.',
+    'CEST': 'C. E. S. T.',
+    'JST': 'J. S. T.',
+    'KST': 'K. S. T.',
+    'IST': 'I. S. T.',
+    'Q1': 'Q. one',
+    'Q2': 'Q. two',
+    'Q3': 'Q. three',
+    'Q4': 'Q. four',
+    'H1': 'H. one',
+    'H2': 'H. two',
+    # ── AI products / brands (camelCase + special) ───────────────────────
+    'DeepMind': 'Deep-Mind',
+    'AlphaFold': 'Alpha-Fold',
+    'AlphaGo': 'Alpha-Go',
+    'MuZero': 'Mew-Zero',
+    'AlphaStar': 'Alpha-Star',
+    'AlphaProof': 'Alpha-Proof',
+    'ChatGPT': 'Chat G. P. T.',
+    'Codex': 'Co-dex',
+    'Copilot': 'Co-pilot',
+    'MidJourney': 'Mid-Journey',
+    'Sora': 'Sor-ah',
+    'Veo': 'Vay-oh',
+    'Runway': 'Run-way',
+    'Whisper': 'Whisper',
+    'Bedrock': 'Bedrock',
+    'Sagemaker': 'Sage-maker',
+    'Vertex': 'Vertex',
+    'HuggingFace': 'Hugging-Face',
+    'PyTorch': 'Pie-Torch',
+    'TensorFlow': 'Tensor-Flow',
+    'JAX': 'jacks',
+    'vLLM': 'V. L. L. M.',
+    'TensorRT': 'Tensor R. T.',
+    'TGI': 'T. G. I.',
+    # ── Misc tech / formats (recurring) ──────────────────────────────────
+    'WebRTC': 'Web R. T. C.',
+    'WebGL': 'Web G. L.',
+    'WASM': 'wazm',
+    'gRPC': 'G. R. P. C.',
+    'GraphQL': 'graph Q. L.',
+    'CRUD': 'crud',
+    'REST': 'rest',
+    'CSV': 'C. S. V.',
+    'TSV': 'T. S. V.',
+    'YAML': 'yamel',
+    'TOML': 'tom-el',
+    'PNG': 'P. N. G.',
+    'JPG': 'J. P. G.',
+    'JPEG': 'jay-peg',
+    'GIF': 'jiff',
+    'SVG': 'S. V. G.',
+    'WebP': 'Web P.',
+    # ── Hardware extras ──────────────────────────────────────────────────
+    'PCIe': 'P. C. I. E.',
+    'USB': 'U. S. B.',
+    'USB-C': 'U. S. B. C.',
+    'HDMI': 'H. D. M. I.',
+    'Wi-Fi': 'Wi-Fi',
+    'WiFi': 'Wi-Fi',
+    'BLE': 'B. L. E.',
+    'NFC': 'N. F. C.',
+    '5G': 'five-G.',
+    '6G': 'six-G.',
+    'EV': 'E. V.',
+    'EVs': 'E. V. s',
+    'BEV': 'B. E. V.',
+    'PHEV': 'P. H. E. V.',
+    'HEV': 'H. E. V.',
+    'CCS': 'C. C. S.',
+    'V2G': 'V. two G.',
+    'V2X': 'V. two X.',
+    'LIDAR': 'lie-dar',
+    'LiDAR': 'lie-dar',
+    'RADAR': 'ray-dar',
+    'GPS': 'G. P. S.',
+    'IMU': 'I. M. U.',
+    'SoC': 'S. O. C.',
+    'SoCs': 'S. O. C. s',
 }
 
 _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
@@ -374,7 +723,13 @@ _MULTISPACE = re.compile(r'[ \t]{2,}')
 _SPACE_BEFORE_NEWLINE = re.compile(r'[ \t]+\n')
 _TRIPLE_NEWLINE = re.compile(r'\n{3,}')
 _TRAILING_PAUSE_TOKENS = re.compile(r'(?:\.{2,}|\s+\.\s*)+$')
-_LONG_SENT_BREAK = re.compile(r'[,;]\s')
+# Primary break candidates (strong pauses): commas, semicolons, em/en dashes, colons.
+_LONG_SENT_BREAK = re.compile(r'[,;:—–]\s')
+
+# Secondary break candidates (conjunctions): only used when no primary break sits
+# in the target window. Operates on word boundaries so "android" is not a hit
+# for "and". Order matters — earlier conjunctions are preferred for cleaner cuts.
+_CONJUNCTION_BREAK = re.compile(r'\s(?:and|but|while|because|though|although|since|as|so|which|that)\s')
 
 
 def _normalize_tts_whitespace(text: str) -> str:
@@ -442,36 +797,74 @@ def _auto_spell_unknown_acronyms(text: str, locale: str) -> tuple[str, list[str]
     return result, sorted(set(found))
 
 
-def _cap_sentence_length(text: str, max_chars: int = 240) -> str:
-    """Break lines longer than max_chars at a natural comma/semicolon pause point.
+def _cap_sentence_length(text: str, max_chars: int = 150) -> str:
+    """Break lines longer than max_chars at a natural pause point.
 
-    Cartesia's prosody model tapers off on very long unbroken utterances — the
-    engine predicts a breath point that never arrives and compensates by winding
-    down the voice volume ('running out of air' effect). Breaking any sentence
-    longer than ~240 chars at its first suitable comma (≥ 80 chars in) gives the
-    engine a clear sentence boundary with full volume on the second half too.
+    Cartesia's prosody model tapers off on long unbroken utterances — the engine
+    predicts a breath point that never arrives and compensates by winding down
+    the voice volume ('running out of air' effect). Empirically, anything over
+    ~150 chars (~25 spoken words) audibly fades by the end. Breaking at a comma,
+    semicolon, dash, colon, or — in last resort — at a conjunction (and/but/while)
+    gives the engine a clean sentence boundary with full volume on the second half.
 
-    Each split inserts a '\\n' so split_script() sees two separate paragraphs and
-    can place them in independent chunks when they overflow. Applied to TTS input
-    only; script.txt stays canonical.
+    The cap is intentionally aggressive (lowered from 240 → 150 chars on
+    2026-04-19 after a listening test): it's better to over-segment than to
+    leave the voice trailing off at the end of an articulate paragraph. Each
+    split inserts a '\\n' so split_script() sees independent paragraphs.
+    Applied to TTS input only; script.txt stays canonical.
     """
     return '\n'.join(_shorten_line(line, max_chars) for line in text.split('\n'))
 
 
+# Minimum length of the FIRST half of a split — anything below feels chopped.
+# 50 chars ≈ 8-10 spoken words, the lower bound for a coherent standalone clause.
+_MIN_FIRST_HALF = 50
+
+
 def _shorten_line(line: str, max_chars: int) -> str:
-    """Recursively shorten one line until every segment is ≤ max_chars."""
+    """Recursively shorten one line until every segment is ≤ max_chars.
+
+    Tiered split-point search:
+      1. Primary breaks (`, ; : — –`) in the [_MIN_FIRST_HALF, max_chars] window.
+      2. Conjunctions (`and / but / while / because / though …`) in same window.
+      3. The latest primary break BEYOND max_chars (last-resort, unblocks lines
+         that have no usable break in the target window — better to split slightly
+         long than not split at all).
+      4. Give up — return the line untouched.
+    """
     if len(line) <= max_chars:
         return line
-    # Find the first comma/semicolon between positions [80, max_chars]
+
+    # Tier 1 — primary punctuation break in target window
     for m in _LONG_SENT_BREAK.finditer(line):
         pos = m.start()
-        if 80 <= pos <= max_chars:
-            first = line[:pos].rstrip() + '.'
-            rest = line[pos + 1:].lstrip()
-            if rest:
-                rest = rest[0].upper() + rest[1:]
-            return first + '\n' + _shorten_line(rest, max_chars)
-    return line  # no suitable split point — leave as is
+        if _MIN_FIRST_HALF <= pos <= max_chars:
+            return _do_split(line, pos, max_chars)
+
+    # Tier 2 — conjunction break in target window
+    for m in _CONJUNCTION_BREAK.finditer(line):
+        pos = m.start()
+        if _MIN_FIRST_HALF <= pos <= max_chars:
+            return _do_split(line, pos, max_chars)
+
+    # Tier 3 — first primary break BEYOND max_chars (within 1.5× max)
+    for m in _LONG_SENT_BREAK.finditer(line):
+        pos = m.start()
+        if max_chars < pos <= int(max_chars * 1.5):
+            return _do_split(line, pos, max_chars)
+
+    return line  # no usable split point — leave as is
+
+
+def _do_split(line: str, pos: int, max_chars: int) -> str:
+    """Split `line` at byte offset `pos`, period the first half, capitalize the second."""
+    first = line[:pos].rstrip().rstrip(',;:—–') + '.'
+    rest = line[pos + 1:].lstrip()
+    if rest and rest[0].islower():
+        rest = rest[0].upper() + rest[1:]
+    if not rest:
+        return first
+    return first + '\n' + _shorten_line(rest, max_chars)
 
 
 def normalize_pronunciations(text: str, locale: str) -> str:

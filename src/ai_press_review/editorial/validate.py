@@ -138,6 +138,11 @@ def validate_section_payload(payload: dict, intro_format: str = 'daily') -> None
 
     for key in required_keys:
         paragraphs = sections.get(key)
+        # Some models return a bare string for single-paragraph sections
+        # (e.g. weekly_intro with "EXACTLY 1 paragraph"). Normalize to list.
+        if isinstance(paragraphs, str) and paragraphs.strip():
+            sections[key] = [paragraphs]
+            paragraphs = sections[key]
         if not isinstance(paragraphs, list) or not paragraphs:
             raise ValueError(f"Missing section content for {key}")
         for paragraph in paragraphs:

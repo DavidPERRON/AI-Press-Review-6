@@ -93,7 +93,8 @@ jobs:
           # Free Layer-2 crawler fallback (Jina Reader). Anonymous if unset.
           JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
           JINA_READER_ENABLED: ${{ vars.JINA_READER_ENABLED }}
-          CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
+          # Falls back through legacy typo (CARESTIA) so old secrets still work.
+          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
           # Both voice IDs — settings._apply_locale picks the right one via
           # voice_id_env in podcast.yaml.
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
@@ -127,18 +128,34 @@ jobs:
             *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
           esac
           echo "Locale: $APR_LOCALE"
-          # Fail fast if LLM_API_KEY is empty — avoids 8-minute crawl then 401
-          python3 - <<'KEYCHECK'
+          # Fail fast if required secrets/variables are missing — avoids 8-minute crawl then 401
+          python3 - <<'PREFLIGHT'
           import os, sys
-          key = os.environ.get("LLM_API_KEY", "").strip()
-          if not key or key.lower() in {"none","null","placeholder","changeme","xxx","todo"}:
-              hint = repr(key) if key else "(empty)"
+          locale = os.environ.get("APR_LOCALE", "en").strip().lower() or "en"
+          voice_var = "CARTESIA_VOICE_ID_FR" if locale == "fr" else "CARTESIA_VOICE_ID"
+          required = [
+              ("LLM_API_KEY",      "secret",   "OpenRouter API key (editorial)"),
+              ("CARTESIA_API_KEY", "secret",   "Cartesia API key (TTS)"),
+              (voice_var,          "variable", f"Cartesia voice ID for locale={locale}"),
+          ]
+          placeholders = {"none", "null", "placeholder", "changeme",
+                          "your-api-key", "your_api_key", "xxx", "todo"}
+          missing = []
+          for name, kind, desc in required:
+              val = os.environ.get(name, "").strip()
+              if not val:
+                  missing.append(f"  - {name} ({kind}) -- {desc}")
+              elif val.lower() in placeholders:
+                  missing.append(f"  - {name} ({kind}) -- placeholder value {val!r}, {desc}")
+          if missing:
               sys.exit(
-                  f"ERROR: LLM_API_KEY is {hint} — update secret in repo Settings → "
-                  "Secrets and variables → Actions → LLM_API_KEY"
+                  "ERROR: required secrets/variables are missing or empty:\n"
+                  + "\n".join(missing)
+                  + "\n\nGo to repo Settings -> Secrets and variables -> Actions."
               )
-          print(f"LLM_API_KEY OK — {len(key)} chars, starts with {key[:6]}...")
-          KEYCHECK
+          key = os.environ["LLM_API_KEY"].strip()
+          print(f"Pre-flight OK - LLM_API_KEY: {len(key)} chars, starts with {key[:6]}...")
+          PREFLIGHT
           # Fail fast with a clear message if no model is resolvable for this
           # locale — avoids the 9-minute-crawl-then-empty-error surprise.
           python -c "
@@ -155,11 +172,43 @@ jobs:
               )
           print(f'Editor model resolved for {loc}: ' + next(c for c in candidates if c.strip()))
           "
-          python scripts/cloud_dry_run.py --date "$RUN_DATE" --profile "$PROFILE"
+          mkdir -p .ci-logs
+          LOG_FILE=".ci-logs/dry-run-${RUN_DATE}.log"
+          MAX_ATTEMPTS=2
+          ATTEMPT=0
+          EXIT_CODE=1
+          while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+            ATTEMPT=$((ATTEMPT + 1))
+            echo "=== Attempt $ATTEMPT/$MAX_ATTEMPTS ===" | tee -a "$LOG_FILE"
+            set +e
+            python scripts/cloud_dry_run.py --date "$RUN_DATE" --profile "$PROFILE" 2>&1 | tee -a "$LOG_FILE"
+            EXIT_CODE=${PIPESTATUS[0]}
+            set -e
+            if [ $EXIT_CODE -eq 0 ]; then
+              echo "Dry run succeeded on attempt $ATTEMPT" | tee -a "$LOG_FILE"
+              break
+            fi
+            if [ $ATTEMPT -lt $MAX_ATTEMPTS ]; then
+              TAIL=$(tail -30 "$LOG_FILE")
+              if echo "$TAIL" | grep -qiE "(HTTP 429|HTTP 502|HTTP 503|HTTP 504|ConnectionError|TimeoutError|connection reset|rate limit|too many requests)"; then
+                echo "Transient error — retrying in 30s (attempt $ATTEMPT/$MAX_ATTEMPTS)" | tee -a "$LOG_FILE"
+                sleep 30
+              else
+                echo "::error::Permanent error on attempt $ATTEMPT — not retrying" | tee -a "$LOG_FILE"
+                break
+              fi
+            fi
+          done
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo "::error::Dry run failed after $ATTEMPT attempt(s)" | tee -a "$LOG_FILE"
+            exit $EXIT_CODE
+          fi
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: cloud-dry-run-output
-          path: output/
+          path: |
+            output/
+            .ci-logs/
           retention-days: 7

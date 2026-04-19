@@ -51,6 +51,8 @@ jobs:
     # (Crawl4AI abandoned the same day). 30 min gives ~5 min headroom over
     # the typical 20-25 min run with httpx async + Cartesia streaming.
     timeout-minutes: 30
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -117,21 +119,23 @@ jobs:
           LLM_FALLBACK_BASE_URL_FR: ${{ vars.LLM_FALLBACK_BASE_URL_FR }}
           LLM_FALLBACK_API_KEY_FR: ${{ secrets.LLM_FALLBACK_API_KEY_FR }}
           LLM_EMERGENCY_BASE_URL_EN: ${{ vars.LLM_EMERGENCY_BASE_URL_EN }}
-          LLM_EMERGENCY_API_KEY_EN: ${{ secrets.LLM_EMERGENCY_API_KEY_EN || secrets.DEEPINFRA_API_KEY }}
+          LLM_EMERGENCY_API_KEY_EN: ${{ secrets.APR_TEST_DEEPINFRA_API_KEY || secrets.DEEPINFRA_API_KEY }}
           LLM_EMERGENCY_BASE_URL_FR: ${{ vars.LLM_EMERGENCY_BASE_URL_FR }}
-          LLM_EMERGENCY_API_KEY_FR: ${{ secrets.LLM_EMERGENCY_API_KEY_FR || secrets.DEEPINFRA_API_KEY }}
-          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_EMERGENCY_API_KEY_FR: ${{ secrets.APR_TEST_DEEPINFRA_API_KEY || secrets.DEEPINFRA_API_KEY }}
+          LLM_API_KEY: ${{ secrets.APR_TEST_LLM_API_KEY || secrets.LLM_API_KEY }}
           # Free Layer-2 crawler fallback (Jina Reader). Anonymous if unset.
-          JINA_API_KEY: ${{ secrets.JINA_API_KEY }}
+          JINA_API_KEY: ${{ secrets.APR_TEST_JINA_API_KEY || secrets.JINA_API_KEY }}
           JINA_READER_ENABLED: ${{ vars.JINA_READER_ENABLED }}
-          CARTESIA_API_KEY: ${{ secrets.CARESTIA_API_KEY }}
+          # APR_TEST_CARTESIA_API_KEY overrides prod for test runs. Falls back
+          # through the legacy typo (CARESTIA) so old secrets still work.
+          CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}
-          R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
-          R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-          NEWSAPI_API_KEY: ${{ secrets.NEWS_API_KEY }}
+          R2_BUCKET_NAME: ${{ vars.APR_TEST_R2_BUCKET_NAME || vars.R2_BUCKET_NAME }}
+          R2_ENDPOINT: ${{ vars.APR_TEST_R2_ENDPOINT || vars.R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.APR_TEST_R2_ACCESS_KEY_ID || secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.APR_TEST_R2_SECRET_ACCESS_KEY || secrets.R2_SECRET_ACCESS_KEY }}
+          NEWSAPI_API_KEY: ${{ secrets.APR_TEST_NEWS_API_KEY || secrets.NEWS_API_KEY }}
           # Shell-injection hardening — see daily-generate.yml for the pattern.
           RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
           PROFILE_INPUT: ${{ github.event.inputs.profile || 'weekly' }}
@@ -200,7 +204,10 @@ jobs:
                   + "\n".join(missing)
                   + "\n\nGo to repo Settings -> Secrets and variables -> Actions.\n"
                   "  Secrets in the 'Secrets' tab. Variables in the 'Variables' tab.\n"
-                  "  R2 keys: Cloudflare Dashboard → R2 → Manage API Tokens."
+                  "  R2 keys: Cloudflare Dashboard → R2 → Manage API Tokens.\n"
+                  "TIP: For safe test runs set APR_TEST_* overrides (e.g. APR_TEST_LLM_API_KEY,\n"
+                  "  APR_TEST_CARTESIA_API_KEY, APR_TEST_R2_BUCKET_NAME …) — they shadow\n"
+                  "  the matching production secret/variable without touching prod data."
               )
           hint = llm_key[:6] + "..." if len(llm_key) > 6 else llm_key[:3] + "..."
           print(f"Pre-flight OK - LLM key: {len(llm_key)} chars, starts with {hint}")
@@ -226,7 +233,38 @@ jobs:
             *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
           esac
           echo "Generating ${PROFILE} draft for locale=$APR_LOCALE date=$RUN_DATE"
-          python scripts/generate_draft.py --date "$RUN_DATE" --profile "$PROFILE"
+          mkdir -p .ci-logs
+          LOG_FILE=".ci-logs/${APR_LOCALE}-${RUN_DATE}.log"
+          MAX_ATTEMPTS=3
+          ATTEMPT=0
+          EXIT_CODE=1
+          while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+            ATTEMPT=$((ATTEMPT + 1))
+            echo "=== Attempt $ATTEMPT/$MAX_ATTEMPTS ===" | tee -a "$LOG_FILE"
+            set +e
+            python scripts/generate_draft.py --date "$RUN_DATE" --profile "$PROFILE" 2>&1 | tee -a "$LOG_FILE"
+            EXIT_CODE=${PIPESTATUS[0]}
+            set -e
+            if [ $EXIT_CODE -eq 0 ]; then
+              echo "Draft generation succeeded on attempt $ATTEMPT" | tee -a "$LOG_FILE"
+              break
+            fi
+            if [ $ATTEMPT -lt $MAX_ATTEMPTS ]; then
+              TAIL=$(tail -30 "$LOG_FILE")
+              if echo "$TAIL" | grep -qiE "(HTTP 429|HTTP 502|HTTP 503|HTTP 504|ConnectionError|TimeoutError|connection reset|rate limit|too many requests)"; then
+                WAIT=$((ATTEMPT * 30))
+                echo "Transient error — retrying in ${WAIT}s (attempt $ATTEMPT/$MAX_ATTEMPTS)" | tee -a "$LOG_FILE"
+                sleep $WAIT
+              else
+                echo "::error::Permanent error on attempt $ATTEMPT — not retrying" | tee -a "$LOG_FILE"
+                break
+              fi
+            fi
+          done
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo "::error::Draft generation failed after $ATTEMPT attempt(s)" | tee -a "$LOG_FILE"
+            exit $EXIT_CODE
+          fi
 
       - name: Commit draft state
         env:
@@ -261,5 +299,7 @@ jobs:
         if: always()
         with:
           name: weekly-draft-output-${{ matrix.locale }}
-          path: output/
+          path: |
+            output/
+            .ci-logs/
           retention-days: 7

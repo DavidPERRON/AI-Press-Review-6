@@ -460,6 +460,18 @@ def _resolve_endpoint(model: str, settings) -> tuple[str, str]:
             base = per_base
         if per_key:
             key = per_key
+        elif per_base:
+            # Per-tier base URL points at a different provider but no matching key
+            # was configured — we fall back to the generic LLM_API_KEY, which is
+            # almost certainly wrong for that provider (e.g. OpenRouter key sent to
+            # api.deepseek.com). Log a clear warning so the 401 is diagnosable.
+            env_prefix = tier_prefix.upper().replace('LLM_', '')
+            logger.warning(
+                "LLM_%s_BASE_URL is set (%s) but LLM_%s_API_KEY[_<LOCALE>] is empty "
+                "— falling back to generic LLM_API_KEY. "
+                "If the target provider needs its own key, set LLM_%s_API_KEY.",
+                env_prefix, per_base, env_prefix, env_prefix,
+            )
     return base, key
 
 

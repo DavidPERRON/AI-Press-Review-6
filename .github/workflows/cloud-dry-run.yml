@@ -14,7 +14,7 @@ on:
         type: choice
         options:
           - daily
-          - weekly_recap
+          - weekly
       locale:
         description: Locale (en or fr) — picks the per-locale LLM model + voice
         required: false
@@ -122,7 +122,8 @@ jobs:
           # Profile whitelist — reject anything that isn't one of the two
           # expected profile names, keeps crafted inputs from reaching argv.
           case "$PROFILE_INPUT" in
-            daily|weekly_recap) PROFILE="$PROFILE_INPUT" ;;
+            daily) PROFILE="daily" ;;
+            weekly|weekly_recap) PROFILE="weekly_recap" ;;
             *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
           esac
           echo "Locale: $APR_LOCALE"

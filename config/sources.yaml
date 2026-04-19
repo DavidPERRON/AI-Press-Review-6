@@ -29,8 +29,9 @@ curated_rss:
   - "https://huggingface.co/blog/feed.xml"
   - "https://www.deepmind.com/blog/rss.xml"
   - "https://cohere.com/blog/rss.xml"
-  - "https://www.anthropic.com/rss.xml"
-  - "https://mistral.ai/news/rss"
+  # Removed 2026-04-19 (404): anthropic.com/rss.xml, mistral.ai/news/rss
+  # Anthropic has no public RSS as of this date; Mistral migrated their news
+  # off RSS. Coverage of these labs comes via curated press + Google News.
 
   # Cloud & Enterprise
   - "https://aws.amazon.com/blogs/machine-learning/feed/"
@@ -42,8 +43,8 @@ curated_rss:
   - "https://engineering.atspotify.com/feed/"
 
   # Semiconductors & Hardware
-  - "https://www.intel.com/content/www/us/en/newsroom/rss-feed.html"
-  - "https://community.amd.com/community/amd-blog/rss"
+  # Removed 2026-04-19 (403): intel.com/content/.../rss-feed.html — Intel
+  # newsroom now blocks datacenter UAs. NVIDIA + AMD blog still available.
 
   # ── PRESSE SPECIALISEE IA ──────────────────────────────────
   - "https://techcrunch.com/category/artificial-intelligence/feed/"
@@ -62,9 +63,12 @@ curated_rss:
   - "https://www.infoworld.com/category/machine-learning/index.rss"
   - "https://www.artificialintelligence-news.com/feed/"
   - "https://www.aitrends.com/feed/"
-  - "https://theregister.com/software/ai_and_ml/headlines.atom"
+  # Replaced 2026-04-19: theregister.com/software/ai_and_ml/headlines.atom
+  # returned 404 (path retired). The site-wide atom still works.
+  - "https://www.theregister.com/headlines.atom"
   - "https://www.analyticsvidhya.com/feed/"
-  - "https://www.datanami.com/feed/"
+  # Removed 2026-04-19 (403): datanami.com — site decommissioned, redirects
+  # to hpcwire which also blocks our UA.
   - "https://www.kdnuggets.com/feed"
 
   # ── AI-FOCUSED MEDIA & EXPERT BLOGS ───────────────────────
@@ -74,7 +78,9 @@ curated_rss:
   - "https://www.oneusefulthing.org/feed"
   - "https://lastweekin.ai/feed"
   - "https://jack-clark.net/feed/"
-  - "https://interconnects.ai/feed"
+  # Replaced 2026-04-19: interconnects.ai/feed → 404. The newsletter is on
+  # Substack and the substack feed works.
+  - "https://www.interconnects.ai/feed"
   - "https://www.semianalysis.com/feed"
   - "https://newsletter.pragmaticengineer.com/feed"
   - "https://9to5mac.com/guides/artificial-intelligence/feed/"
@@ -90,9 +96,11 @@ curated_rss:
   - "https://engineering.fb.com/category/ml-applications/feed/"
   - "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science"
   - "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss"
-  - "https://news.mit.edu/topic/artificial-intelligence2/rss.xml"
+  # Replaced 2026-04-19: news.mit.edu/.../artificial-intelligence2 → 404
+  - "https://news.mit.edu/rss/topic/artificial-intelligence2"
   - "https://hai.stanford.edu/news/feed"
-  - "https://research.ibm.com/blog/feed/"
+  # Removed 2026-04-19 (404): research.ibm.com/blog/feed — moved, no clean
+  # replacement. IBM coverage comes via Google News + curated press.
   - "https://pytorch.org/blog/feed.xml"
   - "https://research.microsoft.com/en-us/news/rss/home.aspx"
   - "https://www.nature.com/subjects/machine-learning.rss"
@@ -110,18 +118,21 @@ curated_rss:
   # Asia Pro, Caixin Global Pro) are hard-blocked by _PAYWALL_DOMAINS.
   - "https://www.restofworld.org/feed/latest/"
   - "https://technode.com/feed/"
-  - "https://asia.nikkei.com/rss/feed/nikkei-asia-top-stories"
+  # Removed 2026-04-19 (404): asia.nikkei.com/rss/feed/nikkei-asia-top-stories
+  # and yicaiglobal.com/feed. Both restructured their RSS endpoints.
+  # SCMP + ChinaTalk + 36kr + PingWest still cover the same beat.
   - "https://36kr.com/feed"
   - "https://en.pingwest.com/feed"
   - "https://kr-asia.com/feed"
   - "https://chinatalk.media/feed"
-  - "https://www.yicaiglobal.com/feed"
 
   # ── EXPERT NEWSLETTERS COMPLEMENTARY (libre accès) ────────
   - "https://thegradient.pub/rss/"
   - "https://www.latent.space/feed"
   - "https://www.aisnakeoil.com/feed"
-  - "https://garymarcus.substack.com/feed"
+  # Removed 2026-04-19 (403): garymarcus.substack.com — Substack blocks
+  # datacenter UAs on this newsletter. Reachable via Layer-2 (Jina) for
+  # individual articles surfaced through Google News.
 
   # ── BUSINESS & FINANCE (libre accès) ──────────────────────
   - "https://www.finextra.com/rss/headlines.aspx"
@@ -130,7 +141,8 @@ curated_rss:
   - "https://www.bankingdive.com/feeds/news/"
 
   # ── PRESSE FRANÇAISE (libre accès) ────────────────────────
-  - "https://www.journaldunet.com/intelligence-artificielle/rss.xml"
-  - "https://www.usine-digitale.fr/rss.xml"
+  # Removed 2026-04-19: journaldunet (404 — path moved to /_montage/...) and
+  # usine-digitale (403 datacenter block). Section retained for when FR is
+  # re-enabled; siecledigital + maddyness still serve EN-relevant signal.
   - "https://siecledigital.fr/feed/"
   - "https://www.maddyness.com/feed/"

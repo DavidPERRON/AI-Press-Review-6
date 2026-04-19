@@ -54,11 +54,17 @@ JINA_MIN_CHARS = MIN_CONTENT_LENGTH
 # Feature flags — can be turned off via env without code change.
 #   JINA_READER_ENABLED=false  → skip Layer 2 entirely
 #   JINA_API_KEY=<key>         → optional, raises rate limit
+#
+# NB: GitHub Actions `${{ vars.FOO }}` expands to "" when the Variable is
+# unset, not to None. Treat empty string as "not configured" → default ON.
+# Only explicit falsy tokens disable the fallback.
+_FALSY_TOKENS = {"0", "false", "no", "off", "disabled"}
+
 def _jina_enabled() -> bool:
     v = os.getenv("JINA_READER_ENABLED")
-    if v is None:
+    if v is None or not v.strip():
         return True
-    return v.strip().lower() in {"1", "true", "yes", "on"}
+    return v.strip().lower() not in _FALSY_TOKENS
 
 
 def _jina_api_key() -> Optional[str]:

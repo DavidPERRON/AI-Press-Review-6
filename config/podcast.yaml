@@ -65,7 +65,7 @@ tts:
   #   'websocket': one continue=true session for the full script (EN default)
   #   'chunks':    independent session per chunk + crossfade (FR default)
   mode: "websocket"
-  chunk_crossfade_ms: 80
+  chunk_crossfade_ms: 300
 
 # ── PUBLICATION ───────────────────────────────────────────────
 retention_days: 10
@@ -122,7 +122,7 @@ locales:
     # session and crossfades them — segments stay at full quality. Daily
     # episodes (~14 min) gain nothing audible but pay no cost either.
     tts_mode: "chunks"
-    tts_chunk_crossfade_ms: 80
+    tts_chunk_crossfade_ms: 300
 
   fr:
     # Paused 2026-04-18: voice quality unacceptable (saccadée, acronymes
@@ -171,7 +171,7 @@ locales:
     # noise + volume degradation observed in FR after ~2 min of a single long
     # continue=true session. 80 ms crossfade is inaudible at normal volume.
     tts_mode: "chunks"
-    tts_chunk_crossfade_ms: 80
+    tts_chunk_crossfade_ms: 300
 
 # ──────────────────────────────────────────────────────────────
 #  PROFILS EDITORIAUX

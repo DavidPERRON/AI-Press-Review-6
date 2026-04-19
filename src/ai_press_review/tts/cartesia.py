@@ -1111,20 +1111,19 @@ def _auto_spell_unknown_acronyms(text: str, locale: str) -> tuple[str, list[str]
     return result, sorted(set(found))
 
 
-def _cap_sentence_length(text: str, max_chars: int = 150) -> str:
+def _cap_sentence_length(text: str, max_chars: int = 210) -> str:
     """Break lines longer than max_chars at a natural pause point.
 
     Cartesia's prosody model tapers off on long unbroken utterances — the engine
     predicts a breath point that never arrives and compensates by winding down
-    the voice volume ('running out of air' effect). Empirically, anything over
-    ~150 chars (~25 spoken words) audibly fades by the end. Breaking at a comma,
-    semicolon, dash, colon, or — in last resort — at a conjunction (and/but/while)
-    gives the engine a clean sentence boundary with full volume on the second half.
+    the voice volume ('running out of air' effect). Breaking at a comma,
+    semicolon, dash, colon, or — in last resort — at a conjunction gives the
+    engine a clean breath point with full volume on the second half.
 
-    The cap is intentionally aggressive (lowered from 240 → 150 chars on
-    2026-04-19 after a listening test): it's better to over-segment than to
-    leave the voice trailing off at the end of an articulate paragraph. Each
-    split inserts a '\\n' so split_script() sees independent paragraphs.
+    210 chars ≈ 35 spoken words — enough for a full, natural-sounding sentence
+    without triggering the volume-taper. 150 was too aggressive: every comma
+    became an artificial sentence boundary, producing a choppy, staccato rhythm
+    with muffled endings (sentence-final prosody applied mid-clause).
     Applied to TTS input only; script.txt stays canonical.
     """
     return '\n'.join(_shorten_line(line, max_chars) for line in text.split('\n'))
@@ -1171,8 +1170,16 @@ def _shorten_line(line: str, max_chars: int) -> str:
 
 
 def _do_split(line: str, pos: int, max_chars: int) -> str:
-    """Split `line` at byte offset `pos`, period the first half, capitalize the second."""
-    first = line[:pos].rstrip().rstrip(',;:—–') + '.'
+    """Split `line` at byte offset `pos`, keep original punctuation, capitalize the second.
+
+    Preserve the trailing comma/semicolon so Cartesia uses continuation prosody
+    (brief pause, sustained volume) rather than sentence-final prosody (taper +
+    long silence) at the split point. The split is at a mid-sentence break, not
+    a true sentence end.
+    """
+    # Keep the punctuation character at pos (comma, semicolon, etc.) so Cartesia
+    # hears a natural comma pause rather than a full-stop volume taper.
+    first = line[:pos + 1].rstrip()
     rest = line[pos + 1:].lstrip()
     if rest and rest[0].islower():
         rest = rest[0].upper() + rest[1:]
@@ -1207,12 +1214,16 @@ def split_script(text: str, max_chars: int = 1800) -> list[str]:
     Each chunk is sent as a separate transcript within a single shared
     context_id websocket session, so Cartesia keeps prosody and voice state
     across the whole script. There are no per-chunk restart artefacts.
+
+    Paragraphs are joined with a single \\n (not \\n\\n) so Cartesia treats each
+    boundary as a short breath rather than a full paragraph break. \\n\\n caused
+    noticeably long silences between every paragraph in the synthesized audio.
     """
     paragraphs = [p.strip() for p in text.split('\n') if p.strip()]
     chunks: list[str] = []
     current = ''
     for paragraph in paragraphs:
-        candidate = f"{current}\n\n{paragraph}".strip() if current else paragraph
+        candidate = f"{current}\n{paragraph}".strip() if current else paragraph
         if len(candidate) <= max_chars:
             current = candidate
         else:

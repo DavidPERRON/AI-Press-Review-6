@@ -1,0 +1,54 @@
+name: Upload to YouTube
+
+# Reusable workflow — called by approve-release.yml after a successful release.
+# Soft-skips if YOUTUBE_CLIENT_ID / YOUTUBE_REFRESH_TOKEN are not configured.
+
+on:
+  workflow_call:
+    inputs:
+      locale:
+        description: 'Locale (en | fr)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Pull latest state
+        run: git pull --rebase origin main
+
+      - name: Upload episode to YouTube
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_PLAYLIST_ID_EN: ${{ vars.YOUTUBE_PLAYLIST_ID_EN }}
+          YOUTUBE_PLAYLIST_ID_FR: ${{ vars.YOUTUBE_PLAYLIST_ID_FR }}
+        run: python scripts/youtube_upload.py --locale ${{ inputs.locale }}

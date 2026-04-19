@@ -119,16 +119,11 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
                 # One paragraph = ONE distinct story/fact. No padding.
                 "weekly_intro": [
                     "KEY NAME IS 'weekly_intro' — do not rename. "
-                    "1 to 2 paragraphs of 60-90 words each. "
-                    "In natural spoken language, introduce this episode's 3-part structure: "
-                    "first, you will cover the AI news and deployments from this Friday (~13 minutes); "
-                    "then, a brief segment of signals absent from mainstream tech media — the kind of intelligence "
-                    "Bloomberg hasn't surfaced yet (~4 minutes); "
-                    "finally, a focused look at what to watch in the coming week (~5 minutes). "
-                    "Do NOT say 'Part 1', 'Part 2', or 'Part 3'. Use natural language. "
-                    "Reference Friday explicitly ('this Friday', 'hier' in FR). "
-                    "TEASE the off-radar segment: 1 sentence that makes the listener curious about what mainstream media missed. "
-                    "No filler. Keep it tight.",
+                    "EXACTLY 1 paragraph of 60-70 words. No more. "
+                    "Straight to the point: name the top story of the week, state what's in this episode "
+                    "(Friday news + off-radar signals + week ahead), tease the off-radar segment in one punchy sentence. "
+                    "No filler, no 'Welcome back', no paragraph numbering. "
+                    "Reference Friday explicitly ('this Friday' / 'hier vendredi' in FR).",
                 ],
                 "weekly_news": [
                     "KEY NAME IS 'weekly_news' — do not rename. "
@@ -247,7 +242,7 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         length_instructions = (
             f"Your script MUST contain at least {settings.min_script_words} words total across all paragraphs. "
             f"Target {target_words} words (~21 spoken minutes total: ~16 min for Friday news + deployments, ~5 min for next week). "
-            "weekly_intro paragraphs: 60-90 words each. All other paragraphs: 80-110 words each. Never shorter, never longer. "
+            "weekly_intro: exactly 1 paragraph of 60-70 words. All other paragraphs: 80-110 words each. Never shorter, never longer. "
             "One paragraph = one distinct story or fact. Never merge two stories. Never split one story across two paragraphs. "
             "weekly_news and weekly_use_cases MUST use ONLY sources from Friday — ignore earlier days. "
             "weekly_next_week may reference any recent signals to ground its forward-looking items. "

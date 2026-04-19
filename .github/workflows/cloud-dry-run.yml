@@ -112,36 +112,58 @@ jobs:
             daily|weekly_recap) PROFILE="$PROFILE_INPUT" ;;
             *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
           esac
-          echo "Locale: $APR_LOCALE"
-          # Fail fast if LLM_API_KEY is empty — avoids 8-minute crawl then 401
-          python3 - <<'KEYCHECK'
+          echo "Locale: $APR_LOCALE  Profile: $PROFILE  Date: $RUN_DATE"
+          # ── Pre-flight: validate every required secret/variable in one pass ──
+          # Mirrors the PREFLIGHT block in daily-generate.yml (minus R2, since
+          # dry-run sets upload_audio=False). Without this the workflow failed
+          # ~2 minutes into crawling with an opaque exit-code-1 whenever a
+          # secret was missing or a per-locale model var was unset.
+          python3 - <<'PREFLIGHT'
           import os, sys
-          key = os.environ.get("LLM_API_KEY", "").strip()
-          if not key or key.lower() in {"none","null","placeholder","changeme","xxx","todo"}:
-              hint = repr(key) if key else "(empty)"
-              sys.exit(
-                  f"ERROR: LLM_API_KEY is {hint} — update secret in repo Settings → "
-                  "Secrets and variables → Actions → LLM_API_KEY"
-              )
-          print(f"LLM_API_KEY OK — {len(key)} chars, starts with {key[:6]}...")
-          KEYCHECK
-          # Fail fast with a clear message if no model is resolvable for this
-          # locale — avoids the 9-minute-crawl-then-empty-error surprise.
-          python -c "
-          import os, sys
-          loc = os.environ.get('APR_LOCALE', 'en').upper()
-          candidates = [
-              os.environ.get(f'LLM_EDITOR_MODEL_{loc}', ''),
-              os.environ.get('LLM_EDITOR_MODEL', ''),
+          locale = os.environ.get("APR_LOCALE", "en").strip().lower() or "en"
+          voice_var = "CARTESIA_VOICE_ID_FR" if locale == "fr" else "CARTESIA_VOICE_ID"
+          required = [
+              ("LLM_API_KEY",      "secret",   "OpenRouter API key (editorial)"),
+              ("CARTESIA_API_KEY", "secret",   "Cartesia API key (TTS)"),
+              (voice_var,          "variable", f"Cartesia voice ID for locale={locale}"),
           ]
-          if not any(c.strip() for c in candidates):
-              sys.exit(
-                  f'ERROR: no editor model set for locale {loc}. '
-                  f'Set repo Variable LLM_EDITOR_MODEL_{loc} or LLM_EDITOR_MODEL.'
+          placeholders = {"none", "null", "placeholder", "changeme",
+                          "your-api-key", "your_api_key", "xxx", "todo"}
+          missing = []
+          for name, kind, desc in required:
+              val = os.environ.get(name, "").strip()
+              if not val:
+                  missing.append(f"  - {name} ({kind}) -- {desc}")
+              elif val.lower() in placeholders:
+                  missing.append(f"  - {name} ({kind}) -- placeholder value {val!r}, {desc}")
+          # Also require at least one resolvable editor model for this locale.
+          loc = locale.upper()
+          editor_candidates = [
+              os.environ.get(f"LLM_EDITOR_MODEL_{loc}", "").strip(),
+              os.environ.get("LLM_EDITOR_MODEL", "").strip(),
+          ]
+          if not any(editor_candidates):
+              missing.append(
+                  f"  - LLM_EDITOR_MODEL_{loc} or LLM_EDITOR_MODEL (variable) -- "
+                  f"editor model for locale={locale}"
               )
-          print(f'Editor model resolved for {loc}: ' + next(c for c in candidates if c.strip()))
-          "
-          python scripts/cloud_dry_run.py --date "$RUN_DATE" --profile "$PROFILE"
+          if missing:
+              sys.exit(
+                  "ERROR: required secrets/variables are missing or empty:\n"
+                  + "\n".join(missing)
+                  + "\n\nGo to repo Settings -> Secrets and variables -> Actions.\n"
+                  "  Secrets in the 'Secrets' tab. Variables in the 'Variables' tab."
+              )
+          llm_key = os.environ["LLM_API_KEY"].strip()
+          hint = llm_key[:6] + "..." if len(llm_key) > 6 else llm_key[:3] + "..."
+          print(f"Pre-flight OK - LLM_API_KEY: {len(llm_key)} chars, starts with {hint}")
+          print(f"Pre-flight OK - editor model: {next(c for c in editor_candidates if c)}")
+          PREFLIGHT
+          # Surface full tracebacks — a bare `exit 1` from deep inside the
+          # pipeline leaves only "Process completed with exit code 1" in the
+          # run log. `python -u` also disables stdout buffering so log lines
+          # appear in real time rather than in one final flush on failure.
+          python -u scripts/cloud_dry_run.py --date "$RUN_DATE" --profile "$PROFILE"
 
       - uses: actions/upload-artifact@v4
         if: always()

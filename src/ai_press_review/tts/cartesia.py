@@ -668,6 +668,317 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'IMU': 'I. M. U.',
     'SoC': 'S. O. C.',
     'SoCs': 'S. O. C. s',
+
+    # ─────────────────────────────────────────────────────────────────────
+    # MASS-EXPANSION 2026-04-19 (b) — BUSINESS / ECONOMY / CORPORATE
+    # User asked for broader coverage: "ajout acronymes business, economie,
+    # corporate". Anything that recurs on Bloomberg / FT / WSJ / Reuters /
+    # Economist / HBR / consulting reports belongs here.
+    # ─────────────────────────────────────────────────────────────────────
+
+    # ── Strategy / consulting / frameworks ──────────────────────────────
+    'BCG': 'B. C. G.',
+    'MBB': 'M. B. B.',     # McKinsey, Bain, BCG
+    'SWOT': 'swot',
+    'PESTLE': 'pes-tel',
+    'PESTEL': 'pes-tel',
+    'TOWS': 'tows',
+    'OKR': 'O. K. R.',
+    'OKRs': 'O. K. R. s',
+    'KPI': 'K. P. I.',
+    'KPIs': 'K. P. I. s',
+    'EVA': 'E. V. A.',     # Economic Value Added
+    'TCO': 'T. C. O.',     # Total Cost of Ownership
+    'CSF': 'C. S. F.',     # Critical Success Factor
+    'USP': 'U. S. P.',     # Unique Selling Proposition
+    'GTM': 'G. T. M.',
+    'ICP': 'I. C. P.',     # Ideal Customer Profile
+    'JTBD': 'J. T. B. D.', # Jobs To Be Done
+
+    # ── Customer / product metrics ──────────────────────────────────────
+    'CSAT': 'C. sat',
+    'NPS': 'N. P. S.',
+    'CES': 'C. E. S.',     # Customer Effort Score
+    'DAU': 'D. A. U.',
+    'MAU': 'M. A. U.',
+    'WAU': 'W. A. U.',
+    'AOV': 'A. O. V.',     # Average Order Value
+    'ATV': 'A. T. V.',     # Average Transaction Value
+    'ROAS': 'roh-az',      # Return on Ad Spend
+    'CTR': 'C. T. R.',
+    'CVR': 'C. V. R.',     # Conversion Rate
+    'CR': 'C. R.',
+    'CPC': 'C. P. C.',     # Cost Per Click
+    'CPM': 'C. P. M.',
+    'CPL': 'C. P. L.',     # Cost Per Lead
+    'CPA': 'C. P. A.',     # Cost Per Acquisition / Certified Public Accountant
+    'CPS': 'C. P. S.',
+    'PPC': 'P. P. C.',     # Pay Per Click
+
+    # ── Sales / marketing infra ─────────────────────────────────────────
+    'CRM': 'C. R. M.',
+    'CDP': 'C. D. P.',     # Customer Data Platform
+    'DSP': 'D. S. P.',
+    'SSP': 'S. S. P.',
+    'DMP': 'D. M. P.',
+    'SEO': 'S. E. O.',
+    'SEM': 'S. E. M.',
+    'SMM': 'S. M. M.',
+    'ASO': 'A. S. O.',
+    'PR': 'P. R.',
+
+    # ── Enterprise IT / supply chain ────────────────────────────────────
+    'ERP': 'E. R. P.',
+    'SCM': 'S. C. M.',     # Supply Chain Management
+    'PLM': 'P. L. M.',     # Product Lifecycle Management
+    'MES': 'M. E. S.',     # Manufacturing Execution System
+    'WMS': 'W. M. S.',     # Warehouse Management System
+    'MRP': 'M. R. P.',     # Material Requirements Planning
+    'BOM': 'B. O. M.',     # Bill of Materials
+    'SKU': 'S. K. U.',
+    'SKUs': 'S. K. U. s',
+    'EDI': 'E. D. I.',
+    'JIT': 'J. I. T.',     # Just In Time
+    'TQM': 'T. Q. M.',     # Total Quality Management
+    'OEE': 'O. E. E.',     # Overall Equipment Effectiveness
+    'ODM': 'O. D. M.',
+    '3PL': 'three P. L.',  # third-party logistics
+    '4PL': 'four P. L.',
+
+    # ── Corporate structure / governance ────────────────────────────────
+    'LLC': 'L. L. C.',
+    'LLP': 'L. L. P.',
+    'LP': 'L. P.',
+    'GP': 'G. P.',         # General Partner
+    'LBO': 'L. B. O.',
+    'MBO': 'M. B. O.',
+    'ESOP': 'ee-sop',
+    'RSU': 'R. S. U.',
+    'RSUs': 'R. S. U. s',
+    'ISO': 'I. S. O.',     # also Incentive Stock Option
+    'AGM': 'A. G. M.',     # Annual General Meeting
+    'EGM': 'E. G. M.',
+    'BOD': 'B. O. D.',
+    'NED': 'N. E. D.',     # Non-Executive Director
+    'C-suite': 'C-suite',
+    'CRO': 'C. R. O.',     # Chief Revenue / Risk Officer
+    'CHRO': 'C. H. R. O.',
+    'CMO': 'C. M. O.',
+    'CCO': 'C. C. O.',     # Chief Compliance / Customer Officer
+    'CPO': 'C. P. O.',     # Chief Product / People Officer
+    'CDO': 'C. D. O.',     # also Collateralized Debt Obligation
+    'GC': 'G. C.',         # General Counsel
+    'CoS': 'C. o. S.',     # Chief of Staff
+    'EVP': 'E. V. P.',     # Executive Vice President
+    'SVP': 'S. V. P.',
+    'VP': 'V. P.',
+    'AVP': 'A. V. P.',
+
+    # ── Macro economics ─────────────────────────────────────────────────
+    'GDP': 'G. D. P.',
+    'GNP': 'G. N. P.',
+    'GNI': 'G. N. I.',
+    'PCE': 'P. C. E.',
+    'CPI': 'C. P. I.',
+    'PPI': 'P. P. I.',
+    'PMI': 'P. M. I.',
+    'ISM': 'I. S. M.',
+    'NFP': 'N. F. P.',     # Non-Farm Payrolls
+    'JOLTS': 'jolts',
+    'FFR': 'F. F. R.',
+    'ZIRP': 'zerp',
+    'NIRP': 'nerp',
+    'QE': 'Q. E.',
+    'QT': 'Q. T.',
+    'M2': 'M. two',
+    'M3': 'M. three',
+    'BoP': 'B. o. P.',     # Balance of Payments
+    'CA': 'C. A.',
+    'FDI': 'F. D. I.',     # Foreign Direct Investment
+    'PPP': 'P. P. P.',     # Purchasing Power Parity
+    'HDI': 'H. D. I.',
+    'CBDC': 'C. B. D. C.',
+
+    # ── Trade blocs & multilaterals ─────────────────────────────────────
+    'WB': 'W. B.',         # World Bank
+    'IMF': 'I. M. F.',
+    'WTO': 'W. T. O.',
+    'OECD': 'O. E. C. D.',
+    'BIS': 'B. I. S.',
+    'WEF': 'W. E. F.',
+    'BRICS': 'bricks',
+    'G7': 'G. seven',
+    'G20': 'G. twenty',
+    'G77': 'G. seventy-seven',
+    'ASEAN': 'AS-ee-an',
+    'MERCOSUR': 'mer-co-sur',
+    'NAFTA': 'naf-ta',
+    'USMCA': 'U. S. M. C. A.',
+    'CPTPP': 'C. P. T. P. P.',
+    'RCEP': 'R. SEP.',
+    'IPCC': 'I. P. C. C.',
+    'COP': 'cop',
+    'COP30': 'cop thirty',
+    'COP31': 'cop thirty-one',
+    'IEA': 'I. E. A.',
+    'OPEC': 'OPEC',
+    'OPEC+': 'OPEC plus',
+
+    # ── Banks / global financial institutions ───────────────────────────
+    'JPM': 'J. P. M.',
+    'BAML': 'B. A. M. L.',
+    'BoA': 'B. o. A.',
+    'MS': 'M. S.',         # Morgan Stanley
+    'GS': 'G. S.',         # Goldman Sachs
+    'BNP': 'B. N. P.',
+    'SocGen': 'Soc-Gen',
+    'BBVA': 'B. B. V. A.',
+    'UBS': 'U. B. S.',
+    'HSBC': 'H. S. B. C.',
+    'RBC': 'R. B. C.',
+    'TD': 'T. D.',         # TD Bank
+    'ICBC': 'I. C. B. C.',
+    'CCB': 'C. C. B.',     # China Construction Bank
+    'ABC': 'A. B. C.',     # Agricultural Bank of China — context-dependent
+    'BoC': 'B. o. C.',     # Bank of Canada / China
+    'RBA': 'R. B. A.',     # Reserve Bank of Australia
+    'RBI': 'R. B. I.',     # Reserve Bank of India
+    'CBR': 'C. B. R.',     # Central Bank of Russia
+
+    # ── Indices & ratings ───────────────────────────────────────────────
+    'DJIA': 'D. J. I. A.',
+    'DOW': 'Dow',
+    'VIX': 'vicks',
+    'TSX': 'T. S. X.',
+    'FX': 'F. X.',
+    'NYMEX': 'NIME-ex',
+    'CME': 'C. M. E.',
+    'ICE': 'ice',          # Intercontinental Exchange — pronounced as a word
+    'CFA': 'C. F. A.',     # Chartered Financial Analyst
+    'CPA': 'C. P. A.',
+    'CIA': 'C. I. A.',     # also Central Intelligence Agency
+
+    # ── HR / workplace ──────────────────────────────────────────────────
+    'WFH': 'W. F. H.',
+    'WFA': 'W. F. A.',     # work from anywhere
+    'RTO': 'R. T. O.',     # return to office
+    'PTO': 'P. T. O.',     # paid time off
+    'OOO': 'O. O. O.',     # out of office
+    'L&D': 'L. and D.',
+    'T&E': 'T. and E.',    # travel & entertainment
+    'P&L': 'P. and L.',    # profit & loss
+    'EEO': 'E. E. O.',
+    'EEOC': 'E. E. O. C.',
+    'DEI': 'D. E. I.',
+    'CSR': 'C. S. R.',
+    'EVP': 'E. V. P.',     # also Employee Value Proposition
+
+    # ── Legal / IP / compliance ─────────────────────────────────────────
+    'IP': 'I. P.',
+    'IPR': 'I. P. R.',
+    'SOW': 'S. O. W.',
+    'MSA': 'M. S. A.',
+    'DPA': 'D. P. A.',     # Data Processing Agreement
+    'TOS': 'T. O. S.',
+    'ToS': 'T. o. S.',
+    'EULA': 'you-lah',
+    'DMCA': 'D. M. C. A.',
+    'USPTO': 'U. S. P. T. O.',
+    'EPO': 'E. P. O.',     # European Patent Office
+    'WIPO': 'WI-po',
+    'FCPA': 'F. C. P. A.', # Foreign Corrupt Practices Act
+    'SOX': 'sox',          # Sarbanes-Oxley
+    'KYB': 'K. Y. B.',
+
+    # ── Healthcare / pharma (recurring on biz press) ────────────────────
+    'EMA': 'E. M. A.',     # European Medicines Agency
+    'WHO': 'W. H. O.',
+    'CDC': 'C. D. C.',
+    'NIH': 'N. I. H.',
+    'IND': 'I. N. D.',
+    'BLA': 'B. L. A.',
+    'PMA': 'P. M. A.',
+    'GxP': 'G. X. P.',
+    'GMP': 'G. M. P.',
+    'GLP': 'G. L. P.',
+    'GCP': 'G. C. P.',     # also Google Cloud Platform — context-dependent
+
+    # ── Energy / commodities / climate ──────────────────────────────────
+    'LNG': 'L. N. G.',
+    'LPG': 'L. P. G.',
+    'CCS': 'C. C. S.',     # carbon capture and storage
+    'CCUS': 'C. C. U. S.',
+    'PV': 'P. V.',         # photovoltaic
+    'CSP': 'C. S. P.',     # Concentrated Solar Power
+    'BESS': 'bess',        # Battery Energy Storage System
+    'ICE': 'ice',          # also Internal Combustion Engine
+    'kWh': 'kilo-watt-hour',
+    'MWh': 'mega-watt-hour',
+    'GWh': 'giga-watt-hour',
+    'TWh': 'tera-watt-hour',
+    'WACC': 'wack',        # Weighted Average Cost of Capital
+    'EV/EBITDA': 'E. V. to ee-bit-da',
+
+    # ── Economic data sources / surveys ─────────────────────────────────
+    'BLS': 'B. L. S.',     # Bureau of Labor Statistics
+    'BEA': 'B. E. A.',     # Bureau of Economic Analysis
+    'EIA': 'E. I. A.',     # Energy Information Admin
+    'API': 'A. P. I.',     # also American Petroleum Institute — context
+    'EPA': 'E. P. A.',     # Environmental Protection Agency
+
+    # ── Generic biz shorthand ───────────────────────────────────────────
+    'HQ': 'H. Q.',
+    'FAQ': 'F. A. Q.',
+    'AKA': 'A. K. A.',
+    'AOB': 'A. O. B.',     # Any Other Business
+    'BAU': 'B. A. U.',     # Business As Usual
+    'WIP': 'W. I. P.',
+    'TBD': 'T. B. D.',
+    'TBA': 'T. B. A.',
+    'TBC': 'T. B. C.',
+    'POC': 'P. O. C.',
+    'EOL': 'E. O. L.',     # End Of Life
+    'EOS': 'E. O. S.',     # End Of Support
+    'GA': 'G. A.',         # General Availability
+    'EAP': 'E. A. P.',     # Early Access Program
+    'NPV': 'N. P. V.',
+    'YTD': 'Y. T. D.',
+    'MTD': 'M. T. D.',
+    'QTD': 'Q. T. D.',
+    'YoY': 'year-over-year',
+    'QoQ': 'quarter-over-quarter',
+    'MoM': 'month-over-month',
+    'WoW': 'week-over-week',
+    'YoYY': 'Y. o. Y. Y.',
+
+    # ── Real estate / construction ──────────────────────────────────────
+    'CRE': 'C. R. E.',     # Commercial Real Estate
+    'NOI': 'N. O. I.',     # Net Operating Income
+    'GLA': 'G. L. A.',     # Gross Leasable Area
+    'LEED': 'leed',
+    'BREEAM': 'BREEM',
+    'BIM': 'B. I. M.',
+
+    # ── Country / geo codes (recurring in macro) ────────────────────────
+    'PRC': 'P. R. C.',
+    'DPRK': 'D. P. R. K.',
+    'ROK': 'R. O. K.',
+    'ROW': 'R. O. W.',     # Rest Of World
+    'EM': 'E. M.',         # Emerging Markets
+    'DM': 'D. M.',         # Developed Markets
+    'GCC': 'G. C. C.',     # Gulf Cooperation Council
+    'MENA': 'mee-na',
+    'SSA': 'S. S. A.',     # Sub-Saharan Africa
+
+    # ── Audit / risk / controls ─────────────────────────────────────────
+    'COSO': 'co-so',
+    'SOC1': 'sock-one',
+    'ISAE': 'I. S. A. E.',
+    'ICAAP': 'eye-cap',
+    'ILAAP': 'eye-lap',
+    'SREP': 'srep',
+    'ORSA': 'or-sa',
+    'GRC': 'G. R. C.',
 }
 
 _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
@@ -766,6 +1077,9 @@ _UNKNOWN_ACRONYM = re.compile(r'\b[A-Z]{3,5}\b')
 _AUTO_SPELL_SKIP: frozenset[str] = frozenset({
     'NATO', 'NASA', 'FAISS', 'SWIFT', 'OPEC', 'OTAN',
     'DARPA', 'BAFIN', 'GAFAM', 'MATH', 'MATHS',
+    'BRICS', 'ASEAN', 'NAFTA', 'MENA', 'BREEAM',
+    'JOLTS', 'OPEC', 'ESOP', 'SWOT', 'TOWS',
+    'MERCOSUR',
     # Proper nouns / product names written all-caps that should be read as a word
     'OPENAI', 'ARM', 'META', 'APPLE', 'AMAZON', 'GOOGLE', 'ORACLE',
 })

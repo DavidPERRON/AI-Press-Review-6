@@ -20,6 +20,14 @@ on:
         description: Run date (JJ/MM/AA, e.g. 18/04/26)
         required: false
         default: ''
+      profile:
+        description: Editorial profile
+        required: false
+        default: 'weekly'
+        type: choice
+        options:
+          - daily
+          - weekly
       locale:
         description: Locale to run (leave empty for all enabled, or 'en'/'fr')
         required: false
@@ -120,6 +128,7 @@ jobs:
           NEWSAPI_API_KEY: ${{ secrets.NEWS_API_KEY }}
           # Shell-injection hardening — see daily-generate.yml for the pattern.
           RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
+          PROFILE_INPUT: ${{ github.event.inputs.profile || 'weekly' }}
         run: |
           set -e
           # ── Pre-flight: fail fast on missing secrets/variables ──────────────
@@ -194,8 +203,14 @@ jobs:
             echo "::error::Invalid run_date format: $RUN_DATE (expected JJ/MM/AA, e.g. 18/04/26)"
             exit 1
           fi
-          echo "Generating weekly recap for locale=$APR_LOCALE date=$RUN_DATE"
-          python scripts/generate_draft.py --date "$RUN_DATE" --profile weekly_recap
+          PROFILE_INPUT=$(echo "$PROFILE_INPUT" | tr '[:upper:]' '[:lower:]' | tr '-' '_')
+          case "$PROFILE_INPUT" in
+            daily) PROFILE="daily" ;;
+            weekly|weekly_recap) PROFILE="weekly_recap" ;;
+            *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
+          esac
+          echo "Generating ${PROFILE} draft for locale=$APR_LOCALE date=$RUN_DATE"
+          python scripts/generate_draft.py --date "$RUN_DATE" --profile "$PROFILE"
 
       - name: Commit draft state
         env:

@@ -119,10 +119,18 @@ jobs:
           LLM_EDITOR_MODEL_FR: ${{ vars.LLM_EDITOR_MODEL_FR }}
           LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
           LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
-          # Per-tier endpoint overrides — point fallback/emergency at a different
-          # provider (e.g. DeepSeek or DeepInfra) so an OpenRouter incident on
-          # earlier tiers still leaves a working escape hatch. Empty values fall
-          # through to LLM_BASE_URL / LLM_API_KEY.
+          # Per-tier endpoint overrides — route any tier at a different provider
+          # (e.g. Anthropic direct, DeepInfra) so an OpenRouter incident on one
+          # tier still leaves working escape hatches. Empty values fall through
+          # to LLM_BASE_URL / LLM_API_KEY.
+          # Model ID format differs by provider:
+          #   OpenRouter       → anthropic/claude-sonnet-4.5  (dot, with prefix)
+          #   Anthropic direct → claude-sonnet-4-6            (dash, no prefix)
+          # Shorthands (sonnet/haiku/opus) are auto-resolved for api.anthropic.com.
+          LLM_EDITOR_BASE_URL_EN: ${{ vars.LLM_EDITOR_BASE_URL_EN }}
+          LLM_EDITOR_API_KEY_EN: ${{ secrets.LLM_EDITOR_API_KEY_EN }}
+          LLM_EDITOR_BASE_URL_FR: ${{ vars.LLM_EDITOR_BASE_URL_FR }}
+          LLM_EDITOR_API_KEY_FR: ${{ secrets.LLM_EDITOR_API_KEY_FR }}
           LLM_FALLBACK_BASE_URL_EN: ${{ vars.LLM_FALLBACK_BASE_URL_EN }}
           LLM_FALLBACK_API_KEY_EN: ${{ secrets.LLM_FALLBACK_API_KEY_EN }}
           LLM_FALLBACK_BASE_URL_FR: ${{ vars.LLM_FALLBACK_BASE_URL_FR }}

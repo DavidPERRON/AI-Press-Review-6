@@ -66,6 +66,16 @@ class LLMShortScriptError(LLMError):
 _QUOTA_HTTP_CODES = (429,)
 _TRANSIENT_HTTP_CODES = (500, 502, 503, 504)
 
+# Shorthand model aliases resolved when the target endpoint is api.anthropic.com.
+# OpenRouter uses dot notation with prefix ("anthropic/claude-sonnet-4.5");
+# Anthropic's native API uses dash notation without prefix ("claude-sonnet-4-6").
+# These shorthands let you set LLM_EDITOR_MODEL_EN=sonnet instead of the full ID.
+_ANTHROPIC_SHORTHANDS: dict[str, str] = {
+    'sonnet': 'claude-sonnet-4-6',
+    'haiku':  'claude-haiku-4-5',
+    'opus':   'claude-opus-4-7',
+}
+
 
 def _word_count(text: str) -> int:
     r"""Honest spoken-word count: whitespace-separated tokens.
@@ -419,6 +429,34 @@ def _extract_message_content(data: dict[str, Any]) -> str:
     return str(message).strip()
 
 
+def _normalize_model(model: str, base_url: str) -> str:
+    """Resolve model shorthands and validate model ID format.
+
+    Fails fast if the model value looks like an env-var assignment
+    (e.g. the user set LLM_EDITOR_MODEL_EN="ANTHROPIC_MODEL=sonnet"
+    instead of just "sonnet" or "claude-sonnet-4-6").
+
+    Shorthand aliases (sonnet/haiku/opus) are resolved to full Anthropic
+    model IDs only when base_url targets api.anthropic.com — they are NOT
+    valid on OpenRouter, which requires the "anthropic/claude-sonnet-4.5"
+    dot-notation format.
+    """
+    if '=' in (model or ''):
+        raise ValueError(
+            f"Model ID {model!r} contains '=' — it looks like you set the variable "
+            f"to an env-var assignment instead of a bare model ID. "
+            f"Use just the model ID:\n"
+            f"  Anthropic direct → claude-sonnet-4-6\n"
+            f"  OpenRouter       → anthropic/claude-sonnet-4.5"
+        )
+    if 'anthropic.com' in (base_url or ''):
+        resolved = _ANTHROPIC_SHORTHANDS.get((model or '').lower())
+        if resolved:
+            logger.info("Resolved Anthropic model shorthand %r → %r", model, resolved)
+            return resolved
+    return model
+
+
 def _resolve_endpoint(model: str, settings) -> tuple[str, str]:
     """Resolve (base_url, api_key) for `model` based on which cascade tier it sits in.
 
@@ -543,6 +581,9 @@ def _create_completion_data(
     temperature: float,
     max_tokens: int,
 ) -> dict[str, Any]:
+    # Resolve endpoint first so _normalize_model knows the target provider.
+    base_url, api_key = _resolve_endpoint(model, settings)
+    model = _normalize_model(model, base_url)
     payload = {
         "model": model,
         "temperature": temperature,
@@ -550,8 +591,6 @@ def _create_completion_data(
         "max_tokens": max_tokens,
         "response_format": {"type": "json_object"},
     }
-
-    base_url, api_key = _resolve_endpoint(model, settings)
 
     try:
         return _post_chat_completion(

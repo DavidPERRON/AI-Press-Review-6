@@ -647,6 +647,24 @@ def _manifest_to_markdown(manifest: dict) -> str:
     return "\n".join(lines)
 
 
+_SECTION_LABELS = {
+    'ai_news': 'AI News',
+    'use_cases': 'Use Cases',
+    'tools_practice': 'Tools & Practice',
+    'weak_signals': 'Weak Signals',
+    'off_radar': 'Off the Radar',
+    'research': 'Research',
+    'weekly_news': 'Weekly News',
+    'weekly_use_cases': 'Weekly Use Cases',
+    'weekly_tools': 'Weekly Tools',
+    'weekly_signals': 'Weekly Signals',
+    'weekly_research': 'Weekly Research',
+    'weekly_next_week': 'Next Week',
+    'intro': 'Intro',
+    'outro': 'Outro',
+}
+
+
 def _manifest_to_html(manifest: dict) -> str:
     # Article excerpts are intentionally omitted from the public source page
     # to avoid reproducing copyrighted content without explicit permission.
@@ -668,28 +686,63 @@ def _manifest_to_html(manifest: dict) -> str:
         if not _is_safe_http_url(url):
             continue
 
-        pub = src.get("published_at", "")[:10] if src.get("published_at") else ""
         author = (src.get("author") or "").strip()
 
         # Publication name: clean domain, strip literal "www." prefix only.
         domain_raw = src.get("domain", "") or ""
-        publication = domain_raw.removeprefix("www.")
+        domain = domain_raw.removeprefix("www.")
 
-        # Build the by-line: "by Author · Publication · Date" (omit missing parts)
-        byline_parts: list[str] = []
-        if author:
-            byline_parts.append(f"by {escape(author)}")
-        if publication:
-            byline_parts.append(escape(publication))
-        if pub:
-            byline_parts.append(escape(pub))
-        byline = " · ".join(byline_parts)
+        # Short date for display (e.g. "Apr 14")
+        pub_short = ""
+        pub_raw = src.get("published_at", "") or ""
+        if pub_raw:
+            try:
+                from datetime import datetime as _dt
+                pub_short = _dt.fromisoformat(pub_raw[:19]).strftime("%b %-d")
+            except Exception:
+                pass
+
+        # Relevance score
+        score = src.get("relevance_score", 0) or 0
+        score_tag = f"Score {score:.1f}"
+
+        # Sections this source was used in
+        sections = src.get("sections", []) or []
+        section_labels = [
+            _SECTION_LABELS.get(s, s.replace("_", " ").title())
+            for s in sections
+        ]
+
+        # Meta line: domain · date
+        meta_parts = []
+        if domain:
+            meta_parts.append(escape(domain))
+        if pub_short:
+            meta_parts.append(escape(pub_short))
+        meta_line = " · ".join(meta_parts)
+
+        # Build the by-line: "by Author" (omit if no author)
+        byline = f"by {escape(author)}" if author else ""
+
+        # Section tags HTML
+        sections_html = ""
+        if section_labels:
+            tags = "".join(
+                f"<span class='source-section-tag'>{escape(lbl)}</span>"
+                for lbl in section_labels
+            )
+            sections_html = f"<div class='source-sections'>{tags}</div>"
 
         # quoteattr emits the surrounding quotes and escapes both " and '.
         cards.append(
             "<article class='source-card'>"
+            "<div class='source-header'>"
             f"<h3><a href={quoteattr(url)} target='_blank' rel='noopener'>{escape(src['title'])} ↗</a></h3>"
+            f"<span class='source-score'>{escape(score_tag)}</span>"
+            "</div>"
+            + (f"<p class='source-meta'>{meta_line}</p>" if meta_line else "")
             + (f"<p class='source-byline'>{byline}</p>" if byline else "")
+            + sections_html
             + "</article>"
         )
 
@@ -716,6 +769,11 @@ def _manifest_to_html(manifest: dict) -> str:
         ".source-card h3 a{color:var(--text);text-decoration:none}"
         ".source-card h3 a:hover{color:var(--accent)}"
         ".source-byline{margin:0;font-size:.78rem;color:var(--text-secondary)}"
+        ".source-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.2rem}"
+        ".source-score{flex-shrink:0;font-size:.7rem;font-weight:600;color:#c8a96e;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);border-radius:3px;padding:.1rem .4rem;white-space:nowrap;margin-top:.15rem}"
+        ".source-meta{margin:.15rem 0 .2rem;font-size:.75rem;color:#8a8a9a}"
+        ".source-sections{display:inline-flex;gap:.35rem;flex-wrap:wrap;margin-top:.3rem}"
+        ".source-section-tag{font-size:.65rem;padding:.1rem .45rem;border-radius:999px;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);color:#c8a96e}"
         "</style>"
         "</head>"
         "<body>"

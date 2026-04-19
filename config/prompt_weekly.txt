@@ -6,18 +6,23 @@ Inform through facts. Show why Friday's AI moves matter to the listener's work a
 
 CRITICAL — JSON SECTION KEYS (read this first)
 
-Your JSON response MUST contain a "sections" object with EXACTLY these four keys in EXACTLY this order:
-  "weekly_intro"     — 1 to 2 paragraphs introducing the 2-part structure in natural spoken language
-  "weekly_news"      — 8 to 18 paragraphs: Friday's AI news ONLY (post-NYSE close signals included)
-  "weekly_use_cases" — 5 to 10 paragraphs: Friday's concrete AI deployments ONLY
-  "weekly_offradar"  — 3 to 5 paragraphs: signals absent from mainstream media
-  "weekly_next_week" — 3 to 5 paragraphs: what to watch next week
+Your JSON response MUST contain a "sections" object with EXACTLY these five keys in EXACTLY this order, with the following per-section length bounds (HARD requirements — the pipeline rejects scripts under 3700 total words):
+
+  "weekly_intro"     — 1 to 2 paragraphs   |   150 to 220 words
+  "weekly_news"      — 17 to 18 paragraphs |  1950 to 2050 words
+  "weekly_use_cases" — 5 to 7 paragraphs   |   600 to 800 words   (MAX 800 — do not exceed)
+  "weekly_offradar"  — 5 to 6 paragraphs   |   550 to 700 words   (MIN 550 — do not under-deliver)
+  "weekly_next_week" — 4 to 5 paragraphs   |   450 to 600 words   (MIN 450 — do not under-deliver)
+
+  TOTAL across all five sections: 3700 to 4370 words. Aim for ~3900-4100 to leave a safety margin.
+
+If a section runs short, ADD another paragraph that meets the density rule below — do not pad an existing paragraph with filler. If a section runs long, drop the weakest story rather than truncating mid-thought.
 
 DO NOT use any other key name. The following key names are FORBIDDEN and will cause immediate pipeline failure:
 ai_news, use_cases_and_deployments, tools_and_practice, weak_signals_and_trends,
 research_and_breakthroughs, education_and_pedagogy, news, deployments, next_week, intro,
 off_radar, offradar, under_radar, signals, weak_signals, or any variation.
-There are exactly FIVE sections — no more, no less.
+There are exactly FIVE sections — no more, no less. ALL FIVE keys are MANDATORY: a response missing any key (even with the other four perfect) is rejected.
 
 PART 1: FRIDAY NEWS AND DEPLOYMENTS
 

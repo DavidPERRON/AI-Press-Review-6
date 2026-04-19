@@ -98,6 +98,14 @@ jobs:
           LLM_EDITOR_MODEL_FR: ${{ vars.LLM_EDITOR_MODEL_FR }}
           LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
           LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
+          # Per-tier endpoint overrides — let the emergency tier point at a
+          # different provider (e.g. DeepInfra) so an OpenRouter incident on
+          # tiers 1+2 still leaves a working escape hatch. Empty values fall
+          # through to LLM_BASE_URL / LLM_API_KEY.
+          LLM_EMERGENCY_BASE_URL_EN: ${{ vars.LLM_EMERGENCY_BASE_URL_EN }}
+          LLM_EMERGENCY_API_KEY_EN: ${{ secrets.DEEPINFRA_API_KEY }}
+          LLM_EMERGENCY_BASE_URL_FR: ${{ vars.LLM_EMERGENCY_BASE_URL_FR }}
+          LLM_EMERGENCY_API_KEY_FR: ${{ secrets.DEEPINFRA_API_KEY }}
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           # Free Layer-2 crawler fallback (Jina Reader). Anonymous if unset.
           JINA_API_KEY: ${{ secrets.JINA_API_KEY }}

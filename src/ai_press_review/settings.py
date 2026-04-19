@@ -67,6 +67,17 @@ class Settings:
     llm_editor_model: str
     llm_fallback_model: str
     llm_emergency_model: str
+    # Per-tier endpoint overrides — empty string means "fall back to llm_base_url
+    # / llm_api_key". This lets tier 3 (emergency) point at a totally different
+    # provider (e.g. DeepInfra) so an OpenRouter-side outage on tiers 1+2 still
+    # leaves a working escape hatch. The cascade in editorial/generator.py reads
+    # these fields when building the per-call endpoint config.
+    llm_editor_base_url: str
+    llm_editor_api_key: str
+    llm_fallback_base_url: str
+    llm_fallback_api_key: str
+    llm_emergency_base_url: str
+    llm_emergency_api_key: str
     llm_timeout_seconds: int
     llm_max_tokens: int
     llm_temperature: float
@@ -293,6 +304,20 @@ def _apply_locale(settings: Settings, config: dict[str, Any], locale: str) -> No
     if per_locale_emergency:
         settings.llm_emergency_model = per_locale_emergency
 
+    # Per-tier × per-locale endpoint overrides. Most pipelines only need to set
+    # the emergency tier (e.g. DeepInfra) for cascade resilience, but the same
+    # mechanism works for editor + fallback if you ever want to split tiers
+    # across providers.
+    for tier in ('EDITOR', 'FALLBACK', 'EMERGENCY'):
+        base_var = f'LLM_{tier}_BASE_URL_{suffix}'
+        key_var = f'LLM_{tier}_API_KEY_{suffix}'
+        per_loc_base = _env(base_var)
+        per_loc_key = _env(key_var)
+        if per_loc_base:
+            setattr(settings, f'llm_{tier.lower()}_base_url', per_loc_base)
+        if per_loc_key:
+            setattr(settings, f'llm_{tier.lower()}_api_key', per_loc_key)
+
 
 def _apply_profile(settings: Settings, config: dict[str, Any], profile: str) -> None:
     profiles = config.get('profiles', {}) or {}
@@ -390,6 +415,14 @@ def load_settings(
         # set LLM_EMERGENCY_MODEL in repo vars to enable (e.g. a non-Gemini
         # provider so a Google-side outage doesn't take the whole pipeline down).
         llm_emergency_model=_env('LLM_EMERGENCY_MODEL'),
+        # Per-tier endpoint overrides (empty = inherit llm_base_url / llm_api_key).
+        # Locale-suffixed variants (_EN / _FR) are applied later in _apply_locale.
+        llm_editor_base_url=_env('LLM_EDITOR_BASE_URL'),
+        llm_editor_api_key=_env('LLM_EDITOR_API_KEY'),
+        llm_fallback_base_url=_env('LLM_FALLBACK_BASE_URL'),
+        llm_fallback_api_key=_env('LLM_FALLBACK_API_KEY'),
+        llm_emergency_base_url=_env('LLM_EMERGENCY_BASE_URL'),
+        llm_emergency_api_key=_env('LLM_EMERGENCY_API_KEY'),
         llm_timeout_seconds=int(_env('LLM_TIMEOUT_SECONDS', str(_yaml_get(config, 'llm.timeout_seconds', 180)))),
         llm_max_tokens=int(_yaml_get(config, 'llm.max_tokens', 12000)),
         llm_temperature=_safe_float(str(_yaml_get(config, 'llm.temperature', 0.2)), 0.2, 'llm.temperature'),
@@ -438,6 +471,16 @@ def load_settings(
     # NXDOMAIN before giving up). Validating up-front turns that into a
     # 2-second exit with an actionable message.
     _validate_llm_base_url(settings.llm_base_url)
+    # Per-tier endpoint overrides go through the same whitelist check so a
+    # typo in LLM_EMERGENCY_BASE_URL_EN fails at startup, not after tier 1+2
+    # have already burned their retry budgets at 3am.
+    for tier_url in (
+        settings.llm_editor_base_url,
+        settings.llm_fallback_base_url,
+        settings.llm_emergency_base_url,
+    ):
+        if tier_url:
+            _validate_llm_base_url(tier_url)
 
     return settings
 

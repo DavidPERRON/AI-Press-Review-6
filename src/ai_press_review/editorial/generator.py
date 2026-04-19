@@ -429,20 +429,62 @@ def _extract_message_content(data: dict[str, Any]) -> str:
     return str(message).strip()
 
 
-def _post_chat_completion(settings, payload: dict[str, Any]) -> dict[str, Any]:
-    base_url = (settings.llm_base_url or "").strip().rstrip("/")
+def _resolve_endpoint(model: str, settings) -> tuple[str, str]:
+    """Resolve (base_url, api_key) for `model` based on which cascade tier it sits in.
+
+    Per-tier overrides (LLM_<TIER>_BASE_URL[_<LOCALE>] / _API_KEY[_<LOCALE>])
+    win over the generic LLM_BASE_URL / LLM_API_KEY. Empty per-tier values
+    fall through to the generic pair, so single-provider deployments keep
+    working unchanged.
+
+    Why this exists: the 2026-04-19 weekly run failed when both editor (Claude)
+    and fallback (GPT-5.1) on OpenRouter produced unusable output (one short,
+    one wrong-schema). The emergency tier needs to be on a different provider
+    so a single OpenRouter incident doesn't take down all three slots.
+    """
+    # getattr with defaults keeps unit tests using SimpleNamespace mocks happy
+    # — they only set the model fields, not the per-tier endpoint fields.
+    base = getattr(settings, 'llm_base_url', '') or ''
+    key = getattr(settings, 'llm_api_key', '') or ''
+    tier_prefix: str | None = None
+    if model and model == getattr(settings, 'llm_emergency_model', None):
+        tier_prefix = 'llm_emergency'
+    elif model and model == getattr(settings, 'llm_fallback_model', None):
+        tier_prefix = 'llm_fallback'
+    elif model and model == getattr(settings, 'llm_editor_model', None):
+        tier_prefix = 'llm_editor'
+    if tier_prefix:
+        per_base = getattr(settings, f'{tier_prefix}_base_url', '') or ''
+        per_key = getattr(settings, f'{tier_prefix}_api_key', '') or ''
+        if per_base:
+            base = per_base
+        if per_key:
+            key = per_key
+    return base, key
+
+
+def _post_chat_completion(
+    settings,
+    payload: dict[str, Any],
+    base_url_override: str | None = None,
+    api_key_override: str | None = None,
+) -> dict[str, Any]:
+    base_url_raw = base_url_override if base_url_override else settings.llm_base_url
+    api_key = api_key_override if api_key_override is not None else settings.llm_api_key
+
+    base_url = (base_url_raw or "").strip().rstrip("/")
     if not base_url.startswith("http"):
-        raise ValueError(f"Invalid LLM_BASE_URL: {base_url!r}")
+        raise ValueError(f"Invalid LLM base URL: {base_url!r}")
     from urllib.parse import urlparse
     parsed = urlparse(base_url)
     hostname = parsed.hostname or ""
     if hostname in ("localhost", "127.0.0.1", "0.0.0.0") or hostname.startswith("169.254.") or hostname.startswith("10.") or hostname.startswith("192.168."):
-        raise ValueError(f"LLM_BASE_URL points to a private/internal address: {base_url!r}")
+        raise ValueError(f"LLM base URL points to a private/internal address: {base_url!r}")
 
     url = f"{base_url}/chat/completions"
     headers = {"Content-Type": "application/json"}
-    if settings.llm_api_key:
-        headers["Authorization"] = f"Bearer {settings.llm_api_key}"
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
 
     try:
         response = requests.post(
@@ -492,8 +534,13 @@ def _create_completion_data(
         "response_format": {"type": "json_object"},
     }
 
+    base_url, api_key = _resolve_endpoint(model, settings)
+
     try:
-        return _post_chat_completion(settings, payload)
+        return _post_chat_completion(
+            settings, payload,
+            base_url_override=base_url, api_key_override=api_key,
+        )
     except ValueError as exc:
         # Permanent client errors only — re-attempt without response_format
         # if the model rejects that field (common with older OpenAI-compatible
@@ -502,7 +549,10 @@ def _create_completion_data(
         if "json_object" in message or "response format" in message or "405" in message:
             logger.info("Model does not support response_format, retrying without it")
             payload.pop("response_format", None)
-            return _post_chat_completion(settings, payload)
+            return _post_chat_completion(
+                settings, payload,
+                base_url_override=base_url, api_key_override=api_key,
+            )
         raise
 
 
@@ -795,7 +845,13 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
     best_overall_model: str | None = None
 
     for model in cascade:
-        logger.info("Generating script with model: %s (profile=%s)", model, settings.profile_name)
+        ep_base, ep_key = _resolve_endpoint(model, settings)
+        from urllib.parse import urlparse as _u
+        ep_host = _u(ep_base or '').hostname or '(none)'
+        logger.info(
+            "Generating script with model: %s (profile=%s, endpoint=%s, key=%s)",
+            model, settings.profile_name, ep_host, 'set' if ep_key else 'unset',
+        )
         try:
             payload, script, wc = _generate_for_model(model, manifest, settings)
         except LLMError as exc:

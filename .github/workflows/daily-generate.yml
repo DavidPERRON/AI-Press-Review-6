@@ -129,10 +129,18 @@ jobs:
           LLM_EDITOR_MODEL_FR: ${{ vars.LLM_EDITOR_MODEL_FR }}
           LLM_FALLBACK_MODEL_FR: ${{ vars.LLM_FALLBACK_MODEL_FR }}
           LLM_EMERGENCY_MODEL_FR: ${{ vars.LLM_EMERGENCY_MODEL_FR }}
-          # Per-tier endpoint overrides — point fallback/emergency at a different
-          # provider (e.g. DeepSeek or DeepInfra) so an OpenRouter incident on
-          # earlier tiers still leaves a working escape hatch. Empty values fall
-          # through to LLM_BASE_URL / LLM_API_KEY.
+          # Per-tier endpoint overrides — route any tier at a different provider
+          # (e.g. Anthropic direct, DeepInfra) so an OpenRouter incident on one
+          # tier still leaves working escape hatches. Empty values fall through
+          # to LLM_BASE_URL / LLM_API_KEY.
+          # Model ID format differs by provider:
+          #   OpenRouter       → anthropic/claude-sonnet-4.5  (dot, with prefix)
+          #   Anthropic direct → claude-sonnet-4-6            (dash, no prefix)
+          # Shorthands (sonnet/haiku/opus) are auto-resolved for api.anthropic.com.
+          LLM_EDITOR_BASE_URL_EN: ${{ vars.LLM_EDITOR_BASE_URL_EN }}
+          LLM_EDITOR_API_KEY_EN: ${{ secrets.LLM_EDITOR_API_KEY_EN }}
+          LLM_EDITOR_BASE_URL_FR: ${{ vars.LLM_EDITOR_BASE_URL_FR }}
+          LLM_EDITOR_API_KEY_FR: ${{ secrets.LLM_EDITOR_API_KEY_FR }}
           LLM_FALLBACK_BASE_URL_EN: ${{ vars.LLM_FALLBACK_BASE_URL_EN }}
           LLM_FALLBACK_API_KEY_EN: ${{ secrets.LLM_FALLBACK_API_KEY_EN }}
           LLM_FALLBACK_BASE_URL_FR: ${{ vars.LLM_FALLBACK_BASE_URL_FR }}
@@ -182,9 +190,9 @@ jobs:
           python3 - <<'PREFLIGHT'
           import os, sys
           locale = os.environ.get("APR_LOCALE", "en").strip().lower() or "en"
+          locale_upper = locale.upper()
           voice_var = "CARTESIA_VOICE_ID_FR" if locale == "fr" else "CARTESIA_VOICE_ID"
           required = [
-              ("LLM_API_KEY",         "secret",   "OpenRouter API key (editorial)"),
               ("CARTESIA_API_KEY",    "secret",   "Cartesia API key (TTS)"),
               ("R2_ACCESS_KEY_ID",    "secret",   "Cloudflare R2 access key ID (audio upload)"),
               ("R2_SECRET_ACCESS_KEY","secret",   "Cloudflare R2 secret access key (audio upload)"),
@@ -201,6 +209,19 @@ jobs:
                   missing.append(f"  - {name} ({kind}) -- {desc}")
               elif val.lower() in placeholders:
                   missing.append(f"  - {name} ({kind}) -- placeholder value {val!r}, {desc}")
+          # LLM key: generic LLM_API_KEY (OpenRouter) OR a per-locale editor key
+          # when routing the editor tier directly (e.g. to api.anthropic.com).
+          llm_key = (
+              os.environ.get(f"LLM_EDITOR_API_KEY_{locale_upper}", "").strip() or
+              os.environ.get("LLM_API_KEY", "").strip()
+          )
+          if not llm_key:
+              missing.append(
+                  f"  - LLM_API_KEY (secret) -- OpenRouter key (editorial)\n"
+                  f"    OR set LLM_EDITOR_API_KEY_{locale_upper} when routing editor tier directly"
+              )
+          elif llm_key.lower() in placeholders:
+              missing.append(f"  - LLM_API_KEY (secret) -- placeholder value, set a real API key")
           # R2 credential length check — catches swapped or wrong-type keys in 5s
           # instead of after 25min of crawl+LLM+TTS. R2 S3-compatible Access Key
           # ID is always 32 chars; Secret Access Key is always 64 chars. Any other
@@ -230,9 +251,8 @@ jobs:
                   "  APR_TEST_CARTESIA_API_KEY, APR_TEST_R2_BUCKET_NAME …) — they shadow\n"
                   "  the matching production secret/variable without touching prod data."
               )
-          llm_key = os.environ["LLM_API_KEY"].strip()
           hint = llm_key[:6] + "..." if len(llm_key) > 6 else llm_key[:3] + "..."
-          print(f"Pre-flight OK - LLM_API_KEY: {len(llm_key)} chars, starts with {hint}")
+          print(f"Pre-flight OK - LLM key: {len(llm_key)} chars, starts with {hint}")
           print(f"Pre-flight OK - R2_ACCESS_KEY_ID: {len(r2_ak)} chars (expected 32)")
           print(f"Pre-flight OK - R2_SECRET_ACCESS_KEY: {len(r2_sk)} chars (expected 64)")
           PREFLIGHT

@@ -114,7 +114,15 @@ locales:
     cartesia_language: "en"
     tts_speed: 0.9
     tts_emotion: "serious"
-    tts_mode: "websocket"    # one continue=true session: seamless prosody, validated up to ~15 min
+    # 2026-04-19: switched EN from 'websocket' → 'chunks' after listener
+    # reported "echo / bathroom" sound from minute 20 of the weekly recap.
+    # Same root cause as FR (Cartesia's continue=true session quality
+    # degrades on long renders): WebSocket session state accumulates noise
+    # past ~15-18 min. Chunks mode renders each ~1800-char block as its own
+    # session and crossfades them — segments stay at full quality. Daily
+    # episodes (~14 min) gain nothing audible but pay no cost either.
+    tts_mode: "chunks"
+    tts_chunk_crossfade_ms: 80
 
   fr:
     # Paused 2026-04-18: voice quality unacceptable (saccadée, acronymes

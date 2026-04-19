@@ -252,10 +252,10 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         )
         if force_length:
             length_instructions += (
-                f"STRICT FLOOR: you MUST produce AT LEAST {settings.min_script_words} words and "
-                "AT LEAST 40 paragraphs total. "
-                "Expand weekly_news to at least 16 paragraphs and weekly_use_cases to at least 8. "
-                "Each added paragraph must cover a NEW story with a company name, number, or concrete fact."
+                f"FLOOR REMINDER: aim for at least 42 paragraphs total — "
+                "push weekly_news toward 18 paragraphs and weekly_use_cases toward 9. "
+                "Write each paragraph toward the 100-110 word end of the 80-110 range. "
+                "More paragraphs from more stories — not longer sentences."
             )
     else:
         length_instructions = (
@@ -270,12 +270,10 @@ def _build_user_prompt(manifest: dict, settings, force_length: bool = False) -> 
         if force_length:
             # Same rationale as weekly: stateless API, no "previous output".
             length_instructions += (
-                "CRITICAL REMINDER: this script MUST hit the word minimum above. "
-                "You MUST cover MORE distinct stories from the source manifest. "
-                "Do NOT lengthen existing paragraphs. Do NOT add synthesis "
-                "paragraphs. Add NEW paragraphs each covering a NEW story with its own facts: company "
-                "name, number, product name, or result. Dig deeper into the manifest — there are 120 "
-                "sources there, use them. "
+                "FLOOR REMINDER: aim for 30+ paragraphs total — push ai_news toward 9 and "
+                "use_cases_and_deployments toward 7. "
+                "Write each paragraph toward the 100-110 word end of the 80-110 range. "
+                "More paragraphs from more stories — not longer sentences."
             )
 
     if settings.profile_name == 'weekly_recap':

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       run_date:
-        description: Run date in YYYY-MM-DD format
+        description: Run date in JJ/MM/AA format (e.g. 18/04/26)
         required: false
         default: ''
       profile:
@@ -106,8 +106,14 @@ jobs:
           set -e
           RUN_DATE="${RUN_DATE_INPUT}"
           if [ -z "$RUN_DATE" ]; then RUN_DATE=$(date +%F); fi
+          # Convert European JJ/MM/AA or JJ/MM/AAAA → YYYY-MM-DD for internal use
+          if [[ "$RUN_DATE" =~ ^([0-9]{2})/([0-9]{2})/([0-9]{2})$ ]]; then
+            RUN_DATE="20${BASH_REMATCH[3]}-${BASH_REMATCH[2]}-${BASH_REMATCH[1]}"
+          elif [[ "$RUN_DATE" =~ ^([0-9]{2})/([0-9]{2})/([0-9]{4})$ ]]; then
+            RUN_DATE="${BASH_REMATCH[3]}-${BASH_REMATCH[2]}-${BASH_REMATCH[1]}"
+          fi
           if ! [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
-            echo "::error::Invalid run_date format: $RUN_DATE (expected YYYY-MM-DD)"
+            echo "::error::Invalid run_date format: $RUN_DATE (expected JJ/MM/AA, e.g. 18/04/26)"
             exit 1
           fi
           # Normalize input before whitelist check — tolerates Weekly-recap,

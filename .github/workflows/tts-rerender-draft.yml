@@ -16,12 +16,21 @@ on:
   workflow_dispatch:
     inputs:
       source_run_id:
-        description: 'daily-generate run ID to pull script.txt from (see Actions history)'
-        required: true
+        description: 'Run ID to pull script.txt from (leave blank to use current pending draft)'
+        required: false
+        default: ''
+      source_type:
+        description: 'Workflow type the source run came from'
+        required: false
+        default: 'daily'
+        type: choice
+        options:
+          - daily
+          - weekly
       locale:
         description: 'Locale (en | fr)'
         required: true
-        default: 'fr'
+        default: 'en'
         type: choice
         options:
           - en
@@ -59,24 +68,53 @@ jobs:
           pip install -r requirements.txt
           pip install -e .
 
-      - name: Download script.txt from prior run artifact
+      - name: Extract script.txt (from artifact or pending draft)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
           LOCALE="${{ github.event.inputs.locale }}"
           RUN_ID="${{ github.event.inputs.source_run_id }}"
-          ARTIFACT_NAME="daily-draft-output-${LOCALE}"
-          echo "Pulling artifact ${ARTIFACT_NAME} from run ${RUN_ID}"
-          mkdir -p /tmp/src
-          gh run download "${RUN_ID}" --name "${ARTIFACT_NAME}" --dir /tmp/src
-          SCRIPT_PATH=$(find /tmp/src -name 'script.txt' | head -1)
-          if [ -z "${SCRIPT_PATH}" ]; then
-            echo "ERROR: script.txt not found in artifact"
-            ls -laR /tmp/src
-            exit 1
+          SOURCE_TYPE="${{ github.event.inputs.source_type || 'daily' }}"
+
+          if [ -n "${RUN_ID}" ]; then
+            ARTIFACT_NAME="${SOURCE_TYPE}-draft-output-${LOCALE}"
+            echo "Pulling artifact ${ARTIFACT_NAME} from run ${RUN_ID}"
+            mkdir -p /tmp/src
+            gh run download "${RUN_ID}" --name "${ARTIFACT_NAME}" --dir /tmp/src
+            SCRIPT_PATH=$(find /tmp/src -name 'script.txt' | head -1)
+            if [ -z "${SCRIPT_PATH}" ]; then
+              echo "ERROR: script.txt not found in artifact"
+              ls -laR /tmp/src
+              exit 1
+            fi
+            cp "${SCRIPT_PATH}" /tmp/script.txt
+          else
+            echo "No source_run_id — extracting script from pending draft state"
+            python3 - <<'PYEOF'
+          import json, pathlib, sys
+          locale = "$LOCALE"
+          suffix = f"_{locale}" if locale != "en" else "_en"
+          candidates = [
+              pathlib.Path(f"data/state/pending_draft{suffix}.json"),
+              pathlib.Path("data/state/pending_draft.json"),
+          ]
+          data = None
+          for p in candidates:
+              if p.exists():
+                  data = json.loads(p.read_text())
+                  break
+          if not data:
+              print("ERROR: no pending draft found", file=sys.stderr)
+              sys.exit(1)
+          script = data.get("script", "").strip()
+          if not script:
+              print("ERROR: pending draft has no script field", file=sys.stderr)
+              sys.exit(1)
+          pathlib.Path("/tmp/script.txt").write_text(script, encoding="utf-8")
+          print(f"Extracted {len(script.split())} words from {p}")
+          PYEOF
           fi
-          cp "${SCRIPT_PATH}" /tmp/script.txt
           echo "Script: $(wc -w < /tmp/script.txt) words"
 
       - name: Pull latest state before re-render

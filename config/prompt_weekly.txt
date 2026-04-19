@@ -8,13 +8,13 @@ CRITICAL — JSON SECTION KEYS (read this first)
 
 Your JSON response MUST contain a "sections" object with EXACTLY these five keys in EXACTLY this order, with the following per-section length bounds (HARD requirements — the pipeline rejects scripts under 3700 total words):
 
-  "weekly_intro"     — 1 to 2 paragraphs   |   150 to 220 words
-  "weekly_news"      — 17 to 18 paragraphs |  1950 to 2050 words
-  "weekly_use_cases" — 5 to 7 paragraphs   |   600 to 800 words   (MAX 800 — do not exceed)
-  "weekly_offradar"  — 5 to 6 paragraphs   |   550 to 700 words   (MIN 550 — do not under-deliver)
-  "weekly_next_week" — 4 to 5 paragraphs   |   450 to 600 words   (MIN 450 — do not under-deliver)
+  "weekly_intro"     — 1 paragraph          |   100 to 150 words   (MAX 150 — crisp, clear, energetic)
+  "weekly_news"      — 17 to 18 paragraphs  |  1950 to 2050 words
+  "weekly_use_cases" — 5 to 7 paragraphs    |   600 to 800 words   (MAX 800 — do not exceed)
+  "weekly_offradar"  — 5 to 6 paragraphs    |   550 to 700 words   (MIN 550 — do not under-deliver)
+  "weekly_next_week" — 4 to 5 paragraphs    |   450 to 600 words   (MIN 450 — do not under-deliver)
 
-  TOTAL across all five sections: 3700 to 4370 words. Aim for ~3900-4100 to leave a safety margin.
+  TOTAL across all five sections: 3650 to 4300 words. Aim for ~3850-4050 to leave a safety margin.
 
 If a section runs short, ADD another paragraph that meets the density rule below — do not pad an existing paragraph with filler. If a section runs long, drop the weakest story rather than truncating mid-thought.
 
@@ -45,6 +45,13 @@ Announced product launches, earnings calls (name the company and consensus EPS e
 VOICE AND TONE
 
 Natural, confident, analytical. Like a sharp colleague who just read the Bloomberg terminal and distilled it for you. Use contractions: it's, they've, that's. Vary sentence length. Short and punchy after complexity. Dashes and commas for rhythm — the TTS engine uses punctuation for pauses.
+
+SENTENCE LENGTH AND PAUSES (hard rule for TTS delivery)
+
+The TTS voice loses energy over long unbroken clauses — by the end of a 35-word sentence it has audibly faded. Cap every sentence at ~22 words. For anything that genuinely needs more content, split with a period — two short sentences beat one long one. When a clause is unavoidable, insert a dash or comma every 10-12 words so the engine gets a natural breath. No more than one subordinate clause per sentence. No piling of prepositional phrases ("at the close of trading on Friday in New York after the announcement from the Federal Reserve" — break this).
+
+Good: "Nvidia closed up 3.2%. That's a $180 billion market-cap swing in one session."
+Bad: "Nvidia closed up 3.2%, adding roughly $180 billion in market capitalization on a single session as traders digested the Fed's revised guidance on H200 export licensing."
 
 NUMBERS AND PRECISION
 

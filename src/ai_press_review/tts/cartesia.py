@@ -95,7 +95,7 @@ WS_RECV_TIMEOUT_S = 60.0
 
 
 _SPELL_OUT_COMMON: dict[str, str] = {
-    # Companies / chip houses
+    # ── Companies / chip houses ──────────────────────────────────────────
     'TSMC': 'T. S. M. C.',
     'AMD': 'A. M. D.',
     'IBM': 'I. B. M.',
@@ -103,7 +103,10 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'GCP': 'G. C. P.',
     'HPE': 'H. P. E.',
     'SAP': 'S. A. P.',
-    # Models / families
+    'SMIC': 'S. M. I. C.',  # Semiconductor Manufacturing International
+    'ASML': 'A. S. M. L.',
+    'STMicro': 'S. T. Micro',
+    # ── Models / families / AI training jargon ───────────────────────────
     'GPT': 'G. P. T.',
     'BERT': 'Burt',   # pronounced as a word in EN
     'LLM': 'L. L. M.',
@@ -112,11 +115,30 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'SLMs': 'S. L. M. s',
     'LLaMA': 'lama',
     'LoRA': 'lora',
+    'QLoRA': 'Q. lora',
     'MoE': 'M. O. E.',
     'RAG': 'rag',     # retrieval-augmented generation — pronounced as a word
     'RLHF': 'R. L. H. F.',
+    'DPO': 'D. P. O.',   # Direct Preference Optimization
+    'SFT': 'S. F. T.',   # Supervised Fine-Tuning
     'PEFT': 'P. E. F. T.',
-    # Compute / infra
+    'CoT': 'C. o. T.',   # Chain of Thought
+    'ToT': 'T. o. T.',   # Tree of Thought
+    'FLOPs': 'flops',    # pronounced as a word
+    'FLOPS': 'flops',
+    'SOTA': 'sota',      # pronounced as a word
+    'OOD': 'O. O. D.',   # out-of-distribution
+    # ── Benchmarks (frequent) ────────────────────────────────────────────
+    'MMLU': 'M. M. L. U.',
+    'GSM8K': 'G. S. M. 8. K.',
+    'HellaSwag': 'hella-swag',
+    'HumanEval': 'Human-Eval',
+    'BBH': 'B. B. H.',
+    'GPQA': 'G. P. Q. A.',
+    'MATH': 'math',      # the benchmark, but same spelling as the word — harmless
+    'SWE-bench': 'swee-bench',
+    'ARC': 'arc',
+    # ── Compute / infra ──────────────────────────────────────────────────
     'GPU': 'G. P. U.',
     'GPUs': 'G. P. U. s',
     'CPU': 'C. P. U.',
@@ -124,6 +146,7 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'TPU': 'T. P. U.',
     'TPUs': 'T. P. U. s',
     'NPU': 'N. P. U.',
+    'NPUs': 'N. P. U. s',
     'HPC': 'H. P. C.',
     'API': 'A. P. I.',
     'APIs': 'A. P. I. s',
@@ -138,7 +161,20 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'PaaS': 'pass',
     'IaaS': 'eye-ass',
     'VPN': 'V. P. N.',
-    # Org titles / business
+    'ASIC': 'ay-sick',
+    'ASICs': 'ay-sicks',
+    'FPGA': 'F. P. G. A.',
+    'FPGAs': 'F. P. G. A. s',
+    'SSD': 'S. S. D.',
+    'SSDs': 'S. S. D. s',
+    'HBM': 'H. B. M.',
+    'DDR': 'D. D. R.',
+    'NVMe': 'N. V. M. E.',
+    'CUDA': 'koo-da',
+    'ROCm': 'rock-em',
+    'VRAM': 'V. R. A. M.',
+    'DRAM': 'D. R. A. M.',
+    # ── Org titles / business ────────────────────────────────────────────
     'CEO': 'C. E. O.',
     'CTO': 'C. T. O.',
     'CFO': 'C. F. O.',
@@ -146,13 +182,78 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'CIO': 'C. I. O.',
     'CISO': 'C. I. S. O.',
     'IPO': 'I. P. O.',
+    'IPOs': 'I. P. O. s',
     'M&A': 'M. and A.',
     'VC': 'V. C.',
+    'VCs': 'V. C. s',
     'PE': 'P. E.',
     'ROI': 'R. O. I.',
     'KPI': 'K. P. I.',
     'KPIs': 'K. P. I. s',
-    # AI-specific acronyms
+    'OKR': 'O. K. R.',
+    'OKRs': 'O. K. R. s',
+    'OEM': 'O. E. M.',
+    'OEMs': 'O. E. M. s',
+    'GTM': 'G. T. M.',   # go-to-market
+    'B2B': 'B. 2. B.',
+    'B2C': 'B. 2. C.',
+    'D2C': 'D. 2. C.',
+    'HR': 'H. R.',
+    'QA': 'Q. A.',
+    'R&D': 'R. and D.',
+    'PR': 'P. R.',
+    'IT': 'I. T.',
+    'PoC': 'P. O. C.',
+    'MVP': 'M. V. P.',
+    # ── Finance / markets (banking-focused podcast) ──────────────────────
+    'EPS': 'E. P. S.',
+    'EBITDA': 'ee-bit-da',
+    'GDP': 'G. D. P.',
+    'CPI': 'C. P. I.',
+    'PPI': 'P. P. I.',
+    'PMI': 'P. M. I.',
+    'YoY': 'year-over-year',
+    'QoQ': 'quarter-over-quarter',
+    'FY': 'F. Y.',
+    'FY24': 'F. Y. twenty-four',
+    'FY25': 'F. Y. twenty-five',
+    'FY26': 'F. Y. twenty-six',
+    'P/E': 'P. E.',
+    'EV': 'E. V.',         # enterprise value OR electric vehicle — ambiguous but both pronounce same
+    'ESG': 'E. S. G.',
+    'NAV': 'N. A. V.',
+    'AUM': 'A. U. M.',
+    'TVL': 'T. V. L.',
+    # ── Regulators / institutions ────────────────────────────────────────
+    'SEC': 'S. E. C.',
+    'FTC': 'F. T. C.',
+    'FDA': 'F. D. A.',
+    'DOJ': 'D. O. J.',
+    'DOE': 'D. O. E.',
+    'DOD': 'D. O. D.',
+    'NYSE': 'N. Y. S. E.',
+    'NASDAQ': 'naz-dak',
+    'FOMC': 'F. O. M. C.',
+    'FED': 'Fed',
+    'ECB': 'E. C. B.',
+    'BoE': 'B. o. E.',
+    'BoJ': 'B. o. J.',
+    'PBOC': 'P. B. O. C.',
+    'IMF': 'I. M. F.',
+    'WTO': 'W. T. O.',
+    'OECD': 'O. E. C. D.',
+    'NIST': 'nist',
+    'DARPA': 'DARPA',
+    'CFIUS': 'see-fee-us',
+    'BIS': 'B. I. S.',
+    'BAFIN': 'BAFIN',
+    'CMA': 'C. M. A.',
+    'GDPR': 'G. D. P. R.',
+    'HIPAA': 'hip-ah',
+    'FINRA': 'fin-ra',
+    'KYC': 'K. Y. C.',
+    'AML': 'A. M. L.',
+    # ── AI-specific acronyms ─────────────────────────────────────────────
     'AI': 'A. I.',       # English: ay-eye
     'AGI': 'A. G. I.',
     'ASI': 'A. S. I.',
@@ -163,14 +264,25 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'OCR': 'O. C. R.',
     'CV': 'C. V.',       # computer vision in context
     'RL': 'R. L.',
-    # Geographies / institutions
+    'IL': 'I. L.',       # imitation learning
+    'XAI': 'X. A. I.',
+    'AR': 'A. R.',       # augmented reality
+    'VR': 'V. R.',       # virtual reality
+    'XR': 'X. R.',
+    'IoT': 'I. o. T.',
+    'TTFT': 'T. T. F. T.',
+    # ── Geographies / institutions ───────────────────────────────────────
     'USA': 'U. S. A.',
+    'US': 'U. S.',
     'EU': 'E. U.',
     'UK': 'U. K.',
     'UAE': 'U. A. E.',
     'NATO': 'NATO',  # already pronounced as a word
     'UN': 'U. N.',
-    # Tech / formats
+    'APAC': 'A. PAC.',
+    'EMEA': 'E. M. E. A.',
+    'LATAM': 'LA-tam',
+    # ── Tech / formats ───────────────────────────────────────────────────
     'iOS': 'eye-O. S.',
     'macOS': 'mac-O. S.',
     'PDF': 'P. D. F.',
@@ -185,17 +297,27 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'HTTP': 'H. T. T. P.',
     'HTTPS': 'H. T. T. P. S.',
     'ONNX': 'O. N. N. X.',
-    # Brands / camelCase
+    'SQL': 'sequel',
+    'NoSQL': 'no-sequel',
+    'gRPC': 'G. R. P. C.',
+    'UX': 'U. X.',
+    'UI': 'U. I.',
+    # ── Brands / camelCase ───────────────────────────────────────────────
     'OpenAI': 'Open A. I.',
     'NVIDIA': 'en-vidia',
     'NASA': 'NASA',
-    # Research jargon
+    'xAI': 'X. A. I.',
+    'DeepSeek': 'Deep-Seek',
+    'Mistral': 'miss-tral',
+    # ── Research jargon ──────────────────────────────────────────────────
     'arXiv': 'ar-kive',
     'LaTeX': 'Lay-Tech',
     'NeurIPS': 'noor-ips',
     'ICML': 'I. C. M. L.',
     'ACL': 'A. C. L.',
     'ICLR': 'I. C. L. R.',
+    'EMNLP': 'E. M. N. L. P.',
+    'AAAI': 'triple-A. I.',
     'FAISS': 'fais',   # Facebook AI Similarity Search — pronounced as a word
 }
 
@@ -288,6 +410,9 @@ _UNKNOWN_ACRONYM = re.compile(r'\b[A-Z]{3,5}\b')
 # fine when read as words by the TTS engine.
 _AUTO_SPELL_SKIP: frozenset[str] = frozenset({
     'NATO', 'NASA', 'FAISS', 'SWIFT', 'OPEC', 'OTAN',
+    'DARPA', 'BAFIN', 'GAFAM', 'MATH', 'MATHS',
+    # Proper nouns / product names written all-caps that should be read as a word
+    'OPENAI', 'ARM', 'META', 'APPLE', 'AMAZON', 'GOOGLE', 'ORACLE',
 })
 
 

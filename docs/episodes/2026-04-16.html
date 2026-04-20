@@ -229,6 +229,46 @@
       .episode-nav { flex-direction: column; }
       .nav-block.right { text-align: left; }
     }
+
+    .brief-details { }
+    .brief-toggle { list-style: none; }
+    .brief-toggle::-webkit-details-marker { display: none; }
+    .brief-toggle {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      cursor: pointer;
+      padding: 0.7rem 1.15rem;
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      font-size: 0.78rem; font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.07em; text-transform: uppercase;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+    .brief-toggle:hover {
+      border-color: var(--accent-dim);
+      background: #14141a;
+    }
+    .brief-details[open] .brief-toggle {
+      border-color: var(--accent-dim);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .brief-chevron {
+      font-size: 1rem; line-height: 1;
+      color: var(--accent-dim);
+      transition: transform 0.22s ease;
+      display: inline-block;
+    }
+    .brief-details[open] .brief-chevron { transform: rotate(180deg); }
+    .brief-script-surface {
+      border: 1px solid var(--accent-dim);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 2.25rem 2rem 2rem;
+      background: #0d0d10;
+    }
   </style>
 </head>
 <body>
@@ -273,10 +313,14 @@
     <!-- EPISODE TRANSCRIPT — the read brief -->
     <section class="section">
       <p class="section-label">Episode brief</p>
-      <div class="script-body">
-        
-        <p class="script-empty">The full transcript for this episode is not yet available. Use the audio player below to listen.</p>
-      </div>
+        <details class="brief-details">
+          <summary class="brief-toggle">
+            Read full brief&nbsp;<span class="brief-chevron" aria-hidden="true">&#8964;</span>
+          </summary>
+          <div class="brief-script-surface">
+            <p class="script-empty">The full transcript for this episode is not yet available.</p>
+          </div>
+        </details>
     </section>
 
     <!-- AUDIO PLAYER — at the bottom, after reading -->

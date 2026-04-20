@@ -110,7 +110,7 @@ jobs:
   # Only runs when a real episode was released (approve.outputs.released == true).
   youtube:
     needs: approve
-    if: needs.approve.outputs.released == 'true'
+    if: ${{ needs.approve.outputs.released == 'true' }}
     uses: ./.github/workflows/youtube-upload.yml
     with:
       locale: ${{ inputs.locale }}

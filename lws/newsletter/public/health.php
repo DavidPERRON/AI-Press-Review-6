@@ -27,11 +27,16 @@ $config = require $configFile;
 
 $dbOk = false;
 try {
+    // connect_timeout=3 in the DSN is the correct way to cap the TCP
+    // handshake with MySQL in PDO. PDO::ATTR_TIMEOUT is silently ignored
+    // by the MySQL driver and would leave this probe hanging 30+ s if
+    // the DB host is unreachable.
     $pdo = new PDO(
-        sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $config['db_host'], $config['db_name']),
+        sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4;connect_timeout=3',
+                $config['db_host'], $config['db_name']),
         $config['db_user'],
         $config['db_pass'],
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_TIMEOUT => 3]
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
     $dbOk = (bool) $pdo->query('SELECT 1')->fetchColumn();
 } catch (Throwable $e) {

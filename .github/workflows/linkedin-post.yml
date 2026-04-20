@@ -18,6 +18,7 @@ jobs:
       - name: Post latest episode to LinkedIn
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
         run: |
           python3 << 'PYEOF'
           import xml.etree.ElementTree as ET
@@ -31,6 +32,11 @@ jobs:
               print("LINKEDIN_ACCESS_TOKEN manquant")
               sys.exit(1)
 
+          person_urn = os.environ.get('LINKEDIN_PERSON_URN', '')
+          if not person_urn:
+              print("LINKEDIN_PERSON_URN manquant")
+              sys.exit(1)
+
           # Lire le feed social
           tree = ET.parse('docs/social-feed.xml')
           channel = tree.getroot().find('channel')
@@ -40,7 +46,6 @@ jobs:
               sys.exit(0)
 
           item = items[0]
-          guid        = item.findtext('guid') or ''
           title       = item.findtext('title') or ''
           description = item.findtext('description') or title
           pub_date_str = item.findtext('pubDate') or ''
@@ -55,22 +60,6 @@ jobs:
                       sys.exit(0)
               except Exception as e:
                   print(f"Erreur de date : {e}")
-
-          # Récupérer le person URN
-          req = urllib.request.Request(
-              'https://api.linkedin.com/v2/me',
-              headers={
-                  'Authorization': f'Bearer {token}',
-                  'X-Restli-Protocol-Version': '2.0.0'
-              }
-          )
-          try:
-              with urllib.request.urlopen(req) as resp:
-                  profile = json.loads(resp.read())
-              person_urn = f"urn:li:person:{profile['id']}"
-          except urllib.error.HTTPError as e:
-              print(f"Erreur profil LinkedIn : {e.code} — {e.read().decode()}")
-              sys.exit(1)
 
           print(f"Compte : {person_urn}")
           print(f"Épisode : {title}")

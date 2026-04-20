@@ -58,13 +58,16 @@ jobs:
 
           # Récupérer le person URN
           req = urllib.request.Request(
-              'https://api.linkedin.com/v2/userinfo',
-              headers={'Authorization': f'Bearer {token}'}
+              'https://api.linkedin.com/v2/me',
+              headers={
+                  'Authorization': f'Bearer {token}',
+                  'X-Restli-Protocol-Version': '2.0.0'
+              }
           )
           try:
               with urllib.request.urlopen(req) as resp:
                   profile = json.loads(resp.read())
-              person_urn = f"urn:li:person:{profile['sub']}"
+              person_urn = f"urn:li:person:{profile['id']}"
           except urllib.error.HTTPError as e:
               print(f"Erreur profil LinkedIn : {e.code} — {e.read().decode()}")
               sys.exit(1)

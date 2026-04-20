@@ -23,7 +23,7 @@ on:
       force_linkedin:
         description: 'Forcer le post LinkedIn (ignore la limite 48h)'
         required: false
-        default: false
+        default: 'false'
         type: boolean
 
 permissions:

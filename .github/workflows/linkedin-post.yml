@@ -40,7 +40,6 @@ jobs:
               sys.exit(0)
 
           item = items[0]
-          guid        = item.findtext('guid') or ''
           title       = item.findtext('title') or ''
           description = item.findtext('description') or title
           pub_date_str = item.findtext('pubDate') or ''
@@ -56,7 +55,7 @@ jobs:
               except Exception as e:
                   print(f"Erreur de date : {e}")
 
-          # Récupérer le person URN
+          # Récupérer le person URN via OpenID Connect (scopes: openid + profile)
           req = urllib.request.Request(
               'https://api.linkedin.com/v2/userinfo',
               headers={'Authorization': f'Bearer {token}'}
@@ -67,6 +66,7 @@ jobs:
               person_urn = f"urn:li:person:{profile['sub']}"
           except urllib.error.HTTPError as e:
               print(f"Erreur profil LinkedIn : {e.code} — {e.read().decode()}")
+              print("Assure-toi que le token a les scopes : w_member_social + openid + profile")
               sys.exit(1)
 
           print(f"Compte : {person_urn}")

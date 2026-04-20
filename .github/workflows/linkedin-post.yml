@@ -18,7 +18,6 @@ jobs:
       - name: Post latest episode to LinkedIn
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
-          LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
         run: |
           python3 << 'PYEOF'
           import xml.etree.ElementTree as ET
@@ -30,11 +29,6 @@ jobs:
           token = os.environ.get('LINKEDIN_ACCESS_TOKEN', '')
           if not token:
               print("LINKEDIN_ACCESS_TOKEN manquant")
-              sys.exit(1)
-
-          person_urn = os.environ.get('LINKEDIN_PERSON_URN', '')
-          if not person_urn:
-              print("LINKEDIN_PERSON_URN manquant")
               sys.exit(1)
 
           # Lire le feed social
@@ -60,6 +54,20 @@ jobs:
                       sys.exit(0)
               except Exception as e:
                   print(f"Erreur de date : {e}")
+
+          # Récupérer le person URN via OpenID Connect (scopes: openid + profile)
+          req = urllib.request.Request(
+              'https://api.linkedin.com/v2/userinfo',
+              headers={'Authorization': f'Bearer {token}'}
+          )
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  profile = json.loads(resp.read())
+              person_urn = f"urn:li:person:{profile['sub']}"
+          except urllib.error.HTTPError as e:
+              print(f"Erreur profil LinkedIn : {e.code} — {e.read().decode()}")
+              print("Assure-toi que le token a les scopes : w_member_social + openid + profile")
+              sys.exit(1)
 
           print(f"Compte : {person_urn}")
           print(f"Épisode : {title}")

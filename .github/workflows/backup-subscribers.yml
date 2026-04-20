@@ -1,0 +1,105 @@
+name: Sauvegarde abonnés (LWS → repo privé)
+
+# Télécharge le CSV depuis aequitus.net/api/export.php, le chiffre
+# avec GPG AES-256 (symétrique, passphrase en secret GH), et le
+# commite dans un repo de sauvegarde privé.
+#
+# Secrets requis (Settings → Secrets → Actions) :
+#   LWS_EXPORT_TOKEN      — admin_token de config.php sur LWS
+#   BACKUP_GPG_PASSPHRASE — passphrase longue aléatoire (≠ admin_token)
+#   BACKUP_REPO_TOKEN     — fine-grained PAT, write sur BACKUP_REPO seulement
+#
+# Variable (Settings → Variables → Actions) :
+#   BACKUP_REPO           — ex. davidperron/aequitus-newsletter-backup
+#                           (peut aussi être fixée ici dans l'env: ci-dessous)
+#
+# Pour déchiffrer localement :
+#   gpg --decrypt --batch --passphrase "$BACKUP_GPG_PASSPHRASE" \
+#       subscribers-2026-04-20.csv.gpg > subscribers-2026-04-20.csv
+
+on:
+  schedule:
+    - cron: '0 5 * * *'   # 05:00 UTC tous les jours
+  workflow_dispatch:       # déclenchement manuel depuis l'onglet Actions
+
+permissions:
+  contents: none           # ce workflow n'écrit pas dans ce repo
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      EXPORT_URL: https://aequitus.net/api/export.php
+      HEALTH_URL: https://aequitus.net/api/health.php
+      # Écrase avec la variable GH si elle est définie, sinon valeur par défaut.
+      BACKUP_REPO: ${{ vars.BACKUP_REPO || 'davidperron/aequitus-newsletter-backup' }}
+
+    steps:
+      - name: Vérifier la disponibilité du serveur LWS
+        run: |
+          set -e
+          response=$(curl -sf --max-time 10 "$HEALTH_URL" || true)
+          db=$(echo "$response" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('db','?'))" 2>/dev/null || echo '?')
+          if [ "$db" != "True" ] && [ "$db" != "true" ] && [ "$db" != "1" ]; then
+            echo "::error::LWS health check failed — réponse : $response"
+            exit 1
+          fi
+          echo "LWS OK (db=$db)"
+
+      - name: Télécharger le CSV des abonnés
+        env:
+          LWS_EXPORT_TOKEN: ${{ secrets.LWS_EXPORT_TOKEN }}
+        run: |
+          set -e
+          DATE=$(date -u +%F)
+          echo "DATE=$DATE" >> "$GITHUB_ENV"
+          http_code=$(curl -sS --max-time 30 \
+            -H "Authorization: Bearer $LWS_EXPORT_TOKEN" \
+            -o "subscribers-${DATE}.csv" \
+            -w "%{http_code}" \
+            "$EXPORT_URL")
+          if [ "$http_code" != "200" ]; then
+            echo "::error::export.php a répondu HTTP $http_code"
+            exit 1
+          fi
+          lines=$(wc -l < "subscribers-${DATE}.csv")
+          echo "CSV téléchargé : $lines lignes (header inclus)"
+
+      - name: Chiffrer avec GPG (AES-256 symétrique)
+        env:
+          BACKUP_GPG_PASSPHRASE: ${{ secrets.BACKUP_GPG_PASSPHRASE }}
+        run: |
+          set -e
+          # --passphrase-fd 0 lit depuis stdin ; évite que la passphrase
+          # apparaisse dans la liste des processus (ps aux).
+          echo "$BACKUP_GPG_PASSPHRASE" | gpg \
+            --symmetric \
+            --cipher-algo AES256 \
+            --batch \
+            --passphrase-fd 0 \
+            --output "subscribers-${DATE}.csv.gpg" \
+            "subscribers-${DATE}.csv"
+          rm "subscribers-${DATE}.csv"
+          echo "Fichier chiffré : subscribers-${DATE}.csv.gpg"
+
+      - name: Commiter dans le repo de sauvegarde
+        env:
+          BACKUP_REPO_TOKEN: ${{ secrets.BACKUP_REPO_TOKEN }}
+        run: |
+          set -e
+          git clone \
+            "https://x-access-token:${BACKUP_REPO_TOKEN}@github.com/${BACKUP_REPO}.git" \
+            backup-repo
+          cp "subscribers-${DATE}.csv.gpg" backup-repo/
+          cd backup-repo
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "subscribers-${DATE}.csv.gpg"
+          if git diff --cached --quiet; then
+            echo "Aucune nouvelle donnée — commit ignoré (fichier identique au précédent)"
+            exit 0
+          fi
+          git commit -m "backup: abonnés ${DATE}"
+          git push
+          echo "Sauvegarde commitée avec succès."

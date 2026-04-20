@@ -702,10 +702,6 @@ def _manifest_to_html(manifest: dict) -> str:
             except Exception:
                 pass
 
-        # Relevance score
-        score = src.get("relevance_score", 0) or 0
-        score_tag = f"Score {score:.1f}"
-
         # Sections this source was used in
         sections = src.get("sections", []) or []
         section_labels = [
@@ -736,10 +732,7 @@ def _manifest_to_html(manifest: dict) -> str:
         # quoteattr emits the surrounding quotes and escapes both " and '.
         cards.append(
             "<article class='source-card'>"
-            "<div class='source-header'>"
             f"<h3><a href={quoteattr(url)} target='_blank' rel='noopener'>{escape(src['title'])} ↗</a></h3>"
-            f"<span class='source-score'>{escape(score_tag)}</span>"
-            "</div>"
             + (f"<p class='source-meta'>{meta_line}</p>" if meta_line else "")
             + (f"<p class='source-byline'>{byline}</p>" if byline else "")
             + sections_html
@@ -769,8 +762,6 @@ def _manifest_to_html(manifest: dict) -> str:
         ".source-card h3 a{color:var(--text);text-decoration:none}"
         ".source-card h3 a:hover{color:var(--accent)}"
         ".source-byline{margin:0;font-size:.78rem;color:var(--text-secondary)}"
-        ".source-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.2rem}"
-        ".source-score{flex-shrink:0;font-size:.7rem;font-weight:600;color:#c8a96e;background:rgba(200,169,110,.12);border:1px solid rgba(200,169,110,.3);border-radius:3px;padding:.1rem .4rem;white-space:nowrap;margin-top:.15rem}"
         ".source-meta{margin:.15rem 0 .2rem;font-size:.75rem;color:#8a8a9a}"
         ".source-sections{display:inline-flex;gap:.35rem;flex-wrap:wrap;margin-top:.3rem}"
         ".source-section-tag{font-size:.65rem;padding:.1rem .45rem;border-radius:999px;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);color:#c8a96e}"

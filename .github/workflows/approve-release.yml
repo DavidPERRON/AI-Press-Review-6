@@ -23,6 +23,12 @@ on:
 permissions:
   contents: write
 
+# Globally queue all release runs regardless of locale. Two simultaneous
+# approve-release runs (EN + FR, or a re-run while the first is in flight)
+# both mutate data/state/ and docs/social-feed.xml — without this group
+# they race on `git push` and hit the retry-loop (observed 2026-04-16).
+# One queue across locales is simpler than per-locale since the social-feed
+# job reads both histories anyway.
 concurrency:
   group: release-workflow
   cancel-in-progress: false
@@ -33,6 +39,8 @@ jobs:
     timeout-minutes: 15
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    outputs:
+      released: ${{ steps.release.outputs.released }}
 
     steps:
       - uses: actions/checkout@v4
@@ -55,7 +63,6 @@ jobs:
 
       - name: Release pending draft
         id: release
-        continue-on-error: true
         env:
           APR_LOCALE: ${{ inputs.locale }}
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
@@ -63,16 +70,32 @@ jobs:
           R2_ENDPOINT: ${{ vars.APR_TEST_R2_ENDPOINT || vars.R2_ENDPOINT }}
           R2_ACCESS_KEY_ID: ${{ secrets.APR_TEST_R2_ACCESS_KEY_ID || secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.APR_TEST_R2_SECRET_ACCESS_KEY || secrets.R2_SECRET_ACCESS_KEY }}
-        run: python scripts/release_draft.py
+        run: |
+          set +e
+          output=$(python scripts/release_draft.py 2>&1)
+          exit_code=$?
+          echo "$output"
+          if [ $exit_code -eq 0 ]; then
+            echo "released=true" >> $GITHUB_OUTPUT
+          elif echo "$output" | grep -q "No pending draft"; then
+            echo "Aucun draft en attente — skip release"
+            echo "released=false" >> $GITHUB_OUTPUT
+          else
+            echo "::error::release_draft.py a échoué de façon inattendue"
+            exit $exit_code
+          fi
 
       - name: Commit published state
-        if: steps.release.outcome == 'success'
+        if: steps.release.outputs.released == 'true'
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/state/ docs/
           git diff --cached --quiet || git commit -m "release: manually approved episode [skip ci]"
+          # Retry on push race — two simultaneous approve-release runs (EN+FR)
+          # both pull, commit, push: whichever pushes first wins and the loser
+          # must rebase onto the new tip. Observed on 2026-04-16.
           for attempt in 1 2 3; do
             if git push; then exit 0; fi
             echo "push rejected — rebasing (attempt $attempt)"
@@ -81,14 +104,20 @@ jobs:
           echo "::error::push failed after 3 rebase attempts"
           exit 1
 
+  # Upload the released episode to YouTube (static cover + audio → MP4).
+  # Soft-skips gracefully if YOUTUBE_CLIENT_ID / YOUTUBE_REFRESH_TOKEN are
+  # not set in GitHub Secrets — no failure, just a "skipping" log line.
+  # Only runs when a real episode was released (approve.outputs.released == true).
   youtube:
     needs: approve
-    if: needs.approve.result == 'success'
+    if: needs.approve.outputs.released == 'true'
     uses: ./.github/workflows/youtube-upload.yml
     with:
       locale: ${{ inputs.locale }}
     secrets: inherit
 
+  # Rebuild the merged bilingual social feed after every run.
+  # if: always() so it runs even when there is no new draft.
   social-feed:
     needs: approve
     if: always()
@@ -135,6 +164,11 @@ jobs:
           echo "::error::push failed after 3 rebase attempts"
           exit 1
 
+  # Post to LinkedIn after social-feed is rebuilt.
+  # - Normal flow: posts when a new episode was just released (< 48h).
+  # - Force flow: force_linkedin=oui bypasses the age check (e.g. to post
+  #   a previously released episode manually).
+  # - Skips silently if LINKEDIN_ACCESS_TOKEN is not set.
   linkedin:
     needs: [approve, social-feed]
     if: always()
@@ -152,6 +186,7 @@ jobs:
       - name: Post latest episode to LinkedIn
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          RELEASED: ${{ needs.approve.outputs.released }}
           FORCE_LINKEDIN: ${{ inputs.force_linkedin }}
         run: |
           python3 << 'PYEOF'
@@ -166,6 +201,14 @@ jobs:
               print("LINKEDIN_ACCESS_TOKEN manquant — skip")
               sys.exit(0)
 
+          released = os.environ.get('RELEASED', 'false').lower() == 'true'
+          force    = os.environ.get('FORCE_LINKEDIN', 'non').strip().lower() == 'oui'
+
+          # Skip unless a new episode was just released OR user forced it
+          if not released and not force:
+              print("Aucun nouvel episode et force_linkedin=non — skip")
+              sys.exit(0)
+
           tree = ET.parse('docs/social-feed.xml')
           channel = tree.getroot().find('channel')
           items = channel.findall('item')
@@ -178,13 +221,13 @@ jobs:
           description  = item.findtext('description') or title
           pub_date_str = item.findtext('pubDate') or ''
 
-          force = os.environ.get('FORCE_LINKEDIN', 'non').strip().lower() == 'oui'
+          # Age guard (bypassed when force=oui)
           if pub_date_str and not force:
               try:
                   pub_dt = parsedate_to_datetime(pub_date_str)
                   age = datetime.now(timezone.utc) - pub_dt
                   if age > timedelta(hours=48):
-                      print(f"Episode trop ancien ({age}), skip")
+                      print(f"Episode trop ancien ({age}) — skip")
                       sys.exit(0)
               except Exception as e:
                   print(f"Erreur date : {e}")

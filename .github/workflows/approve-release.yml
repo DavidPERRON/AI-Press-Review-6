@@ -1,14 +1,5 @@
 name: Approuver et publier
 
-# Declenchement manuel pour publier le draft immediatement
-# (sans attendre l'auto-release de 10h).
-#
-# Second job `social-feed` rebuilds docs/social-feed.xml (EN+FR merged
-# RSS for the external LinkedIn auto-poster) after every release.
-# Runs after `approve` so the newly-released episode shows up in the
-# social feed immediately. `if: always()` keeps the rebuild running
-# even when approve has nothing to publish (no-op path).
-
 on:
   workflow_dispatch:
     inputs:
@@ -21,20 +12,17 @@ on:
           - en
           - fr
       force_linkedin:
-        description: 'Forcer le post LinkedIn (ignore la limite 48h)'
+        description: 'Forcer le post LinkedIn (oui/non)'
         required: false
-        default: 'false'
-        type: boolean
+        default: 'non'
+        type: choice
+        options:
+          - non
+          - oui
 
 permissions:
   contents: write
 
-# Globally queue all release runs regardless of locale. Two simultaneous
-# approve-release runs (EN + FR, or a re-run while the first is in flight)
-# both mutate data/state/ and docs/social-feed.xml — without this group
-# they race on `git push` and hit the retry-loop (observed 2026-04-16).
-# One queue across locales is simpler than per-locale since the social-feed
-# job reads both histories anyway.
 concurrency:
   group: release-workflow
   cancel-in-progress: false
@@ -66,6 +54,8 @@ jobs:
         run: git pull --rebase origin main
 
       - name: Release pending draft
+        id: release
+        continue-on-error: true
         env:
           APR_LOCALE: ${{ inputs.locale }}
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
@@ -76,15 +66,13 @@ jobs:
         run: python scripts/release_draft.py
 
       - name: Commit published state
+        if: steps.release.outcome == 'success'
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/state/ docs/
           git diff --cached --quiet || git commit -m "release: manually approved episode [skip ci]"
-          # Retry on push race — two simultaneous approve-release runs (EN+FR)
-          # both pull, commit, push: whichever pushes first wins and the loser
-          # must rebase onto the new tip. Observed on 2026-04-16.
           for attempt in 1 2 3; do
             if git push; then exit 0; fi
             echo "push rejected — rebasing (attempt $attempt)"
@@ -93,9 +81,6 @@ jobs:
           echo "::error::push failed after 3 rebase attempts"
           exit 1
 
-  # Upload the released episode to YouTube (static cover + audio → MP4).
-  # Soft-skips gracefully if YOUTUBE_CLIENT_ID / YOUTUBE_REFRESH_TOKEN are
-  # not set in GitHub Secrets — no failure, just a "skipping" log line.
   youtube:
     needs: approve
     if: needs.approve.result == 'success'
@@ -104,10 +89,6 @@ jobs:
       locale: ${{ inputs.locale }}
     secrets: inherit
 
-  # Rebuild the merged bilingual LinkedIn-oriented feed from both locales'
-  # episode histories on main, after the approve job has (possibly) pushed
-  # a newly-published episode. `if: always()` keeps this running even if
-  # approve skipped (no pending draft for that locale).
   social-feed:
     needs: approve
     if: always()
@@ -156,7 +137,7 @@ jobs:
 
   linkedin:
     needs: [approve, social-feed]
-    if: needs.approve.result == 'success'
+    if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -165,7 +146,7 @@ jobs:
         with:
           ref: main
 
-      - name: Pull latest (social-feed may have just pushed)
+      - name: Pull latest
         run: git pull --rebase origin main
 
       - name: Post latest episode to LinkedIn
@@ -189,7 +170,7 @@ jobs:
           channel = tree.getroot().find('channel')
           items = channel.findall('item')
           if not items:
-              print("Feed vide")
+              print("Feed vide — skip")
               sys.exit(0)
 
           item = items[0]
@@ -197,7 +178,7 @@ jobs:
           description  = item.findtext('description') or title
           pub_date_str = item.findtext('pubDate') or ''
 
-          force = os.environ.get('FORCE_LINKEDIN', '').lower() == 'true'
+          force = os.environ.get('FORCE_LINKEDIN', 'non').strip().lower() == 'oui'
           if pub_date_str and not force:
               try:
                   pub_dt = parsedate_to_datetime(pub_date_str)
@@ -206,7 +187,7 @@ jobs:
                       print(f"Episode trop ancien ({age}), skip")
                       sys.exit(0)
               except Exception as e:
-                  print(f"Erreur de date : {e}")
+                  print(f"Erreur date : {e}")
 
           req = urllib.request.Request(
               'https://api.linkedin.com/v2/userinfo',

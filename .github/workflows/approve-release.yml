@@ -20,6 +20,11 @@ on:
         options:
           - en
           - fr
+      force_linkedin:
+        description: 'Forcer le post LinkedIn (ignore la limite 48h)'
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -166,6 +171,7 @@ jobs:
       - name: Post latest episode to LinkedIn
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          FORCE_LINKEDIN: ${{ inputs.force_linkedin }}
         run: |
           python3 << 'PYEOF'
           import xml.etree.ElementTree as ET
@@ -191,7 +197,8 @@ jobs:
           description  = item.findtext('description') or title
           pub_date_str = item.findtext('pubDate') or ''
 
-          if pub_date_str:
+          force = os.environ.get('FORCE_LINKEDIN', '').lower() == 'true'
+          if pub_date_str and not force:
               try:
                   pub_dt = parsedate_to_datetime(pub_date_str)
                   age = datetime.now(timezone.utc) - pub_dt

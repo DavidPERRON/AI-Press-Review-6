@@ -1,6 +1,271 @@
 {
   "items": [
     {
+      "title": "ProbeLogits: Kernel-Level LLM Inference Primitives for AI-Native Operating Systems",
+      "url": "https://arxiv.org/abs/2604.11943",
+      "used_at": "2026-04-21T09:58:26.444001+00:00"
+    },
+    {
+      "title": "The Amazing Agent Race: Strong Tool Users, Weak Navigators",
+      "url": "https://arxiv.org/abs/2604.10261",
+      "used_at": "2026-04-21T09:58:26.444012+00:00"
+    },
+    {
+      "title": "SciImpact: A Multi-Dimensional, Multi-Field Benchmark for Scientific Impact Prediction",
+      "url": "https://arxiv.org/abs/2604.17141",
+      "used_at": "2026-04-21T09:58:26.444014+00:00"
+    },
+    {
+      "title": "ONTO: A Token-Efficient Columnar Notation for LLM Input Optimization",
+      "url": "https://arxiv.org/abs/2604.17512",
+      "used_at": "2026-04-21T09:58:26.444016+00:00"
+    },
+    {
+      "title": "River-LLM: Large Language Model Seamless Exit Based on KV Share",
+      "url": "https://arxiv.org/abs/2604.18396",
+      "used_at": "2026-04-21T09:58:26.444019+00:00"
+    },
+    {
+      "title": "HORIZON: A Benchmark for In-the-wild User Behaviour Modeling",
+      "url": "https://arxiv.org/abs/2604.17259",
+      "used_at": "2026-04-21T09:58:26.444021+00:00"
+    },
+    {
+      "title": "Scaling External Knowledge Input Beyond Context Windows of LLMs via Multi-Agent Collaboration",
+      "url": "https://arxiv.org/abs/2505.21471",
+      "used_at": "2026-04-21T09:58:26.444023+00:00"
+    },
+    {
+      "title": "Mythos: are fears over new AI model panic or PR? – podcast",
+      "url": "https://www.theguardian.com/science/audio/2026/apr/21/mythos-are-fears-over-new-ai-model-panic-or-pr-podcast",
+      "used_at": "2026-04-21T09:58:26.444026+00:00"
+    },
+    {
+      "title": "AWS Weekly Roundup: Claude Opus 4.7 in Amazon Bedrock, AWS Interconnect GA, and more (April 20, 2026)",
+      "url": "https://aws.amazon.com/blogs/aws/aws-weekly-roundup-claude-opus-4-7-in-amazon-bedrock-aws-interconnect-ga-and-more-april-20-2026/",
+      "used_at": "2026-04-21T09:58:26.444028+00:00"
+    },
+    {
+      "title": "Agibot unveils new generation of embodied AI robots and models for real-world deployment - Robotics & Automation News",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNaGk4S3Etdmk4UzRUR2ZYcThGSjB5dG9USHAxWGhxVzJTc1UwdXoyam0wQUQ2el84TzBHdkRWYV9nVGMwT1ZlU3pxZS01SFpra2NBSVNqWGVCZ0lfOE1XbV9IUll3TEVfeVBIRzl2ZDJSaXhuTW1YQlgzWXR0VjlPejJ5UGt3RGI4b0VjVHhRMlNfcXZCOTUtY2ZfS1hUMGNLMzBITFBfeGpTSnpPWXJMcTlBdkpWWWFocGQyb2pWcFRCeW5rOFpQVXEzb1VFRzQ1d0k1LXRoRDBReThqZ3c",
+      "used_at": "2026-04-21T09:58:26.444029+00:00"
+    },
+    {
+      "title": "Moonshot AI Releases Kimi K2.6, Beats Top US Models On Some Benchmarks - OfficeChai",
+      "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBZVGtUUDE1SEFsZTRfTjJ2ZnVsblhIMWhlZXkzNXlkaG43NkZqUTFHc0R4ZlZjN0dFZjNBYW1sWk5MWHIzbl9CUGhrN2tURE1USEFaMjcteUtiOEk",
+      "used_at": "2026-04-21T09:58:26.444031+00:00"
+    },
+    {
+      "title": "奇世智能CheeChips完成天使轮融资，专注AI+母婴智能硬件生态｜最前线",
+      "url": "https://36kr.com/p/3774891479712514",
+      "used_at": "2026-04-21T09:58:26.444032+00:00"
+    },
+    {
+      "title": "Jeff Bezos’ AI Venture Nears $10 Billion Funding Round at $38 Billion Valuation - CXO Digitalpulse",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPdjJVcTlwWUpUNWg0NmQ4bGRaV3gwNFMzWXhqLXRxQTlTbW9UcTJDZnFkQTZVVmR1ZldvSXBRNll4ZG9JVHNzNU9PZG56UlZKMUVvZzFaXzRzbVVYTkRwM3hZVENscDZVaHQtcUM5VHF4YXlqbXl4R1Z4MXdsRXRlUVFHSGlYSlVKeTFvNFZGWjY2OEV1ZWxrSmstcF82eE0zYlZMa09hZXBnZUlnV3c",
+      "used_at": "2026-04-21T09:58:26.444034+00:00"
+    },
+    {
+      "title": "Lee School Board hears report on artificial intelligence pilot program - Cape Coral Breeze",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPVml6VV9VWllPUUZmM3c2YndyLXo2bHdMczBlRE1LS2d0R25LR0ZEZ0NJZ01qeDBxd3ZrYnZ0MjhjMnhTQURtNTY1S21ibUtoNTVXaEJ5MjFtX0tna2NyclFybzFmb3k4Vk1DeFdlSWdfMTc2UVVVYTNSMTVQbEc3MzZNcC1OMnlpWFhYbEYwYnJsMG43RzJmOHlFSW9PNHlnWXpORzRSQ2FWNWRubGd2aU1xalNvZlE1bk5iajZoRC01SHJrcmxkMk5nRk4zeXc",
+      "used_at": "2026-04-21T09:58:26.444036+00:00"
+    },
+    {
+      "title": "Anthropic bites back in the compute wars with Amazon partnership",
+      "url": "https://www.axios.com/2026/04/21/anthropic-amazon-compute-wars",
+      "used_at": "2026-04-21T09:58:26.444038+00:00"
+    },
+    {
+      "title": "How artificial intelligence scales physician extension - KevinMD.com",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNMXZ5Yno5T0lFRFo5T3JXVUFsUUFjQm1KMUliMUd6aWhSeS1SV25EcW44cmI3SHZURFdrUkNUUF9UTzUzdnd4c2ZiRFZXRkJpdk03azhjUzE5OXNFNmdXLUl5VEFUeW4tUlBaMDByYmhhOVFuQlBNSjMyajB0VHdQVTN2SXl6QklmVnE1ZUdPY20",
+      "used_at": "2026-04-21T09:58:26.444039+00:00"
+    },
+    {
+      "title": "Boehringer Ingelheim launches AI centre for pharma research in London - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNYUx5VXRFWXVlWUVZQlllTGdsYjhzYzR2UVlJcDhibkFlTHFZRzdPZ09YazZ0STRKWkd6YUp2S0ZsTVVJYzNHcnAtLXNnem1lMktFZTZYSy0xeUVsLWtDcjA4Ym9MbE00UHk2RThEdlhuVjhySmZDUkwwUWxNc3gyWHVOLXZpS2JETVhjNEI3aHVYeXNzclBDNGkxSXIwNHN2WjhXS2YyOC1Pd2pkZU5zeHAyUmt2UFo2cThBQkJSNHlOTG1XYkZ1b0FwUWlGekU",
+      "used_at": "2026-04-21T09:58:26.444041+00:00"
+    },
+    {
+      "title": "Students’ creativity, artificial intelligence key players in region’s future - Rocky Mount Telegram",
+      "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxQMXdqUVpEVjJzUUFHV1BxNXFtZmpvRTU1YUZSZUFNSmZydDB5eHRiWjlCUlI5bTVkSlRLVXVVX3drTms5TE1yeXJmdHFublNYUVdyRE5RNlBqbUcwUzJCQlpkUm5iV1FDMnZFZU5sWUk0djVqX1ctdE1xNTVaMlZRZEFhQXRrODNtMEtxY2FxU2QwTm1iaHRySDY2amVVN1AyWTVkYm1jeDU4WFJxN3NDMUNTRVpZazJJNnd5eUZmQ0FMUDd4Mk8wOHpmU0xlWVo3eTh4N212cjYtZ294WVVjSlR4UEpCNTI2V3g2OFhmajN3TWgyaDItRlJ4ekJnMHc",
+      "used_at": "2026-04-21T09:58:26.444043+00:00"
+    },
+    {
+      "title": "Microsoft vs. Meta: Which AI Stock Is a Better Buy Headed Into Their Earnings Reports Next Week? - The Motley Fool",
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQV0hiY1NKWTVkdGVRNHZLRDZYVHA3ck5zbXpTZ0VRZ1hvTnJNYWZBY05oZlJVa0hBUUVnbDBMUDE5VTg0OWhtVnpjUURicy10SjhPRlVoVzhqanZIY05Wc3lGc2FKYkdPRXNUYWtiN0NiQXllcUdNYjJBRU90eEVIYjRwUmxYbUI2WEZ4bVc0OTZ0ZG56QzkyVg",
+      "used_at": "2026-04-21T09:58:26.444044+00:00"
+    },
+    {
+      "title": "Cognizant Propels AI Workforce Training with Cognizant Skillspring™: New Talent Transformation Platform Designed to Accelerate Clients' Workforce AI Readiness - PR Newswire",
+      "url": "https://news.google.com/rss/articles/CBMitgJBVV95cUxPLVM2VDZGRWdkUFlmMXQ3bFA4dUpOeXc4UWhsT19ueHI1eFFVUk1LYjM1OXZ6ckNZeWtUTDVxMHBrVlJLTEZsRXhyQjN1OEwtLWVOQXNHWThDdVdaMVVoV0laNjU1dnk1dkZfaUpWXzZjRG1EQkgydlhjVjlzbFhBNWlwTTdrenYtOEpERVY3MDBvWGVJRWRLOUN0eEFPaGhuZ1o1NmxRYnEyd1ZSdVludTdCVXc1OW9ZVnRvRzI2bnNONkJqRDhHRVo4YzFkM2N1YWh3OTROTzZ2RFdNVENsa2JLdDRlTkxYMXFGVFBqdWNaQTRDUHowUkpYdzdVTGJVRUFvX0tZNDZCYmVmMmV1SENKdUlobDk4UXBYNFZEOGh1SFhDNF9udlFLeGxQdTFYWDRRVy1R",
+      "used_at": "2026-04-21T09:58:26.444046+00:00"
+    },
+    {
+      "title": "The 2028 Democratic primary is coming for hopefuls' partners too",
+      "url": "https://www.axios.com/2026/04/19/democrats-primary-contenders-partners",
+      "used_at": "2026-04-21T09:58:26.444048+00:00"
+    },
+    {
+      "title": "Dems kick off 5-city fight to host 2028 convention",
+      "url": "https://www.axios.com/2026/04/19/democrats-2028-convention-cities",
+      "used_at": "2026-04-21T09:58:26.444049+00:00"
+    },
+    {
+      "title": "Scoop: NSA using Anthropic's Mythos despite Defense Department blacklist",
+      "url": "https://www.axios.com/2026/04/19/nsa-anthropic-mythos-pentagon",
+      "used_at": "2026-04-21T09:58:26.444051+00:00"
+    },
+    {
+      "title": "Trump invokes Cold War law in move to boost energy supply",
+      "url": "https://www.axios.com/2026/04/20/trump-energy-fuel-cold-war-defense-law",
+      "used_at": "2026-04-21T09:58:26.444052+00:00"
+    },
+    {
+      "title": "Apple CEO Tim Cook is stepping down",
+      "url": "https://www.axios.com/2026/04/20/tim-cook-apple-ceo",
+      "used_at": "2026-04-21T09:58:26.444054+00:00"
+    },
+    {
+      "title": "Judge orders Nexstar-Tegna to pause merger",
+      "url": "https://www.axios.com/2026/04/20/judge-orders-nexstar-tegna-to-pause-merger",
+      "used_at": "2026-04-21T09:58:26.444055+00:00"
+    },
+    {
+      "title": "Marvell shares gain on report of deal talks with Google to develop two AI chips - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOZDQyQnRRNy0wTk0zdFRrZjFqY0NHQUVRT1BFb040cld0M2FwdUVySFdUcldXVEh6OFc3TmNERHp1MmNnMzAtbmtTZlBDMk9Dc0xtM09GU1dNRU83U0k3QmhnaGJQRU5fVkZjaGE5U0lhejNqNTdUSGdMWWlqcjZvbXl2cmlQM1pDT0N2TXE0b3piWTMydWM1NkZ6QVM2Y3FNZU4xcjNtTFdUcEhjZVowRDdaX2dDQQ",
+      "used_at": "2026-04-21T09:58:26.444057+00:00"
+    },
+    {
+      "title": "Opinion | The world can look to Hong Kong as a pioneer of ethical AI - South China Morning Post",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPTnUwS2xxUldaM3VidnZrY1pzS3BzQkhBaUt2TU1oR2RpTVVxTlFkTVVqdmxUU3ZiZXpETVlZalpHTUQzVC1NQWRXaWtCMkV0UV9JaFlNNXMwekZhV0lHNkd2Y1dhZy1JSEZPbDJlZmw1U1dmTkJxeU0wVXkwWDZ1VGYzY25NZWhjd2c1Nkd5ZGQwR2pVS1JxT1UtQXNvRXZKcUh5OWYzSnJGQkFINUd4OV8tV04xTzVuMVU1Zk92LVpwZ9IBwgFBVV95cUxOdVBpVzR0bmFZVWZtMXNGSE9fdm50QTJ5VUVHaHRkX05XX2J2MzFiUFRPcEJKZFZWTGNLek5XSGVQZmlzM2tHdlNUQlN3RWJYLTZXVUVSN05PaDBCMnlEQUlKaF82ay1pbkR0ZDFPeEtHM254c3RiZGtqcEl3Y2x1MXI1LTM0U1ZLcHp2SUFlV3lVUUphVm5IVXNBSlJ2YjhzRUo4QnhiSklWRHRBTFlWMmVfbTVRYnZFdzl1X0RySktoZw",
+      "used_at": "2026-04-21T09:58:26.444058+00:00"
+    },
+    {
+      "title": "OpenAI's Codex now watches your screen to remember what you're working on",
+      "url": "https://the-decoder.com/openais-codex-now-watches-your-screen-to-remember-what-youre-working-on/",
+      "used_at": "2026-04-21T09:58:26.444060+00:00"
+    },
+    {
+      "title": "Intelligence artificielle: Eliza, le premier agent conversationnel de l'histoire, a 60 ans - RFI",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQQzFWUXktcXczeXBJZDNRS2JQaWtVZGhwYkJkbUVBNDFjQ19jZDlfWmU3TFNiLW1GUGtqSlZQVnpnby16c1BmVjJnVmpmUmwyWFR4UXBWbkFPMHpiZlJsMmU1UU5leFV1elUtLThiWlNwc05JbDVnQkNmUGs1c2hzTFJpNlhUa0hZRkE4VnhWNmZpZ21EdVRQVm9OcVI3MDBKV2k5YVIxSTAtaXRYQ0VXNFlmNzVSYlZ3OVlGQ0RIVTg5MElpcnExWkMwUms",
+      "used_at": "2026-04-21T09:58:26.444062+00:00"
+    },
+    {
+      "title": "Schmoozebots: study finds flattery will get AI everywhere",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/20/chatbots_win_trust_by_sounding/",
+      "used_at": "2026-04-21T09:58:26.444064+00:00"
+    },
+    {
+      "title": "Just like phishing for gullible humans, prompt injecting AIs is here to stay",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/19/just_like_phishing_for_gullible/",
+      "used_at": "2026-04-21T09:58:26.444065+00:00"
+    },
+    {
+      "title": "Saint-Omer : un adolescent face aux dangers de l'IA, la nouvelle percutante de Nathan, 16 ans - Delta FM",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQMWw0ekVtOGpKMERxbTFsbTM4elRyTS12MFJFX2szVEstVmY2MlBBUWgtTkxGbTlMd3lmbnJnc3V1VXdmZVYyNUh4VVFYbWN6eTNvei1QREE3U1dqZmRfbHNWX29FSG5PajVmR1VTNmkwS2JLSnhGUk1JX052VmJxNXhYVnhUUk1Ja3BiVk95aldqeTB4SVFDYzBQODNVZWpX",
+      "used_at": "2026-04-21T09:58:26.444067+00:00"
+    },
+    {
+      "title": "IT firms can't get past the AI question - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOMjU4RlhOU21oZ1lVZ01JeUNWbzV5MERWY2hnMzdKOUpUYlR4cng2UUNQR1hZMEFndjlTS2JYZmhldFVMWlZReGhzclJCWGg5TE9JUWJyWWpxd2tnN2V0NnppVmk0ZzRIZ25RWHRhWTJ1Ni1uUTh2d3NjZWVzYW9JQ21HTGlSU2tESEE",
+      "used_at": "2026-04-21T09:58:26.444068+00:00"
+    },
+    {
+      "title": "How AI is helping Birmingham logistics firm make deliveries - BBC",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBFQkF3VUZpX09LSVZsSG8wV3g5OFFBQzBhS1h6WUhPa1ZQM0paV0pPcDJpVnBSUG5mX2xldlpHS2xodkhGcy00RTZmRzBJVEc5SnE2ZFB1dFVKQQ",
+      "used_at": "2026-04-21T09:58:26.444070+00:00"
+    },
+    {
+      "title": "Palantir manifesto described as ‘ramblings of a supervillain’ amid UK contract fears",
+      "url": "https://www.theguardian.com/technology/2026/apr/21/palantir-manifesto-uk-contract-fears-mps",
+      "used_at": "2026-04-21T09:58:26.444071+00:00"
+    },
+    {
+      "title": "Aftermarket : face à l’IA, le risque n’est plus d’attendre mais de se tromper de cap - Auto Infos",
+      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQUHBmbHNrX0FpVFlzRDN5TkdvME81em9fWVFCSTh6NUpmb0VWN3BxUUEtdTU4YmRsSXRRdUlLZDQ4RDlzNEtnSEh5UjZMWDZQTlQxQWRiaHI1c2RyMTk2aEtrM3U5dXBtaVREWEFsY3MxYWw0U1A5aFF0Q21rN2RNY2JDT3BhYVhZZFc4b0IzRmJwZmt2dy13VlRmSHl4VENWN1Ffc19JYkRPeXFaR1FxNk5yaXg3eUotZmw2VllvWQ",
+      "used_at": "2026-04-21T09:58:26.444073+00:00"
+    },
+    {
+      "title": "Saint-Malo-de-Guersac. L’intelligence artificielle s’invite à la médiathèque - Ma Ville.com",
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNX05fWXBPLUd3VWRyMmhpOVZlRnd4bU9IcmdFSXlTbHpMSzJXYWR2bmRTbS1XZTJVSVAybnNHUWNLV1I4b1hiTmdYWC1CbjRLdlpKeGM3NEExaDZsS05mOE1ST2FYLURxaTFhT20wQ184TFVJWUgxM0xUOGl3R3ZBQW9UMEFLdkdXTGtZdTl6ZnFCQVZzYUJnU0lYanJoczRIM3RuN3hlY3cydUFoX2RZWUEzSWNQOFAtWXdIMFNaMkVpeHZBTGtJYUxKLTJyejM3Q3lmcG9XaTFFOEg5SVV3",
+      "used_at": "2026-04-21T09:58:26.444075+00:00"
+    },
+    {
+      "title": "Canva AI 2.0 : l'incroyable mise à jour qui veut faire trembler l'empire Adobe - Les Numériques",
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPWERZeHZfRC1fWWgza2d6OGUtRzFHLXR5WUVKcDFsMFYzLW5UX0g1QUdGVHZxZjN1YlhWTWtUQmhrT2RsaklTbThBNVYtbG96dVlkc0kyUTk5MktkOW9MYW5fTkRRNk12YjQtWjYzOWNLUnZIYUJmRXYzR3BkbWZVdmFReVNGM1VtTkdISlJZQU1VUWZXTUxYeHhVeklTb2J1aFRjUWVvTzl3M19Jbm5PZlFqM0VTTlo4YlRwS21GSkEwV1h5bGFtQzdaaVFXemxwbjdDTEFvZXFhdUFmLUE",
+      "used_at": "2026-04-21T09:58:26.444076+00:00"
+    },
+    {
+      "title": "L’improbable pivot vers l’IA de la marque de chaussures Allbirds - Cafétech",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOOThnTHFpcFZjeUNvMHZwcHR1RWNsVUZacHV0MzN5VExuUjRsYTNNVHpwX2kwT2JJZ1Foakd5UDd0LVlqMTQ4dklTVDlBSXllMnhvZ2MybWdyd3lqTjdMTmtuelBGNjkwM0pLbTdob1FDLThDV05kRFRzMmNUVXlPYlJWNDQ3NnRtTEFqcld4bTQ1WWcyZ2Qydndn",
+      "used_at": "2026-04-21T09:58:26.444078+00:00"
+    },
+    {
+      "title": "New Jersey datacenter expansion got $77m in tax breaks to create exactly one permanent job — JPMorgan's site already scored $35m and currently employs just 25 workers - Tom's Hardware",
+      "url": "https://news.google.com/rss/articles/CBMi1AJBVV95cUxQdFg1dnFhb01vdWhQUGRMMXZ0ZElnZEoyZGJQMTg2RTVoTHVnSTRNcUxPM2JBa3pkOGdibmM1Z1VSYTBqSjB5c2o1a0IwdWRhbXpVMXF4cFVoTHlsRUpTaVliSVRvc1lFdlJydEE0Q0NwNE1fNVF4MmNaM05NeVlyRVRteUdKd1FPRjFnLWo3Y0lxeGtKSmN4UzRDWTlaVkVCcHNKbUZWUTB2QmlZWDBHM3N0c1JIalN5bEw4N3lqWFUyTFU0ZEN4UWIwQ0xkaVJmQTY1MFdaNnNKRVpoVlNoeGJEbEt4bTBwZHNvZmZvNkFqelpXNExQcU1zdzdXbTFmZjVMQUNwaUVvbDVPT0VRdWhOclViUFdsaVZoRURwdHhOSUsxWUUxSDNLX0kzVnBXb084M3ZCaWJSWFJYR0g4dXVzOFp6c1REYXpLM01LM29rUUZL",
+      "used_at": "2026-04-21T09:58:26.444079+00:00"
+    },
+    {
+      "title": "VIDÉO. Ce laboratoire unique à Rennes veut penser l'IA autrement - Ouest-France",
+      "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNMGkyUzU3aVQ3aFc5X1ItWk9kM0QzU3ZmQW5pNGRpS1NTUl9INnB0N2V2cGVfYXhIa0gzdkd0bUdyWTN5X0g1bFhwM2NTUW9fU0dROXRHNVJvai1MQzVUbHFSQmFRUmN1T2ZXNjVKanBGcFJzTGpNd1p6bXk2czZXYXhjZkhkTzRwR0paYjVKbTh4d1ZSbVR2bzV6MWpGUEpMY0ozcE5MUGUyblhGbG5JMHluU2tud1BkUXdqMjN6Y0RjMFF4RlBHUV9UcWNnNUxYWjM3aWxhRE0yd2pYZVdEN3prNjhoVU9XYUxHSUlUcUM4WlpKbHUw",
+      "used_at": "2026-04-21T09:58:26.444081+00:00"
+    },
+    {
+      "title": "How Pentagon Budget Reveal Could Boost Palantir Stock Amid AI Wave - Investor's Business Daily",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNMm9oVXNZTUpxT2NIVWdfSjI4MmNWNDdPbFNpRU84YXZFYUNVYThHRnhQdXNRcjBVWl90ODRzbDNvRXp4bnB2bXR4V08xZW1RNWhDaGNOWkVWYnRQakZPY29QWVA0d0oxRnAxS3RfeEU4aUE1cUQ2aW02UnlLTkVOMUdzNFdxcms0bnNnVUV4YlNFNFhHOHdiX2w5UVlOY1pUbHd6TFgwSWwyZ0JWazhuTTVZbk5QZTQwcTBzNQ",
+      "used_at": "2026-04-21T09:58:26.444083+00:00"
+    },
+    {
+      "title": "Anthropic MCP Design Vulnerability Enables RCE, Threatening AI Supply Chain - The Hacker News",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFAtRF9YSE9CZy02UXJUb01la20wVzlFZVVJMGhpUGk1NXRFYlZoVjg3cE1pQWltMllNblFBaHI3cDhYTWVnSjk2OFRtaTVYMm51VjFNQ2djRUFkWkd1Rnl1VjdrX2ZtdGRKRzZfSzA5TXF6ZmotX2Q4bVJpUG11dw",
+      "used_at": "2026-04-21T09:58:26.444084+00:00"
+    },
+    {
+      "title": "Pourquoi la justice française veut-elle entendre Elon Musk à Paris ce lundi ?",
+      "url": "https://siecledigital.fr/2026/04/20/pourquoi-la-justice-francaise-veut-elle-entendre-elon-musk-a-paris-ce-lundi/",
+      "used_at": "2026-04-21T09:58:26.444086+00:00"
+    },
+    {
+      "title": "Linux 7.1 will have an optional new NTFS driver",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/20/linux_71_new_ntfs/",
+      "used_at": "2026-04-21T09:58:26.444087+00:00"
+    },
+    {
+      "title": "One of Europe's sovereign cloud picks may not be so-sovereign after all",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/20/europe_picks_4_sovereign_cloud/",
+      "used_at": "2026-04-21T09:58:26.444089+00:00"
+    },
+    {
+      "title": "UK.gov kicks off half-a-billion quid sovereign AI venture with £80M invite",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/20/ukgov_kicks_off_500m_ai/",
+      "used_at": "2026-04-21T09:58:26.444090+00:00"
+    },
+    {
+      "title": "Palantir's NHS future in doubt as ministers eye contract break",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/20/palantir_nhs_break_clause/",
+      "used_at": "2026-04-21T09:58:26.444092+00:00"
+    },
+    {
+      "title": "AI quota inflation is no token effort. It's baked in",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/20/inflation_ai_quota/",
+      "used_at": "2026-04-21T09:58:26.444094+00:00"
+    },
+    {
+      "title": "China’s Hesai adds colour to lidar as EV makers race to level up in self-driving tech",
+      "url": "https://www.scmp.com/business/china-business/article/3350682/chinas-hesai-adds-colour-lidar-ev-makers-race-level-self-driving-tech",
+      "used_at": "2026-04-21T09:58:26.444096+00:00"
+    },
+    {
+      "title": "I stopped using my iPhone's hotspot after testing this 5G router - and that won't change",
+      "url": "https://www.zdnet.com/article/acer-connect-m6e-mobile-hotspot-review/",
+      "used_at": "2026-04-21T09:58:26.444097+00:00"
+    },
+    {
+      "title": "This powerful Gemini setting made my AI results way more personal and accurate",
+      "url": "https://www.zdnet.com/article/gemini-personal-intelligence-hands-on/",
+      "used_at": "2026-04-21T09:58:26.444099+00:00"
+    },
+    {
       "title": "Seed1.8 Model Card: Towards Generalized Real-World Agency",
       "url": "https://arxiv.org/abs/2603.20633",
       "used_at": "2026-04-21T04:33:36.605428+00:00"
@@ -1734,271 +1999,6 @@
       "title": "Could artificial intelligence help with your taxes? Experts say you need to be cautious - NBC 6 South Florida",
       "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPU1hWMXlsekFiMWJnS1pXZFgyVzV3dUFkeldqSnBaY3JXN182OWJGZnRINGZuRHdMNm5lZVhsOHFvTHJtRVRjUWJZYzFabzhmZjlaaE1Wd1B1V2d6X3VkcEcxd3FDNWNsbVRFcFUxMHVfMzJxMHVzUnIyUzVVMENYMXNWVkV3VWNjamZ3R0dLMTljaG5CRV9fdFIzLTJFZWp2TXlVNGVweS1ReW9Tb0N5YjNCUWdPTVd6TDZUT01JbVZxOUVqb1AxbUJQVGdIbnFMOW5SR0xIZ19fWXZDZjBwLdIB6AFBVV95cUxQMGlaNmpwNVJ2WXRDZzRGLUg0NEhqbi10V1hVX1gtdGxSdVpFaVhkOFZrS280UDcwZl91dGszam11a1VwanhFSXJpcmdQTThWVmRVZlBwSzNhQXpldlVEd0l0OFQ3ZjIyZEZQVmRBTnhWc05fVk15d0JyX19HUGtFc05rSURsb2JkbzlyaGpUeGFGaVpvN1JpMUZ1VFUtb1I5blY2Z1JnTjVJOWUzYUZVWnZESThtUjA2LWRBLV85ODdvVTlGQWFtWmhPcU1YQ2VsNV9QT2l2QUI0cjd5SDBnRy1qcF9QZmRh",
       "used_at": "2026-04-16T06:06:09.738794+00:00"
-    },
-    {
-      "title": "The Artificial Intelligence (AI) Hype Is Fading, and That's Creating the Best Buying Opportunity of 2026 - The Motley Fool",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPWDRrVmhYSG00UFZRckpHNEFUakx3QmhyOF9yRUdtMEgxSjNiTHFzODN0eWpqMVFyM0dwM2NCMEVhbzh5azBubnJDNnhSTHZDeXZvQWFIcGVpSTFJaXhZZmk0b1Y5SlFmRFhVZXA1WE9ab21qWDQ4Sk82eUp0QWI1WWZ2LW1Vc3hDdHZsYlhqdlMwOUhNVUhz",
-      "used_at": "2026-04-16T06:06:09.738797+00:00"
-    },
-    {
-      "title": "Client Alert: Artificial Intelligence (AI) Is Supposed to Reduce Risk. Why Does It Feel Like the Opposite? - JD Supra",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPUVd1TDV3ODJTWF9yTmk4SkVaXzZoQVowV3J4Tm1kT1BRQW9mSGZGcFE4d2xSMEJWV0xpSzEyMTFSWjRfdnBhWlc4Ti05U0ZUdTdKX0Y1MGE4UGlfUGlheUxYdmthcExEQnFkVERDdG1aV3lkemdRdFhpTk52WWZXRkQ1M1V0bFZLYmc",
-      "used_at": "2026-04-16T06:06:09.738799+00:00"
-    },
-    {
-      "title": "Avec l’IA, « Mark Zuckerberg réfléchit à donner naissance à une nouvelle créature : un PDG augmenté, un PDG jamais fatigué »",
-      "url": "https://www.lemonde.fr/economie/article/2026/04/14/avec-l-ia-mark-zuckerberg-reflechit-a-donner-naissance-a-une-nouvelle-creature-un-pdg-augmente-un-pdg-jamais-fatigue_6679902_3234.html",
-      "used_at": "2026-04-16T06:06:09.738801+00:00"
-    },
-    {
-      "title": "Many filmmakers fear the existential threat of artificial intelligence, but in India the race is on to produce the first hit Bollywood feature generated by the technology - IslanderNews.com",
-      "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxOSDRhRTZkQUV5cGtlT2ZJNV83YzZ5elF3T2NOZklBSWJzalNnQkFKaE9aZjRlNzFIRlBVRHFaWHF5THlETTZxVno1QkVMTW1mN3U3WFJyRkRwVGwxWlRscU12US00Y05xSE0xOWVTWnJRWjlJeDJWMGh6eXpCcUdZeGdjcVdkWXpvVV9hTUQxai16MFRhc3BXT0ZWTHNUQklzSkJnUXFZV1lSa3VlZkVRazBYOWZKOTNQQXVSUkxPSENjRFRWVC1raThMcklNMy1aQUhpbkdTZFpsU1pQYjRSMXIxdDJIYzQ3RDFVZzFBTFlEX0htRFdzVFdQR0JoT2ktZ1JaajZQWW5IZm9BaHdzVFJHclY",
-      "used_at": "2026-04-16T06:06:09.738803+00:00"
-    },
-    {
-      "title": "XMax Inc. Reports 73% Revenue Growth and Strategic Expansion into Artificial Intelligence for Fiscal Year 2025 - Quiver Quantitative",
-      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPbU55LUlkejloM1ZjZDBKMjRjcGd3UmlGYkJoNUszQVR4ZlhGYW1PSlRJSEFSWllCbEJQTHdfdHhwaUxXbGljZGJVQWVxWW1TNzV4SDhXcDJFSEdHZ091ZmdBN1dxeXllc2lOVUlfUnpMVkJUMkRyOHZTTG0xNDJyTVBZYzgzYkpEM21Cajd2NzJEd0h2eTNKUnpkNjhsaVJ6VGFlZVY0Ti1zYXZ0eUw4RVF1ZGVVYklvTDRMRktIUlZOTTFCQm9QRXZ6R21idDZ0SzNGREdKYTBrMFJJdnc",
-      "used_at": "2026-04-16T06:06:09.738808+00:00"
-    },
-    {
-      "title": "STT GDC and SuperX open AI Innovation Centre to support enterprise AI deployment - Tech Edition",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOVkUwYndReEozYTFSTG1qMFZ3SUdPdUp5VGJSSE5iTFBFSll3Snl6Y3dDQ2hYb0VYWTZaWlM0TUY5TFY1NkNwWFJEbUh0U0VCNlNRMkpZVnhaMUw1SzNMVy1VQ1pOcEJTcjVNaVN6OGNITUFmOTdBZURzTHlTdXo2Y0p5SmdzSEZZLU91OEZPakdvbnVGcHFPMXFWdHVrbEdtUV9qTXVLbw",
-      "used_at": "2026-04-16T06:06:09.738810+00:00"
-    },
-    {
-      "title": "Sparks Police launch artificial intelligence system to assist with non-emergency calls - KTVN",
-      "url": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxPSTkzRXVTTXhZNkRWaXY1a2FrRkZRUnRsLUJtbmRRdGNPZERSN25SZExGbk1WcUxER3BuM19RRktRZDJ6NHJ2cU9jYVZFVmtPaExIZkpPYnpaWHY0VUtmak5RbklMOGxxTng4T0ZJalhvVWlPSVJKX09KNzNWWWt3bTNhUGRRMTNSRmo4cEZibGFoR2tGRnZZRXhQeDF3Z2xXSEFoRkZVX1BqSmVhT3ZIcFc2cEVtYW1mLTlhbVFraXdhQ1FKbXBYZmRneWpqdXpjRTJXQmZTWDM5VVZQVTVaVTJ0TXlkdkd3c01YT2Q5bE8zTW40aVVSOWpDTmFDdw",
-      "used_at": "2026-04-16T06:06:09.738812+00:00"
-    },
-    {
-      "title": "MuleSoft Agent Fabric adds new ways to keep AI agents in line - InfoWorld",
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNSG5hY1BiTTh6Y1BfMFZWemU5X0VPcFdtM016Rkl3RlJDR2JKMTBEVkNTMjU2TWlFTGxSTzBpVllPVWFOeHV0OHlwZkJfTllIb2U2aGN1M3hrQzFJWmRZOVZYNTFwZmFqcnozTHNTQTZ3Q3VqRFU4bVhqM3E0OHk5Vm4zV1J0UXZ6Ri1sM2k3aDRLd2M1MVNOTXgwanVFQ01aWEhJdFNFeUFIS25O",
-      "used_at": "2026-04-16T06:06:09.738814+00:00"
-    },
-    {
-      "title": "STRADVISION Enables Scalable ADAS Deployment in India's Commercial Vehicle Market with Efficient AI Perception - The Manila Times",
-      "url": "https://news.google.com/rss/articles/CBMijgJBVV95cUxNMF90YkNEWkFsSzM3cE9DcE9rd25WTmRzSUdqTjZJYTM4S1ZxMW00Rml0cUlBSklvTVdTTlU3UnFJZjJ4dTdCdDNfVEJzU3kxbVZ1SXFyN3hQN0NIblZBd0MweEVMQmVWS19zV0ZacnVfSnpxVUdUaUlsZmRHVUM3TGVjd0dSRUctWEwyV3UweXJQOFJCaVpFWHdUck1aWUJuQ1h6UUJCNTFxbWlUN3VaeWhKZ2t3YTZ5NzlNYlcxZVZlaGxFVi1oUndVYjN3NHplcE9Cdm9iN2ZOT3FMOENTTVkwdlcxeS1PRWx0MjVFcjlTRnlUSC1WR3o1TGhMM1pWNWdlZTZPVkQ1ZDJTVlHSAZMCQVVfeXFMTVFqTkUyaHBLTzUxT29lZGcyTUo0a08weW1kZHFmVVZ1MXVWQl80U0I0Zl9TVEZyazhxTEpXRUhjaGxMWFFyclNVY2dPXy1XcUhsV0tQMjd0Skl3SzZFZVJucWs3TU1pdXFicmRLczk4Z3RvcTNEN0dIOGhselRlQmhtMDMyM0RlSjNOTXRqU2dNR3czaGttZkdWaXAtbExkWURkNG5lY0JzOTl2aHNwdXVjNklaeWxha0l2ZkJWcWRnX0VEX0NHbmxiQ1FOZWJOZUgxRDNRd1B3RTZnMWVVaVgzTGI2azMtSTVYUGFQSHlXbG13NUFITzRBZ1lPOTgyc0MyTXFHRFdVRnVHSWMyOEV6VDA",
-      "used_at": "2026-04-16T06:06:09.738818+00:00"
-    },
-    {
-      "title": "OpenAI pulls out of a second Stargate data center deal - Network World",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPQm5XVTVrVkhEYmx1V0laWF9NSG1XZDlDN1hfNjRXdkpuVzN0bUQ1MFEzTG1uV1FnTmx6LWxkNTd3S3ZLNEtfQjJsQ19tVWpEdHJLM0dTVElmMUFjbDMxU09pdWNRMmpWZURrQW5hSmxMRUQtQUhuUFAzNjJrcF9zdW16aHlibTl5T3JfMEdobklVQk1nNEc2MjAyVFpIRUJwX3JtMTlmWQ",
-      "used_at": "2026-04-16T06:06:09.738821+00:00"
-    },
-    {
-      "title": "Anthropic Eyes $800B Valuation Amid Funding Talks - StartupHub.ai",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNa2hfbC1UTmxfMHZtMDBvMWgtMERRQUt0ejg4MEhLeGllN1U5MG5qOGVqY0N0dEx6OUVTal9XbVVxWjhhTzB3blNvOFpZQWN2aTNmaktGQi1Mekh5ZjlOX0NkaUozemxsWWl4TjVSbjhHSzAzMWFzSGtKQ0NtZW01TjU2OTMyWlR2bjJRYUNzZzRMbHlVMjJjN0JheF9zNVNJMHc",
-      "used_at": "2026-04-16T06:06:09.738823+00:00"
-    },
-    {
-      "title": "Meta Artificial Intelligence: Menlo Park company building A.I. version of CEO Mark Zuckerberg, report says - ABC7 San Francisco",
-      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOT0R2akhzSVRUSEgxUnQ1N05ua2h6Z2UwMUIySmQtTVJmRFVabm1XekFQQmQ4OU1zUC1IOWRqaVM3dlluTE5PTTZiTlpXVVJOZkFfbkIxZWY5TmtYY2ZNalJSSkp5a0l6STgtWUdqLXhQZUgyYmt0N2R4ek5uR3czRjdzX05KMWFKSjZxRl95dURydU55eWM2NFF5Q0E5VnRKWHdTNmp2UFhEUlZsYkNYeWI2UGtYQ3g2REU5VUNDRTNnRmkwSFZGU1d2aE1qQ2tG0gHWAUFVX3lxTE9FMjl3cnFpYjZKYnM4Z3hPb0dSMTlzR0p0NndUNXVldEEyWVlrNmd6MmpTUTJDRC0xR1NYMzBtdlhjX0Q4R3lvTm5FdDhVbks1a1QyZklYRWVUN3VzSDFoUVBpZm1Od3pvNnpoSE5CMV9wdDZDRlBOVmFrMVpBeUZsZTlOQWVHUlpDYWlwT2lYcnFJYTl0b3ZtcEt1TzFEbDVSVjhhdVJkSVctZ0lTd1I4aElIM3BWdmNaU1EwMVVzdXR2M2xXY1hzTE4wUDY4OVhPRkFSd2c",
-      "used_at": "2026-04-16T06:06:09.738825+00:00"
-    },
-    {
-      "title": "Allbirds Stock Soars After Abrupt Pivot to Artificial Intelligence - finchannel",
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNNFR5cEdJY0x6NlpscTVnOGItZ2NyOVJ6TVNBN1BwM3F6ZU5ZYmRZQ1FtRWVnLTBkVlNzWUlfZnZ0eEg3RDlSVDFCZ0VDbkJkbmMwWDN6OGZHSHUwVXhwbzF0NkZUeHpjVEh6d2ZVcTZyNWVITDN1ZUJsVGdVQzBINmRxQ3BqVjRpa2JQX2xHSjRfTlhlcTBsOG00N3ktTFZHUHl3bVc2d1FxT2dZRDRpckxEZw",
-      "used_at": "2026-04-16T06:06:09.738828+00:00"
-    },
-    {
-      "title": "California Ethics Panel Turns Up the Heat on Artificial Intelligence - JD Supra",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQaGE1Zm9jYTNWS3dtMlM2OGpQSEhDNHkyU2RSVUtRMEx3a3VOUVN6R201QjJRZ3JNLVRUMW56cjBRcW5kODJuMWNHekd6MHhXb0dlVFBQMkFtQW03MkxOVy1wQUQybFd3dGNYRTFsT2hoS25uU1dZbFh4dDlsbEstR0ZzeUZHQQ",
-      "used_at": "2026-04-16T06:06:09.738830+00:00"
-    },
-    {
-      "title": "Technology class tackles artificial intelligence - Lehigh Valley Press",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOeDBDM0ljM3QtU1NqNmxRSWRlRW9RaHJBOS1lMXFQeTRYcGNHcnZqYkcyMmtQaE1NcndITmNrdGlubXhBMnpob1h4OWlUUG91NlBKTXYtcEY3T2VVRlhLVE1Uc3JrSjRHLTMxc1Rpa29MQi1QY21VUl9zOGdvZU5xTndZa1JqcmJUMlE",
-      "used_at": "2026-04-16T06:06:09.738832+00:00"
-    },
-    {
-      "title": "Exclusive: Can AI judge journalism? A Thiel-backed startup says yes, even if it risks chilling whistleblowers - TechCrunch",
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPb0NPM2pMRzZOTm5GSnpRWVh0UTBwMFJqd05oQzQ4ZnJmUk9YZVAwNnZHYkthQjhQb2JsNWtURGZIMjV3YTViV3h1SHJWWHhydl9TdVdrdWhEcm5INndTeG8xZHdJVktueFNiNFlLRzlWak9VZ0VWR1RWQ09XdWUxa3VKV3ZSZmstU1l2TGFUVmVfQnlQeGRHVlZXXzAycVkzLVFFVUJQZEhrNldrUExsNllxa2ZRQ3FjRS1VZFdMbmZYNnpzTnVsZURPOA",
-      "used_at": "2026-04-16T06:06:09.738834+00:00"
-    },
-    {
-      "title": "Meta's Massive Artificial Intelligence Investments May Be About to Pay Off for Investors - The Motley Fool",
-      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPNm1CcHdhcDZJZEhNTlBaZlhMM2RMQ3d0WmY5ZHRia2FaVGtvZzFrVE5sQ252eTd3V0tJRE83M053cFl6aXllY0c2N2RYeklfc1pUNFlYTXVBOGZMZnN2TWtZSEwzeTFHQnNqN1pzd2V0dUduWXNteGY5RG5uTXJsa1A2SEVsNnM2YlF3NFZULW9jQWI2a2Fz",
-      "used_at": "2026-04-16T06:06:09.738837+00:00"
-    },
-    {
-      "title": "Promising Artificial Intelligence Stocks Worth Watching - April 15th - MarketBeat",
-      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQX1R1WWFHMXlub0hCV1dMQUF5QnJHRldBVmprcVRkeVVBNHdlLUVFZEVtOHRNSUR6Tll1dmJaY0FOMnlwMzBsNklMMVpXZ1Rxdm1wTjlhT1J5UEhudGkzdlBidW1VRF9MVWhGaG1xbFlJZmswaEthN0dsWTdYam5McjNubXVMTjVVaG40M3I5Um9XMWN1VHhFdWdUMHROVzZvRWlqbjlwMmx1d0xncFRyUlpJenFXMmxVcllaeQ",
-      "used_at": "2026-04-16T06:06:09.738839+00:00"
-    },
-    {
-      "title": "How Artificial Intelligence Is Changing Agriculture - Lancaster Farming",
-      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNTW1CTWNiMHZKNm8xODFmbHplTzVXTlJLRGZQTUs0ZTRqVFpZWjF1OERlbFpqTTF2N2ZkQlduV2VfLXlaLUJLYXd0eHVvdVB6cEM1RE1Bc09QWl8wR1FkTXpZWFlWck1ZUDZwTkJsSDBlVUhFWjNVOVBTbFB2QWVObXFzQnZmLUVKczBkSFFqNHFMTjB5ODlZN1RPb2lzUE5oU3BvS0NDU0xFSVhiejlualg3NjhCa2ZRU3lnQTBFUFpGU2x4TXhUNmR2ck1DX0tORW5kYzZlTXIxSGtlZTA0ZXdZZWJ5WVU",
-      "used_at": "2026-04-16T06:06:09.738841+00:00"
-    },
-    {
-      "title": "Meta's Massive Artificial Intelligence Investments May Be About to Pay Off for Investors - AOL.com",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQZTBBQ0djaGdqZVFnelp1eEhpR0QtYjVUSWhjUVJPVFVmLVJhOXRXSkFqVmJoOU45YWNxd2lON2ItRFNJdUwyMUpZQXBOa0dRREFWMHVlYnJxNUtQS1R6cjNzSF9HRUlyem9PUkE0ejA2b25aMDc0ZEQxeGRLM1RqVGt5NTZlNHoyeXdqNXJMaDRhbGFGTEpiUA",
-      "used_at": "2026-04-16T06:06:09.738843+00:00"
-    },
-    {
-      "title": "How artificial intelligence can impact youth development - WOODTV.com",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNUmtfR1dxbVRfTHZYazRRbEZWa2lWU1FaM2FFd054R1JCcDktUmd1RTZla0g4aHRGNnlvdjYybXBZU2hGampLbDFOWGxuQXZqei1obVYydEszM3QwSElCTnlFeENHTXo2S3Baak92S2c1aHVNRWU1SXJ3Z0M2bWJuR3ZwMXNTWWJFTkQ0S0hsVS1rMUNfWXBYWkFCNEJwd1VhQjh0ekpqMjRwQUJxZS1PR1dtZ0xGc3FrUDFB0gHAAUFVX3lxTFBTRGNIREhscTdzbXZDcmRZNmVhV2NiZjZqcGFNNDNZZFIyb2xCeDNKbWJocVJCdU9UM2t0MUQ4T05zVkR4NjE2RXVTQUFUUmNQdTd6OW1tdW9MYUU1ME5FZDlaLV9XREdjMGdyRGVMNEU1TXpaNUtZemRGWEp4RHVqTmtHbnk3YzJDRF9Id1FkeGhRWkhzTjFrVmJzVW9GMERHSzM3YXlTYWpybExBc0RZY0g5UGlQbU9URi1YS0pUZg",
-      "used_at": "2026-04-16T06:06:09.738846+00:00"
-    },
-    {
-      "title": "The evolving role of artificial intelligence in cytology - DVM360",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPeUZPdFRMMFAyZ255dHZHSGJpZUQ0TkpRYnhDandJb2NRd1ZaRjEwMUpVS3pUR0ZiUEhlSUVScV9PY1VRVGhUamdLdkV0UlJKWWFiWUp4d0VESVV1ZHk4REMwYkFsZ0dzUkVfR0JvMnRxRzcxbFNrUjhKRlVPR0F2eDM2RW5ETUlYMVZXSw",
-      "used_at": "2026-04-16T06:06:09.738848+00:00"
-    },
-    {
-      "title": "Idaho State University to offer artificial intelligence degree - East Idaho News",
-      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPc21hVGtqU1VVRnQ5cnFFcWN5SzNVWkR3VlFDZGpvdHM0eWl2VDdLNm9kbU1LaDZQRnFHaWs3MGh0enBQY3ZiQkV3cDNqWjBVeHhzb0lnWVRaRGJPYmtlTUtRbmJxNXdHYm9JTHZRaFVfcG5sX285WTFpb3hxaS1pN1k4QmhOSXNrNmRKZXI3a081UWF0OGJCZUwzMng4c2VsYWFr",
-      "used_at": "2026-04-16T06:06:09.738850+00:00"
-    },
-    {
-      "title": "Can Europe create artificial intelligence that we actually understand? - EurekAlert!",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1IT0FycWlWRGtRckJONWhhbjBGTUZfQjhISEJVdlBzWHJWcE14alBEZlhFcXRPZGoyUnY2VGVOcDhVR2x1ZFExeHBla201N2JYVVo3UHdQVTEySmxz",
-      "used_at": "2026-04-16T06:06:09.738852+00:00"
-    },
-    {
-      "title": "Ellucian Wins 2026 Pinnacle Award for Artificial Intelligence - PR Newswire",
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQeks4NDNpR2JQYzFXd05wYlNIUmwwbmtnbnZjdjV5TUZOLU1Xb0V6Tjg5TG1kYmxOSGFHWFhMS3dtc1ZRNE5RbFd5TTdab1BhbzlZdVVRSVFtNFM5YTNRcWx1dXVJUmwxZUw3d0dwbmJPNWdCYUk5MVdSSGZ4bWg0WnBOZ2UwcDNWc2tBM29xRmh0aFFZM0lZbHdCU0V4ZE80SldUT0hnMWs1eDBLb3BGZ2RPUXhuZFAx",
-      "used_at": "2026-04-16T06:06:09.738854+00:00"
-    },
-    {
-      "title": "Artificial Intelligence Brings New Perspective to NJIT Institutional Data Sources - NJIT News",
-      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQeW8xeXRhNzBzTktsbnFmVXFUUlozelVzVDZqWkl0LUlob3JBY0xXeUp1Sl94aHUtUV90RUhMc0RGWjQxQ29YbmJHTV9nOFRsUXFiQTZlWUdjcFhsNGk4dXk5U0NfSmhjcXctaHIzRjF1ZkpYX1VwU29jNjRqeEZZU1lRMncyMTRxbDVEejNVUTgtRUd3TGlVVGI0MW0xeVlQR2c",
-      "used_at": "2026-04-16T06:06:09.738856+00:00"
-    },
-    {
-      "title": "Artificial intelligence is real estate’s future - Anna Maria Island Sun",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE9laXM2SjBQRkNELVg0T3VEWTZwQkVLeE9sWERPLURBaGxtakNXckxQZzVEcDhGcEl6MEt6VnNuQWZBVFB6ek9BY2ZkTVF1eFZwS0RZTjJPRkkxR24zY3JhSV9hV3N1bk1TR0g3VWxyZTJhZFVO",
-      "used_at": "2026-04-16T06:06:09.738859+00:00"
-    },
-    {
-      "title": "Artificial Intelligence and All That Jazz: Preparing Students for the Future of Work - Faculty Focus",
-      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPSkVNM0NMa1YzZkVfVmFESlpaTjdocUZaRzl3YzZkZ0pHVXd5U1l2cTZSaGxER1FHMGNvSEF4WUpubEJsTHpSWUE2eFUtMjhCMUtxYWtfVTRKX2cyYkVyMld1TU4weC1fdkswT21PRFdXVGtWbVV5NzAwbExpZk4tdUZaMm9fS3VqLXVvVlBhVVJDbVMtUnB4U3dhdlY4TXhvM1JsT2xkaWUwSlNsbkU1RC0tc2xxUW9Nc01zenRGR2pzV3BrZlNkbW13Z2pNQ1U2YVpjVHZZeEtmSlU5",
-      "used_at": "2026-04-16T06:06:09.738861+00:00"
-    },
-    {
-      "title": "Xtrackers Artificial Intelligence and Big Data ETF: Is This ETF Late to the Party? - The Motley Fool",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPNXRIZmxSR3Vqb2NKdkR4aXR1QXZCNDkwYVVJX0N2WmctalgwN000V3Q5RDhLanlkMkNRTjhDSWFiUTROVGJvc0hyRG9qdVQzNTBmdEpRTDF1MjY3VnRBWkNiUVlqRm1tR0pPLTNUVmUyOTFwRU9JVnl1cDVZZ0tvZlRDdF9WSWZCTDRaY0l6WmxDc1htdjcweQ",
-      "used_at": "2026-04-16T06:06:09.738863+00:00"
-    },
-    {
-      "title": "Artificial intelligence unlocks new potential for biochar in carbon capture and climate solutions - EurekAlert!",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5ZckwzeUo1blBLZ1dXNlBkMWhxMVZSSzBZSmhvRVdPSk9YdXp1c04wZkpFdmNxQWtNY1NIR2hwVWl6YU8wT2NPaGcwa280TkVuOUZfSWVLN1ozd21q",
-      "used_at": "2026-04-16T06:06:09.738866+00:00"
-    },
-    {
-      "title": "Scammers are conning congregations using artificial intelligence - FOX13 Memphis",
-      "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOVFNUeWphRi1mckxqTWNSWFNIVkFySG51QXlEd1lJcV9ySmlTNlhtcjVlX2dYcUs4MGN4bG5qdlFLTTh0Y0IwdG1yTnQ5MXBjVmZmengyb0kwakN2TWF1Sy1aS1pSUXBhc1NaZG53Zm9xRjhiTHlLT3h2b3ZGUXJtb3ZmcV91bG8xYkVNSG80M2lmNWs5bnF1ckNUVGZsMFRJZ1BNLWVtcEpReVhNdkxSeVZBQUNFaDhHd2E4ZlJVNGZrRHN6aEl2T2d6WTlqcW5Pam1rMjV3UURVbzZyYnhsb25R",
-      "used_at": "2026-04-16T06:06:09.738868+00:00"
-    },
-    {
-      "title": "The AlleyWatch Startup Daily Funding Report: 4/14/2026 - AlleyWatch",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPa3pFd3RlOVp5UjZFRGI3ekN4bWJmSTdTVFRJUFVtNXg1SHVuUWdQcVE1ZUhRSTRZcC0xSUI2aERQV3hpWWNYclRKcFh0THFoZ0dKWHFnLXpCTWp6V0ZlelVIWDNHRm1nMmpEbHhnSWVTcHp6aS1UclRpcllFak9CallQeGZMT01hOGdRdDd3",
-      "used_at": "2026-04-16T06:06:09.738870+00:00"
-    },
-    {
-      "title": "Artificial Intelligence in Low-Dose Computed Tomography Lung Cancer Screening: Clinical Integration, Validation, and Translational Challenges - Cureus",
-      "url": "https://news.google.com/rss/articles/CBMiiAJBVV95cUxOT3hkUzNfZktnc1drSXl3ak45emVHeERQdFJYLXZpcGEtVkxsdzRzdGcyRC1xTnNrcE80U3lmcTEyS3NScTRzUlI2VVZvUXo5TkVtSXhQSlFGUVJNbWhvQW1vaFNlcUN4ZlQ4TEJFMXFnbU9jMy1pOTlXMkk2cUw0T1BiaFlXamNiUUl6ZVFsOThhS19XSnFZclBKTnpfaXlrcEdrVXY0LXBvVmtvWnR5V1hrZkd1eXdYOGEwNjdXUld1LXFrX3VaX2M0YlhPejYydXEwRGxhNVBvV1MyQlNpSnUycnVPTXlDbVFsams3MzBRRXVrVHo4VExXTUYtamtPVTRsdE5WWVQ",
-      "used_at": "2026-04-16T06:06:09.738873+00:00"
-    },
-    {
-      "title": "Artificial intelligence is changing medical writing today - KevinMD.com",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNTGdlNTlTUnAzMjBGS3J0S2ltdWdUc09qNlBSbFJCNkZ0QkVQUUd4bXlQa0FFRkViNjdrOEVuTzBKdEhWZ2dUZnBPZGxOVVM2dGxXRGlNY014MWtuVE9oWE91bGNBT21wQVRxajYwODlUOEpKQ3VFMHRBVFZGQVB3U3c0Q0x1TmFXMkNNZTlsWHl3eElD",
-      "used_at": "2026-04-16T06:06:09.738875+00:00"
-    },
-    {
-      "title": "Ann Arbor quantum AI startup closes $139M funding round - Crain's Detroit",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNeFp5WFVZVUVkNmxJWkRROUpfWGt4N283OGVJZHRrVUdrZWQ2RVM1dVRCX05HdkZZdk0xZUdaeGFjZFNNX1BkTXZCcW5ad3pjdjF1TXFsS3I5ZTBYaW1FRDVzajhadzlfdUg3MTVWckZ2WGc1cEY2cVdlcXUtdGZGZWRJQmhGb1gwemNDY3hYVVVOUQ",
-      "used_at": "2026-04-16T06:06:09.738877+00:00"
-    },
-    {
-      "title": "Quantum and AI drive UK startup funding to $7.8bn in 2026 - City AM",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOREg4VkZiN0ZrUXlDMHZlbHpFV01FSko2Rk91ZXRfTUFBQjJZbDZ6T0MtRjNUVVlwR1JfREVOWE5ZRnBhN2kzUGdMb1E0aFJFUzBBR0szcVJJdU0xNndyWU1mbTVmWTFWME43SHZCT2hJMm9KajQwVVJWWk42ZUZNUXA5V0lzcVk",
-      "used_at": "2026-04-16T06:06:09.738879+00:00"
-    },
-    {
-      "title": "Can artificial intelligence match medical interview assessments by clinicians? - EurekAlert!",
-      "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5mR1JtaEo3NThYTUIwazZLVnBISWF6QWFYY2VqbURQcm1MVkxpckVMZm5ld2FXNWFvdE9JTEdtNE1uV2ZuTUVXSl80QTIzbnZ4MlJYRHNPRFlxUlVX",
-      "used_at": "2026-04-16T05:57:55.867061+00:00"
-    },
-    {
-      "title": "2026 AGILE To Address Artificial Intelligence and Growing Complexity Facing Care at Home Leaders - PR Newswire",
-      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOU3RiM2hCblh3am14ZzUyQXpLUk9SVl9FVFdHdXRWSUtiYkxhMVhSTWV6MTdXY1lyQUtKdWgwMHdLYW5LX21XcFF3MEZmUTNSUURET1lCOVpNaUEydlVnZ2FjclcxZWowZV9pandDZ1F0Vm9GanhUaDUzZU15eHd6SWRuU3k5SnZ6a0R3RWZpeHhnZ3k1VWtKT2NnSXRDalVvdUpUY093QW50Q1lLeXExMGh2cDlrT1VZdXI2djZXaFhGM1BLbk16ZWJqdnc4MUtXNmJUbmN6MGxqcUQwc0VUaDZ2X1d6Rlk",
-      "used_at": "2026-04-16T06:06:09.738881+00:00"
-    },
-    {
-      "title": "This hotel AI startup wasn’t trying to raise. It still closed a €2.8M round led Playfair - Tech Funding News",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5HSEVkUWlLTml0aEpRMDFvUmRsaW1hNkhudDg0cHhBLXVZTVpMTVNUTDBIV05HbEJzOFdJSlNZU3ZJTWZBdzVvc3BBUXBOYVQzRmNDMS1yTE5qNWtzX1Mza1M5RFhFWEZ3OXY2TExZcEM1OW16",
-      "used_at": "2026-04-16T06:06:09.738884+00:00"
-    },
-    {
-      "title": "Student starts petition against school district's plan to use AI at graduation - Atlanta News First",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOQ2V6TW5iZVh3UUtXZFhYaVg2TWp1R3F3MHJVUzhtSHBhcGVMdktqanM1MzdaOEc4a01NVTdpeWZUOElvcjNwY3h0N3R1Ym1ES0laeUs0UlI0TS1NVDNVeHVXYlVYWXlKVllkTEpTWVpyamlseWs3UGthU3BtZXhYdTc1QjlybGZWMllMbFFudTQwSWVVQTRhTGZmUGRid25HVUdvSllweDJUQVlxTGpielhLeFliX1pvazlzSUpvSQ",
-      "used_at": "2026-04-16T06:06:09.738886+00:00"
-    },
-    {
-      "title": "2026 Changzhou Artificial Intelligence Terminal Trendy Products Conference Unveils Latest Innovations - Fidelity",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNczR6QXlKeHViZ3g2SDRFNlM2TzlESjFrbS1rTW9hZzBnUXI3MzFkTmxSbmdQYl85YTNHY1duUDlzNzhaWVN3eC1YQUlPNVpzNldVcC1xdmFtTnJ1RDNJV2padlZ0TlphbkY3Rnlfd2tCMkt6WkhSbV9RY3E1NjJ5WW1RdWRybVBIZUE",
-      "used_at": "2026-04-16T06:06:09.738888+00:00"
-    },
-    {
-      "title": "2026 Changzhou Artificial Intelligence Terminal Trendy Products Conference Unveils Latest Innovations - PR Newswire",
-      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPeGVDTFU4dmx0S2g2OXBtckZEOUNEMUtqNjhpM2V3UkUyd2JndjJna1BlWjFoMjJFMV8yaFMzVGk0S3FHWWVPcXBiWnVuQXFIM1p1RUpqelc0eHl1LUpQelhmbEptVzlQVTd1clZVOXhSN1FzY0NEMUUyaDVGTlZSbmZycWlMUUl2Y1I4LTNlT3QtcnJ4ZzlYaDQ2NHBxWlZUNEJMQVZieXRSbEtSNjRyejNEWmM3UGtnT29FYzZvWjVFdUxzaGtwcjN5ZVpRX3E5dTc5dVNQeElCZFJ6dGR4TG95RXBMcEJCWDdqZnl3",
-      "used_at": "2026-04-16T06:06:09.738890+00:00"
-    },
-    {
-      "title": "Artificial Intelligence is not Information Technology - The Statesman",
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPclBSeWRUMWpodlVOb2tmT25BM2x4aVlLSmVsaTRRQWJOeVNxVjNFQ0ItTXlLVUpEckx3RnZsSDVDZXFfUl8zRTBtOW4tN044emp1WHNmRmUxU1RNZ1VUSmczdGtkZEg4Y1pQZHNRNEQ5TzVJTTJwazN6QmNJOHhtYVQ5RnBBeGNQTm5SNDhRZ1B0UGhpeDFzRGJpbHU5cHdqdVRLaGV6dEl6Z9IBrwFBVV95cUxOa3VHOXRjdEFvZ0tXRjhkSjlmdXdNYV9PUHZCTjhWcW9WTE1QMFl0aE1rUW5OWDV0QmF1b1I1Vk1GQTdjVHhNTFlqamIxOUNRWDNkb2FQQk51a3VrWm95dEFESUtpejl4aEVCN01Yd1NGek5fRWF1cVNmTDFHSTFUT1pncnd6c2ZqelVlQmNiV3ZqRWxad0p2WG9iSHpyWHpXelhCeGoxT252ZTdfMmJJ",
-      "used_at": "2026-04-16T06:06:09.738893+00:00"
-    },
-    {
-      "title": "Anthropic's $800B Valuation & Potential IPO | AI Startup Funding - News and Statistics - IndexBox",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOX2pjci1iQktyMWFSX0xDTEZtRW9hWXBWY3NOY2JsdDJLSkw5Z2JGTHFoRDByRVRhX01PdV96T1RvVlpNV1d1Z21tU0FpaWk5WUh1T2QzRzRqTmd1Sm9ZMDcyaFpKS09oRi1aUTExN0dielIyZ2ticEVHdW1FM3lpWUZza3JuUkI2c3RSMHZscE56czQ",
-      "used_at": "2026-04-16T06:06:09.738895+00:00"
-    },
-    {
-      "title": "‘Pragmata’, an artificial intelligence revolt on the moon - MVNU",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOeVdPVWxGZDg3MXJMd1NJSVNXbzFyQm5ORkE0WlVIcGJHS1diYTlDdWF5QlYtZkZsNmRtWXo1bmhxOVQ4dFpVSVNSNVQ2VW9jSHJmYnB0OUtnMS1NNUs1VXM3WHFBS0xBamZSbVhqeHFVNGZsRGdvbE12Zmh2aTl2cVQ0a19RbHJjSG80Y09kYmYxOE1FZ0UwRHdhelByZw",
-      "used_at": "2026-04-16T06:06:09.738898+00:00"
-    },
-    {
-      "title": "The AlleyWatch Startup Daily Funding Report: 4/15/2026 - AlleyWatch",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxObnBRVWdxT1pPaW9IamtJdXpPTUIwOHc0ODBpOGJ0R2NqN0FWWERtTmcyVkRINnk0MlJnNDNCTUN5ekluSHA1cnJqcmEwbWZFTzEzaFdhMHA1aGlwNThIeTNZQ2tZa0U1cEdjclhKT0pOSW9CODdJcThCWGtIazVWS1lxY3hLdU1fdkZ5aGVR",
-      "used_at": "2026-04-16T06:06:09.738900+00:00"
-    },
-    {
-      "title": "Show HN: Get Hired with AI, a free book I wrote on using LLMs for a job search",
-      "url": "https://careervector.com/read/get-hired-with-ai.html",
-      "used_at": "2026-04-16T05:57:55.867078+00:00"
-    },
-    {
-      "title": "Paperclip CEO on Building Zero-Human Companies - StartupHub.ai",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNTnp0Q0hReFNlR0NYZHZPc3BHRHhIQWpUeVd3VHZmeERMWlo0NVItckpROEZNX1N5bXhhNWk3dC1sc3VQWmNBMHRaZmlCaTFaYnBuTV9SZEpJWk9kZ01zTHhkU3JQcGVnWWNCWTRGU2pLR1B6V2lFNHFtZVd6M0dFcGFEa1NvY3JlRmgtNVg5RXNxa3Q0OG9CZkJaY2hyQmNrcl91M0t5TGZ3Z1VaVFE",
-      "used_at": "2026-04-16T06:06:09.738902+00:00"
-    },
-    {
-      "title": "Snapchat CEO lays off 1,000, citing ‘rapid advancements’ in AI - San Francisco Chronicle",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOelFldDdZU2RrY2dfdDM5OUdJUVVDR0JuZENwZEpDVGZ6NlZUVDlIRUpJa2UzQzVkNUItaXRBb2xVVDhRbGhINU1HXzlVTTRvZFpjRjF0M1lwTGhnRWJDZC1ra0libE5JSDhKM09TbHpzM3pvZ0lEOTdrcV9vMWRkdGlGNW8",
-      "used_at": "2026-04-16T06:06:09.738904+00:00"
-    },
-    {
-      "title": "China’s Embodied AI Sector Sees Funding Surge as Investors Race Not to Miss Out - Yicai Global",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOM3c5eWlnZzFtU0I5blRfZ3M3RS11Rk52Y3Yxc0ZGRHdsdWR4YnRucl9Lb3F2NGpwTUdKbktSb3pEX1pGaE54Tm14Z0RHTHc5bEM2aWhjM1VzeWlXbDVMNktDY0UtS0RzMmVYOFlDbGx0OEpxQnB4VkdZMVJYSjNsUVVjS3RrelpzMTlkVXNMVnNVcG5WV2t0ZVRGZDVsa094R18zWGhFRFZfU2FURnNjUA",
-      "used_at": "2026-04-16T06:06:09.738906+00:00"
-    },
-    {
-      "title": "AI Drives Europe’s Second Straight Quarter Of Funding Gain As Deal Volume Falls Sharply - Crunchbase News",
-      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPZDlNcFhwaElLWm5EOGNQOXJPMVlFbjNmQllsTUpSZXExdHkwd0tndTdTR3NLQmg1MnZ6VEgtYjVoOW4ycHNPTkphTDRZR0w0S2ZIaVZHVXgzMENYRklBTC0yM1hkRzAwdW51dkZvQWFOYThoRENLQ0t5UkY2M3p4d3p3",
-      "used_at": "2026-04-16T06:06:09.738911+00:00"
-    },
-    {
-      "title": "New Gallup research shows AI carving transition into the healthcare landscape - HealthExec",
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNc2dZX2dWUUtkbUVpMlkzblMwcGt0clhxNGd3VkhCT2tlNktUVGQzLVlhdUNVUVF4Z0Z2NXVvVWlmOXJpb2I1bmwzNmpSOGxuMExTYURWYm5oUVhFY0pSbTNCOE1QLXhHRjh3QTRpd3RYT1pCMlZ2cjNGZU5UNmRGa3ltaUVMY0JGTU45RkVDVERoREY3cnRoSkx4Y0ZJS1lsa3d1WjVzWU5Bam1rVWtNRFlnSWwxSHNoYmJrd2JvVQ",
-      "used_at": "2026-04-16T06:06:09.738913+00:00"
-    },
-    {
-      "title": "The day the perimeter broke: Securing the enterprise in the age of AI - cio.com",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNb25NOEVGMC1QdkxhYkVOOUVrbVlYNXBfV2RTbm9KcHZsazR3ZnZKRXotNlN2SzR0dmJfRFlZSG9BY1prMmdFN0t0bHVLMkpwZTZYZWN6allYc21MeklRcWF4bVVRdDE4dDlGQ1VsTlRwNFBYVFBockQ3UXFzTUNwTG5lUzZHUDVqUlV0Vm1iVHlFd2o5dk93T1JRbjZaOVNqczNuNkExUXE4Y0hzSFE",
-      "used_at": "2026-04-16T06:06:09.738915+00:00"
     }
   ]
 }

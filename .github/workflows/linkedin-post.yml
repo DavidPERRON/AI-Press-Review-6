@@ -1,0 +1,134 @@
+name: Publier sur LinkedIn
+
+on:
+  # Déclenché automatiquement après chaque run de "Approuver et publier"
+  workflow_run:
+    workflows: ["Approuver et publier"]
+    types: [completed]
+
+  # Bouton manuel — pour forcer un post ou rejouer
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Forcer même si épisode > 48h (oui/non)'
+        required: false
+        default: 'non'
+        type: choice
+        options:
+          - non
+          - oui
+
+permissions:
+  contents: read
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # En mode workflow_run : ne tourne que si approve-release a réussi
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Pull latest
+        run: git pull --rebase origin main
+
+      - name: Post épisode sur LinkedIn
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          FORCE_LINKEDIN: ${{ inputs.force || 'non' }}
+        run: |
+          python3 << 'PYEOF'
+          import xml.etree.ElementTree as ET
+          import json, os, sys
+          from datetime import datetime, timezone, timedelta
+          from email.utils import parsedate_to_datetime
+          import urllib.request, urllib.error
+
+          # Version LinkedIn : mois précédent, toujours actif
+          _now = datetime.now(timezone.utc)
+          _y, _m = (_now.year, _now.month - 1) if _now.month > 1 else (_now.year - 1, 12)
+          LINKEDIN_VERSION = f'{_y}{_m:02d}'
+
+          token = os.environ.get('LINKEDIN_ACCESS_TOKEN', '')
+          if not token:
+              print("LINKEDIN_ACCESS_TOKEN manquant — skip")
+              sys.exit(0)
+
+          force = os.environ.get('FORCE_LINKEDIN', 'non').strip().lower() == 'oui'
+
+          tree = ET.parse('docs/social-feed.xml')
+          channel = tree.getroot().find('channel')
+          items = channel.findall('item')
+          if not items:
+              print("Feed vide — skip")
+              sys.exit(0)
+
+          item = items[0]
+          title        = item.findtext('title') or ''
+          description  = item.findtext('description') or title
+          pub_date_str = item.findtext('pubDate') or ''
+
+          # Garde d'âge — ignorée si force=oui
+          if pub_date_str and not force:
+              try:
+                  pub_dt = parsedate_to_datetime(pub_date_str)
+                  age = datetime.now(timezone.utc) - pub_dt
+                  if age > timedelta(hours=48):
+                      print(f"Episode trop ancien ({age}) — skip")
+                      sys.exit(0)
+              except Exception as e:
+                  print(f"Erreur date : {e}")
+
+          req = urllib.request.Request(
+              'https://api.linkedin.com/v2/userinfo',
+              headers={'Authorization': f'Bearer {token}'}
+          )
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  profile = json.loads(resp.read())
+              person_urn = f"urn:li:person:{profile['sub']}"
+          except urllib.error.HTTPError as e:
+              print(f"Erreur profil : {e.code} — {e.read().decode()}")
+              sys.exit(1)
+
+          print(f"Compte : {person_urn}")
+          print(f"Episode : {title}")
+          print(f"LinkedIn-Version : {LINKEDIN_VERSION}")
+
+          post_data = json.dumps({
+              "author": person_urn,
+              "commentary": description[:3000],
+              "visibility": "PUBLIC",
+              "distribution": {
+                  "feedDistribution": "MAIN_FEED",
+                  "targetEntities": [],
+                  "thirdPartyDistributionChannels": []
+              },
+              "lifecycleState": "PUBLISHED",
+              "isReshareDisableForOperator": False
+          }).encode()
+
+          req = urllib.request.Request(
+              'https://api.linkedin.com/rest/posts',
+              data=post_data,
+              headers={
+                  'Authorization': f'Bearer {token}',
+                  'Content-Type': 'application/json',
+                  'LinkedIn-Version': LINKEDIN_VERSION,
+                  'X-Restli-Protocol-Version': '2.0.0'
+              },
+              method='POST'
+          )
+          try:
+              with urllib.request.urlopen(req) as resp:
+                  print(f"Publié sur LinkedIn : HTTP {resp.status}")
+          except urllib.error.HTTPError as e:
+              print(f"Echec : {e.code} — {e.read().decode()}")
+              sys.exit(1)
+          PYEOF

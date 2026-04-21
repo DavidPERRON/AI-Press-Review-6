@@ -434,6 +434,13 @@ scoring:
     "pingwest.com": 0.8
     "yicaiglobal.com": 0.8
     "kr-asia.com": 0.8
+    # India
+    "inc42.com": 0.8
+    "medianama.com": 0.8
+    # Japan / South Korea / SEA
+    "nhk.or.jp": 0.8
+    "koreajoongangdaily.joins.com": 0.7
+    "e27.co": 0.7
     # Press — free, professional (Anglo)
     "techcrunch.com": 1.0
     "venturebeat.com": 1.0

@@ -19,6 +19,12 @@ google_news_rss:
   - "https://news.google.com/rss/search?q=AI+finance+banking+fintech&hl=en&gl=US&ceid=US:en"
   - "https://news.google.com/rss/search?q=AI+model+release+benchmark+2026&hl=en&gl=US&ceid=US:en"
   - "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
+  # Asian-region Google News — broaden daily coverage beyond US/FR
+  - "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
+  - "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+  - "https://news.google.com/rss/search?q=AI+LLM+machine+learning&hl=en&gl=JP&ceid=JP:en"
+  - "https://news.google.com/rss/search?q=AI+DeepSeek+model+China+tech&hl=en&gl=SG&ceid=SG:en"
+  - "https://news.google.com/rss/search?q=AI+semiconductor+chip+Korea+Samsung+SK+Hynix&hl=en&gl=KR&ceid=KR:en"
 
 # ── AI LABS & BIG TECH ─────────────────────────────────────────
 curated_rss:
@@ -125,6 +131,15 @@ curated_rss:
   - "https://en.pingwest.com/feed"
   - "https://kr-asia.com/feed"
   - "https://chinatalk.media/feed"
+  # India — large AI market, strong open-source community
+  - "https://inc42.com/feed/"
+  - "https://www.medianama.com/feed/"
+  # Japan — strategic AI policy + hardware (Sony, Toyota AI labs)
+  - "https://www3.nhk.or.jp/nhkworld/en/news/tags/82/feed.xml"
+  # South Korea — Samsung, SK Hynix, KAIST AI research
+  - "https://koreajoongangdaily.joins.com/section/feed/technology"
+  # Southeast Asia — fast-growing AI adoption (Singapore, Indonesia, Vietnam)
+  - "https://e27.co/feed/"
 
   # ── EXPERT NEWSLETTERS COMPLEMENTARY (libre accès) ────────
   - "https://thegradient.pub/rss/"

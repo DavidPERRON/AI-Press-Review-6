@@ -196,6 +196,11 @@ jobs:
           from email.utils import parsedate_to_datetime
           import urllib.request, urllib.error
 
+          # LinkedIn-Version: always use previous month — guaranteed released & active
+          _now = datetime.now(timezone.utc)
+          _y, _m = (_now.year, _now.month - 1) if _now.month > 1 else (_now.year - 1, 12)
+          LINKEDIN_VERSION = f'{_y}{_m:02d}'
+
           token = os.environ.get('LINKEDIN_ACCESS_TOKEN', '')
           if not token:
               print("LINKEDIN_ACCESS_TOKEN manquant — skip")
@@ -266,7 +271,7 @@ jobs:
               headers={
                   'Authorization': f'Bearer {token}',
                   'Content-Type': 'application/json',
-                  'LinkedIn-Version': '202601',
+                  'LinkedIn-Version': LINKEDIN_VERSION,
                   'X-Restli-Protocol-Version': '2.0.0'
               },
               method='POST'

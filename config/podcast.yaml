@@ -13,10 +13,10 @@ author_email: "david.perron@aequitus.net"
 language: "en"
 category_primary: "Business"
 category_secondary: "Artificial Intelligence"
-tagline: "40 sources. 15 minutes. What matters in AI today."
-short_description: "40 sources. 15 minutes. What matters in AI today."
+tagline: "80+ sources. 15 minutes. What matters in AI today."
+short_description: "80+ sources. 15 minutes. What matters in AI today."
 long_description: >
-  Tuesday through Friday at 7AM CET, AI Press Review distills 40+ global sources
+  Tuesday through Friday at 7AM CET, AI Press Review distills 80+ global sources
   into a focused 15-minute briefing — filtered, weighted, and structured around
   six sections: AI News, Use Cases & Deployments, Tools & Practice,
   Weak Signals, Off the Radar, and Research. Built for professionals who need signal, not noise.
@@ -89,10 +89,10 @@ locales:
     title: "AI Press Review"
     subtitle: "Factual, Clear, Built for Busy Professionals"
     language: "en"
-    tagline: "40 sources. 15 minutes. What matters in AI today."
-    short_description: "40 sources. 15 minutes. What matters in AI today."
+    tagline: "80+ sources. 15 minutes. What matters in AI today."
+    short_description: "80+ sources. 15 minutes. What matters in AI today."
     long_description: >
-      Tuesday through Friday at 7AM CET, AI Press Review distills 40+ global sources
+      Tuesday through Friday at 7AM CET, AI Press Review distills 80+ global sources
       into a focused 15-minute briefing — filtered, weighted, and structured around
       six sections: AI News, Use Cases & Deployments, Tools & Practice,
       Weak Signals, Off the Radar, and Research. Built for professionals who need signal, not noise.
@@ -132,10 +132,10 @@ locales:
     title: "Revue de Presse IA"
     subtitle: "Factuel, clair, pense pour les professionnels presses"
     language: "fr"
-    tagline: "40 sources. 15 minutes. Ce qui compte aujourd'hui en IA."
-    short_description: "40 sources. 15 minutes. Ce qui compte aujourd'hui en IA."
+    tagline: "80+ sources. 15 minutes. Ce qui compte aujourd'hui en IA."
+    short_description: "80+ sources. 15 minutes. Ce qui compte aujourd'hui en IA."
     long_description: >
-      Chaque matin a 7h, la Revue de Presse IA distille plus de 40 sources
+      Chaque matin a 7h, la Revue de Presse IA distille plus de 80 sources
       internationales en un brief de 15 minutes — filtre, pondere, et structure
       autour de six piliers : Actualite IA, Recherche et Percees, Cas d'usage,
       Outils et Pratique, Signaux faibles, et Pedagogie. Pense pour les

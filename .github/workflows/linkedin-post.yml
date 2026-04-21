@@ -110,8 +110,7 @@ jobs:
                   "targetEntities": [],
                   "thirdPartyDistributionChannels": []
               },
-              "lifecycleState": "PUBLISHED",
-              "isReshareDisableForOperator": False
+              "lifecycleState": "PUBLISHED"
           }).encode()
 
           req = urllib.request.Request(

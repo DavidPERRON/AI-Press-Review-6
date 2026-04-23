@@ -19,15 +19,20 @@
     "first_seen": "2026-04-21T05:57:57Z",
     "last_seen": "2026-04-21T05:57:57Z"
   },
+  "BMBE": {
+    "count": 1,
+    "first_seen": "2026-04-23T05:58:26Z",
+    "last_seen": "2026-04-23T05:58:26Z"
+  },
   "CAICT": {
     "count": 1,
     "first_seen": "2026-04-21T04:08:31Z",
     "last_seen": "2026-04-21T04:08:31Z"
   },
   "CNBC": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-04-21T04:08:31Z",
-    "last_seen": "2026-04-21T04:08:31Z"
+    "last_seen": "2026-04-23T05:58:26Z"
   },
   "CRM": {
     "count": 1,
@@ -145,14 +150,19 @@
     "last_seen": "2026-04-22T05:57:27Z"
   },
   "MIT": {
-    "count": 2,
+    "count": 3,
     "first_seen": "2026-04-19T03:38:55Z",
-    "last_seen": "2026-04-23T04:23:17Z"
+    "last_seen": "2026-04-23T05:58:26Z"
   },
   "MTIA": {
     "count": 1,
     "first_seen": "2026-04-21T04:08:31Z",
     "last_seen": "2026-04-21T04:08:31Z"
+  },
+  "NER": {
+    "count": 1,
+    "first_seen": "2026-04-23T05:58:26Z",
+    "last_seen": "2026-04-23T05:58:26Z"
   },
   "NPC": {
     "count": 1,
@@ -180,9 +190,9 @@
     "last_seen": "2026-04-21T05:57:57Z"
   },
   "POLIS": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-04-23T04:23:17Z",
-    "last_seen": "2026-04-23T04:23:17Z"
+    "last_seen": "2026-04-23T05:58:26Z"
   },
   "PRO": {
     "count": 1,

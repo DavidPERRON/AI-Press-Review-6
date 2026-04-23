@@ -1,6 +1,6 @@
 # Source manifest — 2026-04-23
 
-Generated at: 2026-04-23T04:19:30.151347+00:00
+Generated at: 2026-04-23T05:56:30.589337+00:00
 Profile: daily
 Relevant source count: 260
 
@@ -15,10 +15,10 @@ Relevant source count: 260
 ## 2. Alibaba Qwen Team Releases Qwen3.6-27B: A Dense Open-Weight Model Outperforming 397B MoE on Agentic Coding Benchmarks
 - Domain: marktechpost.com
 - URL: https://www.marktechpost.com/2026/04/22/alibaba-qwen-team-releases-qwen3-6-27b-a-dense-open-weight-model-outperforming-397b-moe-on-agentic-coding-benchmarks/
-- Relevance score: 19.0
+- Relevance score: 18.0
 - Published: Wed, 22 Apr 2026 19:40:51 +0000
 - Summary: <p>Alibaba&#8217;s Qwen Team has released Qwen3.6-27B, the first dense open-weight model in the Qwen3.6 family — and arguably the most capable 27-billion-parameter model available today for coding agents. It brings substantial improvements in agentic coding, a novel Thinking Preservation mechanism, and a hybrid architecture that blends Gated DeltaNet linear attention with traditional self-attention — all [&#8230;]</p> <p>The post <a href="https://www.marktechpost.com/2026/04/22/alibaba-qwen-team-releases-qwen3-6-27b-a-dense-open-weight-model-outperforming-397b-moe-on-agentic-coding-benchmarks/">Alibaba Qwen Team Releases Qwen3.6-27B: A Dense Open-Weight Model Outperforming 397B MoE on Agentic Coding Benchmarks</a> appeared first on <a href="https://www.marktechpost.com">MarkTechPost</a>.</p>
-- Extract: Alibaba’s Qwen Team has released Qwen3.6-27B, the first dense open-weight model in the Qwen3.6 family — and arguably the most capable 27-billion-parameter model available today for coding agents. It brings substantial improvements in agentic coding, a novel Thinking Preservation mechanism, and a hybrid architecture that blends Gated DeltaNet linear attention with traditional self-attention — all under an Apache 2.0 license. The release comes weeks after the Qwen3.6-35B-A3B, a sparse Mixture-of-Experts (MoE) model with only 3B active parameters which itself followed the broader Qwen3.5 series. Qwen3.6-27B is the family’s second model and the first fully dense variant — and on several key benchmarks, it actually outperforms both Qwen3.6-35B-A3B and the much larger Qwen3.5-397B-A17B MoE model
+- Extract: Title: Alibaba Qwen Team Releases Qwen3.6-27B: A Dense Open-Weight Model Outperforming 397B MoE on Agentic Coding Benchmarks URL Source: https://www.marktechpost.com/2026/04/22/alibaba-qwen-team-releases-qwen3-6-27b-a-dense-open-weight-model-outperforming-397b-moe-on-agentic-coding-benchmarks/ Published Time: 2026-04-22T19:40:51+00:00 Markdown Content: # Alibaba Qwen Team Releases Qwen3.6-27B: A Dense Open-Weight Model Outperforming 397B MoE on Agentic Coding Benchmarks - MarkTechPost [![Image 1: Logo](https://www.marktechpost.com/wp-content/uploads/2025/09/272x90-300x99.png)News Hub](https://www.marktechpost.com/) [Premium Content](https://www.marktechpost.com/2026/04/22/alibaba-qwen-team-releases-qwen3-6-27b-a-dense-open-weight-model-outperforming-397b-moe-on-agentic-coding-benchmarks/# 
 
 ## 3. OpenCLAW-P2P v6.0: Resilient Multi-Layer Persistence, Live Reference Verification, and Production-Scale Evaluation of Decentralized AI Peer Review
 - Domain: arxiv.org
@@ -35,26 +35,26 @@ Relevant source count: 260
 - Summary: <img src="https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Were_launching_two_TPUs_social.max-600x600.format-webp.webp" />The eighth generation of Google’s TPU includes two specialized chips that will power the future of AI.
 - Extract: We're introducing two TPU chips to meet increasingly demanding AI workloads, including autonomous AI agents that work on your behalf to get things done. AI agents need to reason, plan and execute multi-step workflows. TPU 8i is designed specifically to enable AI agents to complete this very quickly to provide a good user experience. Complementing TPU 8i, TPU 8t is optimized for training and can run even the most complex models on a single, massive pool of memory. Along with our full-stack purpose-built infrastructure — from networking to data centers and energy-efficient operations — they create the underlying engine that will allow us to bring highly responsive agentic AI to the masses. To find out more, learn about how our TPUs are redefining what’s possible with AI.
 
-## 5. Accelerating PayPal's Commerce Agent with Speculative Decoding: An Empirical Study on EAGLE3 with Fine-Tuned Nemotron Models
-- Domain: arxiv.org
-- URL: https://arxiv.org/abs/2604.19767
-- Relevance score: 14.5
-- Published: Thu, 23 Apr 2026 00:00:00 -0400
-- Summary: arXiv:2604.19767v1 Announce Type: cross Abstract: We evaluate speculative decoding with EAGLE3 as an inference-time optimization for PayPal's Commerce Agent, powered by a fine-tuned llama3.1-nemotron-nano-8B-v1 model. Building on prior work (NEMO-4-PAYPAL) that reduced latency and cost through domain-specific fine-tuning, we benchmark EAGLE3 via vLLM against NVIDIA NIM on identical 2xH100 hardware across 40 configurations spanning speculative token counts (gamma=3, gamma=5), concurrency levels (1-32), and sampling temperatures (0, 0.5). Key findings: (1) gamma=3 achieves 22-49% throughput improvement and 18-33% latency reduction at zero additional hardware cost; (2) acceptance rates remain stable at approximately 35.5% for gamma=3 across all conditions; (3) gamma=5 yields diminishing returns (approximately 25% acceptance rate); (4) LLM-as-Judge evaluation confirms fully preserved output quality; and (5) speculative decoding on a single H100 matches or exceeds NIM on two H100s, enabling 50% GPU cost reduction.
-
-## 6. White-Basilisk: A Hybrid Model for Code Vulnerability Detection
-- Domain: arxiv.org
-- URL: https://arxiv.org/abs/2507.08540
-- Relevance score: 14.5
-- Published: Thu, 23 Apr 2026 00:00:00 -0400
-- Summary: arXiv:2507.08540v5 Announce Type: replace-cross Abstract: The proliferation of software vulnerabilities presents a significant challenge to cybersecurity, necessitating more effective detection methodologies. We introduce White-Basilisk, a novel approach to vulnerability detection that demonstrates superior performance while challenging prevailing assumptions in AI model scaling. Utilizing an innovative architecture that integrates Mamba layers, linear self-attention, and a Mixture of Experts framework, White-Basilisk achieves state-of-the-art results in vulnerability detection tasks with a parameter count of only 200M. The model's capacity to process sequences of unprecedented length enables comprehensive analysis of extensive codebases in a single pass, surpassing the context limitations of current Large Language Models (LLMs). White-Basilisk exhibits robust performance on imbalanced, real-world datasets, while maintaining computational efficiency that facilitates deployment across diverse organizational scales. This research not only establishes new benchmarks in code security but also provides empirical evidence that compact, efficiently designed models can outperform larger co
-
-## 7. Decoding Text Spans for Efficient and Accurate Named-Entity Recognition
+## 5. Decoding Text Spans for Efficient and Accurate Named-Entity Recognition
 - Domain: arxiv.org
 - URL: https://arxiv.org/abs/2604.20447
 - Relevance score: 14.5
 - Published: Thu, 23 Apr 2026 00:00:00 -0400
 - Summary: arXiv:2604.20447v1 Announce Type: new Abstract: Named Entity Recognition (NER) is a key component in industrial information extraction pipelines, where systems must satisfy strict latency and throughput constraints in addition to strong accuracy. State-of-the-art NER accuracy is often achieved by span-based frameworks, which construct span representations from token encodings and classify candidate spans. However, many span-based methods enumerate large numbers of candidates and process each candidate with marker-augmented inputs, substantially increasing inference cost and limiting scalability in large-scale deployments. In this work, we propose SpanDec, an efficient span-based NER framework that targets this bottleneck. Our main insight is that span representation interactions can be computed effectively at the final transformer stage, avoiding redundant computation in earlier layers via a lightweight decoder dedicated to span representations. We further introduce a span filtering mechanism during enumeration to prune unlikely candidates before expensive processing. Across multiple benchmarks, SpanDec matches competitive span-based baselines while improving throughput and reducin
+
+## 6. Accelerating PayPal's Commerce Agent with Speculative Decoding: An Empirical Study on EAGLE3 with Fine-Tuned Nemotron Models
+- Domain: arxiv.org
+- URL: https://arxiv.org/abs/2604.19767
+- Relevance score: 14.5
+- Published: Thu, 23 Apr 2026 00:00:00 -0400
+- Summary: arXiv:2604.19767v1 Announce Type: new Abstract: We evaluate speculative decoding with EAGLE3 as an inference-time optimization for PayPal's Commerce Agent, powered by a fine-tuned llama3.1-nemotron-nano-8B-v1 model. Building on prior work (NEMO-4-PAYPAL) that reduced latency and cost through domain-specific fine-tuning, we benchmark EAGLE3 via vLLM against NVIDIA NIM on identical 2xH100 hardware across 40 configurations spanning speculative token counts (gamma=3, gamma=5), concurrency levels (1-32), and sampling temperatures (0, 0.5). Key findings: (1) gamma=3 achieves 22-49% throughput improvement and 18-33% latency reduction at zero additional hardware cost; (2) acceptance rates remain stable at approximately 35.5% for gamma=3 across all conditions; (3) gamma=5 yields diminishing returns (approximately 25% acceptance rate); (4) LLM-as-Judge evaluation confirms fully preserved output quality; and (5) speculative decoding on a single H100 matches or exceeds NIM on two H100s, enabling 50% GPU cost reduction.
+
+## 7. White-Basilisk: A Hybrid Model for Code Vulnerability Detection
+- Domain: arxiv.org
+- URL: https://arxiv.org/abs/2507.08540
+- Relevance score: 14.5
+- Published: Thu, 23 Apr 2026 00:00:00 -0400
+- Summary: arXiv:2507.08540v5 Announce Type: replace-cross Abstract: The proliferation of software vulnerabilities presents a significant challenge to cybersecurity, necessitating more effective detection methodologies. We introduce White-Basilisk, a novel approach to vulnerability detection that demonstrates superior performance while challenging prevailing assumptions in AI model scaling. Utilizing an innovative architecture that integrates Mamba layers, linear self-attention, and a Mixture of Experts framework, White-Basilisk achieves state-of-the-art results in vulnerability detection tasks with a parameter count of only 200M. The model's capacity to process sequences of unprecedented length enables comprehensive analysis of extensive codebases in a single pass, surpassing the context limitations of current Large Language Models (LLMs). White-Basilisk exhibits robust performance on imbalanced, real-world datasets, while maintaining computational efficiency that facilitates deployment across diverse organizational scales. This research not only establishes new benchmarks in code security but also provides empirical evidence that compact, efficiently designed models can outperform larger co
 
 ## 8. Statistics, Not Scale: Modular Medical Dialogue with Bayesian Belief Engine
 - Domain: arxiv.org
@@ -68,14 +68,14 @@ Relevant source count: 260
 - URL: https://arxiv.org/abs/2507.21166
 - Relevance score: 14.0
 - Published: Thu, 23 Apr 2026 00:00:00 -0400
-- Summary: arXiv:2507.21166v2 Announce Type: replace-cross Abstract: Human intelligence scales through cumulative cultural evolution (CCE), a ratchet process in which innovations are retained against entropic drift. Large language model training, by contrast, still depends primarily on static corpora and parameter growth, leaving little room for endogenous accumulation through interaction. We present POLIS (Population Orchestrated Learning and Inference Society), a framework in which heterogeneous agents generate solutions, verify one another's outputs, retain validated artifacts in shared cultural memory, and internalize them through parameter updates. On mathematical reasoning benchmarks, populations of 1--4B-parameter models achieved average gains of 8.8--18.9 points over base models and narrowed the gap to 70B+ monoliths. Mechanistic ablations identify peer verification as the main ratchet operator and show that internalization sustains accumulation across rounds, providing computational evidence that epistemic vigilance organizes durable knowledge growth. These results position structured social interaction as a scaling lever orthogonal to parameter count.
+- Summary: arXiv:2507.21166v2 Announce Type: replace Abstract: Human intelligence scales through cumulative cultural evolution (CCE), a ratchet process in which innovations are retained against entropic drift. Large language model training, by contrast, still depends primarily on static corpora and parameter growth, leaving little room for endogenous accumulation through interaction. We present POLIS (Population Orchestrated Learning and Inference Society), a framework in which heterogeneous agents generate solutions, verify one another's outputs, retain validated artifacts in shared cultural memory, and internalize them through parameter updates. On mathematical reasoning benchmarks, populations of 1--4B-parameter models achieved average gains of 8.8--18.9 points over base models and narrowed the gap to 70B+ monoliths. Mechanistic ablations identify peer verification as the main ratchet operator and show that internalization sustains accumulation across rounds, providing computational evidence that epistemic vigilance organizes durable knowledge growth. These results position structured social interaction as a scaling lever orthogonal to parameter count.
 
-## 10. Automatic Ontology Construction Using LLMs as an External Layer of Memory, Verification, and Planning for Hybrid Intelligent Systems
+## 10. Trajectory2Task: Training Robust Tool-Calling Agents with Synthesized Yet Verifiable Data for Complex User Intents
 - Domain: arxiv.org
-- URL: https://arxiv.org/abs/2604.20795
+- URL: https://arxiv.org/abs/2601.20144
 - Relevance score: 13.5
 - Published: Thu, 23 Apr 2026 00:00:00 -0400
-- Summary: arXiv:2604.20795v1 Announce Type: new Abstract: This paper presents a hybrid architecture for intelligent systems in which large language models (LLMs) are extended with an external ontological memory layer. Instead of relying solely on parametric knowledge and vector-based retrieval (RAG), the proposed approach constructs and maintains a structured knowledge graph using RDF/OWL representations, enabling persistent, verifiable, and semantically grounded reasoning. The core contribution is an automated pipeline for ontology construction from heterogeneous data sources, including documents, APIs, and dialogue logs. The system performs entity recognition, relation extraction, normalization, and triple generation, followed by validation using SHACL and OWL constraints, and continuous graph updates. During inference, LLMs operate over a combined context that integrates vector-based retrieval with graph-based reasoning and external tool interaction. Experimental observations on planning tasks, including the Tower of Hanoi benchmark, indicate that ontology augmentation improves performance in multi-step reasoning scenarios compared to baseline LLM systems. In addition, the ontology layer 
+- Summary: arXiv:2601.20144v3 Announce Type: replace Abstract: Tool-calling agents are increasingly deployed in real-world customer-facing workflows. Yet most studies on tool-calling agents focus on idealized settings with general, fixed, and well-specified tasks. In real-world applications, user requests are often (1) ambiguous, (2) changing over time, or (3) infeasible due to policy constraints, and training and evaluation data that cover these diverse, complex interaction patterns remain under-represented. To bridge the gap, we present Trajectory2Task, a verifiable data generation pipeline for studying tool use at scale under three realistic user scenarios: ambiguous intent, changing intent, and infeasible intents. The pipeline first conducts multi-turn exploration to produce valid tool-call trajectories. It then converts these trajectories into user-facing tasks with controlled intent adaptations. This process yields verifiable task that support closed-loop evaluation and training. We benchmark seven state-of-the-art LLMs on the generated complex user scenario tasks and observe frequent failures. Finally, using successful trajectories obtained from task rollouts, we fine-tune lightweight 
 
 ## 11. Ulta Beauty Deploys Google-Powered AI Assistant and Agentic Commerce
 - Domain: pymnts.com
@@ -210,117 +210,117 @@ Relevant source count: 260
 - Published: Tue, 21 Apr 2026 23:48:17 +0000
 - Summary: <p>SpaceX said Tuesday it has agreed to a deal with <a href="https://www.axios.com/technology/automation-and-ai" target="_blank">AI</a> coding startup Cursor that could result in an acquisition or $10 billion investment.</p><p><strong>Why it matters:</strong> The deal underscores SpaceX CEO <a href="https://www.axios.com/2026/04/01/spacex-elon-musk-ipo" target="_blank">Elon Musk</a>'s push to make his company into an AI powerhouse ahead of its <a href="https://www.axios.com/2026/04/01/spacex-elon-musk-ipo" target="_blank">potential IPO</a>, which may be the largest in history.</p><hr /><p><strong>Driving the news:</strong> Cursor, the original <a href="https://www.axios.com/2026/04/21/cursor-chainguard-ai-code-security" target="_blank">vibe coding</a> startup, has raised more than $3 billion and has recently been in talks to secure additional funding. </p><ul><li>SpaceX <a href="https://www.axios.com/2026/02/02/spacex-xai-musk" target="_blank">acquired xAI</a>, Musk's other AI startup, in February.</li><li>That transaction valued the combined company at $1.25 trillion, <a href="https://www.nytimes.com/2026/04/21/business/spacex-cursor-deal.html" target="_blank">according to the New
 
-## 30. Meta tracks US employees' clicks and keystrokes to train AI agents
+## 30. Webcash, Korea's leading B2B fintech company, will install artificial intelligence (AI) agents in al.. - 매일경제
+- Domain: mk.co.kr
+- URL: https://news.google.com/rss/articles/CBMiS0FVX3lxTE9VUUJjQUh1Y1JFc1RYbzlKUjBJZXY4YjNtU01UQ1lPQjFrcEJjNTVjSTJ5SUViajJoUVBYMjM4SW9vTFVmcUVnVVBDbw
+- Relevance score: 8.0
+- Published: Thu, 23 Apr 2026 05:00:28 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMiS0FVX3lxTE9VUUJjQUh1Y1JFc1RYbzlKUjBJZXY4YjNtU01UQ1lPQjFrcEJjNTVjSTJ5SUViajJoUVBYMjM4SW9vTFVmcUVnVVBDbw?oc=5" target="_blank">Webcash, Korea's leading B2B fintech company, will install artificial intelligence (AI) agents in al..</a>&nbsp;&nbsp;<font color="#6f6f6f">매일경제</font>
+
+## 31. Meta tracks US employees' clicks and keystrokes to train AI agents
 - Domain: the-decoder.com
 - URL: https://the-decoder.com/meta-tracks-us-employees-clicks-and-keystrokes-to-train-ai-agents/
 - Relevance score: 7.8
 - Published: Wed, 22 Apr 2026 12:43:38 +0000
 - Summary: <p><img alt="" class="attachment-full size-full wp-post-image" height="768" src="https://the-decoder.com/wp-content/uploads/2026/03/meta_ai_logo-2.png" style="height: auto; margin-bottom: 10px;" width="1376" /></p> <p> Meta is installing new surveillance software on its US employees' computers that captures mouse movements, clicks, and keystrokes to train AI models.</p> <p>The article <a href="https://the-decoder.com/meta-tracks-us-employees-clicks-and-keystrokes-to-train-ai-agents/">Meta tracks US employees&#039; clicks and keystrokes to train AI agents</a> appeared first on <a href="https://the-decoder.com">The Decoder</a>.</p>
 
-## 31. Why China’s cash-rich AI firm DeepSeek is still shopping for funding: sources
+## 32. Why China’s cash-rich AI firm DeepSeek is still shopping for funding: sources
 - Domain: scmp.com
 - URL: https://www.scmp.com/tech/article/3351004/why-chinas-cash-rich-ai-firm-deepseek-still-shopping-funding-sources
 - Relevance score: 7.8
 - Published: Wed, 22 Apr 2026 11:00:10 +0000
 - Summary: Chinese artificial intelligence start-up DeepSeek has begun raising external capital for the first time, but is keeping its initial fundraising round deliberately small to limit equity dilution while retaining key talent, according to people familiar with the matter. The Hangzhou-based company, a spin-off from hedge fund High-Flyer, is seeking to sell no more than 3 per cent of its equity, said three investors with direct knowledge of the plans, who requested anonymity as the information is...
 
-## 32. ChatGPT Images 2.0 is a breakthrough that could fundamentally reshape graphic generation
+## 33. ChatGPT Images 2.0 is a breakthrough that could fundamentally reshape graphic generation
 - Domain: the-decoder.com
 - URL: https://the-decoder.com/openais-chatgpt-images-2-0-thinks-before-it-generates-adding-reasoning-and-web-search-to-image-creation/
 - Relevance score: 7.8
 - Published: Tue, 21 Apr 2026 19:55:49 +0000
 - Summary: <p><img alt="" class="attachment-full size-full wp-post-image" height="1086" src="https://the-decoder.com/wp-content/uploads/2026/04/astronaut_thinking.png" style="height: auto; margin-bottom: 10px;" width="1448" /></p> <p> OpenAI is adding reasoning and web search to its ChatGPT Images 2.0 image generator. The model can now create up to eight consistent images from a single prompt and handles text in general, and especially in non-Latin scripts, significantly better.</p> <p>The article <a href="https://the-decoder.com/openais-chatgpt-images-2-0-thinks-before-it-generates-adding-reasoning-and-web-search-to-image-creation/">ChatGPT Images 2.0 is a breakthrough that could fundamentally reshape graphic generation</a> appeared first on <a href="https://the-decoder.com">The Decoder</a>.</p>
 
-## 33. Artificial intelligence adoption and productivity in Canadian firms - Statistique Canada
+## 34. Artificial intelligence adoption and productivity in Canadian firms - Statistique Canada
 - Domain: www150.statcan.gc.ca
 - URL: https://news.google.com/rss/articles/CBMiggFBVV95cUxOdERKZ2gyYjlfQ0Fmb0E4NzZ5cXVZR3VPczBZdEZPd0VfaWJzRDE4WkgxOTNNai1lemVfRk94M1g5NC1uT3IxZ05NdjNrQTVHUVlrVmdUMDA4V3g1cFVVbnRhNkkyRDc0ZGh1OVZiUGhDVl9LTmhUanQ0cFFBMkdnUm5R
 - Relevance score: 7.5
 - Published: Wed, 22 Apr 2026 17:13:10 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOdERKZ2gyYjlfQ0Fmb0E4NzZ5cXVZR3VPczBZdEZPd0VfaWJzRDE4WkgxOTNNai1lemVfRk94M1g5NC1uT3IxZ05NdjNrQTVHUVlrVmdUMDA4V3g1cFVVbnRhNkkyRDc0ZGh1OVZiUGhDVl9LTmhUanQ0cFFBMkdnUm5R?oc=5" target="_blank">Artificial intelligence adoption and productivity in Canadian firms</a>&nbsp;&nbsp;<font color="#6f6f6f">Statistique Canada</font>
 
-## 34. Aurionpro launches AI-native trade finance platform, as banks test “agent-led” automation - Global Trade Review (GTR)
+## 35. Aurionpro launches AI-native trade finance platform, as banks test “agent-led” automation - Global Trade Review (GTR)
 - Domain: gtreview.com
 - URL: https://news.google.com/rss/articles/CBMiywFBVV95cUxPVmNVTUVwRXBCWWxkeXRGOTM3RVE2bkcyZm8zWXpIeTFMZzdTdmJsQXRpNjRoeTN5YzZXcGg2ajl6UGdmMWxFMjF0Nnh6VWtaZl9WRFpGS1hTZG5MZFdPUlR0RmVLMzllSTlQY0w0VHAxN0NyWG5vTU1MaldvYmNxMTZ6SC1KczVpdGVzTWpsaTQ1Q0p4VDFidzl3aTd0TnhXNGNLNG9YWE1JNGU5R1dDak5BbVBmY083S2FIU0xiNXpiZUp2QU5VYUFTMA
 - Relevance score: 7.5
 - Published: Wed, 22 Apr 2026 16:05:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxPVmNVTUVwRXBCWWxkeXRGOTM3RVE2bkcyZm8zWXpIeTFMZzdTdmJsQXRpNjRoeTN5YzZXcGg2ajl6UGdmMWxFMjF0Nnh6VWtaZl9WRFpGS1hTZG5MZFdPUlR0RmVLMzllSTlQY0w0VHAxN0NyWG5vTU1MaldvYmNxMTZ6SC1KczVpdGVzTWpsaTQ1Q0p4VDFidzl3aTd0TnhXNGNLNG9YWE1JNGU5R1dDak5BbVBmY083S2FIU0xiNXpiZUp2QU5VYUFTMA?oc=5" target="_blank">Aurionpro launches AI-native trade finance platform, as banks test “agent-led” automation</a>&nbsp;&nbsp;<font color="#6f6f6f">Global Trade Review (GTR)</font>
 
-## 35. AI hallucinations found in high-profile Wall Street law firm filing
+## 36. AI hallucinations found in high-profile Wall Street law firm filing
 - Domain: theguardian.com
 - URL: https://www.theguardian.com/technology/2026/apr/22/ai-hallucinations-found-in-high-profile-wall-street-law-firm-filing
 - Relevance score: 7.5
 - Published: Wed, 22 Apr 2026 08:09:34 GMT
 - Summary: <p>Sullivan &amp; Cromwell apologises to New York federal judge for string of errors in documents for Prince Group case</p><ul><li><p><a href="https://www.theguardian.com/business/live/2026/apr/22/uk-inflation-increase-fuel-prices-oil-falls-trump-ceasefire-extended-business-live-news-updates">Business live – latest updates</a></p></li></ul><p>The elite Wall Street law firm Sullivan &amp; Cromwell has told a court that a major filing it made in a <a href="https://www.theguardian.com/world/2026/mar/18/prince-group-chen-zhi-scam-industry-cambodia">high-profile case </a>contained errors resulting from hallucinations generated by artificial intelligence.</p><p>Andrew Dietderich, the co-head of the firm’s global restructuring group, apologised in a letter to the New York federal judge Martin Glenn on Saturday for the string of mistakes, which included inaccurate citations.</p> <a href="https://www.theguardian.com/technology/2026/apr/22/ai-hallucinations-found-in-high-profile-wall-street-law-firm-filing">Continue reading...</a>
 
-## 36. Bunnings shows off AI shopping agent at Google showcase - Computer Weekly
-- Domain: computerweekly.com
-- URL: https://news.google.com/rss/articles/CBMiowFBVV95cUxQT2d2MGxfZHVTUTdZSUVfNTZiMGNrdjBmblRxLTJ0RU53QW1CTTIxdzVMWEF5Y2I3TjVKWnNxN2dLYVctYmFSdWNRTWZIZmp0Z0poaWQxN2lsUHRYTGNsQ3Fha0VraGVQVmNjdVAxYWxnOE5XZnhqSzBuVEdQdmJ1TzZ1UWZlc3dORV9ackdKLUUtSE1BdDNrX3pRSDBCc2F3QnFN
+## 37. 0G to Make Alibaba's Qwen wModels Accessible to AI Agents via Blockchain Integration - Yahoo Finance Singapore
+- Domain: sg.finance.yahoo.com
+- URL: https://news.google.com/rss/articles/CBMijAFBVV95cUxOSXJ5QVEyUi0tdkhSYUgwY0hhWGNTdnlPMFVyWlpuN3RET1duMTJVQlZaS2U0WVprWU1PX25GakZEYW94dmd6NXpBS2RGRm1ZTnAyTE0zbGI0aUl0cXZUSGV1ZHVtbjgteUhOMlZvUDhqZVZwTGprVlE4azBJRS1laUNVT3VjUDJxTVN2Yw
 - Relevance score: 7.5
-- Published: Thu, 23 Apr 2026 01:16:39 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxQT2d2MGxfZHVTUTdZSUVfNTZiMGNrdjBmblRxLTJ0RU53QW1CTTIxdzVMWEF5Y2I3TjVKWnNxN2dLYVctYmFSdWNRTWZIZmp0Z0poaWQxN2lsUHRYTGNsQ3Fha0VraGVQVmNjdVAxYWxnOE5XZnhqSzBuVEdQdmJ1TzZ1UWZlc3dORV9ackdKLUUtSE1BdDNrX3pRSDBCc2F3QnFN?oc=5" target="_blank">Bunnings shows off AI shopping agent at Google showcase</a>&nbsp;&nbsp;<font color="#6f6f6f">Computer Weekly</font>
+- Published: Thu, 23 Apr 2026 05:00:00 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxOSXJ5QVEyUi0tdkhSYUgwY0hhWGNTdnlPMFVyWlpuN3RET1duMTJVQlZaS2U0WVprWU1PX25GakZEYW94dmd6NXpBS2RGRm1ZTnAyTE0zbGI0aUl0cXZUSGV1ZHVtbjgteUhOMlZvUDhqZVZwTGprVlE4azBJRS1laUNVT3VjUDJxTVN2Yw?oc=5" target="_blank">0G to Make Alibaba's Qwen wModels Accessible to AI Agents via Blockchain Integration</a>&nbsp;&nbsp;<font color="#6f6f6f">Yahoo Finance Singapore</font>
 
-## 37. Revolut Stopped Paying for AI and Started Winning
+## 38. Revolut Stopped Paying for AI and Started Winning
 - Domain: pymnts.com
 - URL: https://www.pymnts.com/artificial-intelligence-2/2026/revolut-stopped-paying-for-ai-and-started-winning/
 - Relevance score: 7.5
 - Published: 2026-04-21T17:49:41Z
 - Summary: Most banks pay OpenAI or Anthropic for access to artificial intelligence. Revolut built its own. The London-based neobank trained a proprietary model called PRAGMA on 40 billion transactions, app interactions and financial events drawn from 25 million users a…
 
-## 38. A Detailed Implementation on Equinox with JAX Native Modules, Filtered Transforms, Stateful Layers, and End-to-End Training Workflows
+## 39. A Detailed Implementation on Equinox with JAX Native Modules, Filtered Transforms, Stateful Layers, and End-to-End Training Workflows
 - Domain: marktechpost.com
 - URL: https://www.marktechpost.com/2026/04/22/a-detailed-implementation-on-equinox-with-jax-native-modules-filtered-transforms-stateful-layers-and-end-to-end-training-workflows/
 - Relevance score: 7.0
 - Published: Wed, 22 Apr 2026 19:13:14 +0000
 - Summary: <p>In this tutorial, we explore Equinox, a lightweight and elegant neural network library built on JAX, and show how to use it. We begin by understanding how eqx.Module treats models as PyTrees, which makes parameter handling, transformation, and serialization feel simple and explicit. As we move forward, we work through static fields, filtered transformations such [&#8230;]</p> <p>The post <a href="https://www.marktechpost.com/2026/04/22/a-detailed-implementation-on-equinox-with-jax-native-modules-filtered-transforms-stateful-layers-and-end-to-end-training-workflows/">A Detailed Implementation on Equinox with JAX Native Modules, Filtered Transforms, Stateful Layers, and End-to-End Training Workflows</a> appeared first on <a href="https://www.marktechpost.com">MarkTechPost</a>.</p>
 
-## 39. Correction: Education-Artificial Intelligence-Oral Exams story - The Lufkin Daily News
+## 40. Correction: Education-Artificial Intelligence-Oral Exams story - The Lufkin Daily News
 - Domain: lufkindailynews.com
 - URL: https://news.google.com/rss/articles/CBMi4AFBVV95cUxQR0pKZW1fX2FLQUdoM25RRXIycGdXcVZpek5UUEF5T2hiQlc0Ni02Q0dfSDZxRnVsdnY1SmxRbWljNVIxT3BWM3kwWDYwYmppNkxQbVFpenZCSU9UR1VralBzeTkzdHRxaXpmczF6ZmVIRWl2VDNKd1RKRTJycGVjV0E3MktmOVNJTTd6R292bmxIdzJobWFyajR3RzAwZEk4YVNfREI2T0hpWmpnbWxiUk03a2VKT3FBVlNTSEU2V2o2Q3pZeGJUbkY5SUs5MGQ3LXR5c2dFRWt5aFJLbFU3TA
 - Relevance score: 7.0
 - Published: Wed, 22 Apr 2026 19:01:58 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi4AFBVV95cUxQR0pKZW1fX2FLQUdoM25RRXIycGdXcVZpek5UUEF5T2hiQlc0Ni02Q0dfSDZxRnVsdnY1SmxRbWljNVIxT3BWM3kwWDYwYmppNkxQbVFpenZCSU9UR1VralBzeTkzdHRxaXpmczF6ZmVIRWl2VDNKd1RKRTJycGVjV0E3MktmOVNJTTd6R292bmxIdzJobWFyajR3RzAwZEk4YVNfREI2T0hpWmpnbWxiUk03a2VKT3FBVlNTSEU2V2o2Q3pZeGJUbkY5SUs5MGQ3LXR5c2dFRWt5aFJLbFU3TA?oc=5" target="_blank">Correction: Education-Artificial Intelligence-Oral Exams story</a>&nbsp;&nbsp;<font color="#6f6f6f">The Lufkin Daily News</font>
 
-## 40. Letter: Should we really fear artificial intelligence? - New Scientist
+## 41. Letter: Should we really fear artificial intelligence? - New Scientist
 - Domain: newscientist.com
 - URL: https://news.google.com/rss/articles/CBMingFBVV95cUxNMTlxX09TVEs2MjBVNTU0dlcxOUZZVFVjdWtFR0x1UlpEZlBZeEFfYzJ4S25JcWllM21uYVIxd2YyeW90emVHQVpaX2daN0NQVS1TSmd5ZTYzUXdEUGJIZGtIUHotbmd6MEZJcGtLcFJ4Nl9XbE8tZmgtT0dFMzNGeWtvdXh1aDRqX21tYnhWZjF2ZFJkd1ZIQy1ORWw1Zw
 - Relevance score: 7.0
 - Published: Wed, 22 Apr 2026 17:02:08 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxNMTlxX09TVEs2MjBVNTU0dlcxOUZZVFVjdWtFR0x1UlpEZlBZeEFfYzJ4S25JcWllM21uYVIxd2YyeW90emVHQVpaX2daN0NQVS1TSmd5ZTYzUXdEUGJIZGtIUHotbmd6MEZJcGtLcFJ4Nl9XbE8tZmgtT0dFMzNGeWtvdXh1aDRqX21tYnhWZjF2ZFJkd1ZIQy1ORWw1Zw?oc=5" target="_blank">Letter: Should we really fear artificial intelligence?</a>&nbsp;&nbsp;<font color="#6f6f6f">New Scientist</font>
 
-## 41. Teaching AI models to say “I’m not sure”
+## 42. Teaching AI models to say “I’m not sure”
 - Domain: news.mit.edu
 - URL: https://news.mit.edu/2026/teaching-ai-models-to-say-im-not-sure-0422
 - Relevance score: 7.0
 - Published: Wed, 22 Apr 2026 15:15:00 -0400
 - Summary: A new training method improves the reliability of AI confidence estimates without sacrificing performance, addressing a root cause of hallucination in reasoning models.
 
-## 42. Google Cloud debuts new AI chips, tools for building agents - The Straits Times
+## 43. Google Cloud debuts new AI chips, tools for building agents - The Straits Times
 - Domain: straitstimes.com
 - URL: https://news.google.com/rss/articles/CBMiqwFBVV95cUxNOVhXMW5CaUdLWW1mMm9RbEhjSWlDZkd3S3N4ZnZIQ1JjeUx3LW4xN3hjcWZjRzRaaGEyM2pjNmRBU2RsNGNXWDJlRERQRExFVFVRTWd4bVRoZXk1V1Z6dG92Z1puUmthMHc4VUU1NHBnT0N3bnRVMlhfUGpzb0ZYN3BnT3pNNm0xcTBINXQ4ZjRCbjVZYzF4RjBkRl9rWGpXTzRDa0ptWVBQeE0
 - Relevance score: 7.0
-- Published: Thu, 23 Apr 2026 02:56:00 GMT
+- Published: Thu, 23 Apr 2026 04:09:47 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxNOVhXMW5CaUdLWW1mMm9RbEhjSWlDZkd3S3N4ZnZIQ1JjeUx3LW4xN3hjcWZjRzRaaGEyM2pjNmRBU2RsNGNXWDJlRERQRExFVFVRTWd4bVRoZXk1V1Z6dG92Z1puUmthMHc4VUU1NHBnT0N3bnRVMlhfUGpzb0ZYN3BnT3pNNm0xcTBINXQ4ZjRCbjVZYzF4RjBkRl9rWGpXTzRDa0ptWVBQeE0?oc=5" target="_blank">Google Cloud debuts new AI chips, tools for building agents</a>&nbsp;&nbsp;<font color="#6f6f6f">The Straits Times</font>
 
-## 43. Anthropic’s Mythos is stoking cybersecurity fears. What does it mean for China?
+## 44. Anthropic’s Mythos is stoking cybersecurity fears. What does it mean for China?
 - Domain: scmp.com
 - URL: https://www.scmp.com/tech/tech-trends/article/3350987/anthropics-mythos-stoking-cybersecurity-fears-what-does-it-mean-china
 - Relevance score: 6.8
 - Published: Wed, 22 Apr 2026 08:00:08 +0000
 - Summary: In the first of a three-part series on Anthropic’s new powerful Mythos AI model, we look at its impact on Chinese AI, cybersecurity and competition with the US. US start-up Anthropic announced its latest artificial intelligence model Claude Mythos Preview on April 7, sparking an unprecedented global response among policymakers and regulators due to its powerful ability to identify and exploit cybersecurity vulnerabilities. Instead of a public release, Anthropic released Mythos to a consortium of...
 
-## 44. Now Meta will track what employees do on their computers to train its AI agents
+## 45. Now Meta will track what employees do on their computers to train its AI agents
 - Domain: theverge.com
 - URL: https://www.theverge.com/tech/916681/meta-ai-agents-employee-tracking
 - Relevance score: 6.8
 - Published: 2026-04-22T10:22:35-04:00
 - Summary: Meta employees' activity at work is now being used to train the company's AI agents. As reported by Reuters, Meta is installing a tool it calls Model Capability Initiative (MCI) on US-based employees' computers that runs in work-related apps and websites, recording mouse movements, clicks, keystrokes, and occasional screenshots. The data from this tool will [&#8230;]
-
-## 45. The role of AI in modern forex bot development
-- Domain: artificialintelligence-news.com
-- URL: https://www.artificialintelligence-news.com/news/the-role-of-ai-in-modern-forex-bot-development/
-- Relevance score: 6.7
-- Published: Wed, 22 Apr 2026 07:34:01 +0000
-- Summary: <p>Artificial intelligence has become a defining force in financial markets. And currency trading is no exception. The rise of the AI-powered forex bot reflects a change toward automated systems capable of processing vast amounts of market data and identifying patterns beyond the reach of manual analysis. As global foreign exchange markets operate around the clock [&#8230;]</p> <p>The post <a href="https://www.artificialintelligence-news.com/news/the-role-of-ai-in-modern-forex-bot-development/">The role of AI in modern forex bot development</a> appeared first on <a href="https://www.artificialintelligence-news.com">AI News</a>.</p>
 
 ## 46. Forget one chip to rule them all: With TPU 8, Google has an AI arms race to win
 - Domain: go.theregister.com
@@ -329,28 +329,28 @@ Relevant source count: 260
 - Published: 2026-04-22T12:00:07.00Z
 - Summary: <h4>x86 gets the boot as Google pairs up its TPUs with some Arm-based Axion cores</h4> <p>Google unveiled two new in-house AI accelerators at its annual Cloud Next conference in Las Vegas on Wednesday: one designed to speed up training and another aimed at driving down model serving costs.…</p>
 
-## 47. Chip giant SK hynix posts record quarterly profit on AI boom - Yahoo Finance Singapore
-- Domain: sg.finance.yahoo.com
-- URL: https://news.google.com/rss/articles/CBMif0FVX3lxTE5vdzN0VEdxTUo5bE1tTWQ0Unc3YjNOTlVZeVYwLVdncG1lcE9CZ3lYM05ET09BeF93emcxQl9fNzJxcFZIWWVtSGJ0bVU5a1RyaEROcWRtMEFFQ1hkWkQ2c293RzlCeHhubTRvTllMU1VfS1BXYmw2MzNEamZoaE0
-- Relevance score: 6.5
-- Published: Wed, 22 Apr 2026 23:53:47 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMif0FVX3lxTE5vdzN0VEdxTUo5bE1tTWQ0Unc3YjNOTlVZeVYwLVdncG1lcE9CZ3lYM05ET09BeF93emcxQl9fNzJxcFZIWWVtSGJ0bVU5a1RyaEROcWRtMEFFQ1hkWkQ2c293RzlCeHhubTRvTllMU1VfS1BXYmw2MzNEamZoaE0?oc=5" target="_blank">Chip giant SK hynix posts record quarterly profit on AI boom</a>&nbsp;&nbsp;<font color="#6f6f6f">Yahoo Finance Singapore</font>
-
-## 48. Speeding up agentic workflows with WebSockets in the Responses API
+## 47. Speeding up agentic workflows with WebSockets in the Responses API
 - Domain: openai.com
 - URL: https://openai.com/index/speeding-up-agentic-workflows-with-websockets
 - Relevance score: 6.5
 - Published: Wed, 22 Apr 2026 10:00:00 GMT
 - Summary: A deep dive into the Codex agent loop, showing how WebSockets and connection-scoped caching reduced API overhead and improved model latency.
 
-## 49. Hands-on with ChatGPT's powerful new image engine
+## 48. Hands-on with ChatGPT's powerful new image engine
 - Domain: axios.com
 - URL: https://www.axios.com/2026/04/22/chatgpt-hands-on-powerful-image-engine
 - Relevance score: 6.5
 - Published: Wed, 22 Apr 2026 09:00:05 +0000
 - Summary: <p>ChatGPT's new image engine <a href="https://www.axios.com/2026/04/21/chatgpt-images-major-update" target="_blank">promises</a> a host of improvements including better typography, access to the web and an ability to reason. So Axios put it to the test.</p><p><strong>Why it matters:</strong> Past image engines have proved initially popular with consumers, but had enough flaws to prevent broader use in business.</p><hr /><p><strong>Catch-up quick: </strong>ChatGPT Images 2.0 is now live in the app and supports a wide range of aspect ratios and comes in both standard and a "thinking" mode with built-in reasoning.</p><ul><li>All users will have access to the standard version of the image model, while the thinking mode is reserved for paid subscribers.</li></ul><p><strong>Zoom in:</strong> In the day that I have had access, I gave the new model a wide range of tasks.</p><ul><li>A friend asked me to make a memorial image of her recently deceased cat along with two favorite toys. It<strong> </strong>crafted an image that looked like a highly personalized sympathy card.</li><li>It elegantly took two photos from my wedding and made it appear as if they were in an old-style photo album wit
 
-## 50. Daalchini’s FY26 Revenue Doubled YoY To ₹140 Cr: CEO Kalra
+## 49. NVIDIA launches Ising AI model as Meta scales AI infrastructure - CoinGeek
+- Domain: coingeek.com
+- URL: https://news.google.com/rss/articles/CBMijgFBVV95cUxNazVFOTFvRkJLckhtdHB6cjBZbUlPSXNLb2R2M3JwZU0wZUhZTG53VWRiRUdFd3gxNUcxZEo4WThGT1Y0aUNlc21hOWdKYk9TdlJ4Nk9xZk4yaWRYS0ViU0pSVjJuNE8zZlFnemwybGVfMjVEZEcySVNwTDhfQWZ1azZwTnhfb1RGcXdDRHFR
+- Relevance score: 6.5
+- Published: Thu, 23 Apr 2026 05:02:40 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxNazVFOTFvRkJLckhtdHB6cjBZbUlPSXNLb2R2M3JwZU0wZUhZTG53VWRiRUdFd3gxNUcxZEo4WThGT1Y0aUNlc21hOWdKYk9TdlJ4Nk9xZk4yaWRYS0ViU0pSVjJuNE8zZlFnemwybGVfMjVEZEcySVNwTDhfQWZ1azZwTnhfb1RGcXdDRHFR?oc=5" target="_blank">NVIDIA launches Ising AI model as Meta scales AI infrastructure</a>&nbsp;&nbsp;<font color="#6f6f6f">CoinGeek</font>
+
+## 50. Daalchini’s FY26 Revenue Doubles YoY To ₹140 Cr: CEO Kalra
 - Domain: inc42.com
 - URL: https://inc42.com/buzz/daalchini-claims-2x-yoy-jump-in-fy26-revenue-to-%e2%82%b9140-cr/
 - Relevance score: 6.3
@@ -490,1188 +490,1188 @@ Relevant source count: 260
 - Published: Wed, 22 Apr 2026 06:56:57 +0000
 - Summary: <img alt="Groww recorded a spike in income, its revenue mix also shifted. Its core offerings like mutual funds, equity derivatives, and stocks zoomed on a yearly basis" class="webfeedsFeaturedVisual wp-post-image" height="1020" src="https://inc42.com/cdn-cgi/image/quality=90/https://asset.inc42.com/2026/04/Growws-Follow-Up-ftr.jpg" style="display: block; margin: auto; margin-bottom: 5px;" width="1360" />Over the past few years, Groww has made strategic moves to diversify revenue and reduce reliance on a few verticals.&#8230;
 
-## 70. Datacenter boom keeps dirty coal plants alive in the US
+## 70. LightFury Games Bags $11 Mn To Develop AAA Game ‘eCricket’
+- Domain: inc42.com
+- URL: https://inc42.com/buzz/lightfury-games-bags-11mn-to-develop-aaa-game-ecricket/
+- Relevance score: 5.8
+- Published: Thu, 23 Apr 2026 04:47:12 +0000
+- Summary: <img alt="LightFury Games Bags $11Mn To Develop AAA Game ‘eCricket’" class="webfeedsFeaturedVisual wp-post-image" height="1020" src="https://inc42.com/cdn-cgi/image/quality=90/https://asset.inc42.com/2025/03/LIGHTFURY_FTR.jpg" style="display: block; margin: auto; margin-bottom: 5px;" width="1360" />Gaming studio LightFury Games has raised $11 Mn in its pre-Series A funding round from Blume Ventures, V3 Ventures, MIXI,&#8230;
+
+## 71. Datacenter boom keeps dirty coal plants alive in the US
 - Domain: go.theregister.com
 - URL: https://go.theregister.com/feed/www.theregister.com/2026/04/22/us_nonprofits_datacenter_power_plants/
 - Relevance score: 5.7
 - Published: 2026-04-22T17:10:14.00Z
 - Summary: <h4>Happy Earth Day!</h4> <p>Datacenter growth in the US is helping keep aging fossil-fuel plants online longer, slowing the shift to a cleaner grid and worsening air pollution, according to new research from a group of environmental nonprofits.…</p> <p><!--#include virtual='/data_centre/_whitepaper_textlinks_top.html' --></p>
 
-## 71. Data center exec cites challenges on AI shift - Philippine News Agency
+## 72. Data center exec cites challenges on AI shift - Philippine News Agency
 - Domain: pna.gov.ph
 - URL: https://news.google.com/rss/articles/CBMiUEFVX3lxTE1XZXhwQ2lyMm9tZTJXU2M4cXJaSDlWb0ptazJvVnkxYVlYWkpyWTRLNlU2VldHRlUwOHBaakFSaUp1WTlBY0RMMVV5b3VPbUc0
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 23:07:25 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiUEFVX3lxTE1XZXhwQ2lyMm9tZTJXU2M4cXJaSDlWb0ptazJvVnkxYVlYWkpyWTRLNlU2VldHRlUwOHBaakFSaUp1WTlBY0RMMVV5b3VPbUc0?oc=5" target="_blank">Data center exec cites challenges on AI shift</a>&nbsp;&nbsp;<font color="#6f6f6f">Philippine News Agency</font>
 
-## 72. Should the federal government regulate artificial intelligence? - Baytown Sun
+## 73. Should the federal government regulate artificial intelligence? - Baytown Sun
 - Domain: baytownsun.com
 - URL: https://news.google.com/rss/articles/CBMi1AFBVV95cUxQdW03eDd2akpxaEZoMWxnb2pFYy16aHhzQ2lyZ1I2WmNQLVRDOVhfTl9kaWpNRHpGRE5xQ0cyMXlCcElNRGdyWkE5dGJ6OXZ4UVhiWll0cnpweGZpS0o3RmJvamt6MjZmTG45U3lwS2Z5OVNZVWNUTkY1SFBFTHZiS0FYcGQ5MmpoRHRxQjZpdW1fRU1GY2RaNEV3MnVwT3pRQ05MQ1VfcGNRQ1dvdi13X05BVWtDbkZ4Y1RULXdOWWdid0hLVHVzVWxDY0dldG01SkxKUg
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 22:45:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQdW03eDd2akpxaEZoMWxnb2pFYy16aHhzQ2lyZ1I2WmNQLVRDOVhfTl9kaWpNRHpGRE5xQ0cyMXlCcElNRGdyWkE5dGJ6OXZ4UVhiWll0cnpweGZpS0o3RmJvamt6MjZmTG45U3lwS2Z5OVNZVWNUTkY1SFBFTHZiS0FYcGQ5MmpoRHRxQjZpdW1fRU1GY2RaNEV3MnVwT3pRQ05MQ1VfcGNRQ1dvdi13X05BVWtDbkZ4Y1RULXdOWWdid0hLVHVzVWxDY0dldG01SkxKUg?oc=5" target="_blank">Should the federal government regulate artificial intelligence?</a>&nbsp;&nbsp;<font color="#6f6f6f">Baytown Sun</font>
 
-## 73. INTELLIGENT ARTIFICIEL-Google trouve sa place dans la bataille de l'IA pour l'entreprise - Boursorama
+## 74. INTELLIGENT ARTIFICIEL-Google trouve sa place dans la bataille de l'IA pour l'entreprise - Boursorama
 - Domain: boursorama.com
 - URL: https://news.google.com/rss/articles/CBMi-gFBVV95cUxNSXNKa08zNHdacmhOaHhiVVozdWR4UXN4TlBUa2RydGV0dDZUVjZENHBOMkVPZFB3WGhiVm13c1dhMDRSQnVHaGk2cXpGU29GSjhSbmgtcmpRNjRmbzIxSVVGQnVtM21VamN2T01fNXcyM3BSdGdnXzIyR0ZyVUNYaHhXYjJWR21ENk0xOUtQOUJjQ0pNZ2RZOE5nMWNhaC0tRjIyZFdhYXhucG5VMGpzbldKRlJ0SlZFVmpJcENraG9wSVM4N3RVU2dqaHZsWVdWUnptZHRaTU82dXB4Z29kMkJwV3NsQTJBSkQ3dzJjRVVZcm5xWXU0X2dB0gH_AUFVX3lxTE5BRVhwYldPVHBEa0l5R2l5YXZ5ZS0wTTk5SDJhNEh5SEdFLWRJajF2RE5hbzBFS0gzckt1LVpQb0ZjVXNlRU92cXFBLTIyNzNkMDhBQ2VRSkk0Qlp2REFzTndZMnFSSHFoUUVqWWJPZXl0NnhzNVJtQjRBSGlzUUdVQ3Rxci1MVmNvaFBOYmNUWkdORGllaktZM3JFTW1YeklsODRTZ1pRUWlmb05OdDF2WXl3NGhqWURaekxyQk9FUjQtV2dLMHVSZkxQSDAyY0N2YnVGNkFyOXdBSnJXd3RKN1ZqUnVjTzMzRkljVEJqY0E3eUswbWN3NV93R2diUQ
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 22:04:16 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi-gFBVV95cUxNSXNKa08zNHdacmhOaHhiVVozdWR4UXN4TlBUa2RydGV0dDZUVjZENHBOMkVPZFB3WGhiVm13c1dhMDRSQnVHaGk2cXpGU29GSjhSbmgtcmpRNjRmbzIxSVVGQnVtM21VamN2T01fNXcyM3BSdGdnXzIyR0ZyVUNYaHhXYjJWR21ENk0xOUtQOUJjQ0pNZ2RZOE5nMWNhaC0tRjIyZFdhYXhucG5VMGpzbldKRlJ0SlZFVmpJcENraG9wSVM4N3RVU2dqaHZsWVdWUnptZHRaTU82dXB4Z29kMkJwV3NsQTJBSkQ3dzJjRVVZcm5xWXU0X2dB0gH_AUFVX3lxTE5BRVhwYldPVHBEa0l5R2l5YXZ5ZS0wTTk5SDJhNEh5SEdFLWRJajF2RE5hbzBFS0gzckt1LVpQb0ZjVXNlRU92cXFBLTIyNzNkMDhBQ2VRSkk0Qlp2REFzTndZMnFSSHFoUUVqWWJPZXl0NnhzNVJtQjRBSGlzUUdVQ3Rxci1MVmNvaFBOYmNUWkdORGllaktZM3JFTW1YeklsODRTZ1pRUWlmb05OdDF2WXl3NGhqWURaekxyQk9FUjQtV2dLMHVSZkxQSDAyY0N2YnVGNkFyOXdBSnJXd3RKN1ZqUnVjTzMzRkljVEJqY0E3eUswbWN3NV93R2diUQ?oc=5" target="_blank">INTELLIGENT ARTIFICIEL-Google trouve sa place dans la bataille de l'IA pour l'entreprise</a>&nbsp;&nbsp;<font color="#6f6f6f">Boursorama</font>
 
-## 74. 2026 Spring Homeland | Where artificial intelligence meets water stewardship in agriculture - Tri-State Livestock News
+## 75. 2026 Spring Homeland | Where artificial intelligence meets water stewardship in agriculture - Tri-State Livestock News
 - Domain: tsln.com
 - URL: https://news.google.com/rss/articles/CBMitwFBVV95cUxNa1VQWFpyMzl0S0JaTWF5MVJ3c2h0TmhIZ3hYc2RhcXo5TUF6M0l0RUpWdlR3QWF4d0JZNXE3b2RVLWEzX25nQXE1dTBRaTdqbjFVRUhSUVZFdzJidnR1aXUyMHJHLUhMUi11am83Y0pSa2V0RU56em8yejhtSnpINWZpd3pKREZaNVQyMlJwVVdJdXo2c2RBRTc1SjFHekdKWEktcWh6cU9lRWRVbWYzd3lXRmdSaHc
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 22:03:49 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxNa1VQWFpyMzl0S0JaTWF5MVJ3c2h0TmhIZ3hYc2RhcXo5TUF6M0l0RUpWdlR3QWF4d0JZNXE3b2RVLWEzX25nQXE1dTBRaTdqbjFVRUhSUVZFdzJidnR1aXUyMHJHLUhMUi11am83Y0pSa2V0RU56em8yejhtSnpINWZpd3pKREZaNVQyMlJwVVdJdXo2c2RBRTc1SjFHekdKWEktcWh6cU9lRWRVbWYzd3lXRmdSaHc?oc=5" target="_blank">2026 Spring Homeland | Where artificial intelligence meets water stewardship in agriculture</a>&nbsp;&nbsp;<font color="#6f6f6f">Tri-State Livestock News</font>
 
-## 75. 'I think it's a mistake': Delta CEO Ed Bastian refuses to call it 'artificial intelligence' because it scares people - Fortune
+## 76. 'I think it's a mistake': Delta CEO Ed Bastian refuses to call it 'artificial intelligence' because it scares people - Fortune
 - Domain: fortune.com
 - URL: https://news.google.com/rss/articles/CBMiugFBVV95cUxPdWlDM2gtMGxSaFJHQ1dRNGpXUk9fLWp0bzVmMHVib2JyNlE2QWVqbm43WG1CeGdOVndpMlJmQ1dkRkJGajJNTjNBZGZYa2ZTbFpySUlITzFOM2JCQ09IeDZCNTlpQURCLS1fRDFFLWdtTERLS0RYRkVKQkd4Rll1YnB2Z3dFZ2wzeVlyakxvUUFybjVuUFhkWmJ4aDNvS3RRRWJIS3plekY3U1ZEcWphTEsxdFFHQkRWQnc
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 21:12:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPdWlDM2gtMGxSaFJHQ1dRNGpXUk9fLWp0bzVmMHVib2JyNlE2QWVqbm43WG1CeGdOVndpMlJmQ1dkRkJGajJNTjNBZGZYa2ZTbFpySUlITzFOM2JCQ09IeDZCNTlpQURCLS1fRDFFLWdtTERLS0RYRkVKQkd4Rll1YnB2Z3dFZ2wzeVlyakxvUUFybjVuUFhkWmJ4aDNvS3RRRWJIS3plekY3U1ZEcWphTEsxdFFHQkRWQnc?oc=5" target="_blank">'I think it's a mistake': Delta CEO Ed Bastian refuses to call it 'artificial intelligence' because it scares people</a>&nbsp;&nbsp;<font color="#6f6f6f">Fortune</font>
 
-## 76. Youth and artificial intelligence - haysfreepress.com
+## 77. Youth and artificial intelligence - haysfreepress.com
 - Domain: haysfreepress.com
 - URL: https://news.google.com/rss/articles/CBMigwFBVV95cUxQRFdxb1N6a25uRFhNSnRsZFlQbTdyX0V5QkRPZnljYk1CX0lXVDZVOGpTVVV1Zl9DS1RDNnVnMnNHc3ZQR2hzcXV4cktZcDJDSkFGY0U1Wmw0ZXYtSDVQck1oZ2VtTzB6YThnUHV0dlNOZWhxZ0ltRXdQdjlYQUJPc0pXQQ
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 20:50:24 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQRFdxb1N6a25uRFhNSnRsZFlQbTdyX0V5QkRPZnljYk1CX0lXVDZVOGpTVVV1Zl9DS1RDNnVnMnNHc3ZQR2hzcXV4cktZcDJDSkFGY0U1Wmw0ZXYtSDVQck1oZ2VtTzB6YThnUHV0dlNOZWhxZ0ltRXdQdjlYQUJPc0pXQQ?oc=5" target="_blank">Youth and artificial intelligence</a>&nbsp;&nbsp;<font color="#6f6f6f">haysfreepress.com</font>
 
-## 77. Background Coding Agents: Supercharging Downstream Consumer Dataset Migrations (Honk, Part 4)
+## 78. Background Coding Agents: Supercharging Downstream Consumer Dataset Migrations (Honk, Part 4)
 - Domain: engineering.atspotify.com
 - URL: https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4/
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 19:39:08 +0000
 - Summary: <p>How we used Honk, Backstage, and Fleet Management to ease the pain of migrating thousands of datasets.</p> <p>The post <a href="https://engineering.atspotify.com/2026/4/background-coding-agents-dataset-migrations-honk-part-4/">Background Coding Agents: Supercharging Downstream Consumer Dataset Migrations (Honk, Part 4)</a> appeared first on <a href="https://engineering.atspotify.com">Spotify Engineering</a>.</p>
 
-## 78. Get to your first working agent in minutes: Announcing new features in Amazon Bedrock AgentCore
+## 79. Get to your first working agent in minutes: Announcing new features in Amazon Bedrock AgentCore
 - Domain: aws.amazon.com
 - URL: https://aws.amazon.com/blogs/machine-learning/get-to-your-first-working-agent-in-minutes-announcing-new-features-in-amazon-bedrock-agentcore/
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 19:13:56 +0000
 - Summary: Today, we're introducing new capabilities that further streamline the agent building experience, removing the infrastructure barriers that slow teams down at every stage of agent development from the first prototype through production deployment.
 
-## 79. Artificial intelligence boss named Luna running San Francisco store Andon Market in Cow Hollow neighborhood - ABC7 New York
+## 80. Artificial intelligence boss named Luna running San Francisco store Andon Market in Cow Hollow neighborhood - ABC7 New York
 - Domain: abc7ny.com
 - URL: https://news.google.com/rss/articles/CBMi1AFBVV95cUxNVGlEUG5KdHVXYWRObkxhbWgzbzhmYWg3Nml6ZUYyNE9KSlRaN0g1a1VRTjlEYlZWNnFGdlRsbUZFRTY5U0FmeHVGSG5jQnk4Nlc1akE0TUs4LTdnNEZqckMwMWRMSUY3MlFUcFFXdkxuNzJGZWN4N3duMXZqLWtHUzFTNWtib3RoMTdQYm85b3ZOUDBGWUxHS3ZhRnpWQVBFVDAzTzJTTl9IUEZ0U1VKUWVYNkNVNHJXMlhiSkFOcWZhRGI0bW1pcEZqOXhYM3NPRnRiMNIB2gFBVV95cUxOeXMwaHBVRVpUQVIzZW16WUJya3EyWG42MXEyUk8tWTYtV1NlOTVVc0hINnQ0WnFsUHZVaktEVVZOZXhUclctZVB6NHNQQ2htSGRDLVlDVk5YTDEzRUpIbXdzVHA4ZXJ1WEtYcHJqQ09GWjRhQUFJTWlJNThqMzFySFhuOVkyd2gtTGY3dHRGU0xUcnNZM3NyZllYa1gySUVoZU0yMmZ4dWg4YnRRbTJJc0VMaVRPM29Eckdua0wzNTFOQWlmWFZQSW40WHFibjNPTi1PZnVFeWo1UQ
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 18:00:45 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxNVGlEUG5KdHVXYWRObkxhbWgzbzhmYWg3Nml6ZUYyNE9KSlRaN0g1a1VRTjlEYlZWNnFGdlRsbUZFRTY5U0FmeHVGSG5jQnk4Nlc1akE0TUs4LTdnNEZqckMwMWRMSUY3MlFUcFFXdkxuNzJGZWN4N3duMXZqLWtHUzFTNWtib3RoMTdQYm85b3ZOUDBGWUxHS3ZhRnpWQVBFVDAzTzJTTl9IUEZ0U1VKUWVYNkNVNHJXMlhiSkFOcWZhRGI0bW1pcEZqOXhYM3NPRnRiMNIB2gFBVV95cUxOeXMwaHBVRVpUQVIzZW16WUJya3EyWG42MXEyUk8tWTYtV1NlOTVVc0hINnQ0WnFsUHZVaktEVVZOZXhUclctZVB6NHNQQ2htSGRDLVlDVk5YTDEzRUpIbXdzVHA4ZXJ1WEtYcHJqQ09GWjRhQUFJTWlJNThqMzFySFhuOVkyd2gtTGY3dHRGU0xUcnNZM3NyZllYa1gySUVoZU0yMmZ4dWg4YnRRbTJJc0VMaVRPM29Eckdua0wzNTFOQWlmWFZQSW40WHFibjNPTi1PZnVFeWo1UQ?oc=5" target="_blank">Artificial intelligence boss named Luna running San Francisco store Andon Market in Cow Hollow neighborhood</a>&nbsp;&nbsp;<font color="#6f6f6f">ABC7 New York</font>
 
-## 80. Pentagon asks for $54bn in pivot towards AI-powered war
+## 81. Pentagon asks for $54bn in pivot towards AI-powered war
 - Domain: theguardian.com
 - URL: https://www.theguardian.com/us-news/2026/apr/22/pentagon-asks-for-54bn-in-pivot-towards-ai-powered-war
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 17:24:02 GMT
 - Summary: <p>Budget outlines funding for autonomous drone warfare program as experts say military unprepared for risks</p><p>The Pentagon is aiming to increase funding more than a hundredfold for an autonomous drone warfare program, according to budget documents released this week, signalling a major pivot towards AI-powered war.</p><p>In its 2027 <a href="https://comptroller.war.gov/Budget-Materials/Budget2027/">budget</a>, the Pentagon has asked for over $54bn to fund the Defense Autonomous Warfare Group, a 24,000% increase on last year.</p> <a href="https://www.theguardian.com/us-news/2026/apr/22/pentagon-asks-for-54bn-in-pivot-towards-ai-powered-war">Continue reading...</a>
 
-## 81. PARIS : Intelligence Artificielle - Bull décroche un contrat de 30 M€ pour l'AI Factory suédoise Mimer - Presse Agence
+## 82. PARIS : Intelligence Artificielle - Bull décroche un contrat de 30 M€ pour l'AI Factory suédoise Mimer - Presse Agence
 - Domain: presseagence.fr
 - URL: https://news.google.com/rss/articles/CBMivwFBVV95cUxQQmtSZ2hiTzZyNlBhNjFxZlpKazAxM1hQellmeFNud0RYS0pDSmhTaHZpMDl5ZFo2cWZhWTZqZWF2UzVmZTFiV0pwRllHcWgyUkIxLUR4NzIxYjdIV1owVWxsbUdZR3JtUVZqWGdrYnlfeXF1SWktLWtMRktCdWdHZ3dLNlViVkkzRFFoX0FtREF2SGFNU0dFX1lhSUpSRFE2SWIzc0RoYXlTQkE0QVZYMUFHRXVFQVBCYlZ5LTJ5aw
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 17:00:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxQQmtSZ2hiTzZyNlBhNjFxZlpKazAxM1hQellmeFNud0RYS0pDSmhTaHZpMDl5ZFo2cWZhWTZqZWF2UzVmZTFiV0pwRllHcWgyUkIxLUR4NzIxYjdIV1owVWxsbUdZR3JtUVZqWGdrYnlfeXF1SWktLWtMRktCdWdHZ3dLNlViVkkzRFFoX0FtREF2SGFNU0dFX1lhSUpSRFE2SWIzc0RoYXlTQkE0QVZYMUFHRXVFQVBCYlZ5LTJ5aw?oc=5" target="_blank">PARIS : Intelligence Artificielle - Bull décroche un contrat de 30 M€ pour l'AI Factory suédoise Mimer</a>&nbsp;&nbsp;<font color="#6f6f6f">Presse Agence</font>
 
-## 82. Semiconductor stocks on track for longest-ever rally amid AI optimism - Moneycontrol.com
+## 83. Semiconductor stocks on track for longest-ever rally amid AI optimism - Moneycontrol.com
 - Domain: moneycontrol.com
 - URL: https://news.google.com/rss/articles/CBMizwFBVV95cUxQZ1hNeW55TEM4WndfU3M1YnIxVl9McW1mU3pSbFAzU0pLYnpBZEN5d040dlBXMHRMQkhnZTViWFB5cjRNQUhWbExYQlVRdXJoc0JhRVR4ZlVDQnNYamxBZ1hhcFVaX2Y2TEZqZ1RpM3huRnJMRVp5bE5hb2ZBQzNVcWZHbUgxZ0xWRXg4MVZSa01NaFVKcDc1Mk81dURwWWF5ZTVZZVNsREdJamw4VkRCbzFOQjE0Qms5dFlTbk5seEdQTkpHNFJUeG5FNXY1cWfSAdQBQVVfeXFMTWxCN0RuSHB5aVhTU3J4Yk1ObXdSS24wOTdTa0R2Q2hZbHh4Q2ZGVkhoalF3N0ZiNE0wSFpHVWp0TXN2LV9xX3UtSG5XOUVWNy1wM0xHS0QtWEpnWEtSU2pMSlhCM01GRGtZZjNyNFdNYndFRE5CUHlMQk4tMFQ1R0lKTm5mU29raEVVaHBMZjBPUllmYUNaZkZrOHpTRmpSYzFBcS1MamhqbkR5VHRTUWxtQ2d1dG8xeVF2YUk3RHZQeGNnR3hnbGNOQ1prVE5Kdi1nb3A
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 15:23:10 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxQZ1hNeW55TEM4WndfU3M1YnIxVl9McW1mU3pSbFAzU0pLYnpBZEN5d040dlBXMHRMQkhnZTViWFB5cjRNQUhWbExYQlVRdXJoc0JhRVR4ZlVDQnNYamxBZ1hhcFVaX2Y2TEZqZ1RpM3huRnJMRVp5bE5hb2ZBQzNVcWZHbUgxZ0xWRXg4MVZSa01NaFVKcDc1Mk81dURwWWF5ZTVZZVNsREdJamw4VkRCbzFOQjE0Qms5dFlTbk5seEdQTkpHNFJUeG5FNXY1cWfSAdQBQVVfeXFMTWxCN0RuSHB5aVhTU3J4Yk1ObXdSS24wOTdTa0R2Q2hZbHh4Q2ZGVkhoalF3N0ZiNE0wSFpHVWp0TXN2LV9xX3UtSG5XOUVWNy1wM0xHS0QtWEpnWEtSU2pMSlhCM01GRGtZZjNyNFdNYndFRE5CUHlMQk4tMFQ1R0lKTm5mU29raEVVaHBMZjBPUllmYUNaZkZrOHpTRmpSYzFBcS1MamhqbkR5VHRTUWxtQ2d1dG8xeVF2YUk3RHZQeGNnR3hnbGNOQ1prVE5Kdi1nb3A?oc=5" target="_blank">Semiconductor stocks on track for longest-ever rally amid AI optimism</a>&nbsp;&nbsp;<font color="#6f6f6f">Moneycontrol.com</font>
 
-## 83. What is Mythos AI and why could it be a threat to global cybersecurity?
+## 84. What is Mythos AI and why could it be a threat to global cybersecurity?
 - Domain: theguardian.com
 - URL: https://www.theguardian.com/technology/2026/apr/22/what-is-anthropic-mythos-ai-threat-global-cybersecurity
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 15:03:44 GMT
 - Summary: <p>Anthropic’s decision to restrict access to its powerful new model increases fears about the advanced technology</p><p>Anthropic has ruled out releasing its latest AI model, Mythos, to the public because of the threat it poses to global cybersecurity.</p><p>However, the US tech startup behind the Claude chatbot confirmed on Wednesday it was investigating a report that a group of people had<a href="https://www.theguardian.com/technology/2026/apr/22/anthropic-investigates-report-of-rogue-access-to-hack-enabling-mythos-ai"> gained unauthorised access to Mythos</a>. The alleged incident has raised concerns over the pace of development and the ability of tech companies to keep their riskiest products out of the public domain. Here, we examine Mythos and its potential impact.</p> <a href="https://www.theguardian.com/technology/2026/apr/22/what-is-anthropic-mythos-ai-threat-global-cybersecurity">Continue reading...</a>
 
-## 84. Penn State Harrisburg advances regional artificial intelligence leadership - The Pennsylvania State University
+## 85. Penn State Harrisburg advances regional artificial intelligence leadership - The Pennsylvania State University
 - Domain: psu.edu
 - URL: https://news.google.com/rss/articles/CBMitwFBVV95cUxQWGRERU9JZkFxLXhDVWxiaU9FTWJWVHpoT1BrNGhKZ0NoMXZSN1BVQ1h2cEdWMW00U29Takt4TFRBd2xNaVFHNDFxWGdLcnYxRG84ZUFlN3dWSDlIVTZWbWFocHJKMXAxd21NRXFPMHZFNW8zMTl2ZGI0SlJESzNkNWFES2RlQkJKaGtMYWtnY0t0REtJenAzNkF4NWlmMjVRQThzWVhha3JtNTNvTEloc0x2N2tyTG8
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 13:00:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQWGRERU9JZkFxLXhDVWxiaU9FTWJWVHpoT1BrNGhKZ0NoMXZSN1BVQ1h2cEdWMW00U29Takt4TFRBd2xNaVFHNDFxWGdLcnYxRG84ZUFlN3dWSDlIVTZWbWFocHJKMXAxd21NRXFPMHZFNW8zMTl2ZGI0SlJESzNkNWFES2RlQkJKaGtMYWtnY0t0REtJenAzNkF4NWlmMjVRQThzWVhha3JtNTNvTEloc0x2N2tyTG8?oc=5" target="_blank">Penn State Harrisburg advances regional artificial intelligence leadership</a>&nbsp;&nbsp;<font color="#6f6f6f">The Pennsylvania State University</font>
 
-## 85. TN lawmakers target artificial intelligence with three bills - WKRN News 2
+## 86. TN lawmakers target artificial intelligence with three bills - WKRN News 2
 - Domain: wkrn.com
 - URL: https://news.google.com/rss/articles/CBMibkFVX3lxTE5pMTlSbm1hM3F5dnFuOHZCMEJ4VU85MlhUdG9lZTdIVV9ScHZHZjB5cS14NGRBN1JuYWh3MGFtenpEdTQxRVJodmpWY2xpMFRodVJzY0hYMFpway10X25UdW8xWUhseFNqdUlOdlB30gFzQVVfeXFMTUZXRGxESzZjMDhOMWRQN0JWdE1YNGV5RDdTNnhDYzIzaVB4d3hqQnVZRU9qaHI2UDZWS2RxU2lQT2JOcG14T3VsM0twaTY4U0UyMWZCSnlhU1VUdml6NFhReHphakV6dldfUXptMkRobHN2bw
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 12:46:18 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5pMTlSbm1hM3F5dnFuOHZCMEJ4VU85MlhUdG9lZTdIVV9ScHZHZjB5cS14NGRBN1JuYWh3MGFtenpEdTQxRVJodmpWY2xpMFRodVJzY0hYMFpway10X25UdW8xWUhseFNqdUlOdlB30gFzQVVfeXFMTUZXRGxESzZjMDhOMWRQN0JWdE1YNGV5RDdTNnhDYzIzaVB4d3hqQnVZRU9qaHI2UDZWS2RxU2lQT2JOcG14T3VsM0twaTY4U0UyMWZCSnlhU1VUdml6NFhReHphakV6dldfUXptMkRobHN2bw?oc=5" target="_blank">TN lawmakers target artificial intelligence with three bills</a>&nbsp;&nbsp;<font color="#6f6f6f">WKRN News 2</font>
 
-## 86. Google Maps is about to get a big dose of AI
+## 87. Google Maps is about to get a big dose of AI
 - Domain: techcrunch.com
 - URL: https://techcrunch.com/2026/04/22/google-maps-is-about-to-get-a-big-dose-of-ai/
 - Relevance score: 5.5
 - Published: Wed, 22 Apr 2026 12:00:00 +0000
 - Summary: The new features, announced at Cloud Next in Las Vegas this week, add generative AI capabilities to Google's mapping platform, giving it enhanced visual and data analytics powers.
 
-## 87. Voices of Youth: Learning to live with artificial intelligence requires some deep thinking - Second Wave Media
-- Domain: secondwavemedia.com
-- URL: https://news.google.com/rss/articles/CBMiugFBVV95cUxNazZNYl81elNSUU9neXBBaVBoMmZVNFQ3Nno3OHA5Z092c0VFdWx5WXFhdHRENjRJOHJKdzJydkNidUo3aHk5Y3NrWFV0cFRrZ3psOWtGQ3JqazlkdVdWWTBsUE9pUHl4YWFWRXoyd0szc3FjNV9IN2p5bFh3MHVuRnNnb3RNcWJGMnNuVWRkYjM0ZnpZbElZcEp2Vm5PWmpGbVFmc2VUT1AtZWVmZ2RNMFVZVXdWUlNtVXc
+## 88. Colleges are turning to oral exams to combat artificial intelligence - Indianapolis Business Journal
+- Domain: ibj.com
+- URL: https://news.google.com/rss/articles/CBMingFBVV95cUxQalJ6M181YWgycDktckd3bmFnaTM0SWtPeTNmVHozMFBzaXU3TWhGc2hacDIyLTNDdm5ITEF3bWlKaFJvY0sxZ0NJTnV2RUk1dkVCeVgxN1VwQzhOaVBzMkVYTzdSWVdOMllPTzItRDBMeVlRbFhOcmJTVFhlMVJQUlJJS3B3RUoyUGktNHdQWDFvUGd1Q3NGcnNNUEYzdw
 - Relevance score: 5.5
-- Published: Tue, 21 Apr 2026 17:02:48 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxNazZNYl81elNSUU9neXBBaVBoMmZVNFQ3Nno3OHA5Z092c0VFdWx5WXFhdHRENjRJOHJKdzJydkNidUo3aHk5Y3NrWFV0cFRrZ3psOWtGQ3JqazlkdVdWWTBsUE9pUHl4YWFWRXoyd0szc3FjNV9IN2p5bFh3MHVuRnNnb3RNcWJGMnNuVWRkYjM0ZnpZbElZcEp2Vm5PWmpGbVFmc2VUT1AtZWVmZ2RNMFVZVXdWUlNtVXc?oc=5" target="_blank">Voices of Youth: Learning to live with artificial intelligence requires some deep thinking</a>&nbsp;&nbsp;<font color="#6f6f6f">Second Wave Media</font>
+- Published: Thu, 23 Apr 2026 04:55:08 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQalJ6M181YWgycDktckd3bmFnaTM0SWtPeTNmVHozMFBzaXU3TWhGc2hacDIyLTNDdm5ITEF3bWlKaFJvY0sxZ0NJTnV2RUk1dkVCeVgxN1VwQzhOaVBzMkVYTzdSWVdOMllPTzItRDBMeVlRbFhOcmJTVFhlMVJQUlJJS3B3RUoyUGktNHdQWDFvUGd1Q3NGcnNNUEYzdw?oc=5" target="_blank">Colleges are turning to oral exams to combat artificial intelligence</a>&nbsp;&nbsp;<font color="#6f6f6f">Indianapolis Business Journal</font>
 
-## 88. India weighs stricter AI governance framework amid emerging risks; tougher rules likely: Report - Moneycontrol.com
+## 89. IMA places $4 billion property tower for AI data center - Insurance Business
+- Domain: insurancebusinessmag.com
+- URL: https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMXZQY0l4V3g2TmVwenpNZDR1WUN2dnFqMktSOFNNMG8xYmN6NGtUYnJqanNobTkxWFJfYk92NlY5N0NWTlBWMnJCUE5SclBLM0NKQTY0SnNkaDZQcndtN0NNc2pTTnJ4bVRJdTFIR0RWWFgyOHhkMnR3YkdkNHlFUTdYLURLZkR1NWtTeTlsZkxWNlRLZk5ldk9GQVpFb3JTbmJLYTBzUGRGdVhZOXNYc3JJZU45WTAt
+- Relevance score: 5.5
+- Published: Thu, 23 Apr 2026 04:26:19 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMXZQY0l4V3g2TmVwenpNZDR1WUN2dnFqMktSOFNNMG8xYmN6NGtUYnJqanNobTkxWFJfYk92NlY5N0NWTlBWMnJCUE5SclBLM0NKQTY0SnNkaDZQcndtN0NNc2pTTnJ4bVRJdTFIR0RWWFgyOHhkMnR3YkdkNHlFUTdYLURLZkR1NWtTeTlsZkxWNlRLZk5ldk9GQVpFb3JTbmJLYTBzUGRGdVhZOXNYc3JJZU45WTAt?oc=5" target="_blank">IMA places $4 billion property tower for AI data center</a>&nbsp;&nbsp;<font color="#6f6f6f">Insurance Business</font>
+
+## 90. India weighs stricter AI governance framework amid emerging risks; tougher rules likely: Report - Moneycontrol.com
 - Domain: moneycontrol.com
 - URL: https://news.google.com/rss/articles/CBMi_AFBVV95cUxNSHFRaGVDMGtnam5QZmdrN2ZnN1Fyekp3dkhYSW5ZaGpBVS13VkxIVEdldlN2c043TURSZ1FCTHQwVk9jZjNEaU9lTXNFdWFIUi1mOG96R1BlcDBuMGtKSGdjODF3V0xMMjdlWHM3d1FsSFpnVDd5REVmSTctUjZLZVpyMUlOeVNrS0NZem9ZdkNnMTlIUFM5MFNmUXF5dno4QUhRaE5pb09lb29fRDdKYVlnSThBY2tNUG50cTFZYWVwU2FjenJ2UGIxTVZjYjZDY3VMbExRSTZBR2ZrR0FPNHZYOTRpVFU3YlEyODFIMHZOUDZ5VW9jdXdUMWrSAYICQVVfeXFMTU51OUpvcF94U2JoSnVrUmJ4Y0pNSldubkw5RWVWc1JGaC1vbjNlelcyRDBEaFpzQU9JZk1ETHNkUHFWcGxuOHB0eTdYU2dZUm5xa283RDY5STNZY1o2MVJuNkVPUnp6S3BlNjE4YTVqVmxYSzNrUm9jUXRNVzY2d1Y3M2JiZFh2dmgzRl9VOGd0OHZBc2RQQVdkWWRIRHB3bTZHYWJETURQU0ZZRTBKQzg5Qm9VS0FZSzd1ZWNhMDNIU2Mxc0pURTlKb0gwSXUxb2k4VUdPQ0ZkMUVQa0RtRmpETlhoeE1TNXpic3NmZm5JakRyYVZOakFQM3ZGbmRDa2pB
 - Relevance score: 5.5
 - Published: Thu, 23 Apr 2026 04:05:59 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi_AFBVV95cUxNSHFRaGVDMGtnam5QZmdrN2ZnN1Fyekp3dkhYSW5ZaGpBVS13VkxIVEdldlN2c043TURSZ1FCTHQwVk9jZjNEaU9lTXNFdWFIUi1mOG96R1BlcDBuMGtKSGdjODF3V0xMMjdlWHM3d1FsSFpnVDd5REVmSTctUjZLZVpyMUlOeVNrS0NZem9ZdkNnMTlIUFM5MFNmUXF5dno4QUhRaE5pb09lb29fRDdKYVlnSThBY2tNUG50cTFZYWVwU2FjenJ2UGIxTVZjYjZDY3VMbExRSTZBR2ZrR0FPNHZYOTRpVFU3YlEyODFIMHZOUDZ5VW9jdXdUMWrSAYICQVVfeXFMTU51OUpvcF94U2JoSnVrUmJ4Y0pNSldubkw5RWVWc1JGaC1vbjNlelcyRDBEaFpzQU9JZk1ETHNkUHFWcGxuOHB0eTdYU2dZUm5xa283RDY5STNZY1o2MVJuNkVPUnp6S3BlNjE4YTVqVmxYSzNrUm9jUXRNVzY2d1Y3M2JiZFh2dmgzRl9VOGd0OHZBc2RQQVdkWWRIRHB3bTZHYWJETURQU0ZZRTBKQzg5Qm9VS0FZSzd1ZWNhMDNIU2Mxc0pURTlKb0gwSXUxb2k4VUdPQ0ZkMUVQa0RtRmpETlhoeE1TNXpic3NmZm5JakRyYVZOakFQM3ZGbmRDa2pB?oc=5" target="_blank">India weighs stricter AI governance framework amid emerging risks; tougher rules likely: Report</a>&nbsp;&nbsp;<font color="#6f6f6f">Moneycontrol.com</font>
 
-## 89. Kabeer Biswas’ M Raises ₹102 Cr From Peak XV, Blume
-- Domain: inc42.com
-- URL: https://inc42.com/buzz/kabeer-biswas-m-raises-%e2%82%b9102-cr-from-peak-xv-blume/
-- Relevance score: 5.3
-- Published: Wed, 22 Apr 2026 13:34:20 +0000
-- Summary: <img alt="" class="webfeedsFeaturedVisual wp-post-image" height="1020" src="https://inc42.com/cdn-cgi/image/quality=90/https://asset.inc42.com/2026/04/Untitled-design-10.png" style="display: block; margin: auto; margin-bottom: 5px;" width="1360" />Former Dunzo cofounder Kabeer Biswas’ new startup, M, is looking to net ₹102 Cr (about $11 Mn) from Peak XV&#8230;
-
-## 90. Shopify’s AI Phase Transition: 2026 Usage Explosion, Unlimited Opus-4.6 Token Budget, Tangle, Tangent, SimGym — with Mikhail Parakhin, Shopify CTO
+## 91. Shopify’s AI Phase Transition: 2026 Usage Explosion, Unlimited Opus-4.6 Token Budget, Tangle, Tangent, SimGym — with Mikhail Parakhin, Shopify CTO
 - Domain: latent.space
 - URL: https://www.latent.space/p/shopify
 - Relevance score: 5.2
 - Published: Wed, 22 Apr 2026 19:33:49 GMT
 - Summary: A rare interview with Shopify's CTO on -everything- that Shopify is doing to maximize AI for their customers, with exclusive data on their own AI adoption.
 
-## 91. Reversing enterprise security costs with AI vulnerability discovery
-- Domain: artificialintelligence-news.com
-- URL: https://www.artificialintelligence-news.com/news/reversing-enterprise-security-costs-with-ai-vulnerability-discovery/
-- Relevance score: 5.2
-- Published: Wed, 22 Apr 2026 15:45:14 +0000
-- Summary: <p>Automated AI vulnerability discovery is reversing the enterprise security costs that traditionally favour attackers. Bringing exploits to zero was once viewed as an unrealistic goal. The prevailing operational doctrine aimed to make attacks so expensive that only adversaries with functionally unlimited budgets could afford them, thereby disincentivising casual use. However, the recent evaluation by the [&#8230;]</p> <p>The post <a href="https://www.artificialintelligence-news.com/news/reversing-enterprise-security-costs-with-ai-vulnerability-discovery/">Reversing enterprise security costs with AI vulnerability discovery</a> appeared first on <a href="https://www.artificialintelligence-news.com">AI News</a>.</p>
-
-## 92. AI in law firms entering its closing summaries
-- Domain: artificialintelligence-news.com
-- URL: https://www.artificialintelligence-news.com/news/ai-in-law-firms-entering-its-closing-summaries/
-- Relevance score: 5.2
-- Published: Wed, 22 Apr 2026 13:51:00 +0000
-- Summary: <p>In an interview with Artificial Lawyer, Paris-based AI-native consulting firm owner, Olivier Chaduteau, set out a three-part account of the current state of AI in the legal sector. At first, lawyers dismissed AI as irrelevant to expert work. In the second, organisations bought licences to LLMs to signal activity to partners and/or clients, but little [&#8230;]</p> <p>The post <a href="https://www.artificialintelligence-news.com/news/ai-in-law-firms-entering-its-closing-summaries/">AI in law firms entering its closing summaries</a> appeared first on <a href="https://www.artificialintelligence-news.com">AI News</a>.</p>
-
-## 93. Snowflake Makes AI Real for Businesses at Snowflake Summit 26, Featuring Anthropic's Daniela Amodei and Other Industry Leaders - Snowflake
-- Domain: snowflake.com
-- URL: https://news.google.com/rss/articles/CBMi8AFBVV95cUxPajdwN2NENmNRejUyYmlET1FtYkwxRWpnaTFHNnI1SFU3eG9ENERYZ282ajJ0N1lBQjRvRlRPQjN5NjAwc2pvS29qN2VjRkVIYkFUTWdzQVhRek1tZEtuRk05eEFFTnhkZHR0VXNYbWEtaVNjUW8wNGc5Z3laTGRoOVV1RHAzckp0UzJMbFdtUHRyQ21iZE5oVU85ZkYxdUxiNHpBMHpCQy1hYmFFaFdoSUx0MWlrTEpuNTZ4bjNva1g2YmhfTFpaeVM3UG9rYk9NWlN0eWRPN0E0QThobnJ0YzBxMldrQVZUSkoyTTRUOTE
-- Relevance score: 5.2
-- Published: Thu, 23 Apr 2026 02:54:47 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxPajdwN2NENmNRejUyYmlET1FtYkwxRWpnaTFHNnI1SFU3eG9ENERYZ282ajJ0N1lBQjRvRlRPQjN5NjAwc2pvS29qN2VjRkVIYkFUTWdzQVhRek1tZEtuRk05eEFFTnhkZHR0VXNYbWEtaVNjUW8wNGc5Z3laTGRoOVV1RHAzckp0UzJMbFdtUHRyQ21iZE5oVU85ZkYxdUxiNHpBMHpCQy1hYmFFaFdoSUx0MWlrTEpuNTZ4bjNva1g2YmhfTFpaeVM3UG9rYk9NWlN0eWRPN0E0QThobnJ0YzBxMldrQVZUSkoyTTRUOTE?oc=5" target="_blank">Snowflake Makes AI Real for Businesses at Snowflake Summit 26, Featuring Anthropic's Daniela Amodei and Other Industry Leaders</a>&nbsp;&nbsp;<font color="#6f6f6f">Snowflake</font>
-
-## 94. 36氪官方AI专属社群，正式开放招募！
+## 92. 36氪官方AI专属社群，正式开放招募！
 - Domain: 36kr.com
 - URL: https://36kr.com/p/3777870287737860
 - Relevance score: 5.2
 - Published: 2026-04-23 11:31:49  +0800
 - Summary: <h2><strong>36氪AI测评官方社群现已正式开放， 从入门认知到实战应用，从工具使用到项目落地。</strong></h2> <p><strong>36氪AI测评正式开放三大垂直社群：AI启航群、AI实战群、OPC超级个体群。面向不同阶段、不同目标的用户，帮助你更高效地理解AI、使用AI，并推动真实成长与结果落地。</strong></p> <p class="wx-app-wrapper"> &nbsp; </p> <h3><strong>为什么要做三大专属社群？</strong></h3> <p>AI&nbsp;已经从“了解一下”走向“真正使用”。不同用户所处阶段不同，关注的问题也不同。有人需要从零开始建立基础认知，有人希望提升日常实操能力，也有人更关注如何借助&nbsp;AI&nbsp;推动项目落地、个人增长与资源连接。<br />基于此，<strong>36氪AI测评围绕用户的不同阶段与需求，帮助每一类用户都能找到更适合自己的交流空间与成长路径。</strong></p> <p>&nbsp;</p> <h3><strong>三大社群，覆盖AI学习与应用全阶段</strong></h3> <ul> <li><strong>AI启航群</strong><br />面向&nbsp;AI&nbsp;入门用户的启蒙型社群，适合零基础新手、学生群体以及刚开始接触AI的用户。<br />群内将围绕&nbsp;AI&nbsp;基础概念科普、入门教程、工具避坑指南、基础指令教学与常见问题答疑等内容持续展开，帮助用户从&nbsp;0&nbsp;到&nbsp;1&nbsp;建立对&nbsp;AI&nbsp;的基础认知与使用习惯。<br />适合从不会用AI，到开始上手AI的人。</li> </ul> <p><strong>👉入群链接：</strong></p> <p><a href="https://36aidianping.com/?redirectUrl=https://lop82is3mq.feishu.cn/wiki/R88swCDUrij9gMkgVJvcA6fKnFh" rel="noopener noreferrer" target="_blank">https://36aidianping.com/?redirectUrl=https://lop82is3mq.feishu.cn/wiki/R88swCDUrij9gMkgVJvcA6fKnFh</a></p> <p>&nbsp;</p> <ul> <li><strong>AI实战群</strong><br />面向&nbsp;AI&nbsp;进阶用户的实操型社群。适合已经在办公、写作、创作、信息整理等场景中使用&nbsp;AI&nbsp;的用户。<br />群内将持续更新直播干货拆解、案例复盘、
 
-## 95. 36氪首发 | 清华、哈工大团队做灵巧手，成本降到三分之一，三个月融资近亿元
+## 93. 36氪首发 | 清华、哈工大团队做灵巧手，成本降到三分之一，三个月融资近亿元
 - Domain: 36kr.com
 - URL: https://36kr.com/p/3778730451391751
 - Relevance score: 5.2
 - Published: 2026-04-23 09:24:26  +0800
 - Summary: <p>作者&nbsp;|&nbsp;乔钰杰</p> <p>编辑&nbsp;|&nbsp;袁斯来</p> <p>硬氪获悉，深圳市星际光年科技有限公司（以下简称“星际光年”）近日完成新一轮融资，本轮由顺创产投领投，老股东云时资本持续加注，微星宁元跟投。</p> <p>至此，公司在过去三个月内连续完成两轮融资，累计融资规模近亿元。本轮融资将主要用于通用灵巧操作平台在真实工业场景落地、产品持续完善、规模化产线升级及全球团队生态建设。</p> <p>星际光年专注于灵巧手及通用操作平台的研发与商业化，核心团队来自清华大学、哈尔滨工业大学、香港大学、香港科技大学、美国西北大学等海内外顶尖高校，在机器人灵巧操作领域拥有深厚的技术积累与产业洞察。</p> <p><strong>技术路线上，星际光年坚持绳驱与直驱并行的双轨战略：一方面，以技术壁垒极高的全绳驱灵巧手（Pantheon系列）探索性能上限与终极应用场景；另一方面，通过技术降维，推出高性价比、模块化的直驱灵巧手（Gaia系列），推动具身操作技术普惠，加速生态构建。</strong></p> <p>绳驱方面，Pantheon系列采用全腱绳驱传动架构，仿生人手“肌腱—肌肉”协同机制，可实现多自由度高效联动控制。结合公司首创的即时自动张紧算法，在保持末端极致轻量化的同时，可兼具高自由度、高精度、高抗冲击与高负载的特性。</p> <p>创始人位德浩在接受硬氪采访时介绍称，<strong>针对行业普遍担心的绳驱蠕变、温漂问题，星际光年从结构和算法两方面入手，结构上，采用国内唯一的单侧拉绳技术，与特斯拉相同，保证绳索在长期使用情况下的张紧度一致问题。算法层面，配合难度更高的运控算法，解决了绳索一致性与稳定性问题。</strong></p> <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/20260423/v2_7015ab76a772465b831a51c948747d11@5920579_oswg281706oswg676oswg564_img_000?x-oss-process=image/format,jpg/interlace,1" /></p> <p class="img-desc">（图源/企业）</p> <p><strong>直驱方面，基于全栈自研的微型关节模组，星际光年实现了直驱灵巧手“搭积木”般的极简模块化设计。</strong>今年发布的Gaia Hand 20系列，全系标配20个自由度，并配备阶梯式触觉配置，可灵活适配从基础运动控制验证到多模态感知操作的差异化研发需求。</p> <p>“我们把16到20个灵巧手的旋转模块做成了标准化的单一模块，意味着每只手只用一种模块，大大降低了定制化程度，从技术层面实现了降本”位德浩介绍称
 
-## 96. 开年连融两轮的“可以玩的抖音”，又融了5000万美金｜涌现新项目
+## 94. 开年连融两轮的“可以玩的抖音”，又融了5000万美金｜涌现新项目
 - Domain: 36kr.com
 - URL: https://36kr.com/p/3778135439709446
 - Relevance score: 5.2
 - Published: 2026-04-23 08:30:30  +0800
 - Summary: <p>文｜周鑫雨</p> <p>编辑｜杨轩</p> <h3><strong>一句话介绍</strong></h3> <p><a href="https://mp.weixin.qq.com/s?__biz=MzkwMDQ2NDU2Nw==&amp;mid=2247515548&amp;idx=1&amp;sn=33416a6eb79e301c53c3766f6d038edc&amp;scene=21#wechat_redirect" rel="noopener noreferrer" target="_blank">成立于2025年6月的“涌跃智能”，是《智能涌现》曾报道过的AI创业公司</a>。</p> <p>其旗下产品Loopit，好比“可以玩的抖音”，是一个面向C端的AI互动内容平台，覆盖可交互内容的创作、分发和消费。</p> <p>基于自研的“AI Coding+多模态生成”的互动引擎，用户既可以与社区中的内容互动，也可以创作、发表支持图像、语音、视频、3D等全模态可交互互动内容。</p> <h3><strong>团队介绍</strong></h3> <p>“涌跃智能”创始团队，主要出身于“AI六小虎”百川智能的核心团队。</p> <p>“涌跃智能”联合创始人兼CEO陈炜鹏，前百川智能的联合创始人兼大模型负责人，主导了BaiChuan 1-4等大模型的训练。</p> <p>此前，他的职业路径横跨搜索、推荐与社区产品——从搜狗的搜索与信息流，到Soul的内容社区，一直围绕分发与内容形态演进展开。</p> <h3><strong>融资进展</strong></h3> <p><strong>近期，“涌跃智能”完成了新一轮融资，金额为5000万美元。</strong>该轮融资由全球头部游戏厂商Garena领投。</p> <p>本轮投资阵容还包括<strong>经纬创投、蓝驰创投、渶策资本、柏睿资本等</strong>机构，高鹄资本担任独家财务顾问。其中天使股东经纬创投为第4次加码。</p> <p>2026年以来，“涌跃智能”已经连续完成了3轮融资，累计金额近1亿美元。此前，投资方还包括天使股东耀途资本、钟鼎资本等机构。</p> <h3><strong>产品及业务</strong></h3> <p>2026年才过了1/3，“涌跃智能”就连续完成了三轮融资。资本市场火热，背后是Loopit所代表的AI应用赛道的兴起：<strong>AI互动式内容平台</strong>。</p> <p>在Loopit创作端，用户可以通过文字输入创意，生成可互动的mini-App，也可以基于其余用户创作的内容进行remix（魔改）；</p> <p class="image-wrapper"><img src="https://img.36krcdn.com/hsossms/2026
 
-## 97. Another npm supply chain worm is tearing through dev environments
+## 95. Another npm supply chain worm is tearing through dev environments
 - Domain: go.theregister.com
 - URL: https://go.theregister.com/feed/www.theregister.com/2026/04/22/another_npm_supply_chain_attack/
 - Relevance score: 5.2
 - Published: 2026-04-22T22:34:59.00Z
 - Summary: <h4>Plus, the payload references 'TeamPCP/LiteLLM method'</h4> <p>Yet another npm supply-chain attack is worming its way through compromised packages, stealing secrets and sensitive data as it moves through developers' environments, and it shares significant overlap with the open source infections attributed to TeamPCP last month.…</p>
 
-## 98. SK Hynix’s aspirations for ’Merica-made HBM inch closer to reality
+## 96. SK Hynix’s aspirations for ’Merica-made HBM inch closer to reality
 - Domain: go.theregister.com
 - URL: https://go.theregister.com/feed/www.theregister.com/2026/04/22/sk_hynix_indiana/
 - Relevance score: 5.2
 - Published: 2026-04-22T20:28:25.00Z
 - Summary: <h4>New site set to begin manufacturing and testing HBM memory just in time for Nvidia's Rubin-Ultra GPUs in 2028</h4> <p>SK Hynix has reportedly broken ground on a new advanced memory packaging facility in West Lafayette, Indiana, that should boost the supply of US-made high-bandwidth memory (HBM), a key component in high-end AI accelerators from the likes of Nvidia and AMD.…</p>
 
-## 99. Google claims to have all the answers for enterprise AI agent sprawl
+## 97. Google claims to have all the answers for enterprise AI agent sprawl
 - Domain: go.theregister.com
 - URL: https://go.theregister.com/feed/www.theregister.com/2026/04/22/google_enterprise/
 - Relevance score: 5.2
 - Published: 2026-04-22T12:03:32.00Z
 - Summary: <h4>As biz agentic bot-wrangling intensifies, company says AI orchestration, security and infrastructure tools on the way</h4> <p><strong>Google Cloud Next</strong> Google has overhauled its enterprise AI strategy in the wake of the agentic push across the biz landscape, rebranding and expanding its Vertex AI developer platform into what it now calls the Gemini Enterprise Agent Platform.…</p>
 
-## 100. Oil crisis? What oil crisis? IT spending de-coupled from wider war shock
+## 98. Oil crisis? What oil crisis? IT spending de-coupled from wider war shock
 - Domain: go.theregister.com
 - URL: https://go.theregister.com/feed/www.theregister.com/2026/04/22/oil_crisis_what_oil_crisis/
 - Relevance score: 5.2
 - Published: 2026-04-22T08:30:11.00Z
 - Summary: <h4>Gartner sees accelerating growth in IT spending, powered by cloud and AI infrastructure investment</h4> <p>A day after the International Energy Agency (IEA) said the US/Israel/Iran war was creating the <a href="https://www.reuters.com/business/energy/war-iran-is-causing-biggest-energy-crisis-history-iea-says-2026-04-21/" target="_blank">worst energy crisis ever faced</a> by the ‌world, Gartner increased its growth forecasts for global IT spending by nearly three percentage points.…</p> <p><!--#include virtual='/data_centre/_whitepaper_textlinks_top.html' --></p>
 
-## 101. 氪星晚报｜快手618商家大会于杭州启动 ；OpenAI据悉正洽谈向一家私募股权合资企业投资至多15亿美元；事关节能降碳工作，中办、国办重磅文件对外发布
+## 99. 氪星晚报｜快手618商家大会于杭州启动 ；OpenAI据悉正洽谈向一家私募股权合资企业投资至多15亿美元；事关节能降碳工作，中办、国办重磅文件对外发布
 - Domain: 36kr.com
 - URL: https://36kr.com/p/3774776026874375
 - Relevance score: 5.2
 - Published: 2026-04-22 19:26:21  +0800
 - Summary: <h2><strong>大公司：</strong></h2> <p><a href="https://36kr.com/newsflashes/3777481893810696" rel="noopener noreferrer" target="_blank"><strong>特斯拉AI语音功能即将上线</strong></a></p> <p>据网信上海消息，4月21日，上海新增1款已完成备案的生成式人工智能服务，为特斯拉车机语音大模型服务。对此，4月22日，特斯拉方面人士回应称：“敬请期待”。按照规定，已上线的生成式人工智能应用应在显著位置或产品详情页面公示所使用已备案生成式人工智能服务情况，注明模型名称及备案号，并根据《人工智能生成合成内容标识办法》添加生成合成内容标识。（第一财经）</p> <p><a href="https://36kr.com/newsflashes/3777543279137794" rel="noopener noreferrer" target="_blank"><strong>快手618商家大会于杭州启动</strong></a></p> <p>36氪获悉，4月22日，快手电商在杭州举办618商家大会，表示2026年全年将投入千亿级别流量扶持优质供给。快手电商数据显示，2025年日均动销商家规模同比增长超15%，全年入驻优质新商同比增长26%，日均动销品牌同比增长34%。用户需求端同步增长，今年3月短视频月均购买用户数同比增长超15%，泛货架月均购买用户数同比增长超17%。</p> <p><a href="https://36kr.com/newsflashes/3777790767846402" rel="noopener noreferrer" target="_blank"><strong>新氧与锦波生物达成战略合作</strong></a></p> <p>36氪获悉，4月22日，新氧与锦波生物达成战略合作，锦波生物将旗下新品“薇旖美ColPact”独家专供新氧的线下轻医美门店“新氧青春诊所”。截至目前，“新氧青春诊所”已在全国开设56家门店。据新氧CEO金星透露，公司今年年底突破85家门店、实现单季度盈利的目标不变。</p> <p><a href="https://36kr.com/newsflashes/3777784320693253" rel="noopener noreferrer" target="_blank"><strong>TUMI途明“邂逅地中海”限时空间在上海港汇恒隆广场启幕</strong></a></p> <p>4月21日，高品质商务、旅行与生活方式品牌TUMI途明于上海港汇恒隆广场南座中庭推出“邂逅地中海”主题限时空间，呈现2026春季色彩系列。限时空间于4月22日至26日向公众开放。</
 
-## 102. INSIGHT: Bank executives say AI models can significantly boost AML effectiveness - AML Intelligence
+## 100. INSIGHT: Bank executives say AI models can significantly boost AML effectiveness - AML Intelligence
 - Domain: amlintelligence.com
 - URL: https://news.google.com/rss/articles/CBMivAFBVV95cUxPU1ZOME9rR3FrakpBMUNmVjU0cnROVndORkJCa3FWZDV0OE43MFN4Zm9mTGJTSVhYWFNyQWs4Q3lsWDBWck0wZFg5SG9NNGlfTjNVOUtSbU5hQkVpRW1TV1NKU3lmR0pWaURIek1GYXNqdWhMYktZU1QyQ3FnVzlyV0FFVjNOSFJnSFhRRDI0cWUzbGdRMTRYaVRlSU9GbzVHTnhITnlyWkl5cjdnZkp4ZjdTSkU5NlJtODhtNg
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 23:37:51 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPU1ZOME9rR3FrakpBMUNmVjU0cnROVndORkJCa3FWZDV0OE43MFN4Zm9mTGJTSVhYWFNyQWs4Q3lsWDBWck0wZFg5SG9NNGlfTjNVOUtSbU5hQkVpRW1TV1NKU3lmR0pWaURIek1GYXNqdWhMYktZU1QyQ3FnVzlyV0FFVjNOSFJnSFhRRDI0cWUzbGdRMTRYaVRlSU9GbzVHTnhITnlyWkl5cjdnZkp4ZjdTSkU5NlJtODhtNg?oc=5" target="_blank">INSIGHT: Bank executives say AI models can significantly boost AML effectiveness</a>&nbsp;&nbsp;<font color="#6f6f6f">AML Intelligence</font>
 
-## 103. Pete Hegseth fires U.S. Navy Secretary John Phelan
+## 101. Pete Hegseth fires U.S. Navy Secretary John Phelan
 - Domain: axios.com
 - URL: https://www.axios.com/2026/04/22/navy-secretary-john-phelan-hung-cao
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 23:26:16 +0000
 - Summary: <p>Defense Secretary <a href="https://www.axios.com/2026/04/15/iran-war-pete-hegseth-congress-impeachment-articles-democrats-reflecting-search-interest-order" target="_blank">Pete Hegseth</a> fired Navy Secretary John Phelan. The Pentagon framed it Wednesday as an immediate departure.</p><p><strong>Why it matters: </strong>The ouster of the service's top civilian caught many off-guard, and adds to the pile of military officials who either abruptly exited or were <a href="https://www.axios.com/2026/04/03/military-officials-ousted-retired-trump-hegseth" target="_blank">pushed out</a> of their posts under Trump 2.0.</p><hr /><ul><li>"<a href="https://www.axios.com/2025/08/27/navy-rapid-capabilities-phelan-memo" target="_blank">Phelan</a> didn't understand he wasn't the boss. His job is to follow orders given, not follow the orders he thinks should be given," a person familiar with the situation told Axios.</li><li>The same person said Phelan and Hegseth did not "get along."</li></ul><p><strong>Driving the news: </strong>Chief Pentagon spokesperson Sean Parnell said Phelan was "departing the administration, effective immediately," in a post on <a href="https://x.com/SeanParnellASW/stat
 
-## 104. “We Jumped in With Both Feet”: Designers on AI’s Back-Office Impact - Landscape Architecture Magazine
+## 102. “We Jumped in With Both Feet”: Designers on AI’s Back-Office Impact - Landscape Architecture Magazine
 - Domain: landscapearchitecturemagazine.org
 - URL: https://news.google.com/rss/articles/CBMickFVX3lxTE1OUW44blBLdFZld25ETzlNRGpwSTg5d0lKUlRTRGR5TjN4S1RBT1BnYllvbjdLRXQxT2tCNGREMmp1dFUtTEtMOEc4SlR1Vmo0WTVqZDI5eUZfQWpkSy1jWHhqSGNBd0dNWjIxRGlrNXBmQQ
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 21:11:01 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMickFVX3lxTE1OUW44blBLdFZld25ETzlNRGpwSTg5d0lKUlRTRGR5TjN4S1RBT1BnYllvbjdLRXQxT2tCNGREMmp1dFUtTEtMOEc4SlR1Vmo0WTVqZDI5eUZfQWpkSy1jWHhqSGNBd0dNWjIxRGlrNXBmQQ?oc=5" target="_blank">“We Jumped in With Both Feet”: Designers on AI’s Back-Office Impact</a>&nbsp;&nbsp;<font color="#6f6f6f">Landscape Architecture Magazine</font>
 
-## 105. IBM's slower revenue growth fans AI worries, shares fall - CNA
-- Domain: channelnewsasia.com
-- URL: https://news.google.com/rss/articles/CBMipgFBVV95cUxQUjRUenBRVnZfV1A1ZS1BU242ZEJDTTIyOFJpbHdTYWNOLTJNVEFJWVBQVU5GamhyREF6MTBHQnp4VFYxNzBXVWxybEZQN0pfUWVhaTdiVUFjSEotODFEUE1TZ25JZTRvNzZNTjZXSlZmZURGNVZnNl9Uam9udUg4cFcwOVVudTdXZExlb2dSaWxzdTA5cXlqNFhQV3huYl84YXZYVktB
-- Relevance score: 5.0
-- Published: Wed, 22 Apr 2026 20:13:36 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxQUjRUenBRVnZfV1A1ZS1BU242ZEJDTTIyOFJpbHdTYWNOLTJNVEFJWVBQVU5GamhyREF6MTBHQnp4VFYxNzBXVWxybEZQN0pfUWVhaTdiVUFjSEotODFEUE1TZ25JZTRvNzZNTjZXSlZmZURGNVZnNl9Uam9udUg4cFcwOVVudTdXZExlb2dSaWxzdTA5cXlqNFhQV3huYl84YXZYVktB?oc=5" target="_blank">IBM's slower revenue growth fans AI worries, shares fall</a>&nbsp;&nbsp;<font color="#6f6f6f">CNA</font>
-
-## 106. New report highlights agency advantages of using smaller, open-source AI models - FedScoop
+## 103. New report highlights agency advantages of using smaller, open-source AI models - FedScoop
 - Domain: fedscoop.com
 - URL: https://news.google.com/rss/articles/CBMiogFBVV95cUxPQ2FwNXM2YVhrczJOYkxCTm5ySGRaTndIVFl6ZG05d2FlMVlfT3BWUjRHODBsRTI1M1p1a2xBRUkyY0JDVkR0MzNUQ0NFaDZNTnROQ0RCVUZIRW9DSnlfMHdKSk1jaUVfQjZvSEJlNlJWM3dtcS1nN0wzUzZIQ29xdDZWb3RleU03RjNrdkpkSnlfSFBjV1BYcHhZcnVPeEYyYlE
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 19:52:09 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxPQ2FwNXM2YVhrczJOYkxCTm5ySGRaTndIVFl6ZG05d2FlMVlfT3BWUjRHODBsRTI1M1p1a2xBRUkyY0JDVkR0MzNUQ0NFaDZNTnROQ0RCVUZIRW9DSnlfMHdKSk1jaUVfQjZvSEJlNlJWM3dtcS1nN0wzUzZIQ29xdDZWb3RleU03RjNrdkpkSnlfSFBjV1BYcHhZcnVPeEYyYlE?oc=5" target="_blank">New report highlights agency advantages of using smaller, open-source AI models</a>&nbsp;&nbsp;<font color="#6f6f6f">FedScoop</font>
 
-## 107. Do AI language models ‘understand’ the real world? On a basic level, they do, a new study finds - Brown University
+## 104. Do AI language models ‘understand’ the real world? On a basic level, they do, a new study finds - Brown University
 - Domain: brown.edu
 - URL: https://news.google.com/rss/articles/CBMijwFBVV95cUxQUDdZSUNLSUtYVllhYjlOR1lSVlV6R2lNRVlSMmtudkZ1OXN2Ynk0VmVDVzBvbXdxR3pwLTMxZzlhV3RnMHAzSjU1a1BRZHcyZG9nbjEtWWs0cnFBNy00bFF2bGhEdVhGZ3V2WmZydTBERUpoM2pOWDhScERWWTJMRDlvLUQtdUgxdWE4OFZZYw
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 17:45:01 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxQUDdZSUNLSUtYVllhYjlOR1lSVlV6R2lNRVlSMmtudkZ1OXN2Ynk0VmVDVzBvbXdxR3pwLTMxZzlhV3RnMHAzSjU1a1BRZHcyZG9nbjEtWWs0cnFBNy00bFF2bGhEdVhGZ3V2WmZydTBERUpoM2pOWDhScERWWTJMRDlvLUQtdUgxdWE4OFZZYw?oc=5" target="_blank">Do AI language models ‘understand’ the real world? On a basic level, they do, a new study finds</a>&nbsp;&nbsp;<font color="#6f6f6f">Brown University</font>
 
-## 108. Next Leap to Harness Engineering: JiuwenClaw Pioneers ‘Coordination Engineering’
+## 105. Next Leap to Harness Engineering: JiuwenClaw Pioneers ‘Coordination Engineering’
 - Domain: marktechpost.com
 - URL: https://www.marktechpost.com/2026/04/22/next-leap-to-harness-engineering-jiuwenclaw-pioneers-coordination-engineering/
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 16:34:58 +0000
 - Summary: <p>How to make multiple agents work together like an elite team — autonomously dividing tasks, communicating efficiently, and collaborating seamlessly? The openJiuwen community released the latest version of JiuwenClaw, which adds support for AgentTeam — a multi-agent collaborative capability. It proposes that the next leap beyond Harness Engineering is Coordination Engineering. In in-depth tests, this team [&#8230;]</p> <p>The post <a href="https://www.marktechpost.com/2026/04/22/next-leap-to-harness-engineering-jiuwenclaw-pioneers-coordination-engineering/">Next Leap to Harness Engineering: JiuwenClaw Pioneers &#8216;Coordination Engineering&#8217;</a> appeared first on <a href="https://www.marktechpost.com">MarkTechPost</a>.</p>
 
-## 109. Micron Soars 6%, AMD Rallies 4%, Broadcom Climbs 4% on Reignited AI Chip Demand - 24/7 Wall St.
+## 106. Micron Soars 6%, AMD Rallies 4%, Broadcom Climbs 4% on Reignited AI Chip Demand - 24/7 Wall St.
 - Domain: 247wallst.com
 - URL: https://news.google.com/rss/articles/CBMiugFBVV95cUxQU0FEQkRoZFJtYVhJZFgzeUN0cVY0eXJzUnJ5TXJrVC1BTmNIU1JrMlplSzBGT2EzMW5BNGozOWFqbmdEV1hwdHNXQ05wRWg4el9DWkg2eFFWTDFSbXNadEZoME5aMWFLUFhwQzBKSEFrSDVTem5VTTVBSXh2Z09jdkozdUpuVXY0NlhETzYwTmFCc05SZUh3ZlZGeFJ0SGFlTWZqbWdZTzM2cEJJTnVTanJ1aE1uTHNEMEE
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 16:08:38 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxQU0FEQkRoZFJtYVhJZFgzeUN0cVY0eXJzUnJ5TXJrVC1BTmNIU1JrMlplSzBGT2EzMW5BNGozOWFqbmdEV1hwdHNXQ05wRWg4el9DWkg2eFFWTDFSbXNadEZoME5aMWFLUFhwQzBKSEFrSDVTem5VTTVBSXh2Z09jdkozdUpuVXY0NlhETzYwTmFCc05SZUh3ZlZGeFJ0SGFlTWZqbWdZTzM2cEJJTnVTanJ1aE1uTHNEMEE?oc=5" target="_blank">Micron Soars 6%, AMD Rallies 4%, Broadcom Climbs 4% on Reignited AI Chip Demand</a>&nbsp;&nbsp;<font color="#6f6f6f">24/7 Wall St.</font>
 
-## 110. Young Chinese use AI to launch one-person companies - Taipei Times
+## 107. Young Chinese use AI to launch one-person companies - Taipei Times
 - Domain: taipeitimes.com
 - URL: https://news.google.com/rss/articles/CBMieEFVX3lxTFBjeTVRY0g3Qi15UTE4X0RtT250dVNZRFM1RW9qR1MxZW1jb2c5NnEzbWxVb3U2RUhzUlA2a2NmYW9RZGNyaldTR2VielJoSUxVQl82elc5ZGhXLU42VTlDZWlTT1ZLU3JUVjY2TTA0YWNyRzdoTjNpTQ
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 16:00:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTFBjeTVRY0g3Qi15UTE4X0RtT250dVNZRFM1RW9qR1MxZW1jb2c5NnEzbWxVb3U2RUhzUlA2a2NmYW9RZGNyaldTR2VielJoSUxVQl82elc5ZGhXLU42VTlDZWlTT1ZLU3JUVjY2TTA0YWNyRzdoTjNpTQ?oc=5" target="_blank">Young Chinese use AI to launch one-person companies</a>&nbsp;&nbsp;<font color="#6f6f6f">Taipei Times</font>
 
-## 111. AI reshaping senior health care, Suncoast experts say - ABC7 WWSB
+## 108. AI reshaping senior health care, Suncoast experts say - ABC7 WWSB
 - Domain: mysuncoast.com
 - URL: https://news.google.com/rss/articles/CBMilgFBVV95cUxPdHFPSUN0NVc0R0g2Z0puRXkwV1BSVG9CUmR3ZGdnS0dHUHJ3VThrbWNkeFNaRXpiNngxY2hlWXFScGFOZnQzTlVEVll5X25LNThtOVFGZEZZN1p4bTJYSUJwX284bkg0bWh1azRpenhvSWIzaE5BN1h1MlJXR1VkOHhjYXhkaG85Yk04VHdjTGExMjJoYlHSAaoBQVVfeXFMUEUwUnhuYURtcml3Z0ZrakxFNGxma29JcFJycXVqR05VdXdyMkh5QktGTklBQWtFc3cycGxSOFpvcFVkbGJWcVAtTTVzZXpTZ2E5Q2xncHl5RnBBV0hESUd5cXFTRl9qcVoxV0dUUW9vWDZSNk4tZU84VS1mWnJTclhzeE1pZ1RXRUhEck9Vc3lvOGRYQW44OGxiamVtclhfZ0xyeTFpVldDbFE
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 13:53:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPdHFPSUN0NVc0R0g2Z0puRXkwV1BSVG9CUmR3ZGdnS0dHUHJ3VThrbWNkeFNaRXpiNngxY2hlWXFScGFOZnQzTlVEVll5X25LNThtOVFGZEZZN1p4bTJYSUJwX284bkg0bWh1azRpenhvSWIzaE5BN1h1MlJXR1VkOHhjYXhkaG85Yk04VHdjTGExMjJoYlHSAaoBQVVfeXFMUEUwUnhuYURtcml3Z0ZrakxFNGxma29JcFJycXVqR05VdXdyMkh5QktGTklBQWtFc3cycGxSOFpvcFVkbGJWcVAtTTVzZXpTZ2E5Q2xncHl5RnBBV0hESUd5cXFTRl9qcVoxV0dUUW9vWDZSNk4tZU84VS1mWnJTclhzeE1pZ1RXRUhEck9Vc3lvOGRYQW44OGxiamVtclhfZ0xyeTFpVldDbFE?oc=5" target="_blank">AI reshaping senior health care, Suncoast experts say</a>&nbsp;&nbsp;<font color="#6f6f6f">ABC7 WWSB</font>
 
-## 112. Research shows AI can catch financial errors before they cost millions - Phys.org
-- Domain: phys.org
-- URL: https://news.google.com/rss/articles/CBMicEFVX3lxTE54Uk1fTXNva3BsRl96ai00OVpVTHBJdEpFZWlsNEJqZFY1VkhuVDJuYlVfcVhRU3pzbVNjZTgxMVM5VmNEU3MxLVp0b3JkdVlKQU5YeU41ZF9od3ZfLVNpSDRFZ1ZNZzJuSGV4SWZFSnc
-- Relevance score: 5.0
-- Published: Wed, 22 Apr 2026 13:40:06 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE54Uk1fTXNva3BsRl96ai00OVpVTHBJdEpFZWlsNEJqZFY1VkhuVDJuYlVfcVhRU3pzbVNjZTgxMVM5VmNEU3MxLVp0b3JkdVlKQU5YeU41ZF9od3ZfLVNpSDRFZ1ZNZzJuSGV4SWZFSnc?oc=5" target="_blank">Research shows AI can catch financial errors before they cost millions</a>&nbsp;&nbsp;<font color="#6f6f6f">Phys.org</font>
-
-## 113. Enterprise AI adoption held back by skills gap, says Nutanix AI chief - Business Standard
+## 109. Enterprise AI adoption held back by skills gap, says Nutanix AI chief - Business Standard
 - Domain: business-standard.com
 - URL: https://news.google.com/rss/articles/CBMi1AFBVV95cUxNMHUyaGQya0F0c19KM25jelU3WHRaV0lDb2FpbHNKczFSc3FXdmhKaGdWdXFCU0Fadmh4RFVILUwtdDNaY19uejVzemVkbUNQQThYYWk4MF92MGZzdjZsSFd1WHpEdXF5MEZfNDBYSTZpNDNQZk1jNHVuTEVXWlpUaDRRSGFpVERWOEdobmhwQXBUQVFJYktyTW1FUmNNVGlDS1NJNXZnRncxemRuMUU0anl5VGhVcmFyV1lzcTZFbVh5YTIteEJqSFBZTDU0NEl4VHdjVNIB2gFBVV95cUxQdUFNV1RjR29VQ2FPRm1sSjZxcXdrWHdEc1BXQ1VYMEYtX045Y1hLTGMtV185VWJiXzZta0F0bkwzOXp4eXF6Q3BRcDNLN3BJOFZPbDIwMG1jLVJ5ejExc2ZwZ28xdXpiYzhmbFRYakJyMnpEaUFpTFhfUUxxcmNaR2dmQUlFZ0xJU290MlJSRFJiTWFPSktvUzZOZWdYckRKTEg4QVN3aVBoUWdQRzNzVHk0WlAzODJwMVhrRWNxT2VvblFQMnc1X01IRVU5UGdSQ1ZoWEk5UC0wUQ
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 13:39:19 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxNMHUyaGQya0F0c19KM25jelU3WHRaV0lDb2FpbHNKczFSc3FXdmhKaGdWdXFCU0Fadmh4RFVILUwtdDNaY19uejVzemVkbUNQQThYYWk4MF92MGZzdjZsSFd1WHpEdXF5MEZfNDBYSTZpNDNQZk1jNHVuTEVXWlpUaDRRSGFpVERWOEdobmhwQXBUQVFJYktyTW1FUmNNVGlDS1NJNXZnRncxemRuMUU0anl5VGhVcmFyV1lzcTZFbVh5YTIteEJqSFBZTDU0NEl4VHdjVNIB2gFBVV95cUxQdUFNV1RjR29VQ2FPRm1sSjZxcXdrWHdEc1BXQ1VYMEYtX045Y1hLTGMtV185VWJiXzZta0F0bkwzOXp4eXF6Q3BRcDNLN3BJOFZPbDIwMG1jLVJ5ejExc2ZwZ28xdXpiYzhmbFRYakJyMnpEaUFpTFhfUUxxcmNaR2dmQUlFZ0xJU290MlJSRFJiTWFPSktvUzZOZWdYckRKTEg4QVN3aVBoUWdQRzNzVHk0WlAzODJwMVhrRWNxT2VvblFQMnc1X01IRVU5UGdSQ1ZoWEk5UC0wUQ?oc=5" target="_blank">Enterprise AI adoption held back by skills gap, says Nutanix AI chief</a>&nbsp;&nbsp;<font color="#6f6f6f">Business Standard</font>
 
-## 114. How AI is reshaping workflows and redefining jobs - MIT Sloan
+## 110. How AI is reshaping workflows and redefining jobs - MIT Sloan
 - Domain: mitsloan.mit.edu
 - URL: https://news.google.com/rss/articles/CBMilwFBVV95cUxNTXd5YlE5UnFPcDZHZnV6WnlEX3hZQ05QRmdCMVk2TklkcW5JaXE0MDJ0c3FmMW1oT2ZIZ1MyTzRqOUpsT3lHRVB3Wm5yTkpRUTVidS1LZjJNVmRXNVM2NmNXWE9uUUl6RTJmVjN0QUpmWVhpM0pjcFFqRmhvWjZEdWZpN3g5c2NlRUdEd1ZEa0hjRzZpZ1Jr
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 13:37:54 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNTXd5YlE5UnFPcDZHZnV6WnlEX3hZQ05QRmdCMVk2TklkcW5JaXE0MDJ0c3FmMW1oT2ZIZ1MyTzRqOUpsT3lHRVB3Wm5yTkpRUTVidS1LZjJNVmRXNVM2NmNXWE9uUUl6RTJmVjN0QUpmWVhpM0pjcFFqRmhvWjZEdWZpN3g5c2NlRUdEd1ZEa0hjRzZpZ1Jr?oc=5" target="_blank">How AI is reshaping workflows and redefining jobs</a>&nbsp;&nbsp;<font color="#6f6f6f">MIT Sloan</font>
 
-## 115. AI is spitting out more potential drugs than ever. This startup wants to figure out which ones matter.
+## 111. AI is spitting out more potential drugs than ever. This startup wants to figure out which ones matter.
 - Domain: techcrunch.com
 - URL: https://techcrunch.com/2026/04/22/ai-is-spitting-out-more-potential-drugs-than-ever-this-start-up-wants-to-figure-out-which-ones-matter/
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 13:00:00 +0000
 - Summary: 10x Science has raised a $4.8 million seed round to help pharmaceutical researchers understand complex molecules.
 
-## 116. Prediction: This AI Chip Stock Will Become the Next Nvidia by 2030 - The Globe and Mail
+## 112. Prediction: This AI Chip Stock Will Become the Next Nvidia by 2030 - The Globe and Mail
 - Domain: theglobeandmail.com
 - URL: https://news.google.com/rss/articles/CBMi3AFBVV95cUxQeGVLVHQ0MVdTVGlYaFhwY2tnVFVBeVN4eFU4NkxPZzlQRW9KcXVLVkdHVWN0QjJSaFRHeVlDbTNEUzhJdHYwUVN5MjNmZU5aRWNvMEQxb2VQdHFQMmdWdVQ5TW5LNmd0V3ZRLUt6ZkYyNEVXa0ltWE1wZ3padExQWThIUkJLbWdDYXI4Q1pJRUFRTm5INTdNeTJuVWluQ2d4SVhnakQ2ZWhmem9MT1NwVUNKQWZ6S3liVDU5alNyS1lSd051ckNyQUZfYnp2RGdWWVZwNm1WYkVVVlpz
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 12:46:19 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi3AFBVV95cUxQeGVLVHQ0MVdTVGlYaFhwY2tnVFVBeVN4eFU4NkxPZzlQRW9KcXVLVkdHVWN0QjJSaFRHeVlDbTNEUzhJdHYwUVN5MjNmZU5aRWNvMEQxb2VQdHFQMmdWdVQ5TW5LNmd0V3ZRLUt6ZkYyNEVXa0ltWE1wZ3padExQWThIUkJLbWdDYXI4Q1pJRUFRTm5INTdNeTJuVWluQ2d4SVhnakQ2ZWhmem9MT1NwVUNKQWZ6S3liVDU5alNyS1lSd051ckNyQUZfYnp2RGdWWVZwNm1WYkVVVlpz?oc=5" target="_blank">Prediction: This AI Chip Stock Will Become the Next Nvidia by 2030</a>&nbsp;&nbsp;<font color="#6f6f6f">The Globe and Mail</font>
 
-## 117. Exclusive: Google deepens Thinking Machines Lab ties with new multibillion-dollar deal
+## 113. Exclusive: Google deepens Thinking Machines Lab ties with new multibillion-dollar deal
 - Domain: techcrunch.com
 - URL: https://techcrunch.com/2026/04/22/exclusive-google-deepens-thinking-machines-lab-ties-with-new-multi-billion-dollar-deal/
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 12:00:00 +0000
 - Summary: Mira Murati's Thinking Machines Lab has signed a multibillion-dollar deal with Google Cloud for AI infrastructure powered by Nvidia's latest GB300 chips, TechCrunch has exclusively learned.
 
-## 118. Exclusive: OpenAI briefs feds and Five Eyes on new cyber product
+## 114. Exclusive: OpenAI briefs feds and Five Eyes on new cyber product
 - Domain: axios.com
 - URL: https://www.axios.com/2026/04/22/openai-gpt-cyber-government-meeting
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 09:00:06 +0000
 - Summary: <p>OpenAI has been briefing federal agencies, state governments and Five Eyes allies on the capabilities of its <a href="https://www.axios.com/2026/04/14/openai-model-cyber-program-release" target="_blank">new cyber product</a> over the past week, Axios has learned.</p><p><strong>Why it matters</strong>: Companies and agencies are clamoring to get their hands on the latest AI tools, whose advanced cybersecurity capabilities promise big gains for defenders and frightening advances for malicious hackers. </p><hr /><p><strong>Driving the news</strong>:<strong> </strong>OpenAI held an event in D.C. on Tuesday for approximately 50 cyber defense practitioners across the federal government to demo the capabilities of its new GPT-5.4-Cyber model, which it rolled out under a tiered access program last week.</p><ul><li>Government applicants are going through the same vetting process as commercial customers who wish to join its Trusted Access for Cyber program, a source familiar said. </li><li>Attendees included a range of officials from across the government and national security agencies, most of whom oversee day-to-day cyber tasks.</li></ul><p><strong>Split screen:</strong> OpenAI rolled o
 
-## 119. IA opératrice : comment elle redéfinit les modèles d’entreprise
+## 115. IA opératrice : comment elle redéfinit les modèles d’entreprise
 - Domain: maddyness.com
 - URL: https://www.maddyness.com/2026/04/22/ia-operatrice-comment-elle-redefinit-les-modeles-dentreprise/
 - Relevance score: 5.0
 - Published: Wed, 22 Apr 2026 08:00:37 +0000
 - Summary: <p>L’article <a href="https://www.maddyness.com/2026/04/22/ia-operatrice-comment-elle-redefinit-les-modeles-dentreprise/">IA opératrice : comment elle redéfinit les modèles d’entreprise</a> est apparu en premier sur <a href="https://www.maddyness.com">Maddyness - Le média pour comprendre l&#039;économie de demain</a>.</p>
 
-## 120. Exclusive: Meta to start capturing employee mouse movements, keystrokes for AI training data - Reuters
+## 116. Exclusive: Meta to start capturing employee mouse movements, keystrokes for AI training data - Reuters
 - Domain: reuters.com
 - URL: https://news.google.com/rss/articles/CBMi4wFBVV95cUxOalZ5MS1JQUVHSTFGSjhCWFhVSW1HdkFvYzRNc0oyU2xaSGllSF9IYXBsNUU4Tmp2SG9wc0IwRlBRMjdQaHJKdUxUWUxqQWctZ2lRYVhoSHpOVDRjZTJZcXRSc1F2T2R0QmNXY0E0d2dXS3pyVWJ5UjFBaFgyWkxYMlRLeFBfWWFPTS1aMGFpVVlnS0twR3M0U2FtVklvY0hQSGJSWGhTdVRlY2NFNHAtdURESVY0N241VHhGazh4QVdVS1F1LXF5aUlSYzFKWTlNT29aZ1dZWV9qbWpuSlVzeXNvZw
 - Relevance score: 5.0
 - Published: Tue, 21 Apr 2026 16:28:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxOalZ5MS1JQUVHSTFGSjhCWFhVSW1HdkFvYzRNc0oyU2xaSGllSF9IYXBsNUU4Tmp2SG9wc0IwRlBRMjdQaHJKdUxUWUxqQWctZ2lRYVhoSHpOVDRjZTJZcXRSc1F2T2R0QmNXY0E0d2dXS3pyVWJ5UjFBaFgyWkxYMlRLeFBfWWFPTS1aMGFpVVlnS0twR3M0U2FtVklvY0hQSGJSWGhTdVRlY2NFNHAtdURESVY0N241VHhGazh4QVdVS1F1LXF5aUlSYzFKWTlNT29aZ1dZWV9qbWpuSlVzeXNvZw?oc=5" target="_blank">Exclusive: Meta to start capturing employee mouse movements, keystrokes for AI training data</a>&nbsp;&nbsp;<font color="#6f6f6f">Reuters</font>
 
-## 121. Insilico Medicine announces industry’s first longevity board to accelerate AI-driven aging research for drug discovery - EurekAlert!
+## 117. Insilico Medicine announces industry’s first longevity board to accelerate AI-driven aging research for drug discovery - EurekAlert!
 - Domain: eurekalert.org
 - URL: https://news.google.com/rss/articles/CBMiXEFVX3lxTE9BeUxhd0FUaXZPcHZfOFhKeUQyUTlRcUh6cl9qSi12V29kUGcyUTRMbkZVRUxlTm1XRFV2NUlQSWF1cmUxWjVDOWczZlVlLU9ZWmJwSmVGbVF1RDJZ
 - Relevance score: 5.0
 - Published: Tue, 21 Apr 2026 15:49:40 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE9BeUxhd0FUaXZPcHZfOFhKeUQyUTlRcUh6cl9qSi12V29kUGcyUTRMbkZVRUxlTm1XRFV2NUlQSWF1cmUxWjVDOWczZlVlLU9ZWmJwSmVGbVF1RDJZ?oc=5" target="_blank">Insilico Medicine announces industry’s first longevity board to accelerate AI-driven aging research for drug discovery</a>&nbsp;&nbsp;<font color="#6f6f6f">EurekAlert!</font>
 
-## 122. To be human is to live with friction. That’s something AI boosters will never understand | Alexander Hurst
+## 118. Google Cloud's security chief says context, not AI models, is the ‘real cyber defence superpower’ - The Edge Singapore
+- Domain: theedgesingapore.com
+- URL: https://news.google.com/rss/articles/CBMiwwFBVV95cUxQVjBGaU91NU0zOUZmbC1lWS1tS0JwY1ZLaEFLRXN2cG9kQml4bEhqTE55eTRWNGx2ZTJlR2pUQmt4bjRpQUVpYTVXXzhSVDBVTE0xZTRiVGNJdENOWEg1WUl5U01QcG1rcHNDTDVwRDV2c2hXdWV5UW94VE11Vmdod0IxQk1ka25hSU9GLV9FaUQ0Mm1SSTJuMWo5b21walljRy16NnJPYzVnQkFKSnRVRThlLTdsd01jRkVqeU05WHdQdUnSAcgBQVVfeXFMUEc3ZWpDek9tT1N3MXRsRGRxbURjMzIxc2tOX2dhSzBjaWRhdzF4ak1TWGxhUmdtZ2NQZXVnakpqOWpscGVPbGQyM3pvQnlfdmt5QWNpakxpVzNxVUY0NFloeFlSR2k4dTlhMHJBUG5RZlJZb19HcVdQd3Y5TWJuOHgxTE4tTjFZeDJJd1k1NjVrSEVXZWFGV0hNbi1pT1QzQ2V2ZHJucTB0djdmbWl6azVSYTVNU1FkY0xvRzlMWjJMRmhUZkRLQ2s
+- Relevance score: 5.0
+- Published: Thu, 23 Apr 2026 04:31:56 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMiwwFBVV95cUxQVjBGaU91NU0zOUZmbC1lWS1tS0JwY1ZLaEFLRXN2cG9kQml4bEhqTE55eTRWNGx2ZTJlR2pUQmt4bjRpQUVpYTVXXzhSVDBVTE0xZTRiVGNJdENOWEg1WUl5U01QcG1rcHNDTDVwRDV2c2hXdWV5UW94VE11Vmdod0IxQk1ka25hSU9GLV9FaUQ0Mm1SSTJuMWo5b21walljRy16NnJPYzVnQkFKSnRVRThlLTdsd01jRkVqeU05WHdQdUnSAcgBQVVfeXFMUEc3ZWpDek9tT1N3MXRsRGRxbURjMzIxc2tOX2dhSzBjaWRhdzF4ak1TWGxhUmdtZ2NQZXVnakpqOWpscGVPbGQyM3pvQnlfdmt5QWNpakxpVzNxVUY0NFloeFlSR2k4dTlhMHJBUG5RZlJZb19HcVdQd3Y5TWJuOHgxTE4tTjFZeDJJd1k1NjVrSEVXZWFGV0hNbi1pT1QzQ2V2ZHJucTB0djdmbWl6azVSYTVNU1FkY0xvRzlMWjJMRmhUZkRLQ2s?oc=5" target="_blank">Google Cloud's security chief says context, not AI models, is the ‘real cyber defence superpower’</a>&nbsp;&nbsp;<font color="#6f6f6f">The Edge Singapore</font>
+
+## 119. To be human is to live with friction. That’s something AI boosters will never understand | Alexander Hurst
 - Domain: theguardian.com
 - URL: https://www.theguardian.com/commentisfree/2026/apr/23/humanity-friction-artificial-intelligence-capitalism-black-mirror
 - Relevance score: 5.0
 - Published: Thu, 23 Apr 2026 04:00:46 GMT
 - Summary: <p>We’re being sold a world where there’s no room for reflection or spontaneity. This is the Black Mirror stage of capitalism</p><p>How fast do you have to strike a match to get it to light? Not the chemistry of the ignition, but the actual speed, in metres per second, that the little piece of wood and its bulbous head have to move to spark the chain reaction behind the flame.</p><p>It was a question born of insomnia. And there, in the dark,<strong> </strong>I did the thing you’re not supposed to do, if your goal is to fall back asleep: I opened my phone. Before I knew it, 3am had become 5am. I learned about the composition of the friction strip (red phosphorus, pulverized glass), and of the match head (potassium chlorate, antimony trisulphide, wax), and that a safety match struck against anything else will not light. I found slow-motion videos of a match strike captured at 3,500 frames per second. But nothing about the speed.</p><p>Alexander Hurst writes for Guardian Europe from Paris. His memoir <a href="https://guardianbookshop.com/generation-desperation-9781399728287/">Generation Desperation</a> is out now</p> <a href="https://www.theguardian.com/commentisfree/2026/apr/23/human
 
-## 123. Are AI Tokens the New Digital Currency? - sify.com
+## 120. Are AI Tokens the New Digital Currency? - sify.com
 - Domain: sify.com
 - URL: https://news.google.com/rss/articles/CBMigAFBVV95cUxOYUtBeEljdlpiYVlqYXhZMkJtWFRLLXEwMmNMT1NsOTFaMGowUU0zTzlqYjZGaDBPVmdLSnJLekdQZ3lhOC1kbDlIWjMzWGlLa2loLWFaZWFkMDY1TlpyR1d6ekU3QzRWTThsUE5vdWpUMHRhZjVwdV9WSGJLODBnMg
 - Relevance score: 5.0
 - Published: Thu, 23 Apr 2026 03:26:46 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxOYUtBeEljdlpiYVlqYXhZMkJtWFRLLXEwMmNMT1NsOTFaMGowUU0zTzlqYjZGaDBPVmdLSnJLekdQZ3lhOC1kbDlIWjMzWGlLa2loLWFaZWFkMDY1TlpyR1d6ekU3QzRWTThsUE5vdWpUMHRhZjVwdV9WSGJLODBnMg?oc=5" target="_blank">Are AI Tokens the New Digital Currency?</a>&nbsp;&nbsp;<font color="#6f6f6f">sify.com</font>
 
-## 124. SK Hynix’s profit jumps on soaring prices of AI memory chips - The Edge Singapore
-- Domain: theedgesingapore.com
-- URL: https://news.google.com/rss/articles/CBMinAFBVV95cUxNaEgtamNVUkQwWEtzQ3dtUWR5ZHc3aVgzSkUtVko1ejg0U21pSEtfa18xZ0UxbFJPWWtQYl9wU01pMy03QmYwNzNLT3hJamtNYll4SFdqa21hdm45MFJOUXJsYno0SWpTMi0yN3hmeVVqLXBpVWVrd3A5VTVkQ2xxNmZKdnVmVkRKOFg0aC05dUNSOF8wcXJRWE1keVrSAaIBQVVfeXFMUDFRWjVOUjB3eTNKcFlfcHVDWnRYNF9JNEVvRVJYeFlHM2tNWFlVWGpPOVJvVW94ZzFRRFhxUEFtYkd4ZzR4dFZ6V0R6UDBzWV9paEdGZDJzRVV1UWRxUkY2TzZpaHNuRVNOVWthNUMxVGZMWElqdUVtNEpaVXA5cUxwLTdXM1JZNTNhcTJqMzVydjJpc0NaSHVjVWdnUEpQeUdn
-- Relevance score: 5.0
-- Published: Thu, 23 Apr 2026 03:18:45 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxNaEgtamNVUkQwWEtzQ3dtUWR5ZHc3aVgzSkUtVko1ejg0U21pSEtfa18xZ0UxbFJPWWtQYl9wU01pMy03QmYwNzNLT3hJamtNYll4SFdqa21hdm45MFJOUXJsYno0SWpTMi0yN3hmeVVqLXBpVWVrd3A5VTVkQ2xxNmZKdnVmVkRKOFg0aC05dUNSOF8wcXJRWE1keVrSAaIBQVVfeXFMUDFRWjVOUjB3eTNKcFlfcHVDWnRYNF9JNEVvRVJYeFlHM2tNWFlVWGpPOVJvVW94ZzFRRFhxUEFtYkd4ZzR4dFZ6V0R6UDBzWV9paEdGZDJzRVV1UWRxUkY2TzZpaHNuRVNOVWthNUMxVGZMWElqdUVtNEpaVXA5cUxwLTdXM1JZNTNhcTJqMzVydjJpc0NaSHVjVWdnUEpQeUdn?oc=5" target="_blank">SK Hynix’s profit jumps on soaring prices of AI memory chips</a>&nbsp;&nbsp;<font color="#6f6f6f">The Edge Singapore</font>
-
-## 125. Tesla's 1st quarter earnings top estimates as AI, robotaxi investments accelerate - Anadolu Ajansı
+## 121. Tesla's 1st quarter earnings top estimates as AI, robotaxi investments accelerate - Anadolu Ajansı
 - Domain: aa.com.tr
 - URL: https://news.google.com/rss/articles/CBMivAFBVV95cUxPT2dLdXNtMVREX2JkaU9ITVdaa2FzNkpxUjM5OUhaQkNCc2hFZEh1azFOcXczblVGN3Jta2xGbERwYmNxcWpVYmJycGtVbzFNSDVucWo4VG0waWpIbU5YRlVRSVowT3o3UXdyVWpLSWU0T2UwNTdlWHZsNHJpaS1pVXZQaWZmQWhCMWhua25IUXUwVy1tdndESmNPYzNsMTlIZHVYVlNKYWliUWxmc0l0U0lralhmM2dyWFdwMg
 - Relevance score: 5.0
 - Published: Thu, 23 Apr 2026 03:13:01 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPT2dLdXNtMVREX2JkaU9ITVdaa2FzNkpxUjM5OUhaQkNCc2hFZEh1azFOcXczblVGN3Jta2xGbERwYmNxcWpVYmJycGtVbzFNSDVucWo4VG0waWpIbU5YRlVRSVowT3o3UXdyVWpLSWU0T2UwNTdlWHZsNHJpaS1pVXZQaWZmQWhCMWhua25IUXUwVy1tdndESmNPYzNsMTlIZHVYVlNKYWliUWxmc0l0U0lralhmM2dyWFdwMg?oc=5" target="_blank">Tesla's 1st quarter earnings top estimates as AI, robotaxi investments accelerate</a>&nbsp;&nbsp;<font color="#6f6f6f">Anadolu Ajansı</font>
 
-## 126. Meta to track employee activity to train AI models, sparking surveillance concerns - The Online Citizen
+## 122. Meta to track employee activity to train AI models, sparking surveillance concerns - The Online Citizen
 - Domain: theonlinecitizen.com
 - URL: https://news.google.com/rss/articles/CBMivgFBVV95cUxQalAxWFBfRHVBeWZCRGVUQ3IzV2NvblFqLThTdXFTMjkxM3pUbGNDWWM0OGZZWHBzWmdROE5mUEJud3pmZFppenhLSjQ2aVNDazMwYU9IX0RadGNza185dTdSUHdseEwzVWI5ZjZNMWc1SzlRVUlkU0VoOWJucnlKZDhqMkJoUEF1UzNiT0JsVnR1MVhOLU5yOVY1R3BCbklGTlNURWtqSVU3MEozamxETUZWNUZVMnh2NTY4VVln
 - Relevance score: 5.0
 - Published: Thu, 23 Apr 2026 01:15:52 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxQalAxWFBfRHVBeWZCRGVUQ3IzV2NvblFqLThTdXFTMjkxM3pUbGNDWWM0OGZZWHBzWmdROE5mUEJud3pmZFppenhLSjQ2aVNDazMwYU9IX0RadGNza185dTdSUHdseEwzVWI5ZjZNMWc1SzlRVUlkU0VoOWJucnlKZDhqMkJoUEF1UzNiT0JsVnR1MVhOLU5yOVY1R3BCbklGTlNURWtqSVU3MEozamxETUZWNUZVMnh2NTY4VVln?oc=5" target="_blank">Meta to track employee activity to train AI models, sparking surveillance concerns</a>&nbsp;&nbsp;<font color="#6f6f6f">The Online Citizen</font>
 
-## 127. Gigamon launches AI tools as observability market grows - IT Brief Australia
-- Domain: itbrief.com.au
-- URL: https://news.google.com/rss/articles/CBMijAFBVV95cUxPdGJBYkw3VFQ2NG1UZlAtY01oY1pfRmRFeDZ3V1g3R3UwUjg1aDAxd0lpV1g2OUdMWFRDUWh5bzJfVWZTRFVaRTJPd19ocWhraWY5M0QzbzQxLVllQ3MxM1JhcFdtY1RXN2JFWVNzNEd6NWFYZVVac3JJbFdoTmVSRldwdXRWTE5Db29faA
-- Relevance score: 5.0
-- Published: Thu, 23 Apr 2026 00:00:00 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPdGJBYkw3VFQ2NG1UZlAtY01oY1pfRmRFeDZ3V1g3R3UwUjg1aDAxd0lpV1g2OUdMWFRDUWh5bzJfVWZTRFVaRTJPd19ocWhraWY5M0QzbzQxLVllQ3MxM1JhcFdtY1RXN2JFWVNzNEd6NWFYZVVac3JJbFdoTmVSRldwdXRWTE5Db29faA?oc=5" target="_blank">Gigamon launches AI tools as observability market grows</a>&nbsp;&nbsp;<font color="#6f6f6f">IT Brief Australia</font>
-
-## 128. Alphabet Stock Rises Modestly as Investors Await Q1 Earnings on AI Momentum
+## 123. Alphabet Stock Rises Modestly as Investors Await Q1 Earnings on AI Momentum
 - Domain: ibtimes.com.au
 - URL: https://www.ibtimes.com.au/alphabet-stock-rises-modestly-investors-await-q1-earnings-ai-momentum-1867192
 - Relevance score: 5.0
 - Published: 2026-04-21T14:28:25Z
 - Summary: NEW YORK — Alphabet Inc. Class C shares edged higher in morning trading Tuesday, climbing 0.26% to $336.28 as Wall Street prepared for the tech giant's first-quarter 2026 earnings report scheduled for April 29, with focus on Google Cloud growth, AI advancemen…
 
-## 129. Billionaire Justin Sun sues Trump family crypto venture
+## 124. Billionaire Justin Sun sues Trump family crypto venture
 - Domain: scmp.com
 - URL: https://www.scmp.com/news/world/united-states-canada/article/3351063/billionaire-justin-sun-sues-trump-family-crypto-venture
 - Relevance score: 4.8
 - Published: Wed, 22 Apr 2026 23:08:16 +0000
 - Summary: Entrepreneur Justin Sun filed a lawsuit on Wednesday accusing a Trump family-backed cryptocurrency platform of fraud and alleging he was blocked from withdrawing his assets. In a San Francisco federal court filing reviewed by Agence France-Presse, the Chinese-born crypto billionaire and former Trump ally claims to have bought US$45 million worth of WLFI, an electronic currency launched by World Liberty Financial in October 2024. To thank him for the investment – at a time when WLFI was...
 
-## 130. DeepSeek isn’t short of cash: so why has it decided to raise funds anyway? - South China Morning Post
+## 125. DeepSeek isn’t short of cash: so why has it decided to raise funds anyway? - South China Morning Post
 - Domain: scmp.com
 - URL: https://news.google.com/rss/articles/CBMirwFBVV95cUxOR3J4WEo1ZHczMS1wLTI5Zmd0dGF0QlcxcTVrVUxaSlFTdGphRXJOSEV5TEtQVjhpVFFSZjNnaTRqNGx2b2U0allOQVgxQ3J0eFZHWUdIcFZ0WmRabGE2VmEtUEZSZGZYTWNwZ1B4VHdzMHdSb0V0b0llX01LZmw5U0ZVVnB6U3VlY0hXWGJxUEFzZHB2QnhEVUh4Wlh3djdKZkNoSENJZXBDZlA0MTNr0gGvAUFVX3lxTE05QTNYYTdCS1FxWktUeWlKUTFINC1zMERfQTNmWG1mYXh4N0djZXVGb2VNRVJucnVEaXFzX0hnUk9HOUlGMXVUN21mY3M4X0VURHBlVUFRblJacXBncFMxbUJaWEY2QV83bk9DN004M3RKZjU0Q3BTZ0xsN3ItQUQ0Vy1JSDl3ekRyTlVreFFaaXgteUJaMEEzWHAzcjVoMHJEb1dORlBxYWVWWDh2TFE
 - Relevance score: 4.8
 - Published: Wed, 22 Apr 2026 11:00:10 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOR3J4WEo1ZHczMS1wLTI5Zmd0dGF0QlcxcTVrVUxaSlFTdGphRXJOSEV5TEtQVjhpVFFSZjNnaTRqNGx2b2U0allOQVgxQ3J0eFZHWUdIcFZ0WmRabGE2VmEtUEZSZGZYTWNwZ1B4VHdzMHdSb0V0b0llX01LZmw5U0ZVVnB6U3VlY0hXWGJxUEFzZHB2QnhEVUh4Wlh3djdKZkNoSENJZXBDZlA0MTNr0gGvAUFVX3lxTE05QTNYYTdCS1FxWktUeWlKUTFINC1zMERfQTNmWG1mYXh4N0djZXVGb2VNRVJucnVEaXFzX0hnUk9HOUlGMXVUN21mY3M4X0VURHBlVUFRblJacXBncFMxbUJaWEY2QV83bk9DN004M3RKZjU0Q3BTZ0xsN3ItQUQ0Vy1JSDl3ekRyTlVreFFaaXgteUJaMEEzWHAzcjVoMHJEb1dORlBxYWVWWDh2TFE?oc=5" target="_blank">DeepSeek isn’t short of cash: so why has it decided to raise funds anyway?</a>&nbsp;&nbsp;<font color="#6f6f6f">South China Morning Post</font>
 
-## 131. ECI orders 3-hour takedown rule for AI and fake content in elections
+## 126. ECI orders 3-hour takedown rule for AI and fake content in elections
 - Domain: medianama.com
 - URL: https://www.medianama.com/2026/04/223-eci-orders-3-hour-takedown-rule-ai-fake-content-elections/
 - Relevance score: 4.8
 - Published: Wed, 22 Apr 2026 08:35:43 +0000
 - Summary: <p>ECI tightens social media rules for 2026 polls, mandating AI content labels and 3-hour takedowns of misleading posts, while monitoring MCC violations and removing over 11,000 URLs.</p> <p>The post <a href="https://www.medianama.com/2026/04/223-eci-orders-3-hour-takedown-rule-ai-fake-content-elections/">ECI orders 3-hour takedown rule for AI and fake content in elections</a> appeared first on <a href="https://www.medianama.com">MEDIANAMA</a>.</p>
 
-## 132. New Apple CEO John Ternus inherits a complex China portfolio as Tim Cook steps aside
+## 127. New Apple CEO John Ternus inherits a complex China portfolio as Tim Cook steps aside
 - Domain: scmp.com
 - URL: https://www.scmp.com/tech/big-tech/article/3350869/new-apple-ceo-john-ternus-inherits-complex-china-portfolio-tim-cook-steps-aside
 - Relevance score: 4.8
 - Published: Tue, 21 Apr 2026 14:00:08 +0000
 - Summary: The mounting challenges Apple faces in China will test John Ternus, the newly appointed CEO, as analysts watch if he tries to replicate his predecessor Tim Cook’s frequent “charm offensives” in the world’s largest smartphone market. “I’d like to see if the new CEO can charm Chinese consumers as well as government ministers, just as Tim Cook has,” said Bryan Ma, vice-president of client devices research at IDC. Apple announced on Tuesday that Ternus, 50, would be the new CEO effective September 1...
 
-## 133. Anthropic’s most dangerous AI model just fell into the wrong hands
+## 128. Anthropic’s most dangerous AI model just fell into the wrong hands
 - Domain: theverge.com
 - URL: https://www.theverge.com/ai-artificial-intelligence/916501/anthropic-mythos-unauthorized-users-access-security
 - Relevance score: 4.8
 - Published: 2026-04-22T05:18:40-04:00
 - Summary: Anthropic's Mythos AI model, a powerful cybersecurity tool that the company said could be dangerous in the wrong hands, has been accessed by a "small group of unauthorized users," Bloomberg reports. An unnamed member of the group, identified only as "a third-party contractor for Anthropic," told the publication that members of a private online forum [&#8230;]
 
-## 134. Google place les agents d'IA au cœur de sa stratégie de rentabilisation des entreprises - Boursorama
+## 129. Google place les agents d'IA au cœur de sa stratégie de rentabilisation des entreprises - Boursorama
 - Domain: boursorama.com
 - URL: https://news.google.com/rss/articles/CBMi-gFBVV95cUxPRTJnUlJKYkZudjlUcHRHczNqOHlPR1MwV2FkSFluQjdMejU2UkFKcFYtNW8yZkZLZDcwTGI0N05ISkxjdFY3ckVTeVhoUGYyNkZvLTc5Q2tfTEhWdHJ6RTQteE16bHd1YkVhQnJwOGlUSGpDaXlCMWtwSU9ia1BmRFhMci1DRHVtWXdmelJld3J6LUpIMDlLZ3BSRUNHQ3BreXJmNGpJMXhsYnZaQTNJRmZ0VVJnUUFBVGNsTHhXOHRsajAyZ1lCRlV1NVZKVEx4NlIxeVdCZU1qNUZtLXJia1A3bkNzV1NudGlxb1YxQ1BCWFlOMElNVGl30gH_AUFVX3lxTE5teFRWTDNXR2tYMnVLbE5oN0V4OVhLb29qZ19hMmVSbFljWFdQY25rOTBBazlKeGhFRm9MN1J0MXJWNFE5OEtPT0txaHVoU284NTVNY0I1Qm5FNFVrV3ZuQmZkWmxYMEUzVzhIbmZiMWdzMVdaeGRSUnQwRGZzekJQOXhLNlpsUlE1eDN2TGJYcGJvTl9Gb1VKcUtremxkVnVXNXdhN0M0a3RMNXBGaU5zZko5WVhQNUs4VzRqMnZjZmI2Um9Tb2FXX296S2xsRm12SGg5WXBka1dmUWhvanloWEp1QmVUN3RoNWFnRjRKU3dQS1k1aGd3aXZjck5oYw
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 22:37:44 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi-gFBVV95cUxPRTJnUlJKYkZudjlUcHRHczNqOHlPR1MwV2FkSFluQjdMejU2UkFKcFYtNW8yZkZLZDcwTGI0N05ISkxjdFY3ckVTeVhoUGYyNkZvLTc5Q2tfTEhWdHJ6RTQteE16bHd1YkVhQnJwOGlUSGpDaXlCMWtwSU9ia1BmRFhMci1DRHVtWXdmelJld3J6LUpIMDlLZ3BSRUNHQ3BreXJmNGpJMXhsYnZaQTNJRmZ0VVJnUUFBVGNsTHhXOHRsajAyZ1lCRlV1NVZKVEx4NlIxeVdCZU1qNUZtLXJia1A3bkNzV1NudGlxb1YxQ1BCWFlOMElNVGl30gH_AUFVX3lxTE5teFRWTDNXR2tYMnVLbE5oN0V4OVhLb29qZ19hMmVSbFljWFdQY25rOTBBazlKeGhFRm9MN1J0MXJWNFE5OEtPT0txaHVoU284NTVNY0I1Qm5FNFVrV3ZuQmZkWmxYMEUzVzhIbmZiMWdzMVdaeGRSUnQwRGZzekJQOXhLNlpsUlE1eDN2TGJYcGJvTl9Gb1VKcUtremxkVnVXNXdhN0M0a3RMNXBGaU5zZko5WVhQNUs4VzRqMnZjZmI2Um9Tb2FXX296S2xsRm12SGg5WXBka1dmUWhvanloWEp1QmVUN3RoNWFnRjRKU3dQS1k1aGd3aXZjck5oYw?oc=5" target="_blank">Google place les agents d'IA au cœur de sa stratégie de rentabilisation des entreprises</a>&nbsp;&nbsp;<font color="#6f6f6f">Boursorama</font>
 
-## 135. Harnessing AI in legal teams: Practical strategies for responsible adoption - Wolters Kluwer
+## 130. Harnessing AI in legal teams: Practical strategies for responsible adoption - Wolters Kluwer
 - Domain: wolterskluwer.com
 - URL: https://news.google.com/rss/articles/CBMiwAFBVV95cUxQNjdld3ZoLWRDaXhiWVRqMHhDNmtKYWVUVDJrOUxyRm5xM3NPSUJYbWhfYzYzbF9lREVOXzBJWlA4SWVicURMdElPVlRrUURWVHUzckR1YU5lSlFIRlo5eUJHOEhiQTlUNEJ4WVdGOTlnRkhyOTEtek85MFQ0ZHQ0Q2NQbC0zYk9IaVVjRWd5NlZRQS0tNVNTb1gtdFFwZFg2d1d0TWN5UjZYVzZBVkVzWFJDSjU2TkgyZmFnQjhrLUQ
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 21:38:07 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQNjdld3ZoLWRDaXhiWVRqMHhDNmtKYWVUVDJrOUxyRm5xM3NPSUJYbWhfYzYzbF9lREVOXzBJWlA4SWVicURMdElPVlRrUURWVHUzckR1YU5lSlFIRlo5eUJHOEhiQTlUNEJ4WVdGOTlnRkhyOTEtek85MFQ0ZHQ0Q2NQbC0zYk9IaVVjRWd5NlZRQS0tNVNTb1gtdFFwZFg2d1d0TWN5UjZYVzZBVkVzWFJDSjU2TkgyZmFnQjhrLUQ?oc=5" target="_blank">Harnessing AI in legal teams: Practical strategies for responsible adoption</a>&nbsp;&nbsp;<font color="#6f6f6f">Wolters Kluwer</font>
 
-## 136. AI-Based Hiring: 2026 Developments Employers Can’t Ignore - JD Supra
+## 131. AI-Based Hiring: 2026 Developments Employers Can’t Ignore - JD Supra
 - Domain: jdsupra.com
 - URL: https://news.google.com/rss/articles/CBMiggFBVV95cUxOWUxJMXVBSjZmTXZEMEh0T2pkc1AyUERrZ2l1Z09hUWFLbWhQdWFvbWhJcFZPNURrZVM3dG00WVdWMEg2am11dlU2UzRKUEFRRC1TQjVFSHIwSjc2RHFCMTh4MWd1RVBTbGIwSngyS3lwamJKWUtjSnBKbHhDalZ5UllR
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 20:39:21 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOWUxJMXVBSjZmTXZEMEh0T2pkc1AyUERrZ2l1Z09hUWFLbWhQdWFvbWhJcFZPNURrZVM3dG00WVdWMEg2am11dlU2UzRKUEFRRC1TQjVFSHIwSjc2RHFCMTh4MWd1RVBTbGIwSngyS3lwamJKWUtjSnBKbHhDalZ5UllR?oc=5" target="_blank">AI-Based Hiring: 2026 Developments Employers Can’t Ignore</a>&nbsp;&nbsp;<font color="#6f6f6f">JD Supra</font>
 
-## 137. Bientôt la fin de l’omnicanal ? Pour Google, l’avenir du commerce sera agentique ou ne sera pas, avec l’IA comme interface universelle - L'Usine Digitale
+## 132. Bientôt la fin de l’omnicanal ? Pour Google, l’avenir du commerce sera agentique ou ne sera pas, avec l’IA comme interface universelle - L'Usine Digitale
 - Domain: usine-digitale.fr
 - URL: https://news.google.com/rss/articles/CBMiuAJBVV95cUxNZUNFWXYzNmJoZmNlU1RzcEVLQ3haOTE3YnBsRkNLeU5kNUV3RDdnbFFDc1JWVVUzY1NNQkRUUGNocEk3eUhyVlZpM3hadm1wWFI0dzBoY25EQ0ZXenFwRDM3TG43Z0lIWU5Del9leWRubXUwTmItYTJJOFAwTE1zNlZzR2pSbFFpUmw3WEphalJxcWFFTXFjeWFOTWhybHlJQkNMLVBWRkdibkxmUkVqTXVwaHY4MVR1Q3gzNzFtSGZHUWRKVjg1MlhCWW14SUl6aUxibjJENFlhTHo5M0UtQlhaeXVUM3pVUVZ3dm1tUmRtcG1pYndYY3ZYQ1NfMjE0WURJWUpCemJBcUpMcGZ3VVlSanhGc0N5M2hpRXlFWXNicENrMUQ3YmhhaUdMbzJzZWZqdGxzdWE
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 18:39:35 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiuAJBVV95cUxNZUNFWXYzNmJoZmNlU1RzcEVLQ3haOTE3YnBsRkNLeU5kNUV3RDdnbFFDc1JWVVUzY1NNQkRUUGNocEk3eUhyVlZpM3hadm1wWFI0dzBoY25EQ0ZXenFwRDM3TG43Z0lIWU5Del9leWRubXUwTmItYTJJOFAwTE1zNlZzR2pSbFFpUmw3WEphalJxcWFFTXFjeWFOTWhybHlJQkNMLVBWRkdibkxmUkVqTXVwaHY4MVR1Q3gzNzFtSGZHUWRKVjg1MlhCWW14SUl6aUxibjJENFlhTHo5M0UtQlhaeXVUM3pVUVZ3dm1tUmRtcG1pYndYY3ZYQ1NfMjE0WURJWUpCemJBcUpMcGZ3VVlSanhGc0N5M2hpRXlFWXNicENrMUQ3YmhhaUdMbzJzZWZqdGxzdWE?oc=5" target="_blank">Bientôt la fin de l’omnicanal ? Pour Google, l’avenir du commerce sera agentique ou ne sera pas, avec l’IA comme interface universelle</a>&nbsp;&nbsp;<font color="#6f6f6f">L'Usine Digitale</font>
 
-## 138. What Trump’s Bible stunt says about his complicated history with Christianity
+## 133. What Trump’s Bible stunt says about his complicated history with Christianity
 - Domain: theguardian.com
 - URL: https://www.theguardian.com/us-news/2026/apr/22/trumps-special-relationship-with-christianity
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 18:00:32 GMT
 - Summary: <p>On Tuesday, the president read from the Bible in a taped message. Religious scholars were not impressed</p><ul><li><p>This was originally published in This Week in Trumpland. <a href="https://www.theguardian.com/us-news/2024/apr/25/election-newsletter-sign-up-stakes">Sign up to receive it in your inbox every Wednesday</a></p></li></ul><p>Donald Trump, who recently posted an image on social media which portrayed him as Jesus Christ (<a href="https://www.theguardian.com/us-news/2026/apr/15/donald-trump-ai-images-jesus">or, rather, “a doctor”</a>), and who seems unable to stop attacking the pope, read the Bible to America on Tuesday night.</p><p>Sitting behind his desk in the Oval Office, hands resting on a book that looked like a Bible, Trump stared straight into the camera (presumably there was a teleprompter) <a href="https://www.youtube.com/watch?v=7oqyMMBAapY">as he recited from the book 2 Chronicles</a>. It’s a passage which has become fashionable among the right wing, and which quotes God as saying:</p> <a href="https://www.theguardian.com/us-news/2026/apr/22/trumps-special-relationship-with-christianity">Continue reading...</a>
 
-## 139. Making ChatGPT better for clinicians
+## 134. Making ChatGPT better for clinicians
 - Domain: openai.com
 - URL: https://openai.com/index/making-chatgpt-better-for-clinicians
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 15:00:00 GMT
 - Summary: OpenAI makes ChatGPT for Clinicians free for verified U.S. physicians, nurse practitioners, and pharmacists, supporting clinical care, documentation, and research.
 
-## 140. Mission Lane applies to become a bank
+## 135. Mission Lane applies to become a bank
 - Domain: bankingdive.com
 - URL: https://www.bankingdive.com/news/mission-lane-credit-card-bank-charter-application-occ-fdic-ilc-national-trust/818230/
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 14:49:37 -0400
 - Summary: <figure><div><img src="https://imgproxy.divecdn.com/AE3N_2pnsY9XbdFAGBkenqWenPJRthL223LGTLjrSPw/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS8xOWYyNGQ2OS01OTMxLTQ4NjgtYjFhZi03ZjYyY2RjNTA1YzYuanBn.webp" /></div></figure><p>The startup filed the first credit card bank charter application in roughly 20 years, an observer said. The charter would allow Mission Lane to affix home-state interest rates on loans nationwide.</p>
 
-## 141. Shared exploration of AI makes muddling through the machine age less daunting - pressenterprise.com
+## 136. Shared exploration of AI makes muddling through the machine age less daunting - pressenterprise.com
 - Domain: pressenterprise.com
 - URL: https://news.google.com/rss/articles/CBMi1AFBVV95cUxQN19xbFVWWjNadV93MEVfcnI0aDFLUFNhc1h6NVA5WE9zNzNrdnFuV2RoMzl0ajF6UVladllGSzdSZmcwaHR5bmx5SlJva1VRSlZrMWFmOHZoYTZTT2xiVlJRUk85d0RWRlhWSFEwam1DcWd3aDZfRktVcy1Za2Z0MUxoMmtfV0NGTEl5RHZfLTJ3Y0ZsT0M0OG1vcXVENkpfcnVYVXQ2QllpY3UwcFdKdlFLOFR4enF5eUhxUGJFSDQzMm9LR0E3MFBYRU9mbEZqa3JkSw
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 14:47:27 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQN19xbFVWWjNadV93MEVfcnI0aDFLUFNhc1h6NVA5WE9zNzNrdnFuV2RoMzl0ajF6UVladllGSzdSZmcwaHR5bmx5SlJva1VRSlZrMWFmOHZoYTZTT2xiVlJRUk85d0RWRlhWSFEwam1DcWd3aDZfRktVcy1Za2Z0MUxoMmtfV0NGTEl5RHZfLTJ3Y0ZsT0M0OG1vcXVENkpfcnVYVXQ2QllpY3UwcFdKdlFLOFR4enF5eUhxUGJFSDQzMm9LR0E3MFBYRU9mbEZqa3JkSw?oc=5" target="_blank">Shared exploration of AI makes muddling through the machine age less daunting</a>&nbsp;&nbsp;<font color="#6f6f6f">pressenterprise.com</font>
 
-## 142. OpenAI teams up with Infosys to bring AI tools to more businesses
+## 137. OpenAI teams up with Infosys to bring AI tools to more businesses
 - Domain: techcrunch.com
 - URL: https://techcrunch.com/2026/04/22/openai-teams-up-with-infosys-to-bring-ai-tools-to-more-businesses/
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 14:22:10 +0000
 - Summary: Infosys said the integration will be used to help its clients modernize software development, automate workflows, and deploy AI systems, initially focusing software engineering, legacy modernization, and DevOps.
 
-## 143. AI adoption in EU tax systems surges but deep gaps persist across member states - Devdiscourse
-- Domain: devdiscourse.com
-- URL: https://news.google.com/rss/articles/CBMi0AFBVV95cUxOeHc0UUZ3bUo0QUxfaWh3OUdJeVhaa2NTRTV1TmxCZlRoRFNGczI2OVZzSjdwVzM3Wk9PSTRhQ0tQZl9xOXNxbFRHbVk3bWVtV0x6MmJWR2JQTFp4bW1rT2pDLWozNjh4SXJhbUo0VFM4Z3NRODRva0xOcnJZRGlrc2ZnSlRWTktTQ0xLVDZPaXFVVU1UOGtWdUwyQmRQVDdoeVNBcDBPQURYaUxKNWZoMGJucE9BaEVpVmJRbGlONEFhTzMtUTJqSWNSbWFOWmY30gHWAUFVX3lxTE5MWF9MbHM5aU9tY1NLMnIwd1pQd1FiX20xeEVlUEF5bWRqbVhJem41WktrZnVqX3hVbS1PVGhDRnQ2VzdSOGY2Umh3TU14RHJoUjJKXzltSXBIUXZvTEJxZm1CUG50OVdDc3VRaUpaMWpGV2llS3ZYNWlHNVlnRFBNX3N4RlpwTkxZSmJEcmJrZ1dTWFlnR3pHU0ljbVppbF9YYURFbno2Z1hmNHlfa3BsaXFTc3JWZG5YTzJTNV8wOFoteXR4eUk5bVpRb0pwUzJYQXZRcVE
-- Relevance score: 4.5
-- Published: Wed, 22 Apr 2026 13:58:22 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxOeHc0UUZ3bUo0QUxfaWh3OUdJeVhaa2NTRTV1TmxCZlRoRFNGczI2OVZzSjdwVzM3Wk9PSTRhQ0tQZl9xOXNxbFRHbVk3bWVtV0x6MmJWR2JQTFp4bW1rT2pDLWozNjh4SXJhbUo0VFM4Z3NRODRva0xOcnJZRGlrc2ZnSlRWTktTQ0xLVDZPaXFVVU1UOGtWdUwyQmRQVDdoeVNBcDBPQURYaUxKNWZoMGJucE9BaEVpVmJRbGlONEFhTzMtUTJqSWNSbWFOWmY30gHWAUFVX3lxTE5MWF9MbHM5aU9tY1NLMnIwd1pQd1FiX20xeEVlUEF5bWRqbVhJem41WktrZnVqX3hVbS1PVGhDRnQ2VzdSOGY2Umh3TU14RHJoUjJKXzltSXBIUXZvTEJxZm1CUG50OVdDc3VRaUpaMWpGV2llS3ZYNWlHNVlnRFBNX3N4RlpwTkxZSmJEcmJrZ1dTWFlnR3pHU0ljbVppbF9YYURFbno2Z1hmNHlfa3BsaXFTc3JWZG5YTzJTNV8wOFoteXR4eUk5bVpRb0pwUzJYQXZRcVE?oc=5" target="_blank">AI adoption in EU tax systems surges but deep gaps persist across member states</a>&nbsp;&nbsp;<font color="#6f6f6f">Devdiscourse</font>
-
-## 144. Le développement à grande échelle de l'IA agentique nécessite des données solides : 4 étapes à suivre en premier lieu - ZDNET
+## 138. Le développement à grande échelle de l'IA agentique nécessite des données solides : 4 étapes à suivre en premier lieu - ZDNET
 - Domain: zdnet.fr
 - URL: https://news.google.com/rss/articles/CBMi6wFBVV95cUxQT0hiMFBNQ2o1cVpZVUJsaVVrS0VUUTBZODBVMmRhQUMwQVF4RzFFSEs5TWdmY3k1Ry1mMkdOSTIwRy1PQlZKYzhpTDBBNGczN3AyTjN2eDJPeG05bjNMY1BCRDg3azE1SWNBbmY3VlBtVnpnelFPLWZMd29zcmQ4Y1FJWWRwMjUwOHJpRzlzUmJCOXJ2NnI4Z2daYVJHak9hZHkxSmRqM1kyZlNxOGhfSFZrOVRVWjZOUEhMTFFwMFRQYlk1b3pCYmhqbUp5QzM0a3h2aXhVX0Y3M2YxR1RTQ3hzMEM5SUhuSW40
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 10:56:32 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxQT0hiMFBNQ2o1cVpZVUJsaVVrS0VUUTBZODBVMmRhQUMwQVF4RzFFSEs5TWdmY3k1Ry1mMkdOSTIwRy1PQlZKYzhpTDBBNGczN3AyTjN2eDJPeG05bjNMY1BCRDg3azE1SWNBbmY3VlBtVnpnelFPLWZMd29zcmQ4Y1FJWWRwMjUwOHJpRzlzUmJCOXJ2NnI4Z2daYVJHak9hZHkxSmRqM1kyZlNxOGhfSFZrOVRVWjZOUEhMTFFwMFRQYlk1b3pCYmhqbUp5QzM0a3h2aXhVX0Y3M2YxR1RTQ3hzMEM5SUhuSW40?oc=5" target="_blank">Le développement à grande échelle de l'IA agentique nécessite des données solides : 4 étapes à suivre en premier lieu</a>&nbsp;&nbsp;<font color="#6f6f6f">ZDNET</font>
 
-## 145. Workspace agents
+## 139. Workspace agents
 - Domain: openai.com
 - URL: https://openai.com/academy/workspace-agents
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 10:00:00 GMT
 - Summary: Learn how to build, use, and scale workspace agents in ChatGPT to automate repeatable workflows, connect tools, and streamline team operations.
 
-## 146. Introducing workspace agents in ChatGPT
+## 140. Introducing workspace agents in ChatGPT
 - Domain: openai.com
 - URL: https://openai.com/index/introducing-workspace-agents-in-chatgpt
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 10:00:00 GMT
 - Summary: Workspace agents in ChatGPT are Codex-powered agents that automate complex workflows, run in the cloud, and help teams scale work across tools securely.
 
-## 147. Introducing OpenAI Privacy Filter
+## 141. Introducing OpenAI Privacy Filter
 - Domain: openai.com
 - URL: https://openai.com/index/introducing-openai-privacy-filter
 - Relevance score: 4.5
 - Published: Wed, 22 Apr 2026 00:00:00 GMT
 - Summary: OpenAI Privacy Filter is an open-weight model for detecting and redacting personally identifiable information (PII) in text with state-of-the-art accuracy
 
-## 148. AI & Tech Brief: Beijing tightens grip on AI startups - The Washington Post
+## 142. AI & Tech Brief: Beijing tightens grip on AI startups - The Washington Post
 - Domain: washingtonpost.com
 - URL: https://news.google.com/rss/articles/CBMivAFBVV95cUxOQ0JFY2dvOWhsZkVNLUpGbXR4b18xeldwYnRiTXh6Sl9tUFVNMlNkT0NRZDhRcVI2V3BDR0UtYjFNYlJxcHJmWTVLZG16cWtaM2lEZFRNemRGZ2VnMnhja0ktZEdrNnVrUTBvSDhibkFReF96Z3Y3MmtHOHN5TTZJODJfc2tvLW5GR0VmM29yQU82eERmZjFNNmUxWHVrUkVRRS10Qmwwb2dRZTVneEhiWlV5SDZCR002RFBqNQ
 - Relevance score: 4.5
-- Published: Thu, 23 Apr 2026 03:09:59 GMT
+- Published: Thu, 23 Apr 2026 04:02:40 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxOQ0JFY2dvOWhsZkVNLUpGbXR4b18xeldwYnRiTXh6Sl9tUFVNMlNkT0NRZDhRcVI2V3BDR0UtYjFNYlJxcHJmWTVLZG16cWtaM2lEZFRNemRGZ2VnMnhja0ktZEdrNnVrUTBvSDhibkFReF96Z3Y3MmtHOHN5TTZJODJfc2tvLW5GR0VmM29yQU82eERmZjFNNmUxWHVrUkVRRS10Qmwwb2dRZTVneEhiWlV5SDZCR002RFBqNQ?oc=5" target="_blank">AI & Tech Brief: Beijing tightens grip on AI startups</a>&nbsp;&nbsp;<font color="#6f6f6f">The Washington Post</font>
 
-## 149. Google lance deux nouvelles puces pour s’adapter à l’ère des agents IA - Ouest-France
+## 143. Google lance deux nouvelles puces pour s’adapter à l’ère des agents IA - Ouest-France
 - Domain: ouest-france.fr
 - URL: https://news.google.com/rss/articles/CBMi5AFBVV95cUxNYmNhekFiODhHY1VTRlI0U0VKWWc1Qkk1UF9UZXRHVHgwY1ZvM293LWZzR2ZENW1NaFJ3dE5UWW1qelkzTW1jbUpKUXJKREwtVldqNTJoUjE4SWdJTDV1N2ZDVnFCLVk1TWJWd2VQWjZfTG11Z0FHYVg4Nlp6d1hFV0pIeURLclNmaHFZM3dzMXNZYWJGMmtleVRuNDg4MGpKdGZ6eGtVdEZGdHdVb1VVWHFfcWN0RUR5cE5KVmhxbkt2bjZMQkd2ZERMVTdhUDVXM3JvUG1YSFVMejBJUUtBdFQyRVc
 - Relevance score: 4.5
 - Published: Thu, 23 Apr 2026 01:42:04 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi5AFBVV95cUxNYmNhekFiODhHY1VTRlI0U0VKWWc1Qkk1UF9UZXRHVHgwY1ZvM293LWZzR2ZENW1NaFJ3dE5UWW1qelkzTW1jbUpKUXJKREwtVldqNTJoUjE4SWdJTDV1N2ZDVnFCLVk1TWJWd2VQWjZfTG11Z0FHYVg4Nlp6d1hFV0pIeURLclNmaHFZM3dzMXNZYWJGMmtleVRuNDg4MGpKdGZ6eGtVdEZGdHdVb1VVWHFfcWN0RUR5cE5KVmhxbkt2bjZMQkd2ZERMVTdhUDVXM3JvUG1YSFVMejBJUUtBdFQyRVc?oc=5" target="_blank">Google lance deux nouvelles puces pour s’adapter à l’ère des agents IA</a>&nbsp;&nbsp;<font color="#6f6f6f">Ouest-France</font>
 
-## 150. Google bets $32B on AI agent cyber force as security arms race escalates
+## 144. Google bets $32B on AI agent cyber force as security arms race escalates
 - Domain: zdnet.com
 - URL: https://www.zdnet.com/article/google-deploys-ai-agent-cyber-force-as-security-arms-race-escalates/
 - Relevance score: 4.2
 - Published: Wed, 22 Apr 2026 12:20:00 GMT
 - Summary: With Wiz and AI agents, Google is gearing up for a cyberwar where machines fight at speeds humans can't match.
 
-## 151. How Google just revamped Gemini Enterprise for the agentic era - here's what's new
+## 145. How Google just revamped Gemini Enterprise for the agentic era - here's what's new
 - Domain: zdnet.com
 - URL: https://www.zdnet.com/article/google-cloud-next-enterprise-agent-platform-ai/
 - Relevance score: 4.2
 - Published: Wed, 22 Apr 2026 12:00:00 GMT
 - Summary: Meet Gemini Enterprise Agent Platform, the new developer tool for managing fleets of agents at scale.
 
-## 152. Tesla just increased its spending plan to $25B — here’s where the money is going
+## 146. Tesla just increased its spending plan to $25B — here’s where the money is going
 - Domain: techcrunch.com
 - URL: https://techcrunch.com/2026/04/22/tesla-just-increased-its-capex-to-25b-heres-where-the-money-is-going/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 23:56:52 +0000
 - Summary: Tesla's planned capex for 2026 is three times higher than what the company has historically spent. Its CFO said, as a result, Tesla will have a negative free cash flow the rest of the year.
 
-## 153. An ‘AI-native’—and lavishly funded—medical center grows in Texas - HealthExec
+## 147. An ‘AI-native’—and lavishly funded—medical center grows in Texas - HealthExec
 - Domain: healthexec.com
 - URL: https://news.google.com/rss/articles/CBMirwFBVV95cUxOczlhNkNTT250NklSd3VROWZ4UkpKQzg0RGlIcTZ1QzF2T1ZSUURJVkxjVDVjYzgzQjhZbnIyWktsZUdNa3BZZVRTaE1vREE1RlZCOExLNS1GRjVmOFRvWlI0WU5NdDQ2NTlHby11YlBLVFJKNE94TVlFc0ZjOHhuWkZNNHBhQnhjY0twZnVwSklEaGlrdzNQRllJb1RPU3FocmZEcFdQZnpMaEV5Yjg0
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 23:56:36 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOczlhNkNTT250NklSd3VROWZ4UkpKQzg0RGlIcTZ1QzF2T1ZSUURJVkxjVDVjYzgzQjhZbnIyWktsZUdNa3BZZVRTaE1vREE1RlZCOExLNS1GRjVmOFRvWlI0WU5NdDQ2NTlHby11YlBLVFJKNE94TVlFc0ZjOHhuWkZNNHBhQnhjY0twZnVwSklEaGlrdzNQRllJb1RPU3FocmZEcFdQZnpMaEV5Yjg0?oc=5" target="_blank">An ‘AI-native’—and lavishly funded—medical center grows in Texas</a>&nbsp;&nbsp;<font color="#6f6f6f">HealthExec</font>
 
-## 154. Le ralentissement de la croissance du chiffre d'affaires d'IBM alimente les inquiétudes concernant l'IA, les a - Boursorama
+## 148. Anthropic Seeks to Debunk Pentagon's Claims About Its Control Over AI Technology in Military Systems - U.S. News & World Report
+- Domain: usnews.com
+- URL: https://news.google.com/rss/articles/CBMi7AFBVV95cUxOM1ozYTdOZzhyNzIxT1M3ZUJtMmFIMjl2YUtaSHU5ZHJtVEhkNHRHbG9nd2hCYU5mM2dtN045ODFGdE1lSmxaOFdxM25nMGxQRktwc05JVkhVbUMwX0FzZ1g3dUVBLU1vcnp3al94REpPZnY0ZVhKQlkxb0xMeU5IYzZCYVJqLWs5VVJSRTdGTXI4ZUpONkZrMWpFMFp2STBWU2I2N016VXhQMVl5dE00dEVQbXZLOFN3MEZVbUtEc0FwYjVXZjVnOGRHS0ZNWEpEV2FXS2dpZ0ZhVFVuTkZjMjB3TDk0UlAwaHE4MQ
+- Relevance score: 4.0
+- Published: Wed, 22 Apr 2026 23:45:00 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxOM1ozYTdOZzhyNzIxT1M3ZUJtMmFIMjl2YUtaSHU5ZHJtVEhkNHRHbG9nd2hCYU5mM2dtN045ODFGdE1lSmxaOFdxM25nMGxQRktwc05JVkhVbUMwX0FzZ1g3dUVBLU1vcnp3al94REpPZnY0ZVhKQlkxb0xMeU5IYzZCYVJqLWs5VVJSRTdGTXI4ZUpONkZrMWpFMFp2STBWU2I2N016VXhQMVl5dE00dEVQbXZLOFN3MEZVbUtEc0FwYjVXZjVnOGRHS0ZNWEpEV2FXS2dpZ0ZhVFVuTkZjMjB3TDk0UlAwaHE4MQ?oc=5" target="_blank">Anthropic Seeks to Debunk Pentagon's Claims About Its Control Over AI Technology in Military Systems</a>&nbsp;&nbsp;<font color="#6f6f6f">U.S. News & World Report</font>
+
+## 149. SK Hynix Crushes Records on AI Memory Boom - The Tech Buzz
+- Domain: techbuzz.ai
+- URL: https://news.google.com/rss/articles/CBMigAFBVV95cUxQR2ZfX3FCWVN1bktKMGpaWFZzWEVubmItOWcySEdXdmg3Q2tQdHlRMi1jVWlRMnowa09oTnFiaGdPSFNPdXdJYnNYU2FFeEdKd2Q3dnViRDE1LVFHRG9KRjhIdnRSVlUyVUpDSFZzZUdMOHFSZ1ZNbVcyRmYxYWlnRA
+- Relevance score: 4.0
+- Published: Wed, 22 Apr 2026 23:38:00 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQR2ZfX3FCWVN1bktKMGpaWFZzWEVubmItOWcySEdXdmg3Q2tQdHlRMi1jVWlRMnowa09oTnFiaGdPSFNPdXdJYnNYU2FFeEdKd2Q3dnViRDE1LVFHRG9KRjhIdnRSVlUyVUpDSFZzZUdMOHFSZ1ZNbVcyRmYxYWlnRA?oc=5" target="_blank">SK Hynix Crushes Records on AI Memory Boom</a>&nbsp;&nbsp;<font color="#6f6f6f">The Tech Buzz</font>
+
+## 150. Le ralentissement de la croissance du chiffre d'affaires d'IBM alimente les inquiétudes concernant l'IA, les a - Boursorama
 - Domain: boursorama.com
 - URL: https://news.google.com/rss/articles/CBMiqAJBVV95cUxNTnBHY0FsdG9BZUVYNmkyS2F5LTN2OVpVQ3Y2SzlFeXg2SkFsSXZZejlzZ01NZEhCekRHNFFfeDV3NjR4cFk5MzZ5Qkx3UW14WEQ0bEhwSVdQZm9iNDNYSGhrMW80RUIxQm53UVBHSFlIdXcwMUZ5R29hbGNMOERROTZFcXNOS0JiWXFFeW9mZ1N4ZFJETDQ3SGpIWS1WZ1ZDcEtBV2Z2WXRfVE54dWFwb1FIX3ZpbFNUOWNNRGFsOHEtUnJtOUpzWHl2Z1RLM01TeTc3QVFfUnNXeXlSNXZpT2Y2SWxzRVBINzl0NDdrbDM2MWlIOHlJcHR6Z2JMa0N3WVJhNmxCNlFwWjl6Y3hWRzY1cjRNWFR0LU1KcHNvNldlTTItSzRxYdIBrgJBVV95cUxPMHhQLXBiNVNYTmFQXzdMYi1XV0NfeWtwU2k2QUxUVXZNeWVJamozOE9IWmFYeGRoeFZwdmprblR6MDdrWWVhenJwNXBobkZUZDFLWFQ2X01FMFNBM2M0REpnNVFFZkVYcVYtLUNyZ21tYVFMR3EzVlpCQWZlWWtTc2pqdFNSd2FoUVo1c0ZHTWN3b2tJQlFIWFJzNVh0WW43Unh5NVM4QlhSWFJHT1hDR1JZdFNCeE9FcVJTbk5QbkZEMFJiSU5COExhT004Tm00d0JvdWt3NWtWamV0Rm90R1l3ZDJLWFRfeExIREFvQXh5Ynpsclk5eTVhb2VXQTdJZzBCS1RtRU1ZS2NPcUNHN0g4XzZ3TjlhSUtzM2U4dFlicTd3dHZnWGY0a0Z2QQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 23:07:05 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiqAJBVV95cUxNTnBHY0FsdG9BZUVYNmkyS2F5LTN2OVpVQ3Y2SzlFeXg2SkFsSXZZejlzZ01NZEhCekRHNFFfeDV3NjR4cFk5MzZ5Qkx3UW14WEQ0bEhwSVdQZm9iNDNYSGhrMW80RUIxQm53UVBHSFlIdXcwMUZ5R29hbGNMOERROTZFcXNOS0JiWXFFeW9mZ1N4ZFJETDQ3SGpIWS1WZ1ZDcEtBV2Z2WXRfVE54dWFwb1FIX3ZpbFNUOWNNRGFsOHEtUnJtOUpzWHl2Z1RLM01TeTc3QVFfUnNXeXlSNXZpT2Y2SWxzRVBINzl0NDdrbDM2MWlIOHlJcHR6Z2JMa0N3WVJhNmxCNlFwWjl6Y3hWRzY1cjRNWFR0LU1KcHNvNldlTTItSzRxYdIBrgJBVV95cUxPMHhQLXBiNVNYTmFQXzdMYi1XV0NfeWtwU2k2QUxUVXZNeWVJamozOE9IWmFYeGRoeFZwdmprblR6MDdrWWVhenJwNXBobkZUZDFLWFQ2X01FMFNBM2M0REpnNVFFZkVYcVYtLUNyZ21tYVFMR3EzVlpCQWZlWWtTc2pqdFNSd2FoUVo1c0ZHTWN3b2tJQlFIWFJzNVh0WW43Unh5NVM4QlhSWFJHT1hDR1JZdFNCeE9FcVJTbk5QbkZEMFJiSU5COExhT004Tm00d0JvdWt3NWtWamV0Rm90R1l3ZDJLWFRfeExIREFvQXh5Ynpsclk5eTVhb2VXQTdJZzBCS1RtRU1ZS2NPcUNHN0g4XzZ3TjlhSUtzM2U4dFlicTd3dHZnWGY0a0Z2QQ?oc=5" target="_blank">Le ralentissement de la croissance du chiffre d'affaires d'IBM alimente les inquiétudes concernant l'IA, les a</a>&nbsp;&nbsp;<font color="#6f6f6f">Boursorama</font>
 
-## 155. AI is flattening the jobs market for young people, says Sunak - BBC
+## 151. AI is flattening the jobs market for young people, says Sunak - BBC
 - Domain: bbc.com
 - URL: https://news.google.com/rss/articles/CBMiWkFVX3lxTE5yLTU0X21uY2hjR1paT0ZNYU0xV2xtV2NVRF9zY3doLUtOaWJ1N3FvcXdvaTNQek84SjhvWDBEcFphVmpuYzh6YkhtTXd6SWhBV2wtd1BMMEVkQQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 23:01:09 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE5yLTU0X21uY2hjR1paT0ZNYU0xV2xtV2NVRF9zY3doLUtOaWJ1N3FvcXdvaTNQek84SjhvWDBEcFphVmpuYzh6YkhtTXd6SWhBV2wtd1BMMEVkQQ?oc=5" target="_blank">AI is flattening the jobs market for young people, says Sunak</a>&nbsp;&nbsp;<font color="#6f6f6f">BBC</font>
 
-## 156. AI at UMB: Your Hub for Responsible, Practical AI - The University of Maryland, Baltimore
+## 152. AI at UMB: Your Hub for Responsible, Practical AI - The University of Maryland, Baltimore
 - Domain: elm.umaryland.edu
 - URL: https://news.google.com/rss/articles/CBMimgFBVV95cUxOWDlGbTJWRjloZldnTllPTm1ZVnViM0JZWDRZX3lLQjV1REtzTzRORUV0c3RvV2dPMEhSdWdwRlYtVDBsZDV6dEpRWk5ScU5tVUhtVGNxYkU3R0JvZ1VVZmxoZ0FLU3hJODMwOUMtbUVKN0RjQko0akRvY2ZOVHA2QVZZOTNnVFVnSUl5VkJ2cUc0M203TVNiOUJB
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 22:56:51 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxOWDlGbTJWRjloZldnTllPTm1ZVnViM0JZWDRZX3lLQjV1REtzTzRORUV0c3RvV2dPMEhSdWdwRlYtVDBsZDV6dEpRWk5ScU5tVUhtVGNxYkU3R0JvZ1VVZmxoZ0FLU3hJODMwOUMtbUVKN0RjQko0akRvY2ZOVHA2QVZZOTNnVFVnSUl5VkJ2cUc0M203TVNiOUJB?oc=5" target="_blank">AI at UMB: Your Hub for Responsible, Practical AI</a>&nbsp;&nbsp;<font color="#6f6f6f">The University of Maryland, Baltimore</font>
 
-## 157. EDreams introduces AI planner, ChatGPT app - PhocusWire
-- Domain: phocuswire.com
-- URL: https://news.google.com/rss/articles/CBMilwFBVV95cUxQTWxxZmhaSm4zUG1STENlaGpXZEVNUFd5Tl9YUVdaaXBSbTZNbmotMEg0SHdZSHFkYjBKWjYxbVRKWFFPM3NnRDFWcDhrWlFpQ2NCWUVVdmk5SHE2SlBvbXJCX0JiYjNqbzBUNDJidW1WZkZQRkQzdnk0bkVvSXVjMXpBS010RXV0LXFEcjhDTFVFVVh5aGpz
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 22:49:13 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxQTWxxZmhaSm4zUG1STENlaGpXZEVNUFd5Tl9YUVdaaXBSbTZNbmotMEg0SHdZSHFkYjBKWjYxbVRKWFFPM3NnRDFWcDhrWlFpQ2NCWUVVdmk5SHE2SlBvbXJCX0JiYjNqbzBUNDJidW1WZkZQRkQzdnk0bkVvSXVjMXpBS010RXV0LXFEcjhDTFVFVVh5aGpz?oc=5" target="_blank">EDreams introduces AI planner, ChatGPT app</a>&nbsp;&nbsp;<font color="#6f6f6f">PhocusWire</font>
-
-## 158. House lawmakers get a chilling demo of ‘jailbroken’ AI - Politico
+## 153. House lawmakers get a chilling demo of ‘jailbroken’ AI - Politico
 - Domain: politico.com
 - URL: https://news.google.com/rss/articles/CBMihAFBVV95cUxQTGZsLThJbWR1S19DR3BFZ2NXNEtab01VUHdyLTNxb2ItWkYxZWRRTXk0T2ZuVlpCRlRWd0hiY3NPRW5WWml4MWVvZFVJc0lyS3VKbG54V2hWeGZDWkRXdlh1UHU3bHZtSU44d3kxbnQ2bURYY3ozdHo3V3lzbUR3TTdfbmE
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 22:32:47 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxQTGZsLThJbWR1S19DR3BFZ2NXNEtab01VUHdyLTNxb2ItWkYxZWRRTXk0T2ZuVlpCRlRWd0hiY3NPRW5WWml4MWVvZFVJc0lyS3VKbG54V2hWeGZDWkRXdlh1UHU3bHZtSU44d3kxbnQ2bURYY3ozdHo3V3lzbUR3TTdfbmE?oc=5" target="_blank">House lawmakers get a chilling demo of ‘jailbroken’ AI</a>&nbsp;&nbsp;<font color="#6f6f6f">Politico</font>
 
-## 159. 🚨 Alerte : l'IA sait déjà pirater (et elle le fait seule) - GoodTechInfo
-- Domain: goodtech.info
-- URL: https://news.google.com/rss/articles/CBMihwFBVV95cUxOaDdrcFJERVhHOVZhY0pkdWdud3hYNW9VNjliSExCMmJWTVBNbEQtSmxXbUhncmFfQWJnaFo3MlNxTi1fNk9lM2RJZ2pQb1FkTGZITEZ2cFdMRV9tNTBoM1dJTThCdlNRbGl0RThtRjEzNEpMeUVzcGVGT0hRaDdocndGUlNhdkE
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 22:18:39 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxOaDdrcFJERVhHOVZhY0pkdWdud3hYNW9VNjliSExCMmJWTVBNbEQtSmxXbUhncmFfQWJnaFo3MlNxTi1fNk9lM2RJZ2pQb1FkTGZITEZ2cFdMRV9tNTBoM1dJTThCdlNRbGl0RThtRjEzNEpMeUVzcGVGT0hRaDdocndGUlNhdkE?oc=5" target="_blank">🚨 Alerte : l'IA sait déjà pirater (et elle le fait seule)</a>&nbsp;&nbsp;<font color="#6f6f6f">GoodTechInfo</font>
-
-## 160. L’IA rattrape le search, mais ne l’a pas encore remplacé - The Media Leader
-- Domain: fr.themedialeader.com
-- URL: https://news.google.com/rss/articles/CBMijAFBVV95cUxQV2NhQlo5YThab3hQMkF1WjNBZ1RSbnJLS3NGTjJWLXJoYXU1SE9GTHBXUFduNEV1UFZmVzFlZ2JWM3FZMXkyc0JVcHFmNGV4eDNNNDBLN1VodHg4LTFzdDVZVWx0MlJNQTNYN0x0LW1Wdkt3eTM4WXBpN3Y2TFAtcTR3M0YwV0tDR3RlZQ
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 22:06:03 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxQV2NhQlo5YThab3hQMkF1WjNBZ1RSbnJLS3NGTjJWLXJoYXU1SE9GTHBXUFduNEV1UFZmVzFlZ2JWM3FZMXkyc0JVcHFmNGV4eDNNNDBLN1VodHg4LTFzdDVZVWx0MlJNQTNYN0x0LW1Wdkt3eTM4WXBpN3Y2TFAtcTR3M0YwV0tDR3RlZQ?oc=5" target="_blank">L’IA rattrape le search, mais ne l’a pas encore remplacé</a>&nbsp;&nbsp;<font color="#6f6f6f">The Media Leader</font>
-
-## 161. La croissance du chiffre d'affaires d'IBM ralentit en raison des inquiétudes liées à l'IA ; les actions chuten - Boursorama
-- Domain: boursorama.com
-- URL: https://news.google.com/rss/articles/CBMilgJBVV95cUxOMGtsYTBrZURoaGNnaVFIUUtxaXh3NGRnSTZ3aG1YQWVUaTIteTBSNkRPMWxoSUZBRk1SVlBrT1BmdjRnWmUyTDQwTk9yLWgySGJGcFdJNVhkWU9VaWxqUlotTlg1OHBobWV2cVdPeVNRNWZyTFRHa1padHUwbVdSWWVTWF9MSlFBZmtKZDNCSjRsbmhUdkFaUlZVUzN4TDAtNGhJVzZKX05tV0NpZ3hrWkRzVmNzMXlVQ2o3RTBsQTQtQThGQzJycURfSVVUeWdIRVJ6OWlzYjhNY1M4V3QtUlpfVHNBQWFSajFVYXpjOEgxRG5FV2poTi1NVUpkZDJTWUdiMWlWRkxRYmdJTDZiSGV3ZVREUdIBmwJBVV95cUxNckNRRG8tRlNUSGlTM09aeGR6Ylg0cW1Jcm5QN3M3UTVVV1gzaEw1MTlMNk5RTGdWUVgwS1F3OHhEUGxEU05fWkNKQ0pXZmQwVlROLXltR0VlTUNHck95X0FWZEw5NXpkT2NjV2t2RnpsWWE4S2pXTW1RWDNzSzg3Yl9LZDJibWNPV1VpN1pYQmU2aXo4SllWbVpKNUEteTJHQk9iYVRFU3h1VzRtQWV0cnlXZkNOU2tOdzJOdlRSYjJrTnVvS09tXzNSVS1BOVpxclZXY190V201MVZNSElGam9qMnhXTWdIZjBmekU2c2NpN094UHdKd1JEWlBiaDVxTmhrTFJkVHdZYjVDQjhWNWRaRkFjcHZqSDBN
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 21:26:44 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMilgJBVV95cUxOMGtsYTBrZURoaGNnaVFIUUtxaXh3NGRnSTZ3aG1YQWVUaTIteTBSNkRPMWxoSUZBRk1SVlBrT1BmdjRnWmUyTDQwTk9yLWgySGJGcFdJNVhkWU9VaWxqUlotTlg1OHBobWV2cVdPeVNRNWZyTFRHa1padHUwbVdSWWVTWF9MSlFBZmtKZDNCSjRsbmhUdkFaUlZVUzN4TDAtNGhJVzZKX05tV0NpZ3hrWkRzVmNzMXlVQ2o3RTBsQTQtQThGQzJycURfSVVUeWdIRVJ6OWlzYjhNY1M4V3QtUlpfVHNBQWFSajFVYXpjOEgxRG5FV2poTi1NVUpkZDJTWUdiMWlWRkxRYmdJTDZiSGV3ZVREUdIBmwJBVV95cUxNckNRRG8tRlNUSGlTM09aeGR6Ylg0cW1Jcm5QN3M3UTVVV1gzaEw1MTlMNk5RTGdWUVgwS1F3OHhEUGxEU05fWkNKQ0pXZmQwVlROLXltR0VlTUNHck95X0FWZEw5NXpkT2NjV2t2RnpsWWE4S2pXTW1RWDNzSzg3Yl9LZDJibWNPV1VpN1pYQmU2aXo4SllWbVpKNUEteTJHQk9iYVRFU3h1VzRtQWV0cnlXZkNOU2tOdzJOdlRSYjJrTnVvS09tXzNSVS1BOVpxclZXY190V201MVZNSElGam9qMnhXTWdIZjBmekU2c2NpN094UHdKd1JEWlBiaDVxTmhrTFJkVHdZYjVDQjhWNWRaRkFjcHZqSDBN?oc=5" target="_blank">La croissance du chiffre d'affaires d'IBM ralentit en raison des inquiétudes liées à l'IA ; les actions chuten</a>&nbsp;&nbsp;<font color="#6f6f6f">Boursorama</font>
-
-## 162. Des pirates avec la force de frappe d'un État : à l'aide de Claude et ChatGPT, un groupe de hackers a réalisé un braquage massif de données gouvernementales au Mexique - Science et vie
+## 154. Des pirates avec la force de frappe d'un État : à l'aide de Claude et ChatGPT, un groupe de hackers a réalisé un braquage massif de données gouvernementales au Mexique - Science et vie
 - Domain: science-et-vie.com
 - URL: https://news.google.com/rss/articles/CBMixAJBVV95cUxOaU9KOW4tNG5zZFhNellCVk1uRGNJTHJ0REFNWWFlY01EcDR2aEVWaUpqcWZqbW1UeU1XQVVQZHdDYndzQmlSM1B1R1RZWHdJTlpSVkpudlN6ZTNFRWl3SERIYzQ3MjA4emEyeDctTjRnT2pOeVAxTFA1VGxHdkY4cjRyZ0FkTlBqcVlmOEduVDZvcHlscjJfWTk1RmxhMGRVTzlCQlFEZkxvdjdzenpQVE43RlpSckF4N0s0T095UG4weVoway1RQmNoS1FJZGhIT2c3cXBXeUh0TjI0TDZuSmJON0hMTVhNalp4UUlPZGZPeDg5TlYtd1ZJRkVuSjEzNzNwMkczVmJpWUJ1RXdxUzhOMHhSMHhzbnFkeXZfVHVwTFMtMU0weEVCcFBrMnd6LThEbFpQdVVHZXQ4X19UWGo4bUo
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 21:00:45 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMixAJBVV95cUxOaU9KOW4tNG5zZFhNellCVk1uRGNJTHJ0REFNWWFlY01EcDR2aEVWaUpqcWZqbW1UeU1XQVVQZHdDYndzQmlSM1B1R1RZWHdJTlpSVkpudlN6ZTNFRWl3SERIYzQ3MjA4emEyeDctTjRnT2pOeVAxTFA1VGxHdkY4cjRyZ0FkTlBqcVlmOEduVDZvcHlscjJfWTk1RmxhMGRVTzlCQlFEZkxvdjdzenpQVE43RlpSckF4N0s0T095UG4weVoway1RQmNoS1FJZGhIT2c3cXBXeUh0TjI0TDZuSmJON0hMTVhNalp4UUlPZGZPeDg5TlYtd1ZJRkVuSjEzNzNwMkczVmJpWUJ1RXdxUzhOMHhSMHhzbnFkeXZfVHVwTFMtMU0weEVCcFBrMnd6LThEbFpQdVVHZXQ4X19UWGo4bUo?oc=5" target="_blank">Des pirates avec la force de frappe d'un État : à l'aide de Claude et ChatGPT, un groupe de hackers a réalisé un braquage massif de données gouvernementales au Mexique</a>&nbsp;&nbsp;<font color="#6f6f6f">Science et vie</font>
 
-## 163. IA face à la maladie : pourquoi elle ne remplace pas un vrai traitement - 24matins
+## 155. IA face à la maladie : pourquoi elle ne remplace pas un vrai traitement - 24matins
 - Domain: 24matins.fr
 - URL: https://news.google.com/rss/articles/CBMiowFBVV95cUxQVU1aVXo0MzdrNDBoWnBNTkpiSndzNnN3WWF0M2pRQUt6U0R3NTROYl9jQkxlc2RzSjZOenpmMjRoVmxXVzRNanlzX1VmSFc4aGNBUG5nWnFkXzFQZjJsc2o2TFJ5VWVZZE9rdmd3dmZtUXBjZF8xSERnRXVHVkoyZUZldEc2bHJkaF9STC1BcTk4MWdLUmlxR1Z2ZWJJQWhZQUxr
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 21:00:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxQVU1aVXo0MzdrNDBoWnBNTkpiSndzNnN3WWF0M2pRQUt6U0R3NTROYl9jQkxlc2RzSjZOenpmMjRoVmxXVzRNanlzX1VmSFc4aGNBUG5nWnFkXzFQZjJsc2o2TFJ5VWVZZE9rdmd3dmZtUXBjZF8xSERnRXVHVkoyZUZldEc2bHJkaF9STC1BcTk4MWdLUmlxR1Z2ZWJJQWhZQUxr?oc=5" target="_blank">IA face à la maladie : pourquoi elle ne remplace pas un vrai traitement</a>&nbsp;&nbsp;<font color="#6f6f6f">24matins</font>
 
-## 164. Time to apply the brakes to runaway AI, says pioneer - UN News
+## 156. Time to apply the brakes to runaway AI, says pioneer - UN News
 - Domain: news.un.org
 - URL: https://news.google.com/rss/articles/CBMiV0FVX3lxTE5ySXpGdjBhT2pSSGhWeUluXzBpcWpsQjJuOWtHSEpRUzlhZ25xY3VCTUtmVFV5MnJWeU82OVVyMXBkWml4M0FBY2c2ckxoNnVDMng2STRYUQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 20:47:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiV0FVX3lxTE5ySXpGdjBhT2pSSGhWeUluXzBpcWpsQjJuOWtHSEpRUzlhZ25xY3VCTUtmVFV5MnJWeU82OVVyMXBkWml4M0FBY2c2ckxoNnVDMng2STRYUQ?oc=5" target="_blank">Time to apply the brakes to runaway AI, says pioneer</a>&nbsp;&nbsp;<font color="#6f6f6f">UN News</font>
 
-## 165. Musk's $60 billion bet on Cursor comes as xAI falls behind on coding - Moneycontrol.com
-- Domain: moneycontrol.com
-- URL: https://news.google.com/rss/articles/CBMi2gFBVV95cUxOeXVFVmw2bXFIdG40bnFrWmF1SUdRVFNVVDlkMWVjR3VkcjFNcV9VU0ktb19wLUdpU1BCNHlYeGhZRWVtbFpIY3lxYkxwWjM3UFJhNTJ6X09vdHdzcXdseEhiNnBIcU90bG5ZWEZsMlFNRnQzQ1lzTlVXX29YTDFrajNZZnNPMTFPdFh5SEtsNy0tNXZYS0VqZ3Z0d1YxMkxKWmw4ZjVYYUhtT2lNdDJjU3RodjEtM2FTcHFVQkxGbm10RXFEaEhGUlBNbG5kWEFNeF92TVgtanNsd9IB3wFBVV95cUxNRFBaME45NXA4U3R5NHNXMFF6V0Z0elhpUm1mNDFTRHpQekk4VHphdm1GakdwOGxyLUNOcTUxU3F3SU9vVnloUEhuZXNFdlAzOG1Idk9CVHFUTHN3ZTM1czNwTnlCUi1NQlFLc1BJZ3MyaXpaNEpXak9lTmFWUm9qaUhudWdhU3ktelJYZXFQQlNuTmVDdjRPeFlmMU54YlU2cnRFaFpTVHNsWVp5eEhVN0VYTzRQdElGT1lxcTVFWWpROTlTcGVsMWtVUWpvVWdDb1d1N3dwSXltYnNSMml3
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 20:35:20 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMi2gFBVV95cUxOeXVFVmw2bXFIdG40bnFrWmF1SUdRVFNVVDlkMWVjR3VkcjFNcV9VU0ktb19wLUdpU1BCNHlYeGhZRWVtbFpIY3lxYkxwWjM3UFJhNTJ6X09vdHdzcXdseEhiNnBIcU90bG5ZWEZsMlFNRnQzQ1lzTlVXX29YTDFrajNZZnNPMTFPdFh5SEtsNy0tNXZYS0VqZ3Z0d1YxMkxKWmw4ZjVYYUhtT2lNdDJjU3RodjEtM2FTcHFVQkxGbm10RXFEaEhGUlBNbG5kWEFNeF92TVgtanNsd9IB3wFBVV95cUxNRFBaME45NXA4U3R5NHNXMFF6V0Z0elhpUm1mNDFTRHpQekk4VHphdm1GakdwOGxyLUNOcTUxU3F3SU9vVnloUEhuZXNFdlAzOG1Idk9CVHFUTHN3ZTM1czNwTnlCUi1NQlFLc1BJZ3MyaXpaNEpXak9lTmFWUm9qaUhudWdhU3ktelJYZXFQQlNuTmVDdjRPeFlmMU54YlU2cnRFaFpTVHNsWVp5eEhVN0VYTzRQdElGT1lxcTVFWWpROTlTcGVsMWtVUWpvVWdDb1d1N3dwSXltYnNSMml3?oc=5" target="_blank">Musk's $60 billion bet on Cursor comes as xAI falls behind on coding</a>&nbsp;&nbsp;<font color="#6f6f6f">Moneycontrol.com</font>
-
-## 166. DAF releases data, AI strategies to accelerate military dominance - spaceforce.mil
-- Domain: spaceforce.mil
-- URL: https://news.google.com/rss/articles/CBMiyAFBVV95cUxNN2hqcWpKOS1qNWMyZS0yTFJNS040bkhpRkdfbGVabEVpQ2kzRGVZaGdsZVQ1QnVCdGl5NUlOTjJSRXdkeHg3S1FnZnZWZkNhd3psMzVMejhlZFBRWHdxVzBuMFdNOWRZTDBWSXNYUEhCaVFqX1JVMDVyRGl0NXJOaVg2MnNSd1B6QWJ2YXdOOVBGeEo3SXBGSEFjYS1Ob1ZlcnNfRHNJTDM1QWVHT1h5dDhfNVRRNlVJajdHYURBaEJZUTlmb1Ziaw
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 20:25:52 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxNN2hqcWpKOS1qNWMyZS0yTFJNS040bkhpRkdfbGVabEVpQ2kzRGVZaGdsZVQ1QnVCdGl5NUlOTjJSRXdkeHg3S1FnZnZWZkNhd3psMzVMejhlZFBRWHdxVzBuMFdNOWRZTDBWSXNYUEhCaVFqX1JVMDVyRGl0NXJOaVg2MnNSd1B6QWJ2YXdOOVBGeEo3SXBGSEFjYS1Ob1ZlcnNfRHNJTDM1QWVHT1h5dDhfNVRRNlVJajdHYURBaEJZUTlmb1Ziaw?oc=5" target="_blank">DAF releases data, AI strategies to accelerate military dominance</a>&nbsp;&nbsp;<font color="#6f6f6f">spaceforce.mil</font>
-
-## 167. How AI is changing copper, fiber networking - Network World
+## 157. How AI is changing copper, fiber networking - Network World
 - Domain: networkworld.com
 - URL: https://news.google.com/rss/articles/CBMilwFBVV95cUxNWHdzRExUWmxjdGQ5Unk4MkZZZFhpTndNT3hZbjZuSEpOUlpHdXVNOHNpSXZISXZ3S3hXZFVPeFhQNTg3aE1mTHhTOFFZYUVCMDlWRFdNQTRWYzl4S2wtTEFtZm8yanl3WkFtQkg1T1NNZTJnT3Q4UmNQY1p0X0tZRFRGc0RkaTRycl9JTmNPdmVhR2xlWDYw
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 20:16:34 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNWHdzRExUWmxjdGQ5Unk4MkZZZFhpTndNT3hZbjZuSEpOUlpHdXVNOHNpSXZISXZ3S3hXZFVPeFhQNTg3aE1mTHhTOFFZYUVCMDlWRFdNQTRWYzl4S2wtTEFtZm8yanl3WkFtQkg1T1NNZTJnT3Q4UmNQY1p0X0tZRFRGc0RkaTRycl9JTmNPdmVhR2xlWDYw?oc=5" target="_blank">How AI is changing copper, fiber networking</a>&nbsp;&nbsp;<font color="#6f6f6f">Network World</font>
 
-## 168. AI Tool Use Linked with Understanding of Skincare Issues, With Rory Sayres, PhD, and Yun Liu, PhD - HCPLive
-- Domain: hcplive.com
-- URL: https://news.google.com/rss/articles/CBMirgFBVV95cUxQNHhGdzItWlJoWDh6TGlmbkhhdWdJVDdGRDdITE1rakZoX1M3c0NtZm5qcm42Q0FpaGFBTkxzZ0wzbjAxVUpiVmtLRVd0QUd5SVB6TGZEWDVscTFJdzE4YVhuSGJZb3lzTzNVLWZuSmVBNklfNUd3VzlqN2cxRjQ1WUJaeUJnVk1oa3VIanJzSm05ZFp4RUIyZEk0VnE0M0JlcjBvUE1FQzBZVmpnNmc
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 20:04:54 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxQNHhGdzItWlJoWDh6TGlmbkhhdWdJVDdGRDdITE1rakZoX1M3c0NtZm5qcm42Q0FpaGFBTkxzZ0wzbjAxVUpiVmtLRVd0QUd5SVB6TGZEWDVscTFJdzE4YVhuSGJZb3lzTzNVLWZuSmVBNklfNUd3VzlqN2cxRjQ1WUJaeUJnVk1oa3VIanJzSm05ZFp4RUIyZEk0VnE0M0JlcjBvUE1FQzBZVmpnNmc?oc=5" target="_blank">AI Tool Use Linked with Understanding of Skincare Issues, With Rory Sayres, PhD, and Yun Liu, PhD</a>&nbsp;&nbsp;<font color="#6f6f6f">HCPLive</font>
-
-## 169. Inquiétude à la Silicon Valley: la Chine talonne les géants américains de l'IA avec vingt fois moins d'argent - Slate.fr
+## 158. Inquiétude à la Silicon Valley: la Chine talonne les géants américains de l'IA avec vingt fois moins d'argent - Slate.fr
 - Domain: slate.fr
 - URL: https://news.google.com/rss/articles/CBMiywFBVV95cUxPbGstU3B1ZjZsRWttc2MxZjNjdWFnYkduNVdxU2JZQ0NQbXNDLUNKQXI4ZUtmbzdmMFBKOEdXZGR0cnAySDREejQ5aWNBM1k2eE11b2VhRFhYOS1mSEV3dVlKa1FFaWFFMWJHWUNHaThkcnVBQmZQQkpPNjdqWlkzaXlQdVBIZ0wySUdUUS1uakpkUVBZS1U2V2lkMzk0S05iNWlqNENPNXVRZ1luTUFqdF9OMnV0Z2NIT0gxNllEeS15VlBwdDg5Rlh1d9IB0AFBVV95cUxQTVJpbTRvVW1rZWhDZk9VeDdXak9QSWlfZ3JnQjhoMm1CSFBJVDJiVmpSTW4wMkQtQkoyR2s4Mk0yb1kza29mX0JYUDVaZ2hTMWJEN3RXLWhUMF9vLVBrUEd4VUU5OVRtY0ZVazctWE5MbjVELURab2EzTnNFQVZLbXNlaEh5cDRlQTIxN19nMllicWltZGhPUXB6T0tiUzQ0dFVlM0EyRjJMbWNSY1dINzN3NnBlOXhTSDFUSWJWekJsZW1EQ1hTbU5RRlgzQTZG
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 19:55:05 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxPbGstU3B1ZjZsRWttc2MxZjNjdWFnYkduNVdxU2JZQ0NQbXNDLUNKQXI4ZUtmbzdmMFBKOEdXZGR0cnAySDREejQ5aWNBM1k2eE11b2VhRFhYOS1mSEV3dVlKa1FFaWFFMWJHWUNHaThkcnVBQmZQQkpPNjdqWlkzaXlQdVBIZ0wySUdUUS1uakpkUVBZS1U2V2lkMzk0S05iNWlqNENPNXVRZ1luTUFqdF9OMnV0Z2NIT0gxNllEeS15VlBwdDg5Rlh1d9IB0AFBVV95cUxQTVJpbTRvVW1rZWhDZk9VeDdXak9QSWlfZ3JnQjhoMm1CSFBJVDJiVmpSTW4wMkQtQkoyR2s4Mk0yb1kza29mX0JYUDVaZ2hTMWJEN3RXLWhUMF9vLVBrUEd4VUU5OVRtY0ZVazctWE5MbjVELURab2EzTnNFQVZLbXNlaEh5cDRlQTIxN19nMllicWltZGhPUXB6T0tiUzQ0dFVlM0EyRjJMbWNSY1dINzN3NnBlOXhTSDFUSWJWekJsZW1EQ1hTbU5RRlgzQTZG?oc=5" target="_blank">Inquiétude à la Silicon Valley: la Chine talonne les géants américains de l'IA avec vingt fois moins d'argent</a>&nbsp;&nbsp;<font color="#6f6f6f">Slate.fr</font>
 
-## 170. DeSantis pressures House to pass AI Bill of Rights, references FSU shooting - Florida Phoenix
+## 159. DeSantis pressures House to pass AI Bill of Rights, references FSU shooting - Florida Phoenix
 - Domain: floridaphoenix.com
 - URL: https://news.google.com/rss/articles/CBMiswFBVV95cUxOWlgwRThNSE9uZGM2ZFFmZlU5cXVSM2t4LUN4dWVmc0prUExsOXVVbnphUWZqSkdwakg0dW0wbWlRc29iOGxWajluSmxwT1dmRG01NE9SMmtPU2cxTGI2WTR5V1FwTWRjRmJGRm83VUlHTWVLeFpYOVVKeTBlMHdHNElQSmF1ZU5lbkIyX0lVRWZ3UkJ6dnJGeVl6WkR6UFltbExlMHlXcWE0RDQyQmp2d25ZYw
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 19:35:03 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxOWlgwRThNSE9uZGM2ZFFmZlU5cXVSM2t4LUN4dWVmc0prUExsOXVVbnphUWZqSkdwakg0dW0wbWlRc29iOGxWajluSmxwT1dmRG01NE9SMmtPU2cxTGI2WTR5V1FwTWRjRmJGRm83VUlHTWVLeFpYOVVKeTBlMHdHNElQSmF1ZU5lbkIyX0lVRWZ3UkJ6dnJGeVl6WkR6UFltbExlMHlXcWE0RDQyQmp2d25ZYw?oc=5" target="_blank">DeSantis pressures House to pass AI Bill of Rights, references FSU shooting</a>&nbsp;&nbsp;<font color="#6f6f6f">Florida Phoenix</font>
 
-## 171. World AI Film Festival : à Cannes, le cinéma a de bot jours devant lui - Libération
+## 160. World AI Film Festival : à Cannes, le cinéma a de bot jours devant lui - Libération
 - Domain: liberation.fr
 - URL: https://news.google.com/rss/articles/CBMi3gFBVV95cUxPOEhLU29Sa0x3TkE0cG1kNmdhSVNPbUF0NFJNSkxXbmlGYzZzODVCT3AyalI0dTZaVEtjM2NGbVo5cjRTWE1Tal9PWmkzNUNkaXppcEFfd0QtSmFZY0JaeXBOTzRPQUUwUExzTVJzdXZxNEp5a1RReWxtX21LMXJ5czdZaTFObzM5VkNjZEFTYjM5ekVXelNaelRhOHhzLUJrOXJuajJTbmY1dUNNUDgzSmRoay1FYk5yeVVZa3hvM0VhRVpXcU1sOU5WRnRiX0l3dVFZR2ZpcG5FdWlHT2c
 - Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 19:20:41 GMT
+- Published: Wed, 22 Apr 2026 19:20:31 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi3gFBVV95cUxPOEhLU29Sa0x3TkE0cG1kNmdhSVNPbUF0NFJNSkxXbmlGYzZzODVCT3AyalI0dTZaVEtjM2NGbVo5cjRTWE1Tal9PWmkzNUNkaXppcEFfd0QtSmFZY0JaeXBOTzRPQUUwUExzTVJzdXZxNEp5a1RReWxtX21LMXJ5czdZaTFObzM5VkNjZEFTYjM5ekVXelNaelRhOHhzLUJrOXJuajJTbmY1dUNNUDgzSmRoay1FYk5yeVVZa3hvM0VhRVpXcU1sOU5WRnRiX0l3dVFZR2ZpcG5FdWlHT2c?oc=5" target="_blank">World AI Film Festival : à Cannes, le cinéma a de bot jours devant lui</a>&nbsp;&nbsp;<font color="#6f6f6f">Libération</font>
 
-## 172. AI to reshape financial market infrastructure, says State Bank of India chairman CS Setty - The Economic Times
+## 161. AI to reshape financial market infrastructure, says State Bank of India chairman CS Setty - The Economic Times
 - Domain: m.economictimes.com
 - URL: https://news.google.com/rss/articles/CBMihgJBVV95cUxNaVRac0pFWVB4M0hTLTU5MHhPWUN2UjhaR1FNUVcxek8yaVp3SWx1NzUwYldPMEY5b3NQM21EcFdPbi1heUJyOVp4eTJ3YjN0Y3ZOZU5FSHdBbEN2WXEtVlpkeUlvTlIzRjBJTFIwWEZQRDhqQnJsMjU0SGRoZy1HM25WT3U1UVhUQUdxRHVDLW4yeVN3cy1lNGpwQVlTRXhWNEQyOWd0MXE5WERZaW9kMnJxRUFSdzU5ZmxuU1JJNkxWZENFb1cwUEptZURRcE01dzBPX3hjdjhQWnZhYU4zTV9WdnphQlRtZHpNdTBPMzlRV0ZidHBGcVR5bm5fa3VEN0lDczVn0gGLAkFVX3lxTE83azRwa2dTUzRkWDhOOVFWMmU3WUhIUVFtZUd1T3VvTEd6RE5PS0ZISVlGTUdtWGlJek11clpqNVFvakRXQl9jc05YWkRjWVNmMkpjY1pMMkpZUTRvX3NNcmo3UXR5TExzOWtGczJxQVA2S0JlZExkM1VLSXVkQmhyR0xrQ0RQNkZvVFFzWDczMHdTWmZYZ2NhU0FvYW9rV1YwV29tenZqTHhFMVQ1Q2FVUHh6MG51V2JvTV9Wd3JpS3k2U21YamhTUi04RGtyOXhUZHpSMm42NHp5ZFJtbXhEaWtZOEFfT2toZnNFMGFCenNPOXQ4Sjdma2N6WkFobG1oYzMwQjladmU4WQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 19:16:40 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMihgJBVV95cUxNaVRac0pFWVB4M0hTLTU5MHhPWUN2UjhaR1FNUVcxek8yaVp3SWx1NzUwYldPMEY5b3NQM21EcFdPbi1heUJyOVp4eTJ3YjN0Y3ZOZU5FSHdBbEN2WXEtVlpkeUlvTlIzRjBJTFIwWEZQRDhqQnJsMjU0SGRoZy1HM25WT3U1UVhUQUdxRHVDLW4yeVN3cy1lNGpwQVlTRXhWNEQyOWd0MXE5WERZaW9kMnJxRUFSdzU5ZmxuU1JJNkxWZENFb1cwUEptZURRcE01dzBPX3hjdjhQWnZhYU4zTV9WdnphQlRtZHpNdTBPMzlRV0ZidHBGcVR5bm5fa3VEN0lDczVn0gGLAkFVX3lxTE83azRwa2dTUzRkWDhOOVFWMmU3WUhIUVFtZUd1T3VvTEd6RE5PS0ZISVlGTUdtWGlJek11clpqNVFvakRXQl9jc05YWkRjWVNmMkpjY1pMMkpZUTRvX3NNcmo3UXR5TExzOWtGczJxQVA2S0JlZExkM1VLSXVkQmhyR0xrQ0RQNkZvVFFzWDczMHdTWmZYZ2NhU0FvYW9rV1YwV29tenZqTHhFMVQ1Q2FVUHh6MG51V2JvTV9Wd3JpS3k2U21YamhTUi04RGtyOXhUZHpSMm42NHp5ZFJtbXhEaWtZOEFfT2toZnNFMGFCenNPOXQ4Sjdma2N6WkFobG1oYzMwQjladmU4WQ?oc=5" target="_blank">AI to reshape financial market infrastructure, says State Bank of India chairman CS Setty</a>&nbsp;&nbsp;<font color="#6f6f6f">The Economic Times</font>
 
-## 173. Palantir publie un manifeste : l’entreprise veut se rendre centrale dans presque tout ce qui comptera demain - Futura, le média qui explore le monde
+## 162. Palantir publie un manifeste : l’entreprise veut se rendre centrale dans presque tout ce qui comptera demain - Futura, le média qui explore le monde
 - Domain: futura-sciences.com
 - URL: https://news.google.com/rss/articles/CBMi7wFBVV95cUxNMTNYTWk5clNnSUtLdnF2TDk4TVRhUFpxa2sycnpUVTJ6X0NFSnZGdWVWTnFrRmdocno1bzFOdmlnMWcya2JlUlk3X0JINUg2ZUhXU3huUXBYT0diQnJIaDhFMmM3MlNpVzNmQU00eDFYQVVybVczUDlQU2VPNElMdjdiOFljX0Nvdi02MzhZZkczX09qRmlkbEdXcFhHbVZIczhWNWFHTTQyTjVkdzZQX0xZdmhQd3NYOVlVSUo4Z2Q4d25pU1dnc3NUMWlNNHlQdlVzUXc5TDNENDlGNkhRQmhlOVFBNnNUWVd4SFRFYw
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 19:07:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi7wFBVV95cUxNMTNYTWk5clNnSUtLdnF2TDk4TVRhUFpxa2sycnpUVTJ6X0NFSnZGdWVWTnFrRmdocno1bzFOdmlnMWcya2JlUlk3X0JINUg2ZUhXU3huUXBYT0diQnJIaDhFMmM3MlNpVzNmQU00eDFYQVVybVczUDlQU2VPNElMdjdiOFljX0Nvdi02MzhZZkczX09qRmlkbEdXcFhHbVZIczhWNWFHTTQyTjVkdzZQX0xZdmhQd3NYOVlVSUo4Z2Q4d25pU1dnc3NUMWlNNHlQdlVzUXc5TDNENDlGNkhRQmhlOVFBNnNUWVd4SFRFYw?oc=5" target="_blank">Palantir publie un manifeste : l’entreprise veut se rendre centrale dans presque tout ce qui comptera demain</a>&nbsp;&nbsp;<font color="#6f6f6f">Futura, le média qui explore le monde</font>
 
-## 174. UC San Diego alumna offers ways to be ‘robot-proof’ in the age of AI - San Diego Union-Tribune
+## 163. UC San Diego alumna offers ways to be ‘robot-proof’ in the age of AI - San Diego Union-Tribune
 - Domain: sandiegouniontribune.com
 - URL: https://news.google.com/rss/articles/CBMitgFBVV95cUxPeFJ0SFhDdjktSFUwZUxYblE5Z1kzcFVhYWFJNmlyenVYU0hObnc4djNlMzFjc29uMmF6cWoyeWJnSlRNd3ZzVHlwUjZwSi1mSHhNTEtWMXZUTXJ3QTZhVGlKT0ppd2x1RDJGQmlvNkFZSEw1NENDRVpKTUlKWUNRSkpTbVd6SzJBbGFKZXFzNkc0dTQ0SzRyem82VGpnckhydlR6N092bmo0dGp4UERIVDBiankyZw
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 18:53:39 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPeFJ0SFhDdjktSFUwZUxYblE5Z1kzcFVhYWFJNmlyenVYU0hObnc4djNlMzFjc29uMmF6cWoyeWJnSlRNd3ZzVHlwUjZwSi1mSHhNTEtWMXZUTXJ3QTZhVGlKT0ppd2x1RDJGQmlvNkFZSEw1NENDRVpKTUlKWUNRSkpTbVd6SzJBbGFKZXFzNkc0dTQ0SzRyem82VGpnckhydlR6N092bmo0dGp4UERIVDBiankyZw?oc=5" target="_blank">UC San Diego alumna offers ways to be ‘robot-proof’ in the age of AI</a>&nbsp;&nbsp;<font color="#6f6f6f">San Diego Union-Tribune</font>
 
-## 175. A first for the Tack Lecture: Business, AI and the liberal arts - W&M News
-- Domain: news.wm.edu
-- URL: https://news.google.com/rss/articles/CBMimAFBVV95cUxQaVVvSE93UkJJTGxyNmhwdkJLTVktb0ZJaWZOVWJxZkR6OW91ZDkzX2Q0a0YwOHBvMlNfQnh0WU1JT0pUeUtVTVA5ZV9vWUs3SF9KOTRqb2J5QTZoVWVTY1Y3cmZmdGdQODNWMXR1SDYzQlVTMEtGZGJRRFRPV1luMUxKeklOdnl5R2xvMlIxNHZPUm5HazZCSw
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 18:52:48 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxQaVVvSE93UkJJTGxyNmhwdkJLTVktb0ZJaWZOVWJxZkR6OW91ZDkzX2Q0a0YwOHBvMlNfQnh0WU1JT0pUeUtVTVA5ZV9vWUs3SF9KOTRqb2J5QTZoVWVTY1Y3cmZmdGdQODNWMXR1SDYzQlVTMEtGZGJRRFRPV1luMUxKeklOdnl5R2xvMlIxNHZPUm5HazZCSw?oc=5" target="_blank">A first for the Tack Lecture: Business, AI and the liberal arts</a>&nbsp;&nbsp;<font color="#6f6f6f">W&amp;M News</font>
-
-## 176. Will IT Accelerate or Stall Your AI Transformation? - Bain & Company
+## 164. Will IT Accelerate or Stall Your AI Transformation? - Bain & Company
 - Domain: bain.com
 - URL: https://news.google.com/rss/articles/CBMiiAFBVV95cUxNR3B4MTJnV3g4c0xuZVBseDFyRDBLa0Y4ZklhY2ptTWF6Rjg1TDdtTlFHOTNnUW1kM1plVW94N2hXV2FaVU5FbzBrOWhwLVE3VkJUZEh1S2xpWVpwd1hPVEtYLUtuZ2UtQnE0UTBkMkxKeUtoRlZmQk5YT2kyczA4MEhwaDBEVzFr
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 18:45:55 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxNR3B4MTJnV3g4c0xuZVBseDFyRDBLa0Y4ZklhY2ptTWF6Rjg1TDdtTlFHOTNnUW1kM1plVW94N2hXV2FaVU5FbzBrOWhwLVE3VkJUZEh1S2xpWVpwd1hPVEtYLUtuZ2UtQnE0UTBkMkxKeUtoRlZmQk5YT2kyczA4MEhwaDBEVzFr?oc=5" target="_blank">Will IT Accelerate or Stall Your AI Transformation?</a>&nbsp;&nbsp;<font color="#6f6f6f">Bain & Company</font>
 
-## 177. Student Wins Hackathon with AI-Enhanced Robot for Health Care Settings - CSUN Newsroom
+## 165. Student Wins Hackathon with AI-Enhanced Robot for Health Care Settings - CSUN Newsroom
 - Domain: newsroom.csun.edu
 - URL: https://news.google.com/rss/articles/CBMirAFBVV95cUxNeWRIVWxicXA1Tm5wamREczF3M3lKUjc5WHRkajJGR3pLaDh2Zm1sc1RUY1JIMmhTTktnWXJjak1jZ2N3QUJLYUVydml1YWZrNmRTSF9aTFYzbm1uZ0xnRjdVSkpzU3ZvcmV3UDRIR3dRWHctTE1GXzFqdEVUQlRqVHdHVVk5bGZiUU4tRnppbVVwbGpiSmZqaU5fcGxXcnV4QU9VcjZpZjJFSHgz
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 18:44:49 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNeWRIVWxicXA1Tm5wamREczF3M3lKUjc5WHRkajJGR3pLaDh2Zm1sc1RUY1JIMmhTTktnWXJjak1jZ2N3QUJLYUVydml1YWZrNmRTSF9aTFYzbm1uZ0xnRjdVSkpzU3ZvcmV3UDRIR3dRWHctTE1GXzFqdEVUQlRqVHdHVVk5bGZiUU4tRnppbVVwbGpiSmZqaU5fcGxXcnV4QU9VcjZpZjJFSHgz?oc=5" target="_blank">Student Wins Hackathon with AI-Enhanced Robot for Health Care Settings</a>&nbsp;&nbsp;<font color="#6f6f6f">CSUN Newsroom</font>
 
-## 178. Global Dialogue on AI Governance - SDG Knowledge Hub
+## 166. Global Dialogue on AI Governance - SDG Knowledge Hub
 - Domain: sdg.iisd.org
 - URL: https://news.google.com/rss/articles/CBMibkFVX3lxTE5Mb0FkZ1lhV0ZZN2ViYkJuOHBuM2V6SEdnMkRaejdrM0dUZ2k3aEVlRzQwc3BxeFBrWVJKb3NDLWNTREZZTEw0anVhS0tTTGtuMWpkMENDVDJrLU8yYnI4UXgzekRENGtlSEExQVh3
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 18:05:16 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE5Mb0FkZ1lhV0ZZN2ViYkJuOHBuM2V6SEdnMkRaejdrM0dUZ2k3aEVlRzQwc3BxeFBrWVJKb3NDLWNTREZZTEw0anVhS0tTTGtuMWpkMENDVDJrLU8yYnI4UXgzekRENGtlSEExQVh3?oc=5" target="_blank">Global Dialogue on AI Governance</a>&nbsp;&nbsp;<font color="#6f6f6f">SDG Knowledge Hub</font>
 
-## 179. "Touche pas à mon cinéma" : quand la Chine dit stop à l'IA dans l'audiovisuel - Radio France
-- Domain: radiofrance.fr
-- URL: https://news.google.com/rss/articles/CBMi5wFBVV95cUxNX2JiOEQzUUJiTVplNXR1NjBsclhLNEktNmhIYlBQY0VQYzdzV3VhbXJ4VVV2REtXTktJZVpsSDFsWVppVnZxV2doNzF6aW9sZTBfampDbUtEanZQZ1RYQ1ZZWXY0LWdvbU12MEhqaWl1VHpiemtSVFdmNDdtc295Zmk3ejk3cUQwTnlsZWhTSjd5OEU5MEM3R0NZelJfX2VTNnlDVWZWcm9jdVNSR1RWNjh4dWFYQmNFajBOai0tbmNLOXBQVVI5SjBjU0NFcHV6SFVDOHZlVXR2LVo1NmI0bHBzdTkwcnc
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 18:04:49 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMi5wFBVV95cUxNX2JiOEQzUUJiTVplNXR1NjBsclhLNEktNmhIYlBQY0VQYzdzV3VhbXJ4VVV2REtXTktJZVpsSDFsWVppVnZxV2doNzF6aW9sZTBfampDbUtEanZQZ1RYQ1ZZWXY0LWdvbU12MEhqaWl1VHpiemtSVFdmNDdtc295Zmk3ejk3cUQwTnlsZWhTSjd5OEU5MEM3R0NZelJfX2VTNnlDVWZWcm9jdVNSR1RWNjh4dWFYQmNFajBOai0tbmNLOXBQVVI5SjBjU0NFcHV6SFVDOHZlVXR2LVo1NmI0bHBzdTkwcnc?oc=5" target="_blank">"Touche pas à mon cinéma" : quand la Chine dit stop à l'IA dans l'audiovisuel</a>&nbsp;&nbsp;<font color="#6f6f6f">Radio France</font>
-
-## 180. Why can't AI serve as qualified doctors despite high test scores? - Xinhua
+## 167. Why can't AI serve as qualified doctors despite high test scores? - Xinhua
 - Domain: english.news.cn
 - URL: https://news.google.com/rss/articles/CBMifEFVX3lxTE1tcXhKaEpYNldGNS1kQUItSVJuTDdWUDM4SG5SNDZrdzBwTk9iUkh3R3dhX2QwVV9VMmNvN2h1YVdQcWZ4YlliR1UycEprVVdZQzYxdHYxYkQ1NEtYSEVnWnJlYnFfQ2Rxcnd3NEs0MW5WOGxiZVVvTmhMRWM
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 17:41:15 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTE1tcXhKaEpYNldGNS1kQUItSVJuTDdWUDM4SG5SNDZrdzBwTk9iUkh3R3dhX2QwVV9VMmNvN2h1YVdQcWZ4YlliR1UycEprVVdZQzYxdHYxYkQ1NEtYSEVnWnJlYnFfQ2Rxcnd3NEs0MW5WOGxiZVVvTmhMRWM?oc=5" target="_blank">Why can't AI serve as qualified doctors despite high test scores?</a>&nbsp;&nbsp;<font color="#6f6f6f">Xinhua</font>
 
-## 181. Google turns Chrome into an AI co-worker for the workplace
+## 168. Google turns Chrome into an AI co-worker for the workplace
 - Domain: techcrunch.com
 - URL: https://techcrunch.com/2026/04/22/google-turns-chrome-into-an-ai-coworker-for-the-workplace/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 17:30:00 +0000
 - Summary: Google brings Gemini-powered "auto browse" capabilities to Chrome for enterprise users, letting workers automate tasks like research, data entry, and more.
 
-## 182. Adobe +3 % après rachat $25B, atténue craintes liées à l’IA - TradingView
-- Domain: fr.tradingview.com
-- URL: https://news.google.com/rss/articles/CBMiZkFVX3lxTE0xTGlYYlRNanA1MzJLbWpMV0Q2OGc0VXJnbktFb0I4WkduOXpJU0s3UzBrRGFDNEdJVUl2R0g1Z1Q4OFlVYUlJNWROQUNydnRpblA4RFU2MUI4QzFVYVNmcFlwaFJHUQ
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 17:26:30 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMiZkFVX3lxTE0xTGlYYlRNanA1MzJLbWpMV0Q2OGc0VXJnbktFb0I4WkduOXpJU0s3UzBrRGFDNEdJVUl2R0g1Z1Q4OFlVYUlJNWROQUNydnRpblA4RFU2MUI4QzFVYVNmcFlwaFJHUQ?oc=5" target="_blank">Adobe +3 % après rachat $25B, atténue craintes liées à l’IA</a>&nbsp;&nbsp;<font color="#6f6f6f">TradingView</font>
-
-## 183. Teaching AI to operate particle accelerators with DOE grant - Cornell Chronicle
+## 169. Teaching AI to operate particle accelerators with DOE grant - Cornell Chronicle
 - Domain: news.cornell.edu
 - URL: https://news.google.com/rss/articles/CBMilwFBVV95cUxNcUhPNVpNeUZBY2ZxeEY5Q29xamxIcHhCM2tRNnE2alZBR1hTNE9Ca1l5aVBNR01Wc3NSbVVmcFJncTduTzYyMjUzTjFudXlWbW1EdE9MMjBPY1FUdk85c1p1RW1ES1R1V0VpS1dIYmJWRWxNWGNmNE9XWHNxdVNOYWxZakV5MVlodlBNSkVNcnFQemFSTzd3
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 17:22:04 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxNcUhPNVpNeUZBY2ZxeEY5Q29xamxIcHhCM2tRNnE2alZBR1hTNE9Ca1l5aVBNR01Wc3NSbVVmcFJncTduTzYyMjUzTjFudXlWbW1EdE9MMjBPY1FUdk85c1p1RW1ES1R1V0VpS1dIYmJWRWxNWGNmNE9XWHNxdVNOYWxZakV5MVlodlBNSkVNcnFQemFSTzd3?oc=5" target="_blank">Teaching AI to operate particle accelerators with DOE grant</a>&nbsp;&nbsp;<font color="#6f6f6f">Cornell Chronicle</font>
 
-## 184. Closing the gap between AI technology and who can actually use it - Federal News Network
+## 170. Closing the gap between AI technology and who can actually use it - Federal News Network
 - Domain: federalnewsnetwork.com
 - URL: https://news.google.com/rss/articles/CBMiyAFBVV95cUxPd013SlZMellTb1U0RFljSjh0V1NZVHlpdHV0S255eURCQUVsRGtrY0F1S2VpbUJ2X0ZNVGR6eWFGLVFuZHBkQloyLWE0cmtuVi16S04waTdGQnBDZnVkZzVOUTN4ZGIwdUgxQmJ1ZVd1NF9FOW93cEkzMTZ5Y0w4cEN1Q25FWXV2cENjNWo4OHVfMGlqMVIwQW50eS1TY05yVG1FYlBtNlJwQWFuR0xiblNBckxmTFpyYjduMlNVd2d3NVRLMEh2aw
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 17:03:14 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxPd013SlZMellTb1U0RFljSjh0V1NZVHlpdHV0S255eURCQUVsRGtrY0F1S2VpbUJ2X0ZNVGR6eWFGLVFuZHBkQloyLWE0cmtuVi16S04waTdGQnBDZnVkZzVOUTN4ZGIwdUgxQmJ1ZVd1NF9FOW93cEkzMTZ5Y0w4cEN1Q25FWXV2cENjNWo4OHVfMGlqMVIwQW50eS1TY05yVG1FYlBtNlJwQWFuR0xiblNBckxmTFpyYjduMlNVd2d3NVRLMEh2aw?oc=5" target="_blank">Closing the gap between AI technology and who can actually use it</a>&nbsp;&nbsp;<font color="#6f6f6f">Federal News Network</font>
 
-## 185. Anker lance Thus, sa puce IA maison conçue pour les traitements d'intelligence artificielle en local - KultureGeek
+## 171. Anker lance Thus, sa puce IA maison conçue pour les traitements d'intelligence artificielle en local - KultureGeek
 - Domain: kulturegeek.fr
 - URL: https://news.google.com/rss/articles/CBMiugFBVV95cUxPeVNoMmJnUzFrS1FVWVduWjVoYlZRQTNmbVA4X0tMUy1sNnJfbkxPWWpMVktmNUNlX085NnRZVHVBUF9oZDQ2b1owR2M1TzFLYS1GemhKRzRwWGhWRXlaLVU4V1p4VS1zYjFmVWJVR0k2M1NMRTlHVTFJWkVzMGk4c3VIS0pmZFk3NG9RUjBOUHBidUZCYTBpYk14MnV2Z01IMmQtREdrY2JuZVBrWUJOczVqcVJYUzR5RkE
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 17:00:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPeVNoMmJnUzFrS1FVWVduWjVoYlZRQTNmbVA4X0tMUy1sNnJfbkxPWWpMVktmNUNlX085NnRZVHVBUF9oZDQ2b1owR2M1TzFLYS1GemhKRzRwWGhWRXlaLVU4V1p4VS1zYjFmVWJVR0k2M1NMRTlHVTFJWkVzMGk4c3VIS0pmZFk3NG9RUjBOUHBidUZCYTBpYk14MnV2Z01IMmQtREdrY2JuZVBrWUJOczVqcVJYUzR5RkE?oc=5" target="_blank">Anker lance Thus, sa puce IA maison conçue pour les traitements d'intelligence artificielle en local</a>&nbsp;&nbsp;<font color="#6f6f6f">KultureGeek</font>
 
-## 186. AI Can Help Increase Donor Heart Matches, Reducing Organ Discard - Inside Precision Medicine
+## 172. AI Can Help Increase Donor Heart Matches, Reducing Organ Discard - Inside Precision Medicine
 - Domain: insideprecisionmedicine.com
 - URL: https://news.google.com/rss/articles/CBMiwAFBVV95cUxOenphVUNwQ0VqNmRta0hNd1BKZFp5TFlkeUZOdko1UmdUNmxXSEpUZ0ZVVUMwa1RESGh3TldyRFpZNnQ2U00ydTFaOFd0ZHVYLXNkTllrOUVpa3o0THZHQ3FEeHNvOHZkWU4yY1ViSlBKSlZZRHBkZ1ZST3dqYU55MmY4ZXV4TWFOaWtSczRDWHNSQWpZOGpGdkljV3UzRHozeW00MlZvVmgxTUh5X3FNcXdlc1FkZ0IyNVFGNFEweFI
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 16:52:10 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxOenphVUNwQ0VqNmRta0hNd1BKZFp5TFlkeUZOdko1UmdUNmxXSEpUZ0ZVVUMwa1RESGh3TldyRFpZNnQ2U00ydTFaOFd0ZHVYLXNkTllrOUVpa3o0THZHQ3FEeHNvOHZkWU4yY1ViSlBKSlZZRHBkZ1ZST3dqYU55MmY4ZXV4TWFOaWtSczRDWHNSQWpZOGpGdkljV3UzRHozeW00MlZvVmgxTUh5X3FNcXdlc1FkZ0IyNVFGNFEweFI?oc=5" target="_blank">AI Can Help Increase Donor Heart Matches, Reducing Organ Discard</a>&nbsp;&nbsp;<font color="#6f6f6f">Inside Precision Medicine</font>
 
-## 187. Another County Pauses Data Centers to Weigh Impacts - govtech.com
+## 173. Another County Pauses Data Centers to Weigh Impacts - govtech.com
 - Domain: govtech.com
 - URL: https://news.google.com/rss/articles/CBMioAFBVV95cUxPUWFrVjBKZFJpNHkxR2hENXBHYmNzNGJTcEJEYVBPbndDamtDa1kycnJkNlFfRlB2MVYtLXQ1RTBEV2VFb3dBVTF2R1dXWFdycUg1c3k3VkZGTjFXaHB4OFdoSFhtOEZ3al93YndmSWRTaV9kRl9IRklpX2xGR0Fvek14SlVUTnp0SmdrT3d5OFlEeHZwU3ppSC1XeE5qQVVN
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 16:40:46 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxPUWFrVjBKZFJpNHkxR2hENXBHYmNzNGJTcEJEYVBPbndDamtDa1kycnJkNlFfRlB2MVYtLXQ1RTBEV2VFb3dBVTF2R1dXWFdycUg1c3k3VkZGTjFXaHB4OFdoSFhtOEZ3al93YndmSWRTaV9kRl9IRklpX2xGR0Fvek14SlVUTnp0SmdrT3d5OFlEeHZwU3ppSC1XeE5qQVVN?oc=5" target="_blank">Another County Pauses Data Centers to Weigh Impacts</a>&nbsp;&nbsp;<font color="#6f6f6f">govtech.com</font>
 
-## 188. Spain’s Supervisory Authority Issues New Guidance on AI‑Based Voice Transcription - Inside Privacy
+## 174. Spain’s Supervisory Authority Issues New Guidance on AI‑Based Voice Transcription - Inside Privacy
 - Domain: insideprivacy.com
 - URL: https://news.google.com/rss/articles/CBMi2wFBVV95cUxOWHk3UG51TkdkWXI0X0RuVWltN0JtakE3eHgxa2ZLczNnQmtpU0F5SXhWQlVyTDJKSGo2cHZmUTJJTVMyTkw5aFZ4RnJ0ekJJeU1qSExZejhESVh3QllsamNibnhmVF9sNTl4LXItcWtrZ3VvOGh4ajNjbGE5U0xTcUhuY0VkUF9pZkpRZG1OdFRIeWMzR1dwZXFTdHhLUWVjNlMxakdOc0FBNTE4bzR2ODVQOEIwMmx3TVNIQTUwcDEyS0xyaUxKYWVnclFZRjludHVHYVR6cGlJMW8
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 16:37:26 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi2wFBVV95cUxOWHk3UG51TkdkWXI0X0RuVWltN0JtakE3eHgxa2ZLczNnQmtpU0F5SXhWQlVyTDJKSGo2cHZmUTJJTVMyTkw5aFZ4RnJ0ekJJeU1qSExZejhESVh3QllsamNibnhmVF9sNTl4LXItcWtrZ3VvOGh4ajNjbGE5U0xTcUhuY0VkUF9pZkpRZG1OdFRIeWMzR1dwZXFTdHhLUWVjNlMxakdOc0FBNTE4bzR2ODVQOEIwMmx3TVNIQTUwcDEyS0xyaUxKYWVnclFZRjludHVHYVR6cGlJMW8?oc=5" target="_blank">Spain’s Supervisory Authority Issues New Guidance on AI‑Based Voice Transcription</a>&nbsp;&nbsp;<font color="#6f6f6f">Inside Privacy</font>
 
-## 189. Toyota unveils one of world’s top AI vision engines at Japan test bed as race with China heats up - Automotive News
+## 175. Toyota unveils one of world’s top AI vision engines at Japan test bed as race with China heats up - Automotive News
 - Domain: autonews.com
 - URL: https://news.google.com/rss/articles/CBMiuwFBVV95cUxQU2xOSDZHY2JrbXBzdkM0TnM4RnQyUlNtYUdBTGF1N2FzZENFVmp5YTZuWXZIVXZhem95QWJvM19CTWFNZ04tYVdyU3l4cEpUZVlKQmNHOU9fUzNNZUk0YllDVHZHMDhvZDVLNXRwTVJaREhicHN5elhOZUZiVGVFcFZDaTJ1QVV3YkNpbFFoU200YXNGU0lBUTNYaUhiNERXRy04OVN4LV9yVjJCSVhTYjFKTi00X0w4Uk5r
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 16:35:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQU2xOSDZHY2JrbXBzdkM0TnM4RnQyUlNtYUdBTGF1N2FzZENFVmp5YTZuWXZIVXZhem95QWJvM19CTWFNZ04tYVdyU3l4cEpUZVlKQmNHOU9fUzNNZUk0YllDVHZHMDhvZDVLNXRwTVJaREhicHN5elhOZUZiVGVFcFZDaTJ1QVV3YkNpbFFoU200YXNGU0lBUTNYaUhiNERXRy04OVN4LV9yVjJCSVhTYjFKTi00X0w4Uk5r?oc=5" target="_blank">Toyota unveils one of world’s top AI vision engines at Japan test bed as race with China heats up</a>&nbsp;&nbsp;<font color="#6f6f6f">Automotive News</font>
 
-## 190. Old School Meets the New Cool: Will AI take over entry-level jobs? - WJHG
+## 176. Old School Meets the New Cool: Will AI take over entry-level jobs? - WJHG
 - Domain: wjhg.com
 - URL: https://news.google.com/rss/articles/CBMioAFBVV95cUxNeUtBUUFrSXJpVjRTN25FRkJ2LTFaV3Y4ZUFlRVIzUElBaHZJM0kwRVlyU0dVOFZid0RnbERfc0l5LVBrS0E4UGNjalhuclJOWDVwQTN0LXBxV3RDMjQ2a2FLYmZYY2Ixc2xqNjVzaklVa1RTM1U4bXVrMk9zNVdyNEoyd2RaRWZfc2Y1ZUo5SGdIRnJSZlQ4dURaaUpxelI1
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 16:28:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNeUtBUUFrSXJpVjRTN25FRkJ2LTFaV3Y4ZUFlRVIzUElBaHZJM0kwRVlyU0dVOFZid0RnbERfc0l5LVBrS0E4UGNjalhuclJOWDVwQTN0LXBxV3RDMjQ2a2FLYmZYY2Ixc2xqNjVzaklVa1RTM1U4bXVrMk9zNVdyNEoyd2RaRWZfc2Y1ZUo5SGdIRnJSZlQ4dURaaUpxelI1?oc=5" target="_blank">Old School Meets the New Cool: Will AI take over entry-level jobs?</a>&nbsp;&nbsp;<font color="#6f6f6f">WJHG</font>
 
-## 191. IA : la fin de l'emploi ? (mais pas des profits pour les patrons) - Blast Info
-- Domain: blast-info.fr
-- URL: https://news.google.com/rss/articles/CBMiwAFBVV95cUxNVUNiVWNkXzFEckZfYWJpa1FOeUUwOFNGdEE0MDhLQ3dxMlU4cFVuM2Y5UUpFR29uZkt1MDdRNXVPaTlTZ0NxOVVGXzFzcHpmYU8xbUlSbjNkajBnb05YR2lwZFJIQlR6Y0lvczRMQXRrNENUbVJiODlacU1GQjhycmZnWGdwNUNzYlJid1l0b0NfeGFfQjRwQ09tN1BnODZCdzJ0MW1GeEVYdzNKX0xHdXV0VU90TEpybnhub29ISDY
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 16:26:07 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxNVUNiVWNkXzFEckZfYWJpa1FOeUUwOFNGdEE0MDhLQ3dxMlU4cFVuM2Y5UUpFR29uZkt1MDdRNXVPaTlTZ0NxOVVGXzFzcHpmYU8xbUlSbjNkajBnb05YR2lwZFJIQlR6Y0lvczRMQXRrNENUbVJiODlacU1GQjhycmZnWGdwNUNzYlJid1l0b0NfeGFfQjRwQ09tN1BnODZCdzJ0MW1GeEVYdzNKX0xHdXV0VU90TEpybnhub29ISDY?oc=5" target="_blank">IA : la fin de l'emploi ? (mais pas des profits pour les patrons)</a>&nbsp;&nbsp;<font color="#6f6f6f">Blast Info</font>
-
-## 192. Uber investit dans HysetCo, chef de file de la mobilité hydrogène en France
+## 177. Uber investit dans HysetCo, chef de file de la mobilité hydrogène en France
 - Domain: maddyness.com
 - URL: https://www.maddyness.com/2026/04/22/uber-investit-dans-hysetco-chef-de-file-de-la-mobilite-hydrogene-en-france/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 16:10:18 +0000
 - Summary: <p>L’article <a href="https://www.maddyness.com/2026/04/22/uber-investit-dans-hysetco-chef-de-file-de-la-mobilite-hydrogene-en-france/">Uber investit dans HysetCo, chef de file de la mobilité hydrogène en France</a> est apparu en premier sur <a href="https://www.maddyness.com">Maddyness - Le média pour comprendre l&#039;économie de demain</a>.</p>
 
-## 193. Bidgely Energy Affordability AI Solution Wins 2026 Environment+Energy Leader Award - Business Wire
+## 178. Portugal : l’IA fait exploser la demande d’électricité, un défi majeur pour le pays - Portugal.fr
+- Domain: portugal.fr
+- URL: https://news.google.com/rss/articles/CBMipAFBVV95cUxPTk0tMkhwQ2V3M3NuWTA1eW5MSVJ1MmdmUDROU1R5cVdLc0dYRzBYRUxwRUFjRUloS3VSTkRtSm9sQkZvNEhZVjJJQkUzd2VIWHZqeFhrRkRUQWl3WGxtV3BkLUVWSGZTTjJ4RWpPU1Q5VXN5TXNsTHNrdmQyMDdaanZYb2kxdWVSNFE4Y0FMd0VCbW14OV9OM3dOMjhRbnR6YkNXQg
+- Relevance score: 4.0
+- Published: Wed, 22 Apr 2026 15:56:04 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxPTk0tMkhwQ2V3M3NuWTA1eW5MSVJ1MmdmUDROU1R5cVdLc0dYRzBYRUxwRUFjRUloS3VSTkRtSm9sQkZvNEhZVjJJQkUzd2VIWHZqeFhrRkRUQWl3WGxtV3BkLUVWSGZTTjJ4RWpPU1Q5VXN5TXNsTHNrdmQyMDdaanZYb2kxdWVSNFE4Y0FMd0VCbW14OV9OM3dOMjhRbnR6YkNXQg?oc=5" target="_blank">Portugal : l’IA fait exploser la demande d’électricité, un défi majeur pour le pays</a>&nbsp;&nbsp;<font color="#6f6f6f">Portugal.fr</font>
+
+## 179. UK to build ‘national cyber shield’ to protect against AI cyber threats - Computer Weekly
+- Domain: computerweekly.com
+- URL: https://news.google.com/rss/articles/CBMitgFBVV95cUxOb202QXUydWRDV3Y1YU56TkFPbmViaXpyNGVDOHFnWU9iSl9EbnFjN1NoS0VfZ0FIdFBHaWtqRGFfQ1JVUUlCYjhObm9iXzJyQlU3V2pfdUFyVmQtS3RnanptcE5reDBqQUNQakZuYnFsbGtHdkNuZkVwVXFGMDRfN0toc1lFRUhsYWx1R2N3SkZjbTdrZ1dxejZZRmpqZm9hYkpEM0pwTnRqblU0NE5NSVBnRHRkQQ
+- Relevance score: 4.0
+- Published: Wed, 22 Apr 2026 15:54:04 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxOb202QXUydWRDV3Y1YU56TkFPbmViaXpyNGVDOHFnWU9iSl9EbnFjN1NoS0VfZ0FIdFBHaWtqRGFfQ1JVUUlCYjhObm9iXzJyQlU3V2pfdUFyVmQtS3RnanptcE5reDBqQUNQakZuYnFsbGtHdkNuZkVwVXFGMDRfN0toc1lFRUhsYWx1R2N3SkZjbTdrZ1dxejZZRmpqZm9hYkpEM0pwTnRqblU0NE5NSVBnRHRkQQ?oc=5" target="_blank">UK to build ‘national cyber shield’ to protect against AI cyber threats</a>&nbsp;&nbsp;<font color="#6f6f6f">Computer Weekly</font>
+
+## 180. Bidgely Energy Affordability AI Solution Wins 2026 Environment+Energy Leader Award - Business Wire
 - Domain: businesswire.com
 - URL: https://news.google.com/rss/articles/CBMi1AFBVV95cUxQM2JYUUZaOF9xa0tMUWlwVV8tcVh0RWxfblJrSmNKMl8wRzdxUTBKQ1lNbmNHMGZXdGpCcVNZbnZqaFA0ekdSd3BqTHBmTTBMWVNDQTAwanpBLTFkQkhTTVZWNlduQzVMeHdfWlBOR0FWbXJtSzgxdGtDekRyZ0VXNC1LSmEzOGpkRWVjVUlIbzVDajRmTDVZT1BKOUo3SGlnM1lFOEt1QTBYNDQ3eERReHQ4cGVLMU9PRF9Qb3F4eXFHQWtWazhscTg2Q0s1SXF3Q095VA
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 15:35:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxQM2JYUUZaOF9xa0tMUWlwVV8tcVh0RWxfblJrSmNKMl8wRzdxUTBKQ1lNbmNHMGZXdGpCcVNZbnZqaFA0ekdSd3BqTHBmTTBMWVNDQTAwanpBLTFkQkhTTVZWNlduQzVMeHdfWlBOR0FWbXJtSzgxdGtDekRyZ0VXNC1LSmEzOGpkRWVjVUlIbzVDajRmTDVZT1BKOUo3SGlnM1lFOEt1QTBYNDQ3eERReHQ4cGVLMU9PRF9Qb3F4eXFHQWtWazhscTg2Q0s1SXF3Q095VA?oc=5" target="_blank">Bidgely Energy Affordability AI Solution Wins 2026 Environment+Energy Leader Award</a>&nbsp;&nbsp;<font color="#6f6f6f">Business Wire</font>
 
-## 194. Chez UBER, l’IA fait exploser les budgets / Chez META, les salariés entraînent les machines / OpenAI muscle son jeu en Europe avec un Français à sa tête - frenchweb.fr
+## 181. Chez UBER, l’IA fait exploser les budgets / Chez META, les salariés entraînent les machines / OpenAI muscle son jeu en Europe avec un Français à sa tête - frenchweb.fr
 - Domain: frenchweb.fr
 - URL: https://news.google.com/rss/articles/CBMiiAJBVV95cUxPa0ZScHBHd0dkX09ITjV2QXVCMzFVbHJQLXdoLTBJQ3VET3BYeFBmSGlBNGdCMGEtVEpXaFQ1Q0g4N0hLOWFpVkxLQVZPeVlWSFBzSVJWQW5SajQ5Z1M2RnVUazZyTFhSVTVaNG14dXZTQ3lNamFZejg2ZXREamtCOU9kREpNNE1qeG1UdXNVamhVN2xrS2lPR2VpeWhSRDR0NmFaZ2VMVHhOMC0xb2JyYlZ4ZENWNm5oSkhMSXktQ0FlekR3ZHQ4UVM4c3hwYjZHOFJmVFlKcXJLeDNHS0pONnlUM0FWVG4tMXRXdFVEVnN2MTBDVWZNdzFxTDA2LVA1QzVnbzRud1k
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 15:20:51 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiiAJBVV95cUxPa0ZScHBHd0dkX09ITjV2QXVCMzFVbHJQLXdoLTBJQ3VET3BYeFBmSGlBNGdCMGEtVEpXaFQ1Q0g4N0hLOWFpVkxLQVZPeVlWSFBzSVJWQW5SajQ5Z1M2RnVUazZyTFhSVTVaNG14dXZTQ3lNamFZejg2ZXREamtCOU9kREpNNE1qeG1UdXNVamhVN2xrS2lPR2VpeWhSRDR0NmFaZ2VMVHhOMC0xb2JyYlZ4ZENWNm5oSkhMSXktQ0FlekR3ZHQ4UVM4c3hwYjZHOFJmVFlKcXJLeDNHS0pONnlUM0FWVG4tMXRXdFVEVnN2MTBDVWZNdzFxTDA2LVA1QzVnbzRud1k?oc=5" target="_blank">Chez UBER, l’IA fait exploser les budgets / Chez META, les salariés entraînent les machines / OpenAI muscle son jeu en Europe avec un Français à sa tête</a>&nbsp;&nbsp;<font color="#6f6f6f">frenchweb.fr</font>
 
-## 195. Video: AI Gains Ground at the Dealership - CDK Global
+## 182. Video: AI Gains Ground at the Dealership - CDK Global
 - Domain: cdkglobal.com
 - URL: https://news.google.com/rss/articles/CBMidkFVX3lxTE5hTlhzZDdoTzBrZFJRUGV3TjRMTUo5QkxhZC1SSmlrdTBhOVp3V3Z0SGV0VHhwNkt0dmZicE9UdDczbWdySkFRQjdLOG5Ha3hmOE9hZncxcm5kaXZpQU82clhMZndFRkZtVkFMcExjZC1DWjRRVUE
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 15:16:26 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE5hTlhzZDdoTzBrZFJRUGV3TjRMTUo5QkxhZC1SSmlrdTBhOVp3V3Z0SGV0VHhwNkt0dmZicE9UdDczbWdySkFRQjdLOG5Ha3hmOE9hZncxcm5kaXZpQU82clhMZndFRkZtVkFMcExjZC1DWjRRVUE?oc=5" target="_blank">Video: AI Gains Ground at the Dealership</a>&nbsp;&nbsp;<font color="#6f6f6f">CDK Global</font>
 
-## 196. 98 % des entreprises françaises jugent l’IA déjà décisive pour leur croissance - Journal Spécial des Sociétés
+## 183. 98 % des entreprises françaises jugent l’IA déjà décisive pour leur croissance - Journal Spécial des Sociétés
 - Domain: jss.fr
 - URL: https://news.google.com/rss/articles/CBMifEFVX3lxTFA1UEFqTGVZVWtLak9UdkFPN1dySk51STBWV2tPVTVMRnJ5WElHT1FJT1R5NlU0M1NIckt2Z0FIbUc5NjBXS0ZIS0t0OVM3ZWc0bXVPd2ROeWw5d1VkamFBbEVZZlp5RkZ4bkotMzNzTDc3anAtdjUwN1dMLWY
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 15:01:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFA1UEFqTGVZVWtLak9UdkFPN1dySk51STBWV2tPVTVMRnJ5WElHT1FJT1R5NlU0M1NIckt2Z0FIbUc5NjBXS0ZIS0t0OVM3ZWc0bXVPd2ROeWw5d1VkamFBbEVZZlp5RkZ4bkotMzNzTDc3anAtdjUwN1dMLWY?oc=5" target="_blank">98 % des entreprises françaises jugent l’IA déjà décisive pour leur croissance</a>&nbsp;&nbsp;<font color="#6f6f6f">Journal Spécial des Sociétés</font>
 
-## 197. Watch an AI-powered table tennis robot beat elite players - Live Science
+## 184. Watch an AI-powered table tennis robot beat elite players - Live Science
 - Domain: livescience.com
 - URL: https://news.google.com/rss/articles/CBMipgFBVV95cUxNdk9PNmNTZ0pxV3RzeGdfTjdSd3FDZE1ncldVakFXbkNRQ2lyS0dIdXdRa1ZSRVdBejktZnU0RTM1ZXVVMmhjSzZDRVRYdlZwNExlbnBHV200S1FDVVkzemxnVWtCM25kQkpwdWY0ZEs1emhpM0xmcS1NSEpmS3hOV0diYXItV1IzdG10OC1WMkdYMjEtbjcwM1dnUHA0WkZrd0dxcE13
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 15:00:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNdk9PNmNTZ0pxV3RzeGdfTjdSd3FDZE1ncldVakFXbkNRQ2lyS0dIdXdRa1ZSRVdBejktZnU0RTM1ZXVVMmhjSzZDRVRYdlZwNExlbnBHV200S1FDVVkzemxnVWtCM25kQkpwdWY0ZEs1emhpM0xmcS1NSEpmS3hOV0diYXItV1IzdG10OC1WMkdYMjEtbjcwM1dnUHA0WkZrd0dxcE13?oc=5" target="_blank">Watch an AI-powered table tennis robot beat elite players</a>&nbsp;&nbsp;<font color="#6f6f6f">Live Science</font>
 
-## 198. Défense : quelle est la puissance de l’IA militaire française ? - lejdd.fr
+## 185. Défense : quelle est la puissance de l’IA militaire française ? - lejdd.fr
 - Domain: lejdd.fr
 - URL: https://news.google.com/rss/articles/CBMimgFBVV95cUxOX3RTYWVpOXRBSzNZRUk5N1NaVVZQeFFoY2dkT2FDeWpCR2U1TXBHcExZZU00Uk90cTd3QUFQaFBocnMtWmtnYzRrejlWUFFFM0Z1NGNuTy1uVnRfU3RVUm52Rl85YmNwdnZjajYzbG1sek15blpJOUdJVDltRXBCdVhoWEZFR2dCcjFWc05NV3RiTFJmMDBJaGVR
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 14:56:27 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxOX3RTYWVpOXRBSzNZRUk5N1NaVVZQeFFoY2dkT2FDeWpCR2U1TXBHcExZZU00Uk90cTd3QUFQaFBocnMtWmtnYzRrejlWUFFFM0Z1NGNuTy1uVnRfU3RVUm52Rl85YmNwdnZjajYzbG1sek15blpJOUdJVDltRXBCdVhoWEZFR2dCcjFWc05NV3RiTFJmMDBJaGVR?oc=5" target="_blank">Défense : quelle est la puissance de l’IA militaire française ?</a>&nbsp;&nbsp;<font color="#6f6f6f">lejdd.fr</font>
 
-## 199. First India-Japan AI Strategic Dialogue (April 21, 2026) - Ministry of External Affairs
+## 186. First India-Japan AI Strategic Dialogue (April 21, 2026) - Ministry of External Affairs
 - Domain: mea.gov.in
 - URL: https://news.google.com/rss/articles/CBMipwFBVV95cUxNRmc1SlVSNktVay1HT082QmJPVC1Gb1pBOTRBQ3hKTXpEU1hlUDJKUi0wVFJ3TjlNOE9Ddl9TQzhKSVExUU9wWUliYk53X1IwblNqVVFQUUhrbWUyZklCa01laWhCdDBzV21mWFpMdHl2Vi1EYlRzUFhUMnJSbWRuWEpIS3BNNVFPSzRVNW5iOUVQZ0N1ZFJkVkF5Ty1Ob0szRE12SzBCNA
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 14:44:55 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNRmc1SlVSNktVay1HT082QmJPVC1Gb1pBOTRBQ3hKTXpEU1hlUDJKUi0wVFJ3TjlNOE9Ddl9TQzhKSVExUU9wWUliYk53X1IwblNqVVFQUUhrbWUyZklCa01laWhCdDBzV21mWFpMdHl2Vi1EYlRzUFhUMnJSbWRuWEpIS3BNNVFPSzRVNW5iOUVQZ0N1ZFJkVkF5Ty1Ob0szRE12SzBCNA?oc=5" target="_blank">First India-Japan AI Strategic Dialogue (April 21, 2026)</a>&nbsp;&nbsp;<font color="#6f6f6f">Ministry of External Affairs</font>
 
-## 200. AI generated pornography of teacher produced by students - The Jerusalem Post
+## 187. AI generated pornography of teacher produced by students - The Jerusalem Post
 - Domain: jpost.com
 - URL: https://news.google.com/rss/articles/CBMickFVX3lxTE54ZzJzZ2VHejR2ZVlrTlpDR3VVaGxtS1FacnpXNFpNT1pLS2QtUl91NENSQmIzblAtTXl6UXVKdmI3M2N6TGVRUUdSWWxrTlRLSV9TOTZtaXR2VDlOaUJDREVUQzZCWk1mb21Pb1RrY3lOdw
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 14:44:41 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMickFVX3lxTE54ZzJzZ2VHejR2ZVlrTlpDR3VVaGxtS1FacnpXNFpNT1pLS2QtUl91NENSQmIzblAtTXl6UXVKdmI3M2N6TGVRUUdSWWxrTlRLSV9TOTZtaXR2VDlOaUJDREVUQzZCWk1mb21Pb1RrY3lOdw?oc=5" target="_blank">AI generated pornography of teacher produced by students</a>&nbsp;&nbsp;<font color="#6f6f6f">The Jerusalem Post</font>
 
-## 201. Une nouvelle Chaire à l'X dédiée à l’IA, la souveraineté numérique et la p… - polytechnique.edu
+## 188. Tom Cruise et Brad Pitt en IA, c'est fini : YouTube dévoile son nouvel outil anti-deepfake - Les Numériques
+- Domain: lesnumeriques.com
+- URL: https://news.google.com/rss/articles/CBMi1wFBVV95cUxNeXBUSHUyMGhTeHJzelBFNGtKR1oteVhucnNzRlQ2TVItc1lPTXZSSmJVcEwyN2lQUjFlc0hhTE1oQnR5SW8yanZ4NTMtMTNzS3JqS09iX3Zla0ozamw3S3B4VzQwbmVuYVQzVXE5MkRCbDVXRGVTdVp4RXAyZDMxOGNvdGRRWmM1NFVnUlBZeHV2RVhja2F1MUoxRnFIaVRsMzZpS1JfLXc4RWVFY2VqSHg0bEstQ3pET2hNeFUxUlNWV2g3RThmR1djVllmMTVPcVBGY1Jqdw
+- Relevance score: 4.0
+- Published: Wed, 22 Apr 2026 14:32:00 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxNeXBUSHUyMGhTeHJzelBFNGtKR1oteVhucnNzRlQ2TVItc1lPTXZSSmJVcEwyN2lQUjFlc0hhTE1oQnR5SW8yanZ4NTMtMTNzS3JqS09iX3Zla0ozamw3S3B4VzQwbmVuYVQzVXE5MkRCbDVXRGVTdVp4RXAyZDMxOGNvdGRRWmM1NFVnUlBZeHV2RVhja2F1MUoxRnFIaVRsMzZpS1JfLXc4RWVFY2VqSHg0bEstQ3pET2hNeFUxUlNWV2g3RThmR1djVllmMTVPcVBGY1Jqdw?oc=5" target="_blank">Tom Cruise et Brad Pitt en IA, c'est fini : YouTube dévoile son nouvel outil anti-deepfake</a>&nbsp;&nbsp;<font color="#6f6f6f">Les Numériques</font>
+
+## 189. Une nouvelle Chaire à l'X dédiée à l’IA, la souveraineté numérique et la p… - polytechnique.edu
 - Domain: polytechnique.edu
 - URL: https://news.google.com/rss/articles/CBMiywFBVV95cUxNTVVsWkpBelVDR0xGZkZncGR2ekFXeWo2NC11Q0xPOWhnanhBMUswbkxqRmJqb1F5VzVYeTJ6S1JnR3ZPVDZDMVZzWUszTWhhVnpOaDJXR2poS0RzeF95dHVpOEhIX19yOUljQVVVN0JMZk9EWEd3dE1TTnVfbFNuMU56alZDQndpYlN3N3BFaTJIQjQtbW9aYmxjWnlHQ2NESkJicHhFckxmTGVEeWxsUzJBb2xmQTlVNlNsTWhLVS1MbzBRWnBMMEZwOA
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 14:28:08 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxNTVVsWkpBelVDR0xGZkZncGR2ekFXeWo2NC11Q0xPOWhnanhBMUswbkxqRmJqb1F5VzVYeTJ6S1JnR3ZPVDZDMVZzWUszTWhhVnpOaDJXR2poS0RzeF95dHVpOEhIX19yOUljQVVVN0JMZk9EWEd3dE1TTnVfbFNuMU56alZDQndpYlN3N3BFaTJIQjQtbW9aYmxjWnlHQ2NESkJicHhFckxmTGVEeWxsUzJBb2xmQTlVNlNsTWhLVS1MbzBRWnBMMEZwOA?oc=5" target="_blank">Une nouvelle Chaire à l'X dédiée à l’IA, la souveraineté numérique et la p…</a>&nbsp;&nbsp;<font color="#6f6f6f">polytechnique.edu</font>
 
-## 202. Impôts 2026 : faire confiance à l’intelligence artificielle pour sa déclaration de revenus… au risque du redressement fiscal ? - Bourse Inside
+## 190. Impôts 2026 : faire confiance à l’intelligence artificielle pour sa déclaration de revenus… au risque du redressement fiscal ? - Bourse Inside
 - Domain: bourseinside.fr
 - URL: https://news.google.com/rss/articles/CBMi7AFBVV95cUxNVTlQR2pia3FIbEpDQWl6a2thdy1sejZXeUlhaXlEbldwTjNMWUtDaFlpWHhGUzVMVXljVl9KSU1iVi1sMllaamV4V19DR3FMb0dqakhxdXgtVktsMUlkWDR6UkVtTEZLMXVscnMxRDFDdUw5bnJDem5ROGFhUWh3UG1SbFBOb1pvcUp6MnZrc2U1Yi1ROS1sYkhoUHZoSnpGZ0pVTHJkSU1Ob1F2Z3hkQzJpSURObkxxXzVPdFZnQnR2QTN4SkdpNmVGTGhVemNpczFPYWlIcHhWd2JaLXBvVWh4aF9LUzNsRnYxMA
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 14:13:51 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi7AFBVV95cUxNVTlQR2pia3FIbEpDQWl6a2thdy1sejZXeUlhaXlEbldwTjNMWUtDaFlpWHhGUzVMVXljVl9KSU1iVi1sMllaamV4V19DR3FMb0dqakhxdXgtVktsMUlkWDR6UkVtTEZLMXVscnMxRDFDdUw5bnJDem5ROGFhUWh3UG1SbFBOb1pvcUp6MnZrc2U1Yi1ROS1sYkhoUHZoSnpGZ0pVTHJkSU1Ob1F2Z3hkQzJpSURObkxxXzVPdFZnQnR2QTN4SkdpNmVGTGhVemNpczFPYWlIcHhWd2JaLXBvVWh4aF9LUzNsRnYxMA?oc=5" target="_blank">Impôts 2026 : faire confiance à l’intelligence artificielle pour sa déclaration de revenus… au risque du redressement fiscal ?</a>&nbsp;&nbsp;<font color="#6f6f6f">Bourse Inside</font>
 
-## 203. The Transformative Power of AI: Turning the Tide on Ocean Cleanup - NetChoice
+## 191. The Transformative Power of AI: Turning the Tide on Ocean Cleanup - NetChoice
 - Domain: netchoice.org
 - URL: https://news.google.com/rss/articles/CBMikAFBVV95cUxQUWlOc3hqeXBNU0tkUzFzRnFGelpIU3FWeG1SQUl5VDRNWXduZVlsM3NtbEFCTmxEOHpzR1pHS0Qwd2xHb1l6SDRnRFNrTFFLc0gtT19BV01FTndRN3Uwcl9UbmppNDhvcmlVcWhDSHZGTXc1UEZBZnV1Mm84Q3NzY1BVdXE1azZscUZvTEpoLUY
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 13:58:47 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQUWlOc3hqeXBNU0tkUzFzRnFGelpIU3FWeG1SQUl5VDRNWXduZVlsM3NtbEFCTmxEOHpzR1pHS0Qwd2xHb1l6SDRnRFNrTFFLc0gtT19BV01FTndRN3Uwcl9UbmppNDhvcmlVcWhDSHZGTXc1UEZBZnV1Mm84Q3NzY1BVdXE1azZscUZvTEpoLUY?oc=5" target="_blank">The Transformative Power of AI: Turning the Tide on Ocean Cleanup</a>&nbsp;&nbsp;<font color="#6f6f6f">NetChoice</font>
 
-## 204. Number of AI use cases in the US federal government more than doubles in a year, official figures show - Global Government Forum
+## 192. Number of AI use cases in the US federal government more than doubles in a year, official figures show - Global Government Forum
 - Domain: globalgovernmentforum.com
 - URL: https://news.google.com/rss/articles/CBMi1wFBVV95cUxQT3hGQk1oTUNKN3gwR2dYMjNGbWFhcEQ5WkYtTEJWVXhsay1vamR3Z01iMUU1a0RaTTAtUzA0S2Y1U0E2RXdUYXhWeF9aTHRlaE9iVEc0TzFBcVNWWEFuNHk4VzJZdVRxUmR3RDJMY1Fva3h6eVBGbjF4c3VSeE9FZnVZd1lkdEFXel9YUTRJTUFRT09jN0hWQUNmel9SMUpYTHBaNTRqYy1SOVREOW45eEJXZUJrMHZBUVRxbVpsV0Y4NWhUb2p5ZHNOUFBBZVkyRHQwOGllUQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 13:12:23 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxQT3hGQk1oTUNKN3gwR2dYMjNGbWFhcEQ5WkYtTEJWVXhsay1vamR3Z01iMUU1a0RaTTAtUzA0S2Y1U0E2RXdUYXhWeF9aTHRlaE9iVEc0TzFBcVNWWEFuNHk4VzJZdVRxUmR3RDJMY1Fva3h6eVBGbjF4c3VSeE9FZnVZd1lkdEFXel9YUTRJTUFRT09jN0hWQUNmel9SMUpYTHBaNTRqYy1SOVREOW45eEJXZUJrMHZBUVRxbVpsV0Y4NWhUb2p5ZHNOUFBBZVkyRHQwOGllUQ?oc=5" target="_blank">Number of AI use cases in the US federal government more than doubles in a year, official figures show</a>&nbsp;&nbsp;<font color="#6f6f6f">Global Government Forum</font>
 
-## 205. AcuityMD raises $80M to help bolster AI in the medtech industry - Fierce Biotech
+## 193. AcuityMD raises $80M to help bolster AI in the medtech industry - Fierce Biotech
 - Domain: fiercebiotech.com
 - URL: https://news.google.com/rss/articles/CBMiqAFBVV95cUxPR1dDa2xGZzhaTm5iZm9pQkNabVhsRmZoNTk5SF9wOEszdndMaW1nbXFPdDJyYW1MQnNWMjR3OWctN21YX3hKc0N5N3dHdGlaSGUzWWdvM20xel8xcVVvU2drNjdra2VHVVllTlRGazFnU3kycnluaXlFbEpWdGp5MmhVMWhNM3lDS2NjdTMteXRXUFpxOEVqbmpXb1phRmFSSDV2RTg5cGI
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 13:10:57 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxPR1dDa2xGZzhaTm5iZm9pQkNabVhsRmZoNTk5SF9wOEszdndMaW1nbXFPdDJyYW1MQnNWMjR3OWctN21YX3hKc0N5N3dHdGlaSGUzWWdvM20xel8xcVVvU2drNjdra2VHVVllTlRGazFnU3kycnluaXlFbEpWdGp5MmhVMWhNM3lDS2NjdTMteXRXUFpxOEVqbmpXb1phRmFSSDV2RTg5cGI?oc=5" target="_blank">AcuityMD raises $80M to help bolster AI in the medtech industry</a>&nbsp;&nbsp;<font color="#6f6f6f">Fierce Biotech</font>
 
-## 206. ‘In two years, nobody will care’ if actors are AI or not, predicts La Haine director
+## 194. ‘In two years, nobody will care’ if actors are AI or not, predicts La Haine director
 - Domain: theguardian.com
 - URL: https://www.theguardian.com/film/2026/apr/22/actors-ai-la-haine-director-mathieu-kassovitz
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 13:05:24 GMT
 - Summary: <p>Mathieu Kassovitz, who is currently working on an AI-enabled film, also dismisses concerns over copyright </p><p>His hit film was a masterpiece capturing the gritty truth of the Paris suburbs, but the director of <a href="https://www.theguardian.com/film/2020/may/23/how-la-haine-lit-a-fire-under-french-society">La Haine</a> is now sold on an AI-generated future for cinema.</p><p>Mathieu Kassovitz has called the technology the “the last artistic tool we need” and dismissed concerns about AI stealing other artists’ intellectual property, telling the Guardian: “Fuck copyright.”</p> <a href="https://www.theguardian.com/film/2026/apr/22/actors-ai-la-haine-director-mathieu-kassovitz">Continue reading...</a>
 
-## 207. Impôts 2026: peut-on faire confiance à l'intelligence artificielle pour remplir sa déclaration de revenus? - RMC
+## 195. Impôts 2026: peut-on faire confiance à l'intelligence artificielle pour remplir sa déclaration de revenus? - RMC
 - Domain: rmc.bfmtv.com
 - URL: https://news.google.com/rss/articles/CBMi8gFBVV95cUxNdVRxM3ZwR0RKY25MSTA2VTYwY0N3TC1pMjgtMXRkVmNMM0JoZUhveVZxbmlBeW9QR2xWTHBXZFlYRDJOekZtV0RQdEtQYUItMkxoUi15VzdqYWJ3YUY1b1ltcE5JSFhMbkRDWUFTRDVXNy1LaFZVUm9MLXNMejVPVWJha3pZQWt6TzFZeWQ0U2VyWVF4R3NSazRhMGwtelVZS3pYQUpXYTBmV216djM1SjducUF3YnpYUlltTVZSajJyeHI2LXVJQklHeGFFYUt6ZkloVG5iRHlrM1RuRVZEd1ktVWhFRmpaU0FfaHhEU2k1Zw
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 12:47:11 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi8gFBVV95cUxNdVRxM3ZwR0RKY25MSTA2VTYwY0N3TC1pMjgtMXRkVmNMM0JoZUhveVZxbmlBeW9QR2xWTHBXZFlYRDJOekZtV0RQdEtQYUItMkxoUi15VzdqYWJ3YUY1b1ltcE5JSFhMbkRDWUFTRDVXNy1LaFZVUm9MLXNMejVPVWJha3pZQWt6TzFZeWQ0U2VyWVF4R3NSazRhMGwtelVZS3pYQUpXYTBmV216djM1SjducUF3YnpYUlltTVZSajJyeHI2LXVJQklHeGFFYUt6ZkloVG5iRHlrM1RuRVZEd1ktVWhFRmpaU0FfaHhEU2k1Zw?oc=5" target="_blank">Impôts 2026: peut-on faire confiance à l'intelligence artificielle pour remplir sa déclaration de revenus?</a>&nbsp;&nbsp;<font color="#6f6f6f">RMC</font>
 
-## 208. The Blueprint for Meeting the Power Needs of AI - POWER Magazine
+## 196. The Blueprint for Meeting the Power Needs of AI - POWER Magazine
 - Domain: powermag.com
 - URL: https://news.google.com/rss/articles/CBMifkFVX3lxTE1Xd3lZSHdZNmsyMzJxMnRLLWgwcTlzVk01X2RvSmtoYVozZm9fUHQ3cmJ2R2ZmMVJvN2hCRGYwdm8zVEdSQjE2VmZxUmFubVhuQWxKTnlDa2ZiOFVaRzAyNWdmZ19hempsNHNUZFR5OG1PWWt2aFM1SHR0UENKZw
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 12:44:14 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE1Xd3lZSHdZNmsyMzJxMnRLLWgwcTlzVk01X2RvSmtoYVozZm9fUHQ3cmJ2R2ZmMVJvN2hCRGYwdm8zVEdSQjE2VmZxUmFubVhuQWxKTnlDa2ZiOFVaRzAyNWdmZ19hempsNHNUZFR5OG1PWWt2aFM1SHR0UENKZw?oc=5" target="_blank">The Blueprint for Meeting the Power Needs of AI</a>&nbsp;&nbsp;<font color="#6f6f6f">POWER Magazine</font>
 
-## 209. Don’t rush to bring AI into classrooms: Deputy technology minister - The Jakarta Post
+## 197. Don’t rush to bring AI into classrooms: Deputy technology minister - The Jakarta Post
 - Domain: thejakartapost.com
 - URL: https://news.google.com/rss/articles/CBMivgFBVV95cUxPLXg4c3dITE5udTlRdEN5SDNYdk5NbEpvUjJGc0NyNy1TdnE3blRXTk51M0cyUmF5anBDaUR0c09BbEFPcWpKbmpLM1J1dnZjVEtTM19BMXFDd1dvRnB5TkpOcV9Za0NweHZuV3l0TkNpRWZzVVlkR2Z3Tm1IVUl2b1pqbDBSQ3BuOUVtRVJMSmQxVU1pb096aW5iOHMtd1JXX1hQNHhFTDZnYnFoNHpRTUY3WWR6RkdvV09OMV9R
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 12:19:54 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMivgFBVV95cUxPLXg4c3dITE5udTlRdEN5SDNYdk5NbEpvUjJGc0NyNy1TdnE3blRXTk51M0cyUmF5anBDaUR0c09BbEFPcWpKbmpLM1J1dnZjVEtTM19BMXFDd1dvRnB5TkpOcV9Za0NweHZuV3l0TkNpRWZzVVlkR2Z3Tm1IVUl2b1pqbDBSQ3BuOUVtRVJMSmQxVU1pb096aW5iOHMtd1JXX1hQNHhFTDZnYnFoNHpRTUY3WWR6RkdvV09OMV9R?oc=5" target="_blank">Don’t rush to bring AI into classrooms: Deputy technology minister</a>&nbsp;&nbsp;<font color="#6f6f6f">The Jakarta Post</font>
 
-## 210. How India Is Embedding Intelligence into Governance and the Economy - Elets Technomedia
+## 198. How India Is Embedding Intelligence into Governance and the Economy - Elets Technomedia
 - Domain: egov.eletsonline.com
 - URL: https://news.google.com/rss/articles/CBMiqAFBVV95cUxNVnpIb3lKc3VHVFJHS281aFhpcE52MVA0ZnlDaVUtSnpMS2xhcTFjREUyTGtLSTJvN2ZHTUxWZ1p1NTJFdGZ0TlI4cURUWFhuNndNLUo0ZHVkTS16WU9qTkxjMHZEeC1ucm1LSjZHU2NaZnEySWt3MEZoVXJVelM1WFBfUW44RVk1THk0NG85ZnIwS1kzamhmWklWdTJ2bndIblM2blhuN3g
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 12:05:36 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxNVnpIb3lKc3VHVFJHS281aFhpcE52MVA0ZnlDaVUtSnpMS2xhcTFjREUyTGtLSTJvN2ZHTUxWZ1p1NTJFdGZ0TlI4cURUWFhuNndNLUo0ZHVkTS16WU9qTkxjMHZEeC1ucm1LSjZHU2NaZnEySWt3MEZoVXJVelM1WFBfUW44RVk1THk0NG85ZnIwS1kzamhmWklWdTJ2bndIblM2blhuN3g?oc=5" target="_blank">How India Is Embedding Intelligence into Governance and the Economy</a>&nbsp;&nbsp;<font color="#6f6f6f">Elets Technomedia</font>
 
-## 211. DÉCRYPTAGE. Faire ses itinéraires de randonnée avec l’intelligence artificielle : pourquoi cette pratique peut s’avérer dangereuse - NRPyrenees.fr
+## 199. DÉCRYPTAGE. Faire ses itinéraires de randonnée avec l’intelligence artificielle : pourquoi cette pratique peut s’avérer dangereuse - NRPyrenees.fr
 - Domain: nrpyrenees.fr
 - URL: https://news.google.com/rss/articles/CBMihgJBVV95cUxORmN0NWlpc3d1VktVVUdGLS1QdmZGN0VkajhTUWhnNGlBQjhXdl85UGNrdnVTREFrNmRxZFktVGV3Tm1rakFXZHJYUTRqRTA1OGFnRDhUTm1seERXT3Y2ZVJ5VHJUWDJRYTB2TEFKX2Z6SmJ3aS01Rkt2dU1kWlpacFJ6cnU4Q091QzdUYzdNeU14NnQxcE5pa3lMSmVKNlMyY0NaV2FSdVJwcU9ZQlVxdlVhNUswSVlEa0Z4eTkzUGVmQzZrWjdMVzdzR19yMVcyOC13SDg3S0dpYUZwSlVETGRGWmlWZG9oNzlsQy1UNDRaZFNyZFJUX0ZBOExpc2JjVWo4dUt3
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 11:01:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMihgJBVV95cUxORmN0NWlpc3d1VktVVUdGLS1QdmZGN0VkajhTUWhnNGlBQjhXdl85UGNrdnVTREFrNmRxZFktVGV3Tm1rakFXZHJYUTRqRTA1OGFnRDhUTm1seERXT3Y2ZVJ5VHJUWDJRYTB2TEFKX2Z6SmJ3aS01Rkt2dU1kWlpacFJ6cnU4Q091QzdUYzdNeU14NnQxcE5pa3lMSmVKNlMyY0NaV2FSdVJwcU9ZQlVxdlVhNUswSVlEa0Z4eTkzUGVmQzZrWjdMVzdzR19yMVcyOC13SDg3S0dpYUZwSlVETGRGWmlWZG9oNzlsQy1UNDRaZFNyZFJUX0ZBOExpc2JjVWo4dUt3?oc=5" target="_blank">DÉCRYPTAGE. Faire ses itinéraires de randonnée avec l’intelligence artificielle : pourquoi cette pratique peut s’avérer dangereuse</a>&nbsp;&nbsp;<font color="#6f6f6f">NRPyrenees.fr</font>
 
-## 212. Key to buy UK investment banking advisory firm
+## 200. Key to buy UK investment banking advisory firm
 - Domain: bankingdive.com
 - URL: https://www.bankingdive.com/news/key-acquire-clearwater-uk-investment-banking-advisory-middle-market/818190/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 11:00:13 -0400
 - Summary: <figure><div><img src="https://imgproxy.divecdn.com/qEOdLlS4wahQHxyBSTSsyFuMKiHk2f6_HQB9s9yfmLo/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0yMjA2MzMzOTE3LmpwZw==.webp" /></div></figure><p>The deal to acquire Clearwater UK marks Key&rsquo;s entrance into the western European market, the Cleveland-based lender said.</p>
 
-## 213. Workplace 2026 : l’IA et l’hybride disruptent l’expérience au travail. Par David Gautron - Focus RH
-- Domain: focusrh.com
-- URL: https://news.google.com/rss/articles/CBMiyAFBVV95cUxQNVUzVVR1RldvdTFJUmhXaHRNT1A2V0I1a0pxZlVPbTRLZ0ozanFqUGxYQkZaVFV5VEFJc2tmeEJzZHRHMWV1aFdweHBCbW1udWpGcGhQYkVKdm5UZlVYUGd2SmRhZGxIWVJDcjViMHNjQzNSbEtwcWlkTXMxTjc4bkdYdG8xb3oxakF1UFUxLXVjazlFUE5wSjZYaGxPWk5kMmRxc1AxWktQYk5JLVhXbEFrQms4RE9neW45MkFfWm94SkZYb29zSA
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 10:25:20 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxQNVUzVVR1RldvdTFJUmhXaHRNT1A2V0I1a0pxZlVPbTRLZ0ozanFqUGxYQkZaVFV5VEFJc2tmeEJzZHRHMWV1aFdweHBCbW1udWpGcGhQYkVKdm5UZlVYUGd2SmRhZGxIWVJDcjViMHNjQzNSbEtwcWlkTXMxTjc4bkdYdG8xb3oxakF1UFUxLXVjazlFUE5wSjZYaGxPWk5kMmRxc1AxWktQYk5JLVhXbEFrQms4RE9neW45MkFfWm94SkZYb29zSA?oc=5" target="_blank">Workplace 2026 : l’IA et l’hybride disruptent l’expérience au travail. Par David Gautron</a>&nbsp;&nbsp;<font color="#6f6f6f">Focus RH</font>
-
-## 214. Les signatures mail, levier sous-estimé des TPE pour convertir sans dépenser ?
+## 201. Les signatures mail, levier sous-estimé des TPE pour convertir sans dépenser ?
 - Domain: maddyness.com
 - URL: https://www.maddyness.com/2026/04/22/les-signatures-mail-levier-sous-estime-des-tpe-pour-convertir-sans-depenser/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 09:47:51 +0000
 - Summary: <p>L’article <a href="https://www.maddyness.com/2026/04/22/les-signatures-mail-levier-sous-estime-des-tpe-pour-convertir-sans-depenser/">Les signatures mail, levier sous-estimé des TPE pour convertir sans dépenser ?</a> est apparu en premier sur <a href="https://www.maddyness.com">Maddyness - Le média pour comprendre l&#039;économie de demain</a>.</p>
 
-## 215. Emilie Bujès, directrice artistique de Visions du Réel: «L’IA générative est plus présente que par le passé - Le Temps
+## 202. Emilie Bujès, directrice artistique de Visions du Réel: «L’IA générative est plus présente que par le passé - Le Temps
 - Domain: letemps.ch
 - URL: https://news.google.com/rss/articles/CBMi8AFBVV95cUxNeHNUOVFYTjU3b3dZRk1LX0xlUGc4YlRGTW55R0xkcDFiNjNRaGROdm1HZUFpZUJJM1ItRDd1VkJ1MFFQVVphX0c2UUpHUG9aMXJOYkFwd2xXWHY4NmlGSk9lZnVjbERZUFhzS1R2WVdlLVFiYnM4bzNwWWlLNXpsVmpvYWp5c0pyWXlhc05pRVI0eVYwaHdveVdvMURMbjFBVFRyS2IxcnhFb3RKY3RPZ0FJSVNwYTZaTll2OGRNaVB6NTlQVUVOenJQbjJpQ2hiZ2xTeUdQWlpiR1g3Y09QbHJ2aU9lVXIybURJZ29fV0k
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 09:42:41 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi8AFBVV95cUxNeHNUOVFYTjU3b3dZRk1LX0xlUGc4YlRGTW55R0xkcDFiNjNRaGROdm1HZUFpZUJJM1ItRDd1VkJ1MFFQVVphX0c2UUpHUG9aMXJOYkFwd2xXWHY4NmlGSk9lZnVjbERZUFhzS1R2WVdlLVFiYnM4bzNwWWlLNXpsVmpvYWp5c0pyWXlhc05pRVI0eVYwaHdveVdvMURMbjFBVFRyS2IxcnhFb3RKY3RPZ0FJSVNwYTZaTll2OGRNaVB6NTlQVUVOenJQbjJpQ2hiZ2xTeUdQWlpiR1g3Y09QbHJ2aU9lVXIybURJZ29fV0k?oc=5" target="_blank">Emilie Bujès, directrice artistique de Visions du Réel: «L’IA générative est plus présente que par le passé</a>&nbsp;&nbsp;<font color="#6f6f6f">Le Temps</font>
 
-## 216. AI set to power 68% of Indians’ next trips: Agoda - Storyboard18
+## 203. AI set to power 68% of Indians’ next trips: Agoda - Storyboard18
 - Domain: storyboard18.com
 - URL: https://news.google.com/rss/articles/CBMinwFBVV95cUxOb3gyUDRWM3pFbGhfd2RmaGZvZXlHUXhqUTVZQVE2b1Q0S05Dc1pqWU1MRDhYQzJLMzU2TUszVXVORDZrUTdWZkNrWmNHMWxXd1VZd0h3TEFzNGZJM3lCMzFabXdGcVJBMGI4MUxiWnpFZVpWUTRFU08zV0FqdjU4RzJBVjhJNWVkTjM2SnpxOE8waVNBNWpMR3R3NnZPMGfSAaQBQVVfeXFMTWN0TF9zMWJETWVOT3ZQakdfczNNYmUyMElrNVl2bDBPNHN3RXZndkJLSlpTOW5ENmxSbk14QS1iNzVsZW5jRGZPQ3RoUGVMMU5ZMmJrWHd2WXBiYU1QU3VYZElJU2twWFdmVnBEbEhUUTE2XzZHa08wU1dabnFjYzNCNmFZR3NycUFTTUZPZmVRY25lWERndUUwSl85UWdJR050LTQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 09:23:01 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxOb3gyUDRWM3pFbGhfd2RmaGZvZXlHUXhqUTVZQVE2b1Q0S05Dc1pqWU1MRDhYQzJLMzU2TUszVXVORDZrUTdWZkNrWmNHMWxXd1VZd0h3TEFzNGZJM3lCMzFabXdGcVJBMGI4MUxiWnpFZVpWUTRFU08zV0FqdjU4RzJBVjhJNWVkTjM2SnpxOE8waVNBNWpMR3R3NnZPMGfSAaQBQVVfeXFMTWN0TF9zMWJETWVOT3ZQakdfczNNYmUyMElrNVl2bDBPNHN3RXZndkJLSlpTOW5ENmxSbk14QS1iNzVsZW5jRGZPQ3RoUGVMMU5ZMmJrWHd2WXBiYU1QU3VYZElJU2twWFdmVnBEbEhUUTE2XzZHa08wU1dabnFjYzNCNmFZR3NycUFTTUZPZmVRY25lWERndUUwSl85UWdJR050LTQ?oc=5" target="_blank">AI set to power 68% of Indians’ next trips: Agoda</a>&nbsp;&nbsp;<font color="#6f6f6f">Storyboard18</font>
 
-## 217. L’équivalent chinois de Netflix propose, grâce à l’IA, de faire jouer des acteurs… sans les faire tourner - franceinfo
+## 204. L’équivalent chinois de Netflix propose, grâce à l’IA, de faire jouer des acteurs… sans les faire tourner - franceinfo
 - Domain: franceinfo.fr
 - URL: https://news.google.com/rss/articles/CBMiggJBVV95cUxNWU8xNzdsSVVXQzBkN1A3cVV1WHgtcEE2WXVOS0czS2MzWEhPQmo3ZVJXUmpYMW42ZlNZRHM3OGFCZVVPbXZqM2VZX3lPOGdvM2dMLUNCRzhoeHQxSERiaEhVYXl4T0hQdFFZWlYwRUU2Y2M2bWFISDBrY2F0VWFIMC1OczJrcUZad2JLbXlCanNVTjg0cmJleGNZTllqRUhfb2lKdG9kSFVpeWt0WG5rTC1GN0ZmS1QyakRBdFZvYzhFUTRGc0JyWFRhZU5YVFA5TjU5Rjl1NWdoX1FMb0N3S0JTVTJmaloyRDVGTElvRnY5U3BXU0tpT2l6dnByUWo4dUE
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 09:21:23 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiggJBVV95cUxNWU8xNzdsSVVXQzBkN1A3cVV1WHgtcEE2WXVOS0czS2MzWEhPQmo3ZVJXUmpYMW42ZlNZRHM3OGFCZVVPbXZqM2VZX3lPOGdvM2dMLUNCRzhoeHQxSERiaEhVYXl4T0hQdFFZWlYwRUU2Y2M2bWFISDBrY2F0VWFIMC1OczJrcUZad2JLbXlCanNVTjg0cmJleGNZTllqRUhfb2lKdG9kSFVpeWt0WG5rTC1GN0ZmS1QyakRBdFZvYzhFUTRGc0JyWFRhZU5YVFA5TjU5Rjl1NWdoX1FMb0N3S0JTVTJmaloyRDVGTElvRnY5U3BXU0tpT2l6dnByUWo4dUE?oc=5" target="_blank">L’équivalent chinois de Netflix propose, grâce à l’IA, de faire jouer des acteurs… sans les faire tourner</a>&nbsp;&nbsp;<font color="#6f6f6f">franceinfo</font>
 
-## 218. Amazon visé par de nouvelles accusations de manipulation des prix
+## 205. Amazon visé par de nouvelles accusations de manipulation des prix
 - Domain: siecledigital.fr
 - URL: https://siecledigital.fr/2026/04/22/amazon-vise-par-de-nouvelles-accusations-de-manipulation-des-prix/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 08:46:24 +0000
 - Summary: <a href="https://siecledigital.fr/2026/04/22/amazon-vise-par-de-nouvelles-accusations-de-manipulation-des-prix/" rel="nofollow" title="Amazon visé par de nouvelles accusations de manipulation des prix"><img alt="Amazon visé par de nouvelles accusations de manipulation des prix" class="webfeedsFeaturedVisual wp-post-image" height="350" src="https://siecledigital.fr/wp-content/uploads/2026/04/Amazon-vise-par-de-nouvelles-accusations-de-manipulation-des-prix-600x350.jpg" style="display: block; margin: auto; margin-bottom: 5px;" width="600" /></a>Trois ans et demi que la Californie prépare ses cartes contre Amazon. Le procureur général Rob Bonta a choisi l&#8217;attaque frontale. Plutôt que d&#8217;attendre janvier 2027 et l&#8217;ouverture du procès, son bureau réclame une injonction préliminaire. Ce type de décision judiciaire peut contraindre une entreprise à changer de comportement en cours de route avant même [&#8230;]
 
-## 219. Intelligence artificielle dans la prise en charge de l’accident vasculaire cérébral - Revue Médicale Suisse
+## 206. Intelligence artificielle dans la prise en charge de l’accident vasculaire cérébral - Revue Médicale Suisse
 - Domain: revmed.ch
 - URL: https://news.google.com/rss/articles/CBMi7wFBVV95cUxPZUtLbTM0LU82TEhmYXdFT29leVpLOWtnVnpLeVJYMnNnczBDZm14ZGNNMmkweTBDWURvYUoySGc0UksxTmNSMGVBWUYwX2dXcDNOOTVWSUZYLVZRSWI2YkVWMVhkRGpoV0R0cUNVVWRzM18yX1I0Y0JmYmhKbW9Sa1k2UWp6T0VoNEVWTWx5aVFwalFwdUF2LV9GOXlDejJfU1dGOHpVTDh5RlBZbTlJZlVZZnhPLVk0RmljcGNVUVl2ODByNVRYSzNLZl9NeG9HdE9IN3o1SWduSXFBTE8zZFdDTXNuS3V4MlJOd3VFSQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 08:44:03 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi7wFBVV95cUxPZUtLbTM0LU82TEhmYXdFT29leVpLOWtnVnpLeVJYMnNnczBDZm14ZGNNMmkweTBDWURvYUoySGc0UksxTmNSMGVBWUYwX2dXcDNOOTVWSUZYLVZRSWI2YkVWMVhkRGpoV0R0cUNVVWRzM18yX1I0Y0JmYmhKbW9Sa1k2UWp6T0VoNEVWTWx5aVFwalFwdUF2LV9GOXlDejJfU1dGOHpVTDh5RlBZbTlJZlVZZnhPLVk0RmljcGNVUVl2ODByNVRYSzNLZl9NeG9HdE9IN3o1SWduSXFBTE8zZFdDTXNuS3V4MlJOd3VFSQ?oc=5" target="_blank">Intelligence artificielle dans la prise en charge de l’accident vasculaire cérébral</a>&nbsp;&nbsp;<font color="#6f6f6f">Revue Médicale Suisse</font>
 
-## 220. YouTube veut mieux protéger l’image des célébrités avec un outil dédié aux deepfakes IA
+## 207. YouTube veut mieux protéger l’image des célébrités avec un outil dédié aux deepfakes IA
 - Domain: siecledigital.fr
 - URL: https://siecledigital.fr/2026/04/22/youtube-veut-mieux-proteger-limage-des-celebrites-avec-un-outil-dedie-aux-deepfakes-ia/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 08:27:36 +0000
 - Summary: <a href="https://siecledigital.fr/2026/04/22/youtube-veut-mieux-proteger-limage-des-celebrites-avec-un-outil-dedie-aux-deepfakes-ia/" rel="nofollow" title="YouTube veut mieux protéger l&rsquo;image des célébrités avec un outil dédié aux deepfakes IA"><img alt="YouTube veut mieux protéger l&#039;image des célébrités avec un outil dédié aux deepfakes IA" class="webfeedsFeaturedVisual wp-post-image" height="350" src="https://siecledigital.fr/wp-content/uploads/2026/04/YouTube-veut-mieux-proteger-limage-des-celebrites-avec-un-outil-dedie-aux-deepfakes-IA-600x350.jpg" style="display: block; margin: auto; margin-bottom: 5px;" width="600" /></a>Pendant des années, l&#8217;industrie du divertissement a regardé ses stars se faire cloner par des générateurs d&#8217;images et de vidéos. Elles n&#8217;avaient que des procédures juridiques longues et coûteuses comme possibles recours. YouTube vient de changer la donne. La plateforme annonce l&#8217;ouverture de son outil de détection des deepfakes IA à l&#8217;ensemble de l&#8217;industrie du [&#8230;]
 
-## 221. Axomove boucle sa série A pour améliorer le suivi de la rééducation
+## 208. Axomove boucle sa série A pour améliorer le suivi de la rééducation
 - Domain: maddyness.com
 - URL: https://www.maddyness.com/2026/04/22/axomove-boucle-sa-serie-a-pour-ameliorer-le-suivi-de-la-reeducation/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 08:21:28 +0000
 - Summary: <p>L’article <a href="https://www.maddyness.com/2026/04/22/axomove-boucle-sa-serie-a-pour-ameliorer-le-suivi-de-la-reeducation/">Axomove boucle sa série A pour améliorer le suivi de la rééducation</a> est apparu en premier sur <a href="https://www.maddyness.com">Maddyness - Le média pour comprendre l&#039;économie de demain</a>.</p>
 
-## 222. La DGSI tire la sonnette d’alarme : ces logiciels étrangers peuvent espionner les entreprises françaises
+## 209. La DGSI tire la sonnette d’alarme : ces logiciels étrangers peuvent espionner les entreprises françaises
 - Domain: siecledigital.fr
 - URL: https://siecledigital.fr/2026/04/22/la-dgsi-tire-la-sonnette-dalarme-ces-logiciels-etrangers-peuvent-espionner-les-entreprises-francaises/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 08:06:14 +0000
 - Summary: <a href="https://siecledigital.fr/2026/04/22/la-dgsi-tire-la-sonnette-dalarme-ces-logiciels-etrangers-peuvent-espionner-les-entreprises-francaises/" rel="nofollow" title="La DGSI tire la sonnette d&rsquo;alarme : ces logiciels étrangers peuvent espionner les entreprises françaises"><img alt="La DGSI tire la sonnette d&#039;alarme ces logiciels étrangers peuvent espionner les entreprises françaises" class="webfeedsFeaturedVisual wp-post-image" height="350" src="https://siecledigital.fr/wp-content/uploads/2026/04/La-DGSI-tire-la-sonnette-dalarme-ces-logiciels-etrangers-peuvent-espionner-les-entreprises-francaises-600x350.jpg" style="display: block; margin: auto; margin-bottom: 5px;" width="600" /></a>Une messagerie pour coordonner une réunion, un logiciel de visioconférence pour économiser du temps ou une application de stockage pour partager des fichiers avec un sous-traitant. Ces gestes quotidiens peut, selon la Direction générale de la sécurité intérieure, représenter une porte d&#8217;entrée vers le pillage industriel. Dans une note adressée à des entreprises, des instituts [&#8230;]
 
-## 223. Intelligence artificielle : serons-nous vraiment tous remplacés au travail ? - Courrier international
+## 210. Intelligence artificielle : serons-nous vraiment tous remplacés au travail ? - Courrier international
 - Domain: courrierinternational.com
 - URL: https://news.google.com/rss/articles/CBMi3wFBVV95cUxQMEVuaUstOW54d2oxX3RtS2JJcjR1X1d2SFdGQTVjZG82WEQ4TmdtT1dXVmcxY1ZyTk5VRFBNMnNuMmhkcjhQUEFkUjFGXzFpNzJLS0dRanFIX19yaHFuU1dWZWZfV0tZd1ZtUzBod0xjc3cySGhVR3M3aVJHWlhPZkFKLXZrMFJNQVVGSTVITmxrS2drZ3NaVGlJX0N5aTJMYTJncmFyLXdXMGdUeWVpVnI0b0lSTGVaM3ZSWUFtUXNvT0doN2FtcGlBTG91RUY4Z2piOWlLSjBObzkzdkZr
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 07:48:42 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi3wFBVV95cUxQMEVuaUstOW54d2oxX3RtS2JJcjR1X1d2SFdGQTVjZG82WEQ4TmdtT1dXVmcxY1ZyTk5VRFBNMnNuMmhkcjhQUEFkUjFGXzFpNzJLS0dRanFIX19yaHFuU1dWZWZfV0tZd1ZtUzBod0xjc3cySGhVR3M3aVJHWlhPZkFKLXZrMFJNQVVGSTVITmxrS2drZ3NaVGlJX0N5aTJMYTJncmFyLXdXMGdUeWVpVnI0b0lSTGVaM3ZSWUFtUXNvT0doN2FtcGlBTG91RUY4Z2piOWlLSjBObzkzdkZr?oc=5" target="_blank">Intelligence artificielle : serons-nous vraiment tous remplacés au travail ?</a>&nbsp;&nbsp;<font color="#6f6f6f">Courrier international</font>
 
-## 224. Intelligence artificielle : serons-nous vraiment tous remplacés au travail ? - Yahoo Actualités
-- Domain: fr.news.yahoo.com
-- URL: https://news.google.com/rss/articles/CBMingFBVV95cUxPTU9ud3VTRFJrd2YzSUlvcXB1OGl0SWpteWlYSTFMVGV1dm5mX3FpeUFHcmhfd2RxMlE4bXhYLTBNMzJ5d29GOGRad0V1SUNrRW41Z0ZSZ3F4ZEZGX2J0d3ozVnBuS2oxVGszdFg3ZUxoN2pqdFVYMEZyMHhid2dtbGtrWmpUdmxPWWNkWTlESDFGeU5NU3pwMWZqc0VJUQ
-- Relevance score: 4.0
-- Published: Wed, 22 Apr 2026 07:48:42 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxPTU9ud3VTRFJrd2YzSUlvcXB1OGl0SWpteWlYSTFMVGV1dm5mX3FpeUFHcmhfd2RxMlE4bXhYLTBNMzJ5d29GOGRad0V1SUNrRW41Z0ZSZ3F4ZEZGX2J0d3ozVnBuS2oxVGszdFg3ZUxoN2pqdFVYMEZyMHhid2dtbGtrWmpUdmxPWWNkWTlESDFGeU5NU3pwMWZqc0VJUQ?oc=5" target="_blank">Intelligence artificielle : serons-nous vraiment tous remplacés au travail ?</a>&nbsp;&nbsp;<font color="#6f6f6f">Yahoo Actualités</font>
-
-## 225. Le régulateur britannique ouvre une enquête contre Telegram sur la protection des mineurs
+## 211. Le régulateur britannique ouvre une enquête contre Telegram sur la protection des mineurs
 - Domain: siecledigital.fr
 - URL: https://siecledigital.fr/2026/04/22/le-regulateur-britannique-ouvre-une-enquete-contre-telegram-sur-la-protection-des-mineurs/
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 07:12:46 +0000
 - Summary: <a href="https://siecledigital.fr/2026/04/22/le-regulateur-britannique-ouvre-une-enquete-contre-telegram-sur-la-protection-des-mineurs/" rel="nofollow" title="Le régulateur britannique ouvre une enquête contre Telegram sur la protection des mineurs"><img alt="Le régulateur britannique ouvre une enquête contre Telegram sur la protection des mineurs" class="webfeedsFeaturedVisual wp-post-image" height="350" src="https://siecledigital.fr/wp-content/uploads/2026/04/Le-regulateur-britannique-ouvre-une-enquete-contre-Telegram-sur-la-protection-des-mineurs-600x350.jpg" style="display: block; margin: auto; margin-bottom: 5px;" width="600" /></a>Le régulateur britannique des communications Ofcom a ouvert une enquête contre Telegram. Des éléments laissent craindre que du matériel pédopornographique circule sur la messagerie sans que la plateforme n&#8217;ait pleinement rempli ses obligations légales pour y remédier. C&#8217;est l&#8217;un des dossiers les plus sensibles qu&#8217;Ofcom ait ouvert depuis l&#8217;entrée en vigueur de l&#8217;Online Safety Act. [&#8230;]
 
-## 226. AI, jobs and tech investing through history - Lombard Odier
+## 212. AI, jobs and tech investing through history - Lombard Odier
 - Domain: lombardodier.com
 - URL: https://news.google.com/rss/articles/CBMihgFBVV95cUxOOVhOSnBobVBQUWhnRGJFZ0VZTG5LbnloQXp0dlZiZnZQZ25lUDRjSzVjRHhtUXBwOGlJOWVfdXpnMFVyaG9aMmtxTFNoaWdLc05iWjlCd2lhTFBidmdMa0RWX1RNNnY2bVdkMzB6UTlLTkw5ZHJNS0g2SUxhc3pkMGJwSDRuUQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 06:43:56 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOOVhOSnBobVBQUWhnRGJFZ0VZTG5LbnloQXp0dlZiZnZQZ25lUDRjSzVjRHhtUXBwOGlJOWVfdXpnMFVyaG9aMmtxTFNoaWdLc05iWjlCd2lhTFBidmdMa0RWX1RNNnY2bVdkMzB6UTlLTkw5ZHJNS0g2SUxhc3pkMGJwSDRuUQ?oc=5" target="_blank">AI, jobs and tech investing through history</a>&nbsp;&nbsp;<font color="#6f6f6f">Lombard Odier</font>
 
-## 227. Un groupe non identifié aurait pu accéder à Mythos, le modèle le plus performant d'Anthropic: la start-up en limite jusqu'à présent l'accès par crainte qu'il serve à des cyberattaques avancées - BFM
+## 213. Un groupe non identifié aurait pu accéder à Mythos, le modèle le plus performant d'Anthropic: la start-up en limite jusqu'à présent l'accès par crainte qu'il serve à des cyberattaques avancées - BFM
 - Domain: bfmtv.com
 - URL: https://news.google.com/rss/articles/CBMi_AJBVV95cUxQaWF1ZU5JbFhUTWJPVS1pQjNpZDJDQWQ1d0MyTnRJS0JsVlY2YTlXMFpSNGs1OWdKWHlQZXBSZVpKUEM5cXVqb3I5T3Exb21JVE5Yd2c2OTlmakNua1VidkNfbjlpQUtwQjhGWVpxMHR0RTF6N1UzV0prd0xtZkNCNzNBczdJdV9EU2o4RGVDZnBMNHAwSV9rdUkxaTg2LXVER0NUc3JrMmJPd0xudnZVZmIyVEVFSmRZRGYyZ0thM1FtbGpNbUJOWElNcy1WbjdZTEJmeGhCOUV4c3QtWUE4dEN1WVhrOU13UTNzSWVRLUhuWmZ5dUVfU3VTWWw1bVhXc1JMM2VEelJ3aUZuR25GYUtKaHZIVGFkZXZWbFBSYl9aekM2enBxODlNT2NvTm9zVjJUVTd1bkVnNERxWnZjUVJtcmlXMnlRazVMaG5LTzRGR0JGak1iOEtyaWxTRlF6STdEWkIzUkJZR1duRzNtY2QxLW11eV9ybmRBLQ
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 06:40:36 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi_AJBVV95cUxQaWF1ZU5JbFhUTWJPVS1pQjNpZDJDQWQ1d0MyTnRJS0JsVlY2YTlXMFpSNGs1OWdKWHlQZXBSZVpKUEM5cXVqb3I5T3Exb21JVE5Yd2c2OTlmakNua1VidkNfbjlpQUtwQjhGWVpxMHR0RTF6N1UzV0prd0xtZkNCNzNBczdJdV9EU2o4RGVDZnBMNHAwSV9rdUkxaTg2LXVER0NUc3JrMmJPd0xudnZVZmIyVEVFSmRZRGYyZ0thM1FtbGpNbUJOWElNcy1WbjdZTEJmeGhCOUV4c3QtWUE4dEN1WVhrOU13UTNzSWVRLUhuWmZ5dUVfU3VTWWw1bVhXc1JMM2VEelJ3aUZuR25GYUtKaHZIVGFkZXZWbFBSYl9aekM2enBxODlNT2NvTm9zVjJUVTd1bkVnNERxWnZjUVJtcmlXMnlRazVMaG5LTzRGR0JGak1iOEtyaWxTRlF6STdEWkIzUkJZR1duRzNtY2QxLW11eV9ybmRBLQ?oc=5" target="_blank">Un groupe non identifié aurait pu accéder à Mythos, le modèle le plus performant d'Anthropic: la start-up en limite jusqu'à présent l'accès par crainte qu'il serve à des cyberattaques avancées</a>&nbsp;&nbsp;<font color="#6f6f6f">BFM</font>
 
-## 228. Mythos : quelle est cette IA qui fait trembler les Etats-Unis et même son créateur ? - CNews
+## 214. Mythos : quelle est cette IA qui fait trembler les Etats-Unis et même son créateur ? - CNews
 - Domain: cnews.fr
 - URL: https://news.google.com/rss/articles/CBMiuAFBVV95cUxPVFU1eGxPdnBZdl9IR0lzNVJQQWh4QU1MUi1QZ3lJRU9QZzV3aGFaalhITFFwT0l2REp1clZHRWtQZlhxZUFJM1BDcFh3SjBWVHQ5enplVnFCcElFOGFVbjlpLWpfQV9DT2szcUVPWkwxWHM1cWVPcWZIWXRYdzd3aENZTV9JRnhwYUxRR3BEV1FVeFMxRFRVUE1lZVJWRnlTWHZ0R1Z2My1yUnlYOXU0QkNvblZ4Q2k50gG-AUFVX3lxTE1SSUtDNzNxU2NJN2hQNDJacVk5OExUaXNLcTdYc3k0WjItMmVCNlREeFBQalBtWnBBWFJCTmZaUVBuZXdfT0FKaHdvRTNXMXZnNnJhTXlGeU1zb0hYSGNMdHZReWRaOTg1UXVvQ1dxQkF3ZVNfd3pFYWM5THhqUUw1SjNEQnl2VjZ2X1ZDcExhTGFBbFVPZU1EUWVHc3dXd2o1SXo0Q3NxVHdJRmVLRHJla2JyN2pvWU5GMXI0VXc
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 04:52:49 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxPVFU1eGxPdnBZdl9IR0lzNVJQQWh4QU1MUi1QZ3lJRU9QZzV3aGFaalhITFFwT0l2REp1clZHRWtQZlhxZUFJM1BDcFh3SjBWVHQ5enplVnFCcElFOGFVbjlpLWpfQV9DT2szcUVPWkwxWHM1cWVPcWZIWXRYdzd3aENZTV9JRnhwYUxRR3BEV1FVeFMxRFRVUE1lZVJWRnlTWHZ0R1Z2My1yUnlYOXU0QkNvblZ4Q2k50gG-AUFVX3lxTE1SSUtDNzNxU2NJN2hQNDJacVk5OExUaXNLcTdYc3k0WjItMmVCNlREeFBQalBtWnBBWFJCTmZaUVBuZXdfT0FKaHdvRTNXMXZnNnJhTXlGeU1zb0hYSGNMdHZReWRaOTg1UXVvQ1dxQkF3ZVNfd3pFYWM5THhqUUw1SjNEQnl2VjZ2X1ZDcExhTGFBbFVPZU1EUWVHc3dXd2o1SXo0Q3NxVHdJRmVLRHJla2JyN2pvWU5GMXI0VXc?oc=5" target="_blank">Mythos : quelle est cette IA qui fait trembler les Etats-Unis et même son créateur ?</a>&nbsp;&nbsp;<font color="#6f6f6f">CNews</font>
 
-## 229. Trump gives Iran days to end power struggle, return to peace talks
+## 215. Trump gives Iran days to end power struggle, return to peace talks
 - Domain: axios.com
 - URL: https://www.axios.com/2026/04/22/trump-iran-war-power-struggle-ceasefire
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 04:12:56 +0000
 - Summary: <p>President <a href="https://www.axios.com/politics-policy/donald-trump" target="_blank">Trump</a> is giving Iran's warring factions a short window to unify behind a coherent counter-offer — or the <a href="https://www.axios.com/2026/04/21/trump-iran-war-ceasefire-extension" target="_blank">ceasefire he extended</a> Tuesday ends, three U.S. officials tell Axios. </p><ul><li>"Trump is willing to give another three to five days of ceasefire to allow the Iranians to get their shit together," one U.S. source briefed on the matter said. "It is not going to be open-ended."</li></ul><p><strong>Why it matters:</strong> Trump's negotiators believe a deal to end the war and address what's left of <a href="https://www.axios.com/2026/04/17/iran-us-deal-20-billion-frozen-funds-uranium" target="_blank">Iran's nuclear program</a> is still achievable. But they also worry they may not have anyone in Tehran empowered to say yes.</p><hr /><ul><li>Supreme Leader <a href="https://www.axios.com/2026/04/08/exclusive-how-irans-supreme-leader-reached-a-truce-with-trump" target="_blank">Mojtaba Khamenei</a> is barely communicating. The IRGC generals now in control of the country and Iran's civilian negotia
 
-## 230. Dems' Virginia gamble pays off in redistricting wars
+## 216. Dems' Virginia gamble pays off in redistricting wars
 - Domain: axios.com
 - URL: https://www.axios.com/2026/04/22/virginia-democrats-redraw-maps-vote
 - Relevance score: 4.0
 - Published: Wed, 22 Apr 2026 03:10:35 +0000
 - Summary: <p>Virginia voters' <a href="https://www.axios.com/local/richmond/2026/04/22/virginia-redistricting-vote-passes-house-control" target="_blank">narrow approval</a> Tuesday of a plan to redraw the state's congressional map has swung the nationwide redistricting fight that President Trump provoked in Democrats' favor — for now, at least. </p><p><strong>Why it matters:</strong> Democrats gambled on an aggressive reworking of the map in a purple state — and won. Four Republican incumbents in Congress now face the prospect of running in Democrat-friendly districts designed to retire them this November.</p><hr /><ul><li>Virginia's congressional delegation is expected to shift from a 6–5 Democratic edge to roughly 10–1, in a state Trump lost by less than 6 points in the 2024 election. </li><li>Republicans are vowing to appeal to the Virginia Supreme Court, which in February allowed Tuesday's referendum to proceed without ruling on its legality.</li></ul><p><strong>The GOP may have one more chance</strong> to regain ground in the redistricting spat that Trump began by persuading Texas lawmakers to gerrymander five additional seats for Republicans. </p><ul><li>In <a href="https://floridapoli
 
-## 231. Qualcomm CEO Meets Samsung, SK Hynix, LG on AI, Semiconductors - 조선일보
+## 217. Qualcomm CEO Meets Samsung, SK Hynix, LG on AI, Semiconductors - 조선일보
 - Domain: chosun.com
 - URL: https://news.google.com/rss/articles/CBMiiAFBVV95cUxNbC15MEt1d0VfMWxoRXlHQ2RpckNGVl9CYTBoWnBEN09KQkNNd1MxR2RhNUV1VjZXYTlMZUppZFBsMC1vRnY0VVJ5Ykp1blhmNkhDOHFzRlV3Q0ZQdEUwdVdlSy1KemFQazVHbVZNVjFYSVZQWWNES1NwdFFzbHY1OUg5ek5GLUtk
 - Relevance score: 4.0
 - Published: Tue, 21 Apr 2026 22:47:48 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxNbC15MEt1d0VfMWxoRXlHQ2RpckNGVl9CYTBoWnBEN09KQkNNd1MxR2RhNUV1VjZXYTlMZUppZFBsMC1vRnY0VVJ5Ykp1blhmNkhDOHFzRlV3Q0ZQdEUwdVdlSy1KemFQazVHbVZNVjFYSVZQWWNES1NwdFFzbHY1OUg5ek5GLUtk?oc=5" target="_blank">Qualcomm CEO Meets Samsung, SK Hynix, LG on AI, Semiconductors</a>&nbsp;&nbsp;<font color="#6f6f6f">조선일보</font>
 
-## 232. Missed Nvidia? AMD Could Be Your Second Chance to Earn Massive AI Gains - Barchart
+## 218. Missed Nvidia? AMD Could Be Your Second Chance to Earn Massive AI Gains - Barchart
 - Domain: barchart.com
 - URL: https://news.google.com/rss/articles/CBMitAFBVV95cUxNU1I5NXFIajRtWHJHYnNKWW9vU2NCdXNnMmxyYld4LUNUd0R5dzRxOWpESGFlTnhxdVlRUWhGV1pPMkt4dlJZb18ybTROeVIyTXIzWFU0aWNwWWZCZGZTbjV1b2dqaVhmRzRRdWhFeFhPTHVRT053aW54V09pNDQzbFJrbWZZQWI3ZFdwMGVmTHZ1a1Zxd1NKRFJtcWZDazVETXNCSUhidFIxUmhEeWxsOGExalY
 - Relevance score: 4.0
 - Published: Tue, 21 Apr 2026 19:01:31 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxNU1I5NXFIajRtWHJHYnNKWW9vU2NCdXNnMmxyYld4LUNUd0R5dzRxOWpESGFlTnhxdVlRUWhGV1pPMkt4dlJZb18ybTROeVIyTXIzWFU0aWNwWWZCZGZTbjV1b2dqaVhmRzRRdWhFeFhPTHVRT053aW54V09pNDQzbFJrbWZZQWI3ZFdwMGVmTHZ1a1Zxd1NKRFJtcWZDazVETXNCSUhidFIxUmhEeWxsOGExalY?oc=5" target="_blank">Missed Nvidia? AMD Could Be Your Second Chance to Earn Massive AI Gains</a>&nbsp;&nbsp;<font color="#6f6f6f">Barchart</font>
 
-## 233. Jean-Michel Jarre urges music and film industries to embrace AI
+## 219. CBSE curriculum will enable students to understand the AI ‘black box’ - The Indian Express
+- Domain: indianexpress.com
+- URL: https://news.google.com/rss/articles/CBMitwFBVV95cUxPb2FKeWFxTjc5VVVicDFZVE0zTmJUeE1sVW55QTZSRktHbFdPX0F2SGx6czRpRnAwQjFNT0VhT20zc3BlS0dyYUxDeWg0aXZxNnM3Ymhya3hHYkVhWEtpUmdCQjlpMW9DTnhWTlNsQXQ4bDJVSVRBazMtaUpTNzJaM2tFaEE3TEg5N2hOTUxrd3F1cUEtcDRsYUE4c3J2ZENmLXUxOGZxa1FtQzVpRzB2ckZLREpPczjSAb4BQVVfeXFMT21ycFJzUl8ydXd6am04eE1yUEpWMG1UOHpQWnF0WTk3VmlfQTdrQmZhcDVkdWpCQlJTNTJENUZPN2ZBd2NWR1dGN0RLUWpVTV9rV1RTMDI0SDZPeG13VVR0bFFJUU9HNm9Ua1NOMEtrblpoQ3JjY3luaU9GWmlUenM2RHU1YTc1QXhTQWN0LUVaU3FJTUVUaWNwc2I2SDZrWEl1NUVDemZmRGtHU0FHYzJyVU41MTFWaTFxRy1ndw
+- Relevance score: 4.0
+- Published: Tue, 21 Apr 2026 12:39:24 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPb2FKeWFxTjc5VVVicDFZVE0zTmJUeE1sVW55QTZSRktHbFdPX0F2SGx6czRpRnAwQjFNT0VhT20zc3BlS0dyYUxDeWg0aXZxNnM3Ymhya3hHYkVhWEtpUmdCQjlpMW9DTnhWTlNsQXQ4bDJVSVRBazMtaUpTNzJaM2tFaEE3TEg5N2hOTUxrd3F1cUEtcDRsYUE4c3J2ZENmLXUxOGZxa1FtQzVpRzB2ckZLREpPczjSAb4BQVVfeXFMT21ycFJzUl8ydXd6am04eE1yUEpWMG1UOHpQWnF0WTk3VmlfQTdrQmZhcDVkdWpCQlJTNTJENUZPN2ZBd2NWR1dGN0RLUWpVTV9rV1RTMDI0SDZPeG13VVR0bFFJUU9HNm9Ua1NOMEtrblpoQ3JjY3luaU9GWmlUenM2RHU1YTc1QXhTQWN0LUVaU3FJTUVUaWNwc2I2SDZrWEl1NUVDemZmRGtHU0FHYzJyVU41MTFWaTFxRy1ndw?oc=5" target="_blank">CBSE curriculum will enable students to understand the AI ‘black box’</a>&nbsp;&nbsp;<font color="#6f6f6f">The Indian Express</font>
+
+## 220. Jean-Michel Jarre urges music and film industries to embrace AI
 - Domain: theguardian.com
 - URL: https://www.theguardian.com/music/2026/apr/21/jean-michel-jarre-music-film-industries-embrace-ai
 - Relevance score: 4.0
 - Published: Tue, 21 Apr 2026 12:20:35 GMT
 - Summary: <p>French musician’s comments are in stark contrast to fears expressed by artists such as Elton John and Dua Lipa</p><p>Jean-Michel Jarre has attacked the conservatism of the music and film industries over AI and urged them to embrace the technology instead of being fearful and “very anti-AI”.</p><p>Jarre, one of the pioneers of electronic music in the 1970s, said while the existing creative industries were “freaking out” over the technology, artists would use AI “to create the cinema of tomorrow, the hip-hop of tomorrow, the techno of tomorrow, the rock’n’roll of tomorrow”.</p> <a href="https://www.theguardian.com/music/2026/apr/21/jean-michel-jarre-music-film-industries-embrace-ai">Continue reading...</a>
 
-## 234. SpaceX veut mettre des centres de données IA dans l'espace alors qu'Elon Musk sait que c'est impossible - Les Numériques
+## 221. AI Supply-Chain Monitor Identifies Critical Axios Attack - varindia.com
+- Domain: varindia.com
+- URL: https://news.google.com/rss/articles/CBMijwFBVV95cUxOUXpJdkhEX1hEUWVkcFBpZVMyeXJhYTg4THhGQnp1Y0RaWEI1SFh0ak5xUmRYWnRpUUZobl9xV19acllTdjdlY0FJSXJDbUEzaGQ1Smtkcm1NZlhfZndHbk9sWUtvQV9UT3lqWXNvX1JrSE9WZFpuZjBmZ0g1d3diTm1JZFJRY3VURWthX0JqWQ
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 05:28:25 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOUXpJdkhEX1hEUWVkcFBpZVMyeXJhYTg4THhGQnp1Y0RaWEI1SFh0ak5xUmRYWnRpUUZobl9xV19acllTdjdlY0FJSXJDbUEzaGQ1Smtkcm1NZlhfZndHbk9sWUtvQV9UT3lqWXNvX1JrSE9WZFpuZjBmZ0g1d3diTm1JZFJRY3VURWthX0JqWQ?oc=5" target="_blank">AI Supply-Chain Monitor Identifies Critical Axios Attack</a>&nbsp;&nbsp;<font color="#6f6f6f">varindia.com</font>
+
+## 222. Microsoft to invest $18 billion in Australia to expand AI, cloud infrastructure - Indiatimes
+- Domain: enterpriseai.economictimes.indiatimes.com
+- URL: https://news.google.com/rss/articles/CBMi9AFBVV95cUxNSE9DS1hWYXVTM05ZVDB4Q0I2WUEtX0swUk4tVm1IX2ROX0dITDlrVTZPVUluOFJvZnpYRWZWLUNFNTNYZHVIWWloOVFIem1RVEFRcjNzcm1pUzNhWWlWZ2pLV1VLYkR0dFg1U3FPU3AxUmJTemVWSHAwSldHUmhnbUFkeU1PM2pjV3BiYmJxYjQ4R1hFYkVEX095NF9KR2lWd0cwTWdOdjMwSzE0VmxrR1FkZGRmZ19GUGpRODdlYU1uaHA0b3VBb3RId2FJQzV5QUIyVkYtZnNkTWpCXzd0eFpDUVFZUzA4cGZTWDdOTFYwVDNE0gH6AUFVX3lxTE5oUUJxUFJJRXc1aHRFSUc0cTFnOVhDbG40LV82bzNvcmVWakthT2JrN3VzVUk3TEFWU2pyeF9QSGF5ZzBiZjJrUHQ3RkdXUlVjNUItTnMzaTRSNWRNdlJYSjVoelQxUUs1UVppcklwQUxhRmFoVjAzMTlabk5faGZ6Z2s5MjJmMTZER01IQ0t4T1pXSXFZU2llZmRWQk15U1RNV0xlbkRfaXdJek55dVpYWFRLTWxPbTc1ZjZ5MkhWT2x4NW9IckN2b2xiZmh2ZmdaUk9pNHRwRXlfNUhtQkNxY1dWbnAxRW5mUnRqTTFaT3E1bFptSjNTeEE
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 05:27:53 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMi9AFBVV95cUxNSE9DS1hWYXVTM05ZVDB4Q0I2WUEtX0swUk4tVm1IX2ROX0dITDlrVTZPVUluOFJvZnpYRWZWLUNFNTNYZHVIWWloOVFIem1RVEFRcjNzcm1pUzNhWWlWZ2pLV1VLYkR0dFg1U3FPU3AxUmJTemVWSHAwSldHUmhnbUFkeU1PM2pjV3BiYmJxYjQ4R1hFYkVEX095NF9KR2lWd0cwTWdOdjMwSzE0VmxrR1FkZGRmZ19GUGpRODdlYU1uaHA0b3VBb3RId2FJQzV5QUIyVkYtZnNkTWpCXzd0eFpDUVFZUzA4cGZTWDdOTFYwVDNE0gH6AUFVX3lxTE5oUUJxUFJJRXc1aHRFSUc0cTFnOVhDbG40LV82bzNvcmVWakthT2JrN3VzVUk3TEFWU2pyeF9QSGF5ZzBiZjJrUHQ3RkdXUlVjNUItTnMzaTRSNWRNdlJYSjVoelQxUUs1UVppcklwQUxhRmFoVjAzMTlabk5faGZ6Z2s5MjJmMTZER01IQ0t4T1pXSXFZU2llZmRWQk15U1RNV0xlbkRfaXdJek55dVpYWFRLTWxPbTc1ZjZ5MkhWT2x4NW9IckN2b2xiZmh2ZmdaUk9pNHRwRXlfNUhtQkNxY1dWbnAxRW5mUnRqTTFaT3E1bFptSjNTeEE?oc=5" target="_blank">Microsoft to invest $18 billion in Australia to expand AI, cloud infrastructure</a>&nbsp;&nbsp;<font color="#6f6f6f">Indiatimes</font>
+
+## 223. Nokia beats first-quarter estimates as AI boom lifts sales again - CNA
+- Domain: channelnewsasia.com
+- URL: https://news.google.com/rss/articles/CBMirwFBVV95cUxNaWdHZXBTSkJocmc3eG5vOFdkZzZzVWhKRjVMR0FUdTBCbUxhNHlRdXpsUkpnTURvaTJFc1c2UWZ4eDU2X0J4bVUyQWl6UUNReXl1SGFxM0hrS3R6RnNJci14N0l0YlhZUUt1dTAzTjMxbmNlaDVrZGpaTzFzaW5hRzRvdXdEc0tnVGJUWm9oSVJjMG42YldIamNSdHozU2hkMFViVmlqalRWTTlWdF9N
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 05:18:01 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxNaWdHZXBTSkJocmc3eG5vOFdkZzZzVWhKRjVMR0FUdTBCbUxhNHlRdXpsUkpnTURvaTJFc1c2UWZ4eDU2X0J4bVUyQWl6UUNReXl1SGFxM0hrS3R6RnNJci14N0l0YlhZUUt1dTAzTjMxbmNlaDVrZGpaTzFzaW5hRzRvdXdEc0tnVGJUWm9oSVJjMG42YldIamNSdHozU2hkMFViVmlqalRWTTlWdF9N?oc=5" target="_blank">Nokia beats first-quarter estimates as AI boom lifts sales again</a>&nbsp;&nbsp;<font color="#6f6f6f">CNA</font>
+
+## 224. Nokia beats first-quarter estimates as AI boom lifts sales again - Reuters
+- Domain: reuters.com
+- URL: https://news.google.com/rss/articles/CBMiqgFBVV95cUxNVTJrUzA4SWRoS2U2T0RzY2E5U3JiX0JoNFBJa3ZxY3B4RzlwbkJJUHdPN0FiYkFfZXB4MWJ1T082eDdwSnN1YmhKdExudkx0UVZsSWZoSGlxZENzNTZBQ3BsSjJrQ1h1MDJ0bHViQm1WNDM5VTlXaVQ1aC1TNVJFVVlzRHRnWG5jSHdabXU2b1c1THVwdUFQY3dGZkZzZFVMUThteHFRZm9FQQ
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 05:08:00 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNVTJrUzA4SWRoS2U2T0RzY2E5U3JiX0JoNFBJa3ZxY3B4RzlwbkJJUHdPN0FiYkFfZXB4MWJ1T082eDdwSnN1YmhKdExudkx0UVZsSWZoSGlxZENzNTZBQ3BsSjJrQ1h1MDJ0bHViQm1WNDM5VTlXaVQ1aC1TNVJFVVlzRHRnWG5jSHdabXU2b1c1THVwdUFQY3dGZkZzZFVMUThteHFRZm9FQQ?oc=5" target="_blank">Nokia beats first-quarter estimates as AI boom lifts sales again</a>&nbsp;&nbsp;<font color="#6f6f6f">Reuters</font>
+
+## 225. AI Development for Customer Experience Platforms: Building Intelligent, Responsive, and Scalable CX - Nasscom
+- Domain: community.nasscom.in
+- URL: https://news.google.com/rss/articles/CBMixgFBVV95cUxQY0FTZ1BIUW5mcjNwZkFkaW9FY1M4SHlkaEU2QlVfbUNOVVVCbzJLbG5zMk1PZl9JSmh4QmdqWGFfdlktTnZrekY1RWJROGxxQXhfQUhPY2ktaUZfUm9zZW1odnhwOXNLQmQtX1FrajdHbzJwTkh3MUpfQUs0SEJKVnItU3lvWVdtYTk4T2ZvVHdMaTFJX1VVcTNwdnVpRHZHNWhacnIyTmRlV01tbXNzY2YtYUlLQ01HVkJLR01sTU9jaVZxVVE
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 05:04:54 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxQY0FTZ1BIUW5mcjNwZkFkaW9FY1M4SHlkaEU2QlVfbUNOVVVCbzJLbG5zMk1PZl9JSmh4QmdqWGFfdlktTnZrekY1RWJROGxxQXhfQUhPY2ktaUZfUm9zZW1odnhwOXNLQmQtX1FrajdHbzJwTkh3MUpfQUs0SEJKVnItU3lvWVdtYTk4T2ZvVHdMaTFJX1VVcTNwdnVpRHZHNWhacnIyTmRlV01tbXNzY2YtYUlLQ01HVkJLR01sTU9jaVZxVVE?oc=5" target="_blank">AI Development for Customer Experience Platforms: Building Intelligent, Responsive, and Scalable CX</a>&nbsp;&nbsp;<font color="#6f6f6f">Nasscom</font>
+
+## 226. Ils vont s’enrichir et vous allez adorer : voici comment l’IA va transformer les jeux vidéo - Presse-citron
+- Domain: presse-citron.net
+- URL: https://news.google.com/rss/articles/CBMiugFBVV95cUxOZXI4VE5qcE92Z2s5cFVGUU5wOENGQmh0bGttVWEweHg5b2JiS1B1TVhxODh0NFNWXy1MMlFDT1FVX1BCVlVUZTVXQmhkZHJYQjJ0di02UUtiWVA2N2hIOUctZldUd2RqdWlubjNXa2JHemI5ZjBfcGZtTlJjRVQxTlBSaUZyX28tVlJPX0NJeFlKTi1hMVJJdnlJTi1nd251VC1HNjJkS3JKZWpwWjBRcHlUZWVkeTlMcUE
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 05:01:00 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxOZXI4VE5qcE92Z2s5cFVGUU5wOENGQmh0bGttVWEweHg5b2JiS1B1TVhxODh0NFNWXy1MMlFDT1FVX1BCVlVUZTVXQmhkZHJYQjJ0di02UUtiWVA2N2hIOUctZldUd2RqdWlubjNXa2JHemI5ZjBfcGZtTlJjRVQxTlBSaUZyX28tVlJPX0NJeFlKTi1hMVJJdnlJTi1nd251VC1HNjJkS3JKZWpwWjBRcHlUZWVkeTlMcUE?oc=5" target="_blank">Ils vont s’enrichir et vous allez adorer : voici comment l’IA va transformer les jeux vidéo</a>&nbsp;&nbsp;<font color="#6f6f6f">Presse-citron</font>
+
+## 227. DÉCRYPTAGE. Le tueur a-t-il été aidé par ChatGPT ? L’IA visée par une enquête pénale à la suite d’une fusillade dans une université de Floride en 2025 - ladepeche.fr
+- Domain: ladepeche.fr
+- URL: https://news.google.com/rss/articles/CBMinwJBVV95cUxOMzVVU2hzbHBxeDI4ZFozWHFmdlQ3OUNoVG44OWh1V25wdmxWMTl6RmdzUFk0aURnR25sTGYxWDFTVWlhWjc5OENrVjYtZU9wblU2Zng2eGdJMVg2eUptNEhVREI0YU00OUUzM21IZVZnakFKZ1dkZHowQ0ZJOGVTc3FMdjZrdk9yQ2xteGphbzl6cnI4SG9uU01OeW5fZ2VmSzkyRGhpMUtVYS1PbU16aUVnUkxKdE9JRDgyN29hdnpCTExaRkdSMmhydjE4eHg5U3c1bTlUNVdqcHNfQ2pPX1hyQjQ3ZHFBbTNIUFp4a0lSR2tIZEc1WnJHSmFIUWR1UGtaQndBQ0tFMHBPWkdTWDAwZk1rdl9MbnNMTTZtTQ
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 04:59:00 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMinwJBVV95cUxOMzVVU2hzbHBxeDI4ZFozWHFmdlQ3OUNoVG44OWh1V25wdmxWMTl6RmdzUFk0aURnR25sTGYxWDFTVWlhWjc5OENrVjYtZU9wblU2Zng2eGdJMVg2eUptNEhVREI0YU00OUUzM21IZVZnakFKZ1dkZHowQ0ZJOGVTc3FMdjZrdk9yQ2xteGphbzl6cnI4SG9uU01OeW5fZ2VmSzkyRGhpMUtVYS1PbU16aUVnUkxKdE9JRDgyN29hdnpCTExaRkdSMmhydjE4eHg5U3c1bTlUNVdqcHNfQ2pPX1hyQjQ3ZHFBbTNIUFp4a0lSR2tIZEc1WnJHSmFIUWR1UGtaQndBQ0tFMHBPWkdTWDAwZk1rdl9MbnNMTTZtTQ?oc=5" target="_blank">DÉCRYPTAGE. Le tueur a-t-il été aidé par ChatGPT ? L’IA visée par une enquête pénale à la suite d’une fusillade dans une université de Floride en 2025</a>&nbsp;&nbsp;<font color="#6f6f6f">ladepeche.fr</font>
+
+## 228. Deepfakes, Disinformation, and AI Content Are Taking Over the Internet - infoq.com
+- Domain: infoq.com
+- URL: https://news.google.com/rss/articles/CBMiXkFVX3lxTE5JSm9WYlFCM0tTNE9MNzhZX0NXTlVTcUM0Zi1nQnRTNUZRbFhKdTJhVFlkOFVBVXc5TVBzVHNJV1VFbmRoa1VMSlhtR3Q0aHVwOWxUSl9oalJyVzFfQmc
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 04:37:01 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMiXkFVX3lxTE5JSm9WYlFCM0tTNE9MNzhZX0NXTlVTcUM0Zi1nQnRTNUZRbFhKdTJhVFlkOFVBVXc5TVBzVHNJV1VFbmRoa1VMSlhtR3Q0aHVwOWxUSl9oalJyVzFfQmc?oc=5" target="_blank">Deepfakes, Disinformation, and AI Content Are Taking Over the Internet</a>&nbsp;&nbsp;<font color="#6f6f6f">infoq.com</font>
+
+## 229. Fournisseur Nvidia SK Hynix pulvérise les records avec un trimestre de 35 milliards de dollars alors que la demande en intelligence artificielle défie la saisonnalité - Benzinga France
+- Domain: fr.benzinga.com
+- URL: https://news.google.com/rss/articles/CBMiqwJBVV95cUxOemhmUUVvNkZSN0RaVDQ5ZHdEX2dPRmN4em9neDdCSjUtWk5TME94cW9HbGZiT3kzN19ZRHYzNm5OX0twMVZWclJ3MHV0c09Lc1FhaWFhb0JwSWp3dXh6MF9XQ05YN0dNbWV6RGwtYWFHYV9QX1lQaGRJcHFMM2hscl9aOFB6ODlTOFh0RGFtNG92UkVaTlFSUHdMc285LUhZSld2elotaU5XbVJJaHZwU2RxVktIRTJZRDQzOVN4Q0tpVG1MOUw5T0p5TF9oWG9GeFNKbmh0N1p6anNMUWJ4b2NuQTZaMkItQS1qYWpUZmJrdmRtZ1poLVczTHZMTmFPR3M1WVFPQTFvUXpZaVVDZ1Z3bmZ2VmYwSnNwYjlsUVN0ZjF6aHNBcm5tOA
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 04:34:50 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMiqwJBVV95cUxOemhmUUVvNkZSN0RaVDQ5ZHdEX2dPRmN4em9neDdCSjUtWk5TME94cW9HbGZiT3kzN19ZRHYzNm5OX0twMVZWclJ3MHV0c09Lc1FhaWFhb0JwSWp3dXh6MF9XQ05YN0dNbWV6RGwtYWFHYV9QX1lQaGRJcHFMM2hscl9aOFB6ODlTOFh0RGFtNG92UkVaTlFSUHdMc285LUhZSld2elotaU5XbVJJaHZwU2RxVktIRTJZRDQzOVN4Q0tpVG1MOUw5T0p5TF9oWG9GeFNKbmh0N1p6anNMUWJ4b2NuQTZaMkItQS1qYWpUZmJrdmRtZ1poLVczTHZMTmFPR3M1WVFPQTFvUXpZaVVDZ1Z3bmZ2VmYwSnNwYjlsUVN0ZjF6aHNBcm5tOA?oc=5" target="_blank">Fournisseur Nvidia SK Hynix pulvérise les records avec un trimestre de 35 milliards de dollars alors que la demande en intelligence artificielle défie la saisonnalité</a>&nbsp;&nbsp;<font color="#6f6f6f">Benzinga France</font>
+
+## 230. China’s AI companies are also facing lots of red tape - Euractiv
+- Domain: euractiv.com
+- URL: https://news.google.com/rss/articles/CBMiiwFBVV95cUxOYjQ1VVlhLWcwaF83cEdsTnluTWRwa1FIczBwNHdsQXpoVGh1NWdxTXIyYzF1T3Z1M0J4TW9DTzVfbFEySWdvT2hYX3Z0VEZIVENwZTBpcU52eUxzQ0hRc0VUdE1BSVEwMzBYLXpRaVYtSnZObVNGeWRLVGxlYVk5cGY0QkdlNDh1dkJr
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 04:24:17 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxOYjQ1VVlhLWcwaF83cEdsTnluTWRwa1FIczBwNHdsQXpoVGh1NWdxTXIyYzF1T3Z1M0J4TW9DTzVfbFEySWdvT2hYX3Z0VEZIVENwZTBpcU52eUxzQ0hRc0VUdE1BSVEwMzBYLXpRaVYtSnZObVNGeWRLVGxlYVk5cGY0QkdlNDh1dkJr?oc=5" target="_blank">China’s AI companies are also facing lots of red tape</a>&nbsp;&nbsp;<font color="#6f6f6f">Euractiv</font>
+
+## 231. Foreign investors buy Japan stocks on US-Iran peace hopes, AI rally - CNA
+- Domain: channelnewsasia.com
+- URL: https://news.google.com/rss/articles/CBMisgFBVV95cUxOdFNudTRycV9KX3hvZXExdmpUNWVGcEY1dUROOW1TakNNRTRCTlFMQUE1Rlh2NzNkY2cxXzl5SG15Q0JNalNoS1U0YUg1bUlYS2I0UnRXVkxpV0Zmb1h1bVVEaFpvNk9oRUdjSXdGNlNid1hacEVSY2VpZkY0RW5fY0UzOUFWV01jSHNJUlZXcEctaDlrM0VVMVA3dnhVWjhZZl83REVHWXpwa0lNMnBmckFn
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 04:22:34 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxOdFNudTRycV9KX3hvZXExdmpUNWVGcEY1dUROOW1TakNNRTRCTlFMQUE1Rlh2NzNkY2cxXzl5SG15Q0JNalNoS1U0YUg1bUlYS2I0UnRXVkxpV0Zmb1h1bVVEaFpvNk9oRUdjSXdGNlNid1hacEVSY2VpZkY0RW5fY0UzOUFWV01jSHNJUlZXcEctaDlrM0VVMVA3dnhVWjhZZl83REVHWXpwa0lNMnBmckFn?oc=5" target="_blank">Foreign investors buy Japan stocks on US-Iran peace hopes, AI rally</a>&nbsp;&nbsp;<font color="#6f6f6f">CNA</font>
+
+## 232. SpaceX veut mettre des centres de données IA dans l'espace alors qu'Elon Musk sait que c'est impossible - Les Numériques
 - Domain: lesnumeriques.com
 - URL: https://news.google.com/rss/articles/CBMiggJBVV95cUxNOTQyb2FQaXBpWTdKN1hpektDd1FKdTdmTjdDaG4yY2x3WHVISzBaT1VZMl9fbERCLVNCOFF5c0NlNFoxQmZEX1RiTkdzaGtoNEFsLXBlVkljZGNnMVQzWjBySjBWYzgyV05FWVdiWE1MV2E2SGlKclBUaEpKYXZCd3VpUm9KX2VsM1ZvZ3hBWUoxb3VTMm00RFF6cERNV0RTWkVyT2RfbmhFM3hhSlRabnhjSklDQVhDRGpNaG5yUzNvdVFKOWNVR0lkUGNKaEFPc1JIYkZ0Qlk3OVJmZUZzQU9PZFdhM05pLVhpZlJUclJvSEFaLWVydU8tZGdWWVZmMmc
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 04:15:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiggJBVV95cUxNOTQyb2FQaXBpWTdKN1hpektDd1FKdTdmTjdDaG4yY2x3WHVISzBaT1VZMl9fbERCLVNCOFF5c0NlNFoxQmZEX1RiTkdzaGtoNEFsLXBlVkljZGNnMVQzWjBySjBWYzgyV05FWVdiWE1MV2E2SGlKclBUaEpKYXZCd3VpUm9KX2VsM1ZvZ3hBWUoxb3VTMm00RFF6cERNV0RTWkVyT2RfbmhFM3hhSlRabnhjSklDQVhDRGpNaG5yUzNvdVFKOWNVR0lkUGNKaEFPc1JIYkZ0Qlk3OVJmZUZzQU9PZFdhM05pLVhpZlJUclJvSEFaLWVydU8tZGdWWVZmMmc?oc=5" target="_blank">SpaceX veut mettre des centres de données IA dans l'espace alors qu'Elon Musk sait que c'est impossible</a>&nbsp;&nbsp;<font color="#6f6f6f">Les Numériques</font>
 
-## 235. How ‘jagged intelligence’ can reframe the AI debate - The Irish Times
+## 233. How ‘jagged intelligence’ can reframe the AI debate - The Irish Times
 - Domain: irishtimes.com
 - URL: https://news.google.com/rss/articles/CBMioAFBVV95cUxNcmpqTklSd3RPSzVOaEU2bzV3MVdsZjk5U3I3RWJFZ3dvS3kyWjA2Ry16emQ3cUhjX2RUbHljOFBjLThuajRiMUZoQjFaVTZhbURucVkwZDl6T2hDUTRBcDc4S1JxRTczdEp3M1R5a0VobndDdTgtczM1dzQzcFlhMjlwd3hQSTJRVlNrNG5kbGFPRHYzZDh6eHpuVktwcGFL
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 04:01:38 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNcmpqTklSd3RPSzVOaEU2bzV3MVdsZjk5U3I3RWJFZ3dvS3kyWjA2Ry16emQ3cUhjX2RUbHljOFBjLThuajRiMUZoQjFaVTZhbURucVkwZDl6T2hDUTRBcDc4S1JxRTczdEp3M1R5a0VobndDdTgtczM1dzQzcFlhMjlwd3hQSTJRVlNrNG5kbGFPRHYzZDh6eHpuVktwcGFL?oc=5" target="_blank">How ‘jagged intelligence’ can reframe the AI debate</a>&nbsp;&nbsp;<font color="#6f6f6f">The Irish Times</font>
 
-## 236. How an Indian Med Student Made Millions of Dollars by Duping ‘Dumb MAGA Supporters’ With Fake ‘AI Slop’ Content - NewsGram
+## 234. How an Indian Med Student Made Millions of Dollars by Duping ‘Dumb MAGA Supporters’ With Fake ‘AI Slop’ Content - NewsGram
 - Domain: newsgram.com
 - URL: https://news.google.com/rss/articles/CBMimwFBVV95cUxQcGlzOXRiUGRwWWRfRWxKc3hkVnRBaVEwcnY0blZQeXN6ZnpGcG80N19TdVJvdTdOcGVWVmp1UzdIeC1UYnYxZFY1bC1IUl9rRjFQNWE1Vi1hMDhDb0JURUhLMkl4aVlGMWVJdG9MYnJGUmlFN0VnaVZGcEtfY2d1YUxIZGFOdnRKczlIYXBLZkc4VzBWaFlvWFpNZ9IBqAFBVV95cUxQS0VVc3IySGpVRnRPbTZLUk9ubTRFc3hpVnRpMGFtbFNwakQtTWhnRkhrc25tbTkyQ1VlUFR3M0YwZDRya1hfYzRRcFloZ2ZnR1dPRC1Pck1ZdDVLekpYVW9uMS1RTmNyMXVPMHk2VmVkLVBYTTlDVExrWnRkZ3hmajZheHljSzhMZXhhT3loQnMwTkRhdWNIbE1WaV9kdXdkMG1VTjg3NHA
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 04:00:07 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQcGlzOXRiUGRwWWRfRWxKc3hkVnRBaVEwcnY0blZQeXN6ZnpGcG80N19TdVJvdTdOcGVWVmp1UzdIeC1UYnYxZFY1bC1IUl9rRjFQNWE1Vi1hMDhDb0JURUhLMkl4aVlGMWVJdG9MYnJGUmlFN0VnaVZGcEtfY2d1YUxIZGFOdnRKczlIYXBLZkc4VzBWaFlvWFpNZ9IBqAFBVV95cUxQS0VVc3IySGpVRnRPbTZLUk9ubTRFc3hpVnRpMGFtbFNwakQtTWhnRkhrc25tbTkyQ1VlUFR3M0YwZDRya1hfYzRRcFloZ2ZnR1dPRC1Pck1ZdDVLekpYVW9uMS1RTmNyMXVPMHk2VmVkLVBYTTlDVExrWnRkZ3hmajZheHljSzhMZXhhT3loQnMwTkRhdWNIbE1WaV9kdXdkMG1VTjg3NHA?oc=5" target="_blank">How an Indian Med Student Made Millions of Dollars by Duping ‘Dumb MAGA Supporters’ With Fake ‘AI Slop’ Content</a>&nbsp;&nbsp;<font color="#6f6f6f">NewsGram</font>
 
-## 237. GEO : Comment ChatGPT cherche-t-il vraiment ? Le tuto pour récupérer les Grounding Queries - mntd.fr
+## 235. AI defining force in risk management, improving operational efficiency, market surveillance: SBI chief - Fortune India
+- Domain: fortuneindia.com
+- URL: https://news.google.com/rss/articles/CBMi4wFBVV95cUxOOWlTdE9fdGItNGtRZVZ0STc1MDlIbXdiX3N3anA4X0J6MEtNQTNReTJzRjIyNV92ekRtZl9PMjZuMU9TSUVvV2pwOTB5WUNGNmljWTZwc0NTcjZzbGVuMW5BMjBrOEJfZW5HOUNvY0piamVoVGVXR0trMEJVVFRUdnJGWjZraFJmY1FIQ0o5Wi1sc2xzbkZJUGM4NWQwMmJGdXNrS1k2eVMyeFdWZ09EazlfSDRPT2plVkl3aVJhMzNOQklNcXotbWdUVTdOc0FuRWFmelZrZ1lvQU9qUGlzX0hjMNIB8AFBVV95cUxQczRaYzJHVnR2YjRXeVJ0UUR3OHZfcGljaThFa1RQNHRYSUxyQWNhWjFvLUo3ZFpNNi1hOVNYWWRFWmVwN1hEeC1qUjlnUUtfOUk5eDlWNVUzN2JGVlpFcnpPRF9qS3YwRU5GVmphN2RoQ2FrT1JhV2J4X2lCUWRoS0Y3MmxPdkpNWTBFNEVkUEhteW9NZlFVeUpkbHNxSXlBYVFSSmVWUGl3V3lVWE1WckpBcW1Ob2c3dXcwWVk2MUt6RmJvQ05TREJSM3FqVkExRi00cW41SzRDMC1ISTBVWDFIUVBoYzgxTGJaOU50X3c
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 03:59:35 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxOOWlTdE9fdGItNGtRZVZ0STc1MDlIbXdiX3N3anA4X0J6MEtNQTNReTJzRjIyNV92ekRtZl9PMjZuMU9TSUVvV2pwOTB5WUNGNmljWTZwc0NTcjZzbGVuMW5BMjBrOEJfZW5HOUNvY0piamVoVGVXR0trMEJVVFRUdnJGWjZraFJmY1FIQ0o5Wi1sc2xzbkZJUGM4NWQwMmJGdXNrS1k2eVMyeFdWZ09EazlfSDRPT2plVkl3aVJhMzNOQklNcXotbWdUVTdOc0FuRWFmelZrZ1lvQU9qUGlzX0hjMNIB8AFBVV95cUxQczRaYzJHVnR2YjRXeVJ0UUR3OHZfcGljaThFa1RQNHRYSUxyQWNhWjFvLUo3ZFpNNi1hOVNYWWRFWmVwN1hEeC1qUjlnUUtfOUk5eDlWNVUzN2JGVlpFcnpPRF9qS3YwRU5GVmphN2RoQ2FrT1JhV2J4X2lCUWRoS0Y3MmxPdkpNWTBFNEVkUEhteW9NZlFVeUpkbHNxSXlBYVFSSmVWUGl3V3lVWE1WckpBcW1Ob2c3dXcwWVk2MUt6RmJvQ05TREJSM3FqVkExRi00cW41SzRDMC1ISTBVWDFIUVBoYzgxTGJaOU50X3c?oc=5" target="_blank">AI defining force in risk management, improving operational efficiency, market surveillance: SBI chief</a>&nbsp;&nbsp;<font color="#6f6f6f">Fortune India</font>
+
+## 236. GEO : Comment ChatGPT cherche-t-il vraiment ? Le tuto pour récupérer les Grounding Queries - mntd.fr
 - Domain: mntd.fr
 - URL: https://news.google.com/rss/articles/CBMiqwFBVV95cUxQYzhnZm9WLWRHZmU1TUwzX1FkQ2h2emlJc2NzTFpmNHhraFUtb0dTcUt1Um9pMWd2UGxSMnNSS25pY0Vkbk5TTnMxcmhnLVhDbnZaSTdMM3Y4UHBYWmlsVFdfVENHQTVIM3BtbTZsRXRlTW1nSlVwVnFCYk1lcElRdDhhLW9BQWZxM1Jyck44M1A4YmlReTdDOG16R1VyUnI2YmVlY0ctUFpyMms
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 03:57:21 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxQYzhnZm9WLWRHZmU1TUwzX1FkQ2h2emlJc2NzTFpmNHhraFUtb0dTcUt1Um9pMWd2UGxSMnNSS25pY0Vkbk5TTnMxcmhnLVhDbnZaSTdMM3Y4UHBYWmlsVFdfVENHQTVIM3BtbTZsRXRlTW1nSlVwVnFCYk1lcElRdDhhLW9BQWZxM1Jyck44M1A4YmlReTdDOG16R1VyUnI2YmVlY0ctUFpyMms?oc=5" target="_blank">GEO : Comment ChatGPT cherche-t-il vraiment ? Le tuto pour récupérer les Grounding Queries</a>&nbsp;&nbsp;<font color="#6f6f6f">mntd.fr</font>
 
-## 238. Schneider, Aveva and Nvidia develop blueprints for AI factories - controlglobal.com
+## 237. Schneider, Aveva and Nvidia develop blueprints for AI factories - controlglobal.com
 - Domain: controlglobal.com
 - URL: https://news.google.com/rss/articles/CBMi-AFBVV95cUxPdlpjT1k5ZWg3amhVV3BxeVN3RVh3eTJseTZwSDdzYjZXRlZoVDVWZThvYzNhd080Tm1DS3FoZkFYQjdhcTgzbTJkTnozd2JneDN1NjlXR3FfcU50ZUJ3VE80Ml9vdG5RR2J4RjNKajJYR3FXeDVwZmVmSzNiVWlyZUtkQjlEc2RVV3NBVk0yNHdnQU9jYUFVUDctei1YRncxZjRta1hsUkI3VngwQnY2cG42YmM3TG5wTjN5MzNLbC12M2sySG5nNlVGQ0xKVXVSQ090NHJYalhDejFjeWdFRkg0c0k0WWUzalNzZWxnSUpTdEd6SHVmZQ
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 03:36:56 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi-AFBVV95cUxPdlpjT1k5ZWg3amhVV3BxeVN3RVh3eTJseTZwSDdzYjZXRlZoVDVWZThvYzNhd080Tm1DS3FoZkFYQjdhcTgzbTJkTnozd2JneDN1NjlXR3FfcU50ZUJ3VE80Ml9vdG5RR2J4RjNKajJYR3FXeDVwZmVmSzNiVWlyZUtkQjlEc2RVV3NBVk0yNHdnQU9jYUFVUDctei1YRncxZjRta1hsUkI3VngwQnY2cG42YmM3TG5wTjN5MzNLbC12M2sySG5nNlVGQ0xKVXVSQ090NHJYalhDejFjeWdFRkg0c0k0WWUzalNzZWxnSUpTdEd6SHVmZQ?oc=5" target="_blank">Schneider, Aveva and Nvidia develop blueprints for AI factories</a>&nbsp;&nbsp;<font color="#6f6f6f">controlglobal.com</font>
+
+## 238. Inside The Standard's Bengaluru bet: Building the AI-ready workforce of tomorrow - Indiatimes
+- Domain: cio.economictimes.indiatimes.com
+- URL: https://news.google.com/rss/articles/CBMipwJBVV95cUxOX0J0SWhkdExMWmdYSGlDT1ZabEk4RFpYbnBIT0hzRE9pTnhJUXlrNzVZVXZsVzZEbUU2dW5wWGxqeVlWYlZUSi1VRkpGd1Q2R1l6ZG9pN0wxMUtQaXdhRktPZngxZVZOMDg1MzNhNTQtOExDU3Y2RVIwWmtaTUcxNzFNRzdwaW51YzAyQWRESGVyclJYVWExano3VzI5RUEta1kzdHhuRVQ5Y20wZHpuSlZEMi1vVGpLb3ZyZmxRTm51Ql9JYkhLNk4tYWtIRFkwQkZHNzVIeWhUTGc0WE5jdnViWUFvZVk5RVJYS2lmTGJsUFpTT3oxNUh1OGxOelFRZGxDYTZacmtPR3drLWJia3pHc3F5a213dmxWeTdLWWZpbjJDdnp3
+- Relevance score: 4.0
+- Published: Thu, 23 Apr 2026 03:27:34 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMipwJBVV95cUxOX0J0SWhkdExMWmdYSGlDT1ZabEk4RFpYbnBIT0hzRE9pTnhJUXlrNzVZVXZsVzZEbUU2dW5wWGxqeVlWYlZUSi1VRkpGd1Q2R1l6ZG9pN0wxMUtQaXdhRktPZngxZVZOMDg1MzNhNTQtOExDU3Y2RVIwWmtaTUcxNzFNRzdwaW51YzAyQWRESGVyclJYVWExano3VzI5RUEta1kzdHhuRVQ5Y20wZHpuSlZEMi1vVGpLb3ZyZmxRTm51Ql9JYkhLNk4tYWtIRFkwQkZHNzVIeWhUTGc0WE5jdnViWUFvZVk5RVJYS2lmTGJsUFpTT3oxNUh1OGxOelFRZGxDYTZacmtPR3drLWJia3pHc3F5a213dmxWeTdLWWZpbjJDdnp3?oc=5" target="_blank">Inside The Standard's Bengaluru bet: Building the AI-ready workforce of tomorrow</a>&nbsp;&nbsp;<font color="#6f6f6f">Indiatimes</font>
 
 ## 239. Letters to the editor: AI dowry cal­culators turns a serious social evil into an even more dehumanised metric - Telegraph India
 - Domain: telegraphindia.com
@@ -1680,103 +1680,103 @@ Relevant source count: 260
 - Published: Thu, 23 Apr 2026 03:19:53 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMi9gFBVV95cUxNSGVGbGlLWGFYWnNoeFdQblpJclEwQWFETkc5dkJKRVJQMXVQUk4xd3BydVNjMDJIM0JLX0hLU2FtWC10ZDNpSWlvdnJPN1YwLVV0OVVxS0Znc0R6cDlHNzF1dnBQblFsd2hUdi04NHN2YWtlc3pXeFNZRnhSN29LcFkwZllsR1RXaC1uclZBTVVaSGFCc2djR3o1eHI0RFBLQ0Q1WDVabGV1SDd2Y1I2QXJTV3lwQXFnU1pVb2NOR2RqMmpaejVtcWEzZVpyOWRoeXF5UllUNW1LSHVSd3FJLXMzaXNRaXBmZHNuRXBuRjhFazhXbEHSAfsBQVVfeXFMT1QzU1pRMEhmZHlnMmhCZjdwT1E0UElTOEV2bDZrZV91OUFnbkNOZjQ0ekx5UmItTkRBdVo4c3VxY3h5c0VGeC1Bc25mekhiVUF1a3FoejgzaTR4QUZRWDJjWldwc3FOdGVLb0VRNS1zMkdHVkh4VC1Ed3IwejZJRUItbHBrYmZSNjVxU3NHeEZaOFdUdlgxZ1JMVFVhV2JnUWVxcmpEQzFJanNnTzFOTlotMG1feEhadDlVVUJ4QlBraEVCcU5tbHQ3NjE0SldwazR1bXFTR2RlaWxseEVGSFNBT0kwbXJtNjdTS3lzdUE4bnVfVTMtTTVUR2M?oc=5" target="_blank">Letters to the editor: AI dowry cal­culators turns a serious social evil into an even more dehumanised metric</a>&nbsp;&nbsp;<font color="#6f6f6f">Telegraph India</font>
 
-## 240. POET stock soars 76% in 3 days on expectations of AI optical interconnect orders - Moomoo
-- Domain: moomoo.com
-- URL: https://news.google.com/rss/articles/CBMitAFBVV95cUxPVzdZU0xhM2M1NDBieVk1cVJxcld2RVRvLUl4N3kwWENHUjBLejNlNEpLWW5Dems3LWpTalNkQ2dfc21Ic0NDamtycTVUUl9vUmZTRlFKZU9BT3hQbWU1MFRuSzZudXNIRUVaejA5Nkx4d1hQNnp0ZTI5UkpkVHI5SDZpOU1Gcll1Nnhpd1E3N083MVdoX0Z3aHFJdmZQSHZyRmdVTW1TWlFpS0xlWkszOWw2LTE
-- Relevance score: 4.0
-- Published: Thu, 23 Apr 2026 03:16:00 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPVzdZU0xhM2M1NDBieVk1cVJxcld2RVRvLUl4N3kwWENHUjBLejNlNEpLWW5Dems3LWpTalNkQ2dfc21Ic0NDamtycTVUUl9vUmZTRlFKZU9BT3hQbWU1MFRuSzZudXNIRUVaejA5Nkx4d1hQNnp0ZTI5UkpkVHI5SDZpOU1Gcll1Nnhpd1E3N083MVdoX0Z3aHFJdmZQSHZyRmdVTW1TWlFpS0xlWkszOWw2LTE?oc=5" target="_blank">POET stock soars 76% in 3 days on expectations of AI optical interconnect orders</a>&nbsp;&nbsp;<font color="#6f6f6f">Moomoo</font>
-
-## 241. Smarter supply chains ahead: K-Logistikus integrates AI to redefine logistics in the Philippines - Inquirer.net
+## 240. Smarter supply chains ahead: K-Logistikus integrates AI to redefine logistics in the Philippines - Inquirer.net
 - Domain: business.inquirer.net
 - URL: https://news.google.com/rss/articles/CBMizAFBVV95cUxNWHZwcmI1cUtmdWZZUW5UX1pfTUp2a3VNVG9NaHBlWktOWkNBYUxCbUEzZkJ1ak0wNkVjRlJrenF3cmVraWg0N2tCZWpmUzhaajV5ZUp1RVZ2eEFXcjhMbkJ4S0lyd2FjbEY1UUQ0ZW0zbEJGVEFLREdtU3ZGMGxmN3pCMDV4Z05zZXRkUGNZZmU3cHlhVmJNUW5KS09qajZ0NUlhcjBOOFBwWk5iME1tVExiQnh0ajlobEtCRjRQSGhiRS1ZX01qaUJUejnSAdIBQVVfeXFMTzhvY1BVMlJsQ0NXV0VUNXBCaUp6UWhjVUNacUJRY1NTTWladGg4Y3piX3ZYVmNZU1BLdVhDMzVhX3d2NkxzVE80Q3dnNzVZeTlHWmxPWlQyZ3RGQTRiRWVMamdfNnlXb1lvTVRPREUzc1NISV9nUzZudWxsd3ZobzJpbVBaenE5X3M0WUxXc3NDNE9JeEw2NVlCU0lqU0JPRmZlU2VFdnI0dGxQME1RY2xZR0ZhYkZBZ2U0X0JEZzBxRE1CVjFwRGdhb2FSMjhnSjZn
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 03:12:00 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMizAFBVV95cUxNWHZwcmI1cUtmdWZZUW5UX1pfTUp2a3VNVG9NaHBlWktOWkNBYUxCbUEzZkJ1ak0wNkVjRlJrenF3cmVraWg0N2tCZWpmUzhaajV5ZUp1RVZ2eEFXcjhMbkJ4S0lyd2FjbEY1UUQ0ZW0zbEJGVEFLREdtU3ZGMGxmN3pCMDV4Z05zZXRkUGNZZmU3cHlhVmJNUW5KS09qajZ0NUlhcjBOOFBwWk5iME1tVExiQnh0ajlobEtCRjRQSGhiRS1ZX01qaUJUejnSAdIBQVVfeXFMTzhvY1BVMlJsQ0NXV0VUNXBCaUp6UWhjVUNacUJRY1NTTWladGg4Y3piX3ZYVmNZU1BLdVhDMzVhX3d2NkxzVE80Q3dnNzVZeTlHWmxPWlQyZ3RGQTRiRWVMamdfNnlXb1lvTVRPREUzc1NISV9nUzZudWxsd3ZobzJpbVBaenE5X3M0WUxXc3NDNE9JeEw2NVlCU0lqU0JPRmZlU2VFdnI0dGxQME1RY2xZR0ZhYkZBZ2U0X0JEZzBxRE1CVjFwRGdhb2FSMjhnSjZn?oc=5" target="_blank">Smarter supply chains ahead: K-Logistikus integrates AI to redefine logistics in the Philippines</a>&nbsp;&nbsp;<font color="#6f6f6f">Inquirer.net</font>
 
-## 242. Google’s $185B AI bet could be a masterstroke or its biggest mistake - Communications Today
+## 241. Google’s $185B AI bet could be a masterstroke or its biggest mistake - Communications Today
 - Domain: communicationstoday.co.in
 - URL: https://news.google.com/rss/articles/CBMiqAFBVV95cUxORE1nMjV3N3pGVnBXWTY2QWNsNlFYOHZVQVVCWXFZRUxlMm5DMDJ5OUZfSXBabUZlQ3U0QUh5elNjRGp0Y2Jkc0lRVDlFeFBGUjlBaG0yN0s4NWJYTkFlZnVBenVMeWFPeWpPU1l3M3lWVmx1ZVdyY0kxMkJmNW1XMVJ3M0dxVkRZRTg5M2ZZUldGbU9BUW43SW5OYnRkQzkzRERQb0hkaGc
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 03:10:35 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxORE1nMjV3N3pGVnBXWTY2QWNsNlFYOHZVQVVCWXFZRUxlMm5DMDJ5OUZfSXBabUZlQ3U0QUh5elNjRGp0Y2Jkc0lRVDlFeFBGUjlBaG0yN0s4NWJYTkFlZnVBenVMeWFPeWpPU1l3M3lWVmx1ZVdyY0kxMkJmNW1XMVJ3M0dxVkRZRTg5M2ZZUldGbU9BUW43SW5OYnRkQzkzRERQb0hkaGc?oc=5" target="_blank">Google’s $185B AI bet could be a masterstroke or its biggest mistake</a>&nbsp;&nbsp;<font color="#6f6f6f">Communications Today</font>
 
-## 243. Plutôt cheval ou charbon ? Le travail humain face à la révolution de l’IA - Courrier international
+## 242. Plutôt cheval ou charbon ? Le travail humain face à la révolution de l’IA - Courrier international
 - Domain: courrierinternational.com
 - URL: https://news.google.com/rss/articles/CBMizgFBVV95cUxNOTVzOEFPVmJ3Vmt2b2RtT2U1Z091NHRXdVlvVE5rSExhQVg3MGczcHU4Nm1SY25lVXoydjczUUlpcHpQcF9QcXlnVndPd2IwWmRrY2FDTl9hbnlFVE1rd0R5STFPOTM1UmRGZFgtbDc0WmozVzFaZE5udHNlQ3F4eHRUZVN1NHA3ZE5TM2tjTFBoQVlHSW8xUGNZYnUwZTlER3N6azlEcmlkczVvdFowakpfUVZjamd4eTZwOVF1QXN6dnRuS1FaWEVoVnJKdw
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 03:00:15 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxNOTVzOEFPVmJ3Vmt2b2RtT2U1Z091NHRXdVlvVE5rSExhQVg3MGczcHU4Nm1SY25lVXoydjczUUlpcHpQcF9QcXlnVndPd2IwWmRrY2FDTl9hbnlFVE1rd0R5STFPOTM1UmRGZFgtbDc0WmozVzFaZE5udHNlQ3F4eHRUZVN1NHA3ZE5TM2tjTFBoQVlHSW8xUGNZYnUwZTlER3N6azlEcmlkczVvdFowakpfUVZjamd4eTZwOVF1QXN6dnRuS1FaWEVoVnJKdw?oc=5" target="_blank">Plutôt cheval ou charbon ? Le travail humain face à la révolution de l’IA</a>&nbsp;&nbsp;<font color="#6f6f6f">Courrier international</font>
 
-## 244. South Korea economic growth tops all estimates on AI-fuelled export boom - The Business Times
-- Domain: businesstimes.com.sg
-- URL: https://news.google.com/rss/articles/CBMitwFBVV95cUxQUVBqZUQ3eW1QZlJUaHctYUx5bXAxamlENThqZU4zNDNCR0xoT1pOdXdYUVprVWM0VldzNWx6TnV5eGRBYW5RVTFJaGVaV2NyYzU3VWtRTm5CdE94YUVtY290TTRMcFFtUU1pNG12SVlTZHdqeUVkdEZ3YXc1UWs5dTVvdl91NmdzWkU2T1ZZOEtZSmIyZXpvXzJwc3lJazhLRl9tRmNIUEo4cDFfb1Y4WGN0U3ltQm8
+## 243. Telstra’s board was drowning in data. An AI bot has changed everything - AFR
+- Domain: afr.com
+- URL: https://news.google.com/rss/articles/CBMirgFBVV95cUxPUlhQd3M0WVY3M3RKdFVDUlMzMnNVX0pHRlNBSWhiQ3FWUzYzalZCQTFSTVBSeS1xdDl0ZFd2M0UyalhUQk90emFNNGFqZFRhb19oS190OUtYTzZFeU5rMGR0WUVtNTRsVlZTNTh4VzcwTHFJT2tFMllIejRSSHc0VG5xbk1UTW1FTkxYeUw5TjNSZTYwQ0pVZUFnZGxZTnYzR0JQQkg0RlZ3NjFtY1E
 - Relevance score: 4.0
-- Published: Thu, 23 Apr 2026 01:17:00 GMT
-- Summary: <a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQUVBqZUQ3eW1QZlJUaHctYUx5bXAxamlENThqZU4zNDNCR0xoT1pOdXdYUVprVWM0VldzNWx6TnV5eGRBYW5RVTFJaGVaV2NyYzU3VWtRTm5CdE94YUVtY290TTRMcFFtUU1pNG12SVlTZHdqeUVkdEZ3YXc1UWs5dTVvdl91NmdzWkU2T1ZZOEtZSmIyZXpvXzJwc3lJazhLRl9tRmNIUEo4cDFfb1Y4WGN0U3ltQm8?oc=5" target="_blank">South Korea economic growth tops all estimates on AI-fuelled export boom</a>&nbsp;&nbsp;<font color="#6f6f6f">The Business Times</font>
+- Published: Thu, 23 Apr 2026 01:48:00 GMT
+- Summary: <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxPUlhQd3M0WVY3M3RKdFVDUlMzMnNVX0pHRlNBSWhiQ3FWUzYzalZCQTFSTVBSeS1xdDl0ZFd2M0UyalhUQk90emFNNGFqZFRhb19oS190OUtYTzZFeU5rMGR0WUVtNTRsVlZTNTh4VzcwTHFJT2tFMllIejRSSHc0VG5xbk1UTW1FTkxYeUw5TjNSZTYwQ0pVZUFnZGxZTnYzR0JQQkg0RlZ3NjFtY1E?oc=5" target="_blank">Telstra’s board was drowning in data. An AI bot has changed everything</a>&nbsp;&nbsp;<font color="#6f6f6f">AFR</font>
 
-## 245. Anthropic handed the pentagon its AI, now it's in court saying it can't control what happens next - Moneycontrol.com
+## 244. Anthropic handed the pentagon its AI, now it's in court saying it can't control what happens next - Moneycontrol.com
 - Domain: moneycontrol.com
 - URL: https://news.google.com/rss/articles/CBMigAJBVV95cUxPWlpqc3pNWmxCbllTR0FDQUpLLTd6cXVKRmE1ZnI2ckdjUmk1ZW9meUpGLV9UYlJnd2N3M1FWendqbXdtWVRYSzBwcDlWVGl6NkQyaUlWWEF5blMzOWxjNzlaLW4xdWpHcVpBZjVrZ0lOTVZhbmNMcUpmNlllUXV4cDZFakZ4Z19rSDFVLW5UVXZqX3JybW94NjNNblN4UkRfcWdJTGF2aXAwZDJIY2dseHZpa3picTJEalB4Ny1lcG1na2RBdXlBM1ZIcXAwSXoyc0tWRk81V3BRSGZIMzdUYkFyeGxsSDlqUU5tU180VnVWdzNCSC1yUmdCc2hlbGd30gGGAkFVX3lxTE1PMlZGMVhuR1R3ZUdZcjlzOE14OFdjQXhfSjNfckVueFk3S0otSmZWVkRGMW9Ia3Y0aktNbnd2X2dGZHJLRko0eFBXWUdqVDdUWXVOSU1Tenc3dWUzNDU3d1pHZjhQelNOelFYWnlmcHQ5WndOOHl0a3NQcl9mWGVwQzd4UHN3b3cyc1gtdnFhbU9XYXZCb2toSUVpTTFZMnBzbWZRNFVvdUw3RFJLV0I5UGFwUGJHZzR1QVlyckJZbHNJV1Z5dDZ3SXVSbDFhcm85b256Njd3YnFDbXAwWEozd3d4dVNxSGs2ZnZlR1hvOHRiWENJemZUUFBDTW4zR2taTTdPcGc
 - Relevance score: 4.0
 - Published: Thu, 23 Apr 2026 01:06:54 GMT
 - Summary: <a href="https://news.google.com/rss/articles/CBMigAJBVV95cUxPWlpqc3pNWmxCbllTR0FDQUpLLTd6cXVKRmE1ZnI2ckdjUmk1ZW9meUpGLV9UYlJnd2N3M1FWendqbXdtWVRYSzBwcDlWVGl6NkQyaUlWWEF5blMzOWxjNzlaLW4xdWpHcVpBZjVrZ0lOTVZhbmNMcUpmNlllUXV4cDZFakZ4Z19rSDFVLW5UVXZqX3JybW94NjNNblN4UkRfcWdJTGF2aXAwZDJIY2dseHZpa3picTJEalB4Ny1lcG1na2RBdXlBM1ZIcXAwSXoyc0tWRk81V3BRSGZIMzdUYkFyeGxsSDlqUU5tU180VnVWdzNCSC1yUmdCc2hlbGd30gGGAkFVX3lxTE1PMlZGMVhuR1R3ZUdZcjlzOE14OFdjQXhfSjNfckVueFk3S0otSmZWVkRGMW9Ia3Y0aktNbnd2X2dGZHJLRko0eFBXWUdqVDdUWXVOSU1Tenc3dWUzNDU3d1pHZjhQelNOelFYWnlmcHQ5WndOOHl0a3NQcl9mWGVwQzd4UHN3b3cyc1gtdnFhbU9XYXZCb2toSUVpTTFZMnBzbWZRNFVvdUw3RFJLV0I5UGFwUGJHZzR1QVlyckJZbHNJV1Z5dDZ3SXVSbDFhcm85b256Njd3YnFDbXAwWEozd3d4dVNxSGs2ZnZlR1hvOHRiWENJemZUUFBDTW4zR2taTTdPcGc?oc=5" target="_blank">Anthropic handed the pentagon its AI, now it's in court saying it can't control what happens next</a>&nbsp;&nbsp;<font color="#6f6f6f">Moneycontrol.com</font>
 
-## 246. More finance firms join FCA’s AI testing initiative
+## 245. More finance firms join FCA’s AI testing initiative
 - Domain: computerweekly.com
 - URL: https://www.computerweekly.com/news/366641830/More-finance-firms-join-FCAs-AI-testing-initiative
 - Relevance score: 4.0
 - Published: 2026-04-21T10:54:00Z
 - Summary: Barclays, Experian and UBS join the FCA’s live AI testing initiative, exploring cutting-edge technologies like agentic AI and SLMs to ensure safe, responsible innovation in UK financial markets
 
-## 247. AI failure could trigger the next financial crisis, warns Elizabeth Warren
+## 246. AI failure could trigger the next financial crisis, warns Elizabeth Warren
 - Domain: theverge.com
 - URL: https://www.theverge.com/policy/917026/ai-economy-bubble-elizabeth-warren
 - Relevance score: 3.8
 - Published: 2026-04-22T16:29:05-04:00
 - Summary: "I know a bubble when I see one." That's what Sen. Elizabeth Warren (D-MA), who led the push to create a new consumer financial regulator in the wake of the 2008 recession, told a crowd at a Vanderbilt Policy Accelerator event in Washington, DC on Wednesday. Warren warned of what she called "striking" parallels to [&#8230;]
 
-## 248. Watch Sony’s elite ping-pong robot beat top-ranked players
+## 247. Watch Sony’s elite ping-pong robot beat top-ranked players
 - Domain: theverge.com
 - URL: https://www.theverge.com/tech/916800/sony-ai-ace-ping-pong-table-tennis-robot-cameras
 - Relevance score: 3.8
 - Published: 2026-04-22T13:43:38-04:00
 - Summary: Humans have been building ping-pong playing robots for decades, such as Omron's FORPHEUS that challenged amateur competitors at CES 2017. What sets Ace apart from the rest is that the robot, which was developed by Sony's AI division, is the first that can hold its own against top-ranked human players and occasionally even beat them [&#8230;]
 
-## 249. Google Meet will take AI notes for in-person meetings too
+## 248. Google Meet will take AI notes for in-person meetings too
 - Domain: theverge.com
 - URL: https://www.theverge.com/tech/916779/google-meet-ai-notetaker-in-person-meetings
 - Relevance score: 3.8
 - Published: 2026-04-22T12:38:19-04:00
 - Summary: Google's AI meeting notetaker is no longer limited to Google Meets - Gemini can also generate summaries and transcripts of in-person meetings now, as well as meetings on Zoom and Microsoft Teams, as first reported by 9to5Google. Support for in-person meetings was previously limited to alpha users and only available on Android. Google's support page [&#8230;]
 
-## 250. Partnering with industry leaders to accelerate AI transformation
+## 249. Partnering with industry leaders to accelerate AI transformation
 - Domain: deepmind.google
 - URL: https://deepmind.google/blog/partnering-with-industry-leaders-to-accelerate-ai-transformation/
 - Relevance score: 3.5
 - Published: Tue, 21 Apr 2026 14:54:15 +0000
 - Summary: Google DeepMind partners with global consultancies to bring the power of frontier AI to organizations around the world.
 
-## 251. Bose QuietComfort Ultra 2 vs. Samsung Galaxy Buds 4 Pro: I tried both, and this pair wins
+## 250. Bose QuietComfort Ultra 2 vs. Samsung Galaxy Buds 4 Pro: I tried both, and this pair wins
 - Domain: zdnet.com
 - URL: https://www.zdnet.com/article/samsung-galaxy-buds-4-pro-vs-bose-quietcomfort-ultra-2/
 - Relevance score: 3.2
 - Published: Thu, 23 Apr 2026 01:30:42 GMT
 - Summary: The latest Samsung earbuds compete squarely with the flagship Bose QuietComfort Ultra Earbuds 2. But are they better?
 
-## 252. From Rainforests to Recycling Plants: 5 Ways NVIDIA AI Is Protecting the Planet
+## 251. From Rainforests to Recycling Plants: 5 Ways NVIDIA AI Is Protecting the Planet
 - Domain: blogs.nvidia.com
 - URL: https://blogs.nvidia.com/blog/earth-day-2026-ai-accelerated-computing/
 - Relevance score: 3.0
 - Published: Wed, 22 Apr 2026 13:00:42 +0000
 - Summary: Across climate, conservation, disaster monitoring and recycling, NVIDIA AI is enabling applications protecting the planet.
 
-## 253. Deadly deepfakes: A survival guide for the age of algorithmic war
+## 252. Deadly deepfakes: A survival guide for the age of algorithmic war
 - Domain: restofworld.org
 - URL: https://restofworld.org/2026/deepfakes-ai-war-disinformation/
 - Relevance score: 3.0
 - Published: Wed, 22 Apr 2026 10:00:00 +0000
 - Summary: Rachel Adams warns AI-generated content sabotages civilian safety in conflict zones, and calls out global inequities and the role of Western tech powerhouses.
+
+## 253. Introducing Azure Accelerate for Databases: Modernize your data for AI with experts and investments
+- Domain: azure.microsoft.com
+- URL: https://azure.microsoft.com/en-us/blog/introducing-azure-accelerate-for-databases-modernize-your-data-for-ai-with-experts-and-investments/
+- Relevance score: 3.0
+- Published: Wed, 22 Apr 2026 00:00:00 +0000
+- Summary: <p>Azure Accelerate for Databases helps organizations modernize their databases and build AI-ready capabilities.</p> <p>The post <a href="https://azure.microsoft.com/en-us/blog/introducing-azure-accelerate-for-databases-modernize-your-data-for-ai-with-experts-and-investments/">Introducing Azure Accelerate for Databases: Modernize your data for AI with experts and investments</a> appeared first on <a href="https://azure.microsoft.com/en-us/blog">Microsoft Azure Blog</a>.</p>
 
 ## 254. Designing Data-intensive Applications with Martin Kleppmann
 - Domain: newsletter.pragmaticengineer.com

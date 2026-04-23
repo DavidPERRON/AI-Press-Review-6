@@ -69,6 +69,11 @@
     "first_seen": "2026-04-22T05:57:27Z",
     "last_seen": "2026-04-22T05:57:27Z"
   },
+  "GDSII": {
+    "count": 1,
+    "first_seen": "2026-04-23T04:23:17Z",
+    "last_seen": "2026-04-23T04:23:17Z"
+  },
   "GPTQ": {
     "count": 1,
     "first_seen": "2026-04-21T04:08:31Z",
@@ -140,14 +145,19 @@
     "last_seen": "2026-04-22T05:57:27Z"
   },
   "MIT": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-04-19T03:38:55Z",
-    "last_seen": "2026-04-19T03:38:55Z"
+    "last_seen": "2026-04-23T04:23:17Z"
   },
   "MTIA": {
     "count": 1,
     "first_seen": "2026-04-21T04:08:31Z",
     "last_seen": "2026-04-21T04:08:31Z"
+  },
+  "NPC": {
+    "count": 1,
+    "first_seen": "2026-04-23T04:23:17Z",
+    "last_seen": "2026-04-23T04:23:17Z"
   },
   "NSA": {
     "count": 2,
@@ -169,6 +179,11 @@
     "first_seen": "2026-04-21T05:57:57Z",
     "last_seen": "2026-04-21T05:57:57Z"
   },
+  "POLIS": {
+    "count": 1,
+    "first_seen": "2026-04-23T04:23:17Z",
+    "last_seen": "2026-04-23T04:23:17Z"
+  },
   "PRO": {
     "count": 1,
     "first_seen": "2026-04-21T04:08:31Z",
@@ -178,6 +193,11 @@
     "count": 1,
     "first_seen": "2026-04-21T04:08:31Z",
     "last_seen": "2026-04-21T04:08:31Z"
+  },
+  "RISC": {
+    "count": 1,
+    "first_seen": "2026-04-23T04:23:17Z",
+    "last_seen": "2026-04-23T04:23:17Z"
   },
   "RTX": {
     "count": 1,
@@ -218,6 +238,11 @@
     "count": 1,
     "first_seen": "2026-04-19T03:38:55Z",
     "last_seen": "2026-04-19T03:38:55Z"
+  },
+  "TDT": {
+    "count": 1,
+    "first_seen": "2026-04-23T04:23:17Z",
+    "last_seen": "2026-04-23T04:23:17Z"
   },
   "WPP": {
     "count": 1,

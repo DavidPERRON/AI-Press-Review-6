@@ -125,10 +125,7 @@ locales:
     tts_chunk_crossfade_ms: 300
 
   fr:
-    # Paused 2026-04-18: voice quality unacceptable (saccadée, acronymes
-    # coupés UE/ASML). FR is on hold until the host's voice is cloned and
-    # integrated. Set back to true to re-enable the FR pipeline.
-    enabled: false
+    enabled: true
     title: "Revue de Presse IA"
     subtitle: "Factuel, clair, pense pour les professionnels presses"
     language: "fr"

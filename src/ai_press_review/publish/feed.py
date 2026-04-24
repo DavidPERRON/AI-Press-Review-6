@@ -382,12 +382,14 @@ _SOCIAL_LOCALES: dict[str, dict[str, str]] = {
         'site_base_url': 'https://podcast.aequitus.net',
         'hashtags': '#AI #Podcast #TechBriefing',
         'listen_label': 'Listen',
+        'accroche': '',
     },
     'fr': {
         'state_file': 'episode_history_fr.json',
         'site_base_url': 'https://podcast.aequitus.net/fr',
         'hashtags': '#IntelligenceArtificielle #Podcast #IA',
         'listen_label': 'Écouter',
+        'accroche': 'Nouvelle étape : AI Press Review en français, avec ma voix clonée. Vos retours m'intéressent.',
     },
 }
 
@@ -423,9 +425,10 @@ def _build_social_copy(ep: dict, locale_meta: dict[str, str]) -> str:
     """Build the LinkedIn-ready post body for a single episode.
 
     Rules (aligned with brand voice):
+    - Optional locale accroche (hook) on its own line at the top.
     - Title on its own line.
     - One-to-two sentence summary, truncated at a sentence/word boundary.
-    - Single-line CTA with em-dash separator.
+    - FR link + EN link on separate lines.
     - Hashtags adapted to locale.
     - No emojis. No negatives. No greetings.
     """
@@ -434,13 +437,19 @@ def _build_social_copy(ep: dict, locale_meta: dict[str, str]) -> str:
     listen_url = ep.get('brief_url') or locale_meta['site_base_url']
     hashtags = locale_meta['hashtags']
     listen_label = locale_meta['listen_label']
+    accroche = locale_meta.get('accroche', '')
 
-    parts = [title]
+    parts = []
+    if accroche:
+        parts.append(accroche)
+        parts.append('')
+    parts.append(title)
     if summary:
         parts.append('')
         parts.append(summary)
     parts.append('')
     parts.append(f'{listen_label} — {listen_url}')
+    parts.append('Listen — https://podcast.aequitus.net')
     parts.append('')
     parts.append(hashtags)
     return '\n'.join(parts)

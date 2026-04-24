@@ -463,6 +463,16 @@ def _normalize_model(model: str, base_url: str) -> str:
         if resolved:
             logger.info("Resolved Anthropic model shorthand %r → %r", model, resolved)
             return resolved
+        # Strip OpenRouter-style "provider/" prefix and convert dots to dashes so
+        # "anthropic/claude-sonnet-4.5" becomes "claude-sonnet-4-5" (Anthropic
+        # direct does not accept provider-prefixed names or dot version notation).
+        m = model or ''
+        if '/' in m:
+            original = m
+            m = m.split('/', 1)[1]
+            m = m.replace('.', '-')
+            logger.info("Converted OpenRouter model %r → %r for Anthropic endpoint", original, m)
+            return m
     return model
 
 

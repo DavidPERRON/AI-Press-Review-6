@@ -17,10 +17,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description='Generate draft episode (collect + LLM + TTS + upload, no RSS publish)')
     parser.add_argument('--date', default=date.today().isoformat())
     parser.add_argument('--profile', default='daily', help='Editorial profile: daily, weekly_recap')
+    parser.add_argument('--sources-file', default=None, metavar='PATH',
+                        help='Load manifest from this JSON file instead of crawling (reuse EN sources for FR)')
     args = parser.parse_args()
     result = generate_draft(
         run_date=args.date,
         profile=args.profile,
+        sources_file=args.sources_file,
     )
     print(result)
 

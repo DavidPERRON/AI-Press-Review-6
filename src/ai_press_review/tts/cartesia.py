@@ -1040,7 +1040,31 @@ _LONG_SENT_BREAK = re.compile(r'[,;:—–]\s')
 # Secondary break candidates (conjunctions): only used when no primary break sits
 # in the target window. Operates on word boundaries so "android" is not a hit
 # for "and". Order matters — earlier conjunctions are preferred for cleaner cuts.
-_CONJUNCTION_BREAK = re.compile(r'\s(?:and|but|while|because|though|although|since|as|so|which|that)\s')
+_CONJUNCTION_BREAK = re.compile(
+    r'\s(?:'
+    r'and|but|while|because|though|although|since|as|so|which|that'
+    r'|mais|donc|car|lorsque|puisque|alors|quand|comme|ni'
+    r')\s'
+)
+
+# Em/en dashes and spaced hyphens (« A - B ») cause 500-800ms Cartesia silences.
+# The pattern absorbs surrounding spaces so replacement doesn't leave double spaces.
+_EM_EN_DASHES = re.compile(r' *[—–] *| {1,3}-(?= )')
+
+# Hyphen in version/model names: «GPT-5.5»→«GPT 5.5», «MiMo-V2.5-Pro»→«MiMo V2.5 Pro»,
+# «claude-3»→«claude 3», «MLP-Mixer»→«MLP Mixer».
+# Safe for French compounds (multi-étapes, vision-langage): those have lowercase→lowercase
+# which is excluded — only lowercase→digit and any→uppercase/digit are replaced.
+_VERSION_HYPHEN = re.compile(r'(?<=[A-Za-z0-9\.])-(?=[A-Z0-9])|(?<=[a-z])-(?=[0-9])')
+
+
+def _replace_dashes(text: str) -> str:
+    """Replace em/en dashes and version-number hyphens with a space to avoid Cartesia pauses."""
+    text = _EM_EN_DASHES.sub(' ', text)
+    text = _VERSION_HYPHEN.sub(' ', text)
+    # Re-collapse any double spaces introduced by dash removal.
+    text = re.sub(r'  +', ' ', text)
+    return text
 
 
 def _normalize_tts_whitespace(text: str) -> str:
@@ -1278,6 +1302,7 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     # Cap long sentences so Cartesia never tapers volume on a single utterance.
     # Splits any line > 240 chars at its first usable comma/semicolon ≥ 80 chars in.
     spoken_script = _cap_sentence_length(spoken_script)
+    spoken_script = _replace_dashes(spoken_script)
     chunks = split_script(spoken_script, max_chars=settings.tts_chunk_max_chars)
     if not chunks:
         raise ValueError('Script is empty — cannot synthesize audio')

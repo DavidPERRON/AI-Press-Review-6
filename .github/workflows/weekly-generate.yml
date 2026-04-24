@@ -57,12 +57,8 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        # FR was paused on 2026-04-18 pending voice cloning of the host
-        # (user instruction 1.98 — "stop toutes les workflow fr"). The matrix
-        # defaults to EN only. Operators can still force a FR run via
-        # workflow_dispatch with locale=fr, but the scheduled Saturday run
-        # is EN-only until the FR locale is re-enabled in podcast.yaml.
-        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en"]') }}
+        # FR re-enabled 2026-04-24: voice clone integrated (CARTESIA_VOICE_ID_FR).
+        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en","fr"]') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -242,9 +238,10 @@ jobs:
             echo "::error::Invalid run_date format: $RUN_DATE (expected JJ/MM/AA, e.g. 18/04/26)"
             exit 1
           fi
+          APR_LOCALE=$(echo "$APR_LOCALE" | tr '[:upper:]' '[:lower:]')
           PROFILE_INPUT=$(echo "$PROFILE_INPUT" | tr '[:upper:]' '[:lower:]' | tr '-' '_')
           case "$PROFILE_INPUT" in
-            daily) PROFILE="daily" ;;
+daily) PROFILE="daily" ;;
             weekly|weekly_recap) PROFILE="weekly_recap" ;;
             *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
           esac

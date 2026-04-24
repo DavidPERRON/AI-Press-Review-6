@@ -239,7 +239,7 @@ jobs:
           APR_LOCALE=$(echo "$APR_LOCALE" | tr '[:upper:]' '[:lower:]')
           PROFILE_INPUT=$(echo "$PROFILE_INPUT" | tr '[:upper:]' '[:lower:]' | tr '-' '_')
           case "$PROFILE_INPUT" in
-daily) PROFILE="daily" ;;
+            daily) PROFILE="daily" ;;
             weekly|weekly_recap) PROFILE="weekly_recap" ;;
             *) echo "::error::Invalid profile: $PROFILE_INPUT"; exit 1 ;;
           esac

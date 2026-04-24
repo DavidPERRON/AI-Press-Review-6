@@ -62,19 +62,9 @@ jobs:
       max-parallel: 1        # serialise les git push pour eviter les races
       matrix:
         # Filter the matrix itself so non-selected locales never spawn a job.
-        # Earlier attempt used an `exit 0` step body, which only exits that
-        # one step — the rest of the job (ffmpeg, pytest, Chromium, LLM, TTS)
-        # still ran and committed unwanted drafts on manual single-locale
-        # dispatches. Narrowing the expansion here is the correct fix:
         # dispatch with locale=fr → ["fr"]; schedule / empty → ["en","fr"].
-        # `matrix.locale` is not available in `jobs.<id>.if`, but
-        # `github.event.inputs` IS available in `jobs.<id>.strategy`.
-        # FR was paused on 2026-04-18 pending voice cloning of the host
-        # (user instruction 1.98 — "stop toutes les workflow fr"). The matrix
-        # defaults to EN only. Operators can still force a FR run via
-        # workflow_dispatch with locale=fr, but the scheduled daily run is
-        # EN-only until the FR locale is re-enabled in podcast.yaml.
-        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en"]') }}
+        # FR re-enabled 2026-04-24: voice clone integrated (CARTESIA_VOICE_ID_FR).
+        locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en","fr"]') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -285,6 +275,7 @@ jobs:
             echo "::error::Invalid run_date format: $RUN_DATE (expected JJ/MM/AA, e.g. 18/04/26)"
             exit 1
           fi
+          APR_LOCALE=$(echo "$APR_LOCALE" | tr '[:upper:]' '[:lower:]')
           PROFILE_INPUT=$(echo "$PROFILE_INPUT" | tr '[:upper:]' '[:lower:]' | tr '-' '_')
           case "$PROFILE_INPUT" in
             daily) PROFILE="daily" ;;

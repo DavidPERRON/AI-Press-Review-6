@@ -389,7 +389,7 @@ _SOCIAL_LOCALES: dict[str, dict[str, str]] = {
         'site_base_url': 'https://podcast.aequitus.net/fr',
         'hashtags': '#IntelligenceArtificielle #Podcast #IA',
         'listen_label': 'Écouter',
-        'accroche': 'Nouvelle étape : AI Press Review en français, avec ma voix clonée. Vos retours m'intéressent.',
+        'accroche': "Nouvelle étape : AI Press Review en français, avec ma voix clonée. Vos retours m'intéressent.",
     },
 }
 

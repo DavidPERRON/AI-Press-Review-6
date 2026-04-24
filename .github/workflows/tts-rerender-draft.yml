@@ -44,17 +44,14 @@ jobs:
   rerender:
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
       # Pin to main so the re-render uses the exact same code as daily-generate.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -131,7 +128,7 @@ jobs:
           echo "::error::push failed after 3 attempts"
           exit 1
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         if: always()
         with:
           name: tts-rerender-${{ github.event.inputs.locale }}

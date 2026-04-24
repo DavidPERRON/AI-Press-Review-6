@@ -1277,6 +1277,19 @@ def normalize_pronunciations(text: str, locale: str) -> str:
     return text
 
 
+_DASHES = re.compile(r'[—–]| +-')
+
+def _replace_dashes(text: str) -> str:
+    """Replace em/en dashes and spaced hyphens with commas.
+
+    Cartesia treats — and – as hard pause signals, producing silences of
+    500-800 ms. A comma gives a natural short breath instead.
+    Applied AFTER _cap_sentence_length so dashes are still available as
+    sentence-split candidates before being stripped from the TTS text.
+    """
+    return _DASHES.sub(',', text)
+
+
 def split_script(text: str, max_chars: int = 1800) -> list[str]:
     """Split the script into paragraph-aligned chunks under max_chars each.
 
@@ -1347,6 +1360,9 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     # Cap long sentences so Cartesia never tapers volume on a single utterance.
     # Splits any line > 240 chars at its first usable comma/semicolon ≥ 80 chars in.
     spoken_script = _cap_sentence_length(spoken_script)
+    # Remove dashes after sentence splitting (dashes served as split candidates);
+    # any remaining — or – would cause Cartesia 500-800 ms silent pauses.
+    spoken_script = _replace_dashes(spoken_script)
     chunks = split_script(spoken_script, max_chars=settings.tts_chunk_max_chars)
     if not chunks:
         raise ValueError('Script is empty — cannot synthesize audio')

@@ -158,8 +158,8 @@ locales:
     # TTS locale-specific overrides
     voice_id_env: "CARTESIA_VOICE_ID_FR"   # nouveau secret GitHub
     cartesia_language: "fr"                # CRITIQUE pour prosodie francaise
-    tts_speed: 0.92
-    tts_emotion: "positivity:low"
+    tts_speed: 1
+    tts_emotion: "excited"
     # chunks mode: each paragraph block is its own WebSocket session, then
     # segments are crossfaded. Eliminates noise/volume degradation after ~2 min
     # of a single long session.

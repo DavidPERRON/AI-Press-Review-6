@@ -144,7 +144,7 @@ _SUMMARY_PREFIX: dict[str, str] = {
 }
 
 
-
+def generate_draft(
     run_date: str,
     profile: str = 'daily',
     local_preview: bool = False,

@@ -37,15 +37,15 @@ jobs:
       - name: List EN voices
         if: inputs.action == 'list-voices'
         env:
-          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
           CARTESIA_VERSION: "2026-03-01"
         run: python scripts/cartesia_voice_mix.py --list
 
       - name: Create mixed voice
         if: inputs.action == 'create-mix'
         env:
-          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY }}
-          CARTESIA_VOICE_ID: ${{ secrets.CARTESIA_VOICE_ID }}
+          CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
+          CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           CARTESIA_VERSION: "2026-03-01"
         run: |
           python scripts/cartesia_voice_mix.py \

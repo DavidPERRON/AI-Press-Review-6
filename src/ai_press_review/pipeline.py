@@ -142,18 +142,29 @@ def generate_draft(
     run_date: str,
     profile: str = 'daily',
     local_preview: bool = False,
+    sources_file: str | None = None,
 ) -> dict:
     """Collect, generate, render audio, upload — but do NOT publish to RSS.
-    Saves draft metadata for later release or rejection."""
+    Saves draft metadata for later release or rejection.
+
+    If *sources_file* is provided, the manifest is loaded from that JSON file
+    instead of running the full crawler (used by FR to reuse EN's manifest).
+    """
+    import json as _json
     run_date = _sanitize_run_date(run_date)
     pipeline_start = time.monotonic()
     settings = load_settings(local_preview=local_preview, profile=profile)
     logger.info("Draft generation started: date=%s profile=%s", run_date, profile)
 
-    # Phase 1: Collect
+    # Phase 1: Collect (or reuse an existing manifest)
     t0 = time.monotonic()
-    manifest = collect_sources(run_date=run_date, local_preview=local_preview, profile=profile)
-    logger.info("Collection completed: %d sources in %.1fs", manifest['source_count'], time.monotonic() - t0)
+    if sources_file:
+        logger.info("Loading manifest from %s (skipping crawl)", sources_file)
+        manifest = _json.loads(Path(sources_file).read_text(encoding='utf-8'))
+        logger.info("Manifest loaded: %d sources in %.1fs", manifest.get('source_count', len(manifest.get('sources', []))), time.monotonic() - t0)
+    else:
+        manifest = collect_sources(run_date=run_date, local_preview=local_preview, profile=profile)
+        logger.info("Collection completed: %d sources in %.1fs", manifest['source_count'], time.monotonic() - t0)
 
     # Phase 2: Generate
     t0 = time.monotonic()

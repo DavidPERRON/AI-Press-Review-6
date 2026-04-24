@@ -112,17 +112,11 @@ locales:
     # TTS locale-specific overrides (voice, speed, emotion, language)
     voice_id_env: "CARTESIA_VOICE_ID"      # secret GitHub existant
     cartesia_language: "en"
-    tts_speed: 0.9
-    tts_emotion: "serious"
-    # 2026-04-19: switched EN from 'websocket' → 'chunks' after listener
-    # reported "echo / bathroom" sound from minute 20 of the weekly recap.
-    # Same root cause as FR (Cartesia's continue=true session quality
-    # degrades on long renders): WebSocket session state accumulates noise
-    # past ~15-18 min. Chunks mode renders each ~1800-char block as its own
-    # session and crossfades them — segments stay at full quality. Daily
-    # episodes (~14 min) gain nothing audible but pay no cost either.
+    tts_speed: 1
+    tts_emotion: "excited"
     tts_mode: "chunks"
-    tts_chunk_crossfade_ms: 300
+    tts_chunk_max_chars: 1400
+    tts_chunk_crossfade_ms: 80
 
   fr:
     enabled: true

@@ -39,7 +39,14 @@ jobs:
         env:
           CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
           CARTESIA_VERSION: "2026-03-01"
-        run: python scripts/cartesia_voice_mix.py --list
+        run: python scripts/cartesia_voice_mix.py --list | tee cartesia-voices.txt
+
+      - name: Upload voice list
+        if: inputs.action == 'list-voices'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cartesia-voices
+          path: cartesia-voices.txt
 
       - name: Create mixed voice
         if: inputs.action == 'create-mix'

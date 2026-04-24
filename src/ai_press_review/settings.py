@@ -265,6 +265,8 @@ def _apply_locale(settings: Settings, config: dict[str, Any], locale: str) -> No
         settings.tts_mode = str(loc['tts_mode'])
     if 'tts_chunk_crossfade_ms' in loc:
         settings.tts_chunk_crossfade_ms = int(loc['tts_chunk_crossfade_ms'])
+    if 'tts_chunk_max_chars' in loc:
+        settings.tts_chunk_max_chars = int(loc['tts_chunk_max_chars'])
 
     # Voice ID: read from the env var named in voice_id_env
     voice_env = str(loc.get('voice_id_env', 'CARTESIA_VOICE_ID'))

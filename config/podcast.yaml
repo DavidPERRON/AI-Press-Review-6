@@ -160,12 +160,15 @@ locales:
     cartesia_language: "fr"                # CRITIQUE pour prosodie francaise
     tts_speed: 0.92
     tts_emotion: "positivity:low"
-    # chunks mode: each paragraph block is synthesized as a self-contained
-    # WebSocket session, then segments are crossfaded together. Eliminates the
-    # noise + volume degradation observed in FR after ~2 min of a single long
-    # continue=true session. 80 ms crossfade is inaudible at normal volume.
+    # chunks mode: each paragraph block is its own WebSocket session, then
+    # segments are crossfaded. Eliminates noise/volume degradation after ~2 min
+    # of a single long session.
+    # chunk_max_chars 1400 (vs 900 default): fewer sessions → fewer chunk-start
+    # acceleration artifacts from Cartesia model warm-up.
+    # crossfade_ms 80: shorter overlap reduces audible blend at boundaries.
     tts_mode: "chunks"
-    tts_chunk_crossfade_ms: 300
+    tts_chunk_max_chars: 1400
+    tts_chunk_crossfade_ms: 80
 
 # ──────────────────────────────────────────────────────────────
 #  PROFILS EDITORIAUX

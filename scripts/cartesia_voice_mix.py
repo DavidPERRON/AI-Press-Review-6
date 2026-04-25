@@ -18,7 +18,6 @@ Usage:
 Environment variables required:
     CARTESIA_API_KEY      - your Cartesia API key
     CARTESIA_VOICE_ID     - your current EN clone voice ID
-    CARTESIA_VERSION      - optional, defaults to 2026-03-01
 """
 from __future__ import annotations
 
@@ -31,6 +30,10 @@ import urllib.error
 
 API_BASE = 'https://api.cartesia.ai'
 
+# /voices/mix was decommissioned in 2026-03-01 — use last version that supports it.
+VERSION_LIST = '2026-03-01'
+VERSION_MIX  = '2025-04-16'
+
 
 def _headers(api_key: str, version: str) -> dict:
     return {
@@ -40,7 +43,7 @@ def _headers(api_key: str, version: str) -> dict:
     }
 
 
-def _get(path: str, api_key: str, version: str) -> dict:
+def _get(path: str, api_key: str, version: str) -> dict | list:
     req = urllib.request.Request(
         f'{API_BASE}{path}',
         headers=_headers(api_key, version),
@@ -61,40 +64,49 @@ def _post(path: str, payload: dict, api_key: str, version: str) -> dict:
         return json.loads(resp.read())
 
 
-def list_voices(api_key: str, version: str) -> None:
+def list_voices(api_key: str) -> None:
     print('Fetching Cartesia voice library...\n')
-    result = _get('/voices', api_key, version)
-    voices = result if isinstance(result, list) else result.get('voices', [])
 
-    # Filter English voices, exclude clones (user-created)
-    en_voices = [
-        v for v in voices
-        if (v.get('language') or '').startswith('en')
-        and not v.get('is_owner', False)
-    ]
+    # Paginate through all results
+    voices: list[dict] = []
+    cursor: str | None = None
+    while True:
+        path = '/voices?limit=100'
+        if cursor:
+            path += f'&starting_after={cursor}'
+        result = _get(path, api_key, VERSION_LIST)
 
-    if not en_voices:
-        print('No public English voices found. Showing all voices:\n')
-        en_voices = voices
+        # Handle both response shapes: plain list (old) or paginated object (new)
+        if isinstance(result, list):
+            voices.extend(result)
+            break
+        else:
+            page = result.get('data', [])
+            voices.extend(page)
+            if not result.get('has_more'):
+                break
+            cursor = voices[-1]['id'] if voices else None
 
-    print(f'{"ID":<38} {"Name":<35} {"Gender":<8} {"Description"}')
-    print('-' * 110)
-    for v in sorted(en_voices, key=lambda x: x.get('name', '')):
-        vid = v.get('id', '')
-        name = (v.get('name') or '')[:34]
-        gender = (v.get('gender') or v.get('features', {}).get('gender', '?'))[:7]
-        desc = (v.get('description') or '')[:50]
-        print(f'{vid:<38} {name:<35} {gender:<8} {desc}')
+    # Sort: public library voices first, then user's own, alphabetically
+    voices.sort(key=lambda v: (v.get('is_owner', False), v.get('name', '')))
 
-    print(f'\nTotal: {len(en_voices)} voices')
+    print(f'{"ID":<38} {"Name":<35} {"Language":<10} {"Owner?"}')
+    print('-' * 95)
+    for v in voices:
+        vid   = v.get('id', '')
+        name  = (v.get('name') or '')[:34]
+        lang  = (v.get('language') or '')[:9]
+        owner = 'YOUR CLONE' if v.get('is_owner') else 'library'
+        print(f'{vid:<38} {name:<35} {lang:<10} {owner}')
+
+    print(f'\nTotal: {len(voices)} voices')
 
 
 def create_mix(clone_id: str, partner_id: str, ratio: float,
-               name: str, api_key: str, version: str, dry_run: bool) -> None:
-    """Mix clone_id (ratio) with partner_id (1-ratio)."""
+               name: str, api_key: str, dry_run: bool) -> None:
     payload = {
         'name': name,
-        'description': f'Mixed voice: {ratio*100:.0f}% clone + {(1-ratio)*100:.0f}% EN library',
+        'description': f'Mixed: {ratio*100:.0f}% clone + {(1-ratio)*100:.0f}% EN library voice',
         'voices': [
             {'id': clone_id,   'weight': ratio},
             {'id': partner_id, 'weight': round(1.0 - ratio, 4)},
@@ -108,9 +120,9 @@ def create_mix(clone_id: str, partner_id: str, ratio: float,
         print('\n[dry-run] Not calling API.')
         return
 
-    print('\nCreating mixed voice...')
+    print(f'\nCreating mixed voice (API version {VERSION_MIX})...')
     try:
-        result = _post('/voices/mix', payload, api_key, version)
+        result = _post('/voices/mix', payload, api_key, VERSION_MIX)
     except urllib.error.HTTPError as exc:
         body = exc.read().decode()
         print(f'API error {exc.code}: {body}', file=sys.stderr)
@@ -120,12 +132,12 @@ def create_mix(clone_id: str, partner_id: str, ratio: float,
     print(f'\nMixed voice created!')
     print(f'  ID   : {new_id}')
     print(f'  Name : {result.get("name")}')
-    print(f'\nUpdate your GitHub secret CARTESIA_VOICE_ID to: {new_id}')
+    print(f'\nUpdate your GitHub variable CARTESIA_VOICE_ID to: {new_id}')
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description='Cartesia voice mixing utility')
-    parser.add_argument('--list', action='store_true', help='List available EN voices')
+    parser.add_argument('--list', action='store_true', help='List all voices')
     parser.add_argument('--mix', metavar='PARTNER_VOICE_ID', help='Library voice ID to mix with your clone')
     parser.add_argument('--ratio', type=float, default=0.7,
                         help='Weight of YOUR clone (0.0-1.0, default 0.7)')
@@ -134,16 +146,15 @@ def main() -> None:
     parser.add_argument('--dry-run', action='store_true', help='Print payload only, no API call')
     args = parser.parse_args()
 
-    api_key = os.environ.get('CARTESIA_API_KEY', '').strip()
+    api_key  = os.environ.get('CARTESIA_API_KEY', '').strip()
     clone_id = os.environ.get('CARTESIA_VOICE_ID', '').strip()
-    version = os.environ.get('CARTESIA_VERSION', '2026-03-01').strip()
 
     if not api_key and not args.dry_run:
         print('Error: CARTESIA_API_KEY not set', file=sys.stderr)
         sys.exit(1)
 
     if args.list:
-        list_voices(api_key, version)
+        list_voices(api_key)
         return
 
     if args.mix:
@@ -153,7 +164,7 @@ def main() -> None:
         if not 0.0 < args.ratio < 1.0:
             print('Error: --ratio must be between 0 and 1 exclusive', file=sys.stderr)
             sys.exit(1)
-        create_mix(clone_id, args.mix, args.ratio, args.name, api_key, version, args.dry_run)
+        create_mix(clone_id, args.mix, args.ratio, args.name, api_key, args.dry_run)
         return
 
     parser.print_help()

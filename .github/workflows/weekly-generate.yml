@@ -59,12 +59,12 @@ jobs:
         locale: ${{ fromJSON(github.event.inputs.locale != '' && format('["{0}"]', github.event.inputs.locale) || '["en","fr"]') }}
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: main
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -343,7 +343,7 @@ daily) PROFILE="daily" ;;
             --latest=false \
             --prerelease
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: weekly-draft-output-${{ matrix.locale }}

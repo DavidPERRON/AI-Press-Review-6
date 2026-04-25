@@ -23,6 +23,10 @@ on:
         description: "Name for the new mixed voice"
         required: false
         default: "AI Press Review EN (mixed)"
+      clone_voice_id:
+        description: "Override clone voice ID (leave blank to use CARTESIA_VOICE_ID var). Use CARTESIA_VOICE_ID_FR for French."
+        required: false
+        default: ""
 
 jobs:
   voice-mix:
@@ -52,7 +56,7 @@ jobs:
         if: inputs.action == 'create-mix'
         env:
           CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
-          CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
+          CARTESIA_VOICE_ID: ${{ inputs.clone_voice_id != '' && inputs.clone_voice_id || vars.CARTESIA_VOICE_ID }}
           CARTESIA_VERSION: "2026-03-01"
         run: |
           python scripts/cartesia_voice_mix.py \

@@ -37,11 +37,11 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
         with:
           ref: main
 
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -58,7 +58,7 @@ jobs:
       - name: Render test audio
         env:
           APR_LOCALE: ${{ inputs.locale }}
-          CARTESIA_API_KEY: ${{ secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
+          CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ inputs.voice_id_override != '' && inputs.voice_id_override || vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ inputs.voice_id_override != '' && inputs.voice_id_override || vars.CARTESIA_VOICE_ID_FR }}
           TEST_TEXT: ${{ inputs.text != '' && inputs.text || (inputs.locale == 'en' && 'Welcome to the AI Press Review. Today, OpenAI unveiled a new multimodal LLM that rivals the best NVIDIA GPUs on MMLU and GPQA benchmarks. The CEO of a French startup announced a funding round, while AGI remains at the heart of debates among Silicon Valley executives. MCP APIs are becoming the standard, and AI industry KPIs confirm massive B2B adoption.' || 'Bienvenue dans la Revue de Presse IA. Aujourd hui, OpenAI a dévoilé un nouveau LLM multimodal qui rivalise avec les meilleurs GPU de NVIDIA sur les benchmarks MMLU et GPQA. Le PDG de la startup française a annoncé une levée de fonds en IPO, tandis que l AGI reste au cœur des débats entre les CEO de la Silicon Valley. Les API de MCP s imposent comme standard, et les KPIs de l industrie IA confirment une adoption massive en B2B.') }}
@@ -69,7 +69,7 @@ jobs:
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
         run: python scripts/tts_voice_test.py
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: tts-voice-test-${{ inputs.locale }}

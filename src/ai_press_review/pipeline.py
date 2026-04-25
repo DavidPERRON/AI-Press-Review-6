@@ -143,12 +143,6 @@ _SUMMARY_PREFIX: dict[str, str] = {
 }
 
 
-_SUMMARY_PREFIX: dict[str, str] = {
-    'fr': "La voix est synthétique, le propos reste authentique. Désormais narré par la voix IA de votre obligé. Version anglaise également disponible, mon clone force un peu sur l'accent, l'original s'en sort mieux.",
-    'en': "Synthetic in voice, genuine in substance. Now presented by an AI clone of your devoted host. And yes, the accent is... how you say... more French than the man himself. The algorithm had opinions.",
-}
-
-
 def generate_draft(
     run_date: str,
     profile: str = 'daily',
@@ -184,7 +178,16 @@ def generate_draft(
 
     locale = settings.locale or 'en'
     prefix = _SUMMARY_PREFIX.get(locale, '')
-    if prefix:
+    # For EN weekly episodes, insert the tomorrow_concept teaser between the
+    # voice disclaimer and the main episode summary so podcast app descriptions
+    # show: [voice note] [concept teaser] [main teaser].
+    if locale == 'en' and draft.tomorrow_concept and 'weekly' in profile:
+        draft.episode_summary = (
+            (prefix + ' ' if prefix else '')
+            + draft.tomorrow_concept + ' '
+            + draft.episode_summary
+        )
+    elif prefix:
         draft.episode_summary = prefix + ' ' + draft.episode_summary
 
     outputs_dir = Path('output') / run_date

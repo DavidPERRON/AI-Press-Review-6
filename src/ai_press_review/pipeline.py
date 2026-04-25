@@ -137,6 +137,11 @@ def run_pipeline(
 
 # ── Draft workflow functions ─────────────────────────────────
 
+_SUMMARY_PREFIX: dict[str, str] = {
+    'fr': "La voix est synthétique, le propos reste authentique. Désormais narré par la voix IA de votre obligé. Version anglaise également disponible, mon clone force un peu sur l'accent, l'original s'en sort mieux.",
+    'en': "Synthetic in voice, genuine in substance. Now presented by an AI clone of your devoted host. And yes, the accent is... how you say... more French than the man himself. The algorithm had opinions.",
+}
+
 
 _SUMMARY_PREFIX: dict[str, str] = {
     'fr': "La voix est synthétique, le propos reste authentique. Désormais narré par la voix IA de votre obligé. Version anglaise également disponible, mon clone force un peu sur l'accent, l'original s'en sort mieux.",
@@ -269,10 +274,6 @@ def release_pending_draft() -> dict:
     )
 
     # Only mark the sources as "used" now that the episode is actually live.
-    # Rejected drafts never reach this point, so their sources remain in the
-    # eligible pool. Backward-compat: older drafts saved before the refactor
-    # may not carry source_urls — in that case we pair titles with empty
-    # URL strings, which still works (the dedup lookup uses both).
     titles = draft_data.get('source_titles', []) or []
     urls = draft_data.get('source_urls', []) or []
     if len(urls) < len(titles):

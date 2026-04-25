@@ -1,0 +1,65 @@
+name: Cartesia Voice Mix
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Action"
+        required: true
+        type: choice
+        options:
+          - list-voices
+          - create-mix
+        default: list-voices
+      partner_voice_id:
+        description: "Library voice ID to mix with your clone (required for create-mix)"
+        required: false
+        default: ""
+      clone_ratio:
+        description: "Weight of YOUR clone (0.1–0.9, default 0.7 = 70% you + 30% library)"
+        required: false
+        default: "0.7"
+      mix_name:
+        description: "Name for the new mixed voice"
+        required: false
+        default: "AI Press Review EN (mixed)"
+      clone_voice_id:
+        description: "Override clone voice ID (leave blank to use CARTESIA_VOICE_ID var). Use CARTESIA_VOICE_ID_FR for French."
+        required: false
+        default: ""
+
+jobs:
+  voice-mix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: List EN voices
+        if: inputs.action == 'list-voices'
+        env:
+          CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
+          CARTESIA_VERSION: "2026-03-01"
+        run: python scripts/cartesia_voice_mix.py --list | tee cartesia-voices.txt
+
+      - name: Upload voice list
+        if: inputs.action == 'list-voices'
+        uses: actions/upload-artifact@v4
+        with:
+          name: cartesia-voices
+          path: cartesia-voices.txt
+
+      - name: Create mixed voice
+        if: inputs.action == 'create-mix'
+        env:
+          CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
+          CARTESIA_VOICE_ID: ${{ inputs.clone_voice_id != '' && inputs.clone_voice_id || vars.CARTESIA_VOICE_ID }}
+          CARTESIA_VERSION: "2026-03-01"
+        run: |
+          python scripts/cartesia_voice_mix.py \
+            --mix "${{ inputs.partner_voice_id }}" \
+            --ratio "${{ inputs.clone_ratio }}" \
+            --name "${{ inputs.mix_name }}"

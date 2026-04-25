@@ -1,0 +1,42 @@
+{
+  "ADS": {
+    "count": 2,
+    "first_seen": "2026-04-24T10:00:36Z",
+    "last_seen": "2026-04-24T11:20:11Z"
+  },
+  "AMI": {
+    "count": 2,
+    "first_seen": "2026-04-24T10:00:36Z",
+    "last_seen": "2026-04-24T11:20:11Z"
+  },
+  "COVID": {
+    "count": 1,
+    "first_seen": "2026-04-24T11:20:11Z",
+    "last_seen": "2026-04-24T11:20:11Z"
+  },
+  "ELO": {
+    "count": 1,
+    "first_seen": "2026-04-24T11:20:11Z",
+    "last_seen": "2026-04-24T11:20:11Z"
+  },
+  "LPU": {
+    "count": 1,
+    "first_seen": "2026-04-24T10:00:36Z",
+    "last_seen": "2026-04-24T10:00:36Z"
+  },
+  "MISTY": {
+    "count": 2,
+    "first_seen": "2026-04-24T10:00:36Z",
+    "last_seen": "2026-04-24T11:20:11Z"
+  },
+  "MSU": {
+    "count": 1,
+    "first_seen": "2026-04-24T11:20:11Z",
+    "last_seen": "2026-04-24T11:20:11Z"
+  },
+  "PLDT": {
+    "count": 2,
+    "first_seen": "2026-04-24T10:00:36Z",
+    "last_seen": "2026-04-24T11:20:11Z"
+  }
+}

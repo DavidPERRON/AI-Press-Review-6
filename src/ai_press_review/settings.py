@@ -265,6 +265,8 @@ def _apply_locale(settings: Settings, config: dict[str, Any], locale: str) -> No
         settings.tts_mode = str(loc['tts_mode'])
     if 'tts_chunk_crossfade_ms' in loc:
         settings.tts_chunk_crossfade_ms = int(loc['tts_chunk_crossfade_ms'])
+    if 'tts_chunk_max_chars' in loc:
+        settings.tts_chunk_max_chars = int(loc['tts_chunk_max_chars'])
 
     # Voice ID: read from the env var named in voice_id_env
     voice_env = str(loc.get('voice_id_env', 'CARTESIA_VOICE_ID'))
@@ -432,8 +434,8 @@ def load_settings(
         tts_chunk_crossfade_ms=int(_yaml_get(config, 'tts.chunk_crossfade_ms', 80)),
         cartesia_api_key=_env('CARTESIA_API_KEY'),
         cartesia_voice_id=_env('CARTESIA_VOICE_ID'),
-        cartesia_model_id=_env('CARTESIA_MODEL_ID', 'sonic-3'),
-        cartesia_version=_env('CARTESIA_VERSION', '2025-04-16'),
+        cartesia_model_id=_env('CARTESIA_MODEL_ID', 'sonic-3-2026-01-12'),
+        cartesia_version=_env('CARTESIA_VERSION', '2026-03-01'),
         cartesia_language=_env('CARTESIA_LANGUAGE', 'en'),
         cartesia_speed=_safe_float(_env('CARTESIA_SPEED', str(_yaml_get(config, 'tts.speed', 1.0))), 1.0, 'CARTESIA_SPEED'),
         cartesia_volume=_safe_float(_env('CARTESIA_VOLUME', str(_yaml_get(config, 'tts.volume', 1.0))), 1.0, 'CARTESIA_VOLUME'),

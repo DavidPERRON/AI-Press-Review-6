@@ -1068,7 +1068,6 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'GNB': 'G. N. B.',
     'GNN': 'G. N. N.',
     'HITL': 'H. I. T. L.',
-    'IA': 'ee-ah',
     'ICA': 'I. C. A.',
     'IFT': 'I. F. T.',
     'IID': 'I. I. D.',
@@ -1100,7 +1099,6 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     # Fintech
     'PSD2': 'P-S-D-two',
     # Generative AI / LLMs / Transformers
-    'ALBERT': 'al-bert',
     'ALiBi': 'A. L. I. B. I.',
     'BART': 'B. A. R. T.',
     'BBPE': 'B. B. P. E.',
@@ -1336,28 +1334,92 @@ _SPELL_OUT_COMMON: dict[str, str] = {
 }
 
 _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
-    # FR-specific letter pronunciations and very common French acronyms.
-    'AI': 'A. I.',          # FR keeps the English form when it appears in source quotes
-    # IA: deliberately NOT dot-spelled — 'I. A.' caused a stiff, mechanical
-    # two-beat pause ("I [stop] A [stop]") that sounded unnatural in French.
-    # Cartesia's native FR prosody (cartesia_language='fr') pronounces the bare
-    # letters "IA" fluidly as "ee-ah" without any override needed.
-    # 'IA': removed — handled by native French TTS
-    'PDG': 'P. D. G.',      # Président-directeur général (= CEO)
-    'DG': 'D. G.',          # Directeur général
-    'DSI': 'D. S. I.',      # Directeur des systèmes d'information (= CIO)
+    # ── Compact format for FR ─────────────────────────────────────────────
+    # No spaces between letters (e.g. 'L.L.M.' vs 'L. L. M.') — the space
+    # creates an extra word-boundary pause that makes acronyms sound slow.
+    # With dots-only, Cartesia reads them as tight abbreviations.
+    #
+    # IA: deliberately NOT dot-spelled — 'I. A.' caused a stiff two-beat
+    # pause that sounded unnatural in French. Cartesia's native FR prosody
+    # pronounces bare "IA" fluidly as "ee-ah" without any override needed.
+    #
+    # AI: kept as compact English form. The spaced 'A. I.' (with FR letter
+    # names: "ah… ee") was unintelligible; 'A.I.' reads as a tight
+    # abbreviation closer to the English "A-I" listeners expect.
+    'AI': 'A.I.',
+    # ── AI / ML core ─────────────────────────────────────────────────────
+    'LLM': 'L.L.M.',
+    'LLMs': 'L.L.M.s',
+    'SLM': 'S.L.M.',
+    'SLMs': 'S.L.M.s',
+    'GPT': 'G. P. T.',
+    'AGI': 'A.G.I.',
+    'NLP': 'N.L.P.',
+    'RLHF': 'R.L.H.F.',
+    'DPO': 'D.P.O.',
+    'SFT': 'S.F.T.',
+    'MoE': 'M.o.E.',
+    'OOD': 'O.O.D.',
+    # ── Infra / APIs ─────────────────────────────────────────────────────
+    'API': 'A.P.I.',
+    'APIs': 'A.P.I.s',
+    'MCP': 'M.C.P.',
+    'SDK': 'S.D.K.',
+    'SDKs': 'S.D.K.s',
+    'CLI': 'C.L.I.',
+    'IDE': 'I.D.E.',
+    'VPN': 'V.P.N.',
+    # ── Hardware ─────────────────────────────────────────────────────────
+    'GPU': 'G.P.U.',
+    'GPUs': 'G.P.U.s',
+    'CPU': 'C.P.U.',
+    'CPUs': 'C.P.U.s',
+    'TPU': 'T.P.U.',
+    'TPUs': 'T.P.U.s',
+    'NPU': 'N.P.U.',
+    'NPUs': 'N.P.U.s',
+    'HPC': 'H.P.C.',
+    'HBM': 'H.B.M.',
+    'VRAM': 'V.R.A.M.',
+    'DRAM': 'D.R.A.M.',
+    'FPGA': 'F.P.G.A.',
+    'FPGAs': 'F.P.G.A.s',
+    # ── Benchmarks ───────────────────────────────────────────────────────
+    'MMLU': 'M.M.L.U.',
+    'GPQA': 'G.P.Q.A.',
+    'BBH': 'B.B.H.',
+    # ── Org titles ───────────────────────────────────────────────────────
+    'CEO': 'C. E. O.',
+    'CTO': 'C.T.O.',
+    'CFO': 'C.F.O.',
+    'COO': 'C.O.O.',
+    'CIO': 'C.I.O.',
+    'CISO': 'C.I.S.O.',
+    'IPO': 'I.P.O.',
+    'IPOs': 'I.P.O.s',
+    'ROI': 'R.O.I.',
+    'KPI': 'K.P.I.',
+    'KPIs': 'K.P.I.s',
+    'OKR': 'O.K.R.',
+    'OKRs': 'O.K.R.s',
+    # ── Finance ──────────────────────────────────────────────────────────
+    'GDP': 'G.D.P.',
+    'CPI': 'C.P.I.',
+    # ── FR-specific acronyms (compact) ───────────────────────────────────
+    'PDG': 'P. D. G.',      # Président-directeur général
+    'DG': 'D. G.',
+    'DSI': 'D. S. I.',      # Directeur des systèmes d'information
     'PME': 'P. M. E.',
     'PMI': 'P. M. I.',
     'TPE': 'T. P. E.',
     'UE': 'U. E.',
-    'OTAN': 'OTAN',         # Already pronounced as a word
-    'ONU': 'O. N. U.',
-    'RGPD': 'R. G. P. D.', # Règlement général sur la protection des données (= GDPR)
-    'PIB': 'P. I. B.',      # Produit intérieur brut (= GDP)
-    'GAFAM': 'GAFAM',       # Pronounced as a word in French
-    'R&D': 'R. et D.',      # Recherche et développement
-    # FR letter names differ from EN — explicit dotted spacing keeps both safe
-    # because Cartesia respects the locale flag for individual letter prosody.
+    'ONU': 'O.N.U.',
+    'RGPD': 'R.G.P.D.',   # = GDPR
+    'PIB': 'P.I.B.',      # = GDP
+    'OTAN': 'OTAN',       # pronounced as a word in French
+    'GAFAM': 'GAFAM',     # pronounced as a word in French
+    'R&D': 'R. et D.',    # Recherche et développement
+    # FR letter names differ from EN — phonetic respelling where needed
     'BERT': 'Beurt',
     'LaTeX': 'La-Tek',
     # ── From Acronym DB V1.1 (Excel + RTF) ──────────────────────────────────
@@ -1394,7 +1456,6 @@ _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     'YOLO': 'yo-lo',
     # Core AI / ML
     'F1': 'èf-un',
-    'IA': 'i-a',
     'K-Means': 'ka-means',
     'NLG': 'èn-èl-jé',
     'NLU': 'èn-èl-u',
@@ -1402,7 +1463,6 @@ _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     # Fintech
     'PSD2': 'pé-ess-dé-deux',
     # Generative AI / LLMs / Transformers
-    'ALBERT': 'albert',
     'Context window': 'fenêtre de contexte',
     'DeBERTa': 'dé-berta',
     'ELMo': 'èl-mo',
@@ -1679,6 +1739,19 @@ def normalize_pronunciations(text: str, locale: str) -> str:
     for pattern, phon in table.items():
         text = re.sub(pattern, phon, text)
     return text
+
+
+_DASHES = re.compile(r'[—–]| +-')
+
+def _replace_dashes(text: str) -> str:
+    """Replace em/en dashes and spaced hyphens with commas.
+
+    Cartesia treats — and – as hard pause signals, producing silences of
+    500-800 ms. A comma gives a natural short breath instead.
+    Applied AFTER _cap_sentence_length so dashes are still available as
+    sentence-split candidates before being stripped from the TTS text.
+    """
+    return _DASHES.sub(',', text)
 
 
 def split_script(text: str, max_chars: int = 1800) -> list[str]:

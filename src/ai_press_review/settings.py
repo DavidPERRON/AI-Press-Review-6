@@ -349,6 +349,34 @@ def _apply_profile(settings: Settings, config: dict[str, Any], profile: str) -> 
         settings.unused_score_bonus = float(prof['unused_score_bonus'])
     if 'reuse_min_score' in prof:
         settings.reuse_min_score = float(prof['reuse_min_score'])
+    # TTS overrides at profile level. These are stored but NOT applied here —
+    # _apply_profile is called before _apply_locale so locale settings would
+    # overwrite them. Instead load_settings calls _apply_profile_tts_overrides
+    # after _apply_locale so profile TTS wins over locale TTS.
+
+
+def _apply_profile_tts_overrides(settings: Settings, config: dict[str, Any], profile: str) -> None:
+    """Apply profile-level TTS overrides AFTER locale so profile wins over locale.
+
+    Locale sets voice-ID, language, and base TTS params (speed, emotion, mode).
+    A profile like weekly_recap may need a different speed/chunk size for its
+    longer format — these should win over the locale default without requiring
+    a separate locale entry for every profile×locale combination.
+    """
+    profiles = config.get('profiles', {}) or {}
+    prof = profiles.get(profile)
+    if not prof:
+        return
+    if 'tts_speed' in prof:
+        settings.cartesia_speed = float(prof['tts_speed'])
+    if 'tts_emotion' in prof:
+        settings.cartesia_emotion = str(prof['tts_emotion'])
+    if 'tts_mode' in prof:
+        settings.tts_mode = str(prof['tts_mode'])
+    if 'tts_chunk_max_chars' in prof:
+        settings.tts_chunk_max_chars = int(prof['tts_chunk_max_chars'])
+    if 'tts_chunk_crossfade_ms' in prof:
+        settings.tts_chunk_crossfade_ms = int(prof['tts_chunk_crossfade_ms'])
 
 
 def load_settings(
@@ -459,6 +487,11 @@ def load_settings(
     # profile-wide prompt_file.
     if locale:
         _apply_locale(settings, config, locale)
+
+    # Profile TTS overrides applied LAST so a profile like weekly_recap can set
+    # a slower speed/smaller chunks without being wiped out by the locale defaults.
+    if profile:
+        _apply_profile_tts_overrides(settings, config, profile)
 
     if not settings.llm_api_key and not local_preview:
         logger.warning("LLM_API_KEY is not set — editorial generation will fail")

@@ -82,7 +82,7 @@ def run_pipeline(
     # Phase 3: TTS
     if render_audio:
         t0 = time.monotonic()
-        audio_meta = synthesize_script(draft.script, audio_path, local_preview=local_preview)
+        audio_meta = synthesize_script(draft.script, audio_path, local_preview=local_preview, profile=profile)
         logger.info(
             "TTS completed: %d chunks, %ds duration, %.1f MB in %.1fs",
             audio_meta['chunk_count'],
@@ -196,7 +196,7 @@ def generate_draft(
     audio_name = f"{run_date}-{safe_slug(draft.episode_title)}.mp3"
     audio_path = outputs_dir / audio_name
     t0 = time.monotonic()
-    audio_meta = synthesize_script(draft.script, audio_path, local_preview=local_preview)
+    audio_meta = synthesize_script(draft.script, audio_path, local_preview=local_preview, profile=profile)
     logger.info(
         "TTS completed: %d chunks, %ds duration, %.1f MB in %.1fs",
         audio_meta['chunk_count'],

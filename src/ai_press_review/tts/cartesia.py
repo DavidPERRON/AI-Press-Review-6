@@ -1741,19 +1741,6 @@ def normalize_pronunciations(text: str, locale: str) -> str:
     return text
 
 
-_DASHES = re.compile(r'[—–]| +-')
-
-def _replace_dashes(text: str) -> str:
-    """Replace em/en dashes and spaced hyphens with commas.
-
-    Cartesia treats — and – as hard pause signals, producing silences of
-    500-800 ms. A comma gives a natural short breath instead.
-    Applied AFTER _cap_sentence_length so dashes are still available as
-    sentence-split candidates before being stripped from the TTS text.
-    """
-    return _DASHES.sub(',', text)
-
-
 def split_script(text: str, max_chars: int = 1800) -> list[str]:
     """Split the script into paragraph-aligned chunks under max_chars each.
 
@@ -1781,7 +1768,7 @@ def split_script(text: str, max_chars: int = 1800) -> list[str]:
     return chunks
 
 
-def synthesize_script(script: str, output_path: Path, local_preview: bool = False) -> dict:
+def synthesize_script(script: str, output_path: Path, local_preview: bool = False, profile: str | None = None) -> dict:
     """Render the full script as a single continuous MP3 via websocket continuity.
 
     Phase 8 / T5: replaced /tts/bytes per-chunk POSTs (plus post-hoc pydub
@@ -1792,7 +1779,7 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
     """
     from pydub import AudioSegment
 
-    settings = load_settings(local_preview=local_preview)
+    settings = load_settings(local_preview=local_preview, profile=profile)
     if not settings.cartesia_api_key:
         raise ValueError('CARTESIA_API_KEY is required for TTS')
     if not settings.cartesia_voice_id:

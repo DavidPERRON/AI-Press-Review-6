@@ -205,6 +205,11 @@ profiles:
     target_duration_max: 25
     prompt_file: "prompt_weekly.txt"
     intro_format: "weekly"
+    # TTS overrides for weekly — applied AFTER locale so these win over locale defaults.
+    # A 23-min episode benefits from a slightly slower pace than the daily (14-18 min).
+    # Validated reference: FR speed 0.92 (comment in podcast.yaml top-level tts section).
+    tts_speed: 0.92
+    tts_chunk_max_chars: 1200
 
 # ── SCORING DES SOURCES ──────────────────────────────────────
 # Le score determine quelles sources sont selectionnees.

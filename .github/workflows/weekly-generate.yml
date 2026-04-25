@@ -358,10 +358,15 @@ jobs:
         if: success()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LOCALE: ${{ matrix.locale }}
         run: |
           TITLE=$(python - <<'PYEOF'
-          import json, pathlib
-          h = pathlib.Path('data/state/episode_history.json')
+          import json, pathlib, os
+          locale = os.environ.get("LOCALE", "en")
+          suffix = "_fr" if locale == "fr" else ""
+          h = pathlib.Path(f'data/state/episode_history{suffix}.json')
+          if not h.exists():
+              h = pathlib.Path('data/state/episode_history.json')
           if h.exists():
               eps = json.loads(h.read_text()).get('episodes', [])
               if eps:
@@ -371,7 +376,7 @@ jobs:
           PYEOF
           )
           DATE=$(date -u +%Y-%m-%d)
-          TAG="episode-${DATE}-weekly-en"
+          TAG="episode-${DATE}-weekly-${LOCALE}"
           # Delete old tag if it exists (same-day re-run)
           gh release delete "$TAG" --yes 2>/dev/null || true
           gh release create "$TAG" \

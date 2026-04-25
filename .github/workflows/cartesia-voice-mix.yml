@@ -32,9 +32,9 @@ jobs:
   voice-mix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload voice list
         if: inputs.action == 'list-voices'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: cartesia-voices
           path: cartesia-voices.txt

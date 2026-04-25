@@ -43,7 +43,7 @@ editorial:
 llm:
   max_tokens: 12000
   temperature: 0.2
-  timeout_seconds: 180
+  timeout_seconds: 90
 
 # ── TTS (Cartesia) ───────────────────────────────────────────
 # Voice: Benoit (5def377d-908b-4540-8bd7-3c968fcae351) — set via

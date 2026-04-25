@@ -565,7 +565,7 @@ def _post_chat_completion(
             url,
             headers=headers,
             json=payload,
-            timeout=max(settings.llm_timeout_seconds, 180),
+            timeout=settings.llm_timeout_seconds,
         )
     except requests.RequestException as exc:
         raise LLMTransientError(f"LLM connection error to {parsed.hostname}: {exc}") from exc
@@ -784,7 +784,7 @@ def _sleep_for_quota(retry_after_s: float | None, attempt: int) -> None:
 
 MAX_LENGTH_RETRIES = 3
 MAX_QUOTA_HITS = 2
-MAX_TRANSIENT_RETRIES = 3
+MAX_TRANSIENT_RETRIES = 1
 MAX_INVALID_JSON_RETRIES = 1
 
 

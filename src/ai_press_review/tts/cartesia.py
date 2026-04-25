@@ -1000,7 +1000,7 @@ _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     'LLMs': 'L.L.M.s',
     'SLM': 'S.L.M.',
     'SLMs': 'S.L.M.s',
-    'GPT': 'G.P.T.',
+    'GPT': 'G. P. T.',
     'AGI': 'A.G.I.',
     'NLP': 'N.L.P.',
     'RLHF': 'R.L.H.F.',
@@ -1037,7 +1037,7 @@ _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     'GPQA': 'G.P.Q.A.',
     'BBH': 'B.B.H.',
     # ── Org titles ───────────────────────────────────────────────────────
-    'CEO': 'C.E.O.',
+    'CEO': 'C. E. O.',
     'CTO': 'C.T.O.',
     'CFO': 'C.F.O.',
     'COO': 'C.O.O.',
@@ -1054,13 +1054,13 @@ _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     'GDP': 'G.D.P.',
     'CPI': 'C.P.I.',
     # ── FR-specific acronyms (compact) ───────────────────────────────────
-    'PDG': 'P.D.G.',      # Président-directeur général
-    'DG': 'D.G.',
-    'DSI': 'D.S.I.',      # Directeur des systèmes d'information
-    'PME': 'P.M.E.',
-    'PMI': 'P.M.I.',
-    'TPE': 'T.P.E.',
-    'UE': 'U.E.',
+    'PDG': 'P. D. G.',      # Président-directeur général
+    'DG': 'D. G.',
+    'DSI': 'D. S. I.',      # Directeur des systèmes d'information
+    'PME': 'P. M. E.',
+    'PMI': 'P. M. I.',
+    'TPE': 'T. P. E.',
+    'UE': 'U. E.',
     'ONU': 'O.N.U.',
     'RGPD': 'R.G.P.D.',   # = GDPR
     'PIB': 'P.I.B.',      # = GDP

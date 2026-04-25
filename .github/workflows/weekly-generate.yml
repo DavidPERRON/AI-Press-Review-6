@@ -208,6 +208,35 @@ jobs:
                       f"    Correct model IDs: claude-sonnet-4-6 (Anthropic direct) or anthropic/claude-sonnet-4.5 (OpenRouter)\n"
                       f"    Endpoint URLs go in: LLM_EDITOR_BASE_URL(_EN/_FR), LLM_FALLBACK_BASE_URL(_EN/_FR), LLM_EMERGENCY_BASE_URL(_EN/_FR)"
                   )
+          # Validate fallback/emergency API keys: when no per-tier key is set, these
+          # tiers fall back to the generic LLM_API_KEY. If LLM_EDITOR_API_KEY_{LOCALE}
+          # is an Anthropic key but LLM_API_KEY is also an Anthropic key (or was
+          # overridden with APR_TEST_LLM_API_KEY pointing to an Anthropic key), the
+          # fallback model call to OpenRouter will get a 401 "Missing Authentication
+          # header" — the OpenRouter endpoint rejects Anthropic-format Bearer tokens.
+          generic_llm_key = os.environ.get("LLM_API_KEY", "").strip()
+          llm_base_url = os.environ.get("LLM_BASE_URL", "").strip()
+          for tier in ("FALLBACK", "EMERGENCY"):
+              tier_model = (
+                  os.environ.get(f"LLM_{tier}_MODEL_{locale_upper}", "").strip() or
+                  os.environ.get(f"LLM_{tier}_MODEL", "").strip()
+              )
+              if not tier_model:
+                  continue
+              tier_key = os.environ.get(f"LLM_{tier}_API_KEY_{locale_upper}", "").strip()
+              if not tier_key:
+                  if not generic_llm_key:
+                      missing.append(
+                          f"  - LLM_API_KEY (secret) -- required for {tier.lower()} model {tier_model!r}\n"
+                          f"    (LLM_{tier}_API_KEY_{locale_upper} is unset; the {tier.lower()} tier uses LLM_API_KEY)"
+                      )
+                  elif generic_llm_key.lower().startswith("sk-ant-"):
+                      missing.append(
+                          f"  - LLM_API_KEY starts with 'sk-ant-' (Anthropic key) but the {tier.lower()} "
+                          f"model {tier_model!r} uses LLM_BASE_URL={llm_base_url!r} (OpenRouter).\n"
+                          f"    Set LLM_API_KEY to your OpenRouter key (starts with sk-or-v1-).\n"
+                          f"    Anthropic keys belong in LLM_EDITOR_API_KEY_{locale_upper} only."
+                      )
           if missing:
               sys.exit(
                   "ERROR: required secrets/variables are missing or empty:\n"
@@ -220,7 +249,12 @@ jobs:
                   "  the matching production secret/variable without touching prod data."
               )
           hint = llm_key[:6] + "..." if len(llm_key) > 6 else llm_key[:3] + "..."
-          print(f"Pre-flight OK - LLM key: {len(llm_key)} chars, starts with {hint}")
+          print(f"Pre-flight OK - LLM editor key: {len(llm_key)} chars, starts with {hint}")
+          if generic_llm_key:
+              gh = generic_llm_key[:6] + "..." if len(generic_llm_key) > 6 else generic_llm_key[:3] + "..."
+              print(f"Pre-flight OK - LLM generic key (fallback/emergency): {len(generic_llm_key)} chars, starts with {gh}")
+          else:
+              print("Pre-flight INFO - LLM_API_KEY not set (ok if all tiers have per-locale keys)")
           print(f"Pre-flight OK - R2_ACCESS_KEY_ID: {len(r2_ak)} chars (expected 32)")
           print(f"Pre-flight OK - R2_SECRET_ACCESS_KEY: {len(r2_sk)} chars (expected 64)")
           PREFLIGHT

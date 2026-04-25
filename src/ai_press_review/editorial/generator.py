@@ -951,9 +951,10 @@ def generate_episode_script(manifest: dict, local_preview: bool = False, profile
         ep_base, ep_key = _resolve_endpoint(model, settings)
         from urllib.parse import urlparse as _u
         ep_host = _u(ep_base or '').hostname or '(none)'
+        key_hint = (ep_key[:6] + '...') if ep_key else 'unset'
         logger.info(
             "Generating script with model: %s (profile=%s, endpoint=%s, key=%s)",
-            model, settings.profile_name, ep_host, 'set' if ep_key else 'unset',
+            model, settings.profile_name, ep_host, key_hint,
         )
         try:
             payload, script, wc = _generate_for_model(model, manifest, settings)

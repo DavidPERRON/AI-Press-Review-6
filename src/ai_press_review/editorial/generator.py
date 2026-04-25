@@ -14,7 +14,11 @@ import requests
 from ..models import EpisodeDraft
 from ..settings import load_settings
 from ..utils import atomic_write_text, write_json
-from .validate import assemble_script
+from .validate import (
+    assemble_script,
+    REQUIRED_SECTION_KEYS,
+    REQUIRED_SECTION_KEYS_WEEKLY,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -788,6 +792,30 @@ MAX_TRANSIENT_RETRIES = 3
 MAX_INVALID_JSON_RETRIES = 1
 
 
+def _normalize_sections_payload(payload: dict, intro_format: str) -> dict:
+    """Wrap flat root-level section keys into a 'sections' sub-dict.
+
+    Gemini (and some other models) sometimes return the section paragraphs as
+    top-level keys instead of nesting them under {"sections": {...}}. When that
+    happens payload.get("sections") returns None and validate_section_payload
+    sees every required key as missing. Detect that pattern here and rewrap so
+    the rest of the pipeline (validate + assemble) can proceed normally.
+    """
+    if payload.get("sections"):
+        return payload
+    required = REQUIRED_SECTION_KEYS_WEEKLY if intro_format == 'weekly' else REQUIRED_SECTION_KEYS
+    flat = {k: payload[k] for k in required if k in payload}
+    if not flat:
+        return payload
+    logger.info(
+        "LLM returned section keys at JSON root instead of under 'sections' — rewrapping (%d keys)",
+        len(flat),
+    )
+    wrapped = {k: v for k, v in payload.items() if k not in required}
+    wrapped["sections"] = flat
+    return wrapped
+
+
 def _try_generate_one(
     model: str,
     manifest: dict,
@@ -808,6 +836,7 @@ def _try_generate_one(
     while True:
         try:
             payload = _generate_with_model(model, manifest, settings, force_length=force_length)
+            payload = _normalize_sections_payload(payload, settings.intro_format)
             script = assemble_script(
                 manifest["run_date"],
                 payload,

@@ -144,22 +144,23 @@ def test_normalize_pronunciations_fr_rewrites_legacy_acronyms():
 def test_normalize_pronunciations_fr_handles_french_acronyms():
     text = "Le PDG de la PME annonce une IA pour l'UE."
     out = normalize_pronunciations(text, 'fr')
-    assert 'P. D. G.' in out
-    assert 'P. M. E.' in out
+    assert 'P.D.G.' in out
+    assert 'P.M.E.' in out
     # IA is intentionally NOT dot-spelled in FR — Cartesia's native French TTS
     # pronounces bare "IA" more fluently than the mechanical "I. A." two-beat form.
     assert 'IA' in out  # kept as-is for natural French letter pronunciation
-    assert 'U. E.' in out
+    assert 'U.E.' in out
 
 
 def test_normalize_pronunciations_fr_handles_shared_acronyms():
-    # Common acronyms (TSMC, GPT, CEO) must use the same dotted form in FR.
+    # Common acronyms use compact dotted form in FR (no spaces between letters).
+    # OpenAI is kept bare in FR — the 'A.I.' form caused repetition artifacts.
     text = "TSMC fournit des puces, le CEO d'OpenAI le confirme via GPT."
     out = normalize_pronunciations(text, 'fr')
-    assert 'T. S. M. C.' in out
-    assert 'C. E. O.' in out
-    assert 'Open A. I.' in out
-    assert 'G. P. T.' in out
+    assert 'T.S.M.C.' in out
+    assert 'C.E.O.' in out
+    assert 'OpenAI' in out
+    assert 'G.P.T.' in out
 
 
 def test_normalize_pronunciations_default_locale_is_english():

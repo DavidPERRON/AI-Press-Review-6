@@ -25,9 +25,10 @@ if not text:
     print("TEST_TEXT is empty — nothing to render")
     sys.exit(1)
 
+suffix = os.environ.get('TTS_OUTPUT_SUFFIX', '')
 output_dir = Path('output/tts-test')
 output_dir.mkdir(parents=True, exist_ok=True)
-audio_path = output_dir / 'test.mp3'
+audio_path = output_dir / f'test{suffix}.mp3'
 
 settings = load_settings()
 speed_override = os.environ.get('TTS_SPEED_OVERRIDE', '').strip()
@@ -45,7 +46,7 @@ meta = synthesize_script(text, audio_path)
 print(f"Rendered: {meta['duration_seconds']}s  {meta['bytes'] / 1024:.0f} KB")
 
 locale_tag = settings.locale or 'en'
-remote_key = f"audio-test/voice-test-{locale_tag}.mp3"
+remote_key = f"audio-test/voice-test-{locale_tag}{suffix}.mp3"
 url = upload_file(audio_path, remote_key)
 print(f"\nAudio URL: {url}")
 (output_dir / 'url.txt').write_text(url + '\n', encoding='utf-8')

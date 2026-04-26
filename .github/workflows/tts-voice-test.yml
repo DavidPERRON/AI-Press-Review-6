@@ -1,35 +1,26 @@
 name: Test voix TTS
 
-# Synthétise un court passage texte avec les paramètres TTS actuels et
-# uploade l'audio sur R2 sous audio-test/voice-test-{locale}.mp3.
-# Durée typique : 2-3 minutes. Utile pour valider speed/emotion/acronymes
-# sans lancer un épisode complet.
-#
-# Usage :
-#   gh workflow run tts-voice-test.yml -f locale=fr \
-#     -f text="Bienvenue dans la Revue de Presse IA. Aujourd'hui, les LLM d'OpenAI..."
+# Un seul clic → 3 MP3 en parallèle (speed 0.85 / 0.90 / 0.95).
+# Télécharge les 3 artifacts après le run pour comparer.
+# Durée typique : 3-4 minutes.
 
 on:
   workflow_dispatch:
     inputs:
       locale:
-        description: 'Locale (fr | en)'
+        description: 'Locale'
         required: true
-        default: 'fr'
+        default: 'en'
         type: choice
         options:
-          - fr
           - en
-      speed:
-        description: 'Vitesse TTS (ex: 0.9, 1.0, 1.1) — laisse vide pour utiliser podcast.yaml'
-        required: false
-        default: ""
+          - fr
       text:
-        description: 'Texte à synthétiser (300 car. conseillés, 2000 max)'
+        description: 'Texte à synthétiser (laisser vide = extrait weekly par défaut)'
         required: false
         default: ""
       voice_id_override:
-        description: 'Override voice ID (leave blank to use the variable for the selected locale)'
+        description: 'Override voice ID (laisser vide = voix configurée pour la locale)'
         required: false
         default: ""
 
@@ -40,6 +31,11 @@ jobs:
   test-tts:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    strategy:
+      matrix:
+        speed: ["0.85", "0.90", "0.95"]
+      fail-fast: false
+
     steps:
       - uses: actions/checkout@v5
         with:
@@ -59,24 +55,25 @@ jobs:
           pip install -r requirements.txt
           pip install -e .
 
-      - name: Render test audio
+      - name: Render test audio (speed ${{ matrix.speed }})
         env:
           APR_LOCALE: ${{ inputs.locale }}
           CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ inputs.voice_id_override != '' && inputs.voice_id_override || vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ inputs.voice_id_override != '' && inputs.voice_id_override || vars.CARTESIA_VOICE_ID_FR }}
-          TTS_SPEED_OVERRIDE: ${{ inputs.speed }}
+          TTS_SPEED_OVERRIDE: ${{ matrix.speed }}
           TEST_TEXT: ${{ inputs.text != '' && inputs.text || (inputs.locale == 'en' && 'Your Weekly AI Press Review. This week, three signals dominated the AI landscape. First, DeepSeek V4 dropped without warning — a frontier-class model, open weights, running at a fraction of the cost of GPT-4o. The implications for the GPU supply chain are significant. Second, OpenAI doubled down on its enterprise strategy, announcing deeper Microsoft integrations and a new tier aimed at Fortune 500 procurement teams. Third, the programmer job market is showing real cracks — hiring data from LinkedIn and Stack Overflow confirms a structural shift, not a cyclical one. These three stories are connected, and that connection is the story of this week.' || 'Bienvenue dans votre Revue de Presse IA hebdomadaire. Cette semaine, trois signaux ont dominé le paysage de l intelligence artificielle. Premièrement, DeepSeek V4 est tombé sans prévenir — un modèle de niveau frontier, poids ouverts, tournant à une fraction du coût de GPT-4o. Les implications pour la chaîne d approvisionnement GPU sont considérables. Deuxièmement, OpenAI a doublé la mise sur sa stratégie enterprise. Troisièmement, le marché de l emploi des programmeurs montre de vraies fissures — les données de LinkedIn et Stack Overflow confirment un glissement structurel, pas conjoncturel.') }}
           R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
+          TTS_OUTPUT_SUFFIX: "-speed-${{ matrix.speed }}"
         run: python scripts/tts_voice_test.py
 
       - uses: actions/upload-artifact@v6
         if: always()
         with:
-          name: tts-voice-test-${{ inputs.locale }}
+          name: voice-test-${{ inputs.locale }}-speed-${{ matrix.speed }}
           path: output/tts-test/
           retention-days: 7

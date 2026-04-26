@@ -425,7 +425,7 @@ jobs:
       - uses: actions/upload-artifact@v6
         if: always()
         with:
-          name: daily-draft-output-${{ matrix.locale }}
+          name: ${{ (github.event.inputs.profile == 'weekly' || github.event.inputs.profile == 'weekly_recap') && 'weekly' || 'daily' }}-draft-output-${{ matrix.locale }}
           path: |
             output/
             .ci-logs/

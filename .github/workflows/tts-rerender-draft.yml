@@ -90,6 +90,9 @@ jobs:
           LOCALE: ${{ github.event.inputs.locale }}
         run: python scripts/_extract_pending_script.py
 
+      - name: Fix script (duplicate intro, em dashes, markdown links)
+        run: python scripts/fix_tts_script.py /tmp/script.txt
+
       - name: Pull latest state before re-render
         run: git pull --rebase --autostash origin main
 

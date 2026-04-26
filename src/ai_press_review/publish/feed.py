@@ -380,18 +380,24 @@ _SOCIAL_LOCALES: dict[str, dict[str, str]] = {
     'en': {
         'state_file': 'episode_history_en.json',       # locale-suffixed (migrated from legacy)
         'site_base_url': 'https://podcast.aequitus.net',
+        'other_site_base_url': 'https://podcast.aequitus.net/fr',
         'hashtags': '#AI #Podcast #TechBriefing',
-        'listen_label': 'Listen',
+        'listen_label': 'Listen (EN)',
+        'other_listen_label': 'Écouter (FR)',
         'accroche': '',
     },
     'fr': {
         'state_file': 'episode_history_fr.json',
         'site_base_url': 'https://podcast.aequitus.net/fr',
+        'other_site_base_url': 'https://podcast.aequitus.net',
         'hashtags': '#IntelligenceArtificielle #Podcast #IA',
-        'listen_label': 'Écouter',
+        'listen_label': 'Écouter (FR)',
+        'other_listen_label': 'Listen (EN)',
         'accroche': "Nouvelle étape : AI Press Review en français, avec ma voix clonée. Vos retours m'intéressent.",
     },
 }
+
+_SOCIAL_COVER_URL = 'https://podcast.aequitus.net/assets/og-banner.png'
 
 _SOCIAL_SUMMARY_MAX_CHARS = 200
 _SOCIAL_ITEM_LIMIT = 20
@@ -449,7 +455,7 @@ def _build_social_copy(ep: dict, locale_meta: dict[str, str]) -> str:
         parts.append(summary)
     parts.append('')
     parts.append(f'{listen_label} — {listen_url}')
-    parts.append('Listen — https://podcast.aequitus.net')
+    parts.append(f"{locale_meta['other_listen_label']} — {locale_meta['other_site_base_url']}")
     parts.append('')
     parts.append(hashtags)
     return '\n'.join(parts)
@@ -526,6 +532,8 @@ def build_social_feed(output_path: Path | None = None) -> Path:
             f"<description><![CDATA[{_escape_cdata(post_body)}]]></description>"
             f"<guid isPermaLink=\"false\">{escape(guid)}</guid>"
             f"<pubDate>{pub_date}</pubDate>"
+            f'<media:content url={quoteattr(_SOCIAL_COVER_URL)} medium="image" type="image/png"/>'
+            f'<media:thumbnail url={quoteattr(_SOCIAL_COVER_URL)}/>'
             f"</item>"
         )
 
@@ -536,7 +544,9 @@ def build_social_feed(output_path: Path | None = None) -> Path:
 
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">'
+        '<rss version="2.0"'
+        ' xmlns:atom="http://www.w3.org/2005/Atom"'
+        ' xmlns:media="http://search.yahoo.com/mrss/">'
         '<channel>'
         f"<title>{escape(_SOCIAL_CHANNEL_TITLE)}</title>"
         f"<link>{escape('https://podcast.aequitus.net')}</link>"
@@ -546,6 +556,9 @@ def build_social_feed(output_path: Path | None = None) -> Path:
         f"<lastBuildDate>{last_build_date}</lastBuildDate>"
         f"<pubDate>{channel_pub_date}</pubDate>"
         '<ttl>60</ttl>'
+        f'<image><url>{escape(_SOCIAL_COVER_URL)}</url>'
+        f'<title>{escape(_SOCIAL_CHANNEL_TITLE)}</title>'
+        f'<link>{escape("https://podcast.aequitus.net")}</link></image>'
         f"{''.join(items)}"
         '</channel></rss>'
     )

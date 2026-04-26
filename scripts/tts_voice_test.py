@@ -30,9 +30,13 @@ output_dir.mkdir(parents=True, exist_ok=True)
 audio_path = output_dir / 'test.mp3'
 
 settings = load_settings()
+speed_override = os.environ.get('TTS_SPEED_OVERRIDE', '').strip()
+if speed_override:
+    settings.cartesia_speed = float(speed_override)
+
 print(f"Locale  : {settings.locale or '(default)'}")
 print(f"Voice   : {settings.cartesia_voice_id}")
-print(f"Speed   : {settings.cartesia_speed}")
+print(f"Speed   : {settings.cartesia_speed}{' (override)' if speed_override else ''}")
 print(f"Emotion : {settings.cartesia_emotion}")
 print(f"Mode    : {settings.tts_mode}")
 print(f"Text    : {len(text)} chars")

@@ -20,6 +20,10 @@ on:
         options:
           - fr
           - en
+      speed:
+        description: 'Vitesse TTS (ex: 0.9, 1.0, 1.1) — laisse vide pour utiliser podcast.yaml'
+        required: false
+        default: ""
       text:
         description: 'Texte à synthétiser (300 car. conseillés, 2000 max)'
         required: false
@@ -61,7 +65,8 @@ jobs:
           CARTESIA_API_KEY: ${{ secrets.APR_TEST_CARTESIA_API_KEY || secrets.APR_TEST_CARESTIA_API_KEY || secrets.CARTESIA_API_KEY || secrets.CARESTIA_API_KEY }}
           CARTESIA_VOICE_ID: ${{ inputs.voice_id_override != '' && inputs.voice_id_override || vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ inputs.voice_id_override != '' && inputs.voice_id_override || vars.CARTESIA_VOICE_ID_FR }}
-          TEST_TEXT: ${{ inputs.text != '' && inputs.text || (inputs.locale == 'en' && 'Welcome to the AI Press Review. Today, OpenAI unveiled a new multimodal LLM that rivals the best NVIDIA GPUs on MMLU and GPQA benchmarks. The CEO of a French startup announced a funding round, while AGI remains at the heart of debates among Silicon Valley executives. MCP APIs are becoming the standard, and AI industry KPIs confirm massive B2B adoption.' || 'Bienvenue dans la Revue de Presse IA. Aujourd hui, OpenAI a dévoilé un nouveau LLM multimodal qui rivalise avec les meilleurs GPU de NVIDIA sur les benchmarks MMLU et GPQA. Le PDG de la startup française a annoncé une levée de fonds en IPO, tandis que l AGI reste au cœur des débats entre les CEO de la Silicon Valley. Les API de MCP s imposent comme standard, et les KPIs de l industrie IA confirment une adoption massive en B2B.') }}
+          TTS_SPEED_OVERRIDE: ${{ inputs.speed }}
+          TEST_TEXT: ${{ inputs.text != '' && inputs.text || (inputs.locale == 'en' && 'Your Weekly AI Press Review. This week, three signals dominated the AI landscape. First, DeepSeek V4 dropped without warning — a frontier-class model, open weights, running at a fraction of the cost of GPT-4o. The implications for the GPU supply chain are significant. Second, OpenAI doubled down on its enterprise strategy, announcing deeper Microsoft integrations and a new tier aimed at Fortune 500 procurement teams. Third, the programmer job market is showing real cracks — hiring data from LinkedIn and Stack Overflow confirms a structural shift, not a cyclical one. These three stories are connected, and that connection is the story of this week.' || 'Bienvenue dans votre Revue de Presse IA hebdomadaire. Cette semaine, trois signaux ont dominé le paysage de l intelligence artificielle. Premièrement, DeepSeek V4 est tombé sans prévenir — un modèle de niveau frontier, poids ouverts, tournant à une fraction du coût de GPT-4o. Les implications pour la chaîne d approvisionnement GPU sont considérables. Deuxièmement, OpenAI a doublé la mise sur sa stratégie enterprise. Troisièmement, le marché de l emploi des programmeurs montre de vraies fissures — les données de LinkedIn et Stack Overflow confirment un glissement structurel, pas conjoncturel.') }}
           R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}

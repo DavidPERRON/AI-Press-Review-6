@@ -164,6 +164,8 @@ jobs:
           # shell via a crafted input. See GitHub Actions Security Hardening.
           RUN_DATE_INPUT: ${{ github.event.inputs.run_date }}
           PROFILE_INPUT: ${{ github.event.inputs.profile || 'daily' }}
+          # Weekly profile prompts are ~90k tokens — give Anthropic extra room.
+          LLM_TIMEOUT_SECONDS: 360
         run: |
           set -e
           # ── Pre-flight: fail fast on missing secrets/variables ──────────────

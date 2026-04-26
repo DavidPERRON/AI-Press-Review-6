@@ -801,9 +801,14 @@ def _normalize_sections_payload(payload: dict, intro_format: str) -> dict:
     sees every required key as missing. Detect that pattern here and rewrap so
     the rest of the pipeline (validate + assemble) can proceed normally.
     """
-    if payload.get("sections"):
-        return payload
     required = REQUIRED_SECTION_KEYS_WEEKLY if intro_format == 'weekly' else REQUIRED_SECTION_KEYS
+    sections = payload.get("sections") or {}
+    # Fast path: all required keys are already nested correctly.
+    if all(k in sections for k in required):
+        return payload
+    # Gemini sometimes returns required keys at the JSON root instead of under
+    # "sections", or returns a "sections" dict that exists but omits some keys
+    # while placing them at root. Collect whatever required keys live at root.
     flat = {k: payload[k] for k in required if k in payload}
     if not flat:
         return payload
@@ -812,7 +817,7 @@ def _normalize_sections_payload(payload: dict, intro_format: str) -> dict:
         len(flat),
     )
     wrapped = {k: v for k, v in payload.items() if k not in required}
-    wrapped["sections"] = flat
+    wrapped["sections"] = {**sections, **flat}
     return wrapped
 
 

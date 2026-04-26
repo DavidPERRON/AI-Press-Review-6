@@ -1523,10 +1523,21 @@ def _compile_pronunciation_table(table: dict[str, str]) -> dict[str, str]:
     return {rf'\b{re.escape(key)}\b': value for key, value in table.items()}
 
 
+# Cartesia FR treats each space between dotted letters as an audible pause.
+# 'L. L. M.' → 'L.L.M.' — compact form reads as tight abbreviation, no pauses.
+# Only collapses single-char dotted tokens; multi-char words like 'et' in
+# 'R. et D.' are left intact (next token > 1 char before dot/space/end).
+_FR_DOTTED_SPACE = re.compile(r'(?<=[A-Za-z0-9])\. (?=[A-Za-z0-9](?:[.\s]|$))')
+
+
+def _compact_fr_dots(value: str) -> str:
+    return _FR_DOTTED_SPACE.sub('.', value)
+
+
 _PRONUNCIATIONS_EN: dict[str, str] = _compile_pronunciation_table(_SPELL_OUT_COMMON)
 
 _PRONUNCIATIONS_FR: dict[str, str] = _compile_pronunciation_table(
-    {**_SPELL_OUT_COMMON, **_SPELL_OUT_FR_OVERRIDES}
+    {k: _compact_fr_dots(v) for k, v in {**_SPELL_OUT_COMMON, **_SPELL_OUT_FR_OVERRIDES}.items()}
 )
 
 

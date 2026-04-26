@@ -1343,10 +1343,11 @@ _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     # pause that sounded unnatural in French. Cartesia's native FR prosody
     # pronounces bare "IA" fluidly as "ee-ah" without any override needed.
     #
-    # AI: kept as compact English form. The spaced 'A. I.' (with FR letter
-    # names: "ah… ee") was unintelligible; 'A.I.' reads as a tight
-    # abbreviation closer to the English "A-I" listeners expect.
-    'AI': 'A.I.',
+    # AI / OpenAI: left bare — Cartesia FR handles them natively without
+    # artifacts. 'A.I.' caused a repetition loop ("AIAIAI") in Cartesia FR.
+    # Same logic as IA (also bare — see comment above).
+    'AI': 'AI',
+    'OpenAI': 'OpenAI',
     # ── AI / ML core ─────────────────────────────────────────────────────
     'LLM': 'L.L.M.',
     'LLMs': 'L.L.M.s',

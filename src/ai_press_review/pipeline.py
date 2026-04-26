@@ -143,12 +143,6 @@ _SUMMARY_PREFIX: dict[str, str] = {
 }
 
 
-_SUMMARY_PREFIX: dict[str, str] = {
-    'fr': "La voix est synthétique, le propos reste authentique. Désormais narré par la voix IA de votre obligé. Version anglaise également disponible, mon clone force un peu sur l'accent, l'original s'en sort mieux.",
-    'en': "Synthetic in voice, genuine in substance. Now presented by an AI clone of your devoted host. And yes, the accent is... how you say... more French than the man himself. The algorithm had opinions.",
-}
-
-
 def generate_draft(
     run_date: str,
     profile: str = 'daily',

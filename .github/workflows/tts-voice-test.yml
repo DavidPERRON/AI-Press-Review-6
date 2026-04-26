@@ -14,7 +14,7 @@ on:
       speed:
         description: 'Vitesse (0.85 / 0.90 / 0.95 / 1.0)'
         required: false
-        default: "0.90"
+        default: "0.95"
       text:
         description: 'Texte à synthétiser (laisser vide = extrait par défaut)'
         required: false

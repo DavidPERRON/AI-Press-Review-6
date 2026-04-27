@@ -273,6 +273,11 @@
       .brief-script-surface { padding: 1.5rem 1.25rem 1.25rem; }
     }
   </style>
+  <!-- Plausible Analytics — GDPR-native, no cookies, no banner required.
+       Tracks: page views, outbound links, .mp3 file-download clicks.
+       To activate: create site at plausible.io → add domain podcast.aequitus.net -->
+  <script defer data-domain="podcast.aequitus.net" src="https://plausible.io/js/script.file-downloads.outbound-links.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
 </head>
 <body>
 
@@ -320,10 +325,33 @@
     <!-- AUDIO PLAYER — first item after the hero summary -->
     <div class="audio-section">
       <p class="audio-section-label">Audio</p>
-      <audio controls preload="none">
+      <audio controls preload="none" id="episode-audio">
         <source src="{{EPISODE_AUDIO_URL}}" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
+      <script>
+        (function() {
+          var audio = document.getElementById('episode-audio');
+          if (!audio) return;
+          var title = document.querySelector('.episode-title');
+          var ep = title ? title.textContent.trim() : document.title;
+          var fired = {};
+          audio.addEventListener('play', function() {
+            if (!fired.play) { fired.play = true; plausible('Play', {props: {episode: ep}}); }
+          });
+          audio.addEventListener('timeupdate', function() {
+            if (!audio.duration) return;
+            var pct = audio.currentTime / audio.duration;
+            [{k:'Listen_25', t:0.25},{k:'Listen_50', t:0.50},{k:'Listen_75', t:0.75},{k:'Listen_100', t:0.95}]
+              .forEach(function(m) {
+                if (!fired[m.k] && pct >= m.t) {
+                  fired[m.k] = true;
+                  plausible(m.k.replace('_',' '), {props: {episode: ep}});
+                }
+              });
+          });
+        })();
+      </script>
       <div class="audio-links">
         <a href="{{EPISODE_AUDIO_URL}}" download>Download MP3</a>
         <a href="{{SITE_BASE_URL}}/podcast-feed.xml">RSS Feed</a>

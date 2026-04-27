@@ -179,7 +179,7 @@ def generate_draft(
     locale = settings.locale or 'en'
     prefix = _SUMMARY_PREFIX.get(locale, '')
     if prefix:
-        draft.episode_summary = prefix + ' ' + draft.episode_summary
+        draft.episode_summary = prefix + '\n\n' + draft.episode_summary
 
     outputs_dir = Path('output') / run_date
     outputs_dir.mkdir(parents=True, exist_ok=True)

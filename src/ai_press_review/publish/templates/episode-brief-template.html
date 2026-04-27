@@ -128,6 +128,11 @@
       margin-bottom: 1rem;
       max-width: 660px;
     }
+    .episode-voice-note {
+      font-size: 0.95rem; color: var(--text-secondary);
+      font-style: italic; max-width: 620px; line-height: 1.65;
+      margin-bottom: 0.6rem;
+    }
     .episode-summary {
       font-size: 1rem; color: var(--text-secondary);
       max-width: 620px; line-height: 1.7;
@@ -294,7 +299,7 @@
         <span>{{EPISODE_DURATION}}</span>
       </div>
       <h1 class="episode-title">{{EPISODE_TITLE}}</h1>
-      <p class="episode-summary">{{EPISODE_SUMMARY}}</p>
+      {{EPISODE_SUMMARY_HTML}}
 
       <!-- Compact listen bar — audio access without hijacking the page -->
       <div class="listen-row">

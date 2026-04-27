@@ -71,8 +71,13 @@ jobs:
 
           item = items[0]
           title        = item.findtext('title') or ''
+          episode_url  = item.findtext('link') or ''
           description  = item.findtext('description') or title
           pub_date_str = item.findtext('pubDate') or ''
+
+          # Put episode URL on first line so it's immediately clickable
+          if episode_url and episode_url not in description[:80]:
+              description = episode_url + '\n\n' + description
 
           # Garde d'âge — ignorée si force=oui
           if pub_date_str and not force:

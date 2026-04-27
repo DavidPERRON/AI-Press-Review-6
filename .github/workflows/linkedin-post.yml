@@ -101,7 +101,50 @@ jobs:
           print(f"Episode : {title}")
           print(f"LinkedIn-Version : {LINKEDIN_VERSION}")
 
-          post_data = json.dumps({
+          # ── Upload banner image ────────────────────────────────────────
+          banner_path = 'docs/assets/og-banner.png'
+          image_urn = None
+          if os.path.exists(banner_path):
+              try:
+                  # 1. Initialize upload
+                  init_data = json.dumps({
+                      "initializeUploadRequest": {"owner": person_urn}
+                  }).encode()
+                  req = urllib.request.Request(
+                      'https://api.linkedin.com/v2/images?action=initializeUpload',
+                      data=init_data,
+                      headers={
+                          'Authorization': f'Bearer {token}',
+                          'Content-Type': 'application/json',
+                          'LinkedIn-Version': LINKEDIN_VERSION,
+                          'X-Restli-Protocol-Version': '2.0.0',
+                      },
+                      method='POST',
+                  )
+                  with urllib.request.urlopen(req) as resp:
+                      upload_info = json.loads(resp.read())
+                  upload_url = upload_info['value']['uploadUrl']
+                  image_urn  = upload_info['value']['image']
+
+                  # 2. Upload binary
+                  with open(banner_path, 'rb') as f:
+                      img_bytes = f.read()
+                  req = urllib.request.Request(
+                      upload_url,
+                      data=img_bytes,
+                      headers={'Authorization': f'Bearer {token}',
+                               'Content-Type': 'application/octet-stream'},
+                      method='PUT',
+                  )
+                  with urllib.request.urlopen(req) as resp:
+                      pass
+                  print(f"Banner uploadé : {image_urn}")
+              except Exception as e:
+                  print(f"Upload banner échoué ({e}) — post sans image")
+                  image_urn = None
+
+          # ── Build post payload ─────────────────────────────────────────
+          post_body = {
               "author": person_urn,
               "commentary": description[:3000],
               "visibility": "PUBLIC",
@@ -110,9 +153,17 @@ jobs:
                   "targetEntities": [],
                   "thirdPartyDistributionChannels": []
               },
-              "lifecycleState": "PUBLISHED"
-          }).encode()
+              "lifecycleState": "PUBLISHED",
+          }
+          if image_urn:
+              post_body["content"] = {
+                  "media": {
+                      "altText": title,
+                      "id": image_urn,
+                  }
+              }
 
+          post_data = json.dumps(post_body).encode()
           req = urllib.request.Request(
               'https://api.linkedin.com/rest/posts',
               data=post_data,

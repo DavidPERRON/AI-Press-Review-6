@@ -86,6 +86,7 @@ def generate_episode_brief(episode_data: dict) -> str:
         '{{EPISODE_AUDIO_URL}}': escape(episode_data.get('audio_url', '')),
         '{{EPISODE_SPOTIFY_URL}}': escape(episode_data.get('spotify_url', '')),
         '{{EPISODE_APPLE_URL}}': escape(episode_data.get('apple_url', '')),
+        '{{EPISODE_SUMMARY}}': escape(episode_data.get('summary', '').replace('\n\n', ' ')),
         '{{EPISODE_SUMMARY_HTML}}': _render_summary_html(episode_data.get('summary', '')),
         '{{PREV_EPISODE_URL}}': escape(episode_data.get('prev_url', '')),
         '{{PREV_EPISODE_TITLE}}': escape(episode_data.get('prev_title', '')),

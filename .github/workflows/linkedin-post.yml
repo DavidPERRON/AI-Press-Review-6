@@ -72,12 +72,31 @@ jobs:
           item = items[0]
           title        = item.findtext('title') or ''
           episode_url  = item.findtext('link') or ''
-          description  = item.findtext('description') or title
+          raw_desc     = item.findtext('description') or title
           pub_date_str = item.findtext('pubDate') or ''
 
-          # Put episode URL on first line so it's immediately clickable
-          if episode_url and episode_url not in description[:80]:
-              description = episode_url + '\n\n' + description
+          # Format: title / summary (intro only, skip voice-note) / episode URL
+          # The description stored in the feed is "voice_note\n\nintro" for most
+          # episodes. Strip the voice-note prefix so LinkedIn readers see the
+          # actual news summary, not the AI-voice disclaimer.
+          _VOICE_NOTE_ENDINGS = [
+              "The algorithm had opinions.",
+              "Vos retours m'intéressent.",
+          ]
+          summary = raw_desc
+          if '\n\n' in raw_desc:
+              parts = raw_desc.split('\n\n', 1)
+              # First part is voice note if it ends with a known marker
+              if any(parts[0].rstrip().endswith(e) for e in _VOICE_NOTE_ENDINGS):
+                  summary = parts[1].strip()
+          else:
+              for ending in _VOICE_NOTE_ENDINGS:
+                  idx = raw_desc.find(ending)
+                  if idx != -1:
+                      summary = raw_desc[idx + len(ending):].strip()
+                      break
+
+          description = f"{title}\n\n{summary}\n\n{episode_url}" if episode_url else f"{title}\n\n{summary}"
 
           # Garde d'âge — ignorée si force=oui
           if pub_date_str and not force:

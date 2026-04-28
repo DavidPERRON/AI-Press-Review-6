@@ -393,7 +393,7 @@ _SOCIAL_LOCALES: dict[str, dict[str, str]] = {
         'hashtags': '#IntelligenceArtificielle #Podcast #IA',
         'listen_label': 'Écouter (FR)',
         'other_listen_label': 'Listen (EN)',
-        'accroche': "Nouvelle étape : AI Press Review en français, avec ma voix clonée. Vos retours m'intéressent.",
+        'accroche': '',
     },
 }
 

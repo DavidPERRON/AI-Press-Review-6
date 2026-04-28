@@ -34,11 +34,14 @@ settings = load_settings()
 speed_override = os.environ.get('TTS_SPEED_OVERRIDE', '').strip()
 if speed_override:
     settings.cartesia_speed = float(speed_override)
+emotion_override = os.environ.get('TTS_EMOTION_OVERRIDE', '').strip()
+if emotion_override:
+    settings.cartesia_emotion = emotion_override
 
 print(f"Locale  : {settings.locale or '(default)'}")
 print(f"Voice   : {settings.cartesia_voice_id}")
 print(f"Speed   : {settings.cartesia_speed}{' (override)' if speed_override else ''}")
-print(f"Emotion : {settings.cartesia_emotion}")
+print(f"Emotion : {settings.cartesia_emotion}{' (override)' if emotion_override else ''}")
 print(f"Mode    : {settings.tts_mode}")
 print(f"Text    : {len(text)} chars")
 

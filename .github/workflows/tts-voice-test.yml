@@ -14,7 +14,18 @@ on:
       speed:
         description: 'Vitesse (0.85 / 0.90 / 0.95 / 1.0)'
         required: false
-        default: "0.85"
+        default: "0.95"
+      emotion:
+        description: 'Emotion Cartesia'
+        required: false
+        default: "positivity:highest"
+        type: choice
+        options:
+          - excited
+          - positivity:high
+          - positivity:highest
+          - anger:low
+          - curiosity:high
       text:
         description: 'Texte à synthétiser (laisser vide = extrait par défaut)'
         required: false
@@ -53,7 +64,8 @@ jobs:
           CARTESIA_VOICE_ID: ${{ vars.CARTESIA_VOICE_ID }}
           CARTESIA_VOICE_ID_FR: ${{ vars.CARTESIA_VOICE_ID_FR }}
           TTS_SPEED_OVERRIDE: ${{ inputs.speed }}
-          TEST_TEXT: ${{ inputs.text != '' && inputs.text || (inputs.locale == 'en' && 'Your Weekly AI Press Review. This week, three signals dominated the AI landscape. First, DeepSeek V4 dropped without warning — a frontier-class model, open weights, running at a fraction of the cost of GPT-4o. The implications for the GPU supply chain are significant. Second, OpenAI doubled down on its enterprise strategy, announcing deeper Microsoft integrations and a new tier aimed at Fortune 500 procurement teams. Third, the programmer job market is showing real cracks — hiring data from LinkedIn and Stack Overflow confirms a structural shift, not a cyclical one. These three stories are connected, and that connection is the story of this week.' || 'Bienvenue dans votre Revue de Presse IA hebdomadaire. Cette semaine, trois signaux ont dominé le paysage de l intelligence artificielle. Premièrement, DeepSeek V4 est tombé sans prévenir — un modèle de niveau frontier, poids ouverts, tournant à une fraction du coût de GPT-4o. Les implications pour la chaîne d approvisionnement GPU sont considérables. Deuxièmement, OpenAI a doublé la mise sur sa stratégie enterprise. Troisièmement, le marché de l emploi des programmeurs montre de vraies fissures — les données de LinkedIn et Stack Overflow confirment un glissement structurel, pas conjoncturel.') }}
+          TTS_EMOTION_OVERRIDE: ${{ inputs.emotion }}
+          TEST_TEXT: ${{ inputs.text != '' && inputs.text || (inputs.locale == 'en' && 'Synthetic in voice, genuine in substance. Now presented by an AI clone of your devoted host. And yes, the accent is... how you say... more French than the man himself. The algorithm had opinions.\n\nDeepSeek launched its V4 model at 97% below OpenAI''s GPT-5.5 pricing while simultaneously offering developers a 75% promotional discount, triggering a direct price war in enterprise AI APIs. Anthropic''s internal agent marketplace experiment closed every deal without human input in one week, providing the clearest real-world proof yet of fully autonomous commerce. CFOs should watch token-based consumption pricing closely — a new study shows agentic coding tasks consume up to 1,000 times more tokens than standard code chat, making cost forecasting a material finance risk.' || 'Bienvenue dans votre Revue de Presse IA hebdomadaire. Cette semaine, trois signaux ont dominé le paysage de l intelligence artificielle. Premièrement, DeepSeek V4 est tombé sans prévenir — un modèle de niveau frontier, poids ouverts, tournant à une fraction du coût de GPT-4o. Les implications pour la chaîne d approvisionnement GPU sont considérables. Deuxièmement, OpenAI a doublé la mise sur sa stratégie enterprise. Troisièmement, le marché de l emploi des programmeurs montre de vraies fissures — les données de LinkedIn et Stack Overflow confirment un glissement structurel, pas conjoncturel.') }}
           R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
           R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -64,6 +76,6 @@ jobs:
       - uses: actions/upload-artifact@v6
         if: always()
         with:
-          name: voice-test-${{ inputs.locale }}-speed-${{ inputs.speed }}
+          name: voice-test-${{ inputs.locale }}-speed-${{ inputs.speed }}-${{ inputs.emotion }}
           path: output/tts-test/
           retention-days: 7

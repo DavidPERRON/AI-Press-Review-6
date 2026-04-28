@@ -9,6 +9,41 @@ from ..utils import atomic_write_text
 
 TEMPLATE_PATH = Path(__file__).parent / 'templates' / 'episode-brief-template.html'
 
+_VOICE_NOTE_ENDINGS = [
+    "The algorithm had opinions.",
+    "Vos retours m'intéressent.",
+]
+
+
+def _render_summary_html(summary: str) -> str:
+    """Render episode summary as HTML, separating the voice note from the intro.
+
+    New format: summary contains '\n\n' between voice note and intro.
+    Legacy format (space-concatenated): detect by known voice note endings.
+    """
+    summary = summary.strip()
+    if not summary:
+        return ''
+
+    voice_note, intro = '', ''
+    if '\n\n' in summary:
+        voice_note, intro = summary.split('\n\n', 1)
+    else:
+        for ending in _VOICE_NOTE_ENDINGS:
+            idx = summary.find(ending)
+            if idx != -1:
+                split_pos = idx + len(ending)
+                voice_note = summary[:split_pos].strip()
+                intro = summary[split_pos:].strip()
+                break
+
+    if voice_note and intro:
+        return (
+            f'<p class="episode-voice-note">{escape(voice_note)}</p>\n'
+            f'      <p class="episode-summary">{escape(intro)}</p>'
+        )
+    return f'<p class="episode-summary">{escape(summary)}</p>'
+
 
 def generate_episode_brief(episode_data: dict) -> str:
     """Render an episode brief HTML page from template + episode_data dict.
@@ -51,7 +86,8 @@ def generate_episode_brief(episode_data: dict) -> str:
         '{{EPISODE_AUDIO_URL}}': escape(episode_data.get('audio_url', '')),
         '{{EPISODE_SPOTIFY_URL}}': escape(episode_data.get('spotify_url', '')),
         '{{EPISODE_APPLE_URL}}': escape(episode_data.get('apple_url', '')),
-        '{{EPISODE_SUMMARY}}': escape(episode_data.get('summary', '')),
+        '{{EPISODE_SUMMARY}}': escape(episode_data.get('summary', '').replace('\n\n', ' ')),
+        '{{EPISODE_SUMMARY_HTML}}': _render_summary_html(episode_data.get('summary', '')),
         '{{PREV_EPISODE_URL}}': escape(episode_data.get('prev_url', '')),
         '{{PREV_EPISODE_TITLE}}': escape(episode_data.get('prev_title', '')),
         '{{NEXT_EPISODE_URL}}': escape(episode_data.get('next_url', '')),

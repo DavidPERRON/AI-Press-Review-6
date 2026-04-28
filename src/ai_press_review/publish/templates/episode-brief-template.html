@@ -128,6 +128,11 @@
       margin-bottom: 1rem;
       max-width: 660px;
     }
+    .episode-voice-note {
+      font-size: 0.95rem; color: var(--text-secondary);
+      font-style: italic; max-width: 620px; line-height: 1.65;
+      margin-bottom: 0.6rem;
+    }
     .episode-summary {
       font-size: 1rem; color: var(--text-secondary);
       max-width: 620px; line-height: 1.7;
@@ -267,7 +272,7 @@
       .nav-block.right { text-align: left; }
       .brief-script-surface { padding: 1.5rem 1.25rem 1.25rem; }
     }
-  </style>
+  </style><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "CLOUDFLARE_BEACON_TOKEN"}'></script>
 </head>
 <body>
 
@@ -294,7 +299,7 @@
         <span>{{EPISODE_DURATION}}</span>
       </div>
       <h1 class="episode-title">{{EPISODE_TITLE}}</h1>
-      <p class="episode-summary">{{EPISODE_SUMMARY}}</p>
+      {{EPISODE_SUMMARY_HTML}}
 
       <!-- Compact listen bar — audio access without hijacking the page -->
       <div class="listen-row">
@@ -315,10 +320,33 @@
     <!-- AUDIO PLAYER — first item after the hero summary -->
     <div class="audio-section">
       <p class="audio-section-label">Audio</p>
-      <audio controls preload="none">
+      <audio controls preload="none" id="episode-audio">
         <source src="{{EPISODE_AUDIO_URL}}" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
+      <script>
+        (function() {
+          var audio = document.getElementById('episode-audio');
+          if (!audio) return;
+          var title = document.querySelector('.episode-title');
+          var ep = title ? title.textContent.trim() : document.title;
+          var fired = {};
+          audio.addEventListener('play', function() {
+            if (!fired.play) { fired.play = true; if (typeof plausible === 'function') plausible('Play', {props: {episode: ep}}); }
+          });
+          audio.addEventListener('timeupdate', function() {
+            if (!audio.duration) return;
+            var pct = audio.currentTime / audio.duration;
+            [{k:'Listen_25', t:0.25},{k:'Listen_50', t:0.50},{k:'Listen_75', t:0.75},{k:'Listen_100', t:0.95}]
+              .forEach(function(m) {
+                if (!fired[m.k] && pct >= m.t) {
+                  fired[m.k] = true;
+                  if (typeof plausible === 'function') plausible(m.k.replace('_',' '), {props: {episode: ep}});
+                }
+              });
+          });
+        })();
+      </script>
       <div class="audio-links">
         <a href="{{EPISODE_AUDIO_URL}}" download>Download MP3</a>
         <a href="{{SITE_BASE_URL}}/podcast-feed.xml">RSS Feed</a>

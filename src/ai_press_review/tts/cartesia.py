@@ -1607,6 +1607,33 @@ def _strip_trailing_pause_tokens(text: str) -> str:
     return _TRAILING_PAUSE_TOKENS.sub('.', text.rstrip())
 
 
+def _format_emotion(value: str):
+    """Convert config emotion string into the form Cartesia accepts.
+
+    - "" → None (caller drops the field)
+    - "excited" / "serious" → "excited" (legacy single-word, passed through)
+    - "positivity:high" → ["positivity:high"]
+    - "positivity:high,curiosity:medium" → ["positivity:high", "curiosity:medium"]
+    """
+    v = (value or '').strip()
+    if not v:
+        return None
+    if ':' in v or ',' in v:
+        return [tag.strip() for tag in v.split(',') if tag.strip()]
+    return v
+
+
+def _build_generation_config(settings) -> dict:
+    cfg: dict = {
+        'volume': settings.cartesia_volume,
+        'speed': settings.cartesia_speed,
+    }
+    emotion = _format_emotion(settings.cartesia_emotion)
+    if emotion is not None:
+        cfg['emotion'] = emotion
+    return cfg
+
+
 # Matches remaining ALL-CAPS tokens (3-5 letters) that are still in the script
 # after the known-table normalization pass.
 # Minimum 3: 2-letter tokens (IA, AI, EU, UK, ML, RL …) are either already
@@ -1921,11 +1948,7 @@ async def _render_single_chunk_ws(chunk: str, settings, context_id: str | None =
                 'encoding': 'pcm_s16le',
                 'sample_rate': WEBSOCKET_SAMPLE_RATE,
             },
-            'generation_config': {
-                'volume': settings.cartesia_volume,
-                'speed': settings.cartesia_speed,
-                'emotion': settings.cartesia_emotion,
-            },
+            'generation_config': _build_generation_config(settings),
         }
         await asyncio.wait_for(ws.send(json.dumps(request)), timeout=WS_SEND_TIMEOUT_S)
 
@@ -2050,11 +2073,7 @@ async def _render_session(chunks: list[str], settings) -> bytes:
                     'encoding': 'pcm_s16le',
                     'sample_rate': WEBSOCKET_SAMPLE_RATE,
                 },
-                'generation_config': {
-                    'volume': settings.cartesia_volume,
-                    'speed': settings.cartesia_speed,
-                    'emotion': settings.cartesia_emotion,
-                },
+                'generation_config': _build_generation_config(settings),
             }
             await asyncio.wait_for(ws.send(json.dumps(request)), timeout=WS_SEND_TIMEOUT_S)
 

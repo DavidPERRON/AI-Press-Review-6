@@ -137,11 +137,6 @@ def run_pipeline(
 
 # ── Draft workflow functions ─────────────────────────────────
 
-_SUMMARY_PREFIX: dict[str, str] = {
-    'fr': "La voix est synthétique, le propos reste authentique. Désormais narré par la voix IA de votre obligé. Version anglaise également disponible, mon clone force un peu sur l'accent, l'original s'en sort mieux.",
-    'en': "Synthetic in voice, genuine in substance. Now presented by an AI clone of your devoted host. And yes, the accent is... how you say... more French than the man himself. The algorithm had opinions.",
-}
-
 
 def generate_draft(
     run_date: str,
@@ -175,11 +170,6 @@ def generate_draft(
     t0 = time.monotonic()
     draft = generate_episode_script(manifest, local_preview=local_preview, profile=profile)
     logger.info("Editorial completed: %d words in %.1fs", len(draft.script.split()), time.monotonic() - t0)
-
-    locale = settings.locale or 'en'
-    prefix = _SUMMARY_PREFIX.get(locale, '')
-    if prefix:
-        draft.episode_summary = prefix + '\n\n' + draft.episode_summary
 
     outputs_dir = Path('output') / run_date
     outputs_dir.mkdir(parents=True, exist_ok=True)

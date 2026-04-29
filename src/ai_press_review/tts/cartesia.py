@@ -1965,8 +1965,12 @@ async def _render_chunks_crossfade(
     from pydub import AudioSegment
     from pydub.silence import detect_leading_silence
 
-    silence_thresh_db = getattr(settings, 'tts_silence_thresh_db', -40.0)
-    keep_edge_ms = getattr(settings, 'tts_silence_keep_ms', 60)
+    # Hardcoded edge-silence trim thresholds. Tuned by ear on EN+FR runs:
+    # -40 dBFS catches Cartesia's utterance-tail silence without clipping
+    # low-volume speech; 60 ms residual leaves a natural inter-sentence
+    # micro-pause that the crossfade then smooths.
+    SILENCE_THRESH_DB = -40.0
+    KEEP_EDGE_MS = 60
 
     def _trim_edges(seg: AudioSegment) -> AudioSegment:
         # Each chunk is rendered as an independent Cartesia session and
@@ -1974,12 +1978,12 @@ async def _render_chunks_crossfade(
         # silence Cartesia adds to "wrap" the utterance). Concatenated
         # back-to-back, those silences sound like the podcast just ended
         # mid-episode. Trim leading + trailing silence per chunk down to
-        # `keep_edge_ms` so the crossfade joins clean speech to clean
+        # KEEP_EDGE_MS so the crossfade joins clean speech to clean
         # speech instead of speech-to-silence-to-speech.
-        lead = detect_leading_silence(seg, silence_threshold=silence_thresh_db)
-        trail = detect_leading_silence(seg.reverse(), silence_threshold=silence_thresh_db)
-        start = max(0, lead - keep_edge_ms)
-        end = len(seg) - max(0, trail - keep_edge_ms)
+        lead = detect_leading_silence(seg, silence_threshold=SILENCE_THRESH_DB)
+        trail = detect_leading_silence(seg.reverse(), silence_threshold=SILENCE_THRESH_DB)
+        start = max(0, lead - KEEP_EDGE_MS)
+        end = len(seg) - max(0, trail - KEEP_EDGE_MS)
         if end <= start:
             return seg
         return seg[start:end]

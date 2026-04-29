@@ -1963,6 +1963,26 @@ async def _render_chunks_crossfade(
     chunk 8/20 doesn't abort the whole episode.
     """
     from pydub import AudioSegment
+    from pydub.silence import detect_leading_silence
+
+    silence_thresh_db = getattr(settings, 'tts_silence_thresh_db', -40.0)
+    keep_edge_ms = getattr(settings, 'tts_silence_keep_ms', 60)
+
+    def _trim_edges(seg: AudioSegment) -> AudioSegment:
+        # Each chunk is rendered as an independent Cartesia session and
+        # therefore ends with sentence-final prosody (a long trailing
+        # silence Cartesia adds to "wrap" the utterance). Concatenated
+        # back-to-back, those silences sound like the podcast just ended
+        # mid-episode. Trim leading + trailing silence per chunk down to
+        # `keep_edge_ms` so the crossfade joins clean speech to clean
+        # speech instead of speech-to-silence-to-speech.
+        lead = detect_leading_silence(seg, silence_threshold=silence_thresh_db)
+        trail = detect_leading_silence(seg.reverse(), silence_threshold=silence_thresh_db)
+        start = max(0, lead - keep_edge_ms)
+        end = len(seg) - max(0, trail - keep_edge_ms)
+        if end <= start:
+            return seg
+        return seg[start:end]
 
     segments: list[AudioSegment] = []
     for i, chunk in enumerate(chunks, 1):
@@ -1989,8 +2009,13 @@ async def _render_chunks_crossfade(
             frame_rate=WEBSOCKET_SAMPLE_RATE,
             channels=1,
         )
+        raw_ms = len(seg)
+        seg = _trim_edges(seg)
         segments.append(seg)
-        logger.debug('Chunk %d/%d: %.1fs audio', i, len(chunks), len(seg) / 1000)
+        logger.debug(
+            'Chunk %d/%d: %.1fs audio (trimmed %dms of edge silence)',
+            i, len(chunks), len(seg) / 1000, raw_ms - len(seg),
+        )
 
     # Merge with a short crossfade to hide any micro-silence at boundaries.
     combined = segments[0]

@@ -1657,19 +1657,21 @@ def _auto_spell_unknown_acronyms(text: str, locale: str) -> tuple[str, list[str]
 
 
 def _cap_sentence_length(text: str, max_chars: int = 210) -> str:
-    """Break lines longer than max_chars at a natural pause point.
+    """Marker function: kept for historical reference, now a structural no-op.
 
-    Cartesia's prosody model tapers off on long unbroken utterances — the engine
-    predicts a breath point that never arrives and compensates by winding down
-    the voice volume ('running out of air' effect). Breaking at a comma,
-    semicolon, dash, colon, or — in last resort — at a conjunction gives the
-    engine a clean breath point with full volume on the second half.
+    Previously this broke long lines with \\n at natural punctuation breaks to
+    prevent Cartesia's 'running out of air' volume-taper on very long utterances.
+    The \\n caused a paragraph-level pause *inside* what should be a continuous
+    news paragraph — audible as a spurious section-break mid-sentence (the bug
+    reported 2026-04-30: 'pauses trop longues à certains moments').
 
-    210 chars ≈ 35 spoken words — enough for a full, natural-sounding sentence
-    without triggering the volume-taper. 150 was too aggressive: every comma
-    became an artificial sentence boundary, producing a choppy, staccato rhythm
-    with muffled endings (sentence-final prosody applied mid-clause).
-    Applied to TTS input only; script.txt stays canonical.
+    The fix: _do_split now joins halves with a space (not \\n), so the comma at
+    the break point is the only breath signal Cartesia receives — a natural,
+    brief pause. Paragraphs with natural commas/periods already give the engine
+    enough breath anchors; the \\n trick is not needed when the script is written
+    for oral delivery (as ours is).
+
+    The function is preserved so callers in synthesize_script() remain unchanged.
     """
     return '\n'.join(_shorten_line(line, max_chars) for line in text.split('\n'))
 
@@ -1715,22 +1717,24 @@ def _shorten_line(line: str, max_chars: int) -> str:
 
 
 def _do_split(line: str, pos: int, max_chars: int) -> str:
-    """Split `line` at byte offset `pos`, keep original punctuation, capitalize the second.
+    """Split `line` at byte offset `pos`, keep original punctuation.
 
     Preserve the trailing comma/semicolon so Cartesia uses continuation prosody
     (brief pause, sustained volume) rather than sentence-final prosody (taper +
     long silence) at the split point. The split is at a mid-sentence break, not
     a true sentence end.
+
+    2026-04-30: changed separator from \\n to space. A \\n inside a chunk tells
+    Cartesia 'new paragraph' — the engine resets to sentence-initial prosody and
+    inserts a paragraph-level pause (audibly too long for a mid-sentence comma).
+    A space leaves the comma as the sole breath signal: brief, natural, and no
+    louder than any other comma in the paragraph.
     """
-    # Keep the punctuation character at pos (comma, semicolon, etc.) so Cartesia
-    # hears a natural comma pause rather than a full-stop volume taper.
     first = line[:pos + 1].rstrip()
     rest = line[pos + 1:].lstrip()
-    if rest and rest[0].islower():
-        rest = rest[0].upper() + rest[1:]
     if not rest:
         return first
-    return first + '\n' + _shorten_line(rest, max_chars)
+    return first + ' ' + _shorten_line(rest, max_chars)
 
 
 def normalize_pronunciations(text: str, locale: str) -> str:

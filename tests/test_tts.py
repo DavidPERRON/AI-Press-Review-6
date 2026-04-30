@@ -201,8 +201,10 @@ def test_normalize_tts_whitespace_strips_trailing_line_whitespace():
 def test_normalize_tts_whitespace_caps_blank_lines():
     text = "para 1\n\n\n\npara 2\n\n\n\n\npara 3"
     out = _normalize_tts_whitespace(text)
-    assert "\n\n\n" not in out
-    assert "para 1\n\npara 2\n\npara 3" == out
+    # All multiple newlines (double included) collapse to a single \n so Cartesia
+    # never sees \n\n, which it treats as a full paragraph break with long silence.
+    assert "\n\n" not in out
+    assert "para 1\npara 2\npara 3" == out
 
 
 def test_normalize_tts_whitespace_trims_overall():

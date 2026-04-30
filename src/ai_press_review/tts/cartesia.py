@@ -1555,8 +1555,12 @@ _MULTISPACE = re.compile(r'[ \t]{2,}')
 _SPACE_BEFORE_NEWLINE = re.compile(r'[ \t]+\n')
 _TRIPLE_NEWLINE = re.compile(r'\n{3,}')
 _TRAILING_PAUSE_TOKENS = re.compile(r'(?:\.{2,}|\s+\.\s*)+$')
-# Primary break candidates (strong pauses): commas, semicolons, em/en dashes, colons.
-_LONG_SENT_BREAK = re.compile(r'[,;:—–]\s')
+# Primary break candidates: commas and semicolons only.
+# Colons are excluded: a fragment ending with ":" before \n tells Cartesia a list is
+# coming but then never delivers it — causing an extended "waiting for more" pause.
+# Em/en dashes are excluded: _replace_dashes() now runs *before* _cap_sentence_length(),
+# so there are no dashes left in the text by the time this regex fires.
+_LONG_SENT_BREAK = re.compile(r'[,;]\s')
 
 # Secondary break candidates (conjunctions): only used when no primary break sits
 # in the target window. Operates on word boundaries so "android" is not a hit
@@ -1657,21 +1661,21 @@ def _auto_spell_unknown_acronyms(text: str, locale: str) -> tuple[str, list[str]
 
 
 def _cap_sentence_length(text: str, max_chars: int = 210) -> str:
-    """Marker function: kept for historical reference, now a structural no-op.
+    """Break lines longer than max_chars at a natural comma/semicolon pause point.
 
-    Previously this broke long lines with \\n at natural punctuation breaks to
-    prevent Cartesia's 'running out of air' volume-taper on very long utterances.
-    The \\n caused a paragraph-level pause *inside* what should be a continuous
-    news paragraph — audible as a spurious section-break mid-sentence (the bug
-    reported 2026-04-30: 'pauses trop longues à certains moments').
+    Cartesia's prosody model tapers off on long unbroken utterances — the engine
+    predicts a breath point that never arrives and compensates by winding down
+    the voice volume ('running out of air' effect). Breaking at a comma or
+    semicolon gives the engine a clean breath point with full volume on the
+    second half.
 
-    The fix: _do_split now joins halves with a space (not \\n), so the comma at
-    the break point is the only breath signal Cartesia receives — a natural,
-    brief pause. Paragraphs with natural commas/periods already give the engine
-    enough breath anchors; the \\n trick is not needed when the script is written
-    for oral delivery (as ours is).
+    210 chars ≈ 35 spoken words — enough for a full, natural-sounding sentence.
+    Applied to TTS input only; script.txt stays canonical.
 
-    The function is preserved so callers in synthesize_script() remain unchanged.
+    IMPORTANT: call _replace_dashes() on the text BEFORE calling this function.
+    The break regex (_LONG_SENT_BREAK) no longer matches em/en dashes (they are
+    gone) or colons (a trailing colon before \\n confuses Cartesia into waiting
+    for the list it announced — causing an extended pause).
     """
     return '\n'.join(_shorten_line(line, max_chars) for line in text.split('\n'))
 
@@ -1685,7 +1689,7 @@ def _shorten_line(line: str, max_chars: int) -> str:
     """Recursively shorten one line until every segment is ≤ max_chars.
 
     Tiered split-point search:
-      1. Primary breaks (`, ; : — –`) in the [_MIN_FIRST_HALF, max_chars] window.
+      1. Primary breaks (`, ;`) in the [_MIN_FIRST_HALF, max_chars] window.
       2. Conjunctions (`and / but / while / because / though …`) in same window.
       3. The latest primary break BEYOND max_chars (last-resort, unblocks lines
          that have no usable break in the target window — better to split slightly
@@ -1717,24 +1721,22 @@ def _shorten_line(line: str, max_chars: int) -> str:
 
 
 def _do_split(line: str, pos: int, max_chars: int) -> str:
-    """Split `line` at byte offset `pos`, keep original punctuation.
+    """Split `line` at byte offset `pos`, keep original punctuation, capitalize the second.
 
     Preserve the trailing comma/semicolon so Cartesia uses continuation prosody
     (brief pause, sustained volume) rather than sentence-final prosody (taper +
     long silence) at the split point. The split is at a mid-sentence break, not
     a true sentence end.
-
-    2026-04-30: changed separator from \\n to space. A \\n inside a chunk tells
-    Cartesia 'new paragraph' — the engine resets to sentence-initial prosody and
-    inserts a paragraph-level pause (audibly too long for a mid-sentence comma).
-    A space leaves the comma as the sole breath signal: brief, natural, and no
-    louder than any other comma in the paragraph.
     """
+    # Keep the punctuation character at pos (comma, semicolon) so Cartesia
+    # hears a natural comma pause rather than a full-stop volume taper.
     first = line[:pos + 1].rstrip()
     rest = line[pos + 1:].lstrip()
+    if rest and rest[0].islower():
+        rest = rest[0].upper() + rest[1:]
     if not rest:
         return first
-    return first + ' ' + _shorten_line(rest, max_chars)
+    return first + '\n' + _shorten_line(rest, max_chars)
 
 
 def normalize_pronunciations(text: str, locale: str) -> str:
@@ -1824,10 +1826,14 @@ def synthesize_script(script: str, output_path: Path, local_preview: bool = Fals
             logger.warning('Acronym persistence skipped: %s', exc)
     spoken_script = _normalize_tts_whitespace(spoken_script)
     spoken_script = _strip_trailing_pause_tokens(spoken_script)
-    # Cap long sentences so Cartesia never tapers volume on a single utterance.
-    # Splits any line > 240 chars at its first usable comma/semicolon ≥ 80 chars in.
-    spoken_script = _cap_sentence_length(spoken_script)
+    # Replace dashes BEFORE capping sentence length so _LONG_SENT_BREAK never
+    # fires on a dash position.  A fragment ending with an em/en dash (stripped
+    # to nothing by _replace_dashes) would arrive at Cartesia without terminal
+    # punctuation — causing an anomalously long "what comes next?" pause.
     spoken_script = _replace_dashes(spoken_script)
+    # Cap long sentences so Cartesia never tapers volume on a single utterance.
+    # Splits any line > 210 chars at its first usable comma/semicolon ≥ 50 chars in.
+    spoken_script = _cap_sentence_length(spoken_script)
     chunks = split_script(spoken_script, max_chars=settings.tts_chunk_max_chars)
     if not chunks:
         raise ValueError('Script is empty — cannot synthesize audio')

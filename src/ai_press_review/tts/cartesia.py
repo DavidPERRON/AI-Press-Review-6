@@ -1553,7 +1553,7 @@ _PRONUNCIATIONS_FR: dict[str, str] = _compile_pronunciation_table(
 
 _MULTISPACE = re.compile(r'[ \t]{2,}')
 _SPACE_BEFORE_NEWLINE = re.compile(r'[ \t]+\n')
-_TRIPLE_NEWLINE = re.compile(r'\n{3,}')
+_MULTI_NEWLINE = re.compile(r'\n{2,}')
 _TRAILING_PAUSE_TOKENS = re.compile(r'(?:\.{2,}|\s+\.\s*)+$')
 # Primary break candidates (strong pauses): commas, semicolons, em/en dashes, colons.
 _LONG_SENT_BREAK = re.compile(r'[,;:—–]\s')
@@ -1589,10 +1589,10 @@ def _replace_dashes(text: str) -> str:
 
 
 def _normalize_tts_whitespace(text: str) -> str:
-    """Collapse double-spaces, strip trailing whitespace per line, cap blank lines."""
+    """Collapse double-spaces and multiple newlines to single, strip trailing whitespace per line."""
     text = _MULTISPACE.sub(' ', text)
     text = _SPACE_BEFORE_NEWLINE.sub('\n', text)
-    text = _TRIPLE_NEWLINE.sub('\n\n', text)
+    text = _MULTI_NEWLINE.sub('\n', text)
     return text.strip()
 
 
@@ -1760,19 +1760,23 @@ def normalize_pronunciations(text: str, locale: str) -> str:
 def split_script(text: str, max_chars: int = 1800) -> list[str]:
     """Split the script into paragraph-aligned chunks under max_chars each.
 
-    Each chunk is sent as a separate transcript within a single shared
-    context_id websocket session, so Cartesia keeps prosody and voice state
-    across the whole script. There are no per-chunk restart artefacts.
+    Each chunk is rendered as an independent Cartesia WebSocket session
+    (tts_mode='chunks'). Paragraphs within a chunk are joined with a SPACE,
+    not \\n.
 
-    Paragraphs are joined with a single \\n (not \\n\\n) so Cartesia treats each
-    boundary as a short breath rather than a full paragraph break. \\n\\n caused
-    noticeably long silences between every paragraph in the synthesized audio.
+    Rationale: Cartesia treats \\n as a paragraph-level pause boundary,
+    inserting sentence-final prosody (trailing silence of 500 ms–2 s) at
+    each \\n. A 1 400-char chunk with 5 paragraphs would therefore accumulate
+    2.5–10 s of intra-chunk silence that _trim_edges cannot remove (it only
+    operates on the chunk's leading/trailing edges). Joining with a space
+    leaves the natural punctuation (periods, commas) as the sole breath
+    signals, which is sufficient for a script written for oral delivery.
     """
     paragraphs = [p.strip() for p in text.split('\n') if p.strip()]
     chunks: list[str] = []
     current = ''
     for paragraph in paragraphs:
-        candidate = f"{current}\n{paragraph}".strip() if current else paragraph
+        candidate = f"{current} {paragraph}".strip() if current else paragraph
         if len(candidate) <= max_chars:
             current = candidate
         else:
@@ -1971,10 +1975,12 @@ async def _render_chunks_crossfade(
 
     # Hardcoded edge-silence trim thresholds. Tuned by ear on EN+FR runs:
     # -40 dBFS catches Cartesia's utterance-tail silence without clipping
-    # low-volume speech; 60 ms residual leaves a natural inter-sentence
-    # micro-pause that the crossfade then smooths.
+    # low-volume speech.
+    # KEEP_EDGE_MS must be >= crossfade_ms so the crossfade overlaps only
+    # residual silence, never real speech. crossfade_ms default = 80 ms, so
+    # KEEP_EDGE_MS is set to 100 ms (20 ms margin).
     SILENCE_THRESH_DB = -40.0
-    KEEP_EDGE_MS = 60
+    KEEP_EDGE_MS = 100
 
     def _trim_edges(seg: AudioSegment) -> AudioSegment:
         # Each chunk is rendered as an independent Cartesia session and
@@ -1989,7 +1995,17 @@ async def _render_chunks_crossfade(
         start = max(0, lead - KEEP_EDGE_MS)
         end = len(seg) - max(0, trail - KEEP_EDGE_MS)
         if end <= start:
-            return seg
+            # Segment is entirely below the silence threshold — Cartesia
+            # returned no audible speech (possible cold-start or network
+            # partial-transfer). Return a minimal segment rather than the
+            # full silent original, which would inject 20-30 s of silence
+            # into the final audio.
+            logger.warning(
+                'Chunk entirely silent (%dms below %.0f dBFS) — skipping body, '
+                'possible Cartesia cold-start',
+                len(seg), SILENCE_THRESH_DB,
+            )
+            return seg[:KEEP_EDGE_MS]
         return seg[start:end]
 
     segments: list[AudioSegment] = []

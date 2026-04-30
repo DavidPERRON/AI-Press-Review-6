@@ -39,6 +39,11 @@
     "first_seen": "2026-04-23T05:58:26Z",
     "last_seen": "2026-04-23T05:58:26Z"
   },
+  "BMW": {
+    "count": 1,
+    "first_seen": "2026-04-30T06:24:37Z",
+    "last_seen": "2026-04-30T06:24:37Z"
+  },
   "CAD": {
     "count": 1,
     "first_seen": "2026-04-29T04:23:13Z",
@@ -100,9 +105,9 @@
     "last_seen": "2026-04-28T06:28:09Z"
   },
   "DSO": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-04-30T05:16:54Z",
-    "last_seen": "2026-04-30T05:16:54Z"
+    "last_seen": "2026-04-30T06:24:37Z"
   },
   "DTC": {
     "count": 1,
@@ -195,9 +200,9 @@
     "last_seen": "2026-04-22T05:57:27Z"
   },
   "IDC": {
-    "count": 2,
+    "count": 3,
     "first_seen": "2026-04-22T05:57:27Z",
-    "last_seen": "2026-04-30T05:16:54Z"
+    "last_seen": "2026-04-30T06:24:37Z"
   },
   "IEEE": {
     "count": 1,
@@ -268,6 +273,11 @@
     "count": 1,
     "first_seen": "2026-04-28T06:28:09Z",
     "last_seen": "2026-04-28T06:28:09Z"
+  },
+  "NDTV": {
+    "count": 1,
+    "first_seen": "2026-04-30T06:24:37Z",
+    "last_seen": "2026-04-30T06:24:37Z"
   },
   "NER": {
     "count": 1,

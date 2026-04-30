@@ -1,7 +1,7 @@
 {
   "run_date": "2026-04-30",
-  "generated_at": "2026-04-30T05:13:12.394761+00:00",
-  "source_count": 281,
+  "generated_at": "2026-04-30T06:20:54.599731+00:00",
+  "source_count": 282,
   "profile": "daily",
   "sources": [
     {
@@ -33,26 +33,26 @@
       "sections": []
     },
     {
-      "url": "https://arxiv.org/abs/2604.26508",
-      "title": "Progressive Semantic Communication for Efficient Edge-Cloud Vision-Language Models",
-      "domain": "arxiv.org",
-      "published_at": "Thu, 30 Apr 2026 00:00:00 -0400",
-      "author": "Cyril Shih-Huan Hsu, Wig Yuan-Cheng Cheng, Chrysa Papagianni",
-      "summary": "arXiv:2604.26508v1 Announce Type: new Abstract: Deploying Vision-Language Models (VLMs) on edge devices remains challenging due to their substantial computational and memory demands, which exceed the capabilities of resource-constrained embedded platforms. Conversely, fully offloading inference to the cloud is often impractical in bandwidth-limited environments, where transmitting raw visual data introduces substantial latency overhead. While recent edge-cloud collaborative architectures attempt to partition VLM workloads across devices, they typically rely on transmitting fixed-size representations, lacking adaptability to dynamic network conditions and failing to fully exploit semantic redundancy. In this paper, we propose a progressive semantic communication framework for edge-cloud VLM inference, using a Meta AutoEncoder that compresses visual tokens into adaptive, progressively refinable representations, enabling plug-and-play deployment with off-the-shelf VLMs without additional fine-tuning. This design allows flexible transmission at different information levels, providing a controllable trade-off between communication cost and semantic fidelity. We implement a full end-to-e",
-      "content_text": null,
-      "relevance_score": 14.5,
-      "queries": [
-        "https://export.arxiv.org/rss/cs.LG"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://arxiv.org/abs/2604.26091",
       "title": "Operating-Layer Controls for Onchain Language-Model Agents Under Real Capital",
       "domain": "arxiv.org",
       "published_at": "Thu, 30 Apr 2026 00:00:00 -0400",
       "author": "T. J. Barton, Chris Constantakis, Patti Hauseman, Annie Mous, Alaska Hoffman, Brian Bergeron, Hunter Goodreau",
       "summary": "arXiv:2604.26091v1 Announce Type: new Abstract: We study reliability in autonomous language-model agents that translate user mandates into validated tool actions under real capital. The setting is DX Terminal Pro, a 21-day deployment in which 3,505 user-funded agents traded real ETH in a bounded onchain market. Users configured vaults through structured controls and natural-language strategies, but only agents could choose normal buy/sell trades. The system produced 7.5M agent invocations, roughly 300K onchain actions, about $20M in volume, more than 5,000 ETH deployed, roughly 70B inference tokens, and 99.9% settlement success for policy-valid submitted transactions. Long-running agents accumulated thousands of sequential decisions, including 6,000+ prompt-state-action cycles for continuously active agents, yielding a large-scale trace from user mandate to rendered prompt, reasoning, validation, portfolio state, and settlement. Reliability did not come from the base model alone; it emerged from the operating layer around the model: prompt compilation, typed controls, policy validation, execution guards, memory design, and trace-level observability. Pre-launch testing exposed failu",
+      "content_text": null,
+      "relevance_score": 14.5,
+      "queries": [
+        "https://export.arxiv.org/rss/cs.AI"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://arxiv.org/abs/2604.26508",
+      "title": "Progressive Semantic Communication for Efficient Edge-Cloud Vision-Language Models",
+      "domain": "arxiv.org",
+      "published_at": "Thu, 30 Apr 2026 00:00:00 -0400",
+      "author": "Cyril Shih-Huan Hsu, Wig Yuan-Cheng Cheng, Chrysa Papagianni",
+      "summary": "arXiv:2604.26508v1 Announce Type: cross Abstract: Deploying Vision-Language Models (VLMs) on edge devices remains challenging due to their substantial computational and memory demands, which exceed the capabilities of resource-constrained embedded platforms. Conversely, fully offloading inference to the cloud is often impractical in bandwidth-limited environments, where transmitting raw visual data introduces substantial latency overhead. While recent edge-cloud collaborative architectures attempt to partition VLM workloads across devices, they typically rely on transmitting fixed-size representations, lacking adaptability to dynamic network conditions and failing to fully exploit semantic redundancy. In this paper, we propose a progressive semantic communication framework for edge-cloud VLM inference, using a Meta AutoEncoder that compresses visual tokens into adaptive, progressively refinable representations, enabling plug-and-play deployment with off-the-shelf VLMs without additional fine-tuning. This design allows flexible transmission at different information levels, providing a controllable trade-off between communication cost and semantic fidelity. We implement a full end-to",
       "content_text": null,
       "relevance_score": 14.5,
       "queries": [
@@ -211,6 +211,20 @@
       "relevance_score": 9.0,
       "queries": [
         "https://www.pymnts.com/artificial-intelligence-2/feed/"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://technode.com/2026/04/30/tech-week-shanghai-founding-edition-to-connect-global-tech-players-with-chinas-data-ecosystem/",
+      "title": "Tech Week Shanghai founding edition to connect global tech players with China’s data ecosystem",
+      "domain": "technode.com",
+      "published_at": "Thu, 30 Apr 2026 05:32:29 +0000",
+      "author": "TechNode Staff",
+      "summary": "<figure><img alt=\"\" class=\"attachment-rss-image-size size-rss-image-size wp-post-image\" height=\"576\" src=\"https://i0.wp.com/technode.com/wp-content/uploads/2026/04/Tech-Week-Shanghai-Banner-1.png?fit=1024%2C576&amp;ssl=1\" width=\"1024\" /></figure>Tech Week Shanghai is set to make its debut in Shanghai on May 6 and 7, bringing together enterprise technology leaders, exhibitors, policymakers and industry practitioners across cloud computing, cybersecurity, data center infrastructure, data governance, data services, artificial intelligence and enterprise digital transformation. At a glance The conference and exhibition marks the founding edition of [&#8230;]",
+      "content_text": null,
+      "relevance_score": 9.0,
+      "queries": [
+        "https://technode.com/feed/"
       ],
       "sections": []
     },
@@ -691,6 +705,20 @@
       "sections": []
     },
     {
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOUGJZbkkteWdKX2hncjRIZVBVRHRMYmVUQ1FWdlRJSW16TkRON18zelRPWkdVM0pfNElVV04zOEJBVlRTRFdGZk5YLTdGYy15MHR5d0F0TlNxclRSMTdyX1Q0anR1bHBrM1BEUVNmdU9kLWlKMmVfLVAzZTRtY3hfcUtFZmg3cHpaY0FLLXRpbDdESGsyY3ZJampGUXhKcDNiZnU4bEFmdE5vbldnSjdUNHFGdTltdDNtTU8yM20zVDNWZmx3WVNmTXJR",
+      "title": "Gorilla Technology, Yotta expand India AI infra deal to $2.8 bn with 20,736 GPU deployment - Techcircle",
+      "domain": "techcircle.in",
+      "published_at": "Thu, 30 Apr 2026 05:44:50 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiygFBVV95cUxOUGJZbkkteWdKX2hncjRIZVBVRHRMYmVUQ1FWdlRJSW16TkRON18zelRPWkdVM0pfNElVV04zOEJBVlRTRFdGZk5YLTdGYy15MHR5d0F0TlNxclRSMTdyX1Q0anR1bHBrM1BEUVNmdU9kLWlKMmVfLVAzZTRtY3hfcUtFZmg3cHpaY0FLLXRpbDdESGsyY3ZJampGUXhKcDNiZnU4bEFmdE5vbldnSjdUNHFGdTltdDNtTU8yM20zVDNWZmx3WVNmTXJR?oc=5\" target=\"_blank\">Gorilla Technology, Yotta expand India AI infra deal to $2.8 bn with 20,736 GPU deployment</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Techcircle</font>",
+      "content_text": null,
+      "relevance_score": 7.5,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+      ],
+      "sections": []
+    },
+    {
       "url": "https://e27.co/the-interpretation-gap-why-ai-agents-are-moving-faster-than-companies-can-understand-20260424/",
       "title": "The interpretation gap: Why AI agents are moving faster than companies can understand",
       "domain": "e27.co",
@@ -887,20 +915,6 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOT1ZrR1AzVUtnOVQ5T0YxdnlIQzV4czF1bUxZWTJnNFdJamI2d2xjaE4xZkNFMlVwUmNiazE4Y3ItZFhlY3piQkFEWllYWk9ReWtVRkRMT3JrZjBrQ2RGSXlUc2lOXzJVekRCc3ZzUEw4ekZJODVpYi0zMExSbzVZalRVWGpKVzFhUnVHSk4zWThxNFVMMnRtOTU4TmhVOWJyOG9mcjVycG1RRXhWMk5mWDhaanMzUWtQ0gG-AUFVX3lxTE45WENVNUlCQ1pQZU5rVTdKeTJ1eEZNSk1hUWlwa24tUVFoOFNydk1WczV1QUE4OXZTMk1HRkF0Z1pEeWdkMEVPY0lLMFlpT2pDeGtfWm02eThvdUgxS0VZTS1TUHFrQkw5dm9xU2FMeG1nUFM3S2NUbFZVeWV6QUR1anJyOWNRSEY0bkxQdWI0X01DcEhIV21pUXZfUFNKSmJpWGlIcVpzSkFnZXVFOHlvWHg2SmxxWHo3amtESHc",
-      "title": "TOTM Technologies’ subsidiary launches its first new venture: TOTM.AI - The Edge Singapore",
-      "domain": "theedgesingapore.com",
-      "published_at": "Wed, 29 Apr 2026 15:11:30 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxOT1ZrR1AzVUtnOVQ5T0YxdnlIQzV4czF1bUxZWTJnNFdJamI2d2xjaE4xZkNFMlVwUmNiazE4Y3ItZFhlY3piQkFEWllYWk9ReWtVRkRMT3JrZjBrQ2RGSXlUc2lOXzJVekRCc3ZzUEw4ekZJODVpYi0zMExSbzVZalRVWGpKVzFhUnVHSk4zWThxNFVMMnRtOTU4TmhVOWJyOG9mcjVycG1RRXhWMk5mWDhaanMzUWtQ0gG-AUFVX3lxTE45WENVNUlCQ1pQZU5rVTdKeTJ1eEZNSk1hUWlwa24tUVFoOFNydk1WczV1QUE4OXZTMk1HRkF0Z1pEeWdkMEVPY0lLMFlpT2pDeGtfWm02eThvdUgxS0VZTS1TUHFrQkw5dm9xU2FMeG1nUFM3S2NUbFZVeWV6QUR1anJyOWNRSEY0bkxQdWI0X01DcEhIV21pUXZfUFNKSmJpWGlIcVpzSkFnZXVFOHlvWHg2SmxxWHo3amtESHc?oc=5\" target=\"_blank\">TOTM Technologies’ subsidiary launches its first new venture: TOTM.AI</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Edge Singapore</font>",
-      "content_text": null,
-      "relevance_score": 6.5,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNN25QZ0dwY0R0Zkg0S2R1cDN3TUwteEMxXzdJd1JHeE1nYzIzMG9XZlhBN18zenJraGRpc2UzSjlvMWlfMUFDQ0h2MUp3RVA5MXhxX0RWQ3B4QUdxYUsxNjRSNWxTQ1RkbmRPai1RRW41RS1kWk9PcDRUdEhIR1g5YTdjSE1YOHFEZTBmME9VSzNnQnBGNEczV1pTc0R5SE9GRGtBbTd1ZUJYdTc5UlZaTVFDY0o5aC1hZ2RZYWUxSDl5dw",
       "title": "South Africa’s AI policy cited fake research, created by AI: what lessons need to be learned - The Conversation",
       "domain": "theconversation.com",
@@ -967,6 +981,20 @@
       "relevance_score": 6.2,
       "queries": [
         "https://www.theregister.com/headlines.atom"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOckVZdjRnQm1VTmoxNi1nUzBzWFdEb3FmVFNRblZCakJqRmV6S2FXd0xvcDc4Rm5uR09kSE9MQ1o3NzZPdUJaemRBSGpHelp1QldiT0JjNzBLWHAyOFlDbmlzYmt5by1fcGNya1VoQ1RYMUtkb0luTGZQdFgxZ29Cb1JCYmpfaWRhdWR3",
+      "title": "Meta ouvre ses campagnes publicitaires aux agents IA - The Media Leader",
+      "domain": "fr.themedialeader.com",
+      "published_at": "Wed, 29 Apr 2026 22:50:26 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiiwFBVV95cUxOckVZdjRnQm1VTmoxNi1nUzBzWFdEb3FmVFNRblZCakJqRmV6S2FXd0xvcDc4Rm5uR09kSE9MQ1o3NzZPdUJaemRBSGpHelp1QldiT0JjNzBLWHAyOFlDbmlzYmt5by1fcGNya1VoQ1RYMUtkb0luTGZQdFgxZ29Cb1JCYmpfaWRhdWR3?oc=5\" target=\"_blank\">Meta ouvre ses campagnes publicitaires aux agents IA</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Media Leader</font>",
+      "content_text": null,
+      "relevance_score": 6.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
       ],
       "sections": []
     },
@@ -1064,7 +1092,7 @@
       "content_text": null,
       "relevance_score": 6.0,
       "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
       ],
       "sections": []
     },
@@ -1083,16 +1111,16 @@
       "sections": []
     },
     {
-      "url": "https://techcrunch.com/2026/04/29/softbank-is-creating-a-robotics-company-that-builds-data-centers-and-already-eyeing-a-100b-ipo/",
-      "title": "SoftBank is creating a robotics company that builds data centers — and already eyeing a $100B IPO",
-      "domain": "techcrunch.com",
-      "published_at": "Thu, 30 Apr 2026 03:58:22 +0000",
-      "author": "Lucas Ropek",
-      "summary": "You need infrastructure to build AI a and robots, but apparently you also need AI and robots to build infrastructure.",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPY3NOR2N5TVFud3FtS2UxMXc3Ml9qV2ZmZnVUTTRfaF93b05DMHVPRm1zMFhGMWFSQ0dqeHNNRUdDb1gxUVNNdzNYajZ6WTRlb0ozSnN4cFY5NVgzWjM5cm1WeTJvWUtCQVBBbXl6MkRhUldieU1abjlISXNmS2VTeXVWbUhkMUYxZjl6WUI0VTF5UdIBlwFBVV95cUxOcmFBNHlYMTB6UWRYNklIWjlTakcxZ2VFamlwV3pfcFltd3lGYk5yV0szb2lpUEVKN0NLZHU5Q1h3WHE0Y2I1LWpqNHZyOXpuVHZfNlJFWGN3Z1JvcWk5b3dtalg4cUFTcU40NWduOFpRRlNNVG4tdV9ILXlObDBMeUpPNDIyWDF2eEJwUUxQUUhRX1dQWW5r",
+      "title": "SoftBank reportedly weighs $100 billion valuation for new AI and robotics spinout in potential U.S. IPO - CNBC",
+      "domain": "cnbc.com",
+      "published_at": "Thu, 30 Apr 2026 05:11:19 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMikgFBVV95cUxPY3NOR2N5TVFud3FtS2UxMXc3Ml9qV2ZmZnVUTTRfaF93b05DMHVPRm1zMFhGMWFSQ0dqeHNNRUdDb1gxUVNNdzNYajZ6WTRlb0ozSnN4cFY5NVgzWjM5cm1WeTJvWUtCQVBBbXl6MkRhUldieU1abjlISXNmS2VTeXVWbUhkMUYxZjl6WUI0VTF5UdIBlwFBVV95cUxOcmFBNHlYMTB6UWRYNklIWjlTakcxZ2VFamlwV3pfcFltd3lGYk5yV0szb2lpUEVKN0NLZHU5Q1h3WHE0Y2I1LWpqNHZyOXpuVHZfNlJFWGN3Z1JvcWk5b3dtalg4cUFTcU40NWduOFpRRlNNVG4tdV9ILXlObDBMeUpPNDIyWDF2eEJwUUxQUUhRX1dQWW5r?oc=5\" target=\"_blank\">SoftBank reportedly weighs $100 billion valuation for new AI and robotics spinout in potential U.S. IPO</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">CNBC</font>",
       "content_text": null,
       "relevance_score": 6.0,
       "queries": [
-        "https://techcrunch.com/category/artificial-intelligence/feed/"
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -1135,20 +1163,6 @@
       "relevance_score": 5.8,
       "queries": [
         "https://inc42.com/feed/"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQcHFSY0lpcUVSYUNJM2JyUTVEdXBWMFY1WHhra3BPMTlOZDFuMV9ZVHBmaU1LNzhDWlh6UHBVNE1fMHBQVGhkREkyeUtKOTdneHJVTGZjdU83WUxDZDM2UDFsOWhQTW90cWlQYnFRTVpBWVFRNTZBQzY0T09hQV9Rc3ZxclJPZ092MlY2bVd5bFEwYUwtTGxIcG1Bem9WdUNrRm5oLTh5VWFOc2w1LUZleA",
-      "title": "Hong Kong's AI Ecosystem Shifting Toward Large-Scale Adoption, Alibaba Exec Says - Yicai Global",
-      "domain": "yicaiglobal.com",
-      "published_at": "Thu, 30 Apr 2026 02:39:36 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMisAFBVV95cUxQcHFSY0lpcUVSYUNJM2JyUTVEdXBWMFY1WHhra3BPMTlOZDFuMV9ZVHBmaU1LNzhDWlh6UHBVNE1fMHBQVGhkREkyeUtKOTdneHJVTGZjdU83WUxDZDM2UDFsOWhQTW90cWlQYnFRTVpBWVFRNTZBQzY0T09hQV9Rc3ZxclJPZ092MlY2bVd5bFEwYUwtTGxIcG1Bem9WdUNrRm5oLTh5VWFOc2w1LUZleA?oc=5\" target=\"_blank\">Hong Kong's AI Ecosystem Shifting Toward Large-Scale Adoption, Alibaba Exec Says</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Yicai Global</font>",
-      "content_text": null,
-      "relevance_score": 5.8,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -1265,6 +1279,20 @@
       "sections": []
     },
     {
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOOWE3a1c1SVdKbHo3Vk92Mlhsajk1WWRGQTJrdHBMWUc4dXdUd3VtVmphbGFwa25LQnlNbjV5dDFRek9ldHVIYWFOZEtfQmRMWlpaa1NZLUZuU1BvbVVUUWlFUGNaV003a25EVHhzQnZSUXBvVEpjREhwYXVyRVhWMlh0WmJkcTlxNjNwVWNJYm5FNlotVi0ybVV2VlN2SmE5YnNEOXh5NFdZVDZfa1RJX0gtUQ",
+      "title": "We toured an AI data center to see how our stock names make these facilities work - CNBC",
+      "domain": "cnbc.com",
+      "published_at": "Wed, 29 Apr 2026 17:30:22 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiswFBVV95cUxOOWE3a1c1SVdKbHo3Vk92Mlhsajk1WWRGQTJrdHBMWUc4dXdUd3VtVmphbGFwa25LQnlNbjV5dDFRek9ldHVIYWFOZEtfQmRMWlpaa1NZLUZuU1BvbVVUUWlFUGNaV003a25EVHhzQnZSUXBvVEpjREhwYXVyRVhWMlh0WmJkcTlxNjNwVWNJYm5FNlotVi0ybVV2VlN2SmE5YnNEOXh5NFdZVDZfa1RJX0gtUQ?oc=5\" target=\"_blank\">We toured an AI data center to see how our stock names make these facilities work</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">CNBC</font>",
+      "content_text": null,
+      "relevance_score": 5.5,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence&hl=en&gl=US&ceid=US:en"
+      ],
+      "sections": []
+    },
+    {
       "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQd0ZWZmhTcUZqWDU1bklZTlVodEM2Z082cDY2U0RZQmU1b2VqVF9zdHlSTlNTM0thbTJJX25paVViRTM2OUt3a2F4WjJ1RGF6RU45RWZWOEpCZkd6dDRGRXE1dnE1VktmcDhSUzFGZGZ0OWltWFZLWTBJc0p1OUpQVVgzNUo3U2fSAYwBQVVfeXFMTTBPbWZTTzB3OEZNRlRfOHo1T25xWGdHYWc1MVBwN0dLMmV4TThZQlpPdThiZFpEYVIyU1llaVgyRlpHZC12SDczZXJsSUZNX185UzAzSHc0Zk5xVUFVajY1YWhPc3BZN3BNaG0zN2gwUHRSV2tNdDA2dnJOdkpwTUt1WEpPRXdlYmtZaE0",
       "title": "Let the public share in the rewards of artificial intelligence - The Hill",
       "domain": "thehill.com",
@@ -1303,20 +1331,6 @@
       "relevance_score": 5.5,
       "queries": [
         "https://news.google.com/rss/search?q=artificial+intelligence&hl=en&gl=US&ceid=US:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQcVlraWY3MkRkdGF6OFJ5SV8yXzZtVXBzZWVYUXdheWlxajB2WG1zcVBxNVllTGI0NzhYNU5hY3lYU1QtYXRyV09yaW1kQ29VLW1Ha1VQZlBteDF2U0FBQm5Jc09fazJsVVRVb2E2dDdtY09Ub0Y2NVlCQmFoTmJhQWthZzNjcEpqTFJWWGlyTzJaRDR4UEFiZ0ZsNl9QZVJ4a2FiVEJVa1c0ci1DMklBaWlrS2RxRS1YdU5F",
-      "title": "Enterprises plan rapid growth for AI factories and AI at the edge, survey finds - cio.com",
-      "domain": "cio.com",
-      "published_at": "Wed, 29 Apr 2026 15:50:06 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiuwFBVV95cUxQcVlraWY3MkRkdGF6OFJ5SV8yXzZtVXBzZWVYUXdheWlxajB2WG1zcVBxNVllTGI0NzhYNU5hY3lYU1QtYXRyV09yaW1kQ29VLW1Ha1VQZlBteDF2U0FBQm5Jc09fazJsVVRVb2E2dDdtY09Ub0Y2NVlCQmFoTmJhQWthZzNjcEpqTFJWWGlyTzJaRDR4UEFiZ0ZsNl9QZVJ4a2FiVEJVa1c0ci1DMklBaWlrS2RxRS1YdU5F?oc=5\" target=\"_blank\">Enterprises plan rapid growth for AI factories and AI at the edge, survey finds</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">cio.com</font>",
-      "content_text": null,
-      "relevance_score": 5.5,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -1377,12 +1391,12 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxPZ28zbHJmQVJ0RGt5dEtYRnFiSlJIeHJ1M1o1bzJTdEk0RVN4UkZIc044LVhJLU5sUUhydG42U2N2MnRIcFpvZW04N01vZWpQc2twbE5adm8zRXR1cG14TXplOHhDR05nSVBucUt4cktnU2NNUnNKamZkOVVzbmltNnVfUWx6ZERUem5zb1JvTU1yOFZvdDFXdjZzaVRxTWx4SHVXTDZoMWt2WTQxWlpYQTJhcGZFQmJSSVJwUFZKRGFHdllTbVlRa29tQUJIbjZrcWNCalB3WW5nZnVHOVQzalhxaVRrYVFCYV9qX2FheGluQlBNdnhBWGhENVFNcXJ0R0E",
-      "title": "BMW i Ventures Announces $300 Million Fund to Back AI Startups Reshaping the Automotive Ecosystem - BMW Group",
+      "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxPa3JpWFhrZWNQcjNnRkhKbGdBVDFiXzlXWTZDUURIWTlaRmJLUDRHajRETkRlQ2F0T0xiLV9HbzZhTGRvMGw4aVVxYy1EVnFDRFNsdGFBdkcwSFpNMENvSzlmNzBMV1d3eW9MNnI3RzVkdkdLVTduR21hV3NseGZnbERoNWtKYWRkQ1ctTmJ0X2thWm5EdF90dko0N05fRDd3QTNIbHFiN1d1bWpVLWEzZ1dsV3hpaVJIV1pvTHNxYkdBYU5RYV9Ia3ZhVWpHcG5LSEpjaFNQT0d6UVZfYklieVBpZ2w5eEFuSHFieW5aeklMeXdMN0xMS2FtNk9qRFhzNURQNkln",
+      "title": "BMW i Ventures Announces $300 Million Fund to Back AI Startups Reshaping the Automotive Ecosystem. - BMW Group",
       "domain": "press.bmwgroup.com",
-      "published_at": "Wed, 29 Apr 2026 13:56:24 GMT",
+      "published_at": "Wed, 29 Apr 2026 14:00:00 GMT",
       "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiggJBVV95cUxPZ28zbHJmQVJ0RGt5dEtYRnFiSlJIeHJ1M1o1bzJTdEk0RVN4UkZIc044LVhJLU5sUUhydG42U2N2MnRIcFpvZW04N01vZWpQc2twbE5adm8zRXR1cG14TXplOHhDR05nSVBucUt4cktnU2NNUnNKamZkOVVzbmltNnVfUWx6ZERUem5zb1JvTU1yOFZvdDFXdjZzaVRxTWx4SHVXTDZoMWt2WTQxWlpYQTJhcGZFQmJSSVJwUFZKRGFHdllTbVlRa29tQUJIbjZrcWNCalB3WW5nZnVHOVQzalhxaVRrYVFCYV9qX2FheGluQlBNdnhBWGhENVFNcXJ0R0E?oc=5\" target=\"_blank\">BMW i Ventures Announces $300 Million Fund to Back AI Startups Reshaping the Automotive Ecosystem</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">BMW Group</font>",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMihgJBVV95cUxPa3JpWFhrZWNQcjNnRkhKbGdBVDFiXzlXWTZDUURIWTlaRmJLUDRHajRETkRlQ2F0T0xiLV9HbzZhTGRvMGw4aVVxYy1EVnFDRFNsdGFBdkcwSFpNMENvSzlmNzBMV1d3eW9MNnI3RzVkdkdLVTduR21hV3NseGZnbERoNWtKYWRkQ1ctTmJ0X2thWm5EdF90dko0N05fRDd3QTNIbHFiN1d1bWpVLWEzZ1dsV3hpaVJIV1pvTHNxYkdBYU5RYV9Ia3ZhVWpHcG5LSEpjaFNQT0d6UVZfYklieVBpZ2w5eEFuSHFieW5aeklMeXdMN0xMS2FtNk9qRFhzNURQNkln?oc=5\" target=\"_blank\">BMW i Ventures Announces $300 Million Fund to Back AI Startups Reshaping the Automotive Ecosystem.</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">BMW Group</font>",
       "content_text": null,
       "relevance_score": 5.5,
       "queries": [
@@ -1573,16 +1587,30 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNNUh5Q3VpbUhxcDlLaGZJM1lGRUt6WW1udTIyUDRGMFZYc0tlLVl3LTZkVk5GWmJwX0JTR1hqNmI0SFZzakFtd2UtRjBlV0pYU3o3XzVqWFBPZHJWQmlHVm0yU3g5MUNLUlY3NjdrS0liV3pPNHZBMXh6MGZBY2xiT3VOaC0wcU9RQlVrNTlVWm1IbDZKQWV6TGhwaGtEalNkem85TTRZVDBOZzR6WE1jNnY4S05mTmFIUWVla3JtQnRTdEwweGh2YVZXQjVwLVdBZHI2MW1JOURjd3Vlbzk1cFpybzQyd9IB6wFBVV95cUxOWUVrcXBTTENfOHQ3ZU1aLVFKdE80S0Fnb2RSQnBGVHliRzV4dWVFaHRnMHZ1MXVRN3hWYXoxTUZUd1RpS1FsOFAwT29LME9nOEhmbHRDMzhIY0duUWZXX1RJRXdONk1HT0lvTGtvck8wQjBjU0U4cUxzRWt1YlF1VVFrcVJETVQwaHBrcnlJU2N5ZFpfV0tqRE5KS21xcENkMkFkQzRadTJPeGxNY2VhWkxtdDFkSER5QlJEZ0M5TENzdXloSkNYZHA1QUktREJDc3RndzRNNU9BTk00cDBGdkZ5dnhEMEF1cEkw",
-      "title": "Amphenol forecasts upbeat quarterly results on AI data center demand - ET Telecom",
-      "domain": "telecom.economictimes.indiatimes.com",
-      "published_at": "Thu, 30 Apr 2026 02:51:39 GMT",
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9raXVZUl9JYU02RG5wVjRHYXRiQVREbDhKTGRKTTEwY2JMNnZETklzNlRzbENYVXpIMGVJaXZnZjVHODNmOWp4Q1hIVFA5eVVv",
+      "title": "My Say: The AI mirage: Why firms are accelerating into inefficiency - The Edge Malaysia",
+      "domain": "theedgemalaysia.com",
+      "published_at": "Thu, 30 Apr 2026 05:30:00 GMT",
       "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi5gFBVV95cUxNNUh5Q3VpbUhxcDlLaGZJM1lGRUt6WW1udTIyUDRGMFZYc0tlLVl3LTZkVk5GWmJwX0JTR1hqNmI0SFZzakFtd2UtRjBlV0pYU3o3XzVqWFBPZHJWQmlHVm0yU3g5MUNLUlY3NjdrS0liV3pPNHZBMXh6MGZBY2xiT3VOaC0wcU9RQlVrNTlVWm1IbDZKQWV6TGhwaGtEalNkem85TTRZVDBOZzR6WE1jNnY4S05mTmFIUWVla3JtQnRTdEwweGh2YVZXQjVwLVdBZHI2MW1JOURjd3Vlbzk1cFpybzQyd9IB6wFBVV95cUxOWUVrcXBTTENfOHQ3ZU1aLVFKdE80S0Fnb2RSQnBGVHliRzV4dWVFaHRnMHZ1MXVRN3hWYXoxTUZUd1RpS1FsOFAwT29LME9nOEhmbHRDMzhIY0duUWZXX1RJRXdONk1HT0lvTGtvck8wQjBjU0U4cUxzRWt1YlF1VVFrcVJETVQwaHBrcnlJU2N5ZFpfV0tqRE5KS21xcENkMkFkQzRadTJPeGxNY2VhWkxtdDFkSER5QlJEZ0M5TENzdXloSkNYZHA1QUktREJDc3RndzRNNU9BTk00cDBGdkZ5dnhEMEF1cEkw?oc=5\" target=\"_blank\">Amphenol forecasts upbeat quarterly results on AI data center demand</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">ET Telecom</font>",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiUEFVX3lxTE9raXVZUl9JYU02RG5wVjRHYXRiQVREbDhKTGRKTTEwY2JMNnZETklzNlRzbENYVXpIMGVJaXZnZjVHODNmOWp4Q1hIVFA5eVVv?oc=5\" target=\"_blank\">My Say: The AI mirage: Why firms are accelerating into inefficiency</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Edge Malaysia</font>",
       "content_text": null,
       "relevance_score": 5.5,
       "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOSHFBbC1VM0VXbERvc1hMeVZlaGEtRTBlZEJDLXNLOWVMU0hhem5ZSlBKNmJHM184X3NUTGk5cDRrM1JUSERRZE9MRXJJU0VFeF9RMl9BTWNuLUpiS19jcWc0ZFFJMERzSnU4UDZpYnNmTmxfeXkzc1RBNGpucFNlVUVOU1R5VHNzRXNSeUpVYzR5V0tDamhFbXNRai1wWTRLZEFxY2pFVFc0RTR6RldvUjkteWpzeTRDbXR1b3A5THM0dzV2Wmhib3NKN0xXWmwxSWt4T0U0Y3R0Z2tpZEo0bTBBZTQ",
+      "title": "Microsoft, Google, Meta... les géants de l'IA voient leurs bénéfices s'envoler - La Tribune",
+      "domain": "latribune.fr",
+      "published_at": "Thu, 30 Apr 2026 05:15:42 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi5AFBVV95cUxOSHFBbC1VM0VXbERvc1hMeVZlaGEtRTBlZEJDLXNLOWVMU0hhem5ZSlBKNmJHM184X3NUTGk5cDRrM1JUSERRZE9MRXJJU0VFeF9RMl9BTWNuLUpiS19jcWc0ZFFJMERzSnU4UDZpYnNmTmxfeXkzc1RBNGpucFNlVUVOU1R5VHNzRXNSeUpVYzR5V0tDamhFbXNRai1wWTRLZEFxY2pFVFc0RTR6RldvUjkteWpzeTRDbXR1b3A5THM0dzV2Wmhib3NKN0xXWmwxSWt4T0U0Y3R0Z2tpZEo0bTBBZTQ?oc=5\" target=\"_blank\">Microsoft, Google, Meta... les géants de l'IA voient leurs bénéfices s'envoler</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">La Tribune</font>",
+      "content_text": null,
+      "relevance_score": 5.5,
+      "queries": [
+        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
       ],
       "sections": []
     },
@@ -1671,6 +1699,20 @@
       "sections": []
     },
     {
+      "url": "https://36kr.com/newsflashes/3788915767074051",
+      "title": "追觅AURORA手机全球亮相，最新估值近百亿美元",
+      "domain": "36kr.com",
+      "published_at": "2026-04-30 14:04:25  +0800",
+      "author": null,
+      "summary": "当地时间4月29日，追觅AURORA手机在美国硅谷发布会上亮相。影像方面，实现全焦段2亿像素、全焦段LOFIC技术、3D空间建模照片；通讯方面，实现360°环绕天线、自研AI通信优化算法、全时信号引擎等技术；追觅AURORA AIOS还打造了原生 AI 系统，实现智能终端从 “执行命令的工具” 向 “主动服务的伙伴” 演进。此外，AURORA手机正按640亿元人民币（约合100亿美元）的估值，推进新一轮融资。",
+      "content_text": null,
+      "relevance_score": 5.2,
+      "queries": [
+        "https://36kr.com/feed"
+      ],
+      "sections": []
+    },
+    {
       "url": "https://36kr.com/p/3788687934249989",
       "title": "「优时科技」完成数亿元B2轮融资，从L4视觉自动驾驶延展至人形机器人，打造数据飞轮｜36氪首发",
       "domain": "36kr.com",
@@ -1704,7 +1746,7 @@
       "domain": "36kr.com",
       "published_at": "2026-04-30 08:00:00  +0800",
       "author": null,
-      "summary": "<p>文｜胡香赟</p> <p>编辑｜海若镜</p> <p>36氪获悉，微滔生物近日接连完成A轮及A+轮融资，累计募资金额超5000万美元。两轮融资分别由正心谷资本和德诚资本领投，OrbiMed（奥博资本）、汉康资本、卫材创新风投基金（Eisai Innovation Inc.）、建发新兴投资，以及老股东启明创投、顺禧基金、杏泽资本等跟投。</p> <p>据了解，微滔生物的A轮次募集资金将主要用于推进核心药物管线GT801的临床进程和注册申报，以及研发团队扩充与平台建设。</p> <p>微滔生物由沙砾生物于2025年拆分成立，后者主要从事肿瘤浸润淋巴细胞（TIL）疗法开发，核心产品已进入临床二期。沙砾生物/微滔生物创始人、CEO刘雅容博士毕业于美国南加州大学，在细胞与基因治疗（CGT）领域拥有10余年从业经历。</p> <p>刘雅容介绍，最初选择做TIL，是因为它是少数有望在实体瘤领域取得突破、且已经迈入商业化阶段的细胞治疗路径，这个过程中，沙砾生物对免疫治疗在不同疾病中的作用机制认知也不断加深，积累起了从“体外工程化”到“体内工程化”的研发能力，因此也逐渐开始通过体内CAR-T路径探索下一代免疫治疗方法。这是沙砾生物将体内CAR-T资产拆分、以微滔生物的形态独立运营的背景。</p> <p>2025年下半年以来，礼来、艾伯维、百时美施贵宝等跨国药企接连开始下场收购海外体内CAR-T公司，累计披露金额已超过140亿美元，由此也引发中国CGT企业对该赛道的研发热情。丁香园Insight数据称，当前，全球在研的体内CAR-T管线超过180条，其中约一半都来自中国。激烈的竞争下，谁能更快积累更多样本数据、做出差异化，很大程度上决定了企业的未来。</p> <p>刘雅容也坦言：“去年，拆分微滔生物的一个现实考虑是，LNP（脂质纳米颗粒）路线的体内CAR-T产品更适合用在自身免疫等领域，而这类适应症在临床开发、团队结构以及资源配置上，都与开发传统肿瘤管线存在明显差异。如果完全放在一个体系内推进，可能并不是最高效、合理的安排。所以我们选择把这一部分能力独立出来，通过单独融资和团队配置，让它能够更聚焦、更快推进。”</p> <p>微滔生物押注的LNP递送路线是体内CAR-T疗法的主流开发路径之一。它主要通过把体外合成的mRNA封装于LNP中，在给药后于人体内实现对T细胞的递送。这个过程不需要插入基因组，因此具备更好的安全性，同时也可以通过剂量和给药频率去调节效果，并且支持重复给药，这使它在自身免疫疾病等需要长期管理的疾病中具有天然优势。</p> <p>从技术储备的角度来说，微滔生物重点积累了三方面的能力：首先是体内递送能力，尤其是如何实现对T细胞的精准递送，其中既包括靶向抗体的筛选，也包括LNP与抗体之间的定点定量偶联设计，这一部分直接决定了转导效率和脱靶控制的平衡。</p>",
+      "summary": "<p>文｜胡香赟</p> <p>编辑｜海若镜</p> <p>36氪获悉，微滔生物近日接连完成A轮及A+轮融资，累计募资金额超5000万美元。两轮融资分别由正心谷资本和德诚资本领投，OrbiMed（奥博资本）、汉康资本、卫材创新风投基金（Eisai Innovation Inc.）、建发新兴投资，以及老股东启明创投、顺禧基金、杏泽资本等跟投。</p> <p>据了解，微滔生物的A轮次募集资金将主要用于推进核心药物管线GT801的临床进程和注册申报，以及研发团队扩充与平台建设。</p> <p>微滔生物由沙砾生物于2025年拆分成立，后者主要从事肿瘤浸润淋巴细胞（TIL）疗法开发，核心产品已进入临床二期。沙砾生物/微滔生物创始人、CEO刘雅容博士毕业于美国南加州大学，在细胞与基因治疗（CGT）领域拥有10余年从业经历。</p> <p>刘雅容介绍，最初选择做TIL，是因为它是少数有望在实体瘤领域取得突破、且已经迈入商业化阶段的细胞治疗路径，这个过程中，沙砾生物对免疫治疗在不同疾病中的作用机制认知也不断加深，积累起了从“体外工程化”到“体内工程化”的研发能力，因此也逐渐开始通过体内CAR-T路径探索下一代免疫治疗方法。这是沙砾生物将体内CAR-T资产拆分、以微滔生物的形态独立运营的背景。</p> <p>2025年下半年以来，礼来、艾伯维、百时美施贵宝等跨国药企接连开始下场收购海外体内CAR-T公司，累计披露金额已超过140亿美元，由此也引发中国CGT企业对该赛道的研发热情。丁香园Insight数据称，当前，全球在研的体内CAR-T管线超过180条，其中约一半都来自中国。激烈的竞争下，谁能更快积累更多样本数据、做出差异化，很大程度上决定了企业的未来。</p> <p>刘雅容也坦言：“去年，拆分微滔生物的一个现实考虑是，LNP（脂质纳米颗粒）路线的体内CAR-T产品更适合用在自身免疫等领域，而这类适应症在临床开发、团队结构以及资源配置上，都与开发传统肿瘤管线存在明显差异。如果���全放在一个体系内推进，可能并不是最高效、合理的安排。所以我们选择把这一部分能力独立出来，通过单独融资和团队配置，让它能够更聚焦、更快推进。”</p> <p>微滔生物押注的LNP递送路线是体内CAR-T疗法的主流开发路径之一。它主要通过把体外合成的mRNA封装于LNP中，在给药后于人体内实现对T细胞的递送。这个过程不需要插入基因组，因此具备更好的安全性，同时也可以通过剂量和给药频率去调节效果，并且支持重复给药，这使它在自身免疫疾病等需要长期管理的疾病中具有天然优势。</p> <p>从技术储备的角度来说，微滔生物重点积累了三方面的能力：首先是体内递送能力，尤其是如何实现对T细胞的精准递送，其中既包括靶向抗体的筛选，也包括LNP与抗体之间的定点定量偶联设计，这一部分直接决定了转导效率和脱靶控制的平衡。</",
       "content_text": null,
       "relevance_score": 5.2,
       "queries": [
@@ -1755,20 +1797,6 @@
       "sections": []
     },
     {
-      "url": "https://36kr.com/p/3787661080714497",
-      "title": "“36氪企业全情报”官方股票舆情交流社群，正式开放招募！",
-      "domain": "36kr.com",
-      "published_at": "2026-04-29 16:50:02  +0800",
-      "author": null,
-      "summary": "<p>36氪企业全情报官方专属社群现已正式对外开放，正式打造<strong>唯一官方股票舆情情报社群</strong>，面向所有股民、理财爱好者、个股深度研究者，适配不同投资风格与交易节奏，帮你高效拿捏舆情风向、把握行情先机。</p> <p>从<strong>股市舆情解读、个股情报拆解</strong>，到<strong>行情逻辑分析、投资干货交流</strong>，一站式帮投资者告别信息滞后、看懂涨跌本质。</p> <p class=\"image-wrapper\"><img src=\"https://img.36krcdn.com/hsossms/20260429/v2_4b634360481d423a933d487c35f56cef@5284654_oswg47362oswg282oswg275_img_png?x-oss-process=image/quality,q_100/format,jpg/interlace,1\" /></p> <p class=\"img-desc\">扫码进入：“36氪企业全情报”官方股票舆情交流社群</p> <h2>为什么要做专属股票舆情交流情报社群��</h2> <p>炒股早已不是单纯看K线，<strong>舆情、消息、基本面、行业政策</strong>才是涨跌核心逻辑。很多人每天刷新闻、翻股吧、看研报，依旧消息滞后、真假难辨，抓不住行情主线；有人只会跟风买卖，看不懂资金动向与舆情情绪，容易踏空也容易被套。</p> <p>基于普通股民真实痛点，36氪企业全情报打造官方专属社群，聚焦<strong>股市舆情、个股情报、行业热点、财报解读、避雷预警</strong>，给每一位投资者一个纯粹、专业、无广告的交流圈层。</p> <p>&nbsp;</p> <h2>36氪企业全情报，能给你什么价值</h2> <p>✅ <strong>全网舆情实时速递</strong>依托36氪 + 红麦聚信大数据，7×24小时全网采集行情资讯、政策消息、个股公告、平台热议，关键信息不遗漏。</p> <p>✅ <strong>AI智能行情拆解</strong>融合多款大模型AI算力，自动梳理热点逻辑、解读财报数据、拆解板块轮动，把复杂信息变成简单易懂的决策参考。</p> <p>✅ <strong>每日午报 / 晚报干货同步</strong>盘中热点、板块轮动、个股利好利空、储能 / 猪肉 / 家电等赛道机会，群内定时同步，省去自己全网翻找。</p> <p>✅ <strong>避雷预警 + 个股交流</strong>及时提示业绩暴雷、舆情利空、高位情绪风险，同行交流思路、分享逻辑，拒绝盲目跟风。</p> <p>&nbsp;</p> <h2>社群核心能解决什么？</h2> <p>解决<strong>消息闭塞、资讯杂乱</strong>的问题；解决<str",
-      "content_text": null,
-      "relevance_score": 5.2,
-      "queries": [
-        "https://36kr.com/feed"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://www.axios.com/2026/04/29/israel-lebanon-strikes-trump-interview",
       "title": "Trump tells Netanyahu only \"surgical\" Lebanon strikes as ceasefire falters",
       "domain": "axios.com",
@@ -1793,20 +1821,6 @@
       "relevance_score": 5.0,
       "queries": [
         "https://news.google.com/rss/search?q=artificial+intelligence&hl=en&gl=US&ceid=US:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxObXBESERRR05WQUVBaGNkQkJxbjRSQXl1M21KOVN0SDJ6ak9OQVdaa1N3Wmd4ZkZCcHkycXY2T0Z2QTNmWFNnaWpiREIxRFVjcnctQ1lDeFVTb1dNaUcxb214WkU2ZmRWSVRuUUotTURKSlFPUEFubTlUdVZnQUNTY3VrY0ZoY0VaYXhSa2N1WnVkd1BJcmo0TUJ4bw",
-      "title": "‘No defence’ against wearable AI in exams, researchers warn - Times Higher Education",
-      "domain": "timeshighereducation.com",
-      "published_at": "Wed, 29 Apr 2026 20:34:29 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMimwFBVV95cUxObXBESERRR05WQUVBaGNkQkJxbjRSQXl1M21KOVN0SDJ6ak9OQVdaa1N3Wmd4ZkZCcHkycXY2T0Z2QTNmWFNnaWpiREIxRFVjcnctQ1lDeFVTb1dNaUcxb214WkU2ZmRWSVRuUUotTURKSlFPUEFubTlUdVZnQUNTY3VrY0ZoY0VaYXhSa2N1WnVkd1BJcmo0TUJ4bw?oc=5\" target=\"_blank\">‘No defence’ against wearable AI in exams, researchers warn</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Times Higher Education</font>",
-      "content_text": null,
-      "relevance_score": 5.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -1895,16 +1909,16 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVEFKZS01Tkc0X296WlpFUVROcVdINFZZMDcwckx4QXVDT3ZwelpzN293UkcyWmE2Rm5DT0xJVS1mUTVwY1RBdzFmV0NyZTV0OGhUUDBNQjNIb1pTVXplcTJMQ1dPQnp0dmljbTRON2xGWDBjQ1NIeFUtbWloNDh6ZVh4VUVuQVhjSjhWRUd0SXFZeG5WWElTdFk3b0lVSllzVTZxZHpGS0stZVU",
-      "title": "De la gestion du shadow AI au TokenOps, comment structurer l’essor de l’IA - ITforBusiness.fr",
-      "domain": "itforbusiness.fr",
-      "published_at": "Wed, 29 Apr 2026 10:00:13 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQNFJVdGF1X1oxOWxqeGNxY09neFUwYWl1eklsWEJmSTVxNEJhb3VMWEx0Z0ZYaWowbld0Qm05eXFGTy0zUllEaE9yQjREbmY5VHBEZHlPLUhYUjBmWFZxZk00ZEZUOS1jX0ZHOXRsRG54Wk9rNlNpcG1BUFdpa0xvQy1NbmNCRnczN2FXNm8tVXJhWFZyUFBhUEphSEFuWGNOb3ppZ3UxTy01ZGVKTW9WN25xRkNBWW9yWW4xUktPbklqS0htYWpVT0dZYkxpUlpOWjM4Vm45SE9zcXYwZUFDbzVibEhqd2k0bGfSAeoBQVVfeXFMUDRSVXRhdV9aMTlsanhjcWNPZ3hVMGFpdXpJbFhCZkk1cTRCYW91TFhMdGdGWGlqMG5XdEJtOXlxRk8tM1JZRGhPckI0RG5mOVRwRGR5Ty1IWFIwZlhWcWZNNGRGVDktY19GRzl0bERueFpPazZTaXBtQVBXaWtMb0MtTW5jQkZ3MzdhVzZvLVVyYVhWclBQYVBKYUhBblhjTm96aWd1MU8tNWRlSk1vVjducUZDQVlvclluMVJLT25JaktIbWFqVU9HWWJMaVJaTlozOFZuOUhPc3F2MGVBQ281YmxIandpNGxn",
+      "title": "AI in Medicine is Not the End of Doctors, but a Warning to Put Empathy First, say SHRO Researchers in JAMA Opinion Article | Newswise - Newswise",
+      "domain": "newswise.com",
+      "published_at": "Wed, 29 Apr 2026 12:40:00 GMT",
       "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVEFKZS01Tkc0X296WlpFUVROcVdINFZZMDcwckx4QXVDT3ZwelpzN293UkcyWmE2Rm5DT0xJVS1mUTVwY1RBdzFmV0NyZTV0OGhUUDBNQjNIb1pTVXplcTJMQ1dPQnp0dmljbTRON2xGWDBjQ1NIeFUtbWloNDh6ZVh4VUVuQVhjSjhWRUd0SXFZeG5WWElTdFk3b0lVSllzVTZxZHpGS0stZVU?oc=5\" target=\"_blank\">De la gestion du shadow AI au TokenOps, comment structurer l’essor de l’IA</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">ITforBusiness.fr</font>",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi6gFBVV95cUxQNFJVdGF1X1oxOWxqeGNxY09neFUwYWl1eklsWEJmSTVxNEJhb3VMWEx0Z0ZYaWowbld0Qm05eXFGTy0zUllEaE9yQjREbmY5VHBEZHlPLUhYUjBmWFZxZk00ZEZUOS1jX0ZHOXRsRG54Wk9rNlNpcG1BUFdpa0xvQy1NbmNCRnczN2FXNm8tVXJhWFZyUFBhUEphSEFuWGNOb3ppZ3UxTy01ZGVKTW9WN25xRkNBWW9yWW4xUktPbklqS0htYWpVT0dZYkxpUlpOWjM4Vm45SE9zcXYwZUFDbzVibEhqd2k0bGfSAeoBQVVfeXFMUDRSVXRhdV9aMTlsanhjcWNPZ3hVMGFpdXpJbFhCZkk1cTRCYW91TFhMdGdGWGlqMG5XdEJtOXlxRk8tM1JZRGhPckI0RG5mOVRwRGR5Ty1IWFIwZlhWcWZNNGRGVDktY19GRzl0bERueFpPazZTaXBtQVBXaWtMb0MtTW5jQkZ3MzdhVzZvLVVyYVhWclBQYVBKYUhBblhjTm96aWd1MU8tNWRlSk1vVjducUZDQVlvclluMVJLT25JaktIbWFqVU9HWWJMaVJaTlozOFZuOUhPc3F2MGVBQ281YmxIandpNGxn?oc=5\" target=\"_blank\">AI in Medicine is Not the End of Doctors, but a Warning to Put Empathy First, say SHRO Researchers in JAMA Opinion Article | Newswise</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Newswise</font>",
       "content_text": null,
       "relevance_score": 5.0,
       "queries": [
-        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -2021,6 +2035,62 @@
       "sections": []
     },
     {
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNblRtV21Gb09FQ252S3RMR1pmYVFTaGwzMDlsZUh3akFrU3NwM2RVYjVaeUM3WW93a2EtOEdtRUM2S3EyaWhFaTdxemN3dm12WE5ZN2VGYzRRMHd2dWpfNTVqWUowWXlEbWlHRXRRVHB0Yko3OTQ4aHllSk5NRHJVQ2Z0eS1tbXFmRW9CTUVzay1OY0NUNnM1VmdYeDBXVzFwNEJ4ek83REZvNDROUUdJXzBmYmJld9IBuwFBVV95cUxNX0FWc0ZOejBCa242akxfSkNyalVNU0Y3SW43T1FleUUyRkdUM3pRc1VtT2J1elBzeEl6Ri1BUHlfV1ozSlpBdndfQjd4V3d0Tm9kdlNvUVFsTFZGdnIxMEVVTF9KVWl5eTA4SVFod2tVZnpyWW9MV0kzOXdfVzRXYVVpajZTM0ZSYjR5bDlleXVIZHk4NWFQak5kakkxMEN3RWUwcDA5LXZhWWd6OVpFdGRNX0JNMlo4Tldv",
+      "title": "LG CNS rides AI boom to achieve strong first-quarter earnings growth - The Korea Times",
+      "domain": "koreatimes.co.kr",
+      "published_at": "Thu, 30 Apr 2026 05:50:03 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMitgFBVV95cUxNblRtV21Gb09FQ252S3RMR1pmYVFTaGwzMDlsZUh3akFrU3NwM2RVYjVaeUM3WW93a2EtOEdtRUM2S3EyaWhFaTdxemN3dm12WE5ZN2VGYzRRMHd2dWpfNTVqWUowWXlEbWlHRXRRVHB0Yko3OTQ4aHllSk5NRHJVQ2Z0eS1tbXFmRW9CTUVzay1OY0NUNnM1VmdYeDBXVzFwNEJ4ek83REZvNDROUUdJXzBmYmJld9IBuwFBVV95cUxNX0FWc0ZOejBCa242akxfSkNyalVNU0Y3SW43T1FleUUyRkdUM3pRc1VtT2J1elBzeEl6Ri1BUHlfV1ozSlpBdndfQjd4V3d0Tm9kdlNvUVFsTFZGdnIxMEVVTF9KVWl5eTA4SVFod2tVZnpyWW9MV0kzOXdfVzRXYVVpajZTM0ZSYjR5bDlleXVIZHk4NWFQak5kakkxMEN3RWUwcDA5LXZhWWd6OVpFdGRNX0JNMlo4Tldv?oc=5\" target=\"_blank\">LG CNS rides AI boom to achieve strong first-quarter earnings growth</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Korea Times</font>",
+      "content_text": null,
+      "relevance_score": 5.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQOVRWV3FMVEQ3SjRkU2FsU1lhNVBmNkl2OTF5TWVINGdqQUxNNEQ1X1EyRG8zbHNqcW1CSFlpNnJQWE10dFRUeDgwY2RvMzJyUU5BQjRJcFYzby16enRaUTlraHp3bFhRYk8wOUdMVTU5Tm9xWnc4M2ZYdzQzbkdhejhESnZzN2xuZ29PQ1BxRmJJM1VVLU8yRElHd3kzb3RyWGNXVFU0azc0WXhXOHczcGJtc0I0WnJOWlY4eFR4YnFzc1o1QzgxMTQ4cUVfZ3AyaWIwRWc1TE1iMFJiZGhF",
+      "title": "Jeff Moss urges global collaboration in AI advancement on Day 2 of MTX (Milipol TechX Summit) 2026 - HTX | Home Team Science and Technology Agency",
+      "domain": "htx.gov.sg",
+      "published_at": "Thu, 30 Apr 2026 05:11:12 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi3wFBVV95cUxQOVRWV3FMVEQ3SjRkU2FsU1lhNVBmNkl2OTF5TWVINGdqQUxNNEQ1X1EyRG8zbHNqcW1CSFlpNnJQWE10dFRUeDgwY2RvMzJyUU5BQjRJcFYzby16enRaUTlraHp3bFhRYk8wOUdMVTU5Tm9xWnc4M2ZYdzQzbkdhejhESnZzN2xuZ29PQ1BxRmJJM1VVLU8yRElHd3kzb3RyWGNXVFU0azc0WXhXOHczcGJtc0I0WnJOWlY4eFR4YnFzc1o1QzgxMTQ4cUVfZ3AyaWIwRWc1TE1iMFJiZGhF?oc=5\" target=\"_blank\">Jeff Moss urges global collaboration in AI advancement on Day 2 of MTX (Milipol TechX Summit) 2026</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">HTX | Home Team Science and Technology Agency</font>",
+      "content_text": null,
+      "relevance_score": 5.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPVmdqdnUyRDFQanlCNDFJM21qbzVJNGFJb1B2R0xSU2hmcndlNTk0eERHc25MVHVCaWFkODlEbUs5X1VsWklpclNJdk9LUXRqY2YxelRwSzEySzBQVU5LT3ZEMzNSQVl0ckxRMGtldWxRamFFdFIwZS0wR2NJakI0ZXl6Skw2djNHc0U4SnZydThza2pUNVctZ0pWcTF4LTEwc19pV3hpUjdBNzNBc29NSTUwdDBJcmct0gG-AUFVX3lxTE5IQzVxTFptMlNXaUJQZ2t6VXFpbmNHcjJPZk8xR3ZPSk9vTUdMQ0w5QTAweVh4WUl6TEJkRE9fSHRyVUhDTkpNMXFoOW9tODhqX3EyS1YzclFsQkpmTUtwZlU3UFg2Mnkza2lISGpnT2toazd4ZGxVZWhHRm56ZmtOSko0RFNxWDRDR3VpOGt3ZlI4X2RqWUFrNnFoeDJCUWZkV0kxT3hPTF80SHNnRlZXSXlOUWIwRl9RZTc3amc",
+      "title": "Cognizant layoffs: IT giant to cut 4,000 jobs as Project Leap boosts AI, automation and reshapes global workfo - CNBC TV18",
+      "domain": "cnbctv18.com",
+      "published_at": "Thu, 30 Apr 2026 05:01:59 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxPVmdqdnUyRDFQanlCNDFJM21qbzVJNGFJb1B2R0xSU2hmcndlNTk0eERHc25MVHVCaWFkODlEbUs5X1VsWklpclNJdk9LUXRqY2YxelRwSzEySzBQVU5LT3ZEMzNSQVl0ckxRMGtldWxRamFFdFIwZS0wR2NJakI0ZXl6Skw2djNHc0U4SnZydThza2pUNVctZ0pWcTF4LTEwc19pV3hpUjdBNzNBc29NSTUwdDBJcmct0gG-AUFVX3lxTE5IQzVxTFptMlNXaUJQZ2t6VXFpbmNHcjJPZk8xR3ZPSk9vTUdMQ0w5QTAweVh4WUl6TEJkRE9fSHRyVUhDTkpNMXFoOW9tODhqX3EyS1YzclFsQkpmTUtwZlU3UFg2Mnkza2lISGpnT2toazd4ZGxVZWhHRm56ZmtOSko0RFNxWDRDR3VpOGt3ZlI4X2RqWUFrNnFoeDJCUWZkV0kxT3hPTF80SHNnRlZXSXlOUWIwRl9RZTc3amc?oc=5\" target=\"_blank\">Cognizant layoffs: IT giant to cut 4,000 jobs as Project Leap boosts AI, automation and reshapes global workfo</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">CNBC TV18</font>",
+      "content_text": null,
+      "relevance_score": 5.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPaW5DeXh2UWpNS2ZpYmE3TEx6S3ltU0tYV0JjWEhIcHBEa0hKS0pVYWQxYnNpOXZINjVPeE9pN3BvZWpZZTVaX0FqR2dUcjhYNWExYlVFdnQ1RTFtUFJZd0ctMDhtS3R2NkwwR2FYTTAxdjNjUDBJdUN2Y1hZbzZRaFJGSXFnTmJVOTl1UlZqNXR5d1dnQUJYZFVEQmN1TG9oSnR6LUppUm5JSW1OX2lNVlBscThYclJJOE5ZMkVxVE1BenFjcDB4amdpcVI5UFF4",
+      "title": "Cognizant starts charging for AI alongside human work in new pricing model - People Matters - HR News",
+      "domain": "peoplematters.in",
+      "published_at": "Thu, 30 Apr 2026 05:00:54 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi0AFBVV95cUxPaW5DeXh2UWpNS2ZpYmE3TEx6S3ltU0tYV0JjWEhIcHBEa0hKS0pVYWQxYnNpOXZINjVPeE9pN3BvZWpZZTVaX0FqR2dUcjhYNWExYlVFdnQ1RTFtUFJZd0ctMDhtS3R2NkwwR2FYTTAxdjNjUDBJdUN2Y1hZbzZRaFJGSXFnTmJVOTl1UlZqNXR5d1dnQUJYZFVEQmN1TG9oSnR6LUppUm5JSW1OX2lNVlBscThYclJJOE5ZMkVxVE1BenFjcDB4amdpcVI5UFF4?oc=5\" target=\"_blank\">Cognizant starts charging for AI alongside human work in new pricing model</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">People Matters - HR News</font>",
+      "content_text": null,
+      "relevance_score": 5.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+      ],
+      "sections": []
+    },
+    {
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOYXVyQXBuQkQxUzJMU1hyMV9OcUxKemhrY3prY0FiZXJhZDZYMjFmOWtidXA5WkNucE9DREM2QmNKMmh5UTdKbzNtYWRaVzZRRGRidlZYN09iQ3M4ZnZTTmRrWmotYjc0cUJBTFVzWlljZHd2cWNsWi1naF9XQWlWc3hLX19uQUgtYUgyQXRqME92RFZxa0F5NFNUd1Nrek54Z2c",
       "title": "Alphabet’s cloud unit beats quarterly revenue estimates on strong AI demand - DD News",
       "domain": "ddnews.gov.in",
@@ -2035,30 +2105,30 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPRk13dS1UY0EtRmQtQjQ1Ynd5NU93Z2VCLVNld0dnVkxsQXBkMk0yZ3E2Nm9nOXVpZkpsUkN0dmZNcFdqUGtFckF2Z2I5VnhWQTlHbnBUU3FFeEs4ME0tNTdkR1V2aGJ4dkRkR2xFX2lfSzBLMC1pYUcwOUFneWF3X04waURPR1E0WHNtZjhQRTRnU1Vzb0xWd2pBazhmQ0R0SFYzaW81NXZlZ09KMEVFbUk1NjJjMWJsV3NoN21ROVVHclRtOXpOYTNPNA",
-      "title": "Chinese firms struggle to catch up with South Korea, Taiwan leaders in AI chips, say analysts - The Business Times",
-      "domain": "businesstimes.com.sg",
-      "published_at": "Thu, 30 Apr 2026 04:51:00 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNbkVxY3NYV1lCWngzSVFoUGpqMklFNEJEZ2tvS1JJZjcyWk5TOWswRTQ0QjJqYkttVzZoaU9zYXFtV3pWU3NzT2JhMG9OcU1wakQwak1UQkpuekF5bGtDRXpTOWp5RjdxTGFzbXJRa0dtako2YXJYMzVBREQ5N0NzcnJXdGRQM1FzaU1GOFlsQXh6d3pTaGZ6RkwzcHBLQlBOejRfOG1PYXFFZ2JlSEVTTG9IRkVHQ2FPeE91QTdpeDV5XzNxS2xjN2FQdlRFaTdS0gHWAUFVX3lxTE5UQy02d1NoeDdHZ3lXd2NhQXZNR3pDTDVIcVNTYWQ4emdhM21MQ2Mwc2lEcy05OUdLMjlTRWF0UlBsdmc2REdUSjRPVXAwcklRS21pOUQzclF0am9sZjgyMGVMYy1vQTh3SnRSS1k0ZEZnblBlMGw2cWFvc2UxMnZXZ1NnUFY0bngwbEZZT195WHlVbEw4ZVVJbm5vcmNNOUpCbUJXZktObzZlYUNxZW1zRTNEaERHWUtJX3pleTEtUV9MQlFoMWVqREliaUxEWUhMRnJMc0E",
+      "title": "What Is An AI Data Centre? Inside The Powerful Tech Hubs Shaping The Future - News18",
+      "domain": "news18.com",
+      "published_at": "Thu, 30 Apr 2026 04:14:33 GMT",
       "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiywFBVV95cUxPRk13dS1UY0EtRmQtQjQ1Ynd5NU93Z2VCLVNld0dnVkxsQXBkMk0yZ3E2Nm9nOXVpZkpsUkN0dmZNcFdqUGtFckF2Z2I5VnhWQTlHbnBUU3FFeEs4ME0tNTdkR1V2aGJ4dkRkR2xFX2lfSzBLMC1pYUcwOUFneWF3X04waURPR1E0WHNtZjhQRTRnU1Vzb0xWd2pBazhmQ0R0SFYzaW81NXZlZ09KMEVFbUk1NjJjMWJsV3NoN21ROVVHclRtOXpOYTNPNA?oc=5\" target=\"_blank\">Chinese firms struggle to catch up with South Korea, Taiwan leaders in AI chips, say analysts</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Business Times</font>",
-      "content_text": null,
-      "relevance_score": 5.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOR0l6d21IRVdyVTAtRFpTb0FYdFNsOXp0YXVuekNjQzUwR2FJcmFNTGNzSVo5QUI3QldTNmhYamYxdGh3ZDY4WWwtZnNjeHI0ZGx6aUhLWkM2YTJIc1FnQUhvM1FsdnRMQkN4by1KMGpBZG9DR3NSTTFkaC1EZUh4ZzNWWHdMajBKNG0xMHR0V01IOGEtSkY0TXd5T2Q4aGMyZnVqbExGbFNTdUVDa0dKTnVB0gG3AUFVX3lxTE0zaGJSYmx0d2UzWDZqMHFkdE54VmNKVXp6SldaZHpfaWFaTUxRRzJTWUtIU1RRQkVEZjFvVXNrejZfcFZHX2E3MGJJRURYX1FrY3BRSXh6NGxwakYzNXUxMFZpY0VGUzhKWk9iWTMtTmJ3RmNfMFVBZnZwUVNBNzJxMEctWi1MTzVySm10bldLR2NmVEZUSzItXzZHN2o2Yk1oMGNrS1VRZUlsU3NfVlU3ellfTXo0dw",
-      "title": "Global markets turn selective as AI, oil and capital flows drive divergence: Manulife Investments - CNBC TV18",
-      "domain": "cnbctv18.com",
-      "published_at": "Thu, 30 Apr 2026 04:28:02 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMisgFBVV95cUxOR0l6d21IRVdyVTAtRFpTb0FYdFNsOXp0YXVuekNjQzUwR2FJcmFNTGNzSVo5QUI3QldTNmhYamYxdGh3ZDY4WWwtZnNjeHI0ZGx6aUhLWkM2YTJIc1FnQUhvM1FsdnRMQkN4by1KMGpBZG9DR3NSTTFkaC1EZUh4ZzNWWHdMajBKNG0xMHR0V01IOGEtSkY0TXd5T2Q4aGMyZnVqbExGbFNTdUVDa0dKTnVB0gG3AUFVX3lxTE0zaGJSYmx0d2UzWDZqMHFkdE54VmNKVXp6SldaZHpfaWFaTUxRRzJTWUtIU1RRQkVEZjFvVXNrejZfcFZHX2E3MGJJRURYX1FrY3BRSXh6NGxwakYzNXUxMFZpY0VGUzhKWk9iWTMtTmJ3RmNfMFVBZnZwUVNBNzJxMEctWi1MTzVySm10bldLR2NmVEZUSzItXzZHN2o2Yk1oMGNrS1VRZUlsU3NfVlU3ellfTXo0dw?oc=5\" target=\"_blank\">Global markets turn selective as AI, oil and capital flows drive divergence: Manulife Investments</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">CNBC TV18</font>",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi0AFBVV95cUxNbkVxY3NYV1lCWngzSVFoUGpqMklFNEJEZ2tvS1JJZjcyWk5TOWswRTQ0QjJqYkttVzZoaU9zYXFtV3pWU3NzT2JhMG9OcU1wakQwak1UQkpuekF5bGtDRXpTOWp5RjdxTGFzbXJRa0dtako2YXJYMzVBREQ5N0NzcnJXdGRQM1FzaU1GOFlsQXh6d3pTaGZ6RkwzcHBLQlBOejRfOG1PYXFFZ2JlSEVTTG9IRkVHQ2FPeE91QTdpeDV5XzNxS2xjN2FQdlRFaTdS0gHWAUFVX3lxTE5UQy02d1NoeDdHZ3lXd2NhQXZNR3pDTDVIcVNTYWQ4emdhM21MQ2Mwc2lEcy05OUdLMjlTRWF0UlBsdmc2REdUSjRPVXAwcklRS21pOUQzclF0am9sZjgyMGVMYy1vQTh3SnRSS1k0ZEZnblBlMGw2cWFvc2UxMnZXZ1NnUFY0bngwbEZZT195WHlVbEw4ZVVJbm5vcmNNOUpCbUJXZktObzZlYUNxZW1zRTNEaERHWUtJX3pleTEtUV9MQlFoMWVqREliaUxEWUhMRnJMc0E?oc=5\" target=\"_blank\">What Is An AI Data Centre? Inside The Powerful Tech Hubs Shaping The Future</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">News18</font>",
       "content_text": null,
       "relevance_score": 5.0,
       "queries": [
         "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOeXJaZFJtN2RQZlVtdUd1a3hJS2NTOFJ2Q2xxaTIxTjRWVEpQMlFiSVJyb3N3RXRiTHJYXzJiM1BSOTlMV2xwR0dZV18yLUMtbktwUzh3NTNhYU5yS09HdFR6NGZnMjcyNTFsMmgwT1l4UmtIVVZCcy1CVVBrMmFfNHZTMzVMY2IxbDFWMFB2SHo1aUFiRno2Mi0yclRNc2xLSlJKZ1cxTjd5V1RITWFNSmktbk8yNGVoNUVBbGVpLUR5cjlJdEE",
+      "title": "Samsung’s chip profit soars 48-times due to AI spending frenzy - The Business Times",
+      "domain": "businesstimes.com.sg",
+      "published_at": "Thu, 30 Apr 2026 03:16:00 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMixgFBVV95cUxOeXJaZFJtN2RQZlVtdUd1a3hJS2NTOFJ2Q2xxaTIxTjRWVEpQMlFiSVJyb3N3RXRiTHJYXzJiM1BSOTlMV2xwR0dZV18yLUMtbktwUzh3NTNhYU5yS09HdFR6NGZnMjcyNTFsMmgwT1l4UmtIVVZCcy1CVVBrMmFfNHZTMzVMY2IxbDFWMFB2SHo1aUFiRno2Mi0yclRNc2xLSlJKZ1cxTjd5V1RITWFNSmktbk8yNGVoNUVBbGVpLUR5cjlJdEE?oc=5\" target=\"_blank\">Samsung’s chip profit soars 48-times due to AI spending frenzy</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Business Times</font>",
+      "content_text": null,
+      "relevance_score": 5.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -2399,20 +2469,6 @@
       "sections": []
     },
     {
-      "url": "https://www.kdnuggets.com/self-hosted-llms-in-the-real-world-limits-workarounds-and-hard-lessons",
-      "title": "Self-Hosted LLMs in the Real World: Limits, Workarounds, and Hard Lessons",
-      "domain": "kdnuggets.com",
-      "published_at": "Wed, 29 Apr 2026 12:00:48 +0000",
-      "author": "Nahla Davies",
-      "summary": "This article is about what actually happens when you take self-hosted LLMs seriously: not the benchmarks, not the hype, but the real operational friction most tutorials skip entirely.",
-      "content_text": null,
-      "relevance_score": 4.5,
-      "queries": [
-        "https://www.kdnuggets.com/feed"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPd3E0UW5JVUl2anhnQWhxWkx0anNnV2trc2lZcVZUYzNucXNRV2dEaDZNSVhHb0p5YVJ4MWI4UHlCNUNPaW8ybFJ5Uk1LOGt1ajhIVFdOVHFlUUw0Tk54VnlKWl9iRlVaU2xxcWE0VGZwUURSY2VZRzJtTDdpOEJ2eVFwdmNtR2hDSmdCbHNWc0pOUENoWUdtNkhmTjBUdjB2WEpJTy0xckRZVWg4bllzVkNmZXFvNkd4LUUtLXhRbjBGd05KZkJVT0k0b21ULS1NYW5iWNIB2gFBVV95cUxNemFJNjR0UjBVUWoybXdIZ0Z6UTRuN3lGUFB6NFRHT0IyQWpIMER6bmU5eFcxOFNWd3BwX3ZveUx5MHVtVW9aVXMyMjVoWVItOW42NnJtYXQ0dTJKbWl2TjJFdFF5UGFzZXR0dGxvNlNKMW1TMG1Wc0VsWU16R2NQaExTMmk5WElOVE54Q1RtcURQTDE1WTJDRTlSMmVYRldRQUl0LUdGOTFLWFF5M3Z4Z2FVR0YwRlhLWWRuOWpEOHNYMWNURUstak44QXprY2pwOERlZUllQXJGdw",
       "title": "Indian VCs build 'bridges to America' as AI startups look westward - Business Standard",
       "domain": "business-standard.com",
@@ -2451,6 +2507,20 @@
       "relevance_score": 4.5,
       "queries": [
         "https://www.restofworld.org/feed/latest/"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNV1JRZXNOazQ0QVFCYldQUjFOUUJ1LTdzYU96RWluSHUxdHVHZXE3cHhKTE9PbWI0c3dOcGlpM3dpUGc5SFNFdzQtWnlZSnFUelJRcjVrWXQtTzhLTGF3Qi1keE0tVi1LTG5OMjhJUUo0WFgtWDhEeW1vUl9xMlMzR05UUVhQQzFJREtiUk1oam1WNEhZV0pTSjBLa3BDN1NlUE41ZzRYdVhuQ25NOTNaYUNrdmZ4THFKVXFNSTNLZXBPUHNM0gHKAUFVX3lxTFBkV2RUaVl1cGItdlVCcmdBbEZYQWNZUzkwQTZlZDdZSzl1RmMteXAxbUhsVGhLeF9hZWhiWGN3bTRXQnllTjBLNktSNkFkM3AxaTZMRUxfTGtTX2ZiQVUyUVJqWEgxaGpEZ2NUUnRuaFJNMlZ2ZXo3VEV0UDZXQl9EU1VjRkNBZXhOV01tMk9vX0gxQWVXREZDSGNlc3JYUk5GUW90N3RFeXMwXzREMDRaSG1sTHlIYXlUb2lXRHRjVFd3T25aU21FaEE",
+      "title": "Singtel Singapore’s new AI programme to help push SMEs beyond pilots - The Edge Singapore",
+      "domain": "theedgesingapore.com",
+      "published_at": "Wed, 29 Apr 2026 09:32:16 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMixAFBVV95cUxNV1JRZXNOazQ0QVFCYldQUjFOUUJ1LTdzYU96RWluSHUxdHVHZXE3cHhKTE9PbWI0c3dOcGlpM3dpUGc5SFNFdzQtWnlZSnFUelJRcjVrWXQtTzhLTGF3Qi1keE0tVi1LTG5OMjhJUUo0WFgtWDhEeW1vUl9xMlMzR05UUVhQQzFJREtiUk1oam1WNEhZV0pTSjBLa3BDN1NlUE41ZzRYdVhuQ25NOTNaYUNrdmZ4THFKVXFNSTNLZXBPUHNM0gHKAUFVX3lxTFBkV2RUaVl1cGItdlVCcmdBbEZYQWNZUzkwQTZlZDdZSzl1RmMteXAxbUhsVGhLeF9hZWhiWGN3bTRXQnllTjBLNktSNkFkM3AxaTZMRUxfTGtTX2ZiQVUyUVJqWEgxaGpEZ2NUUnRuaFJNMlZ2ZXo3VEV0UDZXQl9EU1VjRkNBZXhOV01tMk9vX0gxQWVXREZDSGNlc3JYUk5GUW90N3RFeXMwXzREMDRaSG1sTHlIYXlUb2lXRHRjVFd3T25aU21FaEE?oc=5\" target=\"_blank\">Singtel Singapore’s new AI programme to help push SMEs beyond pilots</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Edge Singapore</font>",
+      "content_text": null,
+      "relevance_score": 4.5,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -2525,6 +2595,20 @@
       "sections": []
     },
     {
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPeEtvc3J5YnZVOWdGakJIY3NDc3JSWXhJZ1BXRHZLNzZhZWl1MDNlY096bVpSYWZVeloxS1dCQUZvR3ozWk9XSWl6aXFFTTk2TkVxam9hcXU3WjFleDVkeDFXMGthTjROVW1fLU05bEhHNzNvXzFZSkpLdFVPYmxtd1QwSDNyOTVBNWRnckg0d1E1RzNoc09jYXNYMEwzN3ROdUszU2k3M3kxSl9oUWkycGloZGFwdEpU",
+      "title": "Energy Management Software Market Surges with AI Integration, Set to Reach $44.31 Billion by 2035 - TimesTech",
+      "domain": "timestech.in",
+      "published_at": "Thu, 30 Apr 2026 05:55:52 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiuAFBVV95cUxPeEtvc3J5YnZVOWdGakJIY3NDc3JSWXhJZ1BXRHZLNzZhZWl1MDNlY096bVpSYWZVeloxS1dCQUZvR3ozWk9XSWl6aXFFTTk2TkVxam9hcXU3WjFleDVkeDFXMGthTjROVW1fLU05bEhHNzNvXzFZSkpLdFVPYmxtd1QwSDNyOTVBNWRnckg0d1E1RzNoc09jYXNYMEwzN3ROdUszU2k3M3kxSl9oUWkycGloZGFwdEpU?oc=5\" target=\"_blank\">Energy Management Software Market Surges with AI Integration, Set to Reach $44.31 Billion by 2035</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">TimesTech</font>",
+      "content_text": null,
+      "relevance_score": 4.5,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+      ],
+      "sections": []
+    },
+    {
       "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPTEgzd3czQzNGRmpyRWpOOVdQZUgtZlQyZlZ2LVUwaGlMcEhoS1NPU1QxUnlQVmRlZ3VtMFR1Qmh0UUhuRzVkQ3RUYUpINFVMTjFHTTh2SzZHaHpPSGZQRDVJMGllS1NfMTJ4dDZUMFppY3RaakNkRTk0cExUSnVONlZUWk94YWpBNFJqMHljQmtNUUFwVTB6Z0dXX3lYTzNJRmJVV1p3",
       "title": "Visa pilots AI-powered payment framework with banks and FinTechs - IBS Intelligence",
       "domain": "ibsintelligence.com",
@@ -2534,7 +2618,7 @@
       "content_text": null,
       "relevance_score": 4.5,
       "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -2581,20 +2665,6 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxObW11RFB4X2dfcjlKUDdlMUtPWUloTWF0UkI0UHVpakhPMzVGZlgwVmdPd2pKSkhVLURzdzRzdlBtdDF1MnJ2b3UzX1JhS21oQktKUTV4TXliR0FQYmxsSFZhZUF3N2VMSmNZTld5T01PdnI5ZzRmNnlwYVpXa2twejZQY3M4X0QtVlBTYmFzRVBubXU4Qld3QUkwYktHdFRjeVEtRlJSanRoLXVF",
-      "title": "Amazon tops cloud expectations on strong AI demand, shares rise - CNA",
-      "domain": "channelnewsasia.com",
-      "published_at": "Wed, 29 Apr 2026 22:41:25 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMirAFBVV95cUxObW11RFB4X2dfcjlKUDdlMUtPWUloTWF0UkI0UHVpakhPMzVGZlgwVmdPd2pKSkhVLURzdzRzdlBtdDF1MnJ2b3UzX1JhS21oQktKUTV4TXliR0FQYmxsSFZhZUF3N2VMSmNZTld5T01PdnI5ZzRmNnlwYVpXa2twejZQY3M4X0QtVlBTYmFzRVBubXU4Qld3QUkwYktHdFRjeVEtRlJSanRoLXVF?oc=5\" target=\"_blank\">Amazon tops cloud expectations on strong AI demand, shares rise</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">CNA</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQbXl1ak5ZbC1GM1dLb2t0STVEVklSUEVpMTRpZC16b1FtaDZlSHF2TGk0VTFqQ0xucC1QcmE5Z0lXc3g2LVpOMFJLdjVQLTMwMFk0NVBtMzZiRVBURWkzcmczeGdYQ2NGSjZfQTRKV3JQR2RXVlZEcXo3OUdSYjFEM2xMYXN4VTM5OHdSWEhhdFZ3QlVaYnBoOUZHeEZPOGZud3pPUGtYV0JUU2xZaExGbmx4cUcxYmtVOVE",
       "title": "AI Demand Is Surging — But Taiwan Semiconductor Is Controlling the Supply - 24/7 Wall St.",
       "domain": "247wallst.com",
@@ -2609,20 +2679,6 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNbDZqdlZzMUZudDRfNnhlS29PU3BKVXBSV2FGeUVhOFRrVkpoV0NZWnE0dVZoRTU2aUotYl92bVZJWUhGWHBTeHpuazJPanY3RnA0SVpId2ctVE1kdUFzZ0VNZ1V5TUFRQi13V3g3YjNtU1VpUlVDdjlKWEpnZlpwcWRaenlvNndDSjVKQlM1VnZlLXc5R2EzTFBR",
-      "title": "Selective Virtue: Anthropic, the Pentagon, and the Contradictions of AI Governance in Wartime - Small Wars Journal",
-      "domain": "smallwarsjournal.com",
-      "published_at": "Wed, 29 Apr 2026 22:30:27 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMimgFBVV95cUxNbDZqdlZzMUZudDRfNnhlS29PU3BKVXBSV2FGeUVhOFRrVkpoV0NZWnE0dVZoRTU2aUotYl92bVZJWUhGWHBTeHpuazJPanY3RnA0SVpId2ctVE1kdUFzZ0VNZ1V5TUFRQi13V3g3YjNtU1VpUlVDdjlKWEpnZlpwcWRaenlvNndDSjVKQlM1VnZlLXc5R2EzTFBR?oc=5\" target=\"_blank\">Selective Virtue: Anthropic, the Pentagon, and the Contradictions of AI Governance in Wartime</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Small Wars Journal</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOZmJEMUNPSXRLNlpacDYzSUpZZnRQbkFHVWZnaVJYTExpQlA5ZDZwOEpKZVpZcWV6Rmt4bnhpdVFaR1QzSV9acVFoUUl2ZTdPYnBTaDM2SDhySkNWT3pGNWhNVHRMTjVuOTVhVjZFN2tjcjB5UWg3YWNOdUVJTlExX3JYVlgwZDJ3Skw4S0xqYlc1Zkk",
       "title": "What It Will Take To Make AI-Enabled Robots Safer - Eurasia Review",
       "domain": "eurasiareview.com",
@@ -2633,20 +2689,6 @@
       "relevance_score": 4.0,
       "queries": [
         "https://news.google.com/rss/search?q=artificial+intelligence&hl=en&gl=US&ceid=US:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOeXdBOU00bEFja3pfb1FKR1BmZVFQYVRaOXVmS3BHWU1Tc1U3Q0wzRzhIRW1Ib0l5RTdzNklFcVgxdngyTl9BVzlHQ2g3YTlPdDUwVXlOa2xxeFM0R2F6RVpXVDRpUjNmcndfZW0tMDRpZ0xEWThISHdwWVBKS1BqUzVzejUzRGg3UHIyTXYwcGw",
-      "title": "Nagaland holds first AI-based Capacity Building Plan workshop - Nagaland Post",
-      "domain": "nagalandpost.com",
-      "published_at": "Wed, 29 Apr 2026 22:07:56 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMikAFBVV95cUxOeXdBOU00bEFja3pfb1FKR1BmZVFQYVRaOXVmS3BHWU1Tc1U3Q0wzRzhIRW1Ib0l5RTdzNklFcVgxdngyTl9BVzlHQ2g3YTlPdDUwVXlOa2xxeFM0R2F6RVpXVDRpUjNmcndfZW0tMDRpZ0xEWThISHdwWVBKS1BqUzVzejUzRGg3UHIyTXYwcGw?oc=5\" target=\"_blank\">Nagaland holds first AI-based Capacity Building Plan workshop</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Nagaland Post</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
       ],
       "sections": []
     },
@@ -2749,62 +2791,6 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQRXE0WWpkTWhjd2J6VlNTckVKbDk0TzZXLUdnZWhVNTBqSEEzV1l3OWFFbkFTdzJ1bVRNY19KT1hrWTFvOXotaTRzYWpWRzVsME5EQnIxRlZ6ckp0MFZxQXZTR2NqZ0pwQkdVZENiOHVwMHlYZ05PcWlJY091R0dkUk0yTWJ3UEhtV25rVjZQNjhWdUhLR0syQkRETzZNUmQtVjI5Sy1CZ1RsODIzcEhmNjNidGd1bDdkb3FmVUJTUHJ0bTdHQVdFWjV30gHPAUFVX3lxTE1JVDNUUXhJMFRlU1dhemIyX3FjMENnYmUwS1JXOVpaX2owVnk1Z1daNVhFcHNuLUFNd1I3LVAtYlJYanVnUzVvek9naWd1aF9CY2JfaTh4bGRaTXRYVVVxZjhsRjJvdERuT2NoWUY1c21TX25VcmdGNXJkTjBwZG5XNFlqZHgtVUhISmdKZGxfbENjQnB5TmN0NjluMmVteUFOYkdpeXM4dWR3VENtLUFTQ2NJQXJQRDlfMlF5VW1xU0VWNWgwMDY3YVhtS0Fjaw",
-      "title": "Meta soutenu par l'IA au premier trimestre, mais le marché s'inquiète de ses dépenses... - Fortuneo",
-      "domain": "bourse.fortuneo.fr",
-      "published_at": "Wed, 29 Apr 2026 20:51:00 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiygFBVV95cUxQRXE0WWpkTWhjd2J6VlNTckVKbDk0TzZXLUdnZWhVNTBqSEEzV1l3OWFFbkFTdzJ1bVRNY19KT1hrWTFvOXotaTRzYWpWRzVsME5EQnIxRlZ6ckp0MFZxQXZTR2NqZ0pwQkdVZENiOHVwMHlYZ05PcWlJY091R0dkUk0yTWJ3UEhtV25rVjZQNjhWdUhLR0syQkRETzZNUmQtVjI5Sy1CZ1RsODIzcEhmNjNidGd1bDdkb3FmVUJTUHJ0bTdHQVdFWjV30gHPAUFVX3lxTE1JVDNUUXhJMFRlU1dhemIyX3FjMENnYmUwS1JXOVpaX2owVnk1Z1daNVhFcHNuLUFNd1I3LVAtYlJYanVnUzVvek9naWd1aF9CY2JfaTh4bGRaTXRYVVVxZjhsRjJvdERuT2NoWUY1c21TX25VcmdGNXJkTjBwZG5XNFlqZHgtVUhISmdKZGxfbENjQnB5TmN0NjluMmVteUFOYkdpeXM4dWR3VENtLUFTQ2NJQXJQRDlfMlF5VW1xU0VWNWgwMDY3YVhtS0Fjaw?oc=5\" target=\"_blank\">Meta soutenu par l'IA au premier trimestre, mais le marché s'inquiète de ses dépenses...</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Fortuneo</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPNnlxZTVvOF8yS3RiZ3dyNHBfRmk4UFRxQUZQVEJwemRGV1ozQXFEdjFPUGVmbmYyNWk3YkJrTldCX25mVzJHbC1rVnRBNTIxT25BaUhBekNvRzdYN3lRbXlJSEU0N0RXa0hDWGpiblFCdHAwS2VINl9pOUdaSVhacEJZbVhuREVUdFRyVtIBkgFBVV95cUxORTlpRUlYTUhSSmZ6Ri1VSWJCQnBXSE8yMHEyYUtqSTU5QnZHcS1aNkYzU2R5U2dCSkxHM09YZGVYb1Etd1N6c3BFM2hkXzRUOEE0TDZOYjA2YWVKQVE4bzFPMnEtMW91dS1wWkdsQzdmT2gzZFY4aEt1RmxEdW1UOW9OUjBSb045d19EdWxTRGxJdw",
-      "title": "Maharashtra Clears ₹10,000 Cr AI Policy - Deccan Chronicle",
-      "domain": "deccanchronicle.com",
-      "published_at": "Wed, 29 Apr 2026 20:01:26 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMijAFBVV95cUxPNnlxZTVvOF8yS3RiZ3dyNHBfRmk4UFRxQUZQVEJwemRGV1ozQXFEdjFPUGVmbmYyNWk3YkJrTldCX25mVzJHbC1rVnRBNTIxT25BaUhBekNvRzdYN3lRbXlJSEU0N0RXa0hDWGpiblFCdHAwS2VINl9pOUdaSVhacEJZbVhuREVUdFRyVtIBkgFBVV95cUxORTlpRUlYTUhSSmZ6Ri1VSWJCQnBXSE8yMHEyYUtqSTU5QnZHcS1aNkYzU2R5U2dCSkxHM09YZGVYb1Etd1N6c3BFM2hkXzRUOEE0TDZOYjA2YWVKQVE4bzFPMnEtMW91dS1wWkdsQzdmT2gzZFY4aEt1RmxEdW1UOW9OUjBSb045d19EdWxTRGxJdw?oc=5\" target=\"_blank\">Maharashtra Clears ₹10,000 Cr AI Policy</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Deccan Chronicle</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQUENqM0paZE9lRnhVMkl1NGRtZzA3N3NWUUcwNWR6UWlwZXFjdlB0TVN2bUVROUtwbGkzcXUwMFYzSWctZU1vM21zeTR4QTVhWHNEVlJKdkQ3S1lBY05jSVFvbHRZWVo2NzQ2UXloQ0wtWVBvT0paRHRfeGFWb3NyQTZ4blAzOXhDMi1SSFMxb9IBlwFBVV95cUxNOVE4cE9WZHA2ejBMN0tUZDRhVm1CMzVQcnJLcnpKUjRyWXZ0NEstZGVkNTZXNUJzV2FVZU1meWhNN1AxRHBHYXUwWE5yQlk0YUQ4aTJfUEh5UzQxLWJxeTZWWjlpTTdvRmlEX2JNbEJuLWFiZnVMQ3VaOGlaZnl1WWw4UGN0SWRIQ1hvZGMzZ1FVeWMwbktr",
-      "title": "AI to Become the New ‘Government Clerk’: A Digital Shift in Administration - Marksmen Daily",
-      "domain": "marksmendaily.com",
-      "published_at": "Wed, 29 Apr 2026 19:46:54 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMijwFBVV95cUxQUENqM0paZE9lRnhVMkl1NGRtZzA3N3NWUUcwNWR6UWlwZXFjdlB0TVN2bUVROUtwbGkzcXUwMFYzSWctZU1vM21zeTR4QTVhWHNEVlJKdkQ3S1lBY05jSVFvbHRZWVo2NzQ2UXloQ0wtWVBvT0paRHRfeGFWb3NyQTZ4blAzOXhDMi1SSFMxb9IBlwFBVV95cUxNOVE4cE9WZHA2ejBMN0tUZDRhVm1CMzVQcnJLcnpKUjRyWXZ0NEstZGVkNTZXNUJzV2FVZU1meWhNN1AxRHBHYXUwWE5yQlk0YUQ4aTJfUEh5UzQxLWJxeTZWWjlpTTdvRmlEX2JNbEJuLWFiZnVMQ3VaOGlaZnl1WWw4UGN0SWRIQ1hvZGMzZ1FVeWMwbktr?oc=5\" target=\"_blank\">AI to Become the New ‘Government Clerk’: A Digital Shift in Administration</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Marksmen Daily</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOdXhqTWU5LU5nRUdPa2lVaDBpZWhzVXBETjNRTVNiWGdCeUswTFdfbjMtY2VZQVJNSHRlRlBJRnV6dFZ5UGJ4S0dnVWVVWEVWb19ETXBuaElSWWw3S0VYcG5KQVgxY0tDRzN5Q0pFOUh0RmJrVjBQRXJTZDNISXVveXZIaWFPWGlsV1JJekdNcnRFUUh6NGlvWVZhT1RrN2xoa1plWFRPNlhOTjhteklpODJJNA",
-      "title": "Taylor Swift turns to trademarks over ‘blank space’ in AI law - World IP Review",
-      "domain": "worldipreview.com",
-      "published_at": "Wed, 29 Apr 2026 19:25:28 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiswFBVV95cUxOdXhqTWU5LU5nRUdPa2lVaDBpZWhzVXBETjNRTVNiWGdCeUswTFdfbjMtY2VZQVJNSHRlRlBJRnV6dFZ5UGJ4S0dnVWVVWEVWb19ETXBuaElSWWw3S0VYcG5KQVgxY0tDRzN5Q0pFOUh0RmJrVjBQRXJTZDNISXVveXZIaWFPWGlsV1JJekdNcnRFUUh6NGlvWVZhT1RrN2xoa1plWFRPNlhOTjhteklpODJJNA?oc=5\" target=\"_blank\">Taylor Swift turns to trademarks over ‘blank space’ in AI law</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">World IP Review</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOS1dZMENuZnd0VHB4djF6dHpDN3JvOWJPRW9uSVQ2a2N5cmJwM2NVdWtzLUIyZTAtbXVVcmEzSEtpejlTRkQ4OVUxTklHYzY0aUt3QmlOUExqQmZReW9oOEQtVXJBTVZhVFVmeW1HbVB0SW9adkFIMTZDNlVFeXhxZFJueWo5aFFhczQzNTdjQ2IxWV85SGFSTG1lWXV1SWM3b3VYYW1UeUxJVHpKeEltZ0czVkcxV0NxN1BMYnVzUVYtT0puQW5QYw",
       "title": "Faculty Concerned About ASU’s New AI Course Builder - Inside Higher Ed",
       "domain": "insidehighered.com",
@@ -2815,20 +2801,6 @@
       "relevance_score": 4.0,
       "queries": [
         "https://news.google.com/rss/search?q=artificial+intelligence&hl=en&gl=US&ceid=US:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQeDdBeXc2TVd1dkZBT3VVUDJkUjJsVktheDB0cXpDVjRrdFktQWZsWnBqcmNySXFwcjFuaVZJaHFGMGNOLThaTTdWVTFIUEE1WjU4TmR4VmVHcWM3dlZ3RDBnM3RvWG1fdFdoQ1I2N0tDdGpyWVdVRV9uekJ5d290TGViY29ZbmM1T1BHbVZHLWdHdmhRQmNyQ0NQa1RpaXRyaGxkOHIySlNPT21idENVZkg5N3ZuMzBnMlk1Qks4ZGZRYXVaRWhxb0ZVZWFVUHlfd2NZamhR0gHbAUFVX3lxTFAxb2E1S0xfXzFZakRocUZTQmVoVTFJRUdSRnZwSm0xWWtmOWd0c3AwU2tFYl9YeXFHal9sSFZfbXhjeENVN25qejdWaUF5Q0I3cmNkUW51ZzZGM3VBc3huT1hRS1g2SG1ORjVhQjd6QjJOZEp3TVVuTTQ1VXk4V1VBaHpSZVZ4UGUxcVlnQnNNYUR1WDgwTVlzeXVUN2pOaEtmbUljanA2eGpFdUVGa04xY20zenllR1R0aFFNOW5GaUt1b2tuTTY4SFRWZ010ZkIzaUpEemo0MC1ySQ",
-      "title": "No OTP, no problem: Ahmedabad gang uses AI deepfakes to bypass Aadhaar checks - India Today",
-      "domain": "indiatoday.in",
-      "published_at": "Wed, 29 Apr 2026 18:09:31 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi1gFBVV95cUxQeDdBeXc2TVd1dkZBT3VVUDJkUjJsVktheDB0cXpDVjRrdFktQWZsWnBqcmNySXFwcjFuaVZJaHFGMGNOLThaTTdWVTFIUEE1WjU4TmR4VmVHcWM3dlZ3RDBnM3RvWG1fdFdoQ1I2N0tDdGpyWVdVRV9uekJ5d290TGViY29ZbmM1T1BHbVZHLWdHdmhRQmNyQ0NQa1RpaXRyaGxkOHIySlNPT21idENVZkg5N3ZuMzBnMlk1Qks4ZGZRYXVaRWhxb0ZVZWFVUHlfd2NZamhR0gHbAUFVX3lxTFAxb2E1S0xfXzFZakRocUZTQmVoVTFJRUdSRnZwSm0xWWtmOWd0c3AwU2tFYl9YeXFHal9sSFZfbXhjeENVN25qejdWaUF5Q0I3cmNkUW51ZzZGM3VBc3huT1hRS1g2SG1ORjVhQjd6QjJOZEp3TVVuTTQ1VXk4V1VBaHpSZVZ4UGUxcVlnQnNNYUR1WDgwTVlzeXVUN2pOaEtmbUljanA2eGpFdUVGa04xY20zenllR1R0aFFNOW5GaUt1b2tuTTY4SFRWZ010ZkIzaUpEemo0MC1ySQ?oc=5\" target=\"_blank\">No OTP, no problem: Ahmedabad gang uses AI deepfakes to bypass Aadhaar checks</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">India Today</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
       ],
       "sections": []
     },
@@ -2857,6 +2829,20 @@
       "relevance_score": 4.0,
       "queries": [
         "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPc2RSVmFHUjR1TUlRWUZ3V2tUMk9qaE02UnJsYkNoVk9Gd0NrWHRtQVhzUXJFeEtJUDVqakk4REdELW1ZN2tMek1iZnlYb0p3NE1rWTJYeDQ4Wm9XZERqT1pNbzBLTTNaMnNxTE5FRTl1c3RZbUZvcVRTZmNmNlZwQlhBa3NfaHliWHkzMXpYcExCakFwZGotcGh5c0FtaDJLcHc",
+      "title": "Ukraine’s AI Gambit Shows Middle Powers How to Play a Weak Hand - Lawfare",
+      "domain": "lawfaremedia.org",
+      "published_at": "Wed, 29 Apr 2026 17:53:08 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiogFBVV95cUxPc2RSVmFHUjR1TUlRWUZ3V2tUMk9qaE02UnJsYkNoVk9Gd0NrWHRtQVhzUXJFeEtJUDVqakk4REdELW1ZN2tMek1iZnlYb0p3NE1rWTJYeDQ4Wm9XZERqT1pNbzBLTTNaMnNxTE5FRTl1c3RZbUZvcVRTZmNmNlZwQlhBa3NfaHliWHkzMXpYcExCakFwZGotcGh5c0FtaDJLcHc?oc=5\" target=\"_blank\">Ukraine’s AI Gambit Shows Middle Powers How to Play a Weak Hand</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Lawfare</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -2913,20 +2899,6 @@
       "relevance_score": 4.0,
       "queries": [
         "https://news.google.com/rss/search?q=artificial+intelligence&hl=en&gl=US&ceid=US:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNakZpMHRPdDY4S3ozN1ZyZ2VGTUFUVzl1cHRUaVVxdmFXWmtxLTNpRFktbDRWeVctTzQ5djZCUVR3RmZMeERkR1d4VW1vUU9uNmsxcXlRTEUxWnpSWXZ3SVZvZFZnM1FTRUxma0JtdlhrZ0lCc1duRXlmRS11WmJrZ20xY2pqa2xIQUhzbk1fU21sbWNzamxKd2wxT2ZvTFRudVQtRldiOUNkQm01eTc2YVA4X3dHV0Jtb2Y4TG5RMDNpT1NqT3hTYm1kd3g4TmlveFpJYWFIRzlPSlE",
-      "title": "Cinéma : « Jamais l’IA ne pourra remplacer les acteurs ! » - Le Point",
-      "domain": "lepoint.fr",
-      "published_at": "Wed, 29 Apr 2026 16:30:00 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi2wFBVV95cUxNakZpMHRPdDY4S3ozN1ZyZ2VGTUFUVzl1cHRUaVVxdmFXWmtxLTNpRFktbDRWeVctTzQ5djZCUVR3RmZMeERkR1d4VW1vUU9uNmsxcXlRTEUxWnpSWXZ3SVZvZFZnM1FTRUxma0JtdlhrZ0lCc1duRXlmRS11WmJrZ20xY2pqa2xIQUhzbk1fU21sbWNzamxKd2wxT2ZvTFRudVQtRldiOUNkQm01eTc2YVA4X3dHV0Jtb2Y4TG5RMDNpT1NqT3hTYm1kd3g4TmlveFpJYWFIRzlPSlE?oc=5\" target=\"_blank\">Cinéma : « Jamais l’IA ne pourra remplacer les acteurs ! »</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Le Point</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
       ],
       "sections": []
     },
@@ -2997,34 +2969,6 @@
       "relevance_score": 4.0,
       "queries": [
         "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPcmtIOFl0UmJFTmFVUUQ1WDBuMTczSWtOLUo4QTBwTUlSV2s2cWFHZUZMT09oM0ZTWkc0VG9Dbzl3b1p1aENKbi11U0dkOUtPc2loSURzcnUydU5WRFRIWmJ0NG4yNkxadzlTb1llXy13N25UYVhqaUFWc1Y2VjVjb0c4a3B0dC1VZUs0WDFJRUVoMGJpRHdBZnByc2g5V0Y3MHBwQ2QtOVJJZWg4ZTU3bWlncnpBOXJpSEt2aENnM2lNNkVYV2ZUWXN0RUk4ZE9kUGNVNllIMlVQWmdnMUdKVzhmYWh2LTQ",
-      "title": "Datacenter de Google à Châteauroux : entre 100 à 200 emplois créés attendus - La Tribune",
-      "domain": "latribune.fr",
-      "published_at": "Wed, 29 Apr 2026 13:45:23 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi5wFBVV95cUxPcmtIOFl0UmJFTmFVUUQ1WDBuMTczSWtOLUo4QTBwTUlSV2s2cWFHZUZMT09oM0ZTWkc0VG9Dbzl3b1p1aENKbi11U0dkOUtPc2loSURzcnUydU5WRFRIWmJ0NG4yNkxadzlTb1llXy13N25UYVhqaUFWc1Y2VjVjb0c4a3B0dC1VZUs0WDFJRUVoMGJpRHdBZnByc2g5V0Y3MHBwQ2QtOVJJZWg4ZTU3bWlncnpBOXJpSEt2aENnM2lNNkVYV2ZUWXN0RUk4ZE9kUGNVNllIMlVQWmdnMUdKVzhmYWh2LTQ?oc=5\" target=\"_blank\">Datacenter de Google à Châteauroux : entre 100 à 200 emplois créés attendus</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">La Tribune</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNT1JUMFVOc29vNmx6djdJOWh4Y0xnWUZrek56SlVQc1lRZ1AtN2xpc1RHSGJtdncxZkFqM0NrNmsxaGJYQS1QM05wOU43bld2TFAxdGxZdm41ZUxWOVU0MlZXUWVVSVhuazFZeUhwUlNkaUNpcHZ2ZHkyUExRVXNKbElNaUMtREZmSlY4dkpxV2VEYlBySGhZVFJsQlVKOUVKcWZDT3gybHNLTHB50gGyAUFVX3lxTE5zTEo3YkloNF83b1NKeFR3enFHQWJTYmp3ejdDQXZhR2k2a284azZSOFVDNkMwdjB5ajh1R0R4dVhZWEpQTUVqN1FOMWtHVWZaYjJ1Y0V3WW5DV2hlc1d6a2lCeXdtaTE0bUdheVBhZG9OYU4tVFpUdG9wOWpxM2FZV3MzUGVJeXdaZ3hCZFlLRzB4b09uNFFHRjlLT2N4Mi0yZDBVbDJQb21RN25wbW9NOWc",
-      "title": "L'intelligence artificielle coûte désormais plus cher que les salariés - Génération NT",
-      "domain": "generation-nt.com",
-      "published_at": "Wed, 29 Apr 2026 13:45:01 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMirAFBVV95cUxNT1JUMFVOc29vNmx6djdJOWh4Y0xnWUZrek56SlVQc1lRZ1AtN2xpc1RHSGJtdncxZkFqM0NrNmsxaGJYQS1QM05wOU43bld2TFAxdGxZdm41ZUxWOVU0MlZXUWVVSVhuazFZeUhwUlNkaUNpcHZ2ZHkyUExRVXNKbElNaUMtREZmSlY4dkpxV2VEYlBySGhZVFJsQlVKOUVKcWZDT3gybHNLTHB50gGyAUFVX3lxTE5zTEo3YkloNF83b1NKeFR3enFHQWJTYmp3ejdDQXZhR2k2a284azZSOFVDNkMwdjB5ajh1R0R4dVhZWEpQTUVqN1FOMWtHVWZaYjJ1Y0V3WW5DV2hlc1d6a2lCeXdtaTE0bUdheVBhZG9OYU4tVFpUdG9wOWpxM2FZV3MzUGVJeXdaZ3hCZFlLRzB4b09uNFFHRjlLT2N4Mi0yZDBVbDJQb21RN25wbW9NOWc?oc=5\" target=\"_blank\">L'intelligence artificielle coûte désormais plus cher que les salariés</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Génération NT</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
       ],
       "sections": []
     },
@@ -3169,20 +3113,6 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOX0tnelh0WDVIQUR0U01BVWRzOGU4UllwRHlFeU9RVmxXUC1aWFZXMkpDVVN0T0NBdEx4dmtwaUN5cTl0dGIwZTlDVVhSdHB2aHMxVUxuZE9OMjVsazU3NEpSLWhDTXhPOE9GV2VXUzd3dTdSanRhRUdpM09INzRXcDNjbG1jNFVHdG5OMWRlNm9ZVWUyQWY1dkZ6SEJyNTBNQ2paYnpXRGFfaFo2cV9FbjlSRmdvTkE1dkVDcmEyYi1BZXhmbjZZWGdJdXA1NWY2SGVN",
-      "title": "Les géants de la tech renforcent leurs investissements dans l'IA alors que les résultats révèlent des gains de croissance et une hausse des coûts - CoinDesk",
-      "domain": "coindesk.com",
-      "published_at": "Wed, 29 Apr 2026 12:07:00 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi0wFBVV95cUxOX0tnelh0WDVIQUR0U01BVWRzOGU4UllwRHlFeU9RVmxXUC1aWFZXMkpDVVN0T0NBdEx4dmtwaUN5cTl0dGIwZTlDVVhSdHB2aHMxVUxuZE9OMjVsazU3NEpSLWhDTXhPOE9GV2VXUzd3dTdSanRhRUdpM09INzRXcDNjbG1jNFVHdG5OMWRlNm9ZVWUyQWY1dkZ6SEJyNTBNQ2paYnpXRGFfaFo2cV9FbjlSRmdvTkE1dkVDcmEyYi1BZXhmbjZZWGdJdXA1NWY2SGVN?oc=5\" target=\"_blank\">Les géants de la tech renforcent leurs investissements dans l'IA alors que les résultats révèlent des gains de croissance et une hausse des coûts</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">CoinDesk</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNdWZPbE1nNEdTZ0ZTMUxhSGJESnFBM3Q5UDRPUmMzSk5rZ1laN2NRMlpFMmhCR2QtUEt4bnlTdlZZQkNfVkptRWEtZlNxYTlndnd0ZExGX25rdWtySWU5ckU0NDU0REwyU0tXdE9LSm5mTUZ4WmRPVzh1b2RiZlJuUFFfZy1MQkdwTEE",
       "title": "IA vs consultants : les LLM sont nuls en stratégie - Consultor",
       "domain": "consultor.fr",
@@ -3225,12 +3155,12 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPYWROSUZhb2VSY3Q3alNQdWNkbWkzS0ZHd2xtczZnV3o4THh4ZkNRclR0YkozMDdJWnlvOEhaS3hrN0dHTUJaNmhMay1SenN2b2gyekVqLXRnUk5NeHJWRXNJWTdxdWktR0RrS1B1amZsYTA3MW9KMGNRVEpLVGJqZkcwbzQ2SWlEZ0lQYV9LdHNrcTdXWGFxc1hkdGdSck1OSUF4SFAwVkpEb21hVU1vWHZKODdDSi1VZE5yeHl3dw",
-      "title": "Intelligence artificielle : et si les États-Unis prenaient le chemin de l’éthique ? - L'Humanité",
-      "domain": "humanite.fr",
-      "published_at": "Wed, 29 Apr 2026 10:14:23 GMT",
+      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQVmpPRGJhYzAwVU1YWFZmdXVxRVBIQjZwdUVwUEVpdzZyRmFQRFpzYUxBSlhvTHRRQkljbXFaQlVfdlAxakRqaFh4MlI1RklLbFNNdzVQbGp0VnhfZFNISjNpQXQ0SFZ5ZGREWWhSWXU4YTZ2Vmo2b0RYQ0NlTnFuQTUydWtYQlQwblMyWktZdGRIMUxfQ3RZTU9JZDQxRTRkN19KZmdiaTBFd3I0a3U1aVU1QTluelQ3NlBiR0NyWUdFcEp1U0wtWHBpSUQ4R1NNeDNuY1VCMl9JRThBc0FaaDlxRnNDaU1ZQTFlSFJR",
+      "title": "Face à l’intelligence artificielle, Taylor Swift veut faire de sa voix une marquée déposée - France 24",
+      "domain": "france24.com",
+      "published_at": "Wed, 29 Apr 2026 10:05:07 GMT",
       "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMivwFBVV95cUxPYWROSUZhb2VSY3Q3alNQdWNkbWkzS0ZHd2xtczZnV3o4THh4ZkNRclR0YkozMDdJWnlvOEhaS3hrN0dHTUJaNmhMay1SenN2b2gyekVqLXRnUk5NeHJWRXNJWTdxdWktR0RrS1B1amZsYTA3MW9KMGNRVEpLVGJqZkcwbzQ2SWlEZ0lQYV9LdHNrcTdXWGFxc1hkdGdSck1OSUF4SFAwVkpEb21hVU1vWHZKODdDSi1VZE5yeHl3dw?oc=5\" target=\"_blank\">Intelligence artificielle : et si les États-Unis prenaient le chemin de l’éthique ?</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">L'Humanité</font>",
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi7gFBVV95cUxQVmpPRGJhYzAwVU1YWFZmdXVxRVBIQjZwdUVwUEVpdzZyRmFQRFpzYUxBSlhvTHRRQkljbXFaQlVfdlAxakRqaFh4MlI1RklLbFNNdzVQbGp0VnhfZFNISjNpQXQ0SFZ5ZGREWWhSWXU4YTZ2Vmo2b0RYQ0NlTnFuQTUydWtYQlQwblMyWktZdGRIMUxfQ3RZTU9JZDQxRTRkN19KZmdiaTBFd3I0a3U1aVU1QTluelQ3NlBiR0NyWUdFcEp1U0wtWHBpSUQ4R1NNeDNuY1VCMl9JRThBc0FaaDlxRnNDaU1ZQTFlSFJR?oc=5\" target=\"_blank\">Face à l’intelligence artificielle, Taylor Swift veut faire de sa voix une marquée déposée</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">France 24</font>",
       "content_text": null,
       "relevance_score": 4.0,
       "queries": [
@@ -3351,20 +3281,6 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQdUo5Y0NkNHdCYUtmT2VsR1kzRkFFOHRSYW04TldnMnpiTEU2Q1cyV1NjeGptMjU2Wk9jQ04tSnYwTk8xZzY1elI2QmVOLUlxa0FiWGNwUk02NF9MYnpSeVFrbTcwNWxXY0ZyaWt5QlkzZVk0OHZqRFFDYlB0SUdmZ3RqeGt3S0RYQy1vOWtrVlJZRE1yM1JzMkVNcVg4eDg",
-      "title": "À Nice, Gilles Babinet ouvrira la Semaine de l’IA pour Tous avec une conférence sur l’IA et l’environnement - Petites Affiches - Alpes Maritimes",
-      "domain": "petitesaffiches.fr",
-      "published_at": "Wed, 29 Apr 2026 07:26:15 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMinwFBVV95cUxQdUo5Y0NkNHdCYUtmT2VsR1kzRkFFOHRSYW04TldnMnpiTEU2Q1cyV1NjeGptMjU2Wk9jQ04tSnYwTk8xZzY1elI2QmVOLUlxa0FiWGNwUk02NF9MYnpSeVFrbTcwNWxXY0ZyaWt5QlkzZVk0OHZqRFFDYlB0SUdmZ3RqeGt3S0RYQy1vOWtrVlJZRE1yM1JzMkVNcVg4eDg?oc=5\" target=\"_blank\">À Nice, Gilles Babinet ouvrira la Semaine de l’IA pour Tous avec une conférence sur l’IA et l’environnement</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Petites Affiches - Alpes Maritimes</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://www.bankingdive.com/news/citi-hires-google-exec-brian-saluzzo-cio-tim-ryan/818767/",
       "title": "Citi taps former Google exec as CIO",
       "domain": "bankingdive.com",
@@ -3403,20 +3319,6 @@
       "relevance_score": 4.0,
       "queries": [
         "https://www.maddyness.com/feed/"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMiogNBVV95cUxQWlZWQ283RDBIajZVRVBUazlQcTVYbUNnNExoRG5hazBjbHhpSU5JMUFCbXllOGdwd2w5RG9FM3FodWZTa0hiZXJvS25va21xbG9mYkZ6QUw3U2F5MlBZbUlxWm56X0Mycm9rVkhJVWppd0FDTWNaWFhqS19uaGd5QmxwVHJfYzRsTWt2OTZ0bkJfNk1NNnBsRzhWRGh0S245dGtiV0JmQS0wUTAtT3lEMzFJVmctYTNMbzMyLU1iM0tEeDFnLUhIQTBabVBvYk1DcVVsVGFhQmM4bDliNm50Sk9lWEdrODNZbG5IRFVvaGFsZDM4czZhNkdMMVB5TVhTWHpCYkxjS0ZWbzlHcngtTURxTlJtUXhrY3lISFowaHdoeE13RkhLckdaTjhIQ2VsMV9NbG9PTDFnaVFWVnBrMGtEbXduX3dPdjBBd0RfME5ZajBhSnhBbVVsS1premowMjBBeGtfM1JHZFhoZDNxVDhxSGtMZnhsMERLcTZNeURXTy16ZEhqRTQ1M3hvYjlWd0VOYmQxcTY5Unp2YndpcHJR",
-      "title": "US advisory body’s ‘China warning’ to Google, OpenAI, Anthropic and others: Your position is under threat because… - MSN",
-      "domain": "msn.com",
-      "published_at": "Wed, 29 Apr 2026 04:50:10 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiogNBVV95cUxQWlZWQ283RDBIajZVRVBUazlQcTVYbUNnNExoRG5hazBjbHhpSU5JMUFCbXllOGdwd2w5RG9FM3FodWZTa0hiZXJvS25va21xbG9mYkZ6QUw3U2F5MlBZbUlxWm56X0Mycm9rVkhJVWppd0FDTWNaWFhqS19uaGd5QmxwVHJfYzRsTWt2OTZ0bkJfNk1NNnBsRzhWRGh0S245dGtiV0JmQS0wUTAtT3lEMzFJVmctYTNMbzMyLU1iM0tEeDFnLUhIQTBabVBvYk1DcVVsVGFhQmM4bDliNm50Sk9lWEdrODNZbG5IRFVvaGFsZDM4czZhNkdMMVB5TVhTWHpCYkxjS0ZWbzlHcngtTURxTlJtUXhrY3lISFowaHdoeE13RkhLckdaTjhIQ2VsMV9NbG9PTDFnaVFWVnBrMGtEbXduX3dPdjBBd0RfME5ZajBhSnhBbVVsS1premowMjBBeGtfM1JHZFhoZDNxVDhxSGtMZnhsMERLcTZNeURXTy16ZEhqRTQ1M3hvYjlWd0VOYmQxcTY5Unp2YndpcHJR?oc=5\" target=\"_blank\">US advisory body’s ‘China warning’ to Google, OpenAI, Anthropic and others: Your position is under threat because…</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">MSN</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=large+language+model+OpenAI+Anthropic+Google&hl=en&gl=US&ceid=US:en"
       ],
       "sections": []
     },
@@ -3477,6 +3379,160 @@
       "sections": []
     },
     {
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9sVWZyRTFEVUlyRmVWekRKZ1dkVEcxZUVGWTZiR0J1WExOV1BQRGcyYTVEMzRrYWZDTi1xTW5kaF81UG91VTdYeklWWHoteVVsZGhKdVVlZ1ktWjBMbXI1S1NaR2dDcGFXMkt3NUlGcjRIRldVNV8tMTNfTQ",
+      "title": "Déploiement massif de formations à l’IA pédagogique - Agence Universitaire de la Francophonie",
+      "domain": "auf.org",
+      "published_at": "Tue, 28 Apr 2026 08:39:57 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMie0FVX3lxTE9sVWZyRTFEVUlyRmVWekRKZ1dkVEcxZUVGWTZiR0J1WExOV1BQRGcyYTVEMzRrYWZDTi1xTW5kaF81UG91VTdYeklWWHoteVVsZGhKdVVlZ1ktWjBMbXI1S1NaR2dDcGFXMkt3NUlGcjRIRldVNV8tMTNfTQ?oc=5\" target=\"_blank\">Déploiement massif de formations à l’IA pédagogique</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Agence Universitaire de la Francophonie</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOa3k3RFVCb3Z0cHhOZmtseGpJM0FjT3lkNDd4cEU5UE9HclpHRUQ0eUNfamxibDJPTlNSSjMyRG5PUjJhbklCZUFZeXdxLTljajNJbVlLSjFmM3M3bm1rdzE1VzVpbXhVVXZDTkhJazNmZU1GOTQwNWthTklmRmlMaTBzZFVPZTZTZmhFem5Eb1N2ay13SVpWNGoxNWlLRV82S1pLbXl4cDAzM3hCdDE0SWRPNjk2M0dfVlFNV18xVXdKemVjT21mNWlCUm0tQdIB0wFBVV95cUxPM25QOUNQUTFzZWVJbUJtVTlGN1NYY1Y2blB4Q0lxRURLUm4yS2EzLXF3OThNS3BGR0oyODkyUEhWRzlyUUs1MTBqckRiczJOWkdrSWVFRUJjRGFCdXdmcWFWZzlWVUN1VXlWd3lJMTZZUlpmelNVOXMtTTdTTGdkRkI5alY5WkUwS29ZX3hScy1BTXA5TjJhcTdSUmFvSmxGYTRnQ3c0QUVkaGF1NEdCdUVOQzFQX1hmQWNDWjJRZDd3b3BKWnV6ekhLWHpETGx6Z21N",
+      "title": "Du \"cloud\" aux puces, Amazon fait des étincelles avec l'IA - Boursorama",
+      "domain": "boursorama.com",
+      "published_at": "Thu, 30 Apr 2026 06:10:01 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMizgFBVV95cUxOa3k3RFVCb3Z0cHhOZmtseGpJM0FjT3lkNDd4cEU5UE9HclpHRUQ0eUNfamxibDJPTlNSSjMyRG5PUjJhbklCZUFZeXdxLTljajNJbVlLSjFmM3M3bm1rdzE1VzVpbXhVVXZDTkhJazNmZU1GOTQwNWthTklmRmlMaTBzZFVPZTZTZmhFem5Eb1N2ay13SVpWNGoxNWlLRV82S1pLbXl4cDAzM3hCdDE0SWRPNjk2M0dfVlFNV18xVXdKemVjT21mNWlCUm0tQdIB0wFBVV95cUxPM25QOUNQUTFzZWVJbUJtVTlGN1NYY1Y2blB4Q0lxRURLUm4yS2EzLXF3OThNS3BGR0oyODkyUEhWRzlyUUs1MTBqckRiczJOWkdrSWVFRUJjRGFCdXdmcWFWZzlWVUN1VXlWd3lJMTZZUlpmelNVOXMtTTdTTGdkRkI5alY5WkUwS29ZX3hScy1BTXA5TjJhcTdSUmFvSmxGYTRnQ3c0QUVkaGF1NEdCdUVOQzFQX1hmQWNDWjJRZDd3b3BKWnV6ekhLWHpETGx6Z21N?oc=5\" target=\"_blank\">Du \"cloud\" aux puces, Amazon fait des étincelles avec l'IA</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Boursorama</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5adGE4VGU0anJYZ2FjR2h2WVhmUEtleE44bGtJODZWSmRvYnFtVHY2OFdQdFE3eW9EREpMcmFPcnVkM0hySXJ3QXZtMWs1YkNKR1pReGhTTEhlMDRMT2RiSVdB",
+      "title": "Microsoft Profits Jump As Cloud, AI Drive Quarterly Growth - Bernama",
+      "domain": "bernama.com",
+      "published_at": "Thu, 30 Apr 2026 06:01:46 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiYkFVX3lxTE5adGE4VGU0anJYZ2FjR2h2WVhmUEtleE44bGtJODZWSmRvYnFtVHY2OFdQdFE3eW9EREpMcmFPcnVkM0hySXJ3QXZtMWs1YkNKR1pReGhTTEhlMDRMT2RiSVdB?oc=5\" target=\"_blank\">Microsoft Profits Jump As Cloud, AI Drive Quarterly Growth</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Bernama</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://www.maddyness.com/2026/04/30/mobilier-de-bureau-langle-mort-de-lagilite-financiere/",
+      "title": "Mobilier de bureau : l’angle mort de l’agilité financière",
+      "domain": "maddyness.com",
+      "published_at": "Thu, 30 Apr 2026 06:00:45 +0000",
+      "author": "Arnaud Lusetti",
+      "summary": "<p>L’article <a href=\"https://www.maddyness.com/2026/04/30/mobilier-de-bureau-langle-mort-de-lagilite-financiere/\">Mobilier de bureau : l’angle mort de l’agilité financière</a> est apparu en premier sur <a href=\"https://www.maddyness.com\">Maddyness - Le média pour comprendre l&#039;économie de demain</a>.</p>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://www.maddyness.com/feed/"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNRUh0aGZIaXJRUGJ3Tk1ocXVTdXVPc2RITnUxTWVIWENseTMzVDdBdWhGWF9BQjU0amdCRDhVR0t6OFN0ZTU1bjNlTFFqQlBTYWFhcDJPTW9VTFZ4cDNwYUl3ckdod1FiTTF4bEZyWjNFcjdHeXotbm9FemF1UGRRdnptZV80WHc2WmdZQ19SdU02U3VVN3hwZ2xOaGVUWEI1bmZpS2hOeUg0RTk4NWRxNmdqR0g3VkHSAcQBQVVfeXFMUHZJRE5waWkxV1ZocjdndVFHOE5IRFExbTNfWUM1S1RHblBndy1XUmxhZDlIQWZpT1NFTzRvRnpaTjFjUG1qYWNtSkpvbUp4Rmd5dkU5UGNoZXdXVnZmYlFYUDdRZG9MRlVnVjg3Nzg1WDVQZXl0anNNWWlWeWkwdkV0OHhOSm44dTEwYnBOQTFON0c5VHpfazRfNFhnQVB6VXAtUjVvdEZxYlN4MDRqSV9OMlBwTTQxMkYwb1Z0RlFwR0FmeA",
+      "title": "AI Video Shared as WB Education Minister Bratya Basu Taking Bribe Amid Elections - The Quint",
+      "domain": "thequint.com",
+      "published_at": "Thu, 30 Apr 2026 05:49:47 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMitwFBVV95cUxNRUh0aGZIaXJRUGJ3Tk1ocXVTdXVPc2RITnUxTWVIWENseTMzVDdBdWhGWF9BQjU0amdCRDhVR0t6OFN0ZTU1bjNlTFFqQlBTYWFhcDJPTW9VTFZ4cDNwYUl3ckdod1FiTTF4bEZyWjNFcjdHeXotbm9FemF1UGRRdnptZV80WHc2WmdZQ19SdU02U3VVN3hwZ2xOaGVUWEI1bmZpS2hOeUg0RTk4NWRxNmdqR0g3VkHSAcQBQVVfeXFMUHZJRE5waWkxV1ZocjdndVFHOE5IRFExbTNfWUM1S1RHblBndy1XUmxhZDlIQWZpT1NFTzRvRnpaTjFjUG1qYWNtSkpvbUp4Rmd5dkU5UGNoZXdXVnZmYlFYUDdRZG9MRlVnVjg3Nzg1WDVQZXl0anNNWWlWeWkwdkV0OHhOSm44dTEwYnBOQTFON0c5VHpfazRfNFhnQVB6VXAtUjVvdEZxYlN4MDRqSV9OMlBwTTQxMkYwb1Z0RlFwR0FmeA?oc=5\" target=\"_blank\">AI Video Shared as WB Education Minister Bratya Basu Taking Bribe Amid Elections</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Quint</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPeWdFNlF0bnJEeWFJNWsxUVpsS1BwUjByZjB2MDF3ak1lZHphN2JjUHlIamJHN2paN21EbEFFWFVEcE80TXY1NXZQY3d0d0NWQk1zS2lPZDVYODNqNE8wMVZPcGpiT1JOQ3NwRzFzdnR2cFViUHBzRWJWQmM4LUF6NGJBUUhHQzNUZTBnZnhHUzc5Tmh4QW9MaUNVTjlGOVA2SzJZUw",
+      "title": "Mphasis Q4 Net Profit Rises 14% YoY as AI-Led Deals Gain Traction - Analytics India Magazine",
+      "domain": "analyticsindiamag.com",
+      "published_at": "Thu, 30 Apr 2026 05:48:45 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMipAFBVV95cUxPeWdFNlF0bnJEeWFJNWsxUVpsS1BwUjByZjB2MDF3ak1lZHphN2JjUHlIamJHN2paN21EbEFFWFVEcE80TXY1NXZQY3d0d0NWQk1zS2lPZDVYODNqNE8wMVZPcGpiT1JOQ3NwRzFzdnR2cFViUHBzRWJWQmM4LUF6NGJBUUhHQzNUZTBnZnhHUzc5Tmh4QW9MaUNVTjlGOVA2SzJZUw?oc=5\" target=\"_blank\">Mphasis Q4 Net Profit Rises 14% YoY as AI-Led Deals Gain Traction</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Analytics India Magazine</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNMFN1X3c2VDY2QzFKWDB5RzNud0pJeGQxYUFZcnU1c3RUWG45OURHS1EtaF90WTFaNzNBd1VFMGtDU2Q3a2Q3STkxYzZtZzBvdGhZUjNiOUFjWTFEanB0MU5BVlUwQW9vMXFiRTdoWmMxc2xPQUtVV1JuYkcwSHZtd3RfOW93RGk4NjRob3JscURIdE5iMTdfWmJFQ0I3TkdrcW5ENFJlajdiNEZrRVM4ZFU5U0o3MVhIMTl1NElsb0I3NUxadjB0WDB1T1lfbUpLbVBnbm5ab0FkT0d3TnNZblVubDQyb0JqZ3hNTTVSSQ",
+      "title": "Mistral, champion français de l’IA, est-il le roi de la désinformation ? - Libération",
+      "domain": "liberation.fr",
+      "published_at": "Thu, 30 Apr 2026 05:40:52 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi7wFBVV95cUxNMFN1X3c2VDY2QzFKWDB5RzNud0pJeGQxYUFZcnU1c3RUWG45OURHS1EtaF90WTFaNzNBd1VFMGtDU2Q3a2Q3STkxYzZtZzBvdGhZUjNiOUFjWTFEanB0MU5BVlUwQW9vMXFiRTdoWmMxc2xPQUtVV1JuYkcwSHZtd3RfOW93RGk4NjRob3JscURIdE5iMTdfWmJFQ0I3TkdrcW5ENFJlajdiNEZrRVM4ZFU5U0o3MVhIMTl1NElsb0I3NUxadjB0WDB1T1lfbUpLbVBnbm5ab0FkT0d3TnNZblVubDQyb0JqZ3hNTTVSSQ?oc=5\" target=\"_blank\">Mistral, champion français de l’IA, est-il le roi de la désinformation ?</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Libération</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNQmhFRGdpZ1hBTXJJdXVMSk9hcVphSVhlRm03WjVPUThJUWY2TUs0V3RfZmhnWjl3Z01CX2ZweFRsQlI2eTdVSlVFd0pKd0NSbFpBcXZNODVzVWVoYXJrZ1hGc1UzVTZfbGpmeFRSNHdYeEw2d0VkRllWN2x2d1B3OGhUOThqaWoxQUxuMWZXMXRza1d2Tmx6SnFiNHNfMEVrX2RQSkFJSm5lcFdHRVVFT1lNVTJwTjRKdTdGSkdtRGFBR3h2WHBZ",
+      "title": "The AP Interview: Ukraine bets on battlefield AI as the race for weapons autonomy intensifies - WRAL",
+      "domain": "wral.com",
+      "published_at": "Thu, 30 Apr 2026 05:35:44 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMixwFBVV95cUxNQmhFRGdpZ1hBTXJJdXVMSk9hcVphSVhlRm03WjVPUThJUWY2TUs0V3RfZmhnWjl3Z01CX2ZweFRsQlI2eTdVSlVFd0pKd0NSbFpBcXZNODVzVWVoYXJrZ1hGc1UzVTZfbGpmeFRSNHdYeEw2d0VkRllWN2x2d1B3OGhUOThqaWoxQUxuMWZXMXRza1d2Tmx6SnFiNHNfMEVrX2RQSkFJSm5lcFdHRVVFT1lNVTJwTjRKdTdGSkdtRGFBR3h2WHBZ?oc=5\" target=\"_blank\">The AP Interview: Ukraine bets on battlefield AI as the race for weapons autonomy intensifies</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">WRAL</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence&hl=en&gl=US&ceid=US:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQaXpIMUJlS2NOOHMwdXdLYlBlVGJKRC1YN3AtbW4zZ0EtaXdheGt5YmNST0lVMS1SS1JyS1hZZkw0bGhSNWRkTjBYM2lULUliRk9xZWp1ZXlReW93U1NtMTRuTWJYSFFaenBDVFZWNEtLRWRoYXJnOEpmZjVockFMc2lnTjQtLXRDUFJvdW1CcFRvSHVoelJMYXVMTkNjTTNSdG1GSjYzYjJTTWdqSm9FZnYwZ0VfRWpTVXJXalB3X3kyV3g1RFU4SGtGQmVyUzFzQ2tyeUVoN1FnZ0E",
+      "title": "Les ambitions de Mistral AI dans la défense, bientôt un traité Paris-Helsinki - L'Express",
+      "domain": "lexpress.fr",
+      "published_at": "Thu, 30 Apr 2026 05:30:00 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMi2wFBVV95cUxQaXpIMUJlS2NOOHMwdXdLYlBlVGJKRC1YN3AtbW4zZ0EtaXdheGt5YmNST0lVMS1SS1JyS1hZZkw0bGhSNWRkTjBYM2lULUliRk9xZWp1ZXlReW93U1NtMTRuTWJYSFFaenBDVFZWNEtLRWRoYXJnOEpmZjVockFMc2lnTjQtLXRDUFJvdW1CcFRvSHVoelJMYXVMTkNjTTNSdG1GSjYzYjJTTWdqSm9FZnYwZ0VfRWpTVXJXalB3X3kyV3g1RFU4SGtGQmVyUzFzQ2tyeUVoN1FnZ0E?oc=5\" target=\"_blank\">Les ambitions de Mistral AI dans la défense, bientôt un traité Paris-Helsinki</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">L'Express</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNVmdDMGVHMVhCV0VjR294YUdRcnhNcmlGSEVWcFVteTJVMjlyc04zYTFFWUZQdERjLUJCYXR5QVRBX3JPcWlsTGNQWEdNdzFqMHgwM3IwbmdMT05LM3J4cmRIRmlfU2I0SFhPUFBmXzFQY25IZTU0dEsyLU1wN1owbUwzQUYzVm1WY1g1b3lGQ1NyUHpKY29NR0ozZ00wcDNWOUNLMzRSeVJTTW8",
+      "title": "Le pape dénonce l’IA… mais ses messages auraient été écrits par IA - Numerama",
+      "domain": "numerama.com",
+      "published_at": "Thu, 30 Apr 2026 05:15:00 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiqwFBVV95cUxNVmdDMGVHMVhCV0VjR294YUdRcnhNcmlGSEVWcFVteTJVMjlyc04zYTFFWUZQdERjLUJCYXR5QVRBX3JPcWlsTGNQWEdNdzFqMHgwM3IwbmdMT05LM3J4cmRIRmlfU2I0SFhPUFBmXzFQY25IZTU0dEsyLU1wN1owbUwzQUYzVm1WY1g1b3lGQ1NyUHpKY29NR0ozZ00wcDNWOUNLMzRSeVJTTW8?oc=5\" target=\"_blank\">Le pape dénonce l’IA… mais ses messages auraient été écrits par IA</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Numerama</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE05bndBMXlRYVNUQW83RG9tdmdubGV2c1J3Nm00N012Zlh1cm1Zdjkwak9WUkoySG8tXzlKZVp1MWpCZzFPSFFJWGlYWUJXOElacEcwY2dKVjdaLW4tVHRnbjh1UzFOZkhN",
+      "title": "The trust gap with AI - Healthcare Today",
+      "domain": "healthcaretoday.com",
+      "published_at": "Thu, 30 Apr 2026 05:09:41 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiaEFVX3lxTE05bndBMXlRYVNUQW83RG9tdmdubGV2c1J3Nm00N012Zlh1cm1Zdjkwak9WUkoySG8tXzlKZVp1MWpCZzFPSFFJWGlYWUJXOElacEcwY2dKVjdaLW4tVHRnbjh1UzFOZkhN?oc=5\" target=\"_blank\">The trust gap with AI</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Healthcare Today</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
+      ],
+      "sections": []
+    },
+    {
       "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOQ3FYYUtaVGZNbTRBYlIwRmVvN1h2Vkt5TjA1dE1NWFBZMkN0bGcxbDFVVUtfTm5YWml5bjNpOEpjSk1lVmNCYUIxTU9EQkp1OVFWemFxVnI0SmNJc2kzMVYybnFaM3lvazM1dDFkRFZmUUtybTgxMVR3bklhVUZWRF9OVlZSa2J0ZWZVYTJxVi15MTJPdXpRTGdlYm9zeElaMjFYb0FVN21KQlB4N2dmYVNBNl94TEdCUVBQVFMwWWNlZm5xTEZFUHYwZC11dzBR",
       "title": "SAS mise sur les jumeaux numériques et l’informatique quantique pour ses 50 prochaines années - ZDNET",
       "domain": "zdnet.fr",
@@ -3487,20 +3543,6 @@
       "relevance_score": 4.0,
       "queries": [
         "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOYU1TTkhHTzFsekFjZU03UVptOFlWSW1Id3hxWm5BRFBFTGZUUjREalljQl9oZzRSS2ZGTVdlQ1U2NEdPSTBLUkNHSV9HbVdmX2NjMVdNNjFMVVUzZmxHRzFxWjZoZkYwZWo0ZjdJVnFLZEU0STBHTU5paXpwTHBONjhHN2N0RFplTUl6TXJlSi1sYS1kdDdRaXlCeEZLUU9NV0IzUjdUQ0l4Vi1RdDNTTWtFZ2xpclBkQWFDTVpLQnk1d9IByAFBVV95cUxNMVp4NkRQUWdlX0lQMG9pdVhsbldwSkhSTHFCUFpYX3pZNTBLWGZHekVlRlg0VUZLQzZIRENueE0xalR3OVo1am9OUFVVamlfQzFJYVlaMzVPWnA2NTFjeUgxczRkeGFmaUc4RWYyLUxxOXB6eHZlUlJKMURRRHNLTWlVNVlDVE5odElnTXFQVnptdXNhY2pCa2ZoOUhoY3ZwWmV6aUkxVnVBTjZsZzY1SXR5UHJoRkJISG9IS1daT2ZvOWo4cDVFcw",
-      "title": "Meta shares fall on concerns over AI spending, legal scrutiny - The Hindu",
-      "domain": "thehindu.com",
-      "published_at": "Thu, 30 Apr 2026 04:50:13 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiwgFBVV95cUxOYU1TTkhHTzFsekFjZU03UVptOFlWSW1Id3hxWm5BRFBFTGZUUjREalljQl9oZzRSS2ZGTVdlQ1U2NEdPSTBLUkNHSV9HbVdmX2NjMVdNNjFMVVUzZmxHRzFxWjZoZkYwZWo0ZjdJVnFLZEU0STBHTU5paXpwTHBONjhHN2N0RFplTUl6TXJlSi1sYS1kdDdRaXlCeEZLUU9NV0IzUjdUQ0l4Vi1RdDNTTWtFZ2xpclBkQWFDTVpLQnk1d9IByAFBVV95cUxNMVp4NkRQUWdlX0lQMG9pdVhsbldwSkhSTHFCUFpYX3pZNTBLWGZHekVlRlg0VUZLQzZIRENueE0xalR3OVo1am9OUFVVamlfQzFJYVlaMzVPWnA2NTFjeUgxczRkeGFmaUc4RWYyLUxxOXB6eHZlUlJKMURRRHNLTWlVNVlDVE5odElnTXFQVnptdXNhY2pCa2ZoOUhoY3ZwWmV6aUkxVnVBTjZsZzY1SXR5UHJoRkJISG9IS1daT2ZvOWo4cDVFcw?oc=5\" target=\"_blank\">Meta shares fall on concerns over AI spending, legal scrutiny</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Hindu</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
       ],
       "sections": []
     },
@@ -3571,20 +3613,6 @@
       "relevance_score": 4.0,
       "queries": [
         "https://news.google.com/rss/search?q=intelligence+artificielle+IA&hl=fr&gl=FR&ceid=FR:fr"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNdmMweWtncUhfVGZPNEFKTWFSU0xXMldTdTBwM0tscTJ0WW55TWJWQkVWdTVENUlRbmxpZXViQWhSZkVTRlhGSU5tWGR4RG1TM0J0OHBLSVUtd1hVTWppUFBzd085ejRDRHhsZklzSlNaR3JxSnJIOGJyaTFuWVdqWHZydzVaeGhhczVmYURZazJranFtWFZXUFhpWXZodVJ1OGs3a21IMno0dw",
-      "title": "Meta shares fall on concerns over AI spending, legal scrutiny - CNA",
-      "domain": "channelnewsasia.com",
-      "published_at": "Thu, 30 Apr 2026 03:58:33 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiqgFBVV95cUxNdmMweWtncUhfVGZPNEFKTWFSU0xXMldTdTBwM0tscTJ0WW55TWJWQkVWdTVENUlRbmxpZXViQWhSZkVTRlhGSU5tWGR4RG1TM0J0OHBLSVUtd1hVTWppUFBzd085ejRDRHhsZklzSlNaR3JxSnJIOGJyaTFuWVdqWHZydzVaeGhhczVmYURZazJranFtWFZXUFhpWXZodVJ1OGs3a21IMno0dw?oc=5\" target=\"_blank\">Meta shares fall on concerns over AI spending, legal scrutiny</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">CNA</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -3673,54 +3701,12 @@
       "sections": []
     },
     {
-      "url": "https://news.google.com/rss/articles/CBMitgJBVV95cUxNSmNKYzd2S3dYWVRKaE91ZHpYY0dTbFVWTWFWdzR4c0RNT3UzT3JraHo4VHczeHhfUkVXUVhHTnZxc05CRHdteWZjYW1tbktZNFhNRGh5aVZ0RENxNEp4R3VOMkg2S0U2SWdSeUk4MXZZclJ1T0dtVVhGbWQyUzdMZDYzaW8yWVZXSHpJZ0cwc0d3cm9xanVkQnFoNERxNEREbC1HNXA4bGs4WjRTeGNuMGpMRXFvUzNIemp3aEpuZy1EbnFaU1ZuTi1ObGF3WmtjcHN6TmstMWRKZW9oRDdHNHhjbk10a19OWWtSeVVnQWlFRmptT2tLZVdrZXZFR0RzNXpuQTN6Tm0xZEtwbndJZlhyRHBzb09YVDNNVTkwbXBqdUQtX18xb2dlY0h4U3JEN1Fnbnd30gHzAUFVX3lxTFBnTVkwallBUDNlME04Szg4Nmo1NHppN1c4NW5WRFUxaW1BbG5DeE1pS3FUVXJYVUVva2c2SkkzTWdCZVJHN0FwSkpBMXc0a2NmbzdvSUtKNkxUc3hXbVZHckFJUTJlNUtDYkFuQU02dVhPdEVfY2ZxckRsaWFNb04ydnVGQjFWdEh4bFdrbkNYRFhSOTRrVEtMYURMQjRSVU1xcFV1bFdud2FzQlVfODV4Y0ZGa2JmUVB5VlBZWm13UVMyaVJqQXBEY0lVQUxnR3JvY2l5dUg4UnVuMjdzN2U4bWFGRERUU0VTS0NmZ1RYUWlnYw",
-      "title": "Maharashtra announces AI policy, envisages Rs 10,000 crore investment, creation of 1.5 lakh jobs - ETHRWorld.com",
-      "domain": "hr.economictimes.indiatimes.com",
-      "published_at": "Thu, 30 Apr 2026 02:16:54 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMitgJBVV95cUxNSmNKYzd2S3dYWVRKaE91ZHpYY0dTbFVWTWFWdzR4c0RNT3UzT3JraHo4VHczeHhfUkVXUVhHTnZxc05CRHdteWZjYW1tbktZNFhNRGh5aVZ0RENxNEp4R3VOMkg2S0U2SWdSeUk4MXZZclJ1T0dtVVhGbWQyUzdMZDYzaW8yWVZXSHpJZ0cwc0d3cm9xanVkQnFoNERxNEREbC1HNXA4bGs4WjRTeGNuMGpMRXFvUzNIemp3aEpuZy1EbnFaU1ZuTi1ObGF3WmtjcHN6TmstMWRKZW9oRDdHNHhjbk10a19OWWtSeVVnQWlFRmptT2tLZVdrZXZFR0RzNXpuQTN6Tm0xZEtwbndJZlhyRHBzb09YVDNNVTkwbXBqdUQtX18xb2dlY0h4U3JEN1Fnbnd30gHzAUFVX3lxTFBnTVkwallBUDNlME04Szg4Nmo1NHppN1c4NW5WRFUxaW1BbG5DeE1pS3FUVXJYVUVva2c2SkkzTWdCZVJHN0FwSkpBMXc0a2NmbzdvSUtKNkxUc3hXbVZHckFJUTJlNUtDYkFuQU02dVhPdEVfY2ZxckRsaWFNb04ydnVGQjFWdEh4bFdrbkNYRFhSOTRrVEtMYURMQjRSVU1xcFV1bFdud2FzQlVfODV4Y0ZGa2JmUVB5VlBZWm13UVMyaVJqQXBEY0lVQUxnR3JvY2l5dUg4UnVuMjdzN2U4bWFGRERUU0VTS0NmZ1RYUWlnYw?oc=5\" target=\"_blank\">Maharashtra announces AI policy, envisages Rs 10,000 crore investment, creation of 1.5 lakh jobs</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">ETHRWorld.com</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPUTNTcVVvRDE2dWFZUXBTb3pleUU5S3Z3U2J1MGRpSjFqQTE5N0JYRV9Pd0VVNEk5RHo5NkstQnN1akJhTDhaWE95N2xUR3gxMGJMNy10NXNhdGJVdUlnLVQxRVRCeF9tWFpodkt6VklnMUd4MmIyRFM4ZFdnc2ZvZXY2QVFPUQ",
-      "title": "SoftBank to create and list AI firm Roze in U.S., Financial Times reports - The Japan Times",
-      "domain": "japantimes.co.jp",
-      "published_at": "Thu, 30 Apr 2026 01:25:00 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMihgFBVV95cUxPUTNTcVVvRDE2dWFZUXBTb3pleUU5S3Z3U2J1MGRpSjFqQTE5N0JYRV9Pd0VVNEk5RHo5NkstQnN1akJhTDhaWE95N2xUR3gxMGJMNy10NXNhdGJVdUlnLVQxRVRCeF9tWFpodkt6VklnMUd4MmIyRFM4ZFdnc2ZvZXY2QVFPUQ?oc=5\" target=\"_blank\">SoftBank to create and list AI firm Roze in U.S., Financial Times reports</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The Japan Times</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
-      ],
-      "sections": []
-    },
-    {
       "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5MdmVmY1pqSXRLRGRkNm9NcGUzZGRPX1ZtVE14WUFhWWZzTDNxaW1qNlE1ekFiSzJoOE9XcDZXUi1sX1lUYlBHN01LTU9PRWFvZDMzZXo4aHJ0TXk2ZS13WUd3cHJfQlBvQ0hFMkllY0JTMmFwaVUtYVdpaHNSdw",
       "title": "Which Pothole To Fix? AI Team Helps Company Develop City System - The University of Texas at Dallas",
       "domain": "news.utdallas.edu",
       "published_at": "Thu, 30 Apr 2026 01:05:39 GMT",
       "author": null,
       "summary": "<a href=\"https://news.google.com/rss/articles/CBMifkFVX3lxTE5MdmVmY1pqSXRLRGRkNm9NcGUzZGRPX1ZtVE14WUFhWWZzTDNxaW1qNlE1ekFiSzJoOE9XcDZXUi1sX1lUYlBHN01LTU9PRWFvZDMzZXo4aHJ0TXk2ZS13WUd3cHJfQlBvQ0hFMkllY0JTMmFwaVUtYVdpaHNSdw?oc=5\" target=\"_blank\">Which Pothole To Fix? AI Team Helps Company Develop City System</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The University of Texas at Dallas</font>",
-      "content_text": null,
-      "relevance_score": 4.0,
-      "queries": [
-        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
-      ],
-      "sections": []
-    },
-    {
-      "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1lTWN6OUNFaWluSzZma0UyUmMwX19OZ25Od0UwLWlFczlPVExhaUxNWjdzMHJpeXlzbDcxT2YzLVNVRFRrUVRxNmkzVW1rNURpY21xOW9iRHo5RzRlMUJ3amhUeHo1TlE",
-      "title": "Google–Pentagon AI Deal Sparks Internal Revolt｜Daily News Digest｜2026-04-30｜web only - 天下雜誌",
-      "domain": "english.cw.com.tw",
-      "published_at": "Thu, 30 Apr 2026 01:02:07 GMT",
-      "author": null,
-      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1lTWN6OUNFaWluSzZma0UyUmMwX19OZ25Od0UwLWlFczlPVExhaUxNWjdzMHJpeXlzbDcxT2YzLVNVRFRrUVRxNmkzVW1rNURpY21xOW9iRHo5RzRlMUJ3amhUeHo1TlE?oc=5\" target=\"_blank\">Google–Pentagon AI Deal Sparks Internal Revolt｜Daily News Digest｜2026-04-30｜web only</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">天下雜誌</font>",
       "content_text": null,
       "relevance_score": 4.0,
       "queries": [
@@ -3739,6 +3725,20 @@
       "relevance_score": 4.0,
       "queries": [
         "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=IN&ceid=IN:en"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNdmMweWtncUhfVGZPNEFKTWFSU0xXMldTdTBwM0tscTJ0WW55TWJWQkVWdTVENUlRbmxpZXViQWhSZkVTRlhGSU5tWGR4RG1TM0J0OHBLSVUtd1hVTWppUFBzd085ejRDRHhsZklzSlNaR3JxSnJIOGJyaTFuWVdqWHZydzVaeGhhczVmYURZazJranFtWFZXUFhpWXZodVJ1OGs3a21IMno0dw",
+      "title": "Meta shares fall on concerns over AI spending, legal scrutiny - CNA",
+      "domain": "channelnewsasia.com",
+      "published_at": "Thu, 30 Apr 2026 00:39:00 GMT",
+      "author": null,
+      "summary": "<a href=\"https://news.google.com/rss/articles/CBMiqgFBVV95cUxNdmMweWtncUhfVGZPNEFKTWFSU0xXMldTdTBwM0tscTJ0WW55TWJWQkVWdTVENUlRbmxpZXViQWhSZkVTRlhGSU5tWGR4RG1TM0J0OHBLSVUtd1hVTWppUFBzd085ejRDRHhsZklzSlNaR3JxSnJIOGJyaTFuWVdqWHZydzVaeGhhczVmYURZazJranFtWFZXUFhpWXZodVJ1OGs3a21IMno0dw?oc=5\" target=\"_blank\">Meta shares fall on concerns over AI spending, legal scrutiny</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">CNA</font>",
+      "content_text": null,
+      "relevance_score": 4.0,
+      "queries": [
+        "https://news.google.com/rss/search?q=artificial+intelligence+AI&hl=en&gl=SG&ceid=SG:en"
       ],
       "sections": []
     },
@@ -3823,6 +3823,20 @@
       "relevance_score": 3.5,
       "queries": [
         "https://aws.amazon.com/blogs/machine-learning/feed/"
+      ],
+      "sections": []
+    },
+    {
+      "url": "https://techcrunch.com/2026/04/29/amazons-cloud-business-is-surging-and-so-is-its-capital-spending/",
+      "title": "Amazon’s cloud business is surging — and so is its capital spending",
+      "domain": "techcrunch.com",
+      "published_at": "Thu, 30 Apr 2026 00:14:23 +0000",
+      "author": "Lucas Ropek",
+      "summary": "The e-commerce giant is making more money than expected from AWS but it's also spending a lot, and will continue to do so in the near term, its chief executive said.",
+      "content_text": null,
+      "relevance_score": 3.5,
+      "queries": [
+        "https://techcrunch.com/category/artificial-intelligence/feed/"
       ],
       "sections": []
     },

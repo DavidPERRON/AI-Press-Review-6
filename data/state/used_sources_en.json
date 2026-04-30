@@ -1,6 +1,406 @@
 {
   "items": [
     {
+      "title": "IDC: How EMEA CIOs can jumpstart AI rollouts",
+      "url": "https://www.artificialintelligence-news.com/news/idc-how-emea-cios-can-jumpstart-ai-rollouts/",
+      "used_at": "2026-04-30T11:47:45.632528+00:00"
+    },
+    {
+      "title": "Qwen Team Releases FlashQLA: a High-Performance Linear Attention Kernel Library That Achieves Up to 3× Speedup on NVIDIA Hopper GPUs",
+      "url": "https://www.marktechpost.com/2026/04/29/qwen-team-releases-flashqla-a-high-performance-linear-attention-kernel-library-that-achieves-up-to-3x-speedup-on-nvidia-hopper-gpus/",
+      "used_at": "2026-04-30T11:47:45.632538+00:00"
+    },
+    {
+      "title": "Operating-Layer Controls for Onchain Language-Model Agents Under Real Capital",
+      "url": "https://arxiv.org/abs/2604.26091",
+      "used_at": "2026-04-30T11:47:45.632540+00:00"
+    },
+    {
+      "title": "Progressive Semantic Communication for Efficient Edge-Cloud Vision-Language Models",
+      "url": "https://arxiv.org/abs/2604.26508",
+      "used_at": "2026-04-30T11:47:45.632542+00:00"
+    },
+    {
+      "title": "A Systematic Comparison of Prompting and Multi-Agent Methods for LLM-based Stance Detection",
+      "url": "https://arxiv.org/abs/2604.26319",
+      "used_at": "2026-04-30T11:47:45.632545+00:00"
+    },
+    {
+      "title": "A Scoping Review of LLM-as-a-Judge in Healthcare and the MedJUDGE Framework",
+      "url": "https://arxiv.org/abs/2604.25933",
+      "used_at": "2026-04-30T11:47:45.632547+00:00"
+    },
+    {
+      "title": "A Practice of Post-Training on Llama-3 70B with Optimal Selection of Additional Language Mixture Ratio",
+      "url": "https://arxiv.org/abs/2409.06624",
+      "used_at": "2026-04-30T11:47:45.632549+00:00"
+    },
+    {
+      "title": "MINOS: A Multimodal Evaluation Model for Bidirectional Generation Between Image and Text",
+      "url": "https://arxiv.org/abs/2506.02494",
+      "used_at": "2026-04-30T11:47:45.632551+00:00"
+    },
+    {
+      "title": "SciMDR: Advancing Scientific Multimodal Document Reasoning",
+      "url": "https://arxiv.org/abs/2603.12249",
+      "used_at": "2026-04-30T11:47:45.632553+00:00"
+    },
+    {
+      "title": "Parallel Web Systems Raises $100 Million for Agentic AI Efforts",
+      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/parallel-web-systems-raises-100-million-for-agentic-ai-efforts/",
+      "used_at": "2026-04-30T11:47:45.632555+00:00"
+    },
+    {
+      "title": "Ant International serves 150m merchants, 2b consumers, bets on AI commerce infrastructure",
+      "url": "https://www.scmp.com/tech/big-tech/article/3351926/ant-international-serves-150m-merchants-2b-consumers-bets-ai-commerce-infrastructure",
+      "used_at": "2026-04-30T11:47:45.632556+00:00"
+    },
+    {
+      "title": "GPT-5.5 is OpenAI’s most capable agentic AI model yet",
+      "url": "https://www.artificialintelligence-news.com/news/gpt-5-5-is-openais-most-capable-agentic-ai-model-yet-at-twice-the-api-price/",
+      "used_at": "2026-04-30T11:47:45.632558+00:00"
+    },
+    {
+      "title": "The Zig project's rationale for their firm anti-AI contribution policy",
+      "url": "https://simonwillison.net/2026/Apr/30/zig-anti-ai/",
+      "used_at": "2026-04-30T11:47:45.632560+00:00"
+    },
+    {
+      "title": "氪星晚报 ｜腾讯ima推出全新知识Agent——copilot；魔法原子：目标到2036年营收达140亿美元",
+      "url": "https://36kr.com/p/3787748082293766",
+      "used_at": "2026-04-30T11:47:45.632561+00:00"
+    },
+    {
+      "title": "BlackRock and Vanguard Show the AI Edge Starts With Clean Data",
+      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/blackrock-and-vanguard-show-the-ai-edge-starts-with-clean-data/",
+      "used_at": "2026-04-30T11:47:45.632563+00:00"
+    },
+    {
+      "title": "Tech Week Shanghai founding edition to connect global tech players with China’s data ecosystem",
+      "url": "https://technode.com/2026/04/30/tech-week-shanghai-founding-edition-to-connect-global-tech-players-with-chinas-data-ecosystem/",
+      "used_at": "2026-04-30T11:47:45.632565+00:00"
+    },
+    {
+      "title": "White House Crafts Plan to Bring Anthropic Back Into Government Fold",
+      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/white-house-crafts-plan-to-bring-anthropic-back-into-government-fold/",
+      "used_at": "2026-04-30T11:47:45.632566+00:00"
+    },
+    {
+      "title": "AI chip designer Cambricon vaults to China’s costliest stock after profits soar 185%",
+      "url": "https://www.scmp.com/tech/article/3351894/revenue-jumps-chinas-cambricon-metax-amid-thirst-domestic-ai-chips",
+      "used_at": "2026-04-30T11:47:45.632568+00:00"
+    },
+    {
+      "title": "Cata raises US$5.3M to bring enterprise app tech to F&B and retail operators",
+      "url": "https://e27.co/cata-raises-us5-3m-to-bring-enterprise-app-tech-to-fb-and-retail-operators-20260424/",
+      "used_at": "2026-04-30T11:47:45.632570+00:00"
+    },
+    {
+      "title": "The evolution of encoders: From simple models to multimodal AI",
+      "url": "https://www.artificialintelligence-news.com/news/the-evolution-of-encoders-from-simple-models-to-multimodal-ai/",
+      "used_at": "2026-04-30T11:47:45.632572+00:00"
+    },
+    {
+      "title": "Lightelligence’s 400% debut is a bet that AI’s next bottleneck is the optical interconnect",
+      "url": "https://www.artificialintelligence-news.com/news/lightelligence-ipo-optical-interconnect-ai-infrastructure/",
+      "used_at": "2026-04-30T11:47:45.632574+00:00"
+    },
+    {
+      "title": "IBM Launches AI and Quantum Hubs in Illinois and Massachusetts",
+      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/ibm-launches-ai-and-quantum-hubs-in-illinois-and-massachusetts/",
+      "used_at": "2026-04-30T11:47:45.632575+00:00"
+    },
+    {
+      "title": "Colby Adcock’s Scout AI raises $100M to train its models for war: We visited its bootcamp",
+      "url": "https://techcrunch.com/2026/04/29/coby-adcocks-scout-ai-raises-100-million-to-train-models-for-war-we-visited-its-bootcamp/",
+      "used_at": "2026-04-30T11:47:45.632577+00:00"
+    },
+    {
+      "title": "AI Spending Drives Business Equipment Investment to 6-Year High",
+      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/ai-spending-drives-business-equipment-investment-to-6-year-high/",
+      "used_at": "2026-04-30T11:47:45.632578+00:00"
+    },
+    {
+      "title": "Singapore AI design startup FORMAS.AI raises US$3.98M in oversubscribed pre-seed round",
+      "url": "https://e27.co/singapore-ai-design-startup-formas-ai-raises-us3-98m-in-oversubscribed-pre-seed-round-20260429/",
+      "used_at": "2026-04-30T11:47:45.632580+00:00"
+    },
+    {
+      "title": "别急着All-in DeepSeek V4，先看看这10位从业者的真心话",
+      "url": "https://36kr.com/p/3788151000751364",
+      "used_at": "2026-04-30T11:47:45.632581+00:00"
+    },
+    {
+      "title": "Yet another experiment proves it's too damn simple to poison large language models",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/29/poisoning_large_language_models_6nimmt/",
+      "used_at": "2026-04-30T11:47:45.632583+00:00"
+    },
+    {
+      "title": "OpenAI jumps out of Microsoft's bed, into Amazon's Bedrock",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/28/openai_climbs_into_amazons_bedrock/",
+      "used_at": "2026-04-30T11:47:45.632585+00:00"
+    },
+    {
+      "title": "OpenAI Disputes Growth Worries Amid Subscription Changes",
+      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/openai-disputes-growth-worries-amid-subscription-changes/",
+      "used_at": "2026-04-30T11:47:45.632586+00:00"
+    },
+    {
+      "title": "Introducing AutoSP",
+      "url": "https://pytorch.org/blog/introducing-autosp/",
+      "used_at": "2026-04-30T11:47:45.632588+00:00"
+    },
+    {
+      "title": "Italy Edge Artificial Intelligence Chips - Market Analysis, Forecast, Size, Trends and Insights - IndexBox",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOckdsYkdycGJjZG85TlBnTjZlUnhTYWVBai1tTkNoa0lqRUZNVVYxbFkyUDNGS2ttX2EwYTNNRE9jM0RvS0VNZFFxSHFQWmtNUGNYTlp2RnVEREVoWWltc29xUzBMTS1oYnp1MHZOeHRramVEamNkUTdtRkdqUDZvQlZQeE1DSWJHY0ZzMUtlRVNTcEV1Sm1QZkltZWdGMGhKRV9BeWdFZTZOR2ZITERMOHFNOGM0SnczM1dyeGZB",
+      "used_at": "2026-04-30T11:47:45.632589+00:00"
+    },
+    {
+      "title": "Ex-Twitter CEO Parag Agrawal's AI Startup Hits $2B Valuation With $100M Funding - NDTV Profit",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOR0NHbHlVdk1XWmZmQVBRT2xqejlOLS0tQlBUM2g2XzNYVE1veUw3cVpVbVNsTnNIb2thNzczRVo5alM2UUlUZGRRSFhHVEwyRmM0T3JpYnQ5S1pWUklPaEVheWNPeWx2X01JNHlBSWtnb1Ywam5GX1l6bEtYWENsVjRIN3FUb3FRUnQ1emItcWNwSXU4eUJmVlBCaFpNeDRocFFTZm8tc05hQ3h3Y2Z3UURoY1UxaVRXSkJCc2Zn0gHGAUFVX3lxTE9FbUI2bFZBNDBaNlh6azE0anVxcHdFS1YxTVpjZXNPZkVOaElGRVE5MmRqVUltd1QxS25DbWs0dkRBdEJNb21QY0hDNy1FSUk5LUphZTFvREI5VzNaekx6SFhBUVVHNng3cmVLLTRvVHN6bEdmTWl0RDF4YXRQQUFjX1paQ3ZRVG1acnVJOVplMkNEQVd4TXFGVzdscmJDRGxSMjhJTE1CN3gxUzFlN3hRbFRaaUxMSnN0VkM0Z0NwZHBtZnd5dw",
+      "used_at": "2026-04-30T11:47:45.632591+00:00"
+    },
+    {
+      "title": "Surging artificial intelligence data usage reshaping economy - China Daily",
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5RdU5XNmFQY0pIWjZ2NDZKRXNBQ0R2cmdxY0tjX3NFaXQyLXVFMkRFeWk1ODlwT3lKemVZbFRIOWV2bXBfb3RzMm9yMU85V2VFVWdlT3lGS3laVkJ2WUhnNEZiYzVPX19VZUttQWNMZm1ERzhjd1F0SC1EanB6dw",
+      "used_at": "2026-04-30T11:47:45.632593+00:00"
+    },
+    {
+      "title": "Bernie Sanders urges international cooperation to halt AI’s ‘runaway train’",
+      "url": "https://www.theguardian.com/us-news/2026/apr/29/bernie-sanders-ai-panel",
+      "used_at": "2026-04-30T11:47:45.632594+00:00"
+    },
+    {
+      "title": "DeepSeek adds AI vision in major move: ‘the whale can now see’",
+      "url": "https://www.scmp.com/tech/tech-trends/article/3351892/whale-can-now-see-deepseek-adds-ai-vision-major-move",
+      "used_at": "2026-04-30T11:47:45.632596+00:00"
+    },
+    {
+      "title": "Hit from memory costs spreads from phones to EVs as China’s BYD raises driving-tech price",
+      "url": "https://www.scmp.com/tech/article/3351842/hit-memory-costs-spreads-phones-evs-chinas-byd-raises-driving-tech-price",
+      "used_at": "2026-04-30T11:47:45.632598+00:00"
+    },
+    {
+      "title": "With Nemotron 3 Nano Omni, Nvidia reveals what really goes into a modern multimodal model",
+      "url": "https://the-decoder.com/with-nemotron-3-nano-omni-nvidia-reveals-what-really-goes-into-a-modern-multimodal-model/",
+      "used_at": "2026-04-30T11:47:45.632599+00:00"
+    },
+    {
+      "title": "China’s Alibaba, ByteDance and Zhipu AI make the cut on Time’s first AI A-list",
+      "url": "https://www.scmp.com/tech/article/3351823/chinas-alibaba-bytedance-and-zhipu-ai-make-cut-times-first-ai-list",
+      "used_at": "2026-04-30T11:47:45.632601+00:00"
+    },
+    {
+      "title": "China blocks Meta’s Manus deal, raises Mythos concerns",
+      "url": "https://www.scmp.com/plus/tech/big-tech/article/3351705/china-blocks-metas-manus-deal-raises-mythos-concerns",
+      "used_at": "2026-04-30T11:47:45.632602+00:00"
+    },
+    {
+      "title": "Larry’s risky business",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/920378/oracle-openai-datacenter-buildout",
+      "used_at": "2026-04-30T11:47:45.632604+00:00"
+    },
+    {
+      "title": "From code to carbon: How Asia can harness AI agents without harming people or the planet",
+      "url": "https://e27.co/from-code-to-carbon-how-asia-can-harness-ai-agents-without-harming-people-or-the-planet-20260428/",
+      "used_at": "2026-04-30T11:47:45.632606+00:00"
+    },
+    {
+      "title": "The divided AI race nobody wins: How businesses can navigate the US-China tech divide",
+      "url": "https://e27.co/the-divided-ai-race-nobody-wins-how-businesses-can-navigate-the-us-china-tech-divide-20260423/",
+      "used_at": "2026-04-30T11:47:45.632608+00:00"
+    },
+    {
+      "title": "Why startup founders shouldn’t trust an AI agent to replace a PR team",
+      "url": "https://e27.co/why-startup-founders-shouldnt-trust-an-ai-agent-to-replace-a-pr-team-20260428/",
+      "used_at": "2026-04-30T11:47:45.632609+00:00"
+    },
+    {
+      "title": "LLM 0.32a0 is a major backwards-compatible refactor",
+      "url": "https://simonwillison.net/2026/Apr/29/llm/",
+      "used_at": "2026-04-30T11:47:45.632611+00:00"
+    },
+    {
+      "title": "Claude AI agent’s confession after deleting a firm’s entire database: ‘I violated every principle I was given’",
+      "url": "https://www.theguardian.com/technology/2026/apr/29/claude-ai-deletes-firm-database",
+      "used_at": "2026-04-30T11:47:45.632612+00:00"
+    },
+    {
+      "title": "Stripe Brings Merchant Checkout to Google’s AI Apps",
+      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/stripe-scales-ai-economic-infrastructure-with-google-deal/",
+      "used_at": "2026-04-30T11:47:45.632614+00:00"
+    },
+    {
+      "title": "'I violated every principle I was given': AI agent deletes company's entire database in 9 seconds, then confesses - Live Science",
+      "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxQNnNESllfdEhiRDEydmd2VVBIelhrTmFqRjhsSEJzZGZMZGpuYXIzcUE0T1hMWWw1eFBJcTdXWU9BVS1GV0FKRmhqQmoxOU5tNjBWdEZ0MVhqcXNrMWtlRzNEek1IQXlHOF9MMlJMUEdwRjM2MUlQRlhkZUtxSkdJUDh4b1h4dk5yOUJZQ2Y0WFV2MXVmMTNhZHdtblVxMmprcm5jdWl4Rzd1MUtBQVdfY0VjRFI1a2NmUnRDTVRBTklWSW8yRnpqRHZOWi00am04dEplMlNQN0Y5TWpWTThSOE02YlVUd2tzMENLWHR3cm5VNGxIV1BJbG1sXzRsVlEw",
+      "used_at": "2026-04-30T11:47:45.632616+00:00"
+    },
+    {
+      "title": "CCS Medical Deploys Enterprise Agentic AI Platform for Chronic Care Support - AIM Media House",
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPbmhWOTZmeUJwYUIwRU1famJIZC1HMVc3a2F1THktVDJ4LXViaTV4YWphYlo4dXAxU0Ntcl9JTXJDY0lrcUlNeEhSZVljWGtsbmxHaTVDZDBFOW5wZGNTVTk5bUhrSlpKV3NXSjZMY3pmbU5sTlg0OEJ1Zl9RNXM1M2pVVURnVC14YTJLOXV5dkdpb3V6UHRwQlRiV08tdUhmNDgweEdiZ1k3dmxjUk5LcTBLWFk3dThz",
+      "used_at": "2026-04-30T11:47:45.632617+00:00"
+    },
+    {
+      "title": "A Coding Implementation on Document Parsing Benchmarking with LlamaIndex ParseBench Using Python, Hugging Face, and Evaluation Metrics",
+      "url": "https://www.marktechpost.com/2026/04/29/a-coding-implementation-on-document-parsing-benchmarking-with-llamaindex-parsebench-using-python-hugging-face-and-evaluation-metrics/",
+      "used_at": "2026-04-30T11:47:45.632619+00:00"
+    },
+    {
+      "title": "Exclusive: Big Chinese tech firms scramble to secure Huawei AI chips after DeepSeek V4 launch, sources say - Reuters",
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQb2k3eWk0STFfck5fbjZoWkMzRlg5OFRGR19BM0xXV3Vfb0dCX1NralZ2SDNVQ1RvU1Zpck1mVGhNT0FfRFIwcERIaFVmTHRJRTVRVlNOQlR1a0lyVE9iLW9OT0pYQTdZc3NqdVhPeTJhajhwWlJfZUpOeFdSZmd2M3QxZ2RraG12d2xFSkk1VXloOTNtSFJXS05wb3Y5Zk94VHJwQ2Z4d0V2X1BsbWlIWm1CVTBkYkVVS1hXSy1jR0JMVURZSmc",
+      "used_at": "2026-04-30T11:47:45.632620+00:00"
+    },
+    {
+      "title": "Gorilla Technology, Yotta expand India AI infra deal to $2.8 bn with 20,736 GPU deployment - Techcircle",
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOUGJZbkkteWdKX2hncjRIZVBVRHRMYmVUQ1FWdlRJSW16TkRON18zelRPWkdVM0pfNElVV04zOEJBVlRTRFdGZk5YLTdGYy15MHR5d0F0TlNxclRSMTdyX1Q0anR1bHBrM1BEUVNmdU9kLWlKMmVfLVAzZTRtY3hfcUtFZmg3cHpaY0FLLXRpbDdESGsyY3ZJampGUXhKcDNiZnU4bEFmdE5vbldnSjdUNHFGdTltdDNtTU8yM20zVDNWZmx3WVNmTXJR",
+      "used_at": "2026-04-30T11:47:45.632622+00:00"
+    },
+    {
+      "title": "The interpretation gap: Why AI agents are moving faster than companies can understand",
+      "url": "https://e27.co/the-interpretation-gap-why-ai-agents-are-moving-faster-than-companies-can-understand-20260424/",
+      "used_at": "2026-04-30T11:47:45.632624+00:00"
+    },
+    {
+      "title": "The scale layer nobody budgeted for: How AI agents unlock growth for Asian businesses",
+      "url": "https://e27.co/the-scale-layer-nobody-budgeted-for-20260424/",
+      "used_at": "2026-04-30T11:47:45.632625+00:00"
+    },
+    {
+      "title": "Amazon chips no longer just a side dish, they're a $20B biz",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/29/amazon_chips_20b_business/",
+      "used_at": "2026-04-30T11:47:45.632627+00:00"
+    },
+    {
+      "title": "Latest Marquette polls find deep skepticism of data centers, artificial intelligence - WPR",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPcllHVkxMMVE4QTRRVms0aUlWTnVuQjV3bU5MNTZsQ3VucHhJb0NBbnNMcGV0RkItck1QYy1zbVBNZ19hVHBYNGNFa1hEam9SYXp5OE42TGplSFVEX05yQWJDczVhSnp6Zms3YWU2Y3YteFR0TTd6SWNzdDdISkVYUml3UDRma04yX3Q2M0w4UF9Qd09YSnRGRzM5TDhROXBkV2U3bEE2MG8",
+      "used_at": "2026-04-30T11:47:45.632628+00:00"
+    },
+    {
+      "title": "ReliaQuest, FSU launch AI and cybersecurity partnership to accelerate research and real-world innovation - Florida State University News",
+      "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNcjBCeWVjZmJybGw1NlJWNzVBSlN3T3UxYWthbnVLNnNobHNGMVRod1NxclZjV2VXb1FGNm9CSUpzUUxpTDZOMkFmU0J6d3FDUUhsMUIySHRrSkQzbGI5OWl2UG1BQXBRV3g1UTZEdUVqUDYxbGlFOUtrSFNUZnlUS0RBVDRPMUdNTm9iU2RYUWNlRzUySzRKWUVXMHFFNng4UkNoSVNoTzVRMklpNUVQazBnYVVhWWNiZWZDMEpHbjkyYWc4bEpwQWdGeEtlUHlxQXRmVnpGVzZFMGFucHRMS1pwemJ2MXZjV1NzWDNB",
+      "used_at": "2026-04-30T11:47:45.632630+00:00"
+    },
+    {
+      "title": "Meet the AI jailbreakers: ‘I see the worst things humanity has produced’",
+      "url": "https://www.theguardian.com/technology/2026/apr/29/meet-the-ai-jailbreakers-i-see-the-worst-things-humanity-has-produced",
+      "used_at": "2026-04-30T11:47:45.632631+00:00"
+    },
+    {
+      "title": "House again rejects DeSantis’ artificial intelligence, vaccine measures - WGCU",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQMjVKWU8zS0RtR3llLXR4LUgzZjg1N0w3VUFvY2FpX2p4emNHTHFTb2pXdFRxSWQ3ZWdUX0ZwX3JTeWJYcGRNdm9jbnEwQ3pPTHpRVkNMMHhTTGlWR0txQXhmdm5iSC0zRUlleGNxcl9TcG9tNjE5VVBXWTRXbUFPT2RnUzJYVERGT0ZPWGo4bnBIYU0wVHA5N2V2aTFBVFZEZlQtQTlWX1FtNzhkalBuQXJOTExiTTlPN1FRdVB3",
+      "used_at": "2026-04-30T11:47:45.632633+00:00"
+    },
+    {
+      "title": "Artificial intelligence for battery reuse, recycling and remanufacturing - Nature",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE41MEJmNFFZUlo5LUVkMkg2ZzhVNkVhZDJJLXNOSGFVYjVqdjFkbFZKM1kwaGdyQXFHTEJIUE5XQVVMMzZiLVozUEc3d2lteFhLdjFTeldmQTVXR0lRWnVr",
+      "used_at": "2026-04-30T11:47:45.632634+00:00"
+    },
+    {
+      "title": "OpenAI researchers explain why math is the road to AGI",
+      "url": "https://the-decoder.com/openai-researchers-explain-why-math-is-the-road-to-agi/",
+      "used_at": "2026-04-30T11:47:45.632636+00:00"
+    },
+    {
+      "title": "OpenAI lands on AWS one day after Microsoft deal restructuring",
+      "url": "https://the-decoder.com/openai-lands-on-aws-one-day-after-microsoft-deal-restructuring/",
+      "used_at": "2026-04-30T11:47:45.632637+00:00"
+    },
+    {
+      "title": "Eternal Q4FY26: Goyal Dismisses AI Disruption Risk as Zomato Quietly Builds Agentic Commerce Infrastructure",
+      "url": "https://www.medianama.com/2026/04/223-eternal-q4fy26-deepinder-goyal-zomato-ai-strategy/",
+      "used_at": "2026-04-30T11:47:45.632639+00:00"
+    },
+    {
+      "title": "Amazon reports Q1 earnings that top analyst estimates amid artificial intelligence push - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNYWFSb21aR2d4SDl4TVFqREJJMXNKSW13YUx2QmQtRkdNLS13TTBJTWQtX0g3b1E4dmExWmVyZWVRckpZZFJ6TmI2N1BVSjRzUHNLMUxZc0NkRGhkaFJ5eTBaNVNRdXpfdG82V3FhWXZKRUFZc2VkTkNEQTRkUUZKdVYxYkd3bkVhc0tkWGdhaTg2aGZ6a0pqX1RDTERiVFdScWdwTENlaVV1SFUtQUJUc0ZvWmM2eHJJZmVhS0paN0Y2ZE1fZ0NFUVNXaHhzQjlOVTNQRGVqOGkzMXYxMFV4djlBR05UNnU5dU1z",
+      "used_at": "2026-04-30T11:47:45.632641+00:00"
+    },
+    {
+      "title": "New DOL Guidance Encourages Employer ‘AI Literacy’ Training - The National Law Review",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQdWZKdnFaUWhVQWtuZXh2VzNEYWR2bEphX2luYVFSZURFMmVwUG9vTDhxTHk2VVEzRDB3MEVzQ3ZZWjlncVl0WlBpd2hFNnhKdGlWV3Z1Qk1kSDQwdElTcFhCLXZsS3h4dlFuN3JsU3lGOVpFM1N4dG84NDVZdkxrNnJwY2dweEtpLVpqbENOcmhEdFkx0gGaAUFVX3lxTE4ydlJ4WTdqQlA0aU1zVTZJTlJQRW9udWhxckVKY2RKdlNldjBVZVJiaWpoR2RXWlJJN3RuU3pQVU9ocXY4cGlBM2QxbDl1VVRKa1J4ZkxLOTEwd0dhcEFpTDNZV2U0UTdkTVM0Vk55VXJCMHZoV0ZkemtuWGRzdy1YSEUySUdBcG84M0JrR01iOFdZSndIVGdLWkE",
+      "used_at": "2026-04-30T11:47:45.632642+00:00"
+    },
+    {
+      "title": "AI robotics research in manufacturing at Sungkyunkwan University - Nature",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA0MXA5ZjVPdG11SnVFT0s0dE9MOUUyUEhsdGhPREI1d1JKX09MMU1OR25NU3ZEM3RfSVBnQTE2R21rZEg0a1A2SEJKRmNnTkJqUEdXMmJfQnRhWENCVnpN",
+      "used_at": "2026-04-30T11:47:45.632644+00:00"
+    },
+    {
+      "title": "South Africa’s AI policy cited fake research, created by AI: what lessons need to be learned - The Conversation",
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNN25QZ0dwY0R0Zkg0S2R1cDN3TUwteEMxXzdJd1JHeE1nYzIzMG9XZlhBN18zenJraGRpc2UzSjlvMWlfMUFDQ0h2MUp3RVA5MXhxX0RWQ3B4QUdxYUsxNjRSNWxTQ1RkbmRPai1RRW41RS1kWk9PcDRUdEhIR1g5YTdjSE1YOHFEZTBmME9VSzNnQnBGNEczV1pTc0R5SE9GRGtBbTd1ZUJYdTc5UlZaTVFDY0o5aC1hZ2RZYWUxSDl5dw",
+      "used_at": "2026-04-30T11:47:45.632646+00:00"
+    },
+    {
+      "title": "Behind the Curtain: We've been warned",
+      "url": "https://www.axios.com/2026/04/29/ai-models-speed-warning",
+      "used_at": "2026-04-30T11:47:45.632647+00:00"
+    },
+    {
+      "title": "Optimized Electrotech Raises ₹35 Cr To Expand Into Space Imaging",
+      "url": "https://inc42.com/buzz/optimized-electrotech-raises-%e2%82%b935-cr-to-expand-into-space-imaging/",
+      "used_at": "2026-04-30T11:47:45.632649+00:00"
+    },
+    {
+      "title": "Exfinity Ventures Clocks 13X Return From CloudSEK Partial Exit",
+      "url": "https://inc42.com/buzz/exfinity-ventures-clocks-13x-return-from-cloudsek-partial-exit/",
+      "used_at": "2026-04-30T11:47:45.632651+00:00"
+    },
+    {
+      "title": "30 ClawHub skills secretly turn AI agents into a crypto swarm",
+      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/29/30_clawhub_skills_mine_crypto/",
+      "used_at": "2026-04-30T11:47:45.632652+00:00"
+    },
+    {
+      "title": "Meta ouvre ses campagnes publicitaires aux agents IA - The Media Leader",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOckVZdjRnQm1VTmoxNi1nUzBzWFdEb3FmVFNRblZCakJqRmV6S2FXd0xvcDc4Rm5uR09kSE9MQ1o3NzZPdUJaemRBSGpHelp1QldiT0JjNzBLWHAyOFlDbmlzYmt5by1fcGNya1VoQ1RYMUtkb0luTGZQdFgxZ29Cb1JCYmpfaWRhdWR3",
+      "used_at": "2026-04-30T11:47:45.632654+00:00"
+    },
+    {
+      "title": "The era of chatbot AIOps is fading as agentic AI gains traction - Network World",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPM2JKb0VnVTRqMmRrYko3ZUdTNjNMbW8wWXFjSk9LQVdheHZqRFZjVGhIekFaVGlhT0E5ay1NaldMNzUwQ1o1UXMtdmZTY1daUTNLQmdueHVqUXJFZUpCQ01YNFh0Q2lPUVZHdU9ya2NwVzZvMjlOUTFuUkxLVjBzMkMtdW5XQzcxRjJ5Y2llZE5yTE5qcFZXUzZGWm9jX1VqemJPeU53UEN6ZC14SFN2Q21hUQ",
+      "used_at": "2026-04-30T11:47:45.632655+00:00"
+    },
+    {
+      "title": "Is AI video just a prequel? Runway’s CEO thinks world models are next",
+      "url": "https://techcrunch.com/podcast/equity-podcast-runway-ceo-cristobal-valenzuela-ai-video-world-models/",
+      "used_at": "2026-04-30T11:47:45.632657+00:00"
+    },
+    {
+      "title": "Step by Step Guide to Build a Complete PII Detection and Redaction Pipeline with OpenAI Privacy Filter",
+      "url": "https://www.marktechpost.com/2026/04/29/step-by-step-guide-to-build-a-complete-pii-detection-and-redaction-pipeline-with-openai-privacy-filter/",
+      "used_at": "2026-04-30T11:47:45.632658+00:00"
+    },
+    {
+      "title": "To Navigate the Early Adoption Challenges of AI, Leverage the Power of GenAI Observability - Broadcom",
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOMDBsVzlSWEltcHdqYUVMblV2NWNfSXh2LW5iNDhBZURjaUxGZ1VDZ0MzdFp1bnU0c3BJVkxDeEt3M29yUlQ1UE9HN1BfTUtKb3owclpXRC00dnBycnFUOUw0R3FvVjBtNGtGSnUxallRVE1vcm43UmpFQlBLX3I3cTd0TGpIMzNXbzFLQWZGRUluS2dIZlZz",
+      "used_at": "2026-04-30T11:47:45.632660+00:00"
+    },
+    {
+      "title": "Testing in the age of agentic AI - Atos",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9xUUtET05NcFB5RVczRHJPeUs4eFh5ODVnc2ZrSXFJOWlhdW4tc3B1MDJKZXJyTl9iT3RYNzlsUXNha3NZTUlGbEJmaWZ2Zll6TUNWbnpxM3dKdXpua2RyVVNYdk9VclVP",
+      "used_at": "2026-04-30T11:47:45.632662+00:00"
+    },
+    {
+      "title": "Cybersecurity in the Intelligence Age - OpenAI",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE8zTmJINXN6MVZ2b3g5ZW9pNTRhUFN4bjJjSEFDMjFsTWNxSy1qZXZHVEVScWotbk5CdDNlNU5HSUNOS0F6OGFxbFdmLURtNnlMd3kzMkF6SWdPNmdoekFmWmJzMWRfckVhMGctWDV6ZEk",
+      "used_at": "2026-04-30T11:47:45.632663+00:00"
+    },
+    {
+      "title": "How governments can make agentic AI re ? - The World Economic Forum",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNU1Ewd2lKMlp6a08zZHNuSTF5VE1Gb0FwRzR5ZldPWEJaS1hfeDZUd1R6YnJJLWRVR0hMQXRsWmV0d3d3aXRnN1RFZDBzR01rUGk5blhvQUJpWUpZdWQ2ZEhvZkRoZDltT3dtSTFqT25WRE9JeVpaSUpMelJvdVNQYWJSd1hhcE91cnczbXRVSThKSnZNT21HN18taEttaWs",
+      "used_at": "2026-04-30T11:47:45.632665+00:00"
+    },
+    {
+      "title": "Nvidia, AI Chip Stocks Fall On OpenAI Funding Concerns - Investor's Business Daily",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPNU1rbUpaR0lHdDdSdjJqZl95LVJCRmR3VGpsUEN5c0hZUmM5cm8wM0hFNnd4dnpoMlhWTXZ2LVNTdGIwR18zRGctR0htaHBZS3lTQ1JTMV9iRlJiZVQ2TnpzUTR2LVJnbEQ3U2xzeFZDcm45UzhZbUhBSDlaZ1daN0tTLVhVUUFvT00xNQ",
+      "used_at": "2026-04-30T11:47:45.632667+00:00"
+    },
+    {
+      "title": "SoftBank reportedly weighs $100 billion valuation for new AI and robotics spinout in potential U.S. IPO - CNBC",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPY3NOR2N5TVFud3FtS2UxMXc3Ml9qV2ZmZnVUTTRfaF93b05DMHVPRm1zMFhGMWFSQ0dqeHNNRUdDb1gxUVNNdzNYajZ6WTRlb0ozSnN4cFY5NVgzWjM5cm1WeTJvWUtCQVBBbXl6MkRhUldieU1abjlISXNmS2VTeXVWbUhkMUYxZjl6WUI0VTF5UdIBlwFBVV95cUxOcmFBNHlYMTB6UWRYNklIWjlTakcxZ2VFamlwV3pfcFltd3lGYk5yV0szb2lpUEVKN0NLZHU5Q1h3WHE0Y2I1LWpqNHZyOXpuVHZfNlJFWGN3Z1JvcWk5b3dtalg4cUFTcU40NWduOFpRRlNNVG4tdV9ILXlObDBMeUpPNDIyWDF2eEJwUUxQUUhRX1dQWW5r",
+      "used_at": "2026-04-30T11:47:45.632669+00:00"
+    },
+    {
       "title": "Pimp My LLM: Leveraging Variability Modeling to Tune Inference Hyperparameters",
       "url": "https://arxiv.org/abs/2602.17697",
       "used_at": "2026-04-29T06:46:35.665672+00:00"
@@ -1599,406 +1999,6 @@
       "title": "氪星晚报｜美团万亿级参数大模型开放测试，训练全程由国产算力集群完成；百度联盟正式发布海外App业务；央行等八部门发布金融产品网络营销管理办法",
       "url": "https://36kr.com/p/3777694346548482",
       "used_at": "2026-04-25T15:12:38.396446+00:00"
-    },
-    {
-      "title": "ParaRNN: Large-Scale Nonlinear RNNs, Trainable in Parallel",
-      "url": "https://machinelearning.apple.com/research/large-scale-rnns",
-      "used_at": "2026-04-24T16:15:08.458269+00:00"
-    },
-    {
-      "title": "A pelican for GPT-5.5 via the semi-official Codex backdoor API",
-      "url": "https://simonwillison.net/2026/Apr/23/gpt-5-5/",
-      "used_at": "2026-04-24T16:15:08.458279+00:00"
-    },
-    {
-      "title": "As agentic AI pushes rivals to raise prices and cap usage, Deepseek ships a good-enough model for almost nothing",
-      "url": "https://the-decoder.com/as-agentic-ai-pushes-rivals-to-raise-prices-and-cap-usage-deepseek-ships-a-good-enough-model-for-almost-nothing/",
-      "used_at": "2026-04-24T16:15:08.458281+00:00"
-    },
-    {
-      "title": "Google DeepMind Introduces Decoupled DiLoCo: An Asynchronous Training Architecture Achieving 88% Goodput Under High Hardware Failure Rates",
-      "url": "https://www.marktechpost.com/2026/04/23/google-deepmind-introduces-decoupled-diloco-an-asynchronous-training-architecture-achieving-88-goodput-under-high-hardware-failure-rates/",
-      "used_at": "2026-04-24T16:15:08.458283+00:00"
-    },
-    {
-      "title": "DeepSeek V4 - almost on the frontier, a fraction of the price",
-      "url": "https://simonwillison.net/2026/Apr/24/deepseek-v4/",
-      "used_at": "2026-04-24T16:15:08.458286+00:00"
-    },
-    {
-      "title": "OpenAI releases \"Spud\" GPT-5.5 model",
-      "url": "https://www.axios.com/2026/04/23/openai-releases-spud-gpt-model",
-      "used_at": "2026-04-24T16:15:08.458288+00:00"
-    },
-    {
-      "title": "DeepSeek-V4 preview now available with open-source access",
-      "url": "https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/",
-      "used_at": "2026-04-24T16:15:08.458290+00:00"
-    },
-    {
-      "title": "CI-Work: Benchmarking Contextual Integrity in Enterprise LLM Agents",
-      "url": "https://arxiv.org/abs/2604.21308",
-      "used_at": "2026-04-24T16:15:08.458292+00:00"
-    },
-    {
-      "title": "Hyperloop Transformers",
-      "url": "https://arxiv.org/abs/2604.21254",
-      "used_at": "2026-04-24T16:15:08.458294+00:00"
-    },
-    {
-      "title": "Agentic AI for Personalized Physiotherapy: A Multi-Agent Framework for Generative Video Training and Real-Time Pose Correction",
-      "url": "https://arxiv.org/abs/2604.21154",
-      "used_at": "2026-04-24T16:15:08.458296+00:00"
-    },
-    {
-      "title": "MISTY: High-Throughput Motion Planning via Mixer-based Single-step Drifting",
-      "url": "https://arxiv.org/abs/2604.21489",
-      "used_at": "2026-04-24T16:15:08.458298+00:00"
-    },
-    {
-      "title": "Efficient Logic Gate Networks for Video Copy Detection",
-      "url": "https://arxiv.org/abs/2604.21694",
-      "used_at": "2026-04-24T16:15:08.458299+00:00"
-    },
-    {
-      "title": "Stream2LLM: Overlap Context Streaming and Prefill for Reduced Time-to-First-Token (TTFT)",
-      "url": "https://arxiv.org/abs/2604.16395",
-      "used_at": "2026-04-24T16:15:08.458301+00:00"
-    },
-    {
-      "title": "Musical Score Understanding Benchmark: Evaluating Large Language Models' Comprehension of Complete Musical Scores",
-      "url": "https://arxiv.org/abs/2511.20697",
-      "used_at": "2026-04-24T16:15:08.458302+00:00"
-    },
-    {
-      "title": "Unlocking the Future: Generative AI Server Market to Reach New Heights by 2030",
-      "url": "https://www.globenewswire.com/news-release/2026/04/23/3280138/0/en/Unlocking-the-Future-Generative-AI-Server-Market-to-Reach-New-Heights-by-2030.html",
-      "used_at": "2026-04-24T16:15:08.458304+00:00"
-    },
-    {
-      "title": "Xiaomi Releases MiMo-V2.5-Pro and MiMo-V2.5: Matching Frontier Model Benchmarks at Significantly Lower Token Cost",
-      "url": "https://www.marktechpost.com/2026/04/22/xiaomi-releases-mimo-v2-5-pro-and-mimo-v2-5-matching-frontier-model-benchmarks-at-significantly-lower-token-cost/",
-      "used_at": "2026-04-24T16:15:08.458305+00:00"
-    },
-    {
-      "title": "Portal26 launches Agentic Token Controls to cap runaway AI agent spend",
-      "url": "https://siliconangle.com/2026/04/23/portal26-launches-agentic-token-controls-cap-runaway-ai-agent-spend/",
-      "used_at": "2026-04-24T16:15:08.458307+00:00"
-    },
-    {
-      "title": "The billion-dollar startup with a different idea for AI",
-      "url": "https://www.artificialintelligence-news.com/news/the-billion-dollar-startup-with-a-different-idea-for-ai-ami-labs-yann-lecun/",
-      "used_at": "2026-04-24T16:15:08.458309+00:00"
-    },
-    {
-      "title": "Anthropic: No \"kill switch\" for AI in classified settings",
-      "url": "https://www.axios.com/2026/04/22/anthropic-no-kill-switch-ai-classified-settings",
-      "used_at": "2026-04-24T16:15:08.458310+00:00"
-    },
-    {
-      "title": "Supply chain cracks constrain AI boom",
-      "url": "https://www.axios.com/2026/04/23/ai-iran-supply-chain",
-      "used_at": "2026-04-24T16:15:08.458312+00:00"
-    },
-    {
-      "title": "DeepSeek unveils next-gen AI model as Huawei vows ‘full support’ with new chips",
-      "url": "https://www.scmp.com/tech/big-tech/article/3351239/deepseek-releases-next-gen-ai-model-world-leading-efficiency",
-      "used_at": "2026-04-24T16:15:08.458314+00:00"
-    },
-    {
-      "title": "China plans to invest billions on a robot army to run its power grid",
-      "url": "https://www.scmp.com/economy/china-economy/article/3351323/china-plans-invest-billions-robot-army-run-its-power-grid",
-      "used_at": "2026-04-24T16:15:08.458315+00:00"
-    },
-    {
-      "title": "DeepSeek V4终于发布，但它留下的5道主观题还没有答案",
-      "url": "https://36kr.com/p/3780375304312072",
-      "used_at": "2026-04-24T16:15:08.458317+00:00"
-    },
-    {
-      "title": "Winning a Kaggle Competition with Generative AI–Assisted Coding - NVIDIA Developer",
-      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxORFM4UDVoMkZxODYtYWI1aEQ3ZlE5eVZUc19rRDhUa0x3ZEd3YkJ5VEdobkgtd2E4LWxJZkRVdTNjNVhhU1ZlcmZFcDc5R2ZTdHBKMllDZE5zZklCMkZKdzFPQmN2M2d2SXhzYUFhUG9aVGJiWTlRVjROcHhBYXFwSkM4aXluVk10by1LeWVrdEtHTnB3MkhyMUZQTGR0ZWM",
-      "used_at": "2026-04-24T16:15:08.458318+00:00"
-    },
-    {
-      "title": "Applying multimodal biological foundation models across therapeutics and patient care - Amazon Web Services",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOVnQ3UGU3YmZOVGUwR2VkeERSWkRFcEUwV2JzSDNKZlRtRm1LcURNbnY5OVhCYmRyeVlnc3M1UDNocW9JM2Q2Q3p4LVlmb1FYNFVfd0JHYmpOS3BGaDM5dHhrcWsxT1p4NDhqcV9ZVlNIVG5oRTNxdFdiYVlxZlBBb0NGV1RnblhsZzNGQ1B4eHVsdXQ1V2J0c1ZsNXljTWxZUHVESGNZYXlmQWNfbnF1dWt6NTFnOVBra3laeHlBcjZlalhFRGhqRFZXLUU",
-      "used_at": "2026-04-24T16:15:08.458320+00:00"
-    },
-    {
-      "title": "IRS Expands AI Use as Staffing Gaps Raise Risk",
-      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/irs-expands-ai-use-as-staffing-gaps-raise-risk/",
-      "used_at": "2026-04-24T16:15:08.458322+00:00"
-    },
-    {
-      "title": "DeepSeek-V4: The Most Powerful Open-Source Model Ever",
-      "url": "https://www.analyticsvidhya.com/blog/2026/04/deepseek-v4/",
-      "used_at": "2026-04-24T16:15:08.458323+00:00"
-    },
-    {
-      "title": "The pope moves to police AI",
-      "url": "https://www.axios.com/2026/04/24/catholics-pope-vatican-artificial-intelligence",
-      "used_at": "2026-04-24T16:15:08.458325+00:00"
-    },
-    {
-      "title": "NVIDIA and Google infrastructure cuts AI inference costs",
-      "url": "https://www.artificialintelligence-news.com/news/nvidia-and-google-infrastructure-cuts-ai-inference-costs/",
-      "used_at": "2026-04-24T16:15:08.458326+00:00"
-    },
-    {
-      "title": "Sony AI robot beats players as humanoid robot wins Beijing race",
-      "url": "https://www.artificialintelligence-news.com/news/sony-ai-robot-table-tennis-humanoid-robot-beijing-race/",
-      "used_at": "2026-04-24T16:15:08.458328+00:00"
-    },
-    {
-      "title": "Intel bets the farm on AI inference to drag CPU back to the top table",
-      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/24/intel_expects_ai_inference_to/",
-      "used_at": "2026-04-24T16:15:08.458329+00:00"
-    },
-    {
-      "title": "最前线｜AI收入破亿后的路径选择：微盟推行AI First战略与B端交付的挑战",
-      "url": "https://36kr.com/p/3780556402531330",
-      "used_at": "2026-04-24T16:15:08.458331+00:00"
-    },
-    {
-      "title": "Microsoft gives your Word documents an AI co-author you didn’t ask for",
-      "url": "https://go.theregister.com/feed/www.theregister.com/2026/04/23/microsoft_gives_your_word_documents/",
-      "used_at": "2026-04-24T16:15:08.458332+00:00"
-    },
-    {
-      "title": "Solid Earnings From IBM and ServiceNow Fail to Quell Artificial Intelligence Concerns, Sending Software Stocks Lower. Here's What Investors Need to Know - The Motley Fool",
-      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOVHlyc0ZEWEFlZG1jTmphSTFhNEthOFQyenRYTWY5cXN4RF9tbHZtQVgxS2lRTTJPcTRMUk9kSEg0dUc4QUoyZWI0WFMteUFqZkdNcWNMcUIyTHZRcG9tNU1WeFlSOVFoZmE1ODZaNXZkSl9uZVhub1JLc0FEWk0zaXE5ZmVvb3kwVlcxaXNsZnlfNC1MN0Z5Zg",
-      "used_at": "2026-04-24T16:15:08.458334+00:00"
-    },
-    {
-      "title": "Google Brings All Enterprise AI Agent Tools Under One Roof",
-      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/google-brings-all-enterprise-ai-agent-tools-under-one-roof/",
-      "used_at": "2026-04-24T16:15:08.458335+00:00"
-    },
-    {
-      "title": "White House Accuses China of Far-Reaching Theft of AI Tech",
-      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/white-house-accuses-china-of-far-reaching-theft-of-ai-tech/",
-      "used_at": "2026-04-24T16:15:08.458337+00:00"
-    },
-    {
-      "title": "DeepSeek previews new AI model that ‘closes the gap’ with frontier models",
-      "url": "https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/",
-      "used_at": "2026-04-24T16:15:08.458339+00:00"
-    },
-    {
-      "title": "Alibaba opens Qwen app to outside partners with China Eastern Airlines tie-up",
-      "url": "https://www.scmp.com/tech/big-tech/article/3351076/alibaba-opens-qwen-app-outside-partners-china-eastern-airlines-tie",
-      "used_at": "2026-04-24T16:15:08.458340+00:00"
-    },
-    {
-      "title": "Serving the For You feed",
-      "url": "https://simonwillison.net/2026/Apr/24/serving-the-for-you-feed/",
-      "used_at": "2026-04-24T16:15:08.458342+00:00"
-    },
-    {
-      "title": "llm-openai-via-codex 0.1a0",
-      "url": "https://simonwillison.net/2026/Apr/23/llm-openai-via-codex/",
-      "used_at": "2026-04-24T16:15:08.458343+00:00"
-    },
-    {
-      "title": "Applying multimodal biological foundation models across therapeutics and patient care",
-      "url": "https://aws.amazon.com/blogs/machine-learning/applying-multimodal-biological-foundation-models-across-therapeutics-and-patient-care/",
-      "used_at": "2026-04-24T16:15:08.458345+00:00"
-    },
-    {
-      "title": "Here’s how our TPUs power increasingly demanding AI workloads.",
-      "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/what-is-a-tpu/",
-      "used_at": "2026-04-24T16:15:08.458347+00:00"
-    },
-    {
-      "title": "Primech Holdings Accelerates U.S. Expansion for Primech AI’s Hytron, Selected for SelectUSA Tech Amid Growing Institutional Deployment Pipeline - The Manila Times",
-      "url": "https://news.google.com/rss/articles/CBMiuAJBVV95cUxOclNUcTFQaGk3cnd4NlluaFJkM2V2THVxTkVxTzNSWWs0WC01N3p0d09GTlVWM2dreVJTamh0YVlwdERaRmJKdllmcEpfc3pxd2VOYk9VSjlkRXptTHNJTTY5ZTF0S3hGa2tmZk5LQ24wWjQ3ZmJ4aUE4LVJhOGQzS2FlTGNKai00NDVHUi1RcFVGWTB6VXN6cnVjeHl3emFTVTRYaDFWb2Fic2NhUDBUOE93Y3lUaU5pMkVPaldyWHQ1WGdhYUE3LVdiZDBqaVpKVkt4UE5Ucy1fWTlxTDFxZ1k5azhGd3RQazFZVndTTWQ2M0RBZGJmbGw2c2RMUUFFSDFVTzNadkdNcnJCZkdsSEFPNW1LM3RYTVhSY3V0UG1TM09kdUxzY2JXV0hHNzhIZm9GWEl1ZEPSAb4CQVVfeXFMTzJlLU9Md250UGZtajdpa1FSWXcxOE4wOVVFN0Vuc1g3NTh6eC13OUQ5TXNqWDJHSWZEM1M3OHJwb2Vjdmp0WUJSaUVEcnFHNU55TTMwazBkckd6UktUOHNyN3JsdkdMak1nMUEzYjFoQzY3NUlrVElCamMyOWlmQXBNbHpUWkh1YjhkRzVaMHJVVUpsaTlhSkZfX2dBVDVFWHIwZUZIUmd0bEdPeFc2dkJ2UzhLSXp4Ul9YS080WklKTm5tSG9KSUxPQTRQZ0wyaDVqOXIxVko2RGhDMW43YmpsVldjQldfTmlEZjZ3czNlOXNJU19wbGRVSnVhZFo5MGRyMEcxa3FvMm9MeXpSTkRraUc2WUI1TWpiZWhPRVpwSVI0TGphbmo1MUpkckVJLUpJd05WcWxDek9aSk9B",
-      "used_at": "2026-04-24T16:15:08.458348+00:00"
-    },
-    {
-      "title": "MINIX tackles on-device LLM and AI processing with new T4000 and T5000 Generative AI Mini Workstation - My Everyday Tech",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPZDVBUkdwM1RobENMdkNZWVBHMk5EcjNZX1psOTBMYkpHU2F4MjVMVnRBMDFFanFMdTJ5X2JUbnZmakFKQi1HTTdETnR4V1FRR3JzTlBFQXZ6LUY5cnBEYVE4NWFqZ2xwb0lITHhWN2tlUGdIdm1MWi1FcTUxaVhYeTlWV3FyNm1OVDlYaU0zSVo",
-      "used_at": "2026-04-24T16:15:08.458350+00:00"
-    },
-    {
-      "title": "Anthropic's growing pains mount ahead of OpenAI showdown",
-      "url": "https://www.axios.com/2026/04/23/anthropic-openai-showdown",
-      "used_at": "2026-04-24T16:15:08.458352+00:00"
-    },
-    {
-      "title": "Merchants See a Bigger AI Prize if Consumers Trust the System",
-      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/merchants-see-a-bigger-ai-prize-if-consumers-trust-the-system/",
-      "used_at": "2026-04-24T16:15:08.458353+00:00"
-    },
-    {
-      "title": "Aurora Mobile's GPTBots.ai Integrates DeepSeek-V4 Preview, Bringing Million-Token Context and Next-Generation Agentic AI to Enterprise Users - markets.businessinsider.com",
-      "url": "https://news.google.com/rss/articles/CBMipAJBVV95cUxObDc0RDJPR2FudXd6d0tSS2FCZzQ4ZWhEMFVqN0NIXy1tYU5nTGJ4d3c3TmdnZUxKQVZsaXc3eC1NZGlGbWdZQUpJWmlMcUJKUWdfaXhIOVhzMjh5SVB6cHc1ZlpKMFVqakdwalB4Qmx0RnFWMFN4WTcyOEVmU3AxZ3dibTN4VWhjcW5xWTFJNkpNbXV6ZnYtVUJsOVYzS2J6SGhZWEZpcl85TkxNUklwVjRMZ3F0V0lQc0x0ZllnSHFVTXY0Mjk5V3RTbEpsdXR1N0N2S2JvVFdMNlV4aVRiNlB6c2I1MG1lbjlJSmpQZkxZRzhfZkdVNDdqZmIycmtQc3Z0TDFuZDlQcUNjOVAzQlBOTXZDTV8zNVc5RUROcVREMkZC",
-      "used_at": "2026-04-24T16:15:08.458355+00:00"
-    },
-    {
-      "title": "Google's open-source DESIGN.md gives AI agents a prompt-ready blueprint for brand-consistent design",
-      "url": "https://the-decoder.com/googles-open-source-design-md-gives-ai-agents-a-prompt-ready-blueprint-for-brand-consistent-design/",
-      "used_at": "2026-04-24T16:15:08.458356+00:00"
-    },
-    {
-      "title": "Beijing moves to clean up online ad ecosystem in first-of-its-kind campaign",
-      "url": "https://www.scmp.com/tech/article/3351202/beijing-moves-clean-online-ad-ecosystem-first-its-kind-campaign",
-      "used_at": "2026-04-24T16:15:08.458357+00:00"
-    },
-    {
-      "title": "Why Anthropic’s Mythos has energised China’s cybersecurity industry",
-      "url": "https://www.scmp.com/tech/tech-trends/article/3351152/why-anthropics-mythos-has-energised-chinas-cybersecurity-industry",
-      "used_at": "2026-04-24T16:15:08.458359+00:00"
-    },
-    {
-      "title": "Tencent unveils first flagship AI model with former OpenAI researcher at helm",
-      "url": "https://www.scmp.com/tech/big-tech/article/3351101/tencent-unveils-first-flagship-ai-model-former-openai-researcher-helm",
-      "used_at": "2026-04-24T16:15:08.458361+00:00"
-    },
-    {
-      "title": "Anthropic confirms Claude Code problems and promises stricter quality controls",
-      "url": "https://the-decoder.com/anthropic-confirms-claude-code-problems-and-promises-stricter-quality-controls/",
-      "used_at": "2026-04-24T16:15:08.458362+00:00"
-    },
-    {
-      "title": "Can D2C Be ElasticRun’s Most Profitable Bet Yet?",
-      "url": "https://inc42.com/features/can-d2c-be-elasticruns-most-profitable-bet-yet/",
-      "used_at": "2026-04-24T16:15:08.458364+00:00"
-    },
-    {
-      "title": "It's a big one",
-      "url": "https://simonwillison.net/2026/Apr/24/weekly/",
-      "used_at": "2026-04-24T16:15:08.458365+00:00"
-    },
-    {
-      "title": "氪星晚报｜美团万亿级参数大模型开放测试，训练全程由国产算力集群完成；百度联盟正式发布海外App业务；央行等八部门发布金融产品网络营销管理办法",
-      "url": "https://36kr.com/p/3777694346548482",
-      "used_at": "2026-04-24T16:15:08.458367+00:00"
-    },
-    {
-      "title": "融了2000万美金，这家2000万美金ARR的AI公司，推出“视频版Photoshop”「Buzzy」",
-      "url": "https://36kr.com/p/3780352721851397",
-      "used_at": "2026-04-24T16:15:08.458368+00:00"
-    },
-    {
-      "title": "Microsoft Tests Mythos to Identify and Mitigate Vulnerabilities",
-      "url": "https://www.pymnts.com/artificial-intelligence-2/2026/microsoft-tests-mythos-to-identify-and-mitigate-vulnerabilities/",
-      "used_at": "2026-04-24T16:15:08.458370+00:00"
-    },
-    {
-      "title": "A museum dedicated to artificial intelligence-driven art opens in downtown LA this summer - Daily Breeze",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOYkg3aGtmQW1selFFY0VEWHFoR0lSNjJOSVdNenpLNVdrUU80SVN4RUQ3MnNQSno3UVJRU2RhRVhSMVA1cy1OSXBlRDVwTWdGVEdoWndyT2hSc25RNWlLNXJObEFSVi1OMWJQV3A4dGx0RVRMR1E4TF9DTGxDTnllLUpFcF9mdm1aSjNKUlpYajBrbHJYS3F3ZkNsS052NkZrdHFRSDJLZl9VaDNjQmhHVGNybENmUUhUZ1VYVy1wQXlCdlZFOVotNg",
-      "used_at": "2026-04-24T16:15:08.458371+00:00"
-    },
-    {
-      "title": "Inside China, artificial intelligence is a snake eating its own tail - Defense News",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQVjBrZ0YxVUJDVmhKWFdSaHI1em11UmsxUTlvcXhPZVc1ckw5a1J0UFltWHcwd1pVTGJuRVIyVEFGM25hcURTSFROWFpCd1FWOVkxTktJT25KZVFiMF9wYm5aaGh3bkg3akFZcVFjU0FTbWFjck5Da3YzYmhmSEgta3FsZ1pRLTlpS1NzUG1COUNkbXVwRjFuS1B5WDEySU9Bc1RTRU9WOS1fWVloNTIxLXJEbzJGUQ",
-      "used_at": "2026-04-24T16:15:08.458373+00:00"
-    },
-    {
-      "title": "Column: AI—Artificial Intelligence or Accidental Idiocy? - CityView NC",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOUDhyLUFOVnJJSjhSX2VzdVY1M0JBMFhWVXdjazY0ajIxOVVOMTljSndIVlRralJOc2Z5VWctS1k5R2tqdWZtZk5Bb3hMalNUZ1lPYTZCQVFOamM0MzB4dDJjMzFjSGZDaGxSY0o2cmZWZ19GQUFHTU5ta1N6MDNaZ21TaXZfSUVqQUl4VkNVYnNCaDQy",
-      "used_at": "2026-04-24T16:15:08.458374+00:00"
-    },
-    {
-      "title": "Opinion | Children are in the crosshairs of artificial intelligence. Who will we blame? - CalMatters",
-      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPNFNiMm1mNTJkZVVjeGc1dElRV2FGX3RmR1MxT3dZOVN1QTRNUzN5RkxseFcwU1hrR19rdVdDNjR6eTgtNnI3UE5QbHU3Z2xLVXB5bW5QMGVtRDh4ZXhka0lnUUZkRERtU0FVSnV3eWdPT1pRMnZCMGdfSVU0d2lCdzgtZzUxaThYUzVVUVYyRTVXYURoS0RzYkp2Zmtjdw",
-      "used_at": "2026-04-24T16:15:08.458376+00:00"
-    },
-    {
-      "title": "Children are in the crosshairs of artificial intelligence. Who will we blame? - Palo Alto Online",
-      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNNmZvVmJGX3lHN2NGS3N3RUtBRW9reDBzeVdjcFpPbmRXeVlodGdBOTNqZmVPN3djWEVIaXQ3Rmo0VmszRDIzVUxva19nS0IzYmlPUUR6QUxRcmViU0FJYUNuQ3hmRmRsTkFsay1yWF8ycUF0cjRqZl9hNWdhZy1DRXNOUFpFZE5pclNoREUtNjBQcEdiNnZGdVZRdW5pS3hNMzlGZVFDRlFORWRQM25HaEUtblhnc1I4ZkduakdxSTlwZTZZVlo2UA",
-      "used_at": "2026-04-24T16:15:08.458377+00:00"
-    },
-    {
-      "title": "In another wild turn for AI chips, Meta signs deal for millions of Amazon AI CPUs",
-      "url": "https://techcrunch.com/2026/04/24/in-another-wild-turn-for-ai-chips-meta-signs-deal-for-millions-of-amazon-ai-cpus/",
-      "used_at": "2026-04-24T16:15:08.458379+00:00"
-    },
-    {
-      "title": "JONAH GOLDBERG: Keep artificial intelligence out of American classrooms - Midland Daily News",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQOTdYeHdfNVNIN2J3SFBRN2IyRGUzeDBVakNuZTZkWWMyaDNaaUx6TXBBYlZZMHFEMVQzZkRoWENIYWxxb3h6SnlVNlE5c1JmdkxnamdkUmVFY3ZxbS1WWE1XZVhLQm5VWjg4SW9UMTJLek81TU1maHcycUp0azBmQTk0TFRJUk8zVFpZcmlrS2ZaSExYMmtwSnNFZ0ItMGwwVV9aaXVTSjQtQTFlRGVndQ",
-      "used_at": "2026-04-24T16:15:08.458380+00:00"
-    },
-    {
-      "title": "Trump's missed AI deadlines",
-      "url": "https://www.axios.com/2026/04/24/trump-missed-ai-deadlines",
-      "used_at": "2026-04-24T16:15:08.458382+00:00"
-    },
-    {
-      "title": "Votre site est-il prêt pour les agents IA ? Cloudflare lance un nouvel outil gratuit pour le savoir",
-      "url": "https://siecledigital.fr/2026/04/24/votre-site-est-il-pret-pour-les-agents-ia-cloudflare-lance-un-nouvel-outil-gratuit-pour-le-savoir/",
-      "used_at": "2026-04-24T16:15:08.458384+00:00"
-    },
-    {
-      "title": "Achievement gaps, artificial intelligence and more: state superintendent hopefuls detail their plans at candidate forums - EdSource",
-      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxPanBxMHNsMkVOdEdtRTdzU0g2NjQ4aXN5bkdpcmZsRlNGMmxMaUdta0V3Nm5ZejRjU3VwbUNSaVBLMVB5VWlra2xpUHdGZlBYTzNvOXJvWWxsUTV0VmZDNW5TcnAzbUk4U1QzcUlIcDJTQXpNdFFRZzBBRnRZdDRuSkxrQlk4YUdyN25HZ1hvZzZDTkxueXVRRkQ5VWtmOGZubEx6MEhBMTNObkI0dW9Md3pCMURhZm5lUlRQcjJScTZUSE8zSk5CZFhJWUhRME53UDI2NmFBTzlVb251VFE",
-      "used_at": "2026-04-24T16:15:08.458385+00:00"
-    },
-    {
-      "title": "Trump science advisor says Chinese actors are copying American AI at massive scale",
-      "url": "https://the-decoder.com/trump-science-advisor-says-chinese-actors-are-copying-american-ai-at-massive-scale/",
-      "used_at": "2026-04-24T16:15:08.458387+00:00"
-    },
-    {
-      "title": "US crackdown threat could shake out China’s ‘distillation’ AI copycats: analysts",
-      "url": "https://www.scmp.com/tech/article/3351359/us-crackdown-threat-could-shake-out-chinas-distillation-ai-copycats",
-      "used_at": "2026-04-24T16:15:08.458389+00:00"
-    },
-    {
-      "title": "Prestigious photo contest answers ‘what is a photo?’",
-      "url": "https://www.theverge.com/gadgets/918016/prestigious-photo-contest-answers-what-is-a-photo",
-      "used_at": "2026-04-24T16:15:08.458391+00:00"
-    },
-    {
-      "title": "找钢网集团：上市以来累计出资约4090.26万港币回购公司股份",
-      "url": "https://36kr.com/newsflashes/3780788529716228",
-      "used_at": "2026-04-24T16:15:08.458392+00:00"
-    },
-    {
-      "title": "Google puts AI agents at heart of its enterprise money-making push - Taipei Times",
-      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1KckdUWDFWZVRrVndrRXpIc0ExNU5MZHdQc3daZDRDSFhYN0FoYllzYkp5cC1aX0VCc1lFS3FMQVd5eXVnV2M1QTFzSEcwZEtoeFJIZ2VxQ0xKVmYwR25rOXJ0VDl6NXY4MDVXODFET29pRVh5b3c",
-      "used_at": "2026-04-24T16:15:08.458394+00:00"
-    },
-    {
-      "title": "Bret Taylor’s Sierra buys YC-backed AI startup Fragment",
-      "url": "https://techcrunch.com/2026/04/23/bret-taylors-sierra-buys-yc-backed-ai-startup-fragment/",
-      "used_at": "2026-04-24T16:15:08.458395+00:00"
-    },
-    {
-      "title": "Meta to lay off 8,000 as part of AI efficiency push",
-      "url": "https://www.axios.com/2026/04/23/meta-layoffs-ai-efficiency-push",
-      "used_at": "2026-04-24T16:15:08.458397+00:00"
-    },
-    {
-      "title": "Another customer of troubled startup Delve suffered a big security incident",
-      "url": "https://techcrunch.com/2026/04/23/another-customer-of-troubled-startup-delve-suffered-a-big-security-incident/",
-      "used_at": "2026-04-24T16:15:08.458398+00:00"
-    },
-    {
-      "title": "AI Designs Thermoelectric Generators 10,000 Times Faster Than We Can",
-      "url": "https://spectrum.ieee.org/ai-designed-thermoelectric-generator",
-      "used_at": "2026-04-24T16:15:08.458400+00:00"
-    },
-    {
-      "title": "Asking artificial intelligence health questions? Be cautious, researchers say - Baltimore Sun",
-      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxObDF5YzVWMWdPZE9mVWpSVEdjeE9JVVV2WGlmakpXZkQ1WnRwbi1fZ25BMDU2Z1laTEt5MFVtZmxIdnIzVDkzUWx5UzIzR2U4Z1lFdkxta1h0dnFkRG1KTkhPUFRpOUdINzh1U3NWc0E4cUs3RHFEN0ZidHpFVkR1MllrZ2s0TFhHNkRqNURuckI0YzQ3OFNJcXMxOWU3SEUzNWk5OHZ4ZHRCQjljd0hNV0NwVm0wQTA",
-      "used_at": "2026-04-24T16:15:08.458401+00:00"
-    },
-    {
-      "title": "IIT Madras launches 3 AI courses: Registrations open till this date; check complete details here - The Times of India",
-      "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxOMEFxbFZCTzFfWmZITDAyb18zRG5TZjJHTktTTzJQb3dyNXFHZE9VRUp3alkxcjRUc2ZGdmdIVEE1RmVvYzNLbWRzcmEyQWc2XzJHMHZVb1pES1lKSWhvSFRjN3RPaEJvTnpiNTF1VmE2S1pKZVdjLVpUeG9zNUh4Z1lLUVc0OV9EZWdjanZEM2h0QmRLZkN3eG41aW5LQWQtVVBscUMyZnZBRXc2cE1NWnZrV3lMQ2QyeWJyMmNMM0JELW1fdHdSZEhmblRQWDZwZjZ2QWV4WmEwRkZteDFUMjhzU1ZYWHBkUmoyRXlUMGtPSFQ2ekRRSXV3OXFPX1Jm0gGGAkFVX3lxTE5PaEtfQ092S0JzcERNdW1XZ3EyNGZKSFJUY0FNekllMGN5YlZadGd5R1dlMjVvV2oyRFYtWUU4U2c1QUpFM2o4RnhscUplbTZMdGtZQmV6eTNnQUNFWGxxQmVMR1VUZjR3dnlzWWhQU1VZLTJhaW9sMzhZZ1NpSTlIUWwyVGdCb2NsaDZQLXZ0SnlQMFpQRm5VdFVYWUhvcXdBNmhFWWhJU1lJU3ZHX3BSRGNwZHhWdG1YZTlhM05lOWJ5M2VkVnBGeTl0UWVyRTRac1E2QkU5eTdmWHZCdWZ1QlgtcHpYcFZndUJYZlkwMFkwS0dxWE4xZVdNSjAyTHBwaXI3TlE",
-      "used_at": "2026-04-24T16:15:08.458403+00:00"
-    },
-    {
-      "title": "Avec l’IA, Google Street View permet désormais d’imaginer une scène de film dans un lieu réel",
-      "url": "https://siecledigital.fr/2026/04/24/avec-lia-google-street-view-permet-desormais-dimaginer-une-scene-de-film-dans-un-lieu-reel/",
-      "used_at": "2026-04-24T16:15:08.458405+00:00"
-    },
-    {
-      "title": "SuperOps Lays Off 30% Staff In AI-Led Restructuring Push",
-      "url": "https://inc42.com/buzz/superops-lays-off-30-staff-in-ai-led-restructuring-push/",
-      "used_at": "2026-04-24T16:15:08.458406+00:00"
     }
   ]
 }

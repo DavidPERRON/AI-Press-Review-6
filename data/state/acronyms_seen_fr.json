@@ -24,6 +24,11 @@
     "first_seen": "2026-04-24T10:00:36Z",
     "last_seen": "2026-04-26T17:13:38Z"
   },
+  "BMW": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:44:51Z",
+    "last_seen": "2026-05-01T06:44:51Z"
+  },
   "BSFT": {
     "count": 1,
     "first_seen": "2026-04-28T06:36:56Z",
@@ -59,6 +64,11 @@
     "first_seen": "2026-04-24T11:20:11Z",
     "last_seen": "2026-04-24T11:20:11Z"
   },
+  "CVPR": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:44:51Z",
+    "last_seen": "2026-05-01T06:44:51Z"
+  },
   "DAIC": {
     "count": 1,
     "first_seen": "2026-04-28T06:36:56Z",
@@ -80,9 +90,9 @@
     "last_seen": "2026-04-25T20:40:20Z"
   },
   "EDA": {
-    "count": 2,
+    "count": 3,
     "first_seen": "2026-04-26T17:13:38Z",
-    "last_seen": "2026-04-28T06:36:56Z"
+    "last_seen": "2026-05-01T06:44:51Z"
   },
   "ELO": {
     "count": 1,
@@ -109,6 +119,11 @@
     "first_seen": "2026-04-30T06:44:26Z",
     "last_seen": "2026-04-30T06:44:26Z"
   },
+  "GIL": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:44:51Z",
+    "last_seen": "2026-05-01T06:44:51Z"
+  },
   "GLM": {
     "count": 1,
     "first_seen": "2026-04-25T19:36:21Z",
@@ -129,6 +144,11 @@
     "first_seen": "2026-04-29T06:30:01Z",
     "last_seen": "2026-04-29T06:30:01Z"
   },
+  "IEEE": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:44:51Z",
+    "last_seen": "2026-05-01T06:44:51Z"
+  },
   "III": {
     "count": 3,
     "first_seen": "2026-04-25T19:36:21Z",
@@ -138,6 +158,11 @@
     "count": 2,
     "first_seen": "2026-04-25T20:40:20Z",
     "last_seen": "2026-04-26T05:11:32Z"
+  },
+  "JTC": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:44:51Z",
+    "last_seen": "2026-05-01T06:44:51Z"
   },
   "LPU": {
     "count": 1,
@@ -169,10 +194,20 @@
     "first_seen": "2026-04-24T11:20:11Z",
     "last_seen": "2026-04-24T11:20:11Z"
   },
+  "NAND": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:44:51Z",
+    "last_seen": "2026-05-01T06:44:51Z"
+  },
   "OFDM": {
     "count": 1,
     "first_seen": "2026-04-28T03:53:39Z",
     "last_seen": "2026-04-28T03:53:39Z"
+  },
+  "PARA": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:44:51Z",
+    "last_seen": "2026-05-01T06:44:51Z"
   },
   "PLC": {
     "count": 2,

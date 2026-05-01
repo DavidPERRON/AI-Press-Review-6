@@ -9,6 +9,11 @@
     "first_seen": "2026-04-24T04:33:30Z",
     "last_seen": "2026-04-24T06:02:49Z"
   },
+  "AISI": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:35:55Z",
+    "last_seen": "2026-05-01T06:35:55Z"
+  },
   "AMI": {
     "count": 2,
     "first_seen": "2026-04-24T06:02:49Z",
@@ -40,9 +45,9 @@
     "last_seen": "2026-04-23T05:58:26Z"
   },
   "BMW": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-04-30T06:24:37Z",
-    "last_seen": "2026-04-30T06:24:37Z"
+    "last_seen": "2026-05-01T06:35:55Z"
   },
   "CAD": {
     "count": 1,
@@ -93,6 +98,11 @@
     "count": 1,
     "first_seen": "2026-04-21T05:57:57Z",
     "last_seen": "2026-04-21T05:57:57Z"
+  },
+  "DOGE": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:35:55Z",
+    "last_seen": "2026-05-01T06:35:55Z"
   },
   "DSA": {
     "count": 1,
@@ -153,6 +163,11 @@
     "count": 1,
     "first_seen": "2026-04-24T04:33:30Z",
     "last_seen": "2026-04-24T04:33:30Z"
+  },
+  "GIL": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:35:55Z",
+    "last_seen": "2026-05-01T06:35:55Z"
   },
   "GLM": {
     "count": 1,
@@ -240,9 +255,9 @@
     "last_seen": "2026-04-19T03:38:55Z"
   },
   "JTC": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-04-29T04:23:13Z",
-    "last_seen": "2026-04-29T04:23:13Z"
+    "last_seen": "2026-05-01T06:35:55Z"
   },
   "LPDDR": {
     "count": 2,
@@ -323,6 +338,11 @@
     "count": 1,
     "first_seen": "2026-04-30T05:16:54Z",
     "last_seen": "2026-04-30T05:16:54Z"
+  },
+  "PARA": {
+    "count": 1,
+    "first_seen": "2026-05-01T06:35:55Z",
+    "last_seen": "2026-05-01T06:35:55Z"
   },
   "PLC": {
     "count": 1,

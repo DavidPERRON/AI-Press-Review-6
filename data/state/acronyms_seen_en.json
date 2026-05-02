@@ -10,14 +10,19 @@
     "last_seen": "2026-04-24T06:02:49Z"
   },
   "AISI": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-01T06:35:55Z",
-    "last_seen": "2026-05-01T06:35:55Z"
+    "last_seen": "2026-05-02T06:23:04Z"
   },
   "AMI": {
     "count": 2,
     "first_seen": "2026-04-24T06:02:49Z",
     "last_seen": "2026-04-24T15:15:56Z"
+  },
+  "APRA": {
+    "count": 1,
+    "first_seen": "2026-05-02T06:23:04Z",
+    "last_seen": "2026-05-02T06:23:04Z"
   },
   "ASCO": {
     "count": 1,
@@ -453,5 +458,10 @@
     "count": 2,
     "first_seen": "2026-04-19T03:38:55Z",
     "last_seen": "2026-04-19T18:19:51Z"
+  },
+  "ZTE": {
+    "count": 1,
+    "first_seen": "2026-05-02T06:23:04Z",
+    "last_seen": "2026-05-02T06:23:04Z"
   }
 }

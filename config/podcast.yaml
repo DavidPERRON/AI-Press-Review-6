@@ -28,8 +28,8 @@ public_audio_base_url: "https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pres
 cover_image: "assets/podcast-cover.png"
 
 # ── EDITORIAL (defaults — les profils peuvent surcharger) ────
-# Mots-par-minute observés : Cartesia EN à speed 0.90 = ~176 WPM.
-# FR : speed 0.92 + emotion positivity:low (validé à réajuster après écoute).
+# Mots-par-minute observés : Cartesia EN à speed 0.94 (voice mix 82e6f955, chunks) ≈ 176 WPM.
+# FR : speed 0.85, chunks mode, validé à l'écoute.
 # Moyenne retenue pour les gates : 180 WPM. Pour tenir 14 min min → 2520 mots min.
 editorial:
   target_duration_min: 14
@@ -114,11 +114,9 @@ locales:
     # TTS locale-specific overrides (voice, speed, emotion, language)
     voice_id_env: "CARTESIA_VOICE_ID"      # secret GitHub existant
     cartesia_language: "en"
-    tts_speed: 0.92
-    tts_emotion:
-      - "positivity:high"
-      - "curiosity:low"
-    tts_mode: "websocket"
+    tts_speed: 0.94
+    tts_emotion: "positivity:highest,curiosity:low"
+    tts_mode: "chunks"
     tts_chunk_max_chars: 1400
     tts_chunk_crossfade_ms: 80
 
@@ -157,9 +155,7 @@ locales:
     voice_id_env: "CARTESIA_VOICE_ID_FR"   # nouveau secret GitHub
     cartesia_language: "fr"                # CRITIQUE pour prosodie francaise
     tts_speed: 0.85
-    tts_emotion:
-      - "positivity:high"
-      - "curiosity:low"
+    tts_emotion: "positivity:high,curiosity:low"
     # chunks mode: each paragraph block is its own WebSocket session, then
     # segments are crossfaded. Eliminates noise/volume degradation after ~2 min
     # of a single long session.

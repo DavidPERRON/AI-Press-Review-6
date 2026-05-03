@@ -2059,7 +2059,11 @@ async def _render_chunks_crossfade(
     SILENCE_THRESH_DB = -40.0
     KEEP_EDGE_MS = 200
 
-    def _trim_edges(seg: AudioSegment) -> AudioSegment:
+    def _trim_edges(
+        seg: AudioSegment,
+        trim_lead: bool = True,
+        trim_trail: bool = True,
+    ) -> AudioSegment:
         # Each chunk is rendered as an independent Cartesia session and
         # therefore ends with sentence-final prosody (a long trailing
         # silence Cartesia adds to "wrap" the utterance). Concatenated
@@ -2067,10 +2071,16 @@ async def _render_chunks_crossfade(
         # mid-episode. Trim leading + trailing silence per chunk down to
         # KEEP_EDGE_MS so the crossfade joins clean speech to clean
         # speech instead of speech-to-silence-to-speech.
-        lead = detect_leading_silence(seg, silence_threshold=SILENCE_THRESH_DB)
-        trail = detect_leading_silence(seg.reverse(), silence_threshold=SILENCE_THRESH_DB)
-        start = max(0, lead - KEEP_EDGE_MS)
-        end = len(seg) - max(0, trail - KEEP_EDGE_MS)
+        #
+        # trim_lead=False on the first chunk: Cartesia uses the leading
+        # silence as a prosodic "breath in" before the utterance starts.
+        # Removing it causes the choppy/rushed opening sound.
+        # trim_trail=False on the last chunk: preserves the natural
+        # sentence-final fade rather than cutting into it.
+        lead = detect_leading_silence(seg, silence_threshold=SILENCE_THRESH_DB) if trim_lead else 0
+        trail = detect_leading_silence(seg.reverse(), silence_threshold=SILENCE_THRESH_DB) if trim_trail else 0
+        start = max(0, lead - KEEP_EDGE_MS) if trim_lead else 0
+        end = len(seg) - (max(0, trail - KEEP_EDGE_MS) if trim_trail else 0)
         if end <= start:
             # Segment is entirely below the silence threshold — Cartesia
             # returned no audible speech (possible cold-start or network
@@ -2085,6 +2095,7 @@ async def _render_chunks_crossfade(
             return seg[:KEEP_EDGE_MS]
         return seg[start:end]
 
+    n_chunks = len(chunks)
     segments: list[AudioSegment] = []
     for i, chunk in enumerate(chunks, 1):
         last_exc: Exception | None = None
@@ -2096,13 +2107,13 @@ async def _render_chunks_crossfade(
                 last_exc = exc
                 logger.warning(
                     'Chunk %d/%d attempt %d/%d failed: %s',
-                    i, len(chunks), attempt, max_retries, exc,
+                    i, n_chunks, attempt, max_retries, exc,
                 )
                 if attempt < max_retries:
                     await asyncio.sleep(min(2 ** attempt, 10))
         else:
             raise ValueError(
-                f'Cartesia chunk {i}/{len(chunks)} failed after {max_retries} attempts: {last_exc}'
+                f'Cartesia chunk {i}/{n_chunks} failed after {max_retries} attempts: {last_exc}'
             )
         seg = AudioSegment(
             data=pcm,
@@ -2111,11 +2122,15 @@ async def _render_chunks_crossfade(
             channels=1,
         )
         raw_ms = len(seg)
-        seg = _trim_edges(seg)
+        seg = _trim_edges(
+            seg,
+            trim_lead=(i > 1),          # keep opening breath on first chunk
+            trim_trail=(i < n_chunks),  # keep natural fade on last chunk
+        )
         segments.append(seg)
         logger.info(
             'Chunk %d/%d: %.1fs audio (trimmed %dms of edge silence)',
-            i, len(chunks), len(seg) / 1000, raw_ms - len(seg),
+            i, n_chunks, len(seg) / 1000, raw_ms - len(seg),
         )
 
     # Merge with a short crossfade to hide any micro-silence at boundaries.

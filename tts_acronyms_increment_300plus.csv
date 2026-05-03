@@ -1,0 +1,890 @@
+Token,Rendu EN,Rendu FR,Action recommandée,Domaine,Note,Source URL
+A2C,A. two C.,A. two C.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+A3C,A. three C.,A. three C.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ABM,A. B. M.,A.B.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Adam,A. D. A. M.,A.D.A.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+AdamW,A. D. A. M. W.,A.D.A.M.W.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Adapters,A. D. A. P. T. E. R. S.,A.D.A.P.T.E.R.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+AIGC,A. I. G. C.,A.I.G.C.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ALBERT,albert,albert,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ALiBi,A. L. I. B. I.,A.L.I.B.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+AlphaFold,Alpha-Fold,Alpha-Fold,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+AlphaGo,Alpha-Go,Alpha-Go,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ArenaHard,A. R. E. N. A. H. A. R. D.,A.R.E.N.A.H.A.R.D.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ASR,A. S. R.,A.S.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+AUC,A. U. C.,A.U.C.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+AutoML,A. U. T. O. M. L.,A.U.T.O.M.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+BatchNorm,B. A. T. C. H. N. O. R. M.,B.A.T.C.H.N.O.R.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+BC,B. C.,B.C.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+BigBench,B. I. G. B. E. N. C. H.,B.I.G.B.E.N.C.H.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+BLEU,B. L. E. U.,B.L.E.U.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+BoolQ,B. O. O. L. Q.,B.O.O.L.Q.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+CAI,C. A. I.,C.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+CatBoost,cat boost,cat boost,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+CER,C. E. R.,C.E.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ChatbotArena,C. H. A. T. B. O. T. A. R. E. N. A.,C.H.A.T.B.O.T.A.R.E.N.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Chinchilla,chinchilla,chinchilla,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+CIDEr,C. I. D. E. R.,C.I.D.E.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Claude,Claude,Claude,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ConstitutionalAI,C. O. N. S. T. I. T. U. T. I. O. N. A. L. A. I.,C.O.N.S.T.I.T.U.T.I.O.N.A.L.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+CRF,C. R. F.,C.R.F.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+CTR,C. T. R.,C.T.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+CV,C. V.,C.V.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+CVR,C. V. R.,C.V.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DBSCAN,D. B. S. C. A. N.,D.B.S.C.A.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DDIM,D. D. I. M.,D.D.I.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DDPG,D. D. P. G.,D.D.P.G.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DDPM,D. D. P. M.,D.D.P.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DeBERTa,D. E. B. E. R. T. A.,D.E.B.E.R.T.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Diffusion,D. I. F. F. U. S. I. O. N.,D.I.F.F.U.S.I.O.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DistilBERT,D. I. S. T. I. L. B. E. R. T.,D.I.S.T.I.L.B.E.R.T.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DL,D. L.,D.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Doc2Vec,doc two vec,doc two vec,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DoRA,D. O. R. A.,D.O.R.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DQN,D. Q. N.,D.Q.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+DROP,D. R. O. P.,D.R.O.P.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+EdgeAI,E. D. G. E. A. I.,E.D.G.E.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ELBO,E. L. B. O.,E.L.B.O.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ELECTRA,electra,electra,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ELMo,E. L. M. O.,E.L.M.O.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ELMO,elmo,elmo,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+EMA,E. M. A.,E.M.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ERNIE,ernie,ernie,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Evals,E. V. A. L. S.,E.V.A.L.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+FastText,fast text,fast text,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+FrontierAI,F. R. O. N. T. I. E. R. A. I.,F.R.O.N.T.I.E.R.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GAT,G. A. T.,G.A.T.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GCN,G. C. N.,G.C.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GeLU,G. E. L. U.,G.E.L.U.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Gemini,Gemini,Gemini,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GenAI,G. E. N. A. I.,G.E.N.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GLaM,glam,glam,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GloVe,glove,glove,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GLU,G. L. U.,G.L.U.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GMM,G. M. M.,G.M.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GNN,G. N. N.,G.N.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+GQA,G. Q. A.,G.Q.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Grok,Grok,Grok,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+HAI,H. A. I.,H.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+HDBSCAN,H. D. B. S. C. A. N.,H.D.B.S.C.A.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+HELM,H. E. L. M.,H.E.L.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+HMM,H. M. M.,H.M.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+IA3,I. A. three,I.A. three,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ICA,I. C. A.,I.C.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+IFEval,I. F. E. V. A. L.,I.F.E.V.A.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+IL,I. L.,I.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+IoU,I. O. U.,I.O.U.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+IPO-ML,I. P. O. dash M. L.,I.P.O. tiret M.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+IR,I. R.,I.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+IRL,I. R. L.,I.R.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+KAN,K. A. N.,K.A.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+KG,K. G.,K.G.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+KGE,K. G. E.,K.G.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+KMeans,K. M. E. A. N. S.,K.M.E.A.N.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+KNN,K. N. N.,K.N.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+KTO,K. T. O.,K.T.O.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+KV,K. V.,K.V.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+KV-cache,K. V. dash C. A. C. H. E.,K.V. tiret C.A.C.H.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LAMB,L. A. M. B.,L.A.M.B.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LAMBADA,L. A. M. B. A. D. A.,L.A.M.B.A.D.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LARS,L. A. R. S.,L.A.R.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LayerNorm,L. A. Y. E. R. N. O. R. M.,L.A.Y.E.R.N.O.R.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LightGBM,light G. B. M.,light G.B.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LiveBench,L. I. V. E. B. E. N. C. H.,L.I.V.E.B.E.N.C.H.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LMM,L. M. M.,L.M.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LMSYS,L. M. S. Y. S.,L.M.S.Y.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+LoCon,L. O. C. O. N.,L.O.C.O.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MAB,M. A. B.,M.A.B.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MAE,M. A. E.,M.A.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MAE-LM,M. A. E. dash L. M.,M.A.E. tiret L.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MAEs,M. A. E. S.,M.A.E.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Mamba,mamba,mamba,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MAML,M. A. M. L.,M.A.M.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+mAP,M. A. P.,M.A.P.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MAPE,M. A. P. E.,M.A.P.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MCTS,M. C. T. S.,M.C.T.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MDP,M. D. P.,M.D.P.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+METEOR,M. E. T. E. O. R.,M.E.T.E.O.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MHA,M. H. A.,M.H.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Mistral,Mistral,Mistral,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ML,M. L.,M.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MLP,M. L. P.,M.L.P.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MMLU-Pro,M. M. L. U. dash P. R. O.,M.M.L.U. tiret P.R.O.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MMLU-ProX,M. M. L. U. dash P. R. O. X.,M.M.L.U. tiret P.R.O.X.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MoRA,M. O. R. A.,M.O.R.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MQA,M. Q. A.,M.Q.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MRR,M. R. R.,M.R.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MT,M. T.,M.T.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MT-Bench,M. T. dash B. E. N. C. H.,M.T. tiret B.E.N.C.H.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+MUSR,M. U. S. R.,M.U.S.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+NDCG,N. D. C. G.,N.D.C.G.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+NER,N. E. R.,N.E.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+NLG,N. L. G.,N.L.G.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+NLU,N. L. U.,N.L.U.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+NMF,N. M. F.,N.M.F.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+OCR,O. C. R.,O.C.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ODE,O. D. E.,O.D.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ORM,O. R. M.,O.R.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ORPO,O. R. P. O.,O.R.P.O.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+PaLM,palm,palm,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+PCA,P. C. A.,P.C.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+PIQA,P. I. Q. A.,P.I.Q.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+POMDP,P. O. M. D. P.,P.O.M.D.P.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+POS,P. O. S.,P.O.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+PR,P. R.,P.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+PRM,P. R. M.,P.R.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+QA,Q. A.,Q.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Qwen,Qwen,Qwen,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+R2,R. two,R. two,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RAFT,R. A. F. T.,R.A.F.T.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RAI,R. A. I.,R.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ReFT,R. E. F. T.,R.E.F.T.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ReLoRA,R. E. L. O. R. A.,R.E.L.O.R.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ReLU,R. E. L. U.,R.E.L.U.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RETRO,retro,retro,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RL,R. L.,R.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RLAIF,R. L. A. I. F.,R.L.A.I.F.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RLVR,R. L. V. R.,R.L.V.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RM,R. M.,R.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RMSE,R. M. S. E.,R.M.S.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RMSNorm,R. M. S. N. O. R. M.,R.M.S.N.O.R.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RNN,R. N. N.,R.N.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RoBERTa,R. O. B. E. R. T. A.,R.O.B.E.R.T.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ROC,R. O. C.,R.O.C.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RoPE,R. O. P. E.,R.O.P.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+ROUGE,R. O. U. G. E.,R.O.U.G.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RRHF,R. R. H. F.,R.R.H.F.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+RWKV,R. W. K. V.,R.W.K.V.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+S4,S. four,S. four,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SAC,S. A. C.,S.A.C.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SAM,S. A. M.,S.A.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SBERT,S. B. E. R. T.,S.B.E.R.T.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SDE,S. D. E.,S.D.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SentenceBERT,S. E. N. T. E. N. C. E. B. E. R. T.,S.E.N.T.E.N.C.E.B.E.R.T.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SGD,S. G. D.,S.G.D.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SiLU,S. I. L. U.,S.I.L.U.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SIQA,S. I. Q. A.,S.I.Q.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SQuAD2,S. Q. U. A. D. two,S.Q.U.A.D. two,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SSM,S. S. M.,S.S.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SuperGLUE,S. U. P. E. R. G. L. U. E.,S.U.P.E.R.G.L.U.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SVM,S. V. M.,S.V.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+SwiGLU,S. W. I. G. L. U.,S.W.I.G.L.U.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+t-SNE,T. dash S. N. E.,T. tiret S.N.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+T5,T. five,T. five,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+TAI,T. A. I.,T.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+TD3,T. D. three,T.D. three,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+TinyML,T. I. N. Y. M. L.,T.I.N.Y.M.L.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+TRPO,T. R. P. O.,T.R.P.O.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+TruthfulQA,T. R. U. T. H. F. U. L. Q. A.,T.R.U.T.H.F.U.L.Q.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+TTS,T. T. S.,T.T.S.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+UCB,U. C. B.,U.C.B.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+UMAP,U. M. A. P.,U.M.A.P.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+VAE,V. A. E.,V.A.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+VLM,V. L. M.,V.L.M.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+VQA,V. Q. A.,V.Q.A.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+VQGAN,V. Q. G. A. N.,V.Q.G.A.N.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+VQVAE,V. Q. V. A. E.,V.Q.V.A.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+WER,W. E. R.,W.E.R.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Whisper,Whisper,Whisper,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Winograd,W. I. N. O. G. R. A. D.,W.I.N.O.G.R.A.D.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+WinoGrande,W. I. N. O. G. R. A. N. D. E.,W.I.N.O.G.R.A.N.D.E.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+Word2Vec,word two vec,word two vec,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+XAI,X. A. I.,X.A.I.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+XGBoost,X. G. boost,X.G. boost,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+XLNet,X. L. N. E. T.,X.L.N.E.T.,SPELL_OUT_COMMON,AI/ML,,https://airc.nist.gov/glossary/
+5G,five G.,five G.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+6G,six G.,six G.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Accelerate,A. C. C. E. L. E. R. A. T. E.,A.C.C.E.L.E.R.A.T.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ACID,A. C. I. D.,A.C.I.D.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ACM,A. C. M.,A.C.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+AES,A. E. S.,A.E.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+AIOps,A. I. Ops,é-aï-ops,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Airflow,Airflow,Airflow,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+AKS,A. K. S.,A.K.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ALB,A. L. B.,A.L.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Ansible,Ansible,Ansible,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+AOT,A. O. T.,A.O.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+APT,A. P. T.,A.P.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Argo,Argo,Argo,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Argon2,A. R. G. O. N. two,A.R.G.O.N. two,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ASCII,ask-ee,as-ki,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Aurora,A. U. R. O. R. A.,A.U.R.O.R.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Avro,Avro,Avro,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BaaS,B. A. A. S.,B.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BASE,B. A. S. E.,B.A.S.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BEC,B. E. C.,B.E.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BECs,B. E. C. S.,B.E.C.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Bedrock,B. E. D. R. O. C. K.,B.E.D.R.O.C.K.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BGP,B. G. P.,B.G.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BI,B. I.,B.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BigQuery,B. I. G. Q. U. E. R. Y.,B.I.G.Q.U.E.R.Y.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BIMI,B. I. M. I.,B.I.M.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+bitsandbytes,B. I. T. S. A. N. D. B. Y. T. E. S.,B.I.T.S.A.N.D.B.Y.T.E.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BLOB,B. L. O. B.,B.L.O.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BOM,B. O. M.,B.O.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BPM,B. P. M.,B.P.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BPMN,B. P. M. N.,B.P.M.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BSS,B. S. S.,B.S.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BYOK,B. Y. O. K.,B.Y.O.K.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CAP,C. A. P.,C.A.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CAPTCHA,cap-cha,captcha,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CASB,C. A. S. B.,C.A.S.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CCaaS,C. C. A. A. S.,C.C.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CDC,C. D. C.,C.D.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CDK,C. D. K.,C.D.K.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CE,C. E.,C.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Ceph,C. E. P. H.,C.E.P.H.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CIAM,C. I. A. M.,C.I.A.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CIDR,cider,cidre,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CLOB,C. L. O. B.,C.L.O.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CloudFormation,C. L. O. U. D. F. O. R. M. A. T. I. O. N.,C.L.O.U.D.F.O.R.M.A.T.I.O.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CloudFunctions,C. L. O. U. D. F. U. N. C. T. I. O. N. S.,C.L.O.U.D.F.U.N.C.T.I.O.N.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CloudRun,C. L. O. U. D. R. U. N.,C.L.O.U.D.R.U.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CloudWatch,C. L. O. U. D. W. A. T. C. H.,C.L.O.U.D.W.A.T.C.H.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CMS,C. M. S.,C.M.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CNAPP,C. N. A. P. P.,C.N.A.P.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CNI,C. N. I.,C.N.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Consul,Consul,Consul,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CORS,C. O. R. S.,C.O.R.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CPE,C. P. E.,C.P.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CRI,C. R. I.,C.R.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CRM,C. R. M.,C.R.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CRUD,C. R. U. D.,C.R.U.D.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSI,C. S. I.,C.S.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSP,C. S. P.,C.S.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSPM,C. S. P. M.,C.S.P.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSPROJ,C. S. P. R. O. J.,C.S.P.R.O.J.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSR,C. S. R.,C.S.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSRF,C. S. R. F.,C.S.R.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSS,C. S. S.,C.S.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSV,C. S. V.,C.S.V.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+cuBLAS,C. U. B. L. A. S.,C.U.B.L.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CVSS,C. V. S. S.,C.V.S.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CWE,C. W. E.,C.W.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CWPP,C. W. P. P.,C.W.P.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DaaS,D. A. A. S.,D.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Dask,Dask,Dask,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DAST,D. A. S. T.,D.A.S.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Databricks,Databricks,Databricks,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Dataflow,D. A. T. A. F. L. O. W.,D.A.T.A.F.L.O.W.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DataOps,DataOps,DataOps,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Dataproc,D. A. T. A. P. R. O. C.,D.A.T.A.P.R.O.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DBaaS,D. B. A. A. S.,D.B.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DCL,D. C. L.,D.C.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DDL,D. D. L.,D.D.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DDP,D. D. P.,D.D.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DeepSpeed,D. E. E. P. S. P. E. E. D.,D.E.E.P.S.P.E.E.D.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DeltaLake,D. E. L. T. A. L. A. K. E.,D.E.L.T.A.L.A.K.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DevOps,DevOps,dev-ops,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DHCP,D. H. C. P.,D.H.C.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Diffusers,D. I. F. F. U. S. E. R. S.,D.I.F.F.U.S.E.R.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DKIM,D. K. I. M.,D.K.I.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DLP,D. L. P.,D.L.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DMARC,dee-mark,di-mark,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DML,D. M. L.,D.M.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Docker,Docker,docker,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DOCSIS,D. O. C. S. I. S.,D.O.C.S.I.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DoH,D. O. H.,D.O.H.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DOM,D. O. M.,D.O.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DoT,D. O. T.,D.O.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DRaaS,D. R. A. A. S.,D.R.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DWH,D. W. H.,D.W.H.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DynamoDB,D. Y. N. A. M. O. D. B.,D.Y.N.A.M.O.D.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+EBS,E. B. S.,E.B.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ECC,E. C. C.,E.C.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ECDH,E. C. D. H.,E.C.D.H.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ECDSA,E. C. D. S. A.,E.C.D.S.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ECS,E. C. S.,E.C.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+EFS,E. F. S.,E.F.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+EKS,E. K. S.,E.K.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ElastiCache,E. L. A. S. T. I. C. A. C. H. E.,E.L.A.S.T.I.C.A.C.H.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ELB,E. L. B.,E.L.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ELT,E. L. T.,E.L.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Envoy,Envoy,Envoy,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ERD,E. R. D.,E.R.D.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ERP,E. R. P.,E.R.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ETL,E. T. L.,E.T.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+FaaS,F. A. A. S.,F.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Fabric,F. A. B. R. I. C.,F.A.B.R.I.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Fargate,F. A. R. G. A. T. E.,F.A.R.G.A.T.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Feast,Feast,Feast,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+FIDO,fye-doh,fido,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+FIDO2,F. I. D. O. two,F.I.D.O. two,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+FinOps,FinOps,fin-ops,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+FSDP,F. S. D. P.,F.S.D.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+FTTH,F. T. T. H.,F.T.T.H.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GGML,G. G. M. L.,G.G.M.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GGUF,G. G. U. F.,G.G.U.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GitOps,G. I. T. O. P. S.,G.I.T.O.P.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GKE,G. K. E.,G.K.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GPG,G. P. G.,G.P.G.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GPON,G. P. O. N.,G.P.O.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Grafana,Grafana,Grafana,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GraphQL,Graph Q. L.,Graph Q.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+gRPC,G. R. P. C.,G.R.P.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GUID,G. U. I. D.,G.U.I.D.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Hadoop,Hadoop,Hadoop,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HCL,H. C. L.,H.C.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HCM,H. C. M.,H.C.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HDFS,H. D. F. S.,H.D.F.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Helm,Helm,Helm,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Hive,Hive,Hive,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HKDF,H. K. D. F.,H.K.D.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HMAC,H. M. A. C.,H.M.A.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HOTP,H. O. T. P.,H.O.T.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HRIS,H. R. I. S.,H.R.I.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HSM,H. S. M.,H.S.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HSTS,H. S. T. S.,H.S.T.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HTAP,H. T. A. P.,H.T.A.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HTML,H. T. M. L.,H.T.M.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HTTP,H. T. T. P.,H.T.T.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HTTPS,H. T. T. P. S.,H.T.T.P.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Hudi,H. U. D. I.,H.U.D.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HuggingFace,H. U. G. G. I. N. G. F. A. C. E.,H.U.G.G.I.N.G.F.A.C.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Hydra,H. Y. D. R. A.,H.Y.D.R.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+HYOK,H. Y. O. K.,H.Y.O.K.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Hyper-V,H. Y. P. E. R. dash V.,H.Y.P.E.R. tiret V.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+I2P,I. two P.,I. two P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IaaS,I. A. A. S.,I.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IaC,I. A. C.,I.A.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IAM,I. A. M.,I.A.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IAST,I. A. S. T.,I.A.S.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Iceberg,I. C. E. B. E. R. G.,I.C.E.B.E.R.G.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ICMP,I. C. M. P.,I.C.M.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IDaaS,I. D. A. A. S.,I.D.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IGA,I. G. A.,I.G.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IMAP,I. M. A. P.,I.M.A.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IMS,I. M. S.,I.M.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+INI,I. N. I.,I.N.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IOA,I. O. A.,I.O.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IOC,I. O. C.,I.O.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IP,I. P.,I.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IPv4,I. P. v four,I.P. v four,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IPv6,I. P. v six,I.P. v six,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IRM,I. R. M.,I.R.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ISR,I. S. R.,I.S.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Istio,Istio,Istio,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+JDBC,J. D. B. C.,J.D.B.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+JIT,J. I. T.,J.I.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Jupyter,J. U. P. Y. T. E. R.,J.U.P.Y.T.E.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Kafka,Kafka,Kafka,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Keras,Keras,Keras,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Kerberos,Kerberos,Kerberos,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+KEV,K. E. V.,K.E.V.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Kinesis,K. I. N. E. S. I. S.,K.I.N.E.S.I.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+KMS,K. M. S.,K.M.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Knative,K-native,K-native,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Kubeflow,Kube-flow,Kube-flow,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Kubernetes,Kubernetes,kou-ber-nè-tiz,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+KVM,K. V. M.,K.V.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Lakehouse,L. A. K. E. H. O. U. S. E.,L.A.K.E.H.O.U.S.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Lambda,L. A. M. B. D. A.,L.A.M.B.D.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+LAN,lan,lan,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+LDAP,L. DAP,L. DAP,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+LFI,L. F. I.,L.F.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+LLMOps,L. L. M. Ops,L.L.M.-ops,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+LLVM,L. L. V. M.,L.L.V.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+LMS,L. M. S.,L.M.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+LTE,L. T. E.,L.T.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+LTI,L. T. I.,L.T.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MD5,M. D. five,M.D. five,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MDM,M. D. M.,M.D.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MDR,M. D. R.,M.D.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Megatron,M. E. G. A. T. R. O. N.,M.E.G.A.T.R.O.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Mesos,M. E. S. O. S.,M.E.S.O.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MIMO,M. I. M. O.,M.I.M.O.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MinIO,M. I. N. I. O.,M.I.N.I.O.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MITM,M. I. T. M.,M.I.T.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MITRE,M. I. T. R. E.,M.I.T.R.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MLflow,M. L. flow,M.L. flow,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MLOps,M. L. Ops,èm-elle-ops,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MPI,M. P. I.,M.P.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MPLS,M. P. L. S.,M.P.L.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MPLS-TE,M. P. L. S. dash T. E.,M.P.L.S. tiret T.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MTBF,M. T. B. F.,M.T.B.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+mTLS,M. T. L. S.,M.T.L.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MTTR,M. T. T. R.,M.T.T.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MVCC,M. V. C. C.,M.V.C.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MXDR,M. X. D. R.,M.X.D.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+NAT,nat,nat,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+NCCL,N. C. C. L.,N.C.C.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+NDR,N. D. R.,N.D.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+NFV,N. F. V.,N.F.V.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+NLB,N. L. B.,N.L.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Nomad,Nomad,Nomad,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+NTP,N. T. P.,N.T.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+NumPy,N. U. M. P. Y.,N.U.M.P.Y.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OAuth,oh-auth,o-auth,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OCI,O. C. I.,O.C.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ODBC,O. D. B. C.,O.D.B.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ODS,O. D. S.,O.D.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OFDM,O. F. D. M.,O.F.D.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OIDC,O. I. D. C.,O.I.D.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OLAP,O. L. A. P.,O.L.A.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OLT,O. L. T.,O.L.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OLTP,O. L. T. P.,O.L.T.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ONNX,onix,onix,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ONNXRuntime,O. N. N. X. R. U. N. T. I. M. E.,O.N.N.X.R.U.N.T.I.M.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ONT,O. N. T.,O.N.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OpenID,Open I. D.,open-i-dé,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OpenMP,O. P. E. N. M. P.,O.P.E.N.M.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OpenShift,OpenShift,OpenShift,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OpenStack,O. P. E. N. S. T. A. C. K.,O.P.E.N.S.T.A.C.K.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ORAN,O. R. A. N.,O.R.A.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ORC,O. R. C.,O.R.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OSPF,O. S. P. F.,O.S.P.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OSS,O. S. S.,O.S.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OVA,O. V. A.,O.V.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PaaS,P. A. A. S.,P.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Packer,Packer,Packer,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PAM,P. A. M.,P.A.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Pandas,P. A. N. D. A. S.,P.A.N.D.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PAT,P. A. T.,P.A.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PBKDF2,P. B. K. D. F. two,P.B.K.D.F. two,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PE,P. E.,P.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PGP,P. G. P.,P.G.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PKI,P. K. I.,P.K.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Playbook,P. L. A. Y. B. O. O. K.,P.L.A.Y.B.O.O.K.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Polars,P. O. L. A. R. S.,P.O.L.A.R.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+POP3,pop three,pop three,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Presto,Presto,Presto,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PrivateLink,P. R. I. V. A. T. E. L. I. N. K.,P.R.I.V.A.T.E.L.I.N.K.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Prometheus,Prometheus,Prometheus,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PROTO,P. R. O. T. O.,P.R.O.T.O.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Protobuf,P. R. O. T. O. B. U. F.,P.R.O.T.O.B.U.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PubSub,P. U. B. S. U. B.,P.U.B.S.U.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PWA,P. W. A.,P.W.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+QAM,Q. A. M.,Q.A.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+QoS,Q. O. S.,Q.O.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+QUIC,quick,quick,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RADIUS,R. A. D. I. U. S.,R.A.D.I.U.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RAN,R. A. N.,R.A.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RASP,R. A. S. P.,R.A.S.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RAT,R. A. T.,R.A.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Ray,Ray,Ray,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RCA,R. C. A.,R.C.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RCE,R. C. E.,R.C.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RDS,R. D. S.,R.D.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+reCAPTCHA,R. E. C. A. P. T. C. H. A.,R.E.C.A.P.T.C.H.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Redis,Redis,Redis,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Redshift,R. E. D. S. H. I. F. T.,R.E.D.S.H.I.F.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Regex,R. E. G. E. X.,R.E.G.E.X.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+REST,rest,reste,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RFI,R. F. I.,R.F.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Route53,R. O. U. T. E. five three,R.O.U.T.E. five three,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RPC,R. P. C.,R.P.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RPO,R. P. O.,R.P.O.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RSA,R. S. A.,R.S.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RSSI,R. S. S. I.,R.S.S.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RTO,R. T. O.,R.T.O.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Runbook,R. U. N. B. O. O. K.,R.U.N.B.O.O.K.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SaaS,S. A. A. S.,S.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Safetensors,S. A. F. E. T. E. N. S. O. R. S.,S.A.F.E.T.E.N.S.O.R.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SageMaker,S. A. G. E. M. A. K. E. R.,S.A.G.E.M.A.K.E.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SASE,S. A. S. E.,S.A.S.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SAST,S. A. S. T.,S.A.S.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SBOM,S. B. O. M.,S.B.O.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SCA,S. C. A.,S.C.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Scikit,S. C. I. K. I. T.,S.C.I.K.I.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SciPy,S. C. I. P. Y.,S.C.I.P.Y.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SCORM,S. C. O. R. M.,S.C.O.R.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+scrypt,S. C. R. Y. P. T.,S.C.R.Y.P.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SDN,S. D. N.,S.D.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SDWAN,S. D. W. A. N.,S.D.W.A.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SEM,S. E. M.,S.E.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SEO,S. E. O.,S.E.O.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SHA,S. H. A.,S.H.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SHA256,S. H. A. two five six,S.H.A. two five six,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SHA512,S. H. A. five one two,S.H.A. five one two,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Sigma,S. I. G. M. A.,S.I.G.M.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SINR,S. I. N. R.,S.I.N.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SIP,S. I. P.,S.I.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Sklearn,S. K. L. E. A. R. N.,S.K.L.E.A.R.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SLA,S. L. A.,S.L.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SLI,S. L. I.,S.L.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SLO,S. L. O.,S.L.O.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SMTP,S. M. T. P.,S.M.T.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SNMP,S. N. M. P.,S.N.M.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Snowflake,Snowflake,Snowflake,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SNS,S. N. S.,S.N.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SOAP,S. O. A. P.,S.O.A.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SOAR,S. O. A. R.,S.O.A.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SPA,S. P. A.,S.P.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Spark,Spark,Spark,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SPF,S. P. F.,S.P.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SQLi,S. Q. L. I.,S.Q.L.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SQS,S. Q. S.,S.Q.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SRE,S. R. E.,S.R.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SSE,S. S. E.,S.S.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SSG,S. S. G.,S.S.G.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SSH,S. S. H.,S.S.H.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SSR,S. S. R.,S.S.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SSRF,S. S. R. F.,S.S.R.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+STIX,S. T. I. X.,S.T.I.X.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Synapse,S. Y. N. A. P. S. E.,S.Y.N.A.P.S.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TACACS,T. A. C. A. C. S.,T.A.C.A.C.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TAXII,T. A. X. I. I.,T.A.X.I.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TCL,T. C. L.,T.C.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TCP,T. C. P.,T.C.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TensorRT,T. E. N. S. O. R. R. T.,T.E.N.S.O.R.R.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Terraform,Terraform,terraforme,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TOML,T. O. M. L.,T.O.M.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TOR,T. O. R.,T.O.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TOTP,T. O. T. P.,T.O.T.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Transformers,T. R. A. N. S. F. O. R. M. E. R. S.,T.R.A.N.S.F.O.R.M.E.R.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Trino,Trino,Trino,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TSV,T. S. V.,T.S.V.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TTP,T. T. P.,T.T.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TVM,T. V. M.,T.V.M.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+U2F,U. two F.,U. two F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UBA,U. B. A.,U.B.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UCaaS,U. C. A. A. S.,U.C.A.A.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UDP,U. D. P.,U.D.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UEBA,U. E. B. A.,U.E.B.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UML,U. M. L.,U.M.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Unicode,U. N. I. C. O. D. E.,U.N.I.C.O.D.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+URI,U. R. I.,U.R.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+URL,U. R. L.,U.R.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+URN,U. R. N.,U.R.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UTF,U. T. F.,U.T.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UTF8,U. T. F. eight,U.T.F. eight,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UUID,U. U. I. D.,U.U.I.D.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Vault,Vault,Vault,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VertexAI,V. E. R. T. E. X. A. I.,V.E.R.T.E.X.A.I.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VHD,V. H. D.,V.H.D.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VHDX,V. H. D. X.,V.H.D.X.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VLAN,V. LAN,V.LAN,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VMware,V. M. W. A. R. E.,V.M.W.A.R.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VoIP,V. O. I. P.,V.O.I.P.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VPCe,V. P. C. E.,V.P.C.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+vRAN,V. R. A. N.,V.R.A.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VXLAN,V. X. L. A. N.,V.X.L.A.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+W&B,W. and B.,W. et B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WAF,W. A. F.,W.A.F.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WAN,wan,wan,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WandB,W. A. N. D. B.,W.A.N.D.B.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WebAuthn,web-authen,web-authen,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WebGL,Web G. L.,Web G.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WebGPU,Web G. P. U.,Web G.P.U.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WebRTC,Web R. T. C.,Web R.T.C.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WebSocket,W. E. B. S. O. C. K. E. T.,W.E.B.S.O.C.K.E.T.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Weights,Weights,Weights,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+WLAN,W. LAN,W.LAN,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+XDR,X. D. R.,X.D.R.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+XLA,X. L. A.,X.L.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+XML,X. M. L.,X.M.L.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+XSS,X. S. S.,X.S.S.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+XXE,X. X. E.,X.X.E.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+YARA,Y. A. R. A.,Y.A.R.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+YARN,Y. A. R. N.,Y.A.R.N.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+YubiKey,Y. U. B. I. K. E. Y.,Y.U.B.I.K.E.Y.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ZeRO,Z. E. R. O.,Z.E.R.O.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ZTNA,Z. T. N. A.,Z.T.N.A.,SPELL_OUT_COMMON,Cloud,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ABS,A. B. S.,A.B.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ACH,A. C. H.,A.C.H.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ACHs,A. C. H. S.,A.C.H.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ACPR,A. C. P. R.,A.C.P.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ACV,A. C. V.,A.C.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+AFME,A. F. M. E.,A.F.M.E.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+AMF,A. M. F.,A.M.F.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+AML,A. M. L.,A.M.L.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+AOV,A. O. V.,A.O.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ARPA,A. R. P. A.,A.R.P.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ARPU,A. R. P. U.,A.R.P.U.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ASP,A. S. P.,A.S.P.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+AUM,A. U. M.,A.U.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+AuM,A. U. M.,A.U.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+B2B,B. two B.,B. two B.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+B2B2C,B. two B. two C.,B. two B. two C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+B2C,B. two C.,B. two C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BIC,B. I. C.,B.I.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BIS,B. I. S.,B.I.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BO,B. O.,B.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BoC,B. O. C.,B.O.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BoE,B. O. E.,B.O.E.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BOI,B. O. I.,B.O.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BoJ,B. O. J.,B.O.J.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BRRD,B. R. R. D.,B.R.R.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BTP,B. T. P.,B.T.P.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Bund,B. U. N. D.,B.U.N.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Burn,B. U. R. N.,B.U.R.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+BVPS,B. V. P. S.,B.V.P.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CAC,C. A. C.,C.A.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CBIRC,C. B. I. R. C.,C.B.I.R.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CCC,C. C. C.,C.C.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CCS,C. C. S.,C.C.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CCUS,C. C. U. S.,C.C.U.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CDD,C. D. D.,C.D.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CDO,C. D. O.,C.D.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CDP,C. D. P.,C.D.P.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CDS,C. D. S.,C.D.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CFOps,C. F. O. P. S.,C.F.O.P.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CFT,C. F. T.,C.F.T.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CHAPS,chaps,chaps,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CHIPS,C. H. I. P. S.,C.H.I.P.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Churn,C. H. U. R. N.,C.H.U.R.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CLO,C. L. O.,C.L.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CMBS,C. M. B. S.,C.M.B.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+COCA,C. O. C. A.,C.O.C.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+COGS,C. O. G. S.,C.O.G.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CP,C. P.,C.P.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CRA,C. R. A.,C.R.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CRA3,C. R. A. three,C.R.A. three,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CRD,C. R. D.,C.R.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CRR,C. R. R.,C.R.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CS01,C. S. zero one,C.S. zero one,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CSA,C. S. A.,C.S.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CSRD,C. S. R. D.,C.S.R.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CTR-Fin,C. T. R. dash F. I. N.,C.T.R. tiret F.I.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CUSIP,C. U. S. I. P.,C.U.S.I.P.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CVA,C. V. A.,C.V.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+CVaR,C. V. A. R.,C.V.A.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+D2C,D. two C.,D. two C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+DCF,D. C. F.,D.C.F.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+DIO,D. I. O.,D.I.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+DPS,D. P. S.,D.P.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+DV01,D. V. zero one,D.V. zero one,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+DVA,D. V. A.,D.V.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EBA,E. B. A.,E.B.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EBIT,E. B. I. T.,E.B.I.T.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EBITA,E. B. I. T. A.,E.B.I.T.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EBITDAR,E. B. I. T. D. A. R.,E.B.I.T.D.A.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EDD,E. D. D.,E.D.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EIOPA,E. I. O. P. A.,E.I.O.P.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EMIR,E. M. I. R.,E.M.I.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EONIA,E. O. N. I. A.,E.O.N.I.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EPC,E. P. C.,E.P.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EPS,E. P. S.,E.P.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ES,E. S.,E.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ESG,E. S. G.,E.S.G.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ESMA,E. S. M. A.,E.S.M.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ESRS,E. S. R. S.,E.S.R.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ESTR,E. S. T. R.,E.S.T.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EURIBOR,E. U. R. I. B. O. R.,E.U.R.I.B.O.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Euribor,E. U. R. I. B. O. R.,E.U.R.I.B.O.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EV,E. V.,E.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+EV/EBITDA,E. V. slash E. B. I. T. D. A.,E.V. barre oblique E.B.I.T.D.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FCA,F. C. A.,F.C.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FCF,F. C. F.,F.C.F.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FCFE,F. C. F. E.,F.C.F.E.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FCFF,F. C. F. F.,F.C.F.F.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FDC3,F. D. C. three,F.D.C. three,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FedNow,Fed Now,Fed Now,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Fedwire,Fed-wire,Fed-wire,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FIGI,F. I. G. I.,F.I.G.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FINMA,F. I. N. M. A.,F.I.N.M.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FIX,F. I. X.,F.I.X.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FIXML,F. I. X. M. L.,F.I.X.M.L.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FRA,F. R. A.,F.R.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FRN,F. R. N.,F.R.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FSB,F. S. B.,F.S.B.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FVA,F. V. A.,F.V.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FX,F. X.,F.X.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+FXO,F. X. O.,F.X.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+GHG,G. H. G.,G.H.G.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Gilt,G. I. L. T.,G.I.L.T.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+GMRA,G. M. R. A.,G.M.R.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+GMSLA,G. M. S. L. A.,G.M.S.L.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+GMV,G. M. V.,G.M.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+GOOs,G. O. O. S.,G.O.O.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+GRI,G. R. I.,G.R.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+GRR,G. R. R.,G.R.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+GTV,G. T. V.,G.T.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+H1,H. one,H. one,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+H2,H. two,H. two,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+HIBOR,H. I. B. O. R.,H.I.B.O.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+HKMA,H. K. M. A.,H.K.M.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+IAIS,I. A. I. S.,I.A.I.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+IBAN,I. B. A. N.,I.B.A.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ICMA,I. C. M. A.,I.C.M.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+IM,I. M.,I.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+IOSCO,I. O. S. C. O.,I.O.S.C.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+IR01,I. R. zero one,I.R. zero one,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+IRR,I. R. R.,I.R.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+IRS-Fin,I. R. S. dash F. I. N.,I.R.S. tiret F.I.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ISDA,I. S. D. A.,I.S.D.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ISIN,I. S. I. N.,I.S.I.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ISO20022,I. S. O. two zero zero two two,I.S.O. two zero zero two two,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ISSB,I. S. S. B.,I.S.S.B.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+JGB,J. G. B.,J.G.B.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+KVA,K. V. A.,K.V.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+KYB,K. Y. B.,K.Y.B.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+KYC,K. Y. C.,K.Y.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+LBO,L. B. O.,L.B.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+LCA,L. C. A.,L.C.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+LEI,L. E. I.,L.E.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+LMA,L. M. A.,L.M.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+LogoChurn,L. O. G. O. C. H. U. R. N.,L.O.G.O.C.H.U.R.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+LOI,L. O. I.,L.O.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+LTM,L. T. M.,L.T.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+LTV,L. T. V.,L.T.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MACC,M. A. C. C.,M.A.C.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MAS,M. A. S.,M.A.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MBI,M. B. I.,M.B.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MBO,M. B. O.,M.B.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MBS,M. B. S.,M.B.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MiCA,M. I. C. A.,M.I.C.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MiFID,my-fid,mi-fid,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MiFIDII,M. I. F. I. D. I. I.,M.I.F.I.D.I.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MoM,M. O. M.,M.O.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MOU,M. O. U.,M.O.U.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MSA,M. S. A.,M.S.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MTD,M. T. D.,M.T.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MVA,M. V. A.,M.V.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+MX,M. X.,M.X.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NAV,N. A. V.,N.A.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NCA,N. C. A.,N.C.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NCA-Fin,N. C. A. dash F. I. N.,N.C.A. tiret F.I.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NCE,N. C. E.,N.C.E.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NDA,N. D. A.,N.D.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NDF,N. D. F.,N.D.F.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NDS,N. D. S.,N.D.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NPV,N. P. V.,N.P.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NRA,N. R. A.,N.R.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NRR,N. R. R.,N.R.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NTM,N. T. M.,N.T.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+NWC,N. W. C.,N.W.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+OAS,O. A. S.,O.A.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+OAT,O. A. T.,O.A.T.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+OCF,O. C. F.,O.C.F.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+OIS,O. I. S.,O.I.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PBoC,P. B. O. C.,P.B.O.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PCAF,P. C. A. F.,P.C.A.F.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PEP,P. E. P.,P.E.P.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PPA,P. P. A.,P.P.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PRA,P. R. A.,P.R.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PRI,P. R. I.,P.R.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PSD2,P. S. D. two,P.S.D. two,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PSD3,P. S. D. three,P.S.D. three,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+PV01,P. V. zero one,P.V. zero one,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Q1,Q. one,Q. one,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Q2,Q. two,Q. two,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Q3,Q. three,Q. three,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Q4,Q. four,Q. four,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+QoQ,Q. O. Q.,Q.O.Q.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+RBA,R. B. A.,R.B.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+RBNZ,R. B. N. Z.,R.B.N.Z.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+RECs,R. E. C. S.,R.E.C.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+RFP,R. F. P.,R.F.P.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+RFQ,R. F. Q.,R.F.Q.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+RMBS,R. M. B. S.,R.M.B.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ROA,R. O. A.,R.O.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ROCE,R. O. C. E.,R.O.C.E.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ROE,R. O. E.,R.O.E.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ROIC,R. O. I. C.,R.O.I.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+RT1,R. T. one,R.T. one,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+RTGS,R. T. G. S.,R.T.G.S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Runway,R. U. N. W. A. Y.,R.U.N.W.A.Y.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+S&GA,S. and G. A.,S. et G.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+S&OP,S. and O. P.,S. et O.P.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SAR,S. A. R.,S.A.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SARON,S. A. R. O. N.,S.A.R.O.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SASB,S. A. S. B.,S.A.S.B.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SBTi,S. B. T. I.,S.B.T.I.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Scope1,S. C. O. P. E. one,S.C.O.P.E. one,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Scope2,S. C. O. P. E. two,S.C.O.P.E. two,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Scope3,S. C. O. P. E. three,S.C.O.P.E. three,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SEDOL,S. E. D. O. L.,S.E.D.O.L.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SEPA,seh-pa,sé-pa,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SFDR,S. F. D. R.,S.F.D.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SFTR,S. F. T. R.,S.F.T.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SG&A,S. G. and A.,S.G. et A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SHIBOR,S. H. I. B. O. R.,S.H.I.B.O.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SIBOR,S. I. B. O. R.,S.I.B.O.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SIFMA,S. I. F. M. A.,S.I.F.M.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SNB,S. N. B.,S.N.B.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SOM,S. O. M.,S.O.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SONIA,S. O. N. I. A.,S.O.N.I.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SOW,S. O. W.,S.O.W.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SRB,S. R. B.,S.R.B.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SRM,S. R. M.,S.R.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+STERLING,S. T. E. R. L. I. N. G.,S.T.E.R.L.I.N.G.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+STR,S. T. R.,S.T.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+SWIFT-Fin,S. W. I. F. T. dash F. I. N.,S.W.I.F.T. tiret F.I.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+T-Bill,T. dash B. I. L. L.,T. tiret B.I.L.L.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+T-Bond,T. dash B. O. N. D.,T. tiret B.O.N.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+T-Note,T. dash N. O. T. E.,T. tiret N.O.T.E.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+T2S,T. two S.,T. two S.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TAM,T. A. M.,T.A.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TARGET2,target two,target two,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TCFD,T. C. F. D.,T.C.F.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TCV,T. C. V.,T.C.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TEV,T. E. V.,T.E.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TIPS-Fin,T. I. P. S. dash F. I. N.,T.I.P.S. tiret F.I.N.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TIPS-Pay,T. I. P. S. dash P. A. Y.,T.I.P.S. tiret P.A.Y.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TNFD,T. N. F. D.,T.N.F.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TONAR,T. O. N. A. R.,T.O.N.A.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TPV,T. P. V.,T.P.V.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+TTM,T. T. M.,T.T.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+UBO,U. B. O.,U.B.O.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+UST,U. S. T.,U.S.T.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+VaR,V. A. R.,V.A.R.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+VM,V. M.,V.M.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+VPPA,V. P. P. A.,V.P.P.A.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+WACC,W. A. C. C.,W.A.C.C.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+XCCY,X. C. C. Y.,X.C.C.Y.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+YoY,Y. O. Y.,Y.O.Y.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+YTD,Y. T. D.,Y.T.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+Z-spread,Z. dash S. P. R. E. A. D.,Z. tiret S.P.R.E.A.D.,SPELL_OUT_COMMON,Finance,,https://www.investopedia.com/financial-term-dictionary-4769738
+ABM-Sales,A. B. M. dash S. A. L. E. S.,A.B.M. tiret S.A.L.E.S.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+AE,A. E.,A.E.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ARR2,A. R. R. two,A.R.R. two,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BCG,B. C. G.,B.C.G.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BDR,B. D. R.,B.D.R.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+BizOps,B. I. Z. O. P. S.,B.I.Z.O.P.S.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CES,C. E. S.,C.E.S.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CHRO,C. H. R. O.,C.H.R.O.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CMO,C. M. O.,C.M.O.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+COBIT,C. O. B. I. T.,C.O.B.I.T.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CPO,C. P. O.,C.P.O.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CRO,C. R. O.,C.R.O.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CRO-Rev,C. R. O. dash R. E. V.,C.R.O. tiret R.E.V.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CRO-Risk,C. R. O. dash R. I. S. K.,C.R.O. tiret R.I.S.K.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CROps,C. R. O. P. S.,C.R.O.P.S.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSAT,C. S. A. T.,C.S.A.T.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CSM,C. S. M.,C.S.M.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+CX,C. X.,C.X.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+DACI,D. A. C. I.,D.A.C.I.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GE-McKinsey,G. E. dash M. C. K. I. N. S. E. Y.,G.E. tiret M.C.K.I.N.S.E.Y.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+GTM,G. T. M.,G.T.M.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ICP,I. C. P.,I.C.P.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ICP2,I. C. P. two,I.C.P. two,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ICP3,I. C. P. three,I.C.P. three,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+IEC,I. E. C.,I.E.C.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ISO27001,I. S. O. two seven zero zero one,I.S.O. two seven zero zero one,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ISO27701,I. S. O. two seven seven zero one,I.S.O. two seven seven zero one,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ISO9001,I. S. O. nine zero zero one,I.S.O. nine zero zero one,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+ITIL,I. T. I. L.,I.T.I.L.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Kanban,K. A. N. B. A. N.,K.A.N.B.A.N.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MBR,M. B. R.,M.B.R.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+MQL,M. Q. L.,M.Q.L.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+NPS,N. P. S.,N.P.S.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+OKR2,O. K. R. two,O.K.R. two,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PESTEL,P. E. S. T. E. L.,P.E.S.T.E.L.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PLG,P. L. G.,P.L.G.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PMBOK,P. M. B. O. K.,P.M.B.O.K.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Porter,P. O. R. T. E. R.,P.O.R.T.E.R.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PQA,P. Q. A.,P.Q.A.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PQL,P. Q. L.,P.Q.L.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+PRINCE2,P. R. I. N. C. E. two,P.R.I.N.C.E. two,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+QBR,Q. B. R.,Q.B.R.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RACI,R. A. C. I.,R.A.C.I.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RAPID,R. A. P. I. D.,R.A.P.I.D.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+RevOps,R. E. V. O. P. S.,R.E.V.O.P.S.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SAFe,S. A. F. E.,S.A.F.E.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SAL,S. A. L.,S.A.L.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SalesOps,S. A. L. E. S. O. P. S.,S.A.L.E.S.O.P.S.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+Scrum,S. C. R. U. M.,S.C.R.U.M.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SDR,S. D. R.,S.D.R.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SLG,S. L. G.,S.L.G.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SMART,S. M. A. R. T.,S.M.A.R.T.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SOC1,S. O. C. one,S.O.C. one,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SOC2,S. O. C. two,S.O.C. two,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SOC3,S. O. C. three,S.O.C. three,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SOX,S. O. X.,S.O.X.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SQL-Lead,S. Q. L. dash L. E. A. D.,S.Q.L. tiret L.E.A.D.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+SWOT2,S. W. O. T. two,S.W.O.T. two,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+TOGAF,T. O. G. A. F.,T.O.G.A.F.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UI,U. I.,U.I.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+UX,U. X.,U.X.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary
+VoC,V. O. C.,V.O.C.,SPELL_OUT_COMMON,General,,https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary

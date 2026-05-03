@@ -116,7 +116,7 @@ locales:
     tts_emotion: "Enthusiastic"
     tts_mode: "chunks"
     tts_chunk_max_chars: 1400
-    tts_chunk_crossfade_ms: 80
+    tts_chunk_crossfade_ms: 200
 
   fr:
     enabled: true
@@ -159,10 +159,11 @@ locales:
     # of a single long session.
     # chunk_max_chars 1400 (vs 900 default): fewer sessions → fewer chunk-start
     # acceleration artifacts from Cartesia model warm-up.
-    # crossfade_ms 80: shorter overlap reduces audible blend at boundaries.
+    # crossfade_ms 200: longer overlap smooths chunk boundaries without
+    # audible blend artifacts (KEEP_EDGE_MS = 200 in cartesia.py).
     tts_mode: "chunks"
     tts_chunk_max_chars: 1400
-    tts_chunk_crossfade_ms: 80
+    tts_chunk_crossfade_ms: 200
 
 # ──────────────────────────────────────────────────────────────
 #  PROFILS EDITORIAUX

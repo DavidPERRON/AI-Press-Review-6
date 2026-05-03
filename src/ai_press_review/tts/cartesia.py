@@ -1362,6 +1362,47 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'SPARQL': 'S. P. A. R. Q. L.',
     'URI': 'U. R. I.',
     'WebGPU': 'W. E. B. G. P. U.',
+    # ── Production-validated (from acronyms_seen EN+FR logs) ─────────────────
+    'IRS': 'I. R. S.',          # 4x EN, 2x FR — US tax authority
+    'IDC': 'I. D. C.',          # 3x EN — market research firm
+    'COVID': 'covid',            # 3x EN, 1x FR — pronounced as a word
+    'CTI': 'C. T. I.',          # 3x EN — Cyber Threat Intelligence
+    'AMI': 'A. M. I.',          # 2x EN, 6x FR
+    'HMRC': 'H. M. R. C.',      # 2x EN, 2x FR — UK tax authority
+    'BMW': 'B. M. W.',          # 2x EN, 1x FR
+    'ZTE': 'Z. T. E.',          # 2x EN, 1x FR — Chinese telco
+    'NDRC': 'N. D. R. C.',      # 2x EN — China regulator
+    'JTC': 'J. T. C.',          # 2x EN, 2x FR
+    'CNBC': 'C. N. B. C.',      # 2x EN, 1x FR
+    'ADS': 'A. D. S.',          # 2x EN, 2x FR
+    'DSO': 'D. S. O.',          # 2x EN, 1x FR
+    'APRA': 'A. P. R. A.',      # 2x EN — Australian prudential regulator
+    'LPDDR': 'L. P. D. D. R.', # 2x EN — memory standard
+    'OPC': 'O. P. C.',          # 2x EN
+    'PLDT': 'P. L. D. T.',      # 2x EN, 2x FR — Philippine telco
+    'NSA': 'N. S. A.',          # 2x EN — US intelligence
+    'SWE': 'S. W. E.',          # 2x EN, 2x FR
+    'SOP': 'S. O. P.',          # 2x EN — Standard Operating Procedure
+    'AISI': 'A. I. S. I.',      # 2x EN, 1x FR — AI Safety Institute
+    'EDA': 'E. D. A.',          # 3x FR — Electronic Design Automation
+    'WTI': 'W. T. I.',          # 2x FR — crude oil benchmark
+    'WPP': 'W. P. P.',          # 1x EN, 2x FR — advertising holding company
+    'PLC': 'P. L. C.',          # 1x EN, 2x FR — UK company type
+    'RISC': 'risk',              # 1x EN, 2x FR — pronounced as a word
+    'IEEE': 'I. E. E. E.',      # 1x EN, 1x FR — standards body
+    'BBC': 'B. B. C.',          # 1x EN — UK broadcaster
+    'EUV': 'E. U. V.',          # 1x EN, 1x FR — extreme ultraviolet lithography
+    'RTX': 'R. T. X.',          # 1x EN — Nvidia GPU line
+    'NTT': 'N. T. T.',          # 1x EN — Japanese telco
+    'GPTQ': 'G. P. T. Q.',      # 1x EN — quantization method
+    'MTIA': 'M. T. I. A.',      # 1x EN — Meta Training and Inference Accelerator
+    'GLM': 'G. L. M.',          # 1x EN, 1x FR — model family
+    'RDMA': 'R. D. M. A.',      # 1x EN — Remote Direct Memory Access
+    'ICU': 'I. C. U.',          # 1x EN — Intensive Care Unit
+    'INRIA': 'in-ria',          # 1x EN — French national AI research institute
+    'DSL': 'D. S. L.',          # 1x EN, 1x FR — Domain Specific Language or telco
+    'SMB': 'S. M. B.',          # 1x EN — small-medium business or network protocol
+    'CAICT': 'C. A. I. C. T.', # 1x EN, 1x FR — Chinese telecom research institute
 }
 
 _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
@@ -1547,6 +1588,10 @@ _SPELL_OUT_FR_OVERRIDES: dict[str, str] = {
     'CC-BY': 'cé-cé by',
     'JSON-LD': 'ji-ès-o-èn-tiret-èl-dé',
     'Parquet': 'parquet',
+    # ── Production-validated FR overrides (acronyms_seen_fr.json) ────────────
+    # EAU = Émirats arabes unis (UAE in French) — pronounced as the French word
+    # "eau" (water, sounds like "oh"). Auto-spell would render "E.A.U." instead.
+    'EAU': 'eau',
 }
 
 # Build the per-locale lookup tables once at import time. Patterns use \b so
@@ -1658,6 +1703,9 @@ _AUTO_SPELL_SKIP: frozenset[str] = frozenset({
     'MERCOSUR',
     # Proper nouns / product names written all-caps that should be read as a word
     'OPENAI', 'ARM', 'META', 'APPLE', 'AMAZON', 'GOOGLE', 'ORACLE',
+    # Common English words / pronounceable tokens seen in prod scripts
+    'DOGE', 'EDGE', 'EVAL', 'GRASP', 'MIMIC', 'ONTO',
+    'PARA', 'POLIS', 'PRO', 'REALM', 'YOYO',
 })
 
 
@@ -2005,10 +2053,11 @@ async def _render_chunks_crossfade(
     # -40 dBFS catches Cartesia's utterance-tail silence without clipping
     # low-volume speech.
     # KEEP_EDGE_MS must be >= crossfade_ms so the crossfade overlaps only
-    # residual silence, never real speech. crossfade_ms default = 80 ms, so
-    # KEEP_EDGE_MS is set to 100 ms (20 ms margin).
+    # residual silence, never real speech. crossfade_ms default = 200 ms, so
+    # KEEP_EDGE_MS is set to 200 ms (no extra margin needed — the silence tail
+    # is typically 400-800 ms, so 200 ms always leaves a clean blend zone).
     SILENCE_THRESH_DB = -40.0
-    KEEP_EDGE_MS = 100
+    KEEP_EDGE_MS = 200
 
     def _trim_edges(seg: AudioSegment) -> AudioSegment:
         # Each chunk is rendered as an independent Cartesia session and
@@ -2064,7 +2113,7 @@ async def _render_chunks_crossfade(
         raw_ms = len(seg)
         seg = _trim_edges(seg)
         segments.append(seg)
-        logger.debug(
+        logger.info(
             'Chunk %d/%d: %.1fs audio (trimmed %dms of edge silence)',
             i, len(chunks), len(seg) / 1000, raw_ms - len(seg),
         )

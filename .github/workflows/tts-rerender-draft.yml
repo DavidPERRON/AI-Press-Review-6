@@ -35,6 +35,10 @@ on:
         options:
           - en
           - fr
+      speed:
+        description: 'Vitesse TTS (laisser vide = valeur de podcast.yaml)'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -113,6 +117,7 @@ jobs:
           # whitelist validator raises ValueError on non-empty unknown values.
           LLM_API_KEY: ''
           LLM_BASE_URL: ''
+          TTS_SPEED_OVERRIDE: ${{ github.event.inputs.speed }}
         run: python scripts/rerender_draft_tts.py --script /tmp/script.txt
 
       - name: Commit updated pending draft state

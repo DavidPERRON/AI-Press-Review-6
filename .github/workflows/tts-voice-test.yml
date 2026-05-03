@@ -12,9 +12,9 @@ on:
           - en
           - fr
       speed:
-        description: 'Vitesse (0.85 / 0.90 / 0.95 / 1.0)'
+        description: 'Vitesse (0.85 / 0.90 / 0.92 / 0.95 / 1.0)'
         required: false
-        default: "0.85"
+        default: "0.92"
       text:
         description: 'Texte à synthétiser (laisser vide = extrait par défaut)'
         required: false

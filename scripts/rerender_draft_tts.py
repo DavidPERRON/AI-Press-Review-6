@@ -14,6 +14,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -45,11 +46,15 @@ def main() -> None:
 
     # Load settings — APR_LOCALE env var also accepted if --locale not passed
     settings = load_settings()
+    speed_override = os.environ.get('TTS_SPEED_OVERRIDE', '').strip()
+    if speed_override:
+        settings.cartesia_speed = float(speed_override)
     logger.info(
-        "TTS config — locale=%s voice=%s speed=%s mode=%s",
+        "TTS config — locale=%s voice=%s speed=%s%s mode=%s",
         settings.locale or "(default)",
         settings.cartesia_voice_id[:8] + "..." if settings.cartesia_voice_id else "(unset)",
         settings.cartesia_speed,
+        " (override)" if speed_override else "",
         getattr(settings, "tts_mode", "websocket"),
     )
 

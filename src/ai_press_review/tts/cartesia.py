@@ -51,20 +51,29 @@ CARTESIA_WEBSOCKET_URL = 'wss://api.cartesia.ai/tts/websocket'
 WEBSOCKET_SAMPLE_RATE = 44100
 
 
-def _format_emotion(value: str) -> list[str] | str | None:
-    """Convert podcast.yaml emotion string to the form Cartesia accepts.
+def _format_emotion(value: str) -> list[dict] | None:
+    """Convert podcast.yaml emotion string to Cartesia object format.
 
     - ""                                    → None (caller omits the field)
-    - "excited" / "serious"                 → "excited" (legacy single-word)
-    - "positivity:high"                     → ["positivity:high"]
-    - "positivity:highest,curiosity:low"    → ["positivity:highest", "curiosity:low"]
+    - "positivity:high"                     → [{"name": "positivity", "level": "high"}]
+    - "positivity:highest,curiosity:low"    → [{"name": "positivity", "level": "highest"},
+                                               {"name": "curiosity", "level": "low"}]
+
+    Cartesia's WebSocket API requires objects with "name"/"level" keys; shorthand
+    strings like ["positivity:high"] are rejected with a 400 JSON parse error.
     """
     v = (value or '').strip()
     if not v:
         return None
-    if ':' in v or ',' in v:
-        return [tag.strip() for tag in v.split(',') if tag.strip()]
-    return v
+    result = []
+    for tag in v.split(','):
+        tag = tag.strip()
+        if not tag:
+            continue
+        if ':' in tag:
+            name, level = tag.split(':', 1)
+            result.append({'name': name.strip(), 'level': level.strip()})
+    return result if result else None
 
 
 def _build_generation_config(settings) -> dict:
@@ -1959,7 +1968,7 @@ async def _render_single_chunk_ws(chunk: str, settings, context_id: str | None =
             },
             'generation_config': _build_generation_config(settings),
         }
-        logger.debug("Cartesia WS payload: %s", json.dumps({**request, 'transcript': request['transcript'][:80] + '…'}))
+        logger.info("Cartesia WS payload: %s", json.dumps({**request, 'transcript': request['transcript'][:80] + '…'}))
         await asyncio.wait_for(ws.send(json.dumps(request)), timeout=WS_SEND_TIMEOUT_S)
 
         audio = bytearray()
@@ -2101,7 +2110,7 @@ async def _render_session(chunks: list[str], settings) -> bytes:
                 },
                 'generation_config': _build_generation_config(settings),
             }
-            logger.debug("Cartesia WS payload: %s", json.dumps({**request, 'transcript': request['transcript'][:80] + '…'}))
+            logger.info("Cartesia WS payload: %s", json.dumps({**request, 'transcript': request['transcript'][:80] + '…'}))
             await asyncio.wait_for(ws.send(json.dumps(request)), timeout=WS_SEND_TIMEOUT_S)
 
         audio = bytearray()

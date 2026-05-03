@@ -114,7 +114,7 @@ locales:
     cartesia_language: "en"
     tts_speed: 0.92
     tts_emotion: "excited"
-    tts_mode: "chunks"
+    tts_mode: "websocket"
     tts_chunk_max_chars: 1400
     tts_chunk_crossfade_ms: 80
 

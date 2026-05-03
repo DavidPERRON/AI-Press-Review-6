@@ -61,7 +61,7 @@ tts:
   speed: 0.9
   volume: 1.0
   emotion:
-    - "positivity:highest"
+    - "positivity:high"
     - "curiosity:low"
   # Render mode — overridable per locale:
   #   'websocket': one continue=true session for the full script (EN default)
@@ -116,7 +116,7 @@ locales:
     cartesia_language: "en"
     tts_speed: 0.92
     tts_emotion:
-      - "positivity:highest"
+      - "positivity:high"
       - "curiosity:low"
     tts_mode: "websocket"
     tts_chunk_max_chars: 1400
@@ -158,7 +158,7 @@ locales:
     cartesia_language: "fr"                # CRITIQUE pour prosodie francaise
     tts_speed: 0.85
     tts_emotion:
-      - "positivity:highest"
+      - "positivity:high"
       - "curiosity:low"
     # chunks mode: each paragraph block is its own WebSocket session, then
     # segments are crossfaded. Eliminates noise/volume degradation after ~2 min

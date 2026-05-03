@@ -1,0 +1,364 @@
+name: Release — Réseaux Sociaux
+
+# Workflow de distribution manuelle d'un épisode sur les plateformes sociales.
+# Chaque canal est opt-in : Spotify/Apple (RSS), YouTube (MP4), Podcast Visuel
+# (MP4 + présentation → branch we-podcast-visual-update).
+
+on:
+  workflow_dispatch:
+    inputs:
+      locale:
+        description: 'Locale (en | fr)'
+        required: true
+        default: 'en'
+        type: choice
+        options:
+          - en
+          - fr
+      podcast_name:
+        description: "Nom de l'épisode (référence / logs)"
+        required: true
+        default: ''
+      spotify_apple:
+        description: 'Release Spotify / Apple Podcasts (mise à jour flux RSS)'
+        required: true
+        default: 'oui'
+        type: choice
+        options:
+          - oui
+          - non
+      youtube:
+        description: 'Release YouTube (génère MP4 + upload)'
+        required: true
+        default: 'non'
+        type: choice
+        options:
+          - oui
+          - non
+      podcast_visual:
+        description: 'Release Podcast Visuel (MP4 + présentation → branch we-podcast-visual-update)'
+        required: true
+        default: 'non'
+        type: choice
+        options:
+          - oui
+          - non
+
+permissions:
+  contents: write
+
+concurrency:
+  group: social-release-${{ github.event.inputs.locale }}
+  cancel-in-progress: false
+
+jobs:
+
+  # ── 1. Spotify / Apple Podcasts ─────────────────────────────────────────────
+  # Publie le draft en attente dans le flux RSS.
+  # Spotify et Apple Podcasts récupèrent l'épisode automatiquement via le feed.
+  release-rss:
+    name: "Spotify / Apple — RSS"
+    if: inputs.spotify_apple == 'oui'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      released: ${{ steps.release.outputs.released }}
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Pull latest state
+        run: git pull --rebase origin main
+
+      - name: Release pending draft (RSS feed)
+        id: release
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+          PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
+          R2_BUCKET_NAME: ${{ vars.APR_TEST_R2_BUCKET_NAME || vars.R2_BUCKET_NAME }}
+          R2_ENDPOINT: ${{ vars.APR_TEST_R2_ENDPOINT || vars.R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.APR_TEST_R2_ACCESS_KEY_ID || secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.APR_TEST_R2_SECRET_ACCESS_KEY || secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          set +e
+          output=$(python scripts/release_draft.py 2>&1)
+          exit_code=$?
+          echo "$output"
+          if [ $exit_code -eq 0 ]; then
+            echo "released=true" >> $GITHUB_OUTPUT
+          elif echo "$output" | grep -q "No pending draft"; then
+            echo "Aucun draft en attente — skip release"
+            echo "released=false" >> $GITHUB_OUTPUT
+          else
+            echo "::error::release_draft.py a échoué de façon inattendue"
+            exit $exit_code
+          fi
+
+      - name: Commit published state
+        if: steps.release.outputs.released == 'true'
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/state/ docs/
+          git diff --cached --quiet || git commit -m "release(${{ inputs.locale }}): ${{ inputs.podcast_name }} [skip ci]"
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected — rebasing (attempt $attempt)"
+            git pull --rebase origin main
+          done
+          echo "::error::push failed after 3 rebase attempts"
+          exit 1
+
+  # ── 2. YouTube ──────────────────────────────────────────────────────────────
+  # Génère un MP4 (cover statique + audio) et l'upload sur la chaîne YouTube.
+  # Soft-skip si YOUTUBE_CLIENT_ID / YOUTUBE_REFRESH_TOKEN ne sont pas configurés.
+  youtube:
+    name: "YouTube — MP4 Upload"
+    needs: release-rss
+    if: always() && inputs.youtube == 'oui'
+    uses: ./.github/workflows/youtube-upload.yml
+    with:
+      locale: ${{ inputs.locale }}
+    secrets: inherit
+
+  # ── 3. Podcast Visuel ───────────────────────────────────────────────────────
+  # Crée / recrée la branch we-podcast-visual-update depuis main,
+  # génère le MP4 de l'épisode, l'uploade sur R2, et pousse la branch
+  # avec un manifeste de release visuelle pour revue / PR.
+  podcast-visual:
+    name: "Podcast Visuel — MP4 + Présentation"
+    needs: release-rss
+    if: always() && inputs.podcast_visual == 'oui'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Pull latest main (inclut l'état publié par release-rss si lancé)
+        run: git pull --rebase origin main
+
+      - name: Créer branch we-podcast-visual-update depuis main
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B we-podcast-visual-update
+
+      - name: Extraire métadonnées épisode depuis l'état
+        id: episode
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+        run: |
+          python - <<'PYEOF'
+          import json, os, sys
+          from pathlib import Path
+
+          locale = os.environ['APR_LOCALE']
+          state_dir = Path('data/state')
+          entry = None
+
+          # Priorité : historique (épisode publié) > draft en attente
+          hist = state_dir / f'episode_history_{locale}.json'
+          if hist.exists():
+              data = json.loads(hist.read_text())
+              episodes = data.get('episodes', [])
+              if episodes:
+                  entry = episodes[-1]
+
+          if not entry:
+              draft = state_dir / f'pending_draft_{locale}.json'
+              if draft.exists():
+                  entry = json.loads(draft.read_text())
+
+          if not entry or not entry.get('audio_url'):
+              print('ERROR: aucune URL audio trouvée dans state', file=sys.stderr)
+              sys.exit(1)
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"audio_url={entry['audio_url']}\n")
+              f.write(f"slug={entry.get('slug', 'episode')}\n")
+              f.write(f"date={entry.get('date', 'unknown')}\n")
+              f.write(f"title={entry.get('title', '')}\n")
+          print(f"Audio URL : {entry['audio_url']}")
+          print(f"Slug      : {entry.get('slug')}")
+          PYEOF
+
+      - name: Télécharger audio
+        run: |
+          set -e
+          mkdir -p output/visual
+          curl -fL "${{ steps.episode.outputs.audio_url }}" -o output/visual/episode.mp3
+          echo "Audio téléchargé : $(du -sh output/visual/episode.mp3 | cut -f1)"
+
+      - name: Générer MP4 (cover + audio)
+        run: |
+          set -e
+          ffmpeg -y \
+            -loop 1 -framerate 1 -i assets/podcast-cover.png \
+            -i output/visual/episode.mp3 \
+            -c:v libx264 -tune stillimage \
+            -c:a aac -b:a 192k \
+            -pix_fmt yuv420p -shortest \
+            output/visual/episode-${{ inputs.locale }}.mp4
+          echo "MP4 généré : $(du -sh output/visual/episode-${{ inputs.locale }}.mp4 | cut -f1)"
+
+      - name: Uploader MP4 sur R2 (podcast visuel)
+        id: r2upload
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+          EPISODE_DATE: ${{ steps.episode.outputs.date }}
+          EPISODE_SLUG: ${{ steps.episode.outputs.slug }}
+          R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
+          R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
+        run: |
+          python - <<'PYEOF'
+          import boto3, os
+          from pathlib import Path
+
+          locale   = os.environ['APR_LOCALE']
+          date     = os.environ['EPISODE_DATE']
+          slug     = os.environ['EPISODE_SLUG']
+          mp4_path = Path(f'output/visual/episode-{locale}.mp4')
+          r2_key   = f'visual/{date}-{slug}-{locale}.mp4'
+
+          s3 = boto3.client(
+              's3',
+              endpoint_url=os.environ['R2_ENDPOINT'],
+              aws_access_key_id=os.environ['R2_ACCESS_KEY_ID'],
+              aws_secret_access_key=os.environ['R2_SECRET_ACCESS_KEY'],
+          )
+          s3.upload_file(
+              str(mp4_path),
+              os.environ['R2_BUCKET_NAME'],
+              r2_key,
+              ExtraArgs={'ContentType': 'video/mp4'},
+          )
+          base    = os.environ['PUBLIC_AUDIO_BASE_URL'].rstrip('/')
+          mp4_url = f'{base}/{r2_key}'
+          print(f'MP4 uploadé : {mp4_url}')
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f'mp4_url={mp4_url}\n')
+          PYEOF
+
+      - name: Écrire manifeste release visuelle
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+          PODCAST_NAME: ${{ inputs.podcast_name }}
+          EPISODE_DATE: ${{ steps.episode.outputs.date }}
+          EPISODE_TITLE: ${{ steps.episode.outputs.title }}
+          EPISODE_MP4_URL: ${{ steps.r2upload.outputs.mp4_url }}
+        run: |
+          python - <<'PYEOF'
+          import json, os
+          from pathlib import Path
+
+          manifest = {
+              'locale':       os.environ['APR_LOCALE'],
+              'podcast_name': os.environ.get('PODCAST_NAME', ''),
+              'date':         os.environ.get('EPISODE_DATE', ''),
+              'title':        os.environ.get('EPISODE_TITLE', ''),
+              'mp4_url':      os.environ.get('EPISODE_MP4_URL', ''),
+          }
+          out = Path('data/state') / f"visual_release_{os.environ['APR_LOCALE']}.json"
+          out.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
+          print(f'Manifeste écrit : {out}')
+          print(json.dumps(manifest, indent=2, ensure_ascii=False))
+          PYEOF
+
+      - name: Committer manifeste sur la branch
+        run: |
+          set -e
+          git add data/state/visual_release_*.json
+          git diff --cached --quiet || \
+            git commit -m "visual(${{ inputs.locale }}): MP4 prêt — ${{ inputs.podcast_name }} [skip ci]"
+          git push -u origin we-podcast-visual-update --force
+
+  # ── 4. Social Feed ──────────────────────────────────────────────────────────
+  # Reconstruit le feed social bilingue (EN+FR) après chaque run.
+  # Tourne toujours, même si aucun épisode n'a été publié ce run.
+  social-feed:
+    name: "Social Feed — Refresh"
+    needs: release-rss
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Pull latest (release-rss peut avoir poussé un commit)
+        run: git pull --rebase origin main
+
+      - name: Build social-feed.xml (EN+FR merged)
+        run: |
+          set -e
+          python -c "
+          from ai_press_review.publish.feed import build_social_feed
+          print(f'Social feed written: {build_social_feed()}')
+          "
+
+      - name: Commit social feed
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/social-feed.xml
+          git diff --cached --quiet || git commit -m "social: refresh EN+FR LinkedIn feed [skip ci]"
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected — rebasing (attempt $attempt)"
+            git pull --rebase origin main
+          done
+          echo "::error::push failed after 3 rebase attempts"
+          exit 1

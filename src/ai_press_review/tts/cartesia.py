@@ -50,6 +50,29 @@ CARTESIA_WEBSOCKET_URL = 'wss://api.cartesia.ai/tts/websocket'
 # (16-bit vs 32-bit) with no audible loss for speech.
 WEBSOCKET_SAMPLE_RATE = 44100
 
+
+def _build_emotion(emotion: list | str | None) -> list[dict]:
+    """Convert emotion config to Cartesia API format: [{"name": "...", "level": "..."}].
+
+    Accepts the YAML shorthand list ["positivity:high", "curiosity:low"] or a
+    pre-built list of dicts (already correct).  A bare string is wrapped as a
+    single item with level "high".
+    """
+    if not emotion:
+        return []
+    if isinstance(emotion, str):
+        emotion = [emotion]
+    result = []
+    for item in emotion:
+        if isinstance(item, dict):
+            result.append(item)
+        elif isinstance(item, str) and ':' in item:
+            name, level = item.split(':', 1)
+            result.append({'name': name.strip(), 'level': level.strip()})
+        elif isinstance(item, str):
+            result.append({'name': item.strip(), 'level': 'high'})
+    return result
+
 # Hard upper bounds on any single send/recv await. Without these, a stuck
 # Cartesia session blocks the whole workflow until GitHub's 6-hour job
 # timeout fires — we've seen it happen when the server accepts the
@@ -1932,7 +1955,7 @@ async def _render_single_chunk_ws(chunk: str, settings, context_id: str | None =
             'generation_config': {
                 'volume': settings.cartesia_volume,
                 'speed': settings.cartesia_speed,
-                'emotion': settings.cartesia_emotion,
+                'emotion': _build_emotion(settings.cartesia_emotion),
             },
         }
         await asyncio.wait_for(ws.send(json.dumps(request)), timeout=WS_SEND_TIMEOUT_S)
@@ -2077,7 +2100,7 @@ async def _render_session(chunks: list[str], settings) -> bytes:
                 'generation_config': {
                     'volume': settings.cartesia_volume,
                     'speed': settings.cartesia_speed,
-                    'emotion': settings.cartesia_emotion,
+                    'emotion': _build_emotion(settings.cartesia_emotion),
                 },
             }
             await asyncio.wait_for(ws.send(json.dumps(request)), timeout=WS_SEND_TIMEOUT_S)

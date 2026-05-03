@@ -50,12 +50,13 @@ def main() -> None:
     if speed_override:
         settings.cartesia_speed = float(speed_override)
     logger.info(
-        "TTS config — locale=%s voice=%s speed=%s%s mode=%s",
+        "TTS config — locale=%s voice=%s speed=%s%s mode=%s emotion=%s",
         settings.locale or "(default)",
         settings.cartesia_voice_id[:8] + "..." if settings.cartesia_voice_id else "(unset)",
         settings.cartesia_speed,
         " (override)" if speed_override else "",
         getattr(settings, "tts_mode", "websocket"),
+        settings.cartesia_emotion,
     )
 
     # Load the pending draft to get the original audio_name / R2 key

@@ -51,29 +51,23 @@ CARTESIA_WEBSOCKET_URL = 'wss://api.cartesia.ai/tts/websocket'
 WEBSOCKET_SAMPLE_RATE = 44100
 
 
-def _format_emotion(value: str) -> list[dict] | None:
-    """Convert podcast.yaml emotion string to Cartesia object format.
+def _format_emotion(value) -> str | None:
+    """Return a Cartesia sonic-3 emotion string, or None to omit the field.
 
-    - ""                                    → None (caller omits the field)
-    - "positivity:high"                     → [{"name": "positivity", "level": "high"}]
-    - "positivity:highest,curiosity:low"    → [{"name": "positivity", "level": "highest"},
-                                               {"name": "curiosity", "level": "low"}]
+    Sonic-3 generation_config.emotion is a single string from a predefined enum
+    (e.g. "Enthusiastic", "Curious", "Confident"). Configure podcast.yaml with a
+    valid sonic-3 emotion string directly.
 
-    Cartesia's WebSocket API requires objects with "name"/"level" keys; shorthand
-    strings like ["positivity:high"] are rejected with a 400 JSON parse error.
+    The old sonic-2 "positivity:level,curiosity:level" array format is not valid
+    for sonic-3 — those values are silently dropped (returns None) rather than
+    sending an invalid payload that produces a 400.
     """
-    v = (value or '').strip()
-    if not v:
+    if isinstance(value, list):
         return None
-    result = []
-    for tag in v.split(','):
-        tag = tag.strip()
-        if not tag:
-            continue
-        if ':' in tag:
-            name, level = tag.split(':', 1)
-            result.append({'name': name.strip(), 'level': level.strip()})
-    return result if result else None
+    v = str(value or '').strip()
+    if not v or ':' in v:
+        return None
+    return v
 
 
 def _build_generation_config(settings) -> dict:

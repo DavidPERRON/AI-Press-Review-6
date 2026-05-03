@@ -60,6 +60,8 @@ tts:
   chunk_max_chars: 900
   speed: 0.9
   volume: 1.0
+  # sonic-3 emotion: single string enum — NOT array, NOT name:level shorthand.
+  # Full list: https://docs.cartesia.ai/api-reference/tts/websocket
   emotion: "Enthusiastic"
   # Render mode — overridable per locale:
   #   'websocket': one continue=true session for the full script (EN default)
@@ -113,7 +115,8 @@ locales:
     voice_id_env: "CARTESIA_VOICE_ID"      # secret GitHub existant
     cartesia_language: "en"
     tts_speed: 0.94
-    tts_emotion: "Curious"
+
+tts_emotion: "Enthusiastic"
     tts_mode: "chunks"
     tts_chunk_max_chars: 2200
     tts_chunk_crossfade_ms: 200
@@ -153,7 +156,7 @@ locales:
     voice_id_env: "CARTESIA_VOICE_ID_FR"   # nouveau secret GitHub
     cartesia_language: "fr"                # CRITIQUE pour prosodie francaise
     tts_speed: 0.85
-    tts_emotion: "Curious"
+    tts_emotion: "Enthusiastic"
     # chunks mode: each paragraph block is its own WebSocket session, then
     # segments are crossfaded. Eliminates noise/volume degradation after ~2 min
     # of a single long session.

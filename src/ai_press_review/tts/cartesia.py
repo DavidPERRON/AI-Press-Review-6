@@ -51,23 +51,56 @@ CARTESIA_WEBSOCKET_URL = 'wss://api.cartesia.ai/tts/websocket'
 WEBSOCKET_SAMPLE_RATE = 44100
 
 
+# Valid emotion enum values for sonic-3 generation_config.emotion.
+# Cartesia WebSocket API (2026-03-01): emotion must be a SINGLE string from this set.
+# Arrays, objects, or shorthand "name:level" strings all cause HTTP 400 errors.
+# Source: https://docs.cartesia.ai/api-reference/tts/websocket
+_SONIC3_EMOTIONS: frozenset[str] = frozenset({
+    'Happy', 'Excited', 'Enthusiastic', 'Elated', 'Euphoric', 'Triumphant',
+    'Amazed', 'Surprised', 'Flirtatious', 'Joking/Comedic', 'Curious', 'Content',
+    'Peaceful', 'Serene', 'Calm', 'Grateful', 'Affectionate', 'Trust',
+    'Sympathetic', 'Anticipation', 'Mysterious', 'Angry', 'Mad', 'Outraged',
+    'Frustrated', 'Agitated', 'Threatened', 'Disgusted', 'Contempt', 'Envious',
+    'Sarcastic', 'Ironic', 'Sad', 'Dejected', 'Melancholic', 'Disappointed',
+    'Hurt', 'Guilty', 'Bored', 'Tired', 'Rejected', 'Nostalgic', 'Wistful',
+    'Apologetic', 'Hesitant', 'Insecure', 'Confused', 'Resigned', 'Anxious',
+    'Panicked', 'Alarmed', 'Scared', 'Neutral', 'Proud', 'Confident',
+    'Distant', 'Skeptical', 'Contemplative', 'Determined',
+})
+
+
 def _format_emotion(value) -> str | None:
-    """Return a Cartesia sonic-3 emotion string, or None to omit the field.
+    """Return a valid sonic-3 emotion string, or None to omit the field.
 
-    Sonic-3 generation_config.emotion is a single string from a predefined enum
-    (e.g. "Enthusiastic", "Curious", "Confident"). Configure podcast.yaml with a
-    valid sonic-3 emotion string directly.
-
-    The old sonic-2 "positivity:level,curiosity:level" array format is not valid
-    for sonic-3 — those values are silently dropped (returns None) rather than
-    sending an invalid payload that produces a 400.
+    sonic-3 generation_config.emotion is a single string enum (e.g. "Enthusiastic").
+    Legacy formats — YAML lists, "name:level" shorthand, or {name/level} objects —
+    are all invalid and cause HTTP 400. This function logs a warning and returns
+    None for any value that is not a recognised sonic-3 emotion string.
     """
+    if not value:
+        return None
+    # String path — the expected case from podcast.yaml locale overrides.
+    if isinstance(value, str):
+        v = value.strip()
+        if v in _SONIC3_EMOTIONS:
+            return v
+        # Legacy shorthand formats (e.g. "positivity:highest,curiosity:low")
+        # or plain unknown strings — warn and omit rather than send invalid JSON.
+        logger.warning(
+            "cartesia_emotion=%r is not a valid sonic-3 emotion string — "
+            "field omitted. Use one of: %s",
+            v, ', '.join(sorted(_SONIC3_EMOTIONS)),
+        )
+        return None
+    # List path — legacy YAML list format, never valid for sonic-3.
     if isinstance(value, list):
+        logger.warning(
+            "cartesia_emotion is a list %r — sonic-3 expects a single string enum; "
+            "field omitted. Set a single value like 'Enthusiastic' in podcast.yaml.",
+            value,
+        )
         return None
-    v = str(value or '').strip()
-    if not v or ':' in v:
-        return None
-    return v
+    return None
 
 
 def _build_generation_config(settings) -> dict:

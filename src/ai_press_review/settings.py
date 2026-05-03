@@ -95,7 +95,7 @@ class Settings:
     cartesia_language: str
     cartesia_speed: float
     cartesia_volume: float
-    cartesia_emotion: list | str
+    cartesia_emotion: str
     r2_bucket_name: str
     r2_endpoint: str
     r2_access_key_id: str
@@ -260,7 +260,7 @@ def _apply_locale(settings: Settings, config: dict[str, Any], locale: str) -> No
     if 'tts_speed' in loc:
         settings.cartesia_speed = float(loc['tts_speed'])
     if 'tts_emotion' in loc:
-        settings.cartesia_emotion = loc['tts_emotion'] if isinstance(loc['tts_emotion'], list) else str(loc['tts_emotion'])
+        settings.cartesia_emotion = str(loc['tts_emotion'])
     if 'tts_mode' in loc:
         settings.tts_mode = str(loc['tts_mode'])
     if 'tts_chunk_crossfade_ms' in loc:
@@ -467,7 +467,7 @@ def load_settings(
         cartesia_language=_env('CARTESIA_LANGUAGE', 'en'),
         cartesia_speed=_safe_float(_env('CARTESIA_SPEED', str(_yaml_get(config, 'tts.speed', 1.0))), 1.0, 'CARTESIA_SPEED'),
         cartesia_volume=_safe_float(_env('CARTESIA_VOLUME', str(_yaml_get(config, 'tts.volume', 1.0))), 1.0, 'CARTESIA_VOLUME'),
-        cartesia_emotion=_yaml_get(config, 'tts.emotion', 'neutral'),
+        cartesia_emotion=str(_yaml_get(config, 'tts.emotion', 'Neutral')),
         r2_bucket_name=_env('R2_BUCKET_NAME', 'pressreview'),
         r2_endpoint=_env('R2_ENDPOINT'),
         r2_access_key_id=_env('R2_ACCESS_KEY_ID'),

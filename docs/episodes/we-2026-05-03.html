@@ -2162,6 +2162,25 @@
   btnPrev.addEventListener('click', stopDemo);
   btnNext.addEventListener('click', stopDemo);
   startDemo();
+
+  // Sync from parent page via postMessage
+  var inIframe = window.self !== window.top;
+  if (inIframe) {
+    // Hide internal audio + play button — parent drives playback
+    if (audio) { audio.pause(); audio.style.display = 'none'; }
+    document.querySelectorAll('.ctrl-bar, #btnPlay').forEach(function(el) { el.style.display = 'none'; });
+    stopDemo();
+    window.addEventListener('message', function(e) {
+      if (!e.data || e.data.type !== 'apr-sync') return;
+      var t = e.data.t;
+      timerEl.textContent = fmt(t) + ' / ' + fmt(TOTAL);
+      fill.style.width = (t / TOTAL * 100) + '%';
+      var idx = 0;
+      for (var i = 0; i < SCENES.length; i++) { if (t >= SCENES[i].start) idx = i; else break; }
+      segs.forEach(function(seg, i) { seg.classList.remove('passed','current'); if (i < idx) seg.classList.add('passed'); if (i === idx) seg.classList.add('current'); });
+      if (mode === 'auto' && idx !== currentIdx) showScene(idx);
+    });
+  }
 })();
 </script>
 </body>

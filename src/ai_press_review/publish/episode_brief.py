@@ -104,7 +104,16 @@ def generate_episode_brief(episode_data: dict) -> str:
     raw_script = episode_data.get('script', '').strip()
     if raw_script:
         paras = [p.strip() for p in raw_script.split('\n\n') if p.strip()]
-        script_html = '\n'.join(f'<p class="script-para">{escape(p)}</p>' for p in paras)
+        duration_s = float(episode_data.get('duration_seconds', 0) or 0)
+        total_words = sum(len(p.split()) for p in paras)
+        wps = total_words / duration_s if duration_s > 0 and total_words > 0 else 0
+        cumulative = 0
+        para_tags = []
+        for p in paras:
+            start_s = round(cumulative / wps, 1) if wps > 0 else 0
+            para_tags.append(f'<p class="script-para" data-start="{start_s}">{escape(p)}</p>')
+            cumulative += len(p.split())
+        script_html = '\n'.join(para_tags)
         empty_notice = ''
     else:
         script_html = ''

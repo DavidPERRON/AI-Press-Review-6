@@ -289,23 +289,38 @@ jobs:
           import json, os
           from pathlib import Path
 
+          locale = os.environ['APR_LOCALE']
+          date   = os.environ.get('EPISODE_DATE', '')
+
           manifest = {
-              'locale':       os.environ['APR_LOCALE'],
+              'locale':       locale,
               'podcast_name': os.environ.get('PODCAST_NAME', ''),
-              'date':         os.environ.get('EPISODE_DATE', ''),
+              'date':         date,
               'title':        os.environ.get('EPISODE_TITLE', ''),
               'mp4_url':      os.environ.get('EPISODE_MP4_URL', ''),
           }
-          out = Path('data/state') / f"visual_release_{os.environ['APR_LOCALE']}.json"
+          out = Path('data/state') / f"visual_release_{locale}.json"
           out.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
           print(f'Manifeste écrit : {out}')
           print(json.dumps(manifest, indent=2, ensure_ascii=False))
+
+          # Weekly companion state — enables homepage weekend-edition section
+          if date:
+              prefix = '/fr' if locale == 'fr' else ''
+              companion = {
+                  'date':          date,
+                  'companion_url': f'{prefix}/episodes/we-{date}.html',
+                  'subhead':       'Visual companion · synced to the audio briefing',
+              }
+              out_companion = Path('data/state') / f'weekly_companion_{locale}.json'
+              out_companion.write_text(json.dumps(companion, indent=2, ensure_ascii=False))
+              print(f'Companion state écrit : {out_companion}')
           PYEOF
 
       - name: Committer manifeste sur la branch
         run: |
           set -e
-          git add data/state/visual_release_*.json
+          git add data/state/visual_release_*.json data/state/weekly_companion_*.json
           git diff --cached --quiet || \
             git commit -m "visual(${{ inputs.locale }}): MP4 prêt — ${{ inputs.podcast_name }} [skip ci]"
           git push -u origin we-podcast-visual-update --force

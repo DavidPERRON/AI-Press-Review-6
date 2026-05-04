@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
@@ -362,7 +363,43 @@ def _write_index(episodes: list[dict]) -> None:
             "</div>"
         )
 
-    html = template.replace('{{EPISODES}}', episodes_html)
+    # Weekend companion — inject from data/state/weekly_companion_<locale>.json if present
+    we_html = ''
+    companion_path = DATA_DIR / 'state' / f'weekly_companion_{locale or "en"}.json'
+    if companion_path.exists():
+        try:
+            companion = json.loads(companion_path.read_text(encoding='utf-8'))
+            companion_url = companion.get('companion_url', '')
+            companion_date = companion.get('date', '')
+            subhead = companion.get('subhead', 'Visual companion · synced to the audio briefing')
+            if companion_url and companion_date:
+                d = datetime.fromisoformat(companion_date)
+                if locale == 'fr':
+                    eyebrow = f'Édition hebdomadaire · {d.day:02d} {_MONTHS_FR[d.month - 1]} {d.year}'
+                    open_label = 'Ouvrir le compagnon dans un nouvel onglet →'
+                else:
+                    _months_en = ['January','February','March','April','May','June',
+                                  'July','August','September','October','November','December']
+                    eyebrow = f'Weekly edition · {d.day:02d} {_months_en[d.month - 1]} {d.year}'
+                    open_label = 'Open the weekly companion in a new tab →'
+                we_html = (
+                    f"<section class='weekend-edition' aria-labelledby='we-eyebrow'>"
+                    f"<div class='weekend-edition-inner'>"
+                    f"<p class='we-eyebrow' id='we-eyebrow'>{escape(eyebrow)}</p>"
+                    f"<p class='we-subhead'>{escape(subhead)}</p>"
+                    f"<div class='we-frame-wrap'>"
+                    f"<iframe class='we-frame' src='{companion_url}' "
+                    f"title='{escape(eyebrow)} · audio-synced visual companion' "
+                    f"loading='lazy' allow='autoplay; fullscreen' referrerpolicy='no-referrer'></iframe>"
+                    f"</div>"
+                    f"<p class='we-fallback'><a href='{companion_url}' target='_blank' rel='noopener'>"
+                    f"{open_label}</a></p>"
+                    f"</div></section>"
+                )
+        except Exception:
+            logger.warning("Could not build weekend-edition block from %s", companion_path, exc_info=True)
+
+    html = template.replace('{{WEEKEND_EDITION}}', we_html).replace('{{EPISODES}}', episodes_html)
     out_dir = settings.docs_output_dir
     out_dir.mkdir(parents=True, exist_ok=True)
     atomic_write_text(out_dir / 'index.html', html)

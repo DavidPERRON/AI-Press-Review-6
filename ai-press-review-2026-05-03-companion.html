@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Press Review — Weekly Edition · 03 May 2026</title>
+<meta name="description" content="Visual companion to the AI weekly press review podcast. 28 scenes covering DeepSeek V4, regulation, research, banking use cases, and weak signals.">
+<style>
+  /* ============================== */
+  /* SHARED DESIGN SYSTEM (factored) */
+  /* ============================== */
+  :root {
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+    --c-bg: #15110b;
+    --c-bg-card: #1c1810;
+    --c-bg-deep: #0a0805;
+    --c-text: #ebe4d4;
+    --c-text-mid: #c4b89e;
+    --c-text-dim: #b3a690;
+    --c-accent: #d49a3c;
+    --c-accent-light: #e8b25a;
+    --c-border: #2d2519;
+    --c-border-mid: #3d3526;
+    --c-warn: #d49595;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: var(--c-bg-deep);
+    color: var(--c-text);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-feature-settings: 'kern','liga';
+  }
+  /* Player shell */
+  .player-shell { width: 100%; min-height: 100vh; display: flex; flex-direction: column; }
+  .player-stage { flex: 1; width: 100%; max-width: 1180px; margin: 0 auto; padding: 20px 20px 110px; }
+  .scene { display: none; animation: fadeIn 0.7s ease-out; }
+  .scene.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  /* === Common scene chrome (used by all scenes 6-28; scenes 1-5 ship their own per-prefix CSS) === */
+  .ed-wrap { font-family: var(--font-sans); background: var(--c-bg); color: var(--c-text); padding: 32px 36px; border-radius: 8px; border: 0.5px solid var(--c-border); }
+  .ed-topbar { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px; padding-bottom: 14px; border-bottom: 0.5px solid var(--c-border); margin-bottom: 24px; font-size: 11px; }
+  .ed-mark { display: flex; align-items: center; gap: 10px; }
+  .ed-emblem { width: 18px; height: 18px; border: 0.5px solid var(--c-accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 11px; color: var(--c-accent); font-style: italic; }
+  .ed-brand { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--c-text-dim); }
+  .ed-brand b { color: var(--c-text); font-weight: 500; }
+  .ed-track { height: 1px; background: var(--c-border); position: relative; }
+  .ed-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--c-accent); }
+  .ed-counter { font-family: var(--font-mono); color: var(--c-text-dim); letter-spacing: 1.5px; font-size: 10px; }
+  .ed-counter b { color: var(--c-accent); font-weight: 500; }
+  .ed-h { font-family: var(--font-serif); font-size: 32px; font-weight: 500; line-height: 1.1; color: #fff; margin: 0 0 12px; letter-spacing: -0.5px; }
+  .ed-h em { font-style: italic; font-weight: 400; color: var(--c-accent); }
+  .ed-sub { font-size: 14px; color: var(--c-text-mid); margin-bottom: 24px; line-height: 1.55; max-width: 92%; }
+  .ed-hero { display: grid; grid-template-columns: 1fr 1.3fr; gap: 28px; padding: 22px 0; border-top: 0.5px solid var(--c-border); border-bottom: 0.5px solid var(--c-border); margin-bottom: 22px; }
+  .ed-hero.tight { grid-template-columns: 1fr 1.2fr; }
+  .ed-hero.wide { grid-template-columns: 1fr 1.4fr; align-items: center; }
+  .ed-hero-num { font-family: var(--font-serif); font-size: 76px; font-weight: 500; color: var(--c-accent); line-height: 0.92; letter-spacing: -3px; }
+  .ed-hero-unit { font-family: var(--font-serif); font-size: 26px; color: var(--c-text-mid); font-style: italic; }
+  .ed-hero-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--c-text-dim); margin: 10px 0 8px; }
+  .ed-hero-cap { font-family: var(--font-serif); font-size: 14px; color: var(--c-text); line-height: 1.5; font-style: italic; }
+  .ed-pills { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .ed-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; background: rgba(212, 154, 60, 0.12); border: 0.5px solid rgba(212, 154, 60, 0.45); border-radius: 999px; font-family: var(--font-mono); font-size: 10px; color: var(--c-accent-light); letter-spacing: 0.5px; }
+  /* Right side asset card (generic) */
+  .ed-card { background: var(--c-bg-card); border: 0.5px solid var(--c-border); border-radius: 4px; padding: 18px; }
+  .ed-card-h { font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--c-text-mid); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 0.5px solid var(--c-border); }
+  /* Stats row */
+  .ed-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 22px; }
+  .ed-stat { padding: 14px 14px 12px; border: 0.5px solid var(--c-border); border-radius: 4px; background: var(--c-bg-card); position: relative; display: flex; flex-direction: column; }
+  .ed-stat::before { content: ''; position: absolute; top: 0; left: 0; width: 18px; height: 0.5px; background: var(--c-accent); }
+  .ed-stat-label { font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--c-text-dim); }
+  .ed-stat-num { font-family: var(--font-mono); font-size: 24px; font-weight: 500; color: #fff; margin: 6px 0 2px; font-variant-numeric: tabular-nums; letter-spacing: -0.5px; }
+  .ed-stat-delta { font-size: 11px; color: var(--c-text-mid); }
+  .ed-stat-delta.warn { color: var(--c-accent-light); }
+  .ed-explain { margin-top: 10px; padding-top: 10px; border-top: 0.5px dashed var(--c-border); font-family: var(--font-serif); font-size: 11.5px; line-height: 1.5; color: var(--c-text-mid); font-style: italic; }
+  .ed-explain b { color: var(--c-accent); font-style: normal; font-weight: 500; font-family: var(--font-sans); font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  /* Takeaway block */
+  .ed-take { display: grid; grid-template-columns: auto 1fr; gap: 18px; padding: 18px 20px; background: var(--c-bg-card); border-left: 2px solid var(--c-accent); border-radius: 0 4px 4px 0; margin-bottom: 18px; }
+  .ed-take-meta { display: flex; flex-direction: column; gap: 4px; }
+  .ed-take-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--c-accent); }
+  .ed-take-quote { font-family: var(--font-serif); font-size: 36px; line-height: 0.5; color: var(--c-accent); font-style: italic; }
+  .ed-take-text { font-family: var(--font-serif); font-size: 15px; line-height: 1.55; color: var(--c-text); font-style: italic; }
+  .ed-take-text b { color: #fff; font-weight: 500; font-style: normal; }
+  /* Footer */
+  .ed-foot { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; align-items: center; font-family: var(--font-mono); font-size: 10px; color: var(--c-text-dim); padding-top: 14px; border-top: 0.5px solid var(--c-border); letter-spacing: 0.5px; }
+  .ed-foot-mid { color: var(--c-text-mid); }
+  .ed-link { color: var(--c-accent); cursor: pointer; text-align: right; }
+  /* ====== Reusable asset patterns ====== */
+  /* Before/After (used by S6, S26) */
+  .asset-ba-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; }
+  .asset-ba-box { padding: 12px 14px; background: var(--c-bg); border: 0.5px solid var(--c-border); border-radius: 4px; }
+  .asset-ba-box.target { border-color: rgba(212, 154, 60, 0.5); background: rgba(212, 154, 60, 0.06); }
+  .asset-ba-period { font-size: 10px; color: var(--c-text-mid); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .asset-ba-period.hot { color: var(--c-accent-light); }
+  .asset-ba-num { font-family: var(--font-serif); font-size: 22px; color: #fff; font-weight: 500; line-height: 1; }
+  .asset-ba-num.hot { color: var(--c-accent); }
+  .asset-ba-unit { font-size: 10px; color: var(--c-text-mid); margin-top: 4px; }
+  .asset-ba-arrow { font-family: var(--font-mono); color: var(--c-accent); font-size: 18px; text-align: center; }
+  .asset-ba-mult { font-family: var(--font-serif); font-size: 11px; color: var(--c-accent-light); font-style: italic; text-align: center; margin-top: 4px; }
+  /* Status list (used by S7) */
+  .asset-list-row { display: grid; grid-template-columns: 100px 1fr 60px; gap: 12px; align-items: start; padding: 9px 0; border-bottom: 0.5px dashed var(--c-border); font-size: 12px; }
+  .asset-list-row:last-child { border-bottom: none; }
+  .asset-list-key { font-family: var(--font-mono); font-size: 11px; color: var(--c-accent-light); letter-spacing: 0.5px; padding-top: 1px; }
+  .asset-list-text { color: var(--c-text); line-height: 1.45; }
+  .asset-list-text b { color: #fff; font-weight: 500; }
+  .asset-list-status { text-align: right; font-family: var(--font-mono); font-size: 10px; padding: 2px 6px; border-radius: 2px; }
+  .asset-list-status.bad { background: rgba(192, 133, 133, 0.15); color: var(--c-warn); }
+  .asset-list-status.ok { background: rgba(212, 154, 60, 0.15); color: var(--c-accent-light); }
+  /* Comparator table (used by S10, S19, S24) */
+  .asset-vs-row { display: grid; grid-template-columns: 1fr 110px 110px; gap: 10px; padding: 8px 0; border-bottom: 0.5px dashed var(--c-border); font-size: 12px; align-items: center; }
+  .asset-vs-row:last-child { border-bottom: none; }
+  .asset-vs-row.head { padding: 4px 0; border: none; font-size: 9px; letter-spacing: 1px; color: var(--c-text-mid); text-transform: uppercase; }
+  .asset-vs-name { color: var(--c-text-mid); }
+  .asset-vs-name b { color: #fff; font-weight: 500; }
+  .asset-vs-cold { color: var(--c-text-mid); font-family: var(--font-mono); text-align: right; }
+  .asset-vs-hot { color: var(--c-accent); font-family: var(--font-mono); font-weight: 500; text-align: right; }
+  /* Bench rows (S14) */
+  .asset-bench-row { display: grid; grid-template-columns: 110px 1fr 50px; align-items: center; gap: 12px; padding: 6px 0; font-size: 12px; }
+  .asset-bench-label { color: var(--c-text); }
+  .asset-bench-label.hot { color: var(--c-accent); font-weight: 500; }
+  .asset-bench-track { height: 4px; background: var(--c-bg); }
+  .asset-bench-fill { height: 100%; background: var(--c-border-mid); }
+  .asset-bench-fill.hot { background: var(--c-accent); }
+  .asset-bench-val { font-family: var(--font-mono); font-size: 12px; color: #fff; text-align: right; }
+  .asset-bench-val.hot { color: var(--c-accent); font-weight: 500; }
+  .asset-bench-section-h { font-size: 9px; letter-spacing: 1px; color: var(--c-text-mid); margin: 8px 0; text-transform: uppercase; }
+  /* Bars (S12) */
+  .asset-bars { display: flex; align-items: end; height: 100px; gap: 14px; padding: 0 8px; border-bottom: 0.5px solid var(--c-border-mid); margin-bottom: 8px; }
+  .asset-bar { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .asset-bar-fill { width: 100%; background: #4a4032; min-height: 4px; }
+  .asset-bar-fill.hot { background: var(--c-accent); }
+  .asset-bar-num { font-family: var(--font-mono); font-size: 13px; color: #fff; font-weight: 500; }
+  .asset-bar-num.hot { color: var(--c-accent); }
+  .asset-bar-foot { display: flex; justify-content: space-between; padding: 4px 8px 0; font-family: var(--font-mono); font-size: 10px; color: var(--c-text-mid); letter-spacing: 0.5px; }
+  /* Generic chart wrap */
+  .asset-chart { width: 100%; height: 130px; }
+  .asset-chart-foot { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: var(--c-text-mid); margin-top: 8px; letter-spacing: 0.5px; }
+  /* Items grid (S12 use cases, S23 agents, S28 cards) */
+  .asset-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .asset-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .asset-block { padding: 10px 12px; background: var(--c-bg); border: 0.5px solid var(--c-border); border-radius: 3px; }
+  .asset-block h4 { margin: 0 0 6px; font-size: 11px; color: var(--c-accent-light); letter-spacing: 0.5px; font-weight: 500; }
+  .asset-block p { margin: 0; font-family: var(--font-serif); font-size: 12px; color: var(--c-text-mid); line-height: 1.5; font-style: italic; }
+  /* Numbered steps (S21) */
+  .asset-step { display: grid; grid-template-columns: 28px 1fr; gap: 12px; padding: 9px 0; border-bottom: 0.5px dashed var(--c-border); align-items: start; }
+  .asset-step:last-child { border-bottom: none; }
+  .asset-step-num { font-family: var(--font-mono); font-size: 11px; color: var(--c-accent); padding-top: 2px; letter-spacing: 0.5px; }
+  .asset-step-text { font-size: 12px; color: var(--c-text); line-height: 1.45; }
+  .asset-step-text b { color: #fff; font-weight: 500; }
+  .asset-step-text span { display: block; font-size: 11px; color: var(--c-text-mid); margin-top: 3px; font-style: italic; }
+  /* Person card (S16) */
+  .asset-person { display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: center; padding: 8px 0; }
+  .asset-person-init { width: 50px; height: 50px; background: rgba(212, 154, 60, 0.15); border: 0.5px solid rgba(212, 154, 60, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-style: italic; color: var(--c-accent-light); font-size: 18px; font-weight: 500; }
+  .asset-person-name { font-size: 14px; color: #fff; font-weight: 500; margin-bottom: 2px; }
+  .asset-person-role { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-mid); letter-spacing: 0.5px; }
+  .asset-person-bio { font-family: var(--font-serif); font-size: 12px; color: var(--c-text-mid); font-style: italic; line-height: 1.5; margin-top: 8px; padding-top: 10px; border-top: 0.5px dashed var(--c-border); }
+  /* Pills/chips list (S11 judges) */
+  .asset-pills-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .asset-chip { font-family: var(--font-mono); font-size: 10px; padding: 4px 9px; background: var(--c-bg); border: 0.5px solid var(--c-border-mid); border-radius: 2px; color: var(--c-text); letter-spacing: 0.5px; }
+  /* Headline split (S11) */
+  .asset-hl-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 16px 18px; background: var(--c-bg-card); border: 0.5px solid var(--c-border); border-radius: 4px; margin-bottom: 22px; }
+  .asset-hl-block { padding: 14px 16px; background: var(--c-bg); border-radius: 4px; }
+  .asset-hl-block.zero { border-left: 2px solid var(--c-warn); }
+  .asset-hl-block.starter { border-left: 2px solid var(--c-accent); }
+  .asset-hl-pct { font-family: var(--font-serif); font-size: 36px; font-weight: 500; line-height: 1; }
+  .asset-hl-block.zero .asset-hl-pct { color: var(--c-warn); }
+  .asset-hl-block.starter .asset-hl-pct { color: var(--c-accent); }
+  .asset-hl-l { font-size: 11px; color: var(--c-text); margin-top: 6px; line-height: 1.4; }
+  /* Paradox 2-col (S13) */
+  .asset-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .asset-pcol { padding: 14px; background: var(--c-bg); border: 0.5px solid var(--c-border); border-radius: 4px; }
+  .asset-pcol h4 { margin: 0 0 6px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--c-text-mid); font-weight: 500; }
+  .asset-pcol .pmodel { font-family: var(--font-mono); font-size: 14px; color: var(--c-accent); margin-bottom: 8px; }
+  .asset-pcol .pres { font-family: var(--font-serif); font-size: 13px; color: var(--c-text); line-height: 1.5; font-style: italic; }
+  .asset-pcol .pres b { color: #fff; font-weight: 500; font-style: normal; }
+  /* Axes list (S15) */
+  .asset-axis-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 9px 0; border-bottom: 0.5px dashed var(--c-border); align-items: center; }
+  .asset-axis-row:last-child { border-bottom: none; }
+  .asset-axis-name { font-size: 12px; color: var(--c-text); }
+  .asset-axis-name b { color: #fff; font-weight: 500; }
+  .asset-axis-name span { display: block; font-size: 11px; color: var(--c-text-mid); margin-top: 2px; font-style: italic; }
+  .asset-axis-status { font-family: var(--font-mono); font-size: 11px; padding: 3px 9px; border-radius: 3px; }
+  .asset-axis-status.bad { background: rgba(192, 133, 133, 0.15); color: var(--c-warn); }
+  .asset-axis-status.ok { background: rgba(212, 154, 60, 0.15); color: var(--c-accent-light); }
+  /* Rationale bullet list (S17) */
+  .asset-bullet-row { display: grid; grid-template-columns: 22px 1fr; gap: 12px; padding: 9px 0; border-bottom: 0.5px dashed var(--c-border); align-items: start; }
+  .asset-bullet-row:last-child { border-bottom: none; }
+  .asset-bullet-icon { font-family: var(--font-mono); color: var(--c-accent); font-size: 12px; padding-top: 2px; }
+  .asset-bullet-text { font-size: 12px; color: var(--c-text); line-height: 1.5; }
+  .asset-bullet-text b { color: #fff; font-weight: 500; }
+  /* Timeline (S18) */
+  .asset-tl-row { display: grid; grid-template-columns: 100px 1fr; gap: 12px; align-items: start; padding: 9px 0; border-bottom: 0.5px dashed var(--c-border); }
+  .asset-tl-row:last-child { border-bottom: none; }
+  .asset-tl-date { font-family: var(--font-mono); font-size: 10px; color: var(--c-accent-light); letter-spacing: 0.5px; padding-top: 2px; }
+  .asset-tl-text { font-size: 12px; color: var(--c-text); line-height: 1.45; }
+  .asset-tl-text b { color: #fff; font-weight: 500; }
+  /* Big-num row (S22, S25) */
+  .asset-econ-row { display: grid; grid-template-columns: 1fr auto; gap: 10px; padding: 11px 0; border-bottom: 0.5px dashed var(--c-border); align-items: center; }
+  .asset-econ-row:last-child { border-bottom: none; }
+  .asset-econ-name { font-size: 12px; color: var(--c-text); }
+  .asset-econ-name b { color: #fff; font-weight: 500; }
+  .asset-econ-name span { display: block; font-size: 10px; color: var(--c-text-mid); margin-top: 2px; }
+  .asset-econ-val { font-family: var(--font-mono); font-size: 18px; color: var(--c-accent); font-weight: 500; text-align: right; }
+  .asset-econ-val.small { font-size: 12px; color: var(--c-accent-light); }
+  /* Closing scene cards (S28) */
+  .asset-closing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+  .asset-closing-card { padding: 18px 20px; background: var(--c-bg-card); border: 0.5px solid var(--c-border); border-radius: 4px; position: relative; display: flex; flex-direction: column; }
+  .asset-closing-card.feature { grid-column: 1 / -1; padding: 22px 24px; border-color: rgba(212, 154, 60, 0.4); }
+  .asset-closing-num { position: absolute; top: 14px; right: 16px; font-family: var(--font-serif); font-size: 30px; font-style: italic; color: var(--c-accent); line-height: 1; opacity: 0.85; }
+  .asset-closing-tag { font-family: var(--font-mono); font-size: 10px; color: var(--c-accent-light); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+  .asset-closing-h { font-family: var(--font-serif); font-size: 16px; color: #fff; line-height: 1.3; margin: 0 0 8px; padding-right: 40px; font-weight: 500; }
+  .asset-closing-card.feature .asset-closing-h { font-size: 22px; padding-right: 60px; }
+  .asset-closing-desc { font-size: 12px; color: var(--c-text-mid); line-height: 1.55; margin-bottom: 10px; }
+  .asset-closing-card.feature .asset-closing-desc { font-size: 13px; }
+  .asset-closing-watch { font-family: var(--font-mono); font-size: 10px; color: var(--c-accent); letter-spacing: 0.5px; padding-top: 10px; border-top: 0.5px dashed var(--c-border); margin-top: auto; }
+  .asset-closing-watch b { color: var(--c-text); font-weight: 500; }
+  /* Closing quote */
+  .asset-closing-quote { background: var(--c-bg-card); border-left: 2px solid var(--c-accent); border-radius: 0 4px 4px 0; padding: 22px 24px; margin-bottom: 18px; display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: start; }
+  /* Quote panel (S27) */
+  .asset-quote-block { background: var(--c-bg-card); border: 0.5px solid var(--c-border); border-radius: 4px; padding: 22px; }
+  .asset-quote-h { font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--c-text-mid); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 0.5px solid var(--c-border); }
+  .asset-quote-text { font-family: var(--font-serif); font-size: 18px; color: var(--c-text); line-height: 1.5; font-style: italic; margin-bottom: 16px; }
+  .asset-quote-text b { color: #fff; font-weight: 500; font-style: normal; }
+  .asset-quote-author { font-family: var(--font-mono); font-size: 11px; color: var(--c-accent-light); letter-spacing: 0.5px; padding-top: 12px; border-top: 0.5px dashed var(--c-border); }
+  /* Result before/after rows (S26) */
+  .asset-result-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 0.5px dashed var(--c-border); }
+  .asset-result-row:last-child { border-bottom: none; }
+  .asset-result-grid { display: grid; gap: 2px; }
+  .asset-result-label { font-size: 11px; color: var(--c-text); }
+  .asset-result-before { font-family: var(--font-mono); font-size: 14px; color: var(--c-text-mid); }
+  .asset-result-after { font-family: var(--font-mono); font-size: 14px; color: var(--c-accent); font-weight: 500; }
+  /* Two-column merge (S9) */
+  .asset-merge-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; }
+  .asset-merge-box { padding: 12px 14px; background: var(--c-bg); border: 0.5px solid var(--c-border); border-radius: 4px; }
+  .asset-merge-box.combined { border-color: rgba(212, 154, 60, 0.5); background: rgba(212, 154, 60, 0.06); grid-column: 1 / -1; margin-top: 14px; }
+  .asset-merge-name { font-size: 11px; color: var(--c-text); font-weight: 500; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .asset-merge-name.hot { color: var(--c-accent-light); }
+  .asset-merge-detail { font-family: var(--font-mono); font-size: 10px; color: var(--c-text-mid); line-height: 1.4; }
+  .asset-merge-arrow { font-family: var(--font-mono); color: var(--c-accent); font-size: 18px; text-align: center; }
+  /* ========================== */
+  /* PLAYER CONTROLS - sticky    */
+  /* ========================== */
+  .control-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 8, 5, 0.95); backdrop-filter: blur(12px); border-top: 0.5px solid var(--c-border); padding: 14px 24px; display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; z-index: 100; }
+  .ctrl-buttons { display: flex; gap: 6px; align-items: center; }
+  .ctrl-btn { background: transparent; border: 0.5px solid var(--c-border-mid); color: var(--c-text); width: 34px; height: 34px; border-radius: 4px; cursor: pointer; font-family: var(--font-mono); font-size: 13px; transition: all 0.15s; display: flex; align-items: center; justify-content: center; }
+  .ctrl-btn:hover { border-color: var(--c-accent); color: var(--c-accent); }
+  .ctrl-btn.play { background: var(--c-accent); color: var(--c-bg); border-color: var(--c-accent); width: 40px; }
+  .ctrl-btn.play:hover { background: var(--c-accent-light); }
+  .ctrl-time { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-mid); min-width: 90px; text-align: center; letter-spacing: 0.5px; }
+  .ctrl-progress-wrap { display: flex; flex-direction: column; gap: 6px; }
+  .ctrl-progress-track { height: 4px; background: var(--c-border); border-radius: 2px; cursor: pointer; position: relative; overflow: hidden; }
+  .ctrl-progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: linear-gradient(90deg, var(--c-accent), var(--c-accent-light)); width: 0%; transition: width 0.3s; }
+  .ctrl-progress-segments { display: flex; height: 4px; gap: 1px; margin-top: -4px; pointer-events: none; }
+  .ctrl-seg { background: rgba(212,154,60,0.15); border-right: 0.5px solid rgba(45, 37, 25, 0.8); }
+  .ctrl-seg.passed { background: rgba(212,154,60,0.5); }
+  .ctrl-seg.current { background: rgba(232,178,90,0.7); box-shadow: 0 0 8px rgba(232,178,90,0.6); }
+  .ctrl-meta { display: flex; flex-direction: column; gap: 2px; }
+  .ctrl-meta-section { font-family: var(--font-mono); font-size: 9px; color: var(--c-accent); letter-spacing: 1.5px; text-transform: uppercase; }
+  .ctrl-meta-title { font-size: 13px; color: var(--c-text); font-weight: 500; }
+  .ctrl-right { display: flex; align-items: center; gap: 14px; }
+  .ctrl-counter { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-dim); letter-spacing: 1px; }
+  .ctrl-counter b { color: var(--c-accent); font-weight: 500; }
+  .ctrl-mode { display: flex; gap: 4px; border: 0.5px solid var(--c-border-mid); border-radius: 4px; overflow: hidden; }
+  .ctrl-mode-btn { background: transparent; border: none; color: var(--c-text-dim); padding: 6px 11px; font-family: var(--font-mono); font-size: 10px; cursor: pointer; letter-spacing: 0.5px; transition: all 0.15s; }
+  .ctrl-mode-btn.active { background: rgba(212,154,60,0.18); color: var(--c-accent); }
+  @media (max-width: 768px) {
+    .player-stage { padding: 12px 8px 110px; }
+    .ed-wrap { padding: 20px 16px; }
+    .ed-h { font-size: 22px; }
+    .ed-hero, .ed-hero.tight, .ed-hero.wide { grid-template-columns: 1fr; gap: 16px; }
+    .ed-hero-num { font-size: 56px; }
+    .ed-stats { grid-template-columns: 1fr 1fr; }
+    .control-bar { padding: 10px 12px; grid-template-columns: auto 1fr; }
+    .ctrl-meta, .ctrl-right { display: none; }
+  }
+
+/* === Week 2 shim · classes used in May 03 scenes === */
+.asset-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; padding-top: 6px; }
+.asset-list-item { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; border-bottom: 0.5px dashed var(--c-border); font-size: 12px; }
+.asset-list-item:last-child { border-bottom: none; }
+.asset-list-item.miss { opacity: 0.85; }
+.asset-list-item.warn .asset-list-name { color: #c0c0c0; }
+.asset-list-name { color: var(--c-text); font-weight: 500; }
+.asset-list-tag { font-family: var(--font-mono); color: var(--c-accent-light); font-size: 11px; letter-spacing: 0.5px; }
+.asset-list-tag.warn { color: #d66; }
+
+.asset-bullet-list { list-style: none; padding: 0; margin: 0; }
+.asset-bullet-list li { padding: 8px 0 8px 18px; border-bottom: 0.5px dashed var(--c-border); font-size: 12px; color: var(--c-text); line-height: 1.5; position: relative; }
+.asset-bullet-list li:last-child { border-bottom: none; }
+.asset-bullet-list li::before { content: '▪'; position: absolute; left: 0; top: 9px; color: var(--c-accent); font-family: var(--font-mono); }
+
+.asset-grid-cell { background: var(--c-bg); border: 0.5px solid var(--c-border); padding: 14px 12px; }
+.asset-grid-h { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--c-accent-light); margin-bottom: 6px; text-transform: uppercase; }
+.asset-grid-body { font-size: 12px; color: var(--c-text); line-height: 1.5; }
+
+.asset-2col-cell { background: var(--c-bg); border-left: 2px solid var(--c-border-mid); padding: 12px 14px; }
+.asset-2col-cell.hot { border-left-color: var(--c-accent); }
+.asset-2col-cell.warn { border-left-color: #d66; }
+.asset-2col-h { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--c-text-muted); margin-bottom: 4px; text-transform: uppercase; }
+.asset-2col-num { font-family: var(--font-serif); font-size: 30px; color: var(--c-accent); margin: 4px 0 6px; line-height: 1; }
+.asset-2col-cell.warn .asset-2col-num { color: #d66; }
+.asset-2col-cap { font-size: 11px; color: var(--c-text-muted); line-height: 1.45; }
+
+.asset-bars { display: flex; flex-direction: column; gap: 9px; padding-top: 6px; }
+.asset-bar { display: grid; grid-template-columns: 110px 1fr 70px; gap: 12px; align-items: center; font-size: 12px; width: 100%; }
+.asset-bar-label { color: var(--c-text-muted); font-family: var(--font-mono); font-size: 11px; }
+.asset-bar.hot .asset-bar-label { color: var(--c-accent); }
+.asset-bar-track { height: 6px; background: var(--c-bg); }
+.asset-bar-fill { height: 100%; background: var(--c-border-mid); }
+.asset-bar-fill.hot { background: var(--c-accent); }
+.asset-bar-val { font-family: var(--font-mono); color: var(--c-text); text-align: right; }
+.asset-bar.hot .asset-bar-val { color: var(--c-accent); }
+.asset-bar-val.hot { color: var(--c-accent); }
+
+.asset-bench-bar-track { height: 6px; background: var(--c-bg); }
+.asset-bench-bar-fill { height: 100%; background: var(--c-accent); }
+
+.asset-tl-cell { background: var(--c-bg); border-top: 0.5px solid var(--c-border); padding: 8px 12px; }
+.asset-tl-cell.hot { border-top-color: var(--c-accent); }
+.asset-tl-cell.warn { border-top-color: #d66; }
+.asset-tl-date { font-family: var(--font-mono); font-size: 11px; color: var(--c-text-muted); margin-bottom: 3px; letter-spacing: 0.5px; }
+.asset-tl-date.hot { color: var(--c-accent); }
+.asset-tl-date.warn { color: #d66; }
+.asset-tl-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding-top: 6px; }
+
+/* Hero pills used in week 2 scenes */
+.ed-pills { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+.ed-pill { display: inline-block; font-family: var(--font-mono); font-size: 10px; padding: 3px 8px; border: 0.5px solid var(--c-border); color: var(--c-text-muted); letter-spacing: 0.5px; }
+
+/* Closing scene helpers used in scene 28 */
+.asset-closing-card.feature { grid-column: span 2; border-color: var(--c-accent); }
+
+</style>
+</head>
+<body>
+<audio id="episodeAudio" src="2026-05-03-ai-press-review.mp3" preload="auto"></audio>
+<div class="player-shell">
+  <div class="player-stage" id="stage">
+<div class="scene active" id="scene-01">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:4%"></div></div>
+  <span class="ed-counter">SCENE <b>01</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Pentagon signs seven AI firms — <em>Anthropic absent</em></h1>
+<p class="ed-sub">The Defense Department signed any-lawful-use AI agreements with seven companies Friday. Anthropic refused the lawful-use clause after months of dispute. The White House is now signaling it wants Anthropic back in the fold.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">7</span><span class="ed-hero-unit"> firms</span>
+    <div class="ed-hero-label">Pentagon · any-lawful-use AI agreements</div>
+    <div class="ed-hero-cap">SpaceX, OpenAI, Google, Nvidia, Reflection AI, Microsoft, AWS — all signed Friday. Anthropic refused the standard and was excluded.</div>
+    <div class="ed-pills"><span class="ed-pill">$54B autonomous weapons budget</span><span class="ed-pill">Anthropic absent</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">The seven · and the one missing</div>
+  <div class="asset-list-grid">
+    <div class="asset-list-item"><span class="asset-list-name">SpaceX</span><span class="asset-list-tag">signed</span></div>
+    <div class="asset-list-item"><span class="asset-list-name">OpenAI</span><span class="asset-list-tag">signed</span></div>
+    <div class="asset-list-item"><span class="asset-list-name">Google</span><span class="asset-list-tag">signed</span></div>
+    <div class="asset-list-item"><span class="asset-list-name">Nvidia</span><span class="asset-list-tag">signed</span></div>
+    <div class="asset-list-item"><span class="asset-list-name">Reflection AI</span><span class="asset-list-tag">signed</span></div>
+    <div class="asset-list-item"><span class="asset-list-name">Microsoft</span><span class="asset-list-tag">signed</span></div>
+    <div class="asset-list-item"><span class="asset-list-name">AWS</span><span class="asset-list-tag">signed</span></div>
+    <div class="asset-list-item miss"><span class="asset-list-name">Anthropic</span><span class="asset-list-tag warn">refused</span></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Contract type</div>
+  <div class="ed-stat-num">Any lawful use</div>
+  <div class="ed-stat-delta"></div>
+  <div class="ed-explain"><b>Decoded</b>Explicitly authorizes any lawful military deployment of the model. Anthropic's prior position was to retain a deployment veto.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Autonomous budget</div>
+  <div class="ed-stat-num">$54B</div>
+  <div class="ed-stat-delta">DoD request</div>
+  <div class="ed-explain"><b>Scale check</b>The DoD's separate request for autonomous weapons development. The seven contracts feed into this stack, directly or via subcontracting.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Anthropic stance</div>
+  <div class="ed-stat-num">Excluded</div>
+  <div class="ed-stat-delta warn">by choice</div>
+  <div class="ed-explain"><b>Banking angle</b>Defense customers cannot access Claude through this channel. Enterprise procurement teams in the defense supply chain face vendor concentration.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Next signal</div>
+  <div class="ed-stat-num">Reversal</div>
+  <div class="ed-stat-delta">in motion</div>
+  <div class="ed-explain"><b>Watch list</b>White House publicly signaled Friday it wants Anthropic back. Expect a formal accommodation within weeks given the $54B at stake.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>This is the largest single AI procurement event in defense history.</b> <i>The seven-company structure creates a defacto standard for federal AI access.</i> For Anthropic, the cost of refusing is exclusion from a market that just became significantly larger. The White House signal Friday that it wants Anthropic back in the fold suggests both sides are preparing to negotiate.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · DOD STATEMENT · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · DEFENSE</span>
+  <span class="ed-link">→ DEFENSE.GOV/RELEASES ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-02">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:7%"></div></div>
+  <span class="ed-counter">SCENE <b>02</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Nebius pays <em>$643M</em> for inference optimization</h1>
+<p class="ed-sub">Dutch AI data center operator Nebius Group will acquire model optimization startup Eigen AI for $643 million in cash and stock. The technology will be folded into Nebius's Token Factory managed inference service.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">$643</span><span class="ed-hero-unit">M</span>
+    <div class="ed-hero-label">Nebius · acquires Eigen AI</div>
+    <div class="ed-hero-cap">Cash and stock deal closing within weeks. Eigen AI's custom CUDA and Triton kernels feed directly into Nebius's Token Factory inference service.</div>
+    <div class="ed-pills"><span class="ed-pill">Token Factory integration</span><span class="ed-pill">12+ open-source models</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">What Eigen AI brings</div>
+  <ul class="asset-bullet-list">
+    <li><b>Custom CUDA kernels</b> · replace default model kernels for higher throughput</li>
+    <li><b>Triton modules</b> · hardware-specific optimization for inference</li>
+    <li><b>Weight compression</b> · reduces memory footprint without quality loss</li>
+    <li><b>KV cache enhancement</b> · improves long-context inference performance</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Deal size</div>
+  <div class="ed-stat-num">$643M</div>
+  <div class="ed-stat-delta">cash + stock</div>
+  <div class="ed-explain"><b>Decoded</b>Nebius paid premium for vertical integration. Token Factory becomes harder to commoditize once Eigen's optimization stack is exclusive.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Close timeline</div>
+  <div class="ed-stat-num">Weeks</div>
+  <div class="ed-stat-delta">expected</div>
+  <div class="ed-explain"><b>Scale check</b>Fast close suggests minimal regulatory friction. Both companies operate outside the major hyperscaler footprint.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Models supported</div>
+  <div class="ed-stat-num">12+</div>
+  <div class="ed-stat-delta">open-source</div>
+  <div class="ed-explain"><b>Plain English</b>Nebius positions itself as a neutral hosting layer for open-weight models — Llama, Qwen, DeepSeek, Mistral all in scope.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Strategic angle</div>
+  <div class="ed-stat-num">Stack play</div>
+  <div class="ed-stat-delta">vs hyperscalers</div>
+  <div class="ed-explain"><b>Banking angle</b>European inference provider with proprietary optimization. Relevant for banks needing on-shore AI hosting under EU data residency rules.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Inference economics are becoming a competitive moat.</b> <i>Eigen's kernels measurably reduce per-token cost on a fixed GPU footprint.</i> For Nebius, locking that capability inside Token Factory differentiates against AWS Bedrock, Azure AI, and Google Vertex. Watch for pricing moves in European inference markets over the next quarter.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · NEBIUS PRESS · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · INFRASTRUCTURE</span>
+  <span class="ed-link">→ GROUP.NEBIUS.COM ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-03">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:11%"></div></div>
+  <span class="ed-counter">SCENE <b>03</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Copilot Pro shifts to <em>per-token billing</em></h1>
+<p class="ed-sub">From June 1, GitHub Copilot replaces flat-rate subscriptions with credit-based usage billing. The base $10 tier includes 1,000 AI Credits per month. Multi-agent workflows on large codebases will consume that allowance fast.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">1,000</span><span class="ed-hero-unit"> credits</span>
+    <div class="ed-hero-label">Copilot Pro · $10/month base tier</div>
+    <div class="ed-hero-cap">Each credit equals one US cent. Token consumption varies by model, input-output mix, and cache size. Multi-agent tasks on large codebases will exhaust this fast.</div>
+    <div class="ed-pills"><span class="ed-pill">Effective June 1</span><span class="ed-pill">Follows Anthropic's restriction</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Pricing model · before vs after</div>
+  <div class="asset-ba-row">
+    <div class="asset-ba-box">
+      <div class="asset-ba-period">Until May 31</div>
+      <div class="asset-ba-num">Flat</div>
+      <div class="asset-ba-unit">$10 / unlimited</div>
+    </div>
+    <div>
+      <div class="asset-ba-arrow">→</div>
+      <div class="asset-ba-mult">USAGE</div>
+    </div>
+    <div class="asset-ba-box target">
+      <div class="asset-ba-period hot">From June 1</div>
+      <div class="asset-ba-num hot">$10</div>
+      <div class="asset-ba-unit">+ per-token over 1,000 credits</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Effective date</div>
+  <div class="ed-stat-num">June 1</div>
+  <div class="ed-stat-delta">rollout</div>
+  <div class="ed-explain"><b>Decoded</b>All Copilot Pro plans transition. Existing seats migrate to the credit model on next renewal cycle.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Credit value</div>
+  <div class="ed-stat-num">1¢</div>
+  <div class="ed-stat-delta">per credit</div>
+  <div class="ed-explain"><b>Plain English</b>1,000 credits = $10 of usage. Burn rate depends on which underlying model your prompt routes to and total token throughput.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Multi-agent risk</div>
+  <div class="ed-stat-num">High</div>
+  <div class="ed-stat-delta warn">for credit drain</div>
+  <div class="ed-explain"><b>The catch</b>A single multi-step debugging task across a 500-file repo can consume hundreds of credits. Heavy users will pay materially more.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Procurement signal</div>
+  <div class="ed-stat-num">Pivot</div>
+  <div class="ed-stat-delta">to alternatives</div>
+  <div class="ed-explain"><b>Banking angle</b>Enterprise procurement teams will accelerate evaluations of Qwen, Llama, and DeepSeek-based alternatives that retain flat-rate economics.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>The flat-rate AI subscription era for developer tools is ending.</b> <i>Microsoft is the first major vendor to formalize per-token billing for code assistance.</i> Anthropic restricted Claude Code on its cheapest plans earlier this year — both moves reflect the same compute reality. Enterprise buyers should expect their per-developer AI bill to rise meaningfully unless they renegotiate or substitute.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · GITHUB CHANGELOG · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · DEVELOPER TOOLS</span>
+  <span class="ed-link">→ GITHUB.BLOG/COPILOT ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-04">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:14%"></div></div>
+  <span class="ed-counter">SCENE <b>04</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Big tech 2026 AI capex now <em>$725 billion</em></h1>
+<p class="ed-sub">The Financial Times's revised estimate is up from $610B in February. Google, Amazon, Microsoft, and Meta burned through $130B in Q1 alone. Both Google and Microsoft said they still lack sufficient compute to meet demand.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">$725</span><span class="ed-hero-unit">B</span>
+    <div class="ed-hero-label">2026 hyperscaler AI capex · combined</div>
+    <div class="ed-hero-cap">Up from $610B in February estimates. A 77 percent jump over $410B in 2025. Google, Amazon, Microsoft, Meta burned $130B in Q1 alone.</div>
+    <div class="ed-pills"><span class="ed-pill">+77% YoY</span><span class="ed-pill">Compute capacity still short</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">AI capex trajectory · 2024 to 2026</div>
+  <div class="asset-bars">
+    <div class="asset-bar"><div class="asset-bar-label">2024</div><div class="asset-bar-track"><div class="asset-bar-fill" style="width:32%"></div></div><div class="asset-bar-val">$230B</div></div>
+    <div class="asset-bar"><div class="asset-bar-label">2025</div><div class="asset-bar-track"><div class="asset-bar-fill" style="width:57%"></div></div><div class="asset-bar-val">$410B</div></div>
+    <div class="asset-bar hot"><div class="asset-bar-label">2026 est.</div><div class="asset-bar-track"><div class="asset-bar-fill hot" style="width:100%"></div></div><div class="asset-bar-val hot">$725B</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">YoY change</div>
+  <div class="ed-stat-num">+77%</div>
+  <div class="ed-stat-delta">vs 2025</div>
+  <div class="ed-explain"><b>Headline result</b>Hyperscaler capex growth has accelerated, not stabilized. The $410B 2025 baseline was already a record.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Q1 burn rate</div>
+  <div class="ed-stat-num">$130B</div>
+  <div class="ed-stat-delta">in 90 days</div>
+  <div class="ed-explain"><b>Scale check</b>Roughly $1.4B per day of compute spend across the four firms. This is the AI infrastructure buildout's actual cost cadence.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Capacity status</div>
+  <div class="ed-stat-num">Still short</div>
+  <div class="ed-stat-delta warn">Google + MSFT</div>
+  <div class="ed-explain"><b>The catch</b>Both companies acknowledged on earnings calls they cannot meet enterprise compute demand. Pricing pressure will move higher, not lower.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Monetization path</div>
+  <div class="ed-stat-num">Per-seat + usage</div>
+  <div class="ed-stat-delta">Nadella signal</div>
+  <div class="ed-explain"><b>Banking angle</b>Microsoft's framing — flat seats plus token usage — sets the template for enterprise software pricing across the sector. Bills going up.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Compute scarcity is now an operational constraint, not a balance sheet question.</b> <i>The fact that two of the largest hyperscalers admit they cannot supply demand reframes the AI investment thesis.</i> For banks evaluating AI vendor concentration risk in their loan portfolios, this confirms that infrastructure spend will not normalize in 2026. The capacity-monetization gap drives every other pricing decision in the stack.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · FINANCIAL TIMES · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · MACRO</span>
+  <span class="ed-link">→ FT.COM/AI-CAPEX ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-05">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:18%"></div></div>
+  <span class="ed-counter">SCENE <b>05</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Qualcomm enters <em>hyperscaler silicon</em></h1>
+<p class="ed-sub">CEO Cristiano Amon disclosed on the Q2 earnings call that Qualcomm has quietly entered the custom data center silicon market. Shipments expected Q4 2026 to a 'leading hyperscaler' — identity not yet disclosed.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">Q4</span><span class="ed-hero-unit"> 2026</span>
+    <div class="ed-hero-label">Qualcomm · custom silicon shipments</div>
+    <div class="ed-hero-cap">Custom CPU for agentic data center workloads, plus high-performance AI inference accelerators. Hyperscaler customer unnamed.</div>
+    <div class="ed-pills"><span class="ed-pill">Investor day in June</span><span class="ed-pill">Agentic smartphone push</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Qualcomm · two new product lines</div>
+  <div class="asset-grid-2">
+    <div class="asset-grid-cell"><div class="asset-grid-h">Custom CPU</div><div class="asset-grid-body">Dedicated for agentic workloads in the data center. Optimized for multi-step reasoning, code execution, and stateful coordination.</div></div>
+    <div class="asset-grid-cell"><div class="asset-grid-h">Inference accelerator</div><div class="asset-grid-body">High-performance AI inference for the same hyperscaler customer. Position vs Nvidia is being kept under wraps until the June investor day.</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Customer status</div>
+  <div class="ed-stat-num">Unnamed</div>
+  <div class="ed-stat-delta">1 hyperscaler</div>
+  <div class="ed-explain"><b>Decoded</b>Naming the hyperscaler will move the contract size into market expectations. Watch for leaks before the June investor day.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Product family</div>
+  <div class="ed-stat-num">2 lines</div>
+  <div class="ed-stat-delta">CPU + accelerator</div>
+  <div class="ed-explain"><b>Plain English</b>A general-purpose CPU optimized for agentic workloads and a separate AI inference accelerator. Not the same silicon.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Smartphone signal</div>
+  <div class="ed-stat-num">Agentic push</div>
+  <div class="ed-stat-delta">ZTE + Xiaomi cited</div>
+  <div class="ed-explain"><b>The signal</b>Amon flagged ZTE's Doubao integration and Xiaomi's OS-level AI as model examples. Mobile silicon will follow the same pattern.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Memory dependency</div>
+  <div class="ed-stat-num">Constrained</div>
+  <div class="ed-stat-delta warn">supply ahead</div>
+  <div class="ed-explain"><b>Watch list</b>Qualcomm flagged a coming memory supply squeeze for agentic smartphones — affects SK Hynix and Samsung directly.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Nvidia's data center monopoly is being challenged on two fronts simultaneously.</b> <i>The custom CPU + inference accelerator combination targets agentic workloads where Nvidia's GPU advantage is thinnest.</i> If Qualcomm's hyperscaler customer is one of the top three, the contract size could exceed $5B annually. The June investor day is the calendar event to circle.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · QUALCOMM Q2 CALL · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · SILICON</span>
+  <span class="ed-link">→ QUALCOMM.COM/IR ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-06">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:21%"></div></div>
+  <span class="ed-counter">SCENE <b>06</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Grok 4.3 ships <em>at half the price</em></h1>
+<p class="ed-sub">xAI's developer-focused model launched Friday at $1.25 per million input tokens and $2.50 per million output tokens. On the GDPval-AA benchmark, Grok 4.3's Elo score jumped 321 points to 1,500 — and full benchmark run cost is one-tenth of the closed-frontier alternatives.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">$1.25</span><span class="ed-hero-unit"> /M</span>
+    <div class="ed-hero-label">Grok 4.3 · input tokens</div>
+    <div class="ed-hero-cap">40% cheaper on inputs, 60% cheaper on outputs versus Grok 4.2. Output pricing at $2.50/M. 100 tokens per second sustained throughput.</div>
+    <div class="ed-pills"><span class="ed-pill">1M context window</span><span class="ed-pill">GDPval-AA: 1,500 Elo</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Benchmark cost · GDPval-AA full run</div>
+  <div class="asset-bars">
+    <div class="asset-bar hot"><div class="asset-bar-label">Grok 4.3</div><div class="asset-bar-track"><div class="asset-bar-fill hot" style="width:8%"></div></div><div class="asset-bar-val hot">$395</div></div>
+    <div class="asset-bar"><div class="asset-bar-label">OpenAI flagship</div><div class="asset-bar-track"><div class="asset-bar-fill" style="width:82%"></div></div><div class="asset-bar-val">$3,959</div></div>
+    <div class="asset-bar"><div class="asset-bar-label">Anthropic top</div><div class="asset-bar-track"><div class="asset-bar-fill" style="width:100%"></div></div><div class="asset-bar-val">$4,811</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Input price drop</div>
+  <div class="ed-stat-num">−40%</div>
+  <div class="ed-stat-delta">vs 4.2</div>
+  <div class="ed-explain"><b>Decoded</b>$1.25/M down from $2.10/M. Aligns Grok with the open-source pricing pressure DeepSeek established in April.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Output price drop</div>
+  <div class="ed-stat-num">−60%</div>
+  <div class="ed-stat-delta">vs 4.2</div>
+  <div class="ed-explain"><b>Plain English</b>$2.50/M down from $6.30/M. The deeper output discount targets agentic workflows where outputs dominate cost.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Bench cost ratio</div>
+  <div class="ed-stat-num">1:12</div>
+  <div class="ed-stat-delta">vs Anthropic top</div>
+  <div class="ed-explain"><b>Counter-intuitive</b>Same benchmark, twelve times cheaper. Pricing per benchmark run is becoming a real procurement input.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">New product</div>
+  <div class="ed-stat-num">Imagine Agent</div>
+  <div class="ed-stat-delta">creative mode</div>
+  <div class="ed-explain"><b>Watch list</b>xAI also launched Grok Imagine Agent Mode for creative production. Targets the same workflow as Sora, Veo, and Midjourney's video roadmap.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Pricing pressure on closed frontier models is now systematic.</b> <i>DeepSeek V4 in April, Grok 4.3 this week — the price floor for frontier-comparable inference is dropping every four weeks.</i> For enterprise procurement teams, this becomes leverage in renewal negotiations. The closed-frontier vendors will need to justify a 10× price premium with measurable capability gains, not benchmark wins.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · XAI BLOG · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · MODELS</span>
+  <span class="ed-link">→ XAI.COM/GROK ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-07">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:25%"></div></div>
+  <span class="ed-counter">SCENE <b>07</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Musk vs Altman · <em>week one disclosures</em></h1>
+<p class="ed-sub">Federal court in Oakland heard seven hours of Musk testimony across three days. Cross-examination produced two material disclosures: Musk had backed a for-profit OpenAI structure in his own emails, and xAI appears to have distilled outputs from OpenAI's models for training.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">$38</span><span class="ed-hero-unit">M</span>
+    <div class="ed-hero-label">Musk's original OpenAI funding</div>
+    <div class="ed-hero-cap">Tesla CEO testified for more than seven hours over three days in federal court Oakland. Called himself 'a fool' for the early funding that grew into an $800B company.</div>
+    <div class="ed-pills"><span class="ed-pill">xAI distillation admission</span><span class="ed-pill">$800B valuation at stake</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Week one · key disclosures</div>
+  <ul class="asset-bullet-list">
+    <li><b>For-profit support</b> · OpenAI lawyer presented Musk's own emails backing for-profit conversion</li>
+    <li><b>Tesla takeover</b> · same emails showed Musk had wanted Tesla to acquire OpenAI</li>
+    <li><b>xAI distillation</b> · cross-examination revealed xAI distilled outputs from OpenAI's models</li>
+    <li><b>Valuation context</b> · OpenAI now valued at $800B — Musk's original $38M became 21,000× return basis</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Musk testimony</div>
+  <div class="ed-stat-num">7+ hrs</div>
+  <div class="ed-stat-delta">across 3 days</div>
+  <div class="ed-explain"><b>Decoded</b>Extended cross-examination set up week-two testimony from Altman and Brockman. The trial's outcome reshapes governance of OpenAI's nonprofit-to-for-profit conversion.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">OpenAI valuation</div>
+  <div class="ed-stat-num">$800B</div>
+  <div class="ed-stat-delta warn">structurally exposed</div>
+  <div class="ed-explain"><b>Scale check</b>The conversion underpins OpenAI's ability to raise further capital and execute the AWS partnership announced this week. Litigation risk is non-trivial.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Distillation finding</div>
+  <div class="ed-stat-num">Confirmed</div>
+  <div class="ed-stat-delta warn">xAI from OpenAI</div>
+  <div class="ed-explain"><b>The catch</b>First admission that xAI used OpenAI outputs for training. Sets a precedent and a potential damages claim if proven systematic.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Week 2 schedule</div>
+  <div class="ed-stat-num">Altman + Brockman</div>
+  <div class="ed-stat-delta">expected</div>
+  <div class="ed-explain"><b>Watch list</b>Both OpenAI's CEO and president are expected to testify next week. Outcome may reshape competitive dynamics across the frontier model market.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>This trial is no longer about $38M of seed capital.</b> <i>It is about whether OpenAI's conversion to for-profit can survive judicial scrutiny.</i> A negative ruling complicates OpenAI's $800B valuation, the AWS deal, and every future capital raise. The xAI distillation finding adds a separate IP exposure for Musk's own company. Both sides are walking into week two with material new risk.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · COURT FILINGS · OAKLAND · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · LITIGATION</span>
+  <span class="ed-link">→ COURTLISTENER.COM ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-08">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:29%"></div></div>
+  <span class="ed-counter">SCENE <b>08</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Chinese AI startups <em>unwind offshore structures</em></h1>
+<p class="ed-sub">Moonshot AI is in talks to restructure as it closes a funding round at $18B. StepFun has already begun. Beijing's securities regulator signaled domestic registration is now a prerequisite for IPO consideration. The Manus block triggered the warning.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">$18</span><span class="ed-hero-unit">B</span>
+    <div class="ed-hero-label">Moonshot AI · valuation in restructuring</div>
+    <div class="ed-hero-cap">Talks with lawyers underway to dissolve offshore Cayman structure. StepFun has already started. The shift follows Beijing's signal that domestic registration is required for IPO eligibility.</div>
+    <div class="ed-pills"><span class="ed-pill">6-12 month process</span><span class="ed-pill">Foreign capital constraint</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Restructuring wave · companies named</div>
+  <div class="asset-list-grid">
+    <div class="asset-list-item"><span class="asset-list-name">Moonshot AI</span><span class="asset-list-tag">$18B</span></div>
+    <div class="asset-list-item"><span class="asset-list-name">StepFun</span><span class="asset-list-tag">underway</span></div>
+    <div class="asset-list-item"><span class="asset-list-name">DeepRoute.ai</span><span class="asset-list-tag">reported</span></div>
+    <div class="asset-list-item warn"><span class="asset-list-name">Manus</span><span class="asset-list-tag warn">blocked</span></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Restructure timeline</div>
+  <div class="ed-stat-num">6-12mo</div>
+  <div class="ed-stat-delta">per company</div>
+  <div class="ed-explain"><b>Decoded</b>Dissolving Cayman structures and re-registering in China is a year of legal and tax complexity. Multiple parallel restructurings stretch professional capacity.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Foreign capital</div>
+  <div class="ed-stat-num">Constrained</div>
+  <div class="ed-stat-delta warn">during process</div>
+  <div class="ed-explain"><b>Banking angle</b>Funding rounds during restructuring become operationally complex. Foreign LPs in China-focused VC funds face NAV uncertainty.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Trigger event</div>
+  <div class="ed-stat-num">Manus block</div>
+  <div class="ed-stat-delta">by NDRC</div>
+  <div class="ed-explain"><b>The signal</b>Beijing blocked Meta's attempted Manus acquisition. The NDRC ruling triggered the regulatory warning that prompted the wave.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">IPO eligibility</div>
+  <div class="ed-stat-num">Domestic only</div>
+  <div class="ed-stat-delta">going forward</div>
+  <div class="ed-explain"><b>What changes</b>Offshore-registered Chinese AI companies face tougher IPO approval. The restructure is the price of access to public markets.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Foreign access to Chinese AI is being structurally repriced.</b> <i>The restructuring wave is not optional — it is a regulatory floor for IPO eligibility.</i> For institutional investors with offshore positions in Chinese AI, this creates valuation uncertainty during the transition window. Watch which companies execute cleanly versus which stall during the 6-12 month process.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · REUTERS · BLOOMBERG · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · CHINA REGULATORY</span>
+  <span class="ed-link">→ REUTERS.COM/CHINA-AI ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-09">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:32%"></div></div>
+  <span class="ed-counter">SCENE <b>09</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">White House moves to <em>bring Anthropic back</em></h1>
+<p class="ed-sub">Axios reported Friday the administration is actively working to resolve the Anthropic-Pentagon standoff. The frontier lab was the sole major absentee from Friday's seven-firm agreement, and the Defense Department's $54B autonomous weapons budget creates strong pressure to close.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">Reset</span><span class="ed-hero-unit"> in motion</span>
+    <div class="ed-hero-label">Anthropic ↔ Pentagon</div>
+    <div class="ed-hero-cap">Axios reported Friday the White House is actively working to bring Anthropic back. Anthropic had refused the lawful-use clause and previously sued the Pentagon after being labeled a supply chain risk.</div>
+    <div class="ed-pills"><span class="ed-pill">Sole frontier lab excluded</span><span class="ed-pill">Sued Pentagon previously</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">The standoff · timeline</div>
+  <div class="asset-tl-row">
+    <div class="asset-tl-cell"><div class="asset-tl-date">Q1 2025</div><div class="asset-tl-text">Pentagon labels Anthropic supply chain risk</div></div>
+    <div class="asset-tl-cell"><div class="asset-tl-date">Q2 2025</div><div class="asset-tl-text">Anthropic sues over the designation</div></div>
+    <div class="asset-tl-cell"><div class="asset-tl-date">May 2 2026</div><div class="asset-tl-text">Refuses lawful-use clause; excluded</div></div>
+    <div class="asset-tl-cell hot"><div class="asset-tl-date hot">May 2 2026</div><div class="asset-tl-text">White House signals reconciliation</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Status</div>
+  <div class="ed-stat-num">Reconciling</div>
+  <div class="ed-stat-delta">from litigation</div>
+  <div class="ed-explain"><b>Decoded</b>The transition from active lawsuit to government partnership requires a settlement structure. Both sides have public reasons to move.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">DoD pressure</div>
+  <div class="ed-stat-num">$54B</div>
+  <div class="ed-stat-delta">autonomous budget</div>
+  <div class="ed-explain"><b>Scale check</b>Defense Department cannot deploy autonomous systems at scale without frontier-class models. Anthropic's exclusion is operational, not symbolic.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Anthropic position</div>
+  <div class="ed-stat-num">Frontier</div>
+  <div class="ed-stat-delta">model parity</div>
+  <div class="ed-explain"><b>Why it matters</b>Anthropic's latest is among the most capable models available. Its absence from the seven-firm deal materially constrains DoD AI options.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Likely resolution</div>
+  <div class="ed-stat-num">Carve-out</div>
+  <div class="ed-stat-delta">or executive order</div>
+  <div class="ed-explain"><b>Watch list</b>A formal accommodation could come via executive order or a separate Anthropic-specific contract. Watch for announcement next two weeks.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>This is a procurement reversal in slow motion.</b> <i>The Pentagon needs Anthropic more than Anthropic needs the Pentagon contract revenue.</i> When the buyer needs the seller, terms get renegotiated. Expect the resolution to give Anthropic governance concessions the other six firms did not receive — and watch how that asymmetry plays out in Anthropic's valuation when it next raises capital.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · AXIOS · WHITE HOUSE BACKGROUND · MAY 2</span>
+  <span class="ed-foot-mid">// AI NEWS · DEFENSE</span>
+  <span class="ed-link">→ AXIOS.COM/ANTHROPIC ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-10">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:36%"></div></div>
+  <span class="ed-counter">SCENE <b>10</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">S&P 500 closes at <em>record high</em></h1>
+<p class="ed-sub">Both the S&P 500 and Nasdaq posted record closes Friday, capping the best monthly performance since 2020. AI-linked megacap earnings led the rally. Memory chip makers Samsung and SK Hynix separately warned of a record supply squeeze, with customers pre-booking 2027 capacity.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">ATH</span><span class="ed-hero-unit"></span>
+    <div class="ed-hero-label">S&P 500 + Nasdaq · record close</div>
+    <div class="ed-hero-cap">Best monthly performance since 2020. Megacap tech earnings — Meta, Microsoft, Google, Amazon — beat expectations. AI infrastructure spending drove the upside.</div>
+    <div class="ed-pills"><span class="ed-pill">AI capex tailwind</span><span class="ed-pill">Crypto liquidations $300M</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Equities vs digital assets · same session</div>
+  <div class="asset-2col">
+    <div class="asset-2col-cell hot"><div class="asset-2col-h">Equities</div><div class="asset-2col-num">ATH</div><div class="asset-2col-cap">Best month since 2020 · led by megacap AI earnings beats</div></div>
+    <div class="asset-2col-cell warn"><div class="asset-2col-h">Crypto longs</div><div class="asset-2col-num">−$300M</div><div class="asset-2col-cap">Liquidations same session · institutional rotation away from leverage</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Driver</div>
+  <div class="ed-stat-num">AI capex</div>
+  <div class="ed-stat-delta">all 4 hyperscalers</div>
+  <div class="ed-explain"><b>Decoded</b>Combined Q1 capex of $130B plus 2026 commitments of $725B reframed forward earnings power for the entire AI infrastructure stack.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Memory squeeze</div>
+  <div class="ed-stat-num">Through 2027</div>
+  <div class="ed-stat-delta warn">Samsung warning</div>
+  <div class="ed-explain"><b>The catch</b>Memory supply will be the binding constraint, not GPU. Pricing power moves to memory makers.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Crypto context</div>
+  <div class="ed-stat-num">−$300M</div>
+  <div class="ed-stat-delta warn">longs liquidated</div>
+  <div class="ed-explain"><b>The signal</b>Same session split: AI equities up, crypto longs liquidated. Institutional risk appetite is rotating, not expanding.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Banking exposure</div>
+  <div class="ed-stat-num">Concentration</div>
+  <div class="ed-stat-delta">top 5 names</div>
+  <div class="ed-explain"><b>Banking angle</b>Equity loan books with high megacap tech exposure benefit; portfolios with crypto leverage face mark-to-market hits.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>This is not a broad-based rally. It is a vertical AI re-rating.</b> <i>The S&P record high is being driven by four companies' AI capex producing measurable revenue acceleration in the Q1 prints.</i> The crypto liquidation signal in the same session shows the market is becoming more selective about which AI thesis it funds. Memory supply tightness through 2027 keeps the floor under Samsung and SK Hynix valuations.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · BLOOMBERG · WSJ · MAY 2</span>
+  <span class="ed-foot-mid">// MACRO · EQUITY MARKETS</span>
+  <span class="ed-link">→ BLOOMBERG.COM/MARKETS ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-11">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:39%"></div></div>
+  <span class="ed-counter">SCENE <b>11</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Apple ships <em>tool-call review</em> architecture</h1>
+<p class="ed-sub">Apple's Reinforced Agent paper, accepted at ACL 2026, demonstrates a deployment architecture for enterprise tool-calling agents. A secondary reviewer evaluates each tool call before execution, improving multi-turn accuracy by 7.1 percent and irrelevance detection by 5.5 percent.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">+7.1</span><span class="ed-hero-unit">%</span>
+    <div class="ed-hero-label">Multi-turn stateful accuracy gain</div>
+    <div class="ed-hero-cap">Apple's Reinforced Agent architecture introduces a secondary reviewer agent that evaluates tool calls before execution. Shifts agent design from post-hoc error recovery to proactive prevention.</div>
+    <div class="ed-pills"><span class="ed-pill">ACL 2026 accepted</span><span class="ed-pill">Reasoner: 3:1 benefit ratio</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Architecture · execution + review separation</div>
+  <div class="asset-grid-2">
+    <div class="asset-grid-cell"><div class="asset-grid-h">Executor agent</div><div class="asset-grid-body">Selects and prepares the tool call. Optimized for speed and broad capability coverage. Output: candidate action.</div></div>
+    <div class="asset-grid-cell"><div class="asset-grid-h">Reviewer agent</div><div class="asset-grid-body">Evaluates the candidate before execution. Reasoning model preferred — 3:1 benefit-to-risk vs 2.1:1 for standard. Output: approve or reject.</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Multi-turn gain</div>
+  <div class="ed-stat-num">+7.1%</div>
+  <div class="ed-stat-delta">stateful tasks</div>
+  <div class="ed-explain"><b>Headline result</b>On tasks requiring memory across turns, the reviewer architecture outperforms single-agent baselines by a meaningful margin.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Irrelevance detect</div>
+  <div class="ed-stat-num">+5.5%</div>
+  <div class="ed-stat-delta">filter precision</div>
+  <div class="ed-explain"><b>Plain English</b>The reviewer is better at recognizing when no tool call is appropriate — a common failure mode in current agent systems.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Reviewer choice</div>
+  <div class="ed-stat-num">Reasoner > Std</div>
+  <div class="ed-stat-delta">3:1 vs 2.1:1</div>
+  <div class="ed-explain"><b>What changes</b>Using a reasoning model as the reviewer produces a 3-to-1 benefit-to-risk ratio. Standard models give 2.1-to-1. The reviewer slot rewards reasoning capability.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Prompt opt</div>
+  <div class="ed-stat-num">+1.5-2.8%</div>
+  <div class="ed-stat-delta">GEPA additive</div>
+  <div class="ed-explain"><b>Watch list</b>Automated prompt optimization on top of the architecture adds another 1.5 to 2.8 percent. Stackable improvements compound.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Enterprise agents need a review layer before execution, not just after.</b> <i>Apple's contribution is operational: the reviewer agent slot is independently improvable.</i> Banks deploying tool-calling agents should expect their Q3 architecture to include a separate model in the review position. The 3:1 benefit ratio with reasoning models means the cost of a bigger reviewer is justified — even at higher per-call inference cost.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · APPLE ML RESEARCH · ACL 2026 · MAY 2</span>
+  <span class="ed-foot-mid">// RESEARCH · AGENT ARCHITECTURE</span>
+  <span class="ed-link">→ MACHINELEARNING.APPLE.COM ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-12">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:43%"></div></div>
+  <span class="ed-counter">SCENE <b>12</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Frontier models score <em>under 1%</em> on ARC-AGI-3</h1>
+<p class="ed-sub">The ARC Prize Foundation analyzed 160 game runs by OpenAI's and Anthropic's flagship models. Best score: 0.43 percent at $10,000 per run. Humans solved the same tasks without prior knowledge. Three systematic error patterns identified.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">0.43</span><span class="ed-hero-unit">%</span>
+    <div class="ed-hero-label">Best frontier score · ARC-AGI-3</div>
+    <div class="ed-hero-cap">Both OpenAI's and Anthropic's flagship models scored below 1 percent on tasks humans solve without prior knowledge. Cost: around $10,000 per benchmark run.</div>
+    <div class="ed-pills"><span class="ed-pill">160 game runs analyzed</span><span class="ed-pill">$10K/run cost</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Three systematic error patterns</div>
+  <ul class="asset-bullet-list">
+    <li><b>World-model deficit</b> · models detect local effects but fail to build coherent world models</li>
+    <li><b>Hypothesis rejection</b> · they form correct hypotheses, then reject them in subsequent reasoning</li>
+    <li><b>Stuck on wrong</b> · they persist with incorrect hypotheses despite contradicting evidence</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Best frontier</div>
+  <div class="ed-stat-num">0.43%</div>
+  <div class="ed-stat-delta warn">below 1%</div>
+  <div class="ed-explain"><b>Headline result</b>The most capable models available scored under one percent on tasks designed to be solvable without prior training. The gap with human capability is structural.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Cost per run</div>
+  <div class="ed-stat-num">$10K</div>
+  <div class="ed-stat-delta warn">per benchmark</div>
+  <div class="ed-explain"><b>Scale check</b>Running the full benchmark on either flagship costs $10,000. The cost-per-progress ratio is poor for current architectures.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Error type 1</div>
+  <div class="ed-stat-num">World model</div>
+  <div class="ed-stat-delta">missing</div>
+  <div class="ed-explain"><b>Plain English</b>Models recognize that an action causes an effect locally, but fail to build the rule that explains the pattern globally.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Error type 3</div>
+  <div class="ed-stat-num">Hypothesis lock</div>
+  <div class="ed-stat-delta">despite evidence</div>
+  <div class="ed-explain"><b>Counter-intuitive</b>When evidence contradicts the current hypothesis, models often persist rather than revise. Reasoning chains amplify the wrong path.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>The capability gap on novel reasoning tasks is not closing as quickly as benchmarks suggest.</b> <i>ARC-AGI-3 isolates the kind of reasoning that scaling has not yet solved.</i> For practitioners deploying agents on novel problem domains, this matters: the frontier model performance on standard benchmarks does not transfer to tasks requiring world-model construction. The error patterns suggest where architectural innovation — not scale — is required.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · ARC PRIZE FOUNDATION · MAY 2</span>
+  <span class="ed-foot-mid">// RESEARCH · BENCHMARKS</span>
+  <span class="ed-link">→ ARCPRIZE.ORG/ARC-AGI-3 ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-13">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:46%"></div></div>
+  <span class="ed-counter">SCENE <b>13</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Meta Q1 — LLM rec systems <em>are now revenue</em></h1>
+<p class="ed-sub">Meta's Q1 results confirm that LLM-based content ranking has moved from pilot to revenue driver. Doubling training sequence length lifted Reels time spent by 10 percent. Facebook video time grew more than 8 percent. Same-day posts now exceed 30 percent of recommended Reels.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">+10</span><span class="ed-hero-unit">%</span>
+    <div class="ed-hero-label">Reels time spent · LLM rec lift</div>
+    <div class="ed-hero-cap">Doubling user interaction sequence length used for training drove the gain. Facebook video time +8% — largest gain in four years. Half a billion users now watch AI-generated videos weekly.</div>
+    <div class="ed-pills"><span class="ed-pill">LLM-based ranker</span><span class="ed-pill">30%+ same-day Reels</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Meta Q1 · measurable LLM lift</div>
+  <div class="asset-bench">
+    <div class="asset-bench-row"><div class="asset-bench-label">Reels time spent</div><div class="asset-bench-bar-track"><div class="asset-bench-bar-fill" style="width:65%"></div></div><div class="asset-bench-val">+10%</div></div>
+    <div class="asset-bench-row"><div class="asset-bench-label">FB global video time</div><div class="asset-bench-bar-track"><div class="asset-bench-bar-fill" style="width:55%"></div></div><div class="asset-bench-val">+8%</div></div>
+    <div class="asset-bench-row"><div class="asset-bench-label">Same-day Reels share</div><div class="asset-bench-bar-track"><div class="asset-bench-bar-fill" style="width:75%"></div></div><div class="asset-bench-val">30%+</div></div>
+    <div class="asset-bench-row"><div class="asset-bench-label">AI-video weekly users</div><div class="asset-bench-bar-track"><div class="asset-bench-bar-fill" style="width:90%"></div></div><div class="asset-bench-val">500M+</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Reels lift</div>
+  <div class="ed-stat-num">+10%</div>
+  <div class="ed-stat-delta">time spent</div>
+  <div class="ed-explain"><b>Headline result</b>A 10 percent lift on a flagship product translates directly to ad inventory revenue at Meta's scale. CFO Susan Li framed the gain as scalable.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Facebook video</div>
+  <div class="ed-stat-num">+8%</div>
+  <div class="ed-stat-delta">largest in 4yr</div>
+  <div class="ed-explain"><b>Scale check</b>Largest gain on the metric in four years. Reverses three years of stagnation on the original Facebook surface.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Same-day Reels</div>
+  <div class="ed-stat-num">30%+</div>
+  <div class="ed-stat-delta">share of recs</div>
+  <div class="ed-explain"><b>Plain English</b>More than double a year ago. The model now favors recent content much more heavily — a structural shift in distribution dynamics for creators.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">AI-video users</div>
+  <div class="ed-stat-num">500M+</div>
+  <div class="ed-stat-delta">weekly</div>
+  <div class="ed-explain"><b>Banking angle</b>Half a billion weekly viewers of AI-generated content sets the consumer baseline. Banks underwriting media companies should reprice content moats accordingly.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>LLM-driven content ranking is now a measurable line item in Meta's earnings.</b> <i>The 10 percent Reels lift is not a research result — it is a revenue driver disclosed on an earnings call.</i> For incumbents in any content distribution business, the framework is now: which surface gets repaved with LLM-based ranking next? The competitive dynamics in advertising shift toward whoever closes the LLM training infrastructure gap fastest.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · META Q1 EARNINGS · MAY 1</span>
+  <span class="ed-foot-mid">// RESEARCH · DEPLOYMENTS</span>
+  <span class="ed-link">→ INVESTOR.FB.COM ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-14">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:50%"></div></div>
+  <span class="ed-counter">SCENE <b>14</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Sun Finance · <em>91% cost cut, 5-second processing</em></h1>
+<p class="ed-sub">Latvian microloan platform processes a new application every 0.63 seconds. The AWS-powered rebuild lifted extraction accuracy from 79.7 to 90.8 percent, cut per-document costs by 91 percent, and reduced processing time from up to 20 hours to under 5 seconds. 35 business days from handover to production.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">−91</span><span class="ed-hero-unit">%</span>
+    <div class="ed-hero-label">Sun Finance · per-document cost</div>
+    <div class="ed-hero-cap">Latvian fintech rebuilt identity verification on Amazon Bedrock + Textract + Rekognition. Processing time fell from 20 hours to under 5 seconds. Live in production 35 business days after technical handover.</div>
+    <div class="ed-pills"><span class="ed-pill">80K monthly applications</span><span class="ed-pill">9 countries · 0.63s/loan</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Before vs after · key operational metrics</div>
+  <div class="asset-ba-row">
+    <div class="asset-ba-box">
+      <div class="asset-ba-period">Legacy pipeline</div>
+      <div class="asset-ba-num">79.7%</div>
+      <div class="asset-ba-unit">extraction accuracy · 20hr processing · 60% manual review</div>
+    </div>
+    <div>
+      <div class="asset-ba-arrow">→</div>
+      <div class="asset-ba-mult">35 days</div>
+    </div>
+    <div class="asset-ba-box target">
+      <div class="asset-ba-period hot">AWS rebuild</div>
+      <div class="asset-ba-num hot">90.8%</div>
+      <div class="asset-ba-unit">accuracy · &lt;5s processing · −91% cost</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Cost reduction</div>
+  <div class="ed-stat-num">−91%</div>
+  <div class="ed-stat-delta">per doc</div>
+  <div class="ed-explain"><b>Headline result</b>The week's sharpest deployment economics result. Translates directly into improved unit economics on every loan processed.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Processing time</div>
+  <div class="ed-stat-num">&lt;5s</div>
+  <div class="ed-stat-delta">from 20hr</div>
+  <div class="ed-explain"><b>Scale check</b>Four orders of magnitude faster. Removes manual operator dependency for ~60 percent of applications that previously required review.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Accuracy gain</div>
+  <div class="ed-stat-num">+11pp</div>
+  <div class="ed-stat-delta">79.7 to 90.8</div>
+  <div class="ed-explain"><b>Plain English</b>Eleven percentage points of accuracy improvement on identity extraction. Fewer false positives, fewer missed fraud signals.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Monthly volume</div>
+  <div class="ed-stat-num">80K</div>
+  <div class="ed-stat-delta">applications</div>
+  <div class="ed-explain"><b>Banking angle</b>At 80,000 monthly applications across nine countries, the absolute cost savings are large. Other fintechs with comparable identity verification pipelines should benchmark.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>This is the operational playbook for AI-driven cost reduction in regulated finance.</b> <i>The combination — 91 percent cost cut, 11 point accuracy gain, 35 days to production — is the kind of deployment outcome that bank boards now demand from their AI initiatives.</i> Sun Finance is small. The methodology generalizes to any institution with an identity-document-heavy workflow: KYC, AML onboarding, claims triage.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · AWS CASE STUDY · MAY 2</span>
+  <span class="ed-foot-mid">// USE CASES · FINTECH</span>
+  <span class="ed-link">→ AWS.AMAZON.COM/SOLUTIONS ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-15">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:54%"></div></div>
+  <span class="ed-counter">SCENE <b>15</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Planet Labs runs <em>AI in orbit</em></h1>
+<p class="ed-sub">Pelican-4 satellite identified aircraft at Alice Springs Airport using an on-board AI model — first real-time object classification from space. Eliminates the 6-to-12-hour ground processing delay, critical for wildfire detection, military surveillance, and autonomous tasking.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">30</span><span class="ed-hero-unit"> TB/day</span>
+    <div class="ed-hero-label">Planet Labs · constellation data</div>
+    <div class="ed-hero-cap">Pelican-4 satellite identified more than a dozen aircraft on the tarmac at Alice Springs Airport in real time, on-board, with no ground processing. 18 months of engineering to reach reliable autonomous classification.</div>
+    <div class="ed-pills"><span class="ed-pill">32-satellite Pelican fleet</span><span class="ed-pill">30cm resolution</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Ground vs orbit processing · time to result</div>
+  <div class="asset-ba-row">
+    <div class="asset-ba-box">
+      <div class="asset-ba-period">Ground processing</div>
+      <div class="asset-ba-num">6-12hr</div>
+      <div class="asset-ba-unit">image capture to classified output</div>
+    </div>
+    <div>
+      <div class="asset-ba-arrow">→</div>
+      <div class="asset-ba-mult">REAL-TIME</div>
+    </div>
+    <div class="asset-ba-box target">
+      <div class="asset-ba-period hot">On-orbit AI</div>
+      <div class="asset-ba-num hot">Seconds</div>
+      <div class="asset-ba-unit">classification at the satellite</div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Engineering time</div>
+  <div class="ed-stat-num">18mo</div>
+  <div class="ed-stat-delta">to reliability</div>
+  <div class="ed-explain"><b>Decoded</b>Onboard AI inference at orbital scale required custom model compression, radiation-tolerant compute, and energy-budget engineering.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Latency cut</div>
+  <div class="ed-stat-num">6-12hr</div>
+  <div class="ed-stat-delta">to seconds</div>
+  <div class="ed-explain"><b>Headline result</b>Removing ground-side processing transforms the use case set. Real-time wildfire detection and military surveillance become viable.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Daily data</div>
+  <div class="ed-stat-num">30TB</div>
+  <div class="ed-stat-delta">constellation</div>
+  <div class="ed-explain"><b>Scale check</b>On-board processing also reduces downlink bandwidth needs — only classified results need to be sent down, not raw imagery.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Fleet target</div>
+  <div class="ed-stat-num">32 sats</div>
+  <div class="ed-stat-delta">Pelican class</div>
+  <div class="ed-explain"><b>Watch list</b>Building a fleet of 32 Pelican satellites at 30-centimeter resolution. Each new satellite expands the on-orbit AI capability footprint.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>On-board AI is changing the unit economics of earth observation.</b> <i>The 6-to-12-hour ground processing window was the binding constraint for time-sensitive applications.</i> By moving classification to orbit, Planet Labs unlocks markets — wildfire response, port surveillance, autonomous defense tasking — that the ground architecture could not serve. Watch for similar architectures from European and Chinese earth-observation operators.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · PLANET LABS BLOG · MAY 2</span>
+  <span class="ed-foot-mid">// USE CASES · SPACE AI</span>
+  <span class="ed-link">→ PLANET.COM/PULSE ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-16">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:57%"></div></div>
+  <span class="ed-counter">SCENE <b>16</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Microsoft ships <em>Legal Agent</em> in Word</h1>
+<p class="ed-sub">Microsoft launched Legal Agent inside Word for legal teams. The product handles contract review against a playbook, tracks negotiation history, and flags risks and obligations. It follows structured legal workflows shaped by real practice, not general AI interpretation.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">Word</span><span class="ed-hero-unit"></span>
+    <div class="ed-hero-label">Microsoft · Legal Agent rollout</div>
+    <div class="ed-hero-cap">Built into Word for legal teams. Reviews contracts clause by clause against a defined playbook, tracks negotiation history, flags risks and obligations. Engineers came from failed startup Robin AI.</div>
+    <div class="ed-pills"><span class="ed-pill">Frontier program · US</span><span class="ed-pill">From Robin AI talent</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Legal Agent · workflow steps</div>
+  <ul class="asset-bullet-list">
+    <li><b>Clause-by-clause review</b> · checks each clause against a structured playbook</li>
+    <li><b>Negotiation history</b> · tracks rounds and changes across counterparties</li>
+    <li><b>Risk and obligation flags</b> · surfaces what the firm has committed to versus what it can demand</li>
+    <li><b>Tracked-change analysis</b> · ingests Word's native track-changes — fits existing legal workflow</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Distribution</div>
+  <div class="ed-stat-num">Frontier</div>
+  <div class="ed-stat-delta">US members</div>
+  <div class="ed-explain"><b>Decoded</b>Initial rollout to Frontier program members in the US. Targets Big Law firms and corporate legal departments first.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Architecture</div>
+  <div class="ed-stat-num">Playbook-driven</div>
+  <div class="ed-stat-delta">vs general AI</div>
+  <div class="ed-explain"><b>Plain English</b>Structured workflows beat general model interpretation for legal tasks. The playbook becomes the firm's IP, not the model's output.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Talent source</div>
+  <div class="ed-stat-num">Robin AI</div>
+  <div class="ed-stat-delta">post-failure</div>
+  <div class="ed-explain"><b>What changes</b>Robin AI failed as a standalone contract review startup. Microsoft hired the engineers and shipped what Robin could not as a Word feature.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Sector signal</div>
+  <div class="ed-stat-num">Entry-level</div>
+  <div class="ed-stat-delta warn">legal pressure</div>
+  <div class="ed-explain"><b>Banking angle</b>AI is eliminating entry-level legal work faster than law schools can adapt. Banks lending against law firm receivables should monitor associate hire-rate data.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Microsoft just turned Word into a legal AI platform.</b> <i>Embedding the agent inside Word — where legal work already happens — is a distribution moat that pure-play legal AI startups cannot match.</i> Robin AI failed because its product lived outside the legal team's daily tool. Microsoft's version solves the same problem inside the workflow. Expect similar embedded agents for tax, audit, and underwriting next.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · MICROSOFT BLOG · MAY 2</span>
+  <span class="ed-foot-mid">// USE CASES · LEGAL TECH</span>
+  <span class="ed-link">→ MICROSOFT.COM/MICROSOFT-365 ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-17">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:61%"></div></div>
+  <span class="ed-counter">SCENE <b>17</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Popsa generates <em>5.5M titles</em> via Bedrock</h1>
+<p class="ed-sub">Photo book platform Popsa deployed Amazon Nova models via Amazon Bedrock to generate personalized book titles. The system combines metadata, vision, and retrieval-augmented generation. Quality and cost both improved versus the prior approach. Multi-model routing through a unified Bedrock API.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">5.5</span><span class="ed-hero-unit">M</span>
+    <div class="ed-hero-label">Popsa · personalized titles in 2025</div>
+    <div class="ed-hero-cap">Photo book platform in 50+ countries, 12 languages. Combines metadata, computer vision, and RAG via Amazon Bedrock. Stack: Nova Lite, Nova Pro, Claude Haiku — unified through Bedrock API.</div>
+    <div class="ed-pills"><span class="ed-pill">50 countries · 12 languages</span><span class="ed-pill">Bedrock unified API</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Architecture stack · multi-model via Bedrock</div>
+  <div class="asset-grid-2">
+    <div class="asset-grid-cell"><div class="asset-grid-h">Vision + RAG</div><div class="asset-grid-body">Photo metadata + computer vision feed RAG context. The model receives book theme, dates, location, and user history — not raw photos.</div></div>
+    <div class="asset-grid-cell"><div class="asset-grid-h">Nova + Claude mix</div><div class="asset-grid-body">Nova Lite for fast paths, Nova Pro for quality, Claude Haiku for nuanced phrasing. Routing happens server-side via Bedrock.</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Volume</div>
+  <div class="ed-stat-num">5.5M</div>
+  <div class="ed-stat-delta">titles · 2025</div>
+  <div class="ed-explain"><b>Decoded</b>Generation at consumer scale. Each photo book gets a contextually personalized title based on the photos, dates, and book theme.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Architecture</div>
+  <div class="ed-stat-num">Multi-model</div>
+  <div class="ed-stat-delta">via Bedrock</div>
+  <div class="ed-explain"><b>Plain English</b>Different models for different sub-tasks. Bedrock makes the routing transparent to the application — Popsa only sees one API.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Vendor mix</div>
+  <div class="ed-stat-num">Nova + Claude</div>
+  <div class="ed-stat-delta">in same call</div>
+  <div class="ed-explain"><b>What changes</b>Mixing Amazon's own Nova models with Anthropic's Claude through Bedrock. Demonstrates that the multi-vendor stack is operational, not theoretical.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Result type</div>
+  <div class="ed-stat-num">Engagement</div>
+  <div class="ed-stat-delta">+ purchase rate</div>
+  <div class="ed-explain"><b>Banking angle</b>Measurable lift in customer engagement and purchase rates. Direct unit economics improvement, not a vanity metric.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Multi-model routing through a single API is now the dominant deployment pattern.</b> <i>Popsa's stack — Amazon Nova plus Anthropic Claude, served by Bedrock — is what enterprise AI looks like at scale.</i> The era of single-vendor lock-in is closing. For practitioners building consumer applications, the architecture choice is now which routing layer to bet on, not which single model.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · AWS CASE STUDY · MAY 2</span>
+  <span class="ed-foot-mid">// USE CASES · CONSUMER</span>
+  <span class="ed-link">→ AWS.AMAZON.COM/POPSA ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-18">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:64%"></div></div>
+  <span class="ed-counter">SCENE <b>18</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Choco runs <em>200B AI tokens</em> in production</h1>
+<p class="ed-sub">Food distribution platform Choco processes 8.8 million orders annually using OpenAI APIs, handling more than 200 billion AI tokens in production. Manual order entry cut by 50 percent. Sales productivity doubled without adding headcount. Multi-input: voice, email, messaging.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">8.8</span><span class="ed-hero-unit">M</span>
+    <div class="ed-hero-label">Choco · annual orders processed</div>
+    <div class="ed-hero-cap">Food distribution platform connecting restaurants with suppliers. 200+ billion AI tokens in production. Cut manual order entry by 50 percent, doubled sales productivity without adding headcount.</div>
+    <div class="ed-pills"><span class="ed-pill">200B+ tokens annually</span><span class="ed-pill">Voice + email + messaging</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Operating envelope · multi-input scale</div>
+  <ul class="asset-bullet-list">
+    <li><b>Always-on</b> · orders flow across global time zones, no operator dependency for entry</li>
+    <li><b>Multi-input</b> · accepts voice messages, email orders, and messaging-app text</li>
+    <li><b>Scale</b> · 200 billion tokens annually — among the largest documented OpenAI API deployments</li>
+    <li><b>Productivity</b> · sales team output doubled with no headcount increase</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Token volume</div>
+  <div class="ed-stat-num">200B+</div>
+  <div class="ed-stat-delta">annual</div>
+  <div class="ed-explain"><b>Headline result</b>Among the largest disclosed OpenAI deployments. The token volume implies sustained model usage at industrial scale, not pilot.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Manual cut</div>
+  <div class="ed-stat-num">−50%</div>
+  <div class="ed-stat-delta">order entry</div>
+  <div class="ed-explain"><b>Plain English</b>Half of all orders that previously required human data entry are now agentic. The human staff handles only edge cases and exception flow.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Productivity</div>
+  <div class="ed-stat-num">2x</div>
+  <div class="ed-stat-delta">sales team</div>
+  <div class="ed-explain"><b>What changes</b>Doubled output with same headcount. Operating leverage from agentic workflow becomes structural cost advantage versus competitors.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Input types</div>
+  <div class="ed-stat-num">Voice/email/SMS</div>
+  <div class="ed-stat-delta">all formats</div>
+  <div class="ed-explain"><b>Banking angle</b>Demonstrates that agentic order management at scale works across messy real-world input formats. Logistics and B2B fintechs should benchmark.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Agentic order management at scale is now commercially viable in logistics.</b> <i>200 billion tokens in production is the validation point — Choco crossed from experimental into operational dependency on the AI stack.</i> For practitioners in B2B logistics, food distribution, or any high-volume order processing, the case study confirms that the technology no longer carries pilot risk. Procurement teams should expect competitor pressure on this dimension within four quarters.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · OPENAI CASE STUDY · MAY 2</span>
+  <span class="ed-foot-mid">// USE CASES · LOGISTICS</span>
+  <span class="ed-link">→ OPENAI.COM/CHOCO ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-19">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:68%"></div></div>
+  <span class="ed-counter">SCENE <b>19</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">APRA · <em>formal supervisory warning</em> on AI</h1>
+<p class="ed-sub">Australia's prudential regulator issued a formal warning to banks and superannuation trustees about AI governance gaps. AI is in use across all entities reviewed, but risk management maturity varies sharply. Identity and access management for non-human agents flagged as a critical gap.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">APRA</span><span class="ed-hero-unit"></span>
+    <div class="ed-hero-label">Australia · supervisory warning</div>
+    <div class="ed-hero-cap">Targeted review of large regulated entities late 2025. AI in use across all of them, but maturity in risk management varied sharply. Specifically called out non-human agent identity gaps.</div>
+    <div class="ed-pills"><span class="ed-pill">Banks + super trustees</span><span class="ed-pill">Prompt injection flagged</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Three governance gaps · APRA findings</div>
+  <ul class="asset-bullet-list">
+    <li><b>Identity for non-human agents</b> · most institutions have not extended IAM to AI agents</li>
+    <li><b>Behavior monitoring</b> · model drift, hallucination patterns, output distribution shifts not tracked</li>
+    <li><b>Decommissioning</b> · no formal procedures for retiring AI models with audit trail</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Scope</div>
+  <div class="ed-stat-num">Banks + super</div>
+  <div class="ed-stat-delta">trustees</div>
+  <div class="ed-explain"><b>Decoded</b>APRA covers banking and pensions. Both sectors are deploying AI in loan processing, claims triage, fraud detection, and customer interaction.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">New attack path</div>
+  <div class="ed-stat-num">Prompt injection</div>
+  <div class="ed-stat-delta warn">explicitly flagged</div>
+  <div class="ed-explain"><b>The catch</b>First major prudential regulator to name prompt injection as a supervisory concern. Sets precedent for what other regulators will adopt.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Board reliance</div>
+  <div class="ed-stat-num">Vendor-led</div>
+  <div class="ed-stat-delta warn">criticism</div>
+  <div class="ed-explain"><b>Plain English</b>APRA criticized boards for relying on vendor presentations rather than independent technical scrutiny. Implication: more skin in the game required.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Forward signal</div>
+  <div class="ed-stat-num">12-18mo</div>
+  <div class="ed-stat-delta">global rollout</div>
+  <div class="ed-explain"><b>Banking angle</b>Other prudential supervisors — UK PRA, US OCC, ECB — are expected to issue similar guidance within 12-18 months. Treat APRA as preview.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Australian banking is the early-warning system for global AI prudential supervision.</b> <i>APRA's warning is the first time a major prudential regulator has formalized identity-and-access-management as an AI risk category.</i> For banks in any jurisdiction, the actionable response is to inventory all non-human agents in production, extend IAM controls accordingly, and document the change before the local regulator asks the same question.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · APRA NEWS · MAY 1</span>
+  <span class="ed-foot-mid">// REGULATION · BANKING</span>
+  <span class="ed-link">→ APRA.GOV.AU/NEWS ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-20">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:71%"></div></div>
+  <span class="ed-counter">SCENE <b>20</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Reinforced Agent · <em>operational implications</em></h1>
+<p class="ed-sub">Apple's research is more than a benchmark gain. The execution-plus-review architecture creates an audit-ready agent primitive that fits existing enterprise compliance models. The reviewer slot becomes a policy hook — where banks insert risk constraints today, regulators tomorrow.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">Sep</span><span class="ed-hero-unit">Layer</span>
+    <div class="ed-hero-label">Reviewer + executor · independently improvable</div>
+    <div class="ed-hero-cap">Apple's Reinforced Agent paper provides the architectural primitive: separate the agent that takes the action from the agent that approves it. Each can be replaced or upgraded without retraining the other.</div>
+    <div class="ed-pills"><span class="ed-pill">GEPA prompt opt</span><span class="ed-pill">ACL 2026 paper</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Why this matters operationally</div>
+  <ul class="asset-bullet-list">
+    <li><b>Modular upgrades</b> · swap the reviewer model independently as new reasoners ship</li>
+    <li><b>Audit trail</b> · review decisions are themselves logged, enabling post-hoc compliance review</li>
+    <li><b>Cost control</b> · use cheap executor for simple paths, expensive reviewer only when uncertain</li>
+    <li><b>Safety primitive</b> · the reviewer slot becomes the hook point for policy and risk constraints</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Modularity</div>
+  <div class="ed-stat-num">Drop-in</div>
+  <div class="ed-stat-delta">reviewer</div>
+  <div class="ed-explain"><b>Decoded</b>The reviewer agent can be upgraded independently. As reasoning models improve, the reviewer slot benefits without retraining the executor.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Compliance fit</div>
+  <div class="ed-stat-num">Audit trail</div>
+  <div class="ed-stat-delta">by design</div>
+  <div class="ed-explain"><b>Banking angle</b>Each review decision is logged. Auditors can examine what the reviewer evaluated and why it approved or rejected — meets regulatory expectations on AI traceability.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Cost shape</div>
+  <div class="ed-stat-num">Conditional</div>
+  <div class="ed-stat-delta">spend</div>
+  <div class="ed-explain"><b>Plain English</b>Cheap executor handles most paths. Expensive reasoner reviewer engages only when needed. Total cost stays manageable while accuracy goes up.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Policy hook</div>
+  <div class="ed-stat-num">Reviewer slot</div>
+  <div class="ed-stat-delta">= constraints</div>
+  <div class="ed-explain"><b>What changes</b>Banks insert their risk constraints into the reviewer prompt. The architecture makes 'AI under policy' a structural property, not a bolt-on.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>This is the deployment architecture banks should adopt for tool-calling agents.</b> <i>The reviewer slot is the right place to put policy and compliance constraints — visible, auditable, independently updatable.</i> For a bank's Q3 architecture review, Apple's paper provides the diagram. The challenge is operational: assigning ownership of the reviewer prompt to the second-line risk function, not the engineering team building the executor.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · APPLE ML RESEARCH · ACL 2026 · MAY 2</span>
+  <span class="ed-foot-mid">// RESEARCH · ENTERPRISE AGENTS</span>
+  <span class="ed-link">→ MACHINELEARNING.APPLE.COM ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-21">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:75%"></div></div>
+  <span class="ed-counter">SCENE <b>21</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">China blocks <em>Manus AI acquisition</em></h1>
+<p class="ed-sub">National Development and Reform Commission blocked foreign investment in Manus's AI agent project — a move that received limited English-language coverage but carries significant implications for cross-border AI M&A. First explicit invocation of the Foreign Investment Security Review framework against an AI deal.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">First</span><span class="ed-hero-unit"></span>
+    <div class="ed-hero-label">China NDRC · blocks AI acquisition</div>
+    <div class="ed-hero-cap">First explicit invocation of China's Foreign Investment Security Review framework against an AI deal. NDRC ruled Manus's core algorithms fall under restricted export technologies. Sets precedent for every foreign investor.</div>
+    <div class="ed-pills"><span class="ed-pill">NDRC framework</span><span class="ed-pill">Singapore HQ insufficient</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">The Manus block · what NDRC found</div>
+  <ul class="asset-bullet-list">
+    <li><b>Restricted export tech</b> · core algorithms triggered the technology export licensing requirement</li>
+    <li><b>Data security review</b> · separate data security assessment also required, not just licensing</li>
+    <li><b>Singapore relocation</b> · NDRC ruled the parent's HQ move did not legally separate the China entities</li>
+    <li><b>Precedent set</b> · first explicit AI-related ruling under the Foreign Investment Security Review</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Framework used</div>
+  <div class="ed-stat-num">FISR</div>
+  <div class="ed-stat-delta warn">first AI invocation</div>
+  <div class="ed-explain"><b>Decoded</b>Foreign Investment Security Review framework existed before. This is the first ruling that explicitly applies it to an AI company acquisition.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Singapore loophole</div>
+  <div class="ed-stat-num">Closed</div>
+  <div class="ed-stat-delta warn">by ruling</div>
+  <div class="ed-explain"><b>The catch</b>Manus's parent had relocated HQ to Singapore. NDRC ruled this insufficient — the China-based entities were still legally bound to the technology.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Restriction scope</div>
+  <div class="ed-stat-num">Algorithms</div>
+  <div class="ed-stat-delta">+ data</div>
+  <div class="ed-explain"><b>Plain English</b>Both the technology and the training data are now subject to export controls. Two separate review processes, not one.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Cross-border M&A</div>
+  <div class="ed-stat-num">Repriced</div>
+  <div class="ed-stat-delta warn">all China AI deals</div>
+  <div class="ed-explain"><b>Banking angle</b>Any China-AI cross-border deal now requires NDRC pre-clearance assumption built into deal economics. Expect 6-12 month delays as default.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>China's regulatory perimeter around AI assets just expanded materially.</b> <i>The Manus block is the precedent that will be cited in every subsequent Chinese AI deal review.</i> For investment banks advising on cross-border tech M&A, the deal pipeline assumptions need updating — particularly for any structure that relied on offshore parent-subsidiary separation. The Singapore-HQ workaround is closed.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · CAIXIN · MAY 1</span>
+  <span class="ed-foot-mid">// WEAK SIGNALS · CHINA M&A</span>
+  <span class="ed-link">→ CAIXIN.COM/AI-MANUS ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-22">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:79%"></div></div>
+  <span class="ed-counter">SCENE <b>22</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Chinese AI · <em>structural offshore unwind</em></h1>
+<p class="ed-sub">Beyond Moonshot, StepFun and DeepRoute.ai are reportedly dissolving offshore Cayman holding structures. The process takes 6-12 months and complicates foreign capital raises during the transition window. China's securities regulator has signaled offshore-registered companies face tougher IPO approval.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">3+</span><span class="ed-hero-unit"> companies</span>
+    <div class="ed-hero-label">Cayman dissolutions · this week</div>
+    <div class="ed-hero-cap">Moonshot AI, StepFun, DeepRoute.ai dissolving offshore Cayman holding structures. Process takes 6-12 months. Foreign capital raises become operationally complex during the transition window.</div>
+    <div class="ed-pills"><span class="ed-pill">IPO eligibility driver</span><span class="ed-pill">Foreign LP NAV impact</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Implications across investor segments</div>
+  <div class="asset-grid-2">
+    <div class="asset-grid-cell"><div class="asset-grid-h">Foreign LPs</div><div class="asset-grid-body">Holdings in offshore China-AI vehicles face NAV uncertainty during 6-12 month restructure. Liquidity windows compress. Co-investment opportunities reduce.</div></div>
+    <div class="asset-grid-cell"><div class="asset-grid-h">Domestic LPs</div><div class="asset-grid-body">Better positioned. Direct China registration aligns with onshore regulatory expectations. Pre-IPO opportunities consolidate to RMB funds.</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Companies</div>
+  <div class="ed-stat-num">3+</div>
+  <div class="ed-stat-delta">named publicly</div>
+  <div class="ed-explain"><b>Decoded</b>Moonshot, StepFun, DeepRoute.ai. Likely more in process but not yet disclosed. Watch for additional restructuring announcements over Q2.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Process time</div>
+  <div class="ed-stat-num">6-12mo</div>
+  <div class="ed-stat-delta">per company</div>
+  <div class="ed-explain"><b>Scale check</b>Dissolving Cayman vehicles, transferring IP, and re-registering domestically. Each step has tax and regulatory complexity.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Foreign access</div>
+  <div class="ed-stat-num">Constrained</div>
+  <div class="ed-stat-delta warn">during transition</div>
+  <div class="ed-explain"><b>Plain English</b>Capital raises during restructuring are operationally complex. Foreign LPs holding offshore vehicle stakes face liquidity uncertainty.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">IPO eligibility</div>
+  <div class="ed-stat-num">Domestic</div>
+  <div class="ed-stat-delta">registration required</div>
+  <div class="ed-explain"><b>Banking angle</b>The CSRC signal is structural: future IPO candidates need to be Chinese-domiciled. Pre-IPO investment thesis for offshore-only vehicles is impaired.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>This is a structural rerating of foreign access to Chinese AI.</b> <i>The 6-to-12-month restructuring window creates a liquidity gap that did not exist three months ago.</i> Asset managers with positions in Chinese AI via Cayman or BVI vehicles need to model the NAV impact and the transition risk. The investment thesis 'long Chinese AI through offshore vehicles' is being unwound by Beijing, not by the market.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · REUTERS · CAIXIN · MAY 1</span>
+  <span class="ed-foot-mid">// WEAK SIGNALS · CHINA STRUCTURE</span>
+  <span class="ed-link">→ REUTERS.COM/CHINA-AI ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-23">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:82%"></div></div>
+  <span class="ed-counter">SCENE <b>23</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">DAIMON · <em>tactile-first physical AI</em></h1>
+<p class="ed-sub">Hong Kong company DAIMON Robotics — two and a half years old — released Daimon-Infinity this week. Largest omni-modal robotic dataset for physical AI. The fingertip-sized tactile sensor packs over 110,000 effective sensing units. The kind of foundational work rarely covered in Western tech media.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">110K+</span><span class="ed-hero-unit"></span>
+    <div class="ed-hero-label">DAIMON · sensing units per fingertip</div>
+    <div class="ed-hero-cap">Hong Kong company released Daimon-Infinity this week — largest omni-modal robotic dataset for physical AI. 10,000 hours of open-sourced data. Fingertip-sized tactile sensor with over 110,000 effective sensing units.</div>
+    <div class="ed-pills"><span class="ed-pill">Vision-Tactile-Language-Action</span><span class="ed-pill">Google DeepMind partner</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">DAIMON · architecture and partners</div>
+  <ul class="asset-bullet-list">
+    <li><b>VTLA paradigm</b> · Vision-Tactile-Language-Action — touch elevated to a primary modality</li>
+    <li><b>10,000 hours</b> · open-sourced data spanning laundry folding to factory assembly</li>
+    <li><b>Tactile density</b> · 110,000+ sensing units per fingertip-sized sensor</li>
+    <li><b>Partners</b> · Google DeepMind, Northwestern, National University of Singapore</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Founded</div>
+  <div class="ed-stat-num">2.5yr</div>
+  <div class="ed-stat-delta">Hong Kong</div>
+  <div class="ed-explain"><b>Decoded</b>Young company, ambitious infrastructure release. Co-founder Professor Michael Yu Wang pioneered the VTLA architecture concept.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Dataset hours</div>
+  <div class="ed-stat-num">10K</div>
+  <div class="ed-stat-delta">open-sourced</div>
+  <div class="ed-explain"><b>Scale check</b>Largest tactile-inclusive robotics dataset to date. Open-sourcing creates platform leverage — other labs build on top of it.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Modality lift</div>
+  <div class="ed-stat-num">Touch</div>
+  <div class="ed-stat-delta">= primary</div>
+  <div class="ed-explain"><b>What changes</b>Most physical AI today treats touch as supplementary to vision. VTLA elevates tactile to a first-class input — closer to how humans manipulate objects.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Partner stack</div>
+  <div class="ed-stat-num">DeepMind+</div>
+  <div class="ed-stat-delta">academia</div>
+  <div class="ed-explain"><b>Banking angle</b>Industrial robotics investors should track tactile-modality startups. The technology stack will shape whichever Chinese, US, or European supplier wins the next manufacturing automation cycle.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>Tactile-modality robotics is the next foundational layer in physical AI.</b> <i>DAIMON's release is the kind of infrastructure work that does not surface in mainstream coverage but reshapes a sector's capability set.</i> For investors and industrial buyers, the actionable signal is to ask robotics suppliers about their tactile data strategy — and which open dataset they train on. Standards around tactile sensing are forming now, in this kind of release.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · DAIMON RELEASE · MAY 1</span>
+  <span class="ed-foot-mid">// WEAK SIGNALS · ROBOTICS</span>
+  <span class="ed-link">→ DAIMON-ROBOTICS.HK ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-24">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:86%"></div></div>
+  <span class="ed-counter">SCENE <b>24</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">PromptMink · <em>AI-assisted supply chain attack</em></h1>
+<p class="ed-sub">North Korean threat actor Famous Chollima ran a supply chain attack this week exploiting AI-generated code. ReversingLabs found malicious code in an npm package introduced via an LLM-co-authored commit. Target: a Solana-based autonomous trading agent. AI coding tools are now an active attack surface.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">Famous</span><span class="ed-hero-unit"> Chollima</span>
+    <div class="ed-hero-label">North Korean threat actor · supply chain attack</div>
+    <div class="ed-hero-cap">Also known as Shifty Corsair. Ran a phased supply chain attack via npm. Malicious code introduced through an LLM-co-authored commit. Targeted Solana-based autonomous trading agent — gave attackers crypto wallet access.</div>
+    <div class="ed-pills"><span class="ed-pill">LLM-assisted commit</span><span class="ed-pill">Solana wallet target</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">PromptMink · attack mechanics</div>
+  <div class="asset-tl-row">
+    <div class="asset-tl-cell"><div class="asset-tl-date">Stage 1</div><div class="asset-tl-text">Clean first-layer npm packages published</div></div>
+    <div class="asset-tl-cell"><div class="asset-tl-date">Stage 2</div><div class="asset-tl-text">Second-layer packages embed malicious code</div></div>
+    <div class="asset-tl-cell hot"><div class="asset-tl-date hot">Stage 3</div><div class="asset-tl-text">LLM-co-authored commit hides the payload</div></div>
+    <div class="asset-tl-cell warn"><div class="asset-tl-date warn">Outcome</div><div class="asset-tl-text">Crypto wallet credentials exfiltrated</div></div>
+  </div>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Threat actor</div>
+  <div class="ed-stat-num">DPRK</div>
+  <div class="ed-stat-delta warn">Famous Chollima</div>
+  <div class="ed-explain"><b>Decoded</b>Known North Korean state-affiliated group with a track record of crypto-targeted attacks. Also tracked as Shifty Corsair.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Vector novelty</div>
+  <div class="ed-stat-num">LLM commit</div>
+  <div class="ed-stat-delta warn">first observed</div>
+  <div class="ed-explain"><b>The signal</b>First documented case of malicious code introduced via an LLM-co-authored Git commit. The commit-author signature evades human reviewers.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Attack pattern</div>
+  <div class="ed-stat-num">Phased</div>
+  <div class="ed-stat-delta">2-layer payload</div>
+  <div class="ed-explain"><b>Plain English</b>First-layer packages look clean and pass review. Second-layer packages — pulled in transitively — contain the malicious functionality.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Defense gap</div>
+  <div class="ed-stat-num">Existing</div>
+  <div class="ed-stat-delta warn">controls fail</div>
+  <div class="ed-explain"><b>Banking angle</b>Enterprise security teams have not updated software supply chain controls for LLM-assisted commits. Banks running internal dev teams should audit commit provenance now.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>AI coding tools are now part of the attack surface, not just productivity tools.</b> <i>The PromptMink case demonstrates that LLM-assisted commits can serve as a vector for supply chain compromise.</i> For CISOs, the implication is that existing software supply chain controls — SBOM, signed commits, provenance attestation — need to be extended to track AI involvement in code authorship. Treat LLM-co-authored commits as a distinct risk category requiring elevated review.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · REVERSINGLABS · MAY 2</span>
+  <span class="ed-foot-mid">// WEAK SIGNALS · CYBER</span>
+  <span class="ed-link">→ REVERSINGLABS.COM/BLOG ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-25">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:89%"></div></div>
+  <span class="ed-counter">SCENE <b>25</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">APRA preview · <em>what banks should do now</em></h1>
+<p class="ed-sub">APRA's warning is the leading indicator. UK PRA, US OCC, ECB, and FINMA will likely issue similar guidance within 12-18 months. Banks that treat APRA as preview, not a foreign-jurisdiction issue, will avoid scrambling when their own regulator asks the same questions.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">12-18</span><span class="ed-hero-unit">mo</span>
+    <div class="ed-hero-label">Global rollout · expected window</div>
+    <div class="ed-hero-cap">APRA's framework will likely be adopted by other prudential supervisors in 12-18 months. Treat the Australian guidance as a preview of what UK PRA, US OCC, ECB, and FINMA will issue.</div>
+    <div class="ed-pills"><span class="ed-pill">Identity gaps · global</span><span class="ed-pill">Prompt injection precedent</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Action items · banking risk teams</div>
+  <ul class="asset-bullet-list">
+    <li><b>Inventory non-human agents</b> · catalog every AI system that takes actions on behalf of the bank</li>
+    <li><b>Extend IAM</b> · apply identity and access management controls to AI agents, not just humans</li>
+    <li><b>Document monitoring</b> · log model behavior drift, hallucination patterns, output distribution</li>
+    <li><b>Decommissioning playbook</b> · formal procedure with audit trail for retiring AI models</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Inventory</div>
+  <div class="ed-stat-num">Now</div>
+  <div class="ed-stat-delta">all agents</div>
+  <div class="ed-explain"><b>Decoded</b>Catalog every AI system that takes actions — loan decisions, claims triage, fraud rules, customer interactions, internal automations.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">IAM extension</div>
+  <div class="ed-stat-num">Required</div>
+  <div class="ed-stat-delta">for non-humans</div>
+  <div class="ed-explain"><b>Banking angle</b>Identity controls must extend to AI agents. Treat each agent as a service principal with auditable permissions and access scope.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Monitoring</div>
+  <div class="ed-stat-num">Drift + dist</div>
+  <div class="ed-stat-delta">tracked</div>
+  <div class="ed-explain"><b>Plain English</b>Behavior monitoring is more than uptime. Log when model outputs shift distribution, when hallucination rates change, when calibration degrades.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Decom path</div>
+  <div class="ed-stat-num">Formal SOP</div>
+  <div class="ed-stat-delta">with audit</div>
+  <div class="ed-explain"><b>Watch list</b>When a model is retired, the audit trail of decisions it made must remain accessible. APRA explicitly criticized this gap.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>The APRA framework is the cheapest preview a CRO can read this quarter.</b> <i>The cost of acting on APRA-style guidance now is low; the cost of being caught short by your local prudential supervisor in 12-18 months is high.</i> Operationalize the four action items in this quarter's risk committee. The reputational cost of a public regulatory finding on AI governance is asymmetric to the implementation cost.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · APRA NEWS · MAY 1</span>
+  <span class="ed-foot-mid">// WEAK SIGNALS · GLOBAL BANKING</span>
+  <span class="ed-link">→ APRA.GOV.AU/NEWS ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-26">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:93%"></div></div>
+  <span class="ed-counter">SCENE <b>26</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">London · <em>Europe's AI hub by default</em></h1>
+<p class="ed-sub">According to L'Usine Digitale reporting Friday — largely absent from English-language tech media — London is consolidating its position as Europe's leading AI hub. US hyperscalers including Google, Microsoft, and Amazon have committed significant infrastructure and talent to London over the past 12 months. Lab expansions are routing through London ahead of Paris or Berlin.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">3-5</span><span class="ed-hero-unit">yr</span>
+    <div class="ed-hero-label">London · AI hub consolidation horizon</div>
+    <div class="ed-hero-cap">Reported in L'Usine Digitale Friday — largely absent from English-language tech media. Google, Microsoft, Amazon have made significant infrastructure and talent commitments in London over past 12 months.</div>
+    <div class="ed-pills"><span class="ed-pill">English-language talent</span><span class="ed-pill">Post-Brexit financial flex</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Why London consolidates · three drivers</div>
+  <ul class="asset-bullet-list">
+    <li><b>Talent</b> · English-language AI engineering talent pool, depth in academia and startups</li>
+    <li><b>Regulatory</b> · proximity to EU regulatory bodies but with UK financial flexibility post-Brexit</li>
+    <li><b>Financial</b> · capital markets infrastructure remains intact, lighter regulation than continental Europe</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Hyperscaler bet</div>
+  <div class="ed-stat-num">Top 3</div>
+  <div class="ed-stat-delta">all expanding</div>
+  <div class="ed-explain"><b>Decoded</b>Google, Microsoft, Amazon — the three largest cloud players — all increasing London footprint. Pattern is consistent, not coincidental.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Talent pull</div>
+  <div class="ed-stat-num">Anglophone</div>
+  <div class="ed-stat-delta">+ academic depth</div>
+  <div class="ed-explain"><b>Plain English</b>London draws AI engineering talent from US, India, Asia. Continental rivals depend on local-language pools that are smaller and less mobile.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Regulatory edge</div>
+  <div class="ed-stat-num">Post-Brexit</div>
+  <div class="ed-stat-delta">flexibility</div>
+  <div class="ed-explain"><b>What changes</b>UK can move faster on AI regulation than EU, while staying close to EU regulators. The asymmetry favors London for AI labs that want optionality.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">EU implication</div>
+  <div class="ed-stat-num">Compute drift</div>
+  <div class="ed-stat-delta">to London</div>
+  <div class="ed-explain"><b>Banking angle</b>European banks evaluating AI vendor concentration should reprice London-versus-continental risk. Talent and compute are clustering in London, not Paris.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>London is winning the post-Brexit AI hub competition by default.</b> <i>The story is being missed in English-language tech media because the trend is incremental, not announcement-driven.</i> For European corporate banking, this matters: AI lending exposure, talent placement decisions, and infrastructure financing are concentrating in London. The consequence is structural over a 3-5 year horizon — and the optionality to position now exceeds the cost of moving later.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · L'USINE DIGITALE · MAY 2</span>
+  <span class="ed-foot-mid">// WEAK SIGNALS · EU AI</span>
+  <span class="ed-link">→ USINE-DIGITALE.FR ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-27">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:96%"></div></div>
+  <span class="ed-counter">SCENE <b>27</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Tech Week Shanghai · <em>May 6-7</em></h1>
+<p class="ed-sub">Founding edition of what organizers plan to scale into a flagship 2027 event. Confirmed exhibitors include the three Chinese state telecoms, Siemens, Honeywell, and Shanghai's Foundation Model Innovation Center. First structured cross-border AI commercial venue since Beijing tightened AI exports and foreign investment.</p>
+<div class="ed-hero tight">
+<div>
+    <span class="ed-hero-num">May 6-7</span><span class="ed-hero-unit"></span>
+    <div class="ed-hero-label">Tech Week Shanghai · founding edition</div>
+    <div class="ed-hero-cap">Kerry Hotel Shanghai. Confirmed exhibitors: China Telecom, China Mobile, China Unicom, Siemens, Honeywell, and the Shanghai Foundation Model Innovation Center. First structured attempt to connect global enterprise tech with China's data ecosystem since AI export tightening.</div>
+    <div class="ed-pills"><span class="ed-pill">Founding edition</span><span class="ed-pill">Real-time China posture read</span></div>
+  </div>
+<div class="ed-card">
+  <div class="ed-card-h">Why this event matters · context</div>
+  <ul class="asset-bullet-list">
+    <li><b>Manus precedent</b> · the foreign-investment block and offshore unwind frame every conversation</li>
+    <li><b>Foreign tech presence</b> · Siemens and Honeywell signal Western industrial buyers still engaging</li>
+    <li><b>Telecom triumvirate</b> · China Telecom, Mobile, Unicom present — state telecom is the AI infrastructure layer</li>
+    <li><b>Foundation Model Center</b> · Shanghai's flagship state-academic model lab — direct policy signal</li>
+  </ul>
+</div>
+</div>
+<div class="ed-stats"><div class="ed-stat">
+  <div class="ed-stat-label">Format</div>
+  <div class="ed-stat-num">Founding</div>
+  <div class="ed-stat-delta">edition</div>
+  <div class="ed-explain"><b>Decoded</b>Smaller scale this year, with explicit roadmap to flagship event in 2027. Early stage but the participant list is what matters.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Foreign signal</div>
+  <div class="ed-stat-num">Siemens</div>
+  <div class="ed-stat-delta">+ Honeywell</div>
+  <div class="ed-explain"><b>Scale check</b>Two major Western industrial automation firms participating. Indicates that foreign technology engagement with Chinese data ecosystem is continuing despite regulatory friction.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">State stack</div>
+  <div class="ed-stat-num">All 3 telecoms</div>
+  <div class="ed-stat-delta">present</div>
+  <div class="ed-explain"><b>Plain English</b>China Telecom, China Mobile, China Unicom together. State infrastructure backbone of Chinese AI — directly accessible to event attendees.</div>
+</div><div class="ed-stat">
+  <div class="ed-stat-label">Investor read</div>
+  <div class="ed-stat-num">Posture check</div>
+  <div class="ed-stat-delta">real-time</div>
+  <div class="ed-explain"><b>Watch list</b>Conversations at this event will reveal how foreign tech firms are navigating China's tightening AI environment. First read since the Manus block.</div>
+</div></div>
+<div class="ed-take">
+  <div class="ed-take-meta"><span class="ed-take-label">TAKEAWAY</span><span class="ed-take-quote">"</span></div>
+  <span class="ed-take-text"><b>This event is a real-time read on cross-border AI engagement after the regulatory tightening.</b> <i>The combination of Western industrial firms, all three Chinese state telecoms, and Shanghai's Foundation Model Innovation Center under one roof is the most concrete cross-border AI venue this quarter.</i> For investors evaluating China-AI exposure, the signal will not come from press releases — it will come from which deals quietly emerge in the weeks following.</span>
+</div>
+<div class="ed-foot">
+  <span>SOURCE · EVENT BRIEFING · MAY 2</span>
+  <span class="ed-foot-mid">// LOOKING AHEAD · CHINA</span>
+  <span class="ed-link">→ TECHWEEK-SHANGHAI.COM ↗</span>
+</div>
+
+</div>
+</div>
+
+<div class="scene" id="scene-28">
+<div class="ed-wrap">
+<div class="ed-topbar">
+  <div class="ed-mark"><span class="ed-emblem">A</span><span class="ed-brand"><b>AI press review</b> · weekly edition</span></div>
+  <div class="ed-track"><div class="ed-fill" style="width:100%"></div></div>
+  <span class="ed-counter">SCENE <b>28</b> / 28 · 03 MAY 2026</span>
+</div>
+<h1 class="ed-h">Looking ahead · <em>five storylines for next week</em></h1>
+<p class="ed-sub">The five threads that will shape banking and AI conversations through next Friday. Each carries direct implications for valuation, regulation, or competitive positioning over the four weeks following.</p>
+<div class="asset-closing-grid">
+  <div class="asset-closing-card feature">
+    <div class="ed-stat-label">LITIGATION · WEEK 2</div>
+    <div class="ed-h" style="font-size:1.4rem;margin:.4rem 0">Musk vs Altman trial · Altman + Brockman to testify</div>
+    <p>Week one disclosed Musk's for-profit OpenAI emails and the xAI distillation finding. Week two features OpenAI's CEO and president on the stand. Outcome may reshape OpenAI's $800B valuation and its conversion structure — directly affecting the AWS partnership and capital raise pipeline.</p>
+    <p style="color:var(--ed-amber)">Watch <span class="ed-pill">Altman testimony</span> <span class="ed-pill">conversion ruling</span> <span class="ed-pill">OpenAI valuation</span></p>
+  </div>
+  <div class="asset-closing-card">
+    <div class="ed-stat-label">DEFENSE · ANTHROPIC</div>
+    <div class="ed-h" style="font-size:1.1rem;margin:.4rem 0">Pentagon-Anthropic resolution</div>
+    <p>White House signaled Friday it wants Anthropic back in the fold. Formal agreement or executive order could move next two weeks.</p>
+    <p style="color:var(--ed-amber)">Watch <span class="ed-pill">EO release</span> <span class="ed-pill">DoD contract</span></p>
+  </div>
+  <div class="asset-closing-card">
+    <div class="ed-stat-label">DEVELOPER TOOLS</div>
+    <div class="ed-h" style="font-size:1.1rem;margin:.4rem 0">Copilot pricing impact · enterprise modeling</div>
+    <p>June 1 effective date. Procurement teams will model the cost shift this week. Expect accelerated evaluation of Qwen and other open-weight alternatives.</p>
+    <p style="color:var(--ed-amber)">Watch <span class="ed-pill">Qwen evals</span> <span class="ed-pill">cost benchmarks</span></p>
+  </div>
+  <div class="asset-closing-card">
+    <div class="ed-stat-label">SILICON · QUALCOMM</div>
+    <div class="ed-h" style="font-size:1.1rem;margin:.4rem 0">Hyperscaler customer identity</div>
+    <p>Q4 shipments confirmed Friday. Watch for any leak before the June investor day. Memory supply constraint also flagged — affects SK Hynix, Samsung.</p>
+    <p style="color:var(--ed-amber)">Watch <span class="ed-pill">customer leak</span> <span class="ed-pill">memory supply</span></p>
+  </div>
+  <div class="asset-closing-card">
+    <div class="ed-stat-label">CHINA · SHANGHAI</div>
+    <div class="ed-h" style="font-size:1.1rem;margin:.4rem 0">Tech Week Shanghai · May 6-7</div>
+    <p>First structured cross-border AI venue post-tightening. Conversations there will reveal foreign-tech posture toward Chinese data ecosystem after the Manus block.</p>
+    <p style="color:var(--ed-amber)">Watch <span class="ed-pill">deal pipeline</span> <span class="ed-pill">FDI signals</span></p>
+  </div>
+</div>
+<div class="asset-closing-quote">
+  <span class="ed-take-quote">"</span>
+  <p>This week's editorial line was <b>agentic surge</b>. The Pentagon's seven-firm deal, GitHub Copilot's per-token shift, Apple's reviewer-agent paper, and the Sun Finance 91-percent cost cut all point to the same compounding force — agentic AI is moving from research to production economics. For banks, the moment to revise model evaluation frameworks and procurement RFPs is now, before pricing and regulatory pressures compound through Q3. We see you next week.</p>
+</div>
+<div class="ed-foot">
+  <span>WEEKLY EDITION · 03 MAY 2026</span>
+  <span class="ed-foot-mid">// END OF EPISODE · 28 / 28</span>
+  <span class="ed-link">→ NEXT EDITION · 10 MAY 2026 ↗</span>
+</div>
+
+</div>
+</div>
+
+  </div>
+
+  <div class="control-bar">
+    <div class="ctrl-buttons">
+      <button class="ctrl-btn" id="btnPrev" title="Previous scene">‹</button>
+      <button class="ctrl-btn play" id="btnPlay" title="Play / Pause">▶</button>
+      <button class="ctrl-btn" id="btnNext" title="Next scene">›</button>
+      <span class="ctrl-time" id="timer">00:00 / 15:40</span>
+    </div>
+    <div class="ctrl-progress-wrap">
+      <div class="ctrl-progress-track" id="progressTrack">
+        <div class="ctrl-progress-fill" id="progressFill"></div>
+      </div>
+      <div class="ctrl-progress-segments" id="progressSegments"></div>
+    </div>
+    <div class="ctrl-right">
+      <div class="ctrl-meta">
+        <span class="ctrl-meta-section" id="metaSection">AI News</span>
+        <span class="ctrl-meta-title" id="metaTitle">DeepSeek V4 Pro</span>
+      </div>
+      <span class="ctrl-counter">SCENE <b id="counterCurrent">01</b> / 28</span>
+      <div class="ctrl-mode">
+        <button class="ctrl-mode-btn active" data-mode="auto">AUTO</button>
+        <button class="ctrl-mode-btn" data-mode="manual">MANUAL</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  const SCENES = [
+    {id: 1,dur:60, section:       'AI News', title:'Pentagon · 7 firms'},
+    {id: 2,dur:45, section:       'AI News', title:'Nebius × Eigen AI'},
+    {id: 3,dur:50, section:       'AI News', title:'Copilot per-token'},
+    {id: 4,dur:52, section:       'AI News', title:'Big tech $725B capex'},
+    {id: 5,dur:50, section:       'AI News', title:'Qualcomm hyperscaler'},
+    {id: 6,dur:50, section:       'AI News', title:'Grok 4.3 pricing'},
+    {id: 7,dur:50, section:       'AI News', title:'Musk vs Altman wk1'},
+    {id: 8,dur:48, section:       'AI News', title:'China AI onshore'},
+    {id: 9,dur:45, section:       'AI News', title:'Anthropic-Pentagon'},
+    {id:10,dur:45, section:         'Macro', title:'S&P 500 record'},
+    {id:11,dur:50, section:      'Research', title:'Apple Reinforced Agent'},
+    {id:12,dur:50, section:      'Research', title:'ARC-AGI-3 results'},
+    {id:13,dur:48, section:      'Research', title:'Meta Q1 LLM rec'},
+    {id:14,dur:55, section:     'Use Cases', title:'Sun Finance −91%'},
+    {id:15,dur:48, section:     'Use Cases', title:'Planet Labs in orbit'},
+    {id:16,dur:45, section:     'Use Cases', title:'Microsoft Legal Agent'},
+    {id:17,dur:42, section:     'Use Cases', title:'Popsa 5.5M titles'},
+    {id:18,dur:45, section:     'Use Cases', title:'Choco 200B tokens'},
+    {id:19,dur:45, section:    'Regulation', title:'APRA AI warning'},
+    {id:20,dur:45, section:      'Research', title:'Reviewer architecture'},
+    {id:21,dur:55, section:  'Weak Signals', title:'China blocks Manus'},
+    {id:22,dur:48, section:  'Weak Signals', title:'China offshore unwind'},
+    {id:23,dur:50, section:  'Weak Signals', title:'DAIMON Robotics'},
+    {id:24,dur:50, section:  'Weak Signals', title:'PromptMink attack'},
+    {id:25,dur:45, section:  'Weak Signals', title:'APRA preview · global'},
+    {id:26,dur:42, section:  'Weak Signals', title:'London EU AI hub'},
+    {id:27,dur:42, section: 'Looking Ahead', title:'Tech Week Shanghai'},
+    {id:28,dur:56, section:       'Closing', title:'Looking ahead · 5'},
+  ];
+  const TOTAL = SCENES.reduce((a,s)=>a+s.dur,0);
+  let cum = 0; SCENES.forEach(s => { s.start = cum; cum += s.dur; });
+  let currentIdx = 0, mode = 'auto';
+  const audio = document.getElementById('episodeAudio');
+  const sceneEls = document.querySelectorAll('.scene');
+  const btnPlay = document.getElementById('btnPlay');
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+  const timerEl = document.getElementById('timer');
+  const fill = document.getElementById('progressFill');
+  const segWrap = document.getElementById('progressSegments');
+  const trackEl = document.getElementById('progressTrack');
+  const metaSec = document.getElementById('metaSection');
+  const metaTit = document.getElementById('metaTitle');
+  const counterCur = document.getElementById('counterCurrent');
+  const modeBtns = document.querySelectorAll('.ctrl-mode-btn');
+  SCENES.forEach((s,i) => { const seg = document.createElement('div'); seg.className = 'ctrl-seg'; seg.style.flex = s.dur; segWrap.appendChild(seg); });
+  const segs = segWrap.querySelectorAll('.ctrl-seg');
+  const fmt = sec => { const m = Math.floor(sec/60), s = Math.floor(sec%60); return String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); };
+  function showScene(idx) {
+    if (idx < 0) idx = 0; if (idx >= SCENES.length) idx = SCENES.length - 1;
+    currentIdx = idx;
+    sceneEls.forEach((el,i) => el.classList.toggle('active', i === idx));
+    metaSec.textContent = SCENES[idx].section;
+    metaTit.textContent = SCENES[idx].title;
+    counterCur.textContent = String(idx+1).padStart(2,'0');
+    segs.forEach((seg,i) => { seg.classList.remove('passed','current'); if (i < idx) seg.classList.add('passed'); if (i === idx) seg.classList.add('current'); });
+  }
+  function updateProgress() {
+    const elapsed = audio.currentTime || 0;
+    timerEl.textContent = fmt(elapsed) + ' / ' + fmt(TOTAL);
+    fill.style.width = (elapsed / TOTAL * 100) + '%';
+    let idx = 0;
+    for (let i = 0; i < SCENES.length; i++) { if (elapsed >= SCENES[i].start) idx = i; else break; }
+    if (mode === 'auto' && idx !== currentIdx) showScene(idx);
+  }
+  audio.addEventListener('timeupdate', updateProgress);
+  audio.addEventListener('play', () => { btnPlay.textContent = '||'; });
+  audio.addEventListener('pause', () => { btnPlay.textContent = '▶'; });
+  audio.addEventListener('ended', () => { btnPlay.textContent = '▶'; });
+  btnPlay.addEventListener('click', () => { if (audio.paused) audio.play(); else audio.pause(); });
+  btnPrev.addEventListener('click', () => { const newIdx = Math.max(0, currentIdx - 1); audio.currentTime = SCENES[newIdx].start; showScene(newIdx); });
+  btnNext.addEventListener('click', () => { const newIdx = Math.min(SCENES.length - 1, currentIdx + 1); audio.currentTime = SCENES[newIdx].start; showScene(newIdx); });
+  trackEl.addEventListener('click', e => { const rect = trackEl.getBoundingClientRect(); const ratio = (e.clientX - rect.left) / rect.width; audio.currentTime = ratio * TOTAL; });
+  modeBtns.forEach(b => b.addEventListener('click', () => { modeBtns.forEach(x => x.classList.remove('active')); b.classList.add('active'); mode = b.dataset.mode; }));
+  document.addEventListener('keydown', e => { if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return; if (e.key === ' ') { e.preventDefault(); btnPlay.click(); } else if (e.key === 'ArrowRight') btnNext.click(); else if (e.key === 'ArrowLeft') btnPrev.click(); });
+  showScene(0); updateProgress();
+
+  // === DEMO LOOP ===
+  let demoTimer = null;
+  let demoActive = true;
+  const DEMO_INTERVAL = 3500;
+  function stopDemo() {
+    if (demoTimer) { clearInterval(demoTimer); demoTimer = null; }
+    demoActive = false;
+  }
+  function startDemo() {
+    if (demoTimer || !demoActive) return;
+    demoTimer = setInterval(() => {
+      if (!demoActive) return;
+      const next = (currentIdx + 1) % SCENES.length;
+      showScene(next);
+    }, DEMO_INTERVAL);
+  }
+  audio.addEventListener('play', stopDemo);
+  audio.addEventListener('seeking', stopDemo);
+  trackEl.addEventListener('click', stopDemo);
+  btnPlay.addEventListener('click', stopDemo);
+  btnPrev.addEventListener('click', stopDemo);
+  btnNext.addEventListener('click', stopDemo);
+  startDemo();
+})();
+</script>
+</body>
+</html>

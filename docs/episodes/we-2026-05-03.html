@@ -2162,49 +2162,6 @@
   btnPrev.addEventListener('click', stopDemo);
   btnNext.addEventListener('click', stopDemo);
   startDemo();
-
-  // Sync from parent page via postMessage
-  var inIframe = window.self !== window.top;
-  if (inIframe) {
-    // Hide internal audio + play button — parent drives playback
-    if (audio) { audio.pause(); audio.style.display = 'none'; }
-    document.querySelectorAll('#btnPlay').forEach(function(el) { el.style.display = 'none'; });
-    // Slide mode: scale the whole page proportionally so content fits without scrolling
-    var iframeStyle = document.createElement('style');
-    iframeStyle.textContent = [
-      'html,body{overflow:hidden;margin:0}',
-      'html{transform-origin:top left}',
-      '.player-shell{height:100vh;overflow:hidden}',
-      '.player-stage{max-width:1180px;overflow:hidden}',
-    ].join('');
-    document.head.appendChild(iframeStyle);
-    function scaleToFit() {
-      var DESIGN_W = 1180, DESIGN_H = 885;
-      var s = Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H);
-      document.documentElement.style.transform = 'scale(' + s + ')';
-      document.documentElement.style.width = (100 / s) + '%';
-    }
-    scaleToFit();
-    window.addEventListener('resize', scaleToFit);
-    stopDemo();
-    window.addEventListener('message', function(e) {
-      if (!e.data) return;
-      if (e.data.type === 'apr-nav') {
-        mode = 'manual';
-        if (e.data.dir === 'next') showScene(currentIdx + 1);
-        if (e.data.dir === 'prev') showScene(currentIdx - 1);
-        return;
-      }
-      if (e.data.type !== 'apr-sync') return;
-      var t = e.data.t;
-      timerEl.textContent = fmt(t) + ' / ' + fmt(TOTAL);
-      fill.style.width = (t / TOTAL * 100) + '%';
-      var idx = 0;
-      for (var i = 0; i < SCENES.length; i++) { if (t >= SCENES[i].start) idx = i; else break; }
-      segs.forEach(function(seg, i) { seg.classList.remove('passed','current'); if (i < idx) seg.classList.add('passed'); if (i === idx) seg.classList.add('current'); });
-      if (mode === 'auto' && idx !== currentIdx) showScene(idx);
-    });
-  }
 })();
 </script>
 </body>

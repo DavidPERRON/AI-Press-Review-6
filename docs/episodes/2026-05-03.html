@@ -311,6 +311,13 @@
     </div>
   </div>
 
+  <!-- VISUAL COMPANION — pleine largeur, avant main, synchro audio -->
+  <div style="border-bottom:1px solid #1f1f23;">
+    <iframe id="companion-frame" src="/episodes/we-2026-05-03.html"
+      style="width:100%;height:720px;border:none;display:block;"
+      title="Visual Companion · 28 scènes"></iframe>
+  </div>
+
   <main>
 
     <!-- AUDIO PLAYER — first item after the hero summary -->
@@ -340,6 +347,8 @@
                   if (typeof plausible === 'function') plausible(m.k.replace('_',' '), {props: {episode: ep}});
                 }
               });
+            var frame = document.getElementById('companion-frame');
+            if (frame && frame.contentWindow) frame.contentWindow.postMessage({type:'apr-sync', t: audio.currentTime}, '*');
           });
         })();
       </script>
@@ -347,24 +356,6 @@
         <a href="https://pub-bc812f72712b450fbb9d7f3455e007a0.r2.dev/pressreview/episodes/2026-05-03-pentagon-signs-seven-ai-firms-big-tech-hits-725b-spend-github-copilot-goes-per-t.mp3" download>Download MP3</a>
         <a href="https://podcast.aequitus.net/podcast-feed.xml">RSS Feed</a>
       </div>
-      <script>
-        (function() {
-          var audio = document.getElementById('episode-audio');
-          var frame = document.getElementById('companion-frame');
-          if (!audio || !frame) return;
-          audio.addEventListener('timeupdate', function() {
-            if (frame.contentWindow) frame.contentWindow.postMessage({type:'apr-sync', t: audio.currentTime}, '*');
-          });
-        })();
-      </script>
-    </div>
-
-    <!-- VISUAL COMPANION — inline, synced with episode audio -->
-    <div style="margin: 2rem 0 0; border-top: 1px solid var(--border); padding-top: 1.5rem;">
-      <p class="audio-section-label" style="margin-bottom:0.75rem;">Visual Companion · 28 scenes</p>
-      <iframe id="companion-frame" src="/episodes/we-2026-05-03.html"
-        style="width:100%;height:640px;border:none;border-radius:6px;display:block;"
-        loading="lazy" title="Visual Companion"></iframe>
     </div>
 
     <!-- FULL BRIEF — collapsible, revealed on demand -->

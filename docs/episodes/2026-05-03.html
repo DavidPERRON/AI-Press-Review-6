@@ -304,12 +304,41 @@
     </div>
   </div>
 
-  <!-- VISUAL COMPANION — pleine largeur 3:2, avant main, synchro audio -->
-  <div style="border-bottom:1px solid #1f1f23;width:100%;aspect-ratio:3/2;overflow:hidden;">
-    <iframe id="companion-frame" src="/episodes/we-2026-05-03.html"
-      style="width:100%;height:100%;border:none;display:block;"
-      title="Visual Companion · 28 scènes"></iframe>
+  <!-- VISUAL COMPANION — pleine largeur 4:3, avant main, synchro audio -->
+  <div style="border-bottom:1px solid #1f1f23;width:100%;position:relative;">
+    <div style="width:100%;aspect-ratio:4/3;overflow:hidden;">
+      <iframe id="companion-frame" src="/episodes/we-2026-05-03.html"
+        style="width:100%;height:100%;border:none;display:block;"
+        title="Visual Companion · 28 scènes"></iframe>
+    </div>
+    <!-- Navigation arrows -->
+    <button id="comp-prev" aria-label="Scène précédente"
+      style="position:absolute;left:12px;top:50%;transform:translateY(-50%);
+             background:rgba(9,9,11,0.75);border:1px solid #2a2a30;color:#c8a96e;
+             width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;
+             display:flex;align-items:center;justify-content:center;
+             transition:background .2s,border-color .2s;z-index:10;">&#8249;</button>
+    <button id="comp-next" aria-label="Scène suivante"
+      style="position:absolute;right:12px;top:50%;transform:translateY(-50%);
+             background:rgba(9,9,11,0.75);border:1px solid #2a2a30;color:#c8a96e;
+             width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;
+             display:flex;align-items:center;justify-content:center;
+             transition:background .2s,border-color .2s;z-index:10;">&#8250;</button>
   </div>
+  <script>
+    (function() {
+      function sendNav(dir) {
+        var f = document.getElementById('companion-frame');
+        if (f && f.contentWindow) f.contentWindow.postMessage({type:'apr-nav', dir:dir}, '*');
+      }
+      document.getElementById('comp-prev').addEventListener('click', function() { sendNav('prev'); });
+      document.getElementById('comp-next').addEventListener('click', function() { sendNav('next'); });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft')  sendNav('prev');
+        if (e.key === 'ArrowRight') sendNav('next');
+      });
+    })();
+  </script>
 
   <main>
 

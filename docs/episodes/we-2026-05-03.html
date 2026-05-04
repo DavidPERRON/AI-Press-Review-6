@@ -2179,7 +2179,7 @@
     ].join('');
     document.head.appendChild(iframeStyle);
     function scaleToFit() {
-      var DESIGN_W = 1180, DESIGN_H = 787;
+      var DESIGN_W = 1180, DESIGN_H = 885;
       var s = Math.min(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H);
       document.documentElement.style.transform = 'scale(' + s + ')';
       document.documentElement.style.width = (100 / s) + '%';
@@ -2188,7 +2188,14 @@
     window.addEventListener('resize', scaleToFit);
     stopDemo();
     window.addEventListener('message', function(e) {
-      if (!e.data || e.data.type !== 'apr-sync') return;
+      if (!e.data) return;
+      if (e.data.type === 'apr-nav') {
+        mode = 'manual';
+        if (e.data.dir === 'next') showScene(currentIdx + 1);
+        if (e.data.dir === 'prev') showScene(currentIdx - 1);
+        return;
+      }
+      if (e.data.type !== 'apr-sync') return;
       var t = e.data.t;
       timerEl.textContent = fmt(t) + ' / ' + fmt(TOTAL);
       fill.style.width = (t / TOTAL * 100) + '%';

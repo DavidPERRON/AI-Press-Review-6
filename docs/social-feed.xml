@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>AI Press Review — Social Feed (EN+FR)</title><link>https://podcast.aequitus.net</link><atom:link href="https://podcast.aequitus.net/social-feed.xml" rel="self" type="application/rss+xml" /><language>mul</language><description>Merged bilingual feed for LinkedIn distribution. Each item carries LinkedIn-ready copy — short summary, listen link, hashtags.</description><lastBuildDate>Tue, 05 May 2026 15:41:31 +0000</lastBuildDate><pubDate>Mon, 04 May 2026 04:01:31 +0000</pubDate><ttl>60</ttl><image><url>https://podcast.aequitus.net/assets/og-banner.png</url><title>AI Press Review — Social Feed (EN+FR)</title><link>https://podcast.aequitus.net</link></image><item><title>Pentagon Signs Seven AI Firms, Big Tech Hits $725B Spend, GitHub Copilot Goes Per-Token</title><link>https://podcast.aequitus.net/episodes/2026-05-03.html</link><description><![CDATA[Pentagon Signs Seven AI Firms, Big Tech Hits $725B Spend, GitHub Copilot Goes Per-Token
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/"><channel><title>AI Press Review — Social Feed (EN+FR)</title><link>https://podcast.aequitus.net</link><atom:link href="https://podcast.aequitus.net/social-feed.xml" rel="self" type="application/rss+xml" /><language>mul</language><description>Merged bilingual feed for LinkedIn distribution. Each item carries LinkedIn-ready copy — short summary, listen link, hashtags.</description><lastBuildDate>Fri, 08 May 2026 20:46:04 +0000</lastBuildDate><pubDate>Fri, 08 May 2026 20:45:33 +0000</pubDate><ttl>60</ttl><image><url>https://podcast.aequitus.net/assets/og-banner.png</url><title>AI Press Review — Social Feed (EN+FR)</title><link>https://podcast.aequitus.net</link></image><item><title>Anthropic's 80x Compute Surge, OpenAI's MRC Protocol, and DeepSeek's $45B Valuation</title><link>https://podcast.aequitus.net/episodes/2026-05-08.html</link><description><![CDATA[Anthropic's 80x Compute Surge, OpenAI's MRC Protocol, and DeepSeek's $45B Valuation
+
+Anthropic seized the full capacity of SpaceX's Colossus-1 data center — over 220,000 Nvidia GPUs and 300 megawatts — after its compute demand grew 80x, while simultaneously unveiling financial…
+
+Listen (EN) — https://podcast.aequitus.net/episodes/2026-05-08.html
+Écouter (FR) — https://podcast.aequitus.net/fr
+
+#AI #Podcast #TechBriefing]]></description><guid isPermaLink="false">social-en-2026-05-08-anthropic-s-80x-compute-surge-openai-s-mrc-protocol-and-deepseek-s-45b-valuation</guid><pubDate>Fri, 08 May 2026 20:45:33 +0000</pubDate><media:content url="https://podcast.aequitus.net/assets/og-banner.png" medium="image" type="image/png"/><media:thumbnail url="https://podcast.aequitus.net/assets/og-banner.png"/></item><item><title>Pentagon Signs Seven AI Firms, Big Tech Hits $725B Spend, GitHub Copilot Goes Per-Token</title><link>https://podcast.aequitus.net/episodes/2026-05-03.html</link><description><![CDATA[Pentagon Signs Seven AI Firms, Big Tech Hits $725B Spend, GitHub Copilot Goes Per-Token
 
 The Pentagon signed AI agreements with seven companies — including OpenAI, Google, Nvidia, and SpaceX — for any-lawful-use military deployment, while Anthropic was notably absent after refusing that…
 
@@ -20,21 +27,7 @@ OpenAI missed its internal revenue and user targets for Q1 2026 while simultaneo
 Listen (EN) — https://podcast.aequitus.net/episodes/2026-04-29.html
 Écouter (FR) — https://podcast.aequitus.net/fr
 
-#AI #Podcast #TechBriefing]]></description><guid isPermaLink="false">social-en-2026-04-29-openai-vs-amazon-cloud-war-reshapes-enterprise-ai-apr-29</guid><pubDate>Wed, 29 Apr 2026 06:46:35 +0000</pubDate><media:content url="https://podcast.aequitus.net/assets/og-banner.png" medium="image" type="image/png"/><media:thumbnail url="https://podcast.aequitus.net/assets/og-banner.png"/></item><item><title>DeepSeek vs. OpenAI: price war meets structural shift — Apr 28</title><link>https://podcast.aequitus.net/episodes/2026-04-28.html</link><description><![CDATA[DeepSeek vs. OpenAI: price war meets structural shift — Apr 28
-
-Synthetic in voice, genuine in substance. Now presented by an AI clone of your devoted host. And yes, the accent is... how you say... more French than the man himself.
-
-Listen (EN) — https://podcast.aequitus.net/episodes/2026-04-28.html
-Écouter (FR) — https://podcast.aequitus.net/fr
-
-#AI #Podcast #TechBriefing]]></description><guid isPermaLink="false">social-en-2026-04-28-deepseek-vs-openai-price-war-meets-structural-shift-apr-28</guid><pubDate>Tue, 28 Apr 2026 08:28:58 +0000</pubDate><media:content url="https://podcast.aequitus.net/assets/og-banner.png" medium="image" type="image/png"/><media:thumbnail url="https://podcast.aequitus.net/assets/og-banner.png"/></item><item><title>DeepSeek V4 Resets Open-Source Pricing, DOJ Backs xAI in Colorado, and AI Costs Outpace Headcount</title><link>https://podcast.aequitus.net/episodes/2026-04-26.html</link><description><![CDATA[DeepSeek V4 Resets Open-Source Pricing, DOJ Backs xAI in Colorado, and AI Costs Outpace Headcount
-
-Synthetic in voice, genuine in substance. Now presented by an AI clone of your devoted host. And yes, the accent is... how you say... more French than the man himself. The algorithm had opinions.
-
-Listen (EN) — https://podcast.aequitus.net/episodes/2026-04-26.html
-Écouter (FR) — https://podcast.aequitus.net/fr
-
-#AI #Podcast #TechBriefing]]></description><guid isPermaLink="false">social-en-2026-04-26-deepseek-v4-resets-open-source-pricing-doj-backs-xai-in-colorado-and-ai-costs-ou</guid><pubDate>Mon, 27 Apr 2026 04:10:05 +0000</pubDate><media:content url="https://podcast.aequitus.net/assets/og-banner.png" medium="image" type="image/png"/><media:thumbnail url="https://podcast.aequitus.net/assets/og-banner.png"/></item><item><title>OpenAI acquiert Hiro Finance : la finance IA en mouvement — 16 avr</title><link>https://podcast.aequitus.net/fr/episodes/2026-04-16.html</link><description><![CDATA[OpenAI acquiert Hiro Finance : la finance IA en mouvement — 16 avr
+#AI #Podcast #TechBriefing]]></description><guid isPermaLink="false">social-en-2026-04-29-openai-vs-amazon-cloud-war-reshapes-enterprise-ai-apr-29</guid><pubDate>Wed, 29 Apr 2026 06:46:35 +0000</pubDate><media:content url="https://podcast.aequitus.net/assets/og-banner.png" medium="image" type="image/png"/><media:thumbnail url="https://podcast.aequitus.net/assets/og-banner.png"/></item><item><title>OpenAI acquiert Hiro Finance : la finance IA en mouvement — 16 avr</title><link>https://podcast.aequitus.net/fr/episodes/2026-04-16.html</link><description><![CDATA[OpenAI acquiert Hiro Finance : la finance IA en mouvement — 16 avr
 
 OpenAI renforce sa présence dans la finance avec l'acquisition de Hiro Finance, tandis que Lightelligence prépare son IPO en Chine, signalant une accélération dans les puces photoniques.
 

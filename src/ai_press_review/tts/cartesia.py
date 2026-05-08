@@ -114,6 +114,18 @@ def _build_generation_config(settings) -> dict:
         cfg['emotion'] = emotion
     return cfg
 
+
+def _build_voice_payload(settings) -> dict:
+    """Assemble the Cartesia voice object for a TTS request.
+
+    When cartesia_fine_tune_id is set, it is passed alongside the base voice id
+    so Sonic 3 applies the fine-tuned embedding (e.g. a 70/30 voice mix).
+    """
+    payload: dict = {'mode': 'id', 'id': settings.cartesia_voice_id}
+    if getattr(settings, 'cartesia_fine_tune_id', ''):
+        payload['fine_tune_id'] = settings.cartesia_fine_tune_id
+    return payload
+
 # Hard upper bounds on any single send/recv await. Without these, a stuck
 # Cartesia session blocks the whole workflow until GitHub's 6-hour job
 # timeout fires — we've seen it happen when the server accepts the
@@ -2481,7 +2493,7 @@ async def _render_single_chunk_ws(chunk: str, settings, context_id: str | None =
         request = {
             'model_id': settings.cartesia_model_id,
             'transcript': chunk,
-            'voice': {'mode': 'id', 'id': settings.cartesia_voice_id},
+            'voice': _build_voice_payload(settings),
             'language': settings.cartesia_language,
             'context_id': ctx,
             'continue': False,   # standalone — no continuation expected
@@ -2639,7 +2651,7 @@ async def _render_session(chunks: list[str], settings) -> bytes:
             request = {
                 'model_id': settings.cartesia_model_id,
                 'transcript': chunk,
-                'voice': {'mode': 'id', 'id': settings.cartesia_voice_id},
+                'voice': _build_voice_payload(settings),
                 'language': settings.cartesia_language,
                 'context_id': context_id,
                 'continue': not is_last,

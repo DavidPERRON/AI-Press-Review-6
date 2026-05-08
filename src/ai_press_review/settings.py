@@ -91,6 +91,7 @@ class Settings:
     cartesia_api_key: str
     cartesia_voice_id: str
     cartesia_model_id: str
+    cartesia_fine_tune_id: str
     cartesia_version: str
     cartesia_language: str
     cartesia_speed: float
@@ -279,6 +280,13 @@ def _apply_locale(settings: Settings, config: dict[str, Any], locale: str) -> No
             locale, voice_env, settings.cartesia_voice_id or '(unset)',
         )
 
+    # Fine-tune ID: optional per-locale override via fine_tune_id_env
+    fine_tune_env = str(loc.get('fine_tune_id_env', ''))
+    if fine_tune_env:
+        fine_tune_id = _env(fine_tune_env)
+        if fine_tune_id:
+            settings.cartesia_fine_tune_id = fine_tune_id
+
     # Prompt file resolution: profile decides daily vs weekly, locale provides filename
     profile_name = settings.profile_name
     if profile_name in ('daily',) and 'prompt_daily' in loc:
@@ -463,6 +471,7 @@ def load_settings(
         cartesia_api_key=_env('CARTESIA_API_KEY'),
         cartesia_voice_id=_env('CARTESIA_VOICE_ID'),
         cartesia_model_id=_env('CARTESIA_MODEL_ID', 'sonic-3-2026-01-12'),
+        cartesia_fine_tune_id=_env('CARTESIA_FINE_TUNE_ID'),
         cartesia_version=_env('CARTESIA_VERSION', '2026-03-01'),
         cartesia_language=_env('CARTESIA_LANGUAGE', 'en'),
         cartesia_speed=_safe_float(_env('CARTESIA_SPEED', str(_yaml_get(config, 'tts.speed', 1.0))), 1.0, 'CARTESIA_SPEED'),

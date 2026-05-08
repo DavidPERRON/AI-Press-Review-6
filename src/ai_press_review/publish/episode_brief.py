@@ -131,6 +131,27 @@ def generate_episode_brief(episode_data: dict) -> str:
     html = html.replace('{{EPISODE_SCRIPT_HTML}}', script_html)
     html = html.replace('<!-- EMPTY_NOTICE_PLACEHOLDER -->', empty_notice)
 
+    # ── Video section (visual edition with presentation) ──
+    video_url = episode_data.get('video_url', '').strip()
+    if video_url:
+        video_label = 'Édition visuelle' if is_fr else 'Visual edition'
+        download_label = 'Télécharger MP4' if is_fr else 'Download MP4'
+        video_section = (
+            f'<div class="video-section">'
+            f'<p class="video-section-label">{video_label}</p>'
+            f'<video controls preload="none">'
+            f'<source src="{escape(video_url)}" type="video/mp4" />'
+            f'Your browser does not support the video element.'
+            f'</video>'
+            f'<div class="video-links">'
+            f'<a href="{escape(video_url)}" download>{download_label}</a>'
+            f'</div>'
+            f'</div>'
+        )
+    else:
+        video_section = ''
+    html = html.replace('{{VIDEO_SECTION}}', video_section)
+
     # ── Conditional removal of optional platform links in compact listen bar ──
     # Each link has a preceding separator <span class="listen-sep">·</span>.
     # Remove both the separator and the link when the URL is empty.

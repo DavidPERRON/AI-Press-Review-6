@@ -321,27 +321,50 @@ jobs:
           out.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
           print(f'Manifeste écrit : {out}')
           print(json.dumps(manifest, indent=2, ensure_ascii=False))
-
-          if date:
-              prefix = '/fr' if locale == 'fr' else ''
-              companion = {
-                  'date':          date,
-                  'companion_url': f'{prefix}/episodes/we-{date}.html',
-                  'subhead':       'Visual companion · synced to the audio briefing',
-              }
-              out_companion = Path('data/state') / f'weekly_companion_{locale}.json'
-              out_companion.write_text(json.dumps(companion, indent=2, ensure_ascii=False))
-              print(f'Companion state écrit : {out_companion}')
           PYEOF
 
-      - name: Committer manifeste sur main
+      - name: Rebuilder la page épisode avec lecteur vidéo
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+          EPISODE_DATE: ${{ steps.episode.outputs.date }}
+          EPISODE_MP4_URL: ${{ steps.r2upload.outputs.mp4_url }}
+          PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
+        run: |
+          python - <<'PYEOF'
+          import json, os, sys
+          from pathlib import Path
+          from ai_press_review.publish.episode_brief import generate_episode_brief
+
+          locale    = os.environ['APR_LOCALE']
+          date      = os.environ['EPISODE_DATE']
+          video_url = os.environ['EPISODE_MP4_URL']
+
+          # Charger les données de l'épisode depuis l'historique
+          hist_path = Path('data/state') / f'episode_history_{locale}.json'
+          if not hist_path.exists():
+              print('ERROR: episode_history introuvable', file=sys.stderr)
+              sys.exit(1)
+
+          data = json.loads(hist_path.read_text())
+          episodes = data.get('episodes', [])
+          entry = next((e for e in episodes if e.get('date') == date), None)
+          if not entry:
+              print(f'ERROR: épisode {date} introuvable dans l\'historique', file=sys.stderr)
+              sys.exit(1)
+
+          entry['video_url'] = video_url
+          generate_episode_brief(entry)
+          print(f'Page épisode {date} rebuildée avec lecteur vidéo.')
+          PYEOF
+
+      - name: Committer manifeste + page épisode sur main
         run: |
           set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/state/visual_release_*.json data/state/weekly_companion_*.json
+          git add data/state/visual_release_*.json docs/episodes/ docs/fr/episodes/
           git diff --cached --quiet || \
-            git commit -m "visual(${{ inputs.locale }}): MP4 prêt — ${{ inputs.podcast_name }} [skip ci]"
+            git commit -m "visual(${{ inputs.locale }}): MP4 + page épisode — ${{ inputs.podcast_name }} [skip ci]"
           for attempt in 1 2 3; do
             if git push; then exit 0; fi
             echo "push rejected — rebasing (attempt $attempt)"

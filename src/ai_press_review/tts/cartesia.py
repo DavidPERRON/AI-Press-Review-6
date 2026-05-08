@@ -1455,7 +1455,6 @@ _SPELL_OUT_COMMON: dict[str, str] = {
     'Adam': 'adam',
     'AdamW': 'adam W.',
     'AIGC': 'A. I. G. C.',
-    'ALBERT': 'albert',
     'ArenaHard': 'arena-hard',
     'BatchNorm': 'batch-norm',
     'BigBench': 'big-bench',

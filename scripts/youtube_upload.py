@@ -142,15 +142,19 @@ def _load_episode(locale: str, date: str | None) -> dict:
     return episodes[0]  # most recent first
 
 
-def _download_audio(url: str, dest: Path) -> None:
-    print(f"  Downloading audio from R2…")
+def _download_file(url: str, dest: Path, label: str = "File") -> None:
+    print(f"  Downloading {label}…")
     resp = requests.get(url, stream=True, timeout=180)
     resp.raise_for_status()
     with open(dest, "wb") as fh:
         for chunk in resp.iter_content(chunk_size=65_536):
             fh.write(chunk)
     mb = dest.stat().st_size / 1_048_576
-    print(f"  Audio saved ({mb:.1f} MB)")
+    print(f"  {label} saved ({mb:.1f} MB)")
+
+
+def _download_audio(url: str, dest: Path) -> None:
+    _download_file(url, dest, label="Audio from R2")
 
 
 def _encode_video(audio_path: Path, cover_path: Path, output_path: Path) -> None:
@@ -257,6 +261,9 @@ def main() -> None:
     parser.add_argument("--locale", choices=["en", "fr"], default="en", help="Locale (en or fr)")
     parser.add_argument("--date", default=None, metavar="YYYY-MM-DD",
                         help="Specific episode date to upload (defaults to latest)")
+    parser.add_argument("--mp4-url", default=None, metavar="URL",
+                        help="Upload this existing MP4 directly (skips audio download + ffmpeg encode). "
+                             "Use for episodes with a visual presentation already encoded.")
     args = parser.parse_args()
     locale: str = args.locale
 
@@ -293,12 +300,18 @@ def main() -> None:
     # ── Work in a temp directory ─────────────────────────────────────────────
     with tempfile.TemporaryDirectory() as tmp:
         tmpdir = Path(tmp)
-        audio_path = tmpdir / "episode.mp3"
         video_path = tmpdir / "episode.mp4"
 
         t0 = time.monotonic()
-        _download_audio(audio_url, audio_path)
-        _encode_video(audio_path, COVER_PATH, video_path)
+        if args.mp4_url:
+            # Use the pre-encoded MP4 (e.g. episode with visual presentation)
+            _download_file(args.mp4_url, video_path, label="MP4 with presentation")
+        else:
+            # Classic path: download audio from R2 and encode MP4 from static cover
+            audio_path = tmpdir / "episode.mp3"
+            _download_audio(audio_url, audio_path)
+            _encode_video(audio_path, COVER_PATH, video_path)
+
         video_id = _upload_video(youtube, video_path, title, description, tags, language)
 
         _set_thumbnail(youtube, video_id, COVER_PATH)

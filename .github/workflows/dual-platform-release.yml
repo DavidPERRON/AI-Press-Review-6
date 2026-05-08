@@ -1,0 +1,403 @@
+name: Release — Double plateforme (MP3 + MP4)
+
+# Workflow de distribution pour un épisode avec présentation visuelle.
+#
+#   → Apple Podcasts / Spotify : MP3 audio uniquement (flux RSS existant)
+#   → YouTube                  : MP4 avec présentation (upload direct)
+#   → Podcast Visuel           : MP4 avec présentation (upload vers R2)
+#
+# Pré-requis : fournir l'URL publique du MP4 avec présentation déjà créé.
+# Le flux RSS Apple/Spotify utilise le MP3 du draft en attente (ou du
+# dernier épisode publié) — aucune re-génération audio nécessaire.
+
+on:
+  workflow_dispatch:
+    inputs:
+      locale:
+        description: 'Locale (en | fr)'
+        required: true
+        default: 'en'
+        type: choice
+        options:
+          - en
+          - fr
+      podcast_name:
+        description: "Nom de l'épisode (référence / logs)"
+        required: true
+        default: ''
+      mp4_url:
+        description: "URL du MP4 avec présentation (YouTube + Podcast Visuel)"
+        required: true
+        default: ''
+      apple_spotify:
+        description: 'Release Apple Podcasts / Spotify (MP3 via RSS)'
+        required: true
+        default: 'oui'
+        type: choice
+        options:
+          - oui
+          - non
+      youtube:
+        description: 'Upload YouTube (MP4 avec présentation)'
+        required: true
+        default: 'oui'
+        type: choice
+        options:
+          - oui
+          - non
+      podcast_visuel:
+        description: 'Release Podcast Visuel (MP4 → R2)'
+        required: true
+        default: 'oui'
+        type: choice
+        options:
+          - oui
+          - non
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dual-release-${{ github.event.inputs.locale }}
+  cancel-in-progress: false
+
+jobs:
+
+  # ── 1. Apple Podcasts / Spotify — MP3 via RSS ─────────────────────────────
+  # Publie le draft en attente dans le flux RSS (MP3 audio).
+  # Apple Podcasts et Spotify récupèrent l'épisode automatiquement via le feed.
+  apple-spotify:
+    name: "Apple / Spotify — MP3 RSS"
+    if: inputs.apple_spotify == 'oui'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    outputs:
+      released: ${{ steps.release.outputs.released }}
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Pull latest state
+        run: git pull --rebase origin main
+
+      - name: Release pending draft (flux RSS)
+        id: release
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+          PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
+          R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
+          R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          set +e
+          output=$(python scripts/release_draft.py 2>&1)
+          exit_code=$?
+          echo "$output"
+          if [ $exit_code -eq 0 ]; then
+            echo "released=true" >> $GITHUB_OUTPUT
+          elif echo "$output" | grep -q "No pending draft"; then
+            echo "Aucun draft en attente — skip release"
+            echo "released=false" >> $GITHUB_OUTPUT
+          else
+            echo "::error::release_draft.py a échoué de façon inattendue"
+            exit $exit_code
+          fi
+
+      - name: Commit published state
+        if: steps.release.outputs.released == 'true'
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/state/ docs/
+          git diff --cached --quiet || git commit -m "release(${{ inputs.locale }}): ${{ inputs.podcast_name }} [skip ci]"
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected — rebasing (attempt $attempt)"
+            git pull --rebase origin main
+          done
+          echo "::error::push failed after 3 rebase attempts"
+          exit 1
+
+  # ── 2. YouTube — MP4 avec présentation (upload direct) ────────────────────
+  # Télécharge le MP4 fourni et l'uploade directement sur YouTube.
+  # Aucun ré-encodage — le MP4 avec présentation est utilisé tel quel.
+  youtube:
+    name: "YouTube — MP4 Upload direct"
+    needs: apple-spotify
+    if: always() && inputs.youtube == 'oui'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Pull latest state
+        run: git pull --rebase origin main
+
+      - name: Upload MP4 vers YouTube
+        env:
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          YOUTUBE_PLAYLIST_ID_EN: ${{ vars.YOUTUBE_PLAYLIST_ID_EN }}
+          YOUTUBE_PLAYLIST_ID_FR: ${{ vars.YOUTUBE_PLAYLIST_ID_FR }}
+        run: |
+          python scripts/youtube_upload.py \
+            --locale ${{ inputs.locale }} \
+            --mp4-url "${{ inputs.mp4_url }}"
+
+  # ── 3. Podcast Visuel — MP4 avec présentation → R2 ────────────────────────
+  # Télécharge le MP4 fourni, l'uploade sur R2, et écrit le manifeste
+  # de release visuelle pour intégration dans le feed du podcast.
+  podcast-visuel:
+    name: "Podcast Visuel — MP4 vers R2"
+    needs: apple-spotify
+    if: always() && inputs.podcast_visuel == 'oui'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Pull latest main
+        run: git pull --rebase origin main
+
+      - name: Extraire métadonnées épisode depuis l'état
+        id: episode
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+        run: |
+          python - <<'PYEOF'
+          import json, os, sys
+          from pathlib import Path
+
+          locale = os.environ['APR_LOCALE']
+          state_dir = Path('data/state')
+          entry = None
+
+          # Priorité : historique (épisode publié) > draft en attente
+          hist = state_dir / f'episode_history_{locale}.json'
+          if hist.exists():
+              data = json.loads(hist.read_text())
+              episodes = data.get('episodes', [])
+              if episodes:
+                  entry = episodes[0]  # most recent first
+
+          if not entry:
+              draft = state_dir / f'pending_draft_{locale}.json'
+              if draft.exists():
+                  entry = json.loads(draft.read_text())
+
+          if not entry:
+              print('ERROR: aucune métadonnée trouvée dans state', file=sys.stderr)
+              sys.exit(1)
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f"slug={entry.get('slug', 'episode')}\n")
+              f.write(f"date={entry.get('date', 'unknown')}\n")
+              f.write(f"title={entry.get('title', '')}\n")
+          print(f"Slug  : {entry.get('slug')}")
+          print(f"Date  : {entry.get('date')}")
+          print(f"Titre : {entry.get('title', '')[:80]}")
+          PYEOF
+
+      - name: Télécharger le MP4 avec présentation
+        run: |
+          set -e
+          mkdir -p output/visual
+          curl -fL "${{ inputs.mp4_url }}" -o output/visual/episode-${{ inputs.locale }}.mp4
+          echo "MP4 téléchargé : $(du -sh output/visual/episode-${{ inputs.locale }}.mp4 | cut -f1)"
+
+      - name: Uploader MP4 sur R2 (podcast visuel)
+        id: r2upload
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+          EPISODE_DATE: ${{ steps.episode.outputs.date }}
+          EPISODE_SLUG: ${{ steps.episode.outputs.slug }}
+          R2_BUCKET_NAME: ${{ vars.R2_BUCKET_NAME }}
+          R2_ENDPOINT: ${{ vars.R2_ENDPOINT }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          PUBLIC_AUDIO_BASE_URL: ${{ vars.PUBLIC_AUDIO_BASE_URL }}
+        run: |
+          python - <<'PYEOF'
+          import boto3, os
+          from pathlib import Path
+
+          locale   = os.environ['APR_LOCALE']
+          date     = os.environ['EPISODE_DATE']
+          slug     = os.environ['EPISODE_SLUG']
+          mp4_path = Path(f'output/visual/episode-{locale}.mp4')
+          r2_key   = f'visual/{date}-{slug}-{locale}.mp4'
+
+          s3 = boto3.client(
+              's3',
+              endpoint_url=os.environ['R2_ENDPOINT'],
+              aws_access_key_id=os.environ['R2_ACCESS_KEY_ID'],
+              aws_secret_access_key=os.environ['R2_SECRET_ACCESS_KEY'],
+          )
+          s3.upload_file(
+              str(mp4_path),
+              os.environ['R2_BUCKET_NAME'],
+              r2_key,
+              ExtraArgs={'ContentType': 'video/mp4'},
+          )
+          base    = os.environ['PUBLIC_AUDIO_BASE_URL'].rstrip('/')
+          mp4_url = f'{base}/{r2_key}'
+          print(f'MP4 uploadé : {mp4_url}')
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write(f'mp4_url={mp4_url}\n')
+          PYEOF
+
+      - name: Écrire manifeste release visuelle
+        env:
+          APR_LOCALE: ${{ inputs.locale }}
+          PODCAST_NAME: ${{ inputs.podcast_name }}
+          EPISODE_DATE: ${{ steps.episode.outputs.date }}
+          EPISODE_TITLE: ${{ steps.episode.outputs.title }}
+          EPISODE_MP4_URL: ${{ steps.r2upload.outputs.mp4_url }}
+        run: |
+          python - <<'PYEOF'
+          import json, os
+          from pathlib import Path
+
+          locale = os.environ['APR_LOCALE']
+          date   = os.environ.get('EPISODE_DATE', '')
+
+          manifest = {
+              'locale':        locale,
+              'podcast_name':  os.environ.get('PODCAST_NAME', ''),
+              'date':          date,
+              'title':         os.environ.get('EPISODE_TITLE', ''),
+              'mp4_url':       os.environ.get('EPISODE_MP4_URL', ''),
+              'release_type':  'dual-platform',
+          }
+          out = Path('data/state') / f'visual_release_{locale}.json'
+          out.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
+          print(f'Manifeste écrit : {out}')
+          print(json.dumps(manifest, indent=2, ensure_ascii=False))
+
+          if date:
+              prefix = '/fr' if locale == 'fr' else ''
+              companion = {
+                  'date':          date,
+                  'companion_url': f'{prefix}/episodes/we-{date}.html',
+                  'subhead':       'Visual companion · synced to the audio briefing',
+              }
+              out_companion = Path('data/state') / f'weekly_companion_{locale}.json'
+              out_companion.write_text(json.dumps(companion, indent=2, ensure_ascii=False))
+              print(f'Companion state écrit : {out_companion}')
+          PYEOF
+
+      - name: Committer manifeste sur main
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/state/visual_release_*.json data/state/weekly_companion_*.json
+          git diff --cached --quiet || \
+            git commit -m "visual(${{ inputs.locale }}): MP4 prêt — ${{ inputs.podcast_name }} [skip ci]"
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected — rebasing (attempt $attempt)"
+            git pull --rebase origin main
+          done
+          echo "::error::push failed after 3 rebase attempts"
+          exit 1
+
+  # ── 4. Social Feed — Refresh ───────────────────────────────────────────────
+  # Reconstruit le feed social bilingue (EN+FR) après chaque run.
+  social-feed:
+    name: "Social Feed — Refresh"
+    needs: apple-spotify
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          set -e
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Pull latest (apple-spotify peut avoir poussé un commit)
+        run: git pull --rebase origin main
+
+      - name: Build social-feed.xml (EN+FR merged)
+        run: |
+          set -e
+          python -c "
+          from ai_press_review.publish.feed import build_social_feed
+          print(f'Social feed written: {build_social_feed()}')
+          "
+
+      - name: Commit social feed
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/social-feed.xml
+          git diff --cached --quiet || git commit -m "social: refresh EN+FR LinkedIn feed [skip ci]"
+          for attempt in 1 2 3; do
+            if git push; then exit 0; fi
+            echo "push rejected — rebasing (attempt $attempt)"
+            git pull --rebase origin main
+          done
+          echo "::error::push failed after 3 rebase attempts"
+          exit 1

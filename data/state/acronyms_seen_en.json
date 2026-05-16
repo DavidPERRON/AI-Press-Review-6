@@ -59,6 +59,11 @@
     "first_seen": "2026-04-21T05:57:57Z",
     "last_seen": "2026-04-21T05:57:57Z"
   },
+  "BEAM": {
+    "count": 1,
+    "first_seen": "2026-05-16T10:34:48Z",
+    "last_seen": "2026-05-16T10:34:48Z"
+  },
   "BMBE": {
     "count": 1,
     "first_seen": "2026-04-23T05:58:26Z",
@@ -129,6 +134,11 @@
     "first_seen": "2026-04-21T05:57:57Z",
     "last_seen": "2026-04-21T05:57:57Z"
   },
+  "DJI": {
+    "count": 1,
+    "first_seen": "2026-05-16T10:34:48Z",
+    "last_seen": "2026-05-16T10:34:48Z"
+  },
   "DOGE": {
     "count": 1,
     "first_seen": "2026-05-01T06:35:55Z",
@@ -170,9 +180,9 @@
     "last_seen": "2026-04-19T03:38:55Z"
   },
   "EMO": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-09T06:32:58Z",
-    "last_seen": "2026-05-09T06:32:58Z"
+    "last_seen": "2026-05-16T10:34:48Z"
   },
   "EPM": {
     "count": 1,
@@ -193,6 +203,11 @@
     "count": 1,
     "first_seen": "2026-04-22T05:57:27Z",
     "last_seen": "2026-04-22T05:57:27Z"
+  },
+  "FIS": {
+    "count": 1,
+    "first_seen": "2026-05-16T10:34:48Z",
+    "last_seen": "2026-05-16T10:34:48Z"
   },
   "GDSII": {
     "count": 1,
@@ -449,6 +464,11 @@
     "first_seen": "2026-04-23T04:23:17Z",
     "last_seen": "2026-04-23T04:23:17Z"
   },
+  "RMB": {
+    "count": 1,
+    "first_seen": "2026-05-16T10:34:48Z",
+    "last_seen": "2026-05-16T10:34:48Z"
+  },
   "RTX": {
     "count": 1,
     "first_seen": "2026-04-21T04:08:31Z",
@@ -469,6 +489,11 @@
     "first_seen": "2026-04-21T04:08:31Z",
     "last_seen": "2026-04-21T04:08:31Z"
   },
+  "SEA": {
+    "count": 1,
+    "first_seen": "2026-05-16T10:34:48Z",
+    "last_seen": "2026-05-16T10:34:48Z"
+  },
   "SFI": {
     "count": 1,
     "first_seen": "2026-05-08T08:30:37Z",
@@ -480,14 +505,19 @@
     "last_seen": "2026-04-21T05:57:57Z"
   },
   "SMS": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-04-19T03:38:55Z",
-    "last_seen": "2026-04-19T03:38:55Z"
+    "last_seen": "2026-05-16T10:34:48Z"
   },
   "SOP": {
     "count": 2,
     "first_seen": "2026-04-25T14:35:26Z",
     "last_seen": "2026-04-26T21:09:15Z"
+  },
+  "SSRN": {
+    "count": 1,
+    "first_seen": "2026-05-16T10:34:48Z",
+    "last_seen": "2026-05-16T10:34:48Z"
   },
   "STLA": {
     "count": 1,
@@ -528,6 +558,11 @@
     "count": 1,
     "first_seen": "2026-04-21T04:08:31Z",
     "last_seen": "2026-04-21T04:08:31Z"
+  },
+  "XIV": {
+    "count": 1,
+    "first_seen": "2026-05-16T10:34:48Z",
+    "last_seen": "2026-05-16T10:34:48Z"
   },
   "XUV": {
     "count": 1,

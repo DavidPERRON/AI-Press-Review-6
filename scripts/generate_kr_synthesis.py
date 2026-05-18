@@ -819,21 +819,42 @@ def main() -> None:
         logger.info("filter-only mode — skipping LLM call. Done.")
         return
 
-    user_payload = _build_user_payload(kept, today, args.days, args.lang)
+    en_payload = _build_user_payload(kept, today, args.days, "en")
 
+    # EN is generated from the manifest. KR is a TRANSLATION of the EN output —
+    # the KR prompt is a translator role, not a generator. This guarantees the
+    # two languages share identical content and that the KR memo respects
+    # Korean business writing conventions instead of being a parallel
+    # generation that drifts from the EN.
     languages = ("en", "ko") if args.lang == "both" else (args.lang,)
-    for lang in languages:
-        prompt_name = (
-            "prompt_kr_ax_synthesis_en.txt"
-            if lang == "en"
-            else "prompt_kr_ax_synthesis_kr.txt"
-        )
-        prompt_path = ROOT / "config" / prompt_name
-        if not prompt_path.exists():
-            raise FileNotFoundError(f"Prompt not found: {prompt_path}")
+    en_markdown: str | None = None
 
-        markdown = _call_llm(prompt_path, user_payload, max_tokens=args.max_tokens)
-        _write_synthesis(out_dir, today, lang, markdown)
+    if "en" in languages:
+        en_prompt = ROOT / "config" / "prompt_kr_ax_synthesis_en.txt"
+        if not en_prompt.exists():
+            raise FileNotFoundError(f"Prompt not found: {en_prompt}")
+        en_markdown = _call_llm(en_prompt, en_payload, max_tokens=args.max_tokens)
+        _write_synthesis(out_dir, today, "en", en_markdown)
+
+    if "ko" in languages:
+        # Load EN from the just-generated output, or the most recent prior
+        # EN memo on disk if --lang ko was invoked standalone.
+        if en_markdown is None:
+            en_path = out_dir / f"{today.isoformat()}-en.md"
+            if not en_path.exists():
+                raise FileNotFoundError(
+                    f"--lang ko requires an EN memo to translate. "
+                    f"Expected {en_path} not found — run --lang en first."
+                )
+            en_markdown = en_path.read_text(encoding="utf-8")
+            logger.info("Loaded EN memo for translation: %s (%d chars)",
+                        en_path.name, len(en_markdown))
+
+        ko_prompt = ROOT / "config" / "prompt_kr_ax_synthesis_kr.txt"
+        if not ko_prompt.exists():
+            raise FileNotFoundError(f"Prompt not found: {ko_prompt}")
+        ko_markdown = _call_llm(ko_prompt, en_markdown, max_tokens=args.max_tokens)
+        _write_synthesis(out_dir, today, "ko", ko_markdown)
 
     logger.info("Done. Output in %s", out_dir)
 

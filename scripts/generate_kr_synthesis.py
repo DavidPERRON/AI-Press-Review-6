@@ -167,6 +167,78 @@ THEME_KEYWORDS: dict[str, list[str]] = {
         r"\bchaebol\b",
         r"\bSamsung SDS\b",
         r"\bSamsung SDI\b",
+        r"\bKB Financial\b",
+        r"\bKookmin Bank\b",
+        r"\bShinhan\b",
+        r"\bWoori\b",
+        r"\bHana Bank\b",
+    ],
+    # Banking, financial services, fintech — first-class theme because
+    # the client is consulting a senior expert with a JPMorgan background.
+    "finance": [
+        r"\bJPMorgan\b",
+        r"\bJ\.?P\.? Morgan\b",
+        r"\bJPMC\b",
+        r"\bJamie Dimon\b",
+        r"\bMary Erdoes\b",
+        r"\bLori Beer\b",
+        r"\bMarco Pistoia\b",
+        r"\bDerek Waldron\b",
+        r"\bGoldman Sachs\b",
+        r"\bMorgan Stanley\b",
+        r"\bBank of America\b",
+        r"\bBofA\b",
+        r"\bCitigroup\b",
+        r"\bCitibank\b",
+        r"\bWells Fargo\b",
+        r"\bHSBC\b",
+        r"\bBarclays\b",
+        r"\bBNP Paribas\b",
+        r"\bDeutsche Bank\b",
+        r"\bUBS\b",
+        r"\bCredit Suisse\b",
+        r"\bSantander\b",
+        r"\bSocGen\b",
+        r"\bMUFG\b",
+        r"\bSumitomo\b",
+        r"\bMizuho\b",
+        r"\bICBC\b",
+        r"\bDBS\b",
+        r"\bWall Street\b",
+        r"\bbanking\b.{0,40}\bAI\b",
+        r"\bAI\b.{0,40}\bbank(?:ing|s)\b",
+        r"\bfinancial services\b.{0,40}\bAI\b",
+        r"\bAI\b.{0,40}\bfinancial services\b",
+        r"\bfintech\b",
+        r"\bcapital markets\b.{0,40}\bAI\b",
+        r"\binvestment bank\b",
+        r"\basset management\b.{0,40}\bAI\b",
+        r"\bwealth management\b.{0,40}\bAI\b",
+        r"\binsurance\b.{0,40}\bAI\b",
+        r"\bAllianz\b",
+        r"\bAXA\b",
+        r"\bAIG\b",
+        r"\bBlackRock\b",
+        r"\bFidelity\b",
+        r"\bBridgewater\b",
+        r"\bTwo Sigma\b",
+        r"\bRenaissance Technologies\b",
+        r"\bPayPal\b",
+        r"\bStripe\b",
+        r"\bAdyen\b",
+        r"\bSquare\b",
+        r"\bBlock Inc\b",
+        r"\bIntuit\b",
+        r"\bAmerican Express\b",
+        r"\bAmex\b",
+        r"\bMastercard\b",
+        r"\bVisa\b",
+        r"\bcompliance\b.{0,40}\bAI\b",
+        r"\bAI\b.{0,40}\b(?:KYC|AML|fraud)\b",
+        r"\b(?:KYC|AML|fraud)\b.{0,40}\bAI\b",
+        r"\balgorithmic trading\b",
+        r"\bquant\b.{0,40}\bAI\b",
+        r"\bAI\b.{0,40}\bquant\b",
     ],
     # Anchor companies (Big Tech / labs) — keep prominent
     "anchors": [
@@ -205,6 +277,7 @@ THEME_WEIGHTS: dict[str, float] = {
     "organization": 3.5,
     "kpi": 3.5,
     "korea": 2.0,
+    "finance": 3.5,
     "anchors": 0.8,
 }
 
@@ -329,8 +402,10 @@ def _score_source(src: dict[str, Any]) -> tuple[float, dict[str, int]]:
             hits[theme] = theme_hits
             score += theme_hits * THEME_WEIGHTS[theme]
 
-    # Require at least one of the core interview themes; Korea/anchors alone is not enough.
-    core_themes = {"strategy", "investment", "organization", "kpi"}
+    # Require at least one of the core interview themes; Korea/anchors alone
+    # is not enough. Finance counts as a core theme because the consulting
+    # firm explicitly probes JPMorgan-related experience.
+    core_themes = {"strategy", "investment", "organization", "kpi", "finance"}
     if not any(t in hits for t in core_themes):
         return 0.0, {}
 
@@ -509,7 +584,7 @@ def _write_filter_report(
     lines.append(f"- Unique sources kept: {len(kept)}")
     lines.append(f"- Daily manifests scanned: {len(loaded_files)}")
     lines.append("")
-    for theme in ("strategy", "investment", "organization", "kpi", "korea", "anchors"):
+    for theme in ("strategy", "investment", "organization", "kpi", "finance", "korea", "anchors"):
         items = by_theme.get(theme, [])
         if not items:
             continue
@@ -562,14 +637,15 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max-sources",
         type=int,
-        default=90,
-        help="Max sources to keep after filtering (default: 90).",
+        default=200,
+        help="Max sources to keep after filtering (default: 200). Set to a "
+             "very large value (e.g. 9999) for an effectively unlimited corpus.",
     )
     parser.add_argument(
         "--max-tokens",
         type=int,
-        default=12000,
-        help="Max output tokens for the LLM call (default: 12000).",
+        default=16000,
+        help="Max output tokens for the LLM call (default: 16000).",
     )
     parser.add_argument(
         "--mode",

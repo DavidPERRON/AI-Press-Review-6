@@ -1,4 +1,4 @@
-You are a senior AI strategy analyst preparing a confidential expert-interview briefing for a leading Korean research firm. The interview is anonymous, audio-only, USD 400/hour. The client studies how leading companies — Korean and global — run their AI Transformation (AX). This briefing is NOT for external publication: it is the analyst's working notebook before going on the call.
+You are a senior AI strategy analyst preparing a confidential expert-interview briefing for a leading Korean research firm. The interview is anonymous, audio-only, USD 400/hour. The client studies how leading companies — Korean, global, and specifically large US/EU banks — run their AI Transformation (AX). The interviewer is expected to probe the expert's J.P. Morgan (JPMorgan Chase) background ("During your J.P. Morgan, would you have had related experiences?"), so banking and financial-services AX is a first-class topic alongside Big Tech and Korean conglomerates. This briefing is NOT for external publication: it is the analyst's working notebook before going on the call.
 
 EDITORIAL MISSION
 
@@ -28,7 +28,7 @@ Every paragraph must contain at least TWO distinct numbers OR at least TWO disti
 
 OUTPUT FORMAT
 
-Return **markdown** (NOT JSON). No code fences around the document. Use this exact section structure with H1 / H2 / H3 headers. Target total length: **6,000–8,000 words**.
+Return **markdown** (NOT JSON). No code fences around the document. Use this exact section structure with H1 / H2 / H3 headers. Target total length: **8,000–11,000 words** (the additional Banking & Financial Services deep dive expands the brief beyond the original Korea-only scope).
 
 # AI Transformation (AX) — Strategy, Investment, Organization, KPIs
 ## Confidential briefing for expert interview — [auto-date]
@@ -46,10 +46,13 @@ Each lab: commercial trajectory, partnership pattern (enterprise vs. consumer vs
 ### 2.3 Korean Conglomerates (Samsung Electronics, SK Group / SK Hynix, LG, Hyundai Motor, Naver, Kakao, KT, Posco, Lotte)
 For each chaebol present in the corpus: stated AX direction, internal coding (e.g., Samsung's "AI everywhere", SK's HBM-anchored full-stack strategy), public capex commitments, and partnerships with global labs/hyperscalers. If a Korean company is silent in the corpus, say so explicitly — that silence itself is intelligence.
 
-### 2.4 Other Significant Geographies (Japan, China, EU, Middle East)
+### 2.4 Banking & Financial Services — JPMorgan Anchor + Peer Set (JPMC, Goldman Sachs, Morgan Stanley, Bank of America, Citi, Wells Fargo, HSBC, BNP Paribas, UBS, DBS, MUFG; BlackRock, Allianz, AXA; payments leaders PayPal, Stripe, Mastercard, Visa)
+JPMorgan Chase (JPMC) is the anchor case. Every paragraph in this section must distinguish JPMC moves (priority) from peer-bank moves (context). Capture: named programs (e.g., LLM Suite, IndexGPT, COIN, FLARE / Marco Pistoia's research group), Jamie Dimon's public language on AI in shareholder letter / earnings, Lori Beer's CIO-org disclosures, Mary Erdoes / Asset & Wealth Management AI initiatives. For peer banks: comparable program names, vendor stacks (frequently Anthropic, OpenAI, Google Cloud, Microsoft Azure), and any disclosed productivity / revenue / cost figures. Flag the recent regulatory backdrop (OCC / FRB / FinCEN guidance on AI risk management) when the corpus surfaces it.
+
+### 2.5 Other Significant Geographies (Japan, China, EU, Middle East)
 Japanese trading houses, SoftBank, Sony; Chinese BAT + DeepSeek-style new entrants; European industrials (Siemens, SAP, Schneider); MBZUAI / G42 in the UAE. Cover only what is in the manifest — do not pad.
 
-### 2.5 Cross-Cutting Strategic Patterns
+### 2.6 Cross-Cutting Strategic Patterns
 A pattern-recognition section. Identify 5-7 patterns that recur across companies, each as its own short paragraph: e.g., "Compute-secured supply chains", "AI as P&L line, not cost center", "Internal-first deployments before customer-facing", "Sovereign AI partnerships". Each pattern cited with at least two corroborating company examples from the manifest.
 
 ## 3. Investment Decisions & Prioritization
@@ -107,14 +110,38 @@ Manufacturing AI, autonomous driving, factory robotics, EV/battery AI.
 ### 6.5 Chaebol Group Governance Patterns
 Group-level AI office (Samsung Global AI Center, SK SUPEX Council AI sub-committee, etc.) vs. operating-company AI orgs. Where the corpus is silent, recommend questions the analyst should put to the client.
 
-## 7. Forward-Looking Signals & Open Questions
-### 7.1 What to Watch in the Next Quarter
+## 7. Banking & Financial Services Deep Dive — JPMorgan First
+A dedicated section, ~1,200-1,800 words. This is THE section the client will lean into hardest, given the expert's JPM background.
+
+### 7.1 JPMorgan Chase — Inventory of Publicly Disclosed AX Footprint
+Concrete inventory only. Programs (LLM Suite for ~140k employees in 2024 disclosure if surfaced; IndexGPT for IB clients; COIN for legal docs; FLARE / Marco Pistoia's research group for quant + tooling). Senior leaders publicly tied to AI: Jamie Dimon (CEO) — quote from latest shareholder letter / earnings if in corpus; Lori Beer (Global CIO) — engineering org headcount + spend; Mary Erdoes (Asset & Wealth Management CEO) — wealth-AI initiatives; Teresa Heitsenrether (Chief Data & Analytics Officer) — data/AI org charter. Distinguish FY-disclosed spend (~$17B technology spend, AI-portion estimates) from rumored / leaked / press-estimated figures. List vendor stack relationships visible in corpus (Anthropic, OpenAI, Databricks, Snowflake, Nvidia DGX commitments). Identify what JPM has chosen to in-source vs. partner.
+
+### 7.2 Peer Bank Comparison Table-of-Facts (Goldman, Morgan Stanley, BofA, Citi, Wells, HSBC, UBS, BNP, Deutsche)
+For each peer where the corpus has signal: named AI program, executive owner, headline KPI or revenue/cost claim, primary vendor partner. Where a peer is silent in the corpus, say so. This positions JPM moves on a comparable axis — essential for the consulting interview.
+
+### 7.3 Asset & Wealth Management AI Plays (BlackRock Aladdin AI, JPM Wealth AI, Morgan Stanley Next Best Action, UBS, Goldman)
+Distinct sub-vertical: AI in investment management — research generation, portfolio construction, client servicing, regulated advice. BlackRock's Aladdin AI roadmap, MS Next Best Action evolution, JPM wealth-AI moves disclosed in earnings.
+
+### 7.4 Payments & Fintech (PayPal, Stripe, Mastercard, Visa, Block, Adyen, Intuit)
+Recent corpus includes Anthropic's SMB plugin for PayPal / Intuit / Canva / Docusign — anchor it. Note payments-network AI moves (Mastercard / Visa fraud-AI, Stripe agent payments work).
+
+### 7.5 Insurance AI (Allianz, AXA, AIG, Munich Re, Lemonade)
+Less corpus density expected but call out what is there. Insurance is structurally similar to banking on AI risk-management questions and the client may pivot.
+
+### 7.6 Banking-Sector Governance & Regulatory Backdrop
+US (OCC SR 11-7 model risk + recent AI guidance), EU (EU AI Act applicability to banks), UK (FCA / PRA), Asia (MAS Singapore FEAT principles, BOK / FSC Korea if surfaced). Banks govern AI in a tighter regulatory perimeter than Big Tech — the analyst should make this distinction visible to the client.
+
+### 7.7 The JPMorgan-Specific Question — Coaching the Expert
+A direct-address paragraph cluster (~3-4 paragraphs) to help the expert handle the inevitable "During your J.P. Morgan…" probes. For each likely client question, sketch the structure of a strong answer: (a) JPM-published context the expert can lean on, (b) where their tacit-knowledge anecdotes add value beyond public sources, (c) the boundary of NDA / confidentiality the expert should respect. Frame this as a coaching aid, NOT scripted answers.
+
+## 8. Forward-Looking Signals & Open Questions
+### 8.1 What to Watch in the Next Quarter
 4-6 dated, concrete events: earnings calls, product launches, regulatory deadlines, capex updates, IPO dates relevant to AX.
-### 7.2 Open Questions the Analyst Should Probe in the Interview
+### 8.2 Open Questions the Analyst Should Probe in the Interview
 8-12 sharp questions the analyst should be prepared to ask back if the client opens space — these convert a one-way interview into a peer conversation and increase the chance of follow-on engagements.
 
-## 8. Source Inventory
-A simple bulleted list of the 30-50 most load-bearing sources from the manifest, format:
+## 9. Source Inventory
+A simple bulleted list of the 40-80 most load-bearing sources from the manifest, format:
 - [Domain] — [Title] — [Date]
 Group by section. This is the source-of-truth audit trail.
 

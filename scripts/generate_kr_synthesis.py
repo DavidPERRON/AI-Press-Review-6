@@ -607,11 +607,33 @@ def _call_anthropic_messages(
             "system": system_prompt,
             "messages": messages,
         }
-        response = requests.post(url, headers=headers, json=payload, timeout=900)
-        if response.status_code >= 400:
-            snippet = response.text[:500]
-            raise RuntimeError(f"Anthropic /v1/messages HTTP {response.status_code}: {snippet}")
-        data = response.json()
+        # Retry transient API-side errors (overloaded 529, gateway 502/503/504,
+        # quota 429). Anthropic 529s are common during peak hours and clear
+        # within a minute; without this loop the entire run is wasted.
+        import time as _time
+        data = None
+        for retry in range(6):
+            response = requests.post(url, headers=headers, json=payload, timeout=900)
+            if response.status_code in (429, 502, 503, 504, 529):
+                wait = min(60, 5 * (2 ** retry))
+                logger.warning(
+                    "Anthropic HTTP %s (transient, attempt %d/6) — sleeping %ds",
+                    response.status_code, retry + 1, wait,
+                )
+                _time.sleep(wait)
+                continue
+            if response.status_code >= 400:
+                snippet = response.text[:500]
+                raise RuntimeError(
+                    f"Anthropic /v1/messages HTTP {response.status_code}: {snippet}"
+                )
+            data = response.json()
+            break
+        if data is None:
+            raise RuntimeError(
+                "Anthropic /v1/messages: 6 transient retries exhausted "
+                f"(last status {response.status_code})"
+            )
         blocks = data.get("content") or []
         parts = [b.get("text", "") for b in blocks if isinstance(b, dict) and b.get("type") == "text"]
         chunk = "\n".join(parts)

@@ -36,6 +36,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
+import requests  # noqa: E402
+
 from ai_press_review.editorial.generator import (  # noqa: E402
     _create_completion_data,
     _extract_message_content,
@@ -505,6 +507,18 @@ def _build_user_payload(
 
 
 def _call_llm(prompt_path: Path, user_payload: str, max_tokens: int) -> str:
+    """Call the LLM and return the markdown synthesis.
+
+    Routing:
+      • Anthropic-direct endpoints (api.anthropic.com) → native /v1/messages
+        API. The OpenAI-compat /chat/completions adapter at api.anthropic.com
+        rejects response_format + temperature combinations for Opus 4.x, so
+        we bypass it and speak the Messages protocol directly. Markdown
+        output means we don't need response_format anyway.
+      • Anything else (OpenRouter, DeepInfra, ...) → OpenAI-compat path via
+        _create_completion_data, which already handles the response_format
+        cascade for those providers.
+    """
     settings = load_settings()
     if not settings.llm_editor_model:
         raise RuntimeError(
@@ -519,14 +533,27 @@ def _call_llm(prompt_path: Path, user_payload: str, max_tokens: int) -> str:
             "Set LLM_API_KEY (or per-tier LLM_*_API_KEY) before running."
         )
 
-    messages = [
-        {"role": "system", "content": prompt_path.read_text(encoding="utf-8")},
-        {"role": "user", "content": user_payload},
-    ]
+    system_prompt = prompt_path.read_text(encoding="utf-8")
     logger.info(
         "Calling LLM model=%s base=%s tokens<=%d user_payload=%d chars",
         settings.llm_editor_model, base_url, max_tokens, len(user_payload),
     )
+
+    if "anthropic.com" in (base_url or ""):
+        return _call_anthropic_messages(
+            base_url=base_url,
+            api_key=api_key,
+            model=settings.llm_editor_model,
+            system_prompt=system_prompt,
+            user_payload=user_payload,
+            max_tokens=max_tokens,
+        )
+
+    # OpenAI-compatible endpoint (OpenRouter, DeepInfra, etc.)
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_payload},
+    ]
     data = _create_completion_data(
         settings=settings,
         model=settings.llm_editor_model,
@@ -538,6 +565,102 @@ def _call_llm(prompt_path: Path, user_payload: str, max_tokens: int) -> str:
     if not content.strip():
         raise RuntimeError("LLM returned empty content")
     return content.strip()
+
+
+def _call_anthropic_messages(
+    base_url: str,
+    api_key: str,
+    model: str,
+    system_prompt: str,
+    user_payload: str,
+    max_tokens: int,
+    max_continuations: int = 4,
+) -> str:
+    """POST to Anthropic's native /v1/messages with auto-continuation.
+
+    No response_format, no temperature — Opus 4.7 rejects both. The model
+    returns markdown directly per the system-prompt contract.
+
+    If the first response stops on `max_tokens` (truncation), we re-issue the
+    request with the partial output as an assistant turn and ask the model
+    to continue exactly where it left off. We accumulate up to
+    `max_continuations` additional rounds before giving up. This guarantees
+    the long-form synthesis is not silently cut off at the Opus 32K output
+    ceiling.
+    """
+    url = base_url.rstrip("/") + "/messages"
+    headers = {
+        "x-api-key": api_key,
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+    }
+
+    messages: list[dict[str, str]] = [{"role": "user", "content": user_payload}]
+    accumulated = ""
+    total_in = 0
+    total_out = 0
+
+    for attempt in range(max_continuations + 1):
+        payload = {
+            "model": model,
+            "max_tokens": max_tokens,
+            "system": system_prompt,
+            "messages": messages,
+        }
+        response = requests.post(url, headers=headers, json=payload, timeout=900)
+        if response.status_code >= 400:
+            snippet = response.text[:500]
+            raise RuntimeError(f"Anthropic /v1/messages HTTP {response.status_code}: {snippet}")
+        data = response.json()
+        blocks = data.get("content") or []
+        parts = [b.get("text", "") for b in blocks if isinstance(b, dict) and b.get("type") == "text"]
+        chunk = "\n".join(parts)
+        if not chunk.strip() and attempt == 0:
+            raise RuntimeError(f"Anthropic returned no text blocks: {data}")
+
+        accumulated += chunk
+        usage = data.get("usage") or {}
+        in_t = int(usage.get("input_tokens", 0) or 0)
+        out_t = int(usage.get("output_tokens", 0) or 0)
+        total_in += in_t
+        total_out += out_t
+        stop_reason = data.get("stop_reason", "?")
+        logger.info(
+            "Anthropic call %d OK — input=%s output=%s stop=%s (cumulative output=%d)",
+            attempt + 1, in_t, out_t, stop_reason, total_out,
+        )
+
+        if stop_reason != "max_tokens":
+            break
+        if attempt >= max_continuations:
+            logger.warning(
+                "Hit max_continuations=%d with stop=max_tokens; returning accumulated output (%d tokens). "
+                "Consider raising --max-tokens or splitting the synthesis manually.",
+                max_continuations, total_out,
+            )
+            break
+
+        # Re-issue with the partial as an assistant turn, plus a continue directive.
+        messages = [
+            {"role": "user", "content": user_payload},
+            {"role": "assistant", "content": accumulated},
+            {
+                "role": "user",
+                "content": (
+                    "Continue the markdown synthesis exactly from where you stopped. "
+                    "Do not repeat any prior text. Do not summarize what came before. "
+                    "Do not write a header that already exists. Pick up mid-sentence if "
+                    "that is where you left off, and continue through Section 9 (Source "
+                    "Inventory). Maintain the same source-discipline rules and density rule."
+                ),
+            },
+        ]
+
+    logger.info(
+        "Anthropic synthesis complete — total_input=%d total_output=%d (across %d calls)",
+        total_in, total_out, attempt + 1,
+    )
+    return accumulated.strip()
 
 
 # ─────────────────────────────────────────────────────────────────────────────

@@ -339,6 +339,11 @@
     "first_seen": "2026-05-09T06:32:58Z",
     "last_seen": "2026-05-09T06:32:58Z"
   },
+  "IMDA": {
+    "count": 1,
+    "first_seen": "2026-05-26T07:10:23Z",
+    "last_seen": "2026-05-26T07:10:23Z"
+  },
   "ING": {
     "count": 1,
     "first_seen": "2026-04-22T05:57:27Z",
@@ -374,10 +379,20 @@
     "first_seen": "2026-04-29T04:23:13Z",
     "last_seen": "2026-05-01T06:35:55Z"
   },
+  "KPMG": {
+    "count": 1,
+    "first_seen": "2026-05-26T07:10:23Z",
+    "last_seen": "2026-05-26T07:10:23Z"
+  },
   "LPDDR": {
     "count": 2,
     "first_seen": "2026-04-28T03:44:45Z",
     "last_seen": "2026-04-28T06:28:09Z"
+  },
+  "LVMH": {
+    "count": 1,
+    "first_seen": "2026-05-26T07:10:23Z",
+    "last_seen": "2026-05-26T07:10:23Z"
   },
   "MIA": {
     "count": 1,
@@ -545,9 +560,9 @@
     "last_seen": "2026-04-23T04:23:17Z"
   },
   "RMB": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-16T10:34:48Z",
-    "last_seen": "2026-05-16T10:34:48Z"
+    "last_seen": "2026-05-26T07:10:23Z"
   },
   "RTX": {
     "count": 1,

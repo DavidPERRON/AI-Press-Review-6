@@ -170,9 +170,9 @@
     "last_seen": "2026-04-21T05:57:57Z"
   },
   "DGX": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-06-02T08:23:53Z",
-    "last_seen": "2026-06-02T08:23:53Z"
+    "last_seen": "2026-06-03T08:45:28Z"
   },
   "DHL": {
     "count": 1,
@@ -440,9 +440,14 @@
     "last_seen": "2026-05-26T07:10:23Z"
   },
   "MAI": {
-    "count": 2,
+    "count": 3,
     "first_seen": "2026-05-28T07:52:54Z",
-    "last_seen": "2026-05-29T07:51:35Z"
+    "last_seen": "2026-06-03T08:45:28Z"
+  },
+  "MDASH": {
+    "count": 1,
+    "first_seen": "2026-06-03T08:45:28Z",
+    "last_seen": "2026-06-03T08:45:28Z"
   },
   "MGM": {
     "count": 1,
@@ -463,6 +468,11 @@
     "count": 4,
     "first_seen": "2026-04-19T03:38:55Z",
     "last_seen": "2026-04-24T15:15:56Z"
+  },
+  "MLS": {
+    "count": 1,
+    "first_seen": "2026-06-03T08:45:28Z",
+    "last_seen": "2026-06-03T08:45:28Z"
   },
   "MLX": {
     "count": 2,
@@ -573,6 +583,11 @@
     "count": 2,
     "first_seen": "2026-05-22T07:09:30Z",
     "last_seen": "2026-05-23T06:47:27Z"
+  },
+  "OSC": {
+    "count": 1,
+    "first_seen": "2026-06-03T08:45:28Z",
+    "last_seen": "2026-06-03T08:45:28Z"
   },
   "OSS": {
     "count": 1,
@@ -720,9 +735,9 @@
     "last_seen": "2026-04-28T06:28:09Z"
   },
   "TCS": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-12T06:38:34Z",
-    "last_seen": "2026-05-12T06:38:34Z"
+    "last_seen": "2026-06-03T08:45:28Z"
   },
   "TDT": {
     "count": 1,

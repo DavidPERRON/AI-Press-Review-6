@@ -114,15 +114,20 @@
     "first_seen": "2026-04-21T04:08:31Z",
     "last_seen": "2026-04-21T04:08:31Z"
   },
+  "CATL": {
+    "count": 1,
+    "first_seen": "2026-06-04T08:14:04Z",
+    "last_seen": "2026-06-04T08:14:04Z"
+  },
   "CBRN": {
     "count": 1,
     "first_seen": "2026-05-30T06:59:40Z",
     "last_seen": "2026-05-30T06:59:40Z"
   },
   "CISA": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-08T08:30:37Z",
-    "last_seen": "2026-05-08T08:30:37Z"
+    "last_seen": "2026-06-04T08:14:04Z"
   },
   "CLEVR": {
     "count": 1,
@@ -339,6 +344,11 @@
     "first_seen": "2026-04-19T18:19:51Z",
     "last_seen": "2026-04-19T18:19:51Z"
   },
+  "HKGAI": {
+    "count": 1,
+    "first_seen": "2026-06-04T08:14:04Z",
+    "last_seen": "2026-06-04T08:14:04Z"
+  },
   "HMMT": {
     "count": 1,
     "first_seen": "2026-05-08T08:30:37Z",
@@ -424,6 +434,11 @@
     "first_seen": "2026-04-29T04:23:13Z",
     "last_seen": "2026-05-01T06:35:55Z"
   },
+  "KFC": {
+    "count": 1,
+    "first_seen": "2026-06-04T08:14:04Z",
+    "last_seen": "2026-06-04T08:14:04Z"
+  },
   "KPMG": {
     "count": 1,
     "first_seen": "2026-05-26T07:10:23Z",
@@ -440,9 +455,9 @@
     "last_seen": "2026-05-26T07:10:23Z"
   },
   "MAI": {
-    "count": 3,
+    "count": 4,
     "first_seen": "2026-05-28T07:52:54Z",
-    "last_seen": "2026-06-03T08:45:28Z"
+    "last_seen": "2026-06-04T08:14:04Z"
   },
   "MDASH": {
     "count": 1,
@@ -635,9 +650,9 @@
     "last_seen": "2026-04-21T04:08:31Z"
   },
   "RAM": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-06-02T08:23:53Z",
-    "last_seen": "2026-06-02T08:23:53Z"
+    "last_seen": "2026-06-04T08:14:04Z"
   },
   "RDMA": {
     "count": 1,
@@ -718,6 +733,11 @@
     "count": 1,
     "first_seen": "2026-05-16T10:34:48Z",
     "last_seen": "2026-05-16T10:34:48Z"
+  },
+  "SSSD": {
+    "count": 1,
+    "first_seen": "2026-06-04T08:14:04Z",
+    "last_seen": "2026-06-04T08:14:04Z"
   },
   "STLA": {
     "count": 1,

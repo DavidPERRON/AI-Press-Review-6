@@ -115,9 +115,9 @@
     "last_seen": "2026-04-21T04:08:31Z"
   },
   "CATL": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-06-04T08:14:04Z",
-    "last_seen": "2026-06-04T08:14:04Z"
+    "last_seen": "2026-06-05T08:00:01Z"
   },
   "CBRN": {
     "count": 1,
@@ -345,9 +345,9 @@
     "last_seen": "2026-04-19T18:19:51Z"
   },
   "HKGAI": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-06-04T08:14:04Z",
-    "last_seen": "2026-06-04T08:14:04Z"
+    "last_seen": "2026-06-05T08:00:01Z"
   },
   "HMMT": {
     "count": 1,
@@ -435,9 +435,9 @@
     "last_seen": "2026-05-01T06:35:55Z"
   },
   "KFC": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-06-04T08:14:04Z",
-    "last_seen": "2026-06-04T08:14:04Z"
+    "last_seen": "2026-06-05T08:00:01Z"
   },
   "KPMG": {
     "count": 1,
@@ -584,6 +584,11 @@
     "first_seen": "2026-05-20T07:10:41Z",
     "last_seen": "2026-05-20T07:10:41Z"
   },
+  "OIF": {
+    "count": 1,
+    "first_seen": "2026-06-05T08:00:01Z",
+    "last_seen": "2026-06-05T08:00:01Z"
+  },
   "ONTO": {
     "count": 1,
     "first_seen": "2026-04-21T05:57:57Z",
@@ -598,6 +603,11 @@
     "count": 2,
     "first_seen": "2026-05-22T07:09:30Z",
     "last_seen": "2026-05-23T06:47:27Z"
+  },
+  "OPPO": {
+    "count": 1,
+    "first_seen": "2026-06-05T08:00:01Z",
+    "last_seen": "2026-06-05T08:00:01Z"
   },
   "OSC": {
     "count": 1,
@@ -650,9 +660,9 @@
     "last_seen": "2026-04-21T04:08:31Z"
   },
   "RAM": {
-    "count": 2,
+    "count": 3,
     "first_seen": "2026-06-02T08:23:53Z",
-    "last_seen": "2026-06-04T08:14:04Z"
+    "last_seen": "2026-06-05T08:00:01Z"
   },
   "RDMA": {
     "count": 1,
@@ -735,9 +745,9 @@
     "last_seen": "2026-05-16T10:34:48Z"
   },
   "SSSD": {
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-06-04T08:14:04Z",
-    "last_seen": "2026-06-04T08:14:04Z"
+    "last_seen": "2026-06-05T08:00:01Z"
   },
   "STLA": {
     "count": 1,
@@ -788,6 +798,11 @@
     "count": 1,
     "first_seen": "2026-05-08T08:30:37Z",
     "last_seen": "2026-05-08T08:30:37Z"
+  },
+  "VSRAQ": {
+    "count": 1,
+    "first_seen": "2026-06-05T08:00:01Z",
+    "last_seen": "2026-06-05T08:00:01Z"
   },
   "WPP": {
     "count": 1,

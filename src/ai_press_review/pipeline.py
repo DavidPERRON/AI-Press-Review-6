@@ -180,7 +180,12 @@ def generate_draft(
     audio_name = f"{run_date}-{safe_slug(draft.episode_title)}.mp3"
     audio_path = outputs_dir / audio_name
     t0 = time.monotonic()
-    audio_meta = synthesize_script(draft.script, audio_path, local_preview=local_preview, profile=profile)
+    from pathlib import Path
+out = Path("docs/drafts"); out.mkdir(parents=True, exist_ok=True)
+(out / f"{date}-draft.md").write_text(
+    f"# {getattr(draft, 'title', '')}\n\n{getattr(draft, 'description', '')}\n\n---\n\n{draft.script}",
+    encoding="utf-8",
+)    audio_meta = synthesize_script(draft.script, audio_path, local_preview=local_preview, profile=profile)
     logger.info(
         "TTS completed: %d chunks, %ds duration, %.1f MB in %.1fs",
         audio_meta['chunk_count'],

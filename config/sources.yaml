@@ -29,6 +29,9 @@ google_news_rss:
 # ── AI LABS & BIG TECH ─────────────────────────────────────────
 curated_rss:
   # Labs — primary sources
+  # — TEST: GitHub releases as press-review source, added 2026-06-17
+  #   Stagehand (Browserbase) — code-tooling pulse for AI-agent infra.
+  - "https://github.com/browserbase/stagehand/releases.atom"
   - "https://openai.com/news/rss.xml"
   - "https://blog.google/technology/ai/rss/"
   - "https://blogs.nvidia.com/feed/"
